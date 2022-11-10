@@ -1,0 +1,494 @@
+/* table header */
+
+.table th,
+.table td {
+    padding: 2px 0 2px 10px;
+    font-size: 13px;
+}
+
+.table thead th {
+    padding-left: 10px !important;
+}
+
+.admin-session-alert {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    padding: 0.2rem 1.25rem;
+}
+
+.custon-table-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 15px;
+}
+
+.course-row {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    padding: 10px 15px;
+}
+
+.course-row:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.stretch-card form .row,
+.stretch-card form .form-group {
+    margin-bottom: 0;
+}
+
+.stretch-card form input,
+.stretch-card form select {
+    width: 100%;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.stretch-card form input[type=file],
+.stretch-card form input[type=date] {
+    padding: 8px 15px;
+}
+
+.classroom-btn .btn {
+    padding: 2px 6px;
+    font-size: 11px;
+}
+
+.admin-message-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.admin-reply-message {
+    background: #efefef;
+    border-radius: 5px;
+    padding: 10px 15px;
+}
+
+.admin-message-container h4 {
+    color: #3f50f6;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+
+/* profile section */
+
+.show-student-profile {
+    padding: 10px;
+}
+
+.show-student-profile .single-details {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 5px 10px;
+}
+
+.show-student-profile .single-details:nth-child(even) {
+    background: #3490dc1c;
+}
+
+
+/* chatroom section */
+
+.chatroom-section {
+    position: relative;
+    background: #ffffff;
+    padding-left: 50px;
+    padding-right: 60px;
+}
+
+@media (max-width :767px) {
+    .chatroom-section {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .content-wrapper {
+        padding: 1rem;
+    }
+}
+
+.chatroom-section .chatroom-header {
+    margin-bottom: 20px;
+}
+
+.chatroom-section h6 {
+    font-weight: 600;
+}
+
+.chatroom-section .chatroom-header a {
+    color: #3b3b3b;
+    display: inline;
+    font-weight: 600;
+    text-align: center;
+}
+
+.chatroom-section .chatroom-header a.active {
+    border-bottom: 5px double #3490dc;
+    color: #3490dc;
+}
+
+.chatroom-section .chatroom-title {
+    padding: 10px 20px;
+    background: #3490dc94;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.chatroom-section .chatroom-title h6 {
+    color: #ffffff;
+}
+
+.chatroom-section .chatroom-main-content {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    /* height: calc( 70vh);
+    overflow-y: scroll; */
+}
+
+.chatroom-section .chatroom-main-content::-webkit-scrollbar {
+    width: 1px;
+}
+
+.chatroom-section .chatroom-main-content::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+.chatroom-section .chatroom-main-content::-webkit-scrollbar-thumb {
+    background-color: #3490dc;
+    border-radius: 20px;
+}
+
+.chatroom-section .only-chatroom {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    position: relative;
+}
+
+.chatroom-section .chat-box {
+    overflow-y: scroll;
+    width: 100%;
+    padding: 10px 20px 0;
+    max-height: calc( 65vh);
+}
+
+.chatroom-section .chat-box::-webkit-scrollbar {
+    width: 1px;
+}
+
+.chatroom-section .chat-box::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+.chatroom-section .chat-box::-webkit-scrollbar-thumb {
+    background-color: #3490dc;
+    border-radius: 20px;
+}
+
+.chatroom-section .posted-chat {
+    margin: 15px 0;
+    align-items: flex-end;
+}
+
+.chatroom-section .posted-chat .chat {
+    margin: 15px 0;
+    width: 80%;
+    float: bottom;
+}
+
+.chatroom-section .chat-from-admin {
+    margin-left: auto !important;
+    margin-right: 0;
+}
+
+.chatroom-section .user-name-time {
+    font-weight: 600;
+    color: #3490dc;
+}
+
+.chatroom-section .user-name-time span {
+    font-size: 12px;
+    font-weight: 400;
+    color: #686c6f;
+}
+
+.chatroom-section .user-message {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border-bottom-left-radius: 0;
+    overflow-wrap: break-word;
+}
+
+.chatroom-section .chat-from-admin .user-message {
+    background: #0d6efd24;
+    border-bottom-right-radius: 0;
+}
+
+.chatroom-section .chat-from-other .user-message {
+    border: 1px solid #eff0f1;
+    border-bottom-left-radius: 0;
+}
+
+
+/* .chatroom-section .your-message {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-left: 20px;
+    padding-bottom: 10px;
+} */
+
+.chatroom-section .your-message .message-send {
+    border: 0;
+    background: transparent;
+}
+
+.chatroom-section .your-message .message-send i {
+    color: #3490dc;
+}
+
+.your-message select {
+    width: 100%;
+    padding: 5px 10px;
+    border-color: rgb(182, 178, 178);
+    border-radius: 5px;
+}
+
+.your-message select:focus {
+    border-color: #eff0f1;
+}
+
+
+/* video player model section */
+
+#videoModal .modal-header .modal-title {
+    margin-left: 2rem;
+}
+
+#videoModal .modal-header .close {
+    padding: 0;
+    margin: -1rem 2rem -1rem auto;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #eee;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .7;
+    background-color: transparent;
+    border: 0;
+}
+
+#videoModal .modal-header .close:hover {
+    opacity: .9;
+}
+
+#videoModal .modal-dialog .modal-content {
+    background: rgba(0, 0, 0, .7);
+}
+
+.chatroom-section .create-new-file {
+    padding: 30px 40px;
+    font-size: 35px;
+    border: 2px solid #3490dc;
+    color: #3490dc;
+    position: relative;
+    margin-top: 20px;
+}
+
+.chatroom-section .file-upload-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #3490dc;
+    color: #ffffff;
+    font-size: 15px;
+    padding-top: 40px;
+    opacity: 0;
+}
+
+.chatroom-section .create-new-file:hover .file-upload-hover {
+    opacity: 1;
+}
+
+.chatroom-section .single-file .user-files {
+    height: 32px;
+    margin-top: 10px;
+}
+
+.chatroom-section .single-file .user-files h4 {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.chatroom-section .single-file .user-files h4 a {
+    color: #1c252e;
+}
+
+.chatroom-section .single-file .user-files h4 a:hover {
+    color: #3490dc;
+}
+
+.chatroom-section .single-file .user-name-time {
+    font-size: 14px;
+}
+
+.chatroom-section .single-file .user-name-time span {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.chatroom-section .demo-file {
+    overflow-y: hidden;
+    width: 100%;
+    height: 120px;
+    border: 1px solid #ccccce;
+}
+
+.chatroom-section .demo-file::-webkit-scrollbar {
+    width: 1px;
+}
+
+.chatroom-section .demo-file::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+.chatroom-section .demo-file::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 20px;
+}
+
+.chatroom-section .classroom-videos .upload-user {
+    color: #3f50f6;
+    font-size: 14px;
+}
+
+.chatroom-section .upload-user span {
+    font-size: 11px;
+    color: #686c6f;
+    display: block;
+}
+
+.chatroom-section .video-btn {
+    /* border: 1px solid #eee; */
+    padding: 20px;
+    padding-bottom: 0;
+    width: 100%;
+    /* height: 150px; */
+    text-align: center;
+}
+
+.chatroom-section .chatroom-video-action {
+    display: grid;
+    grid-template-columns: 1fr 25px;
+    margin-bottom: 15px;
+}
+
+.chatroom-section .video-btn .view-video span {
+    font-size: 60px;
+    color: #3490dc;
+}
+
+.chatroom-section .video-btn h5 {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.file-video-delete-btn {
+    text-decoration: none;
+    background: rgb(245, 57, 57);
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.file-video-delete-btn span {
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.report-container .card-body i {
+    font-size: 20px;
+    color: #3490dc;
+}
+
+.reports ul li a {
+    float: right;
+    margin-left: 10px;
+    padding: 3px 10px;
+    font-size: 13px;
+}
+
+.text-14,
+.text-14 span {
+    font-size: 14px;
+}
+
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .navbar-dropdown .dropdown-item {
+    padding: 11px 15px;
+}
+
+.reports ul li {
+    padding: 5px;
+}
+
+.table-responsive-md {
+    display: block;
+}
+
+
+/* for dashboard */
+
+.view-from-dashboard-button {
+    padding: 5px;
+    border-radius: 5px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.view-from-dashboard-button:hover {
+    background: #ff6803;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.booking-un-verified p {
+    margin-bottom: 5px;
+    position: relative;
+    font-weight: 600;
+}
+
+.booking-badge {
+    position: absolute;
+    top: 0;
+    background: green;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 1px 5px;
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.booking-badge-un {
+    position: absolute;
+    top: 0;
+    background: #ffab2d;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 1px 5px;
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.content-wrapper .dropdown-toggle {
+    padding: 1px 4px;
+    font-size: 13px;
+}
+
+.content-wrapper .dropdown .dropdown-menu .dropdown-item {
+    font-size: 13px;
+}

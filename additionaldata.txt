@@ -1,0 +1,60 @@
+JWT_SECRET=mdQVZeEQx8Pmu3SjCKkiVVghW0zqQcDgEvdkzOPRK2mDD07PgVaBTBQ7vMRcXEMl
+
+ZOOM_API_URL="https://api.zoom.us/v2/"
+ZOOM_USER="classetutor@gmail.com"
+ZOOM_API_KEY="VK47OI8USQ2zQGskxUKghA"
+ZOOM_API_SECRET="YHspptb2VHdc5CCrh5ARmcm6LMH20k7DTenc"
+
+
+Login Details
+
+Username: etutorclass
+Password: S17*E8EBnmxu1+
+
+Control Panel URL: http://174.138.23.182:2082/
+Once your domain has propagated, you may also use http://www.etutorclass.com:2082/
+
+Server Information
+
+Server Name: s406 Premium
+Server IP: 174.138.23.182
+
+If you are using an existing domain with your new hosting account, you will need to update the nameservers to point to the nameservers listed below.
+
+Nameserver 1: ns1.himalayanhosting.com ()
+Nameserver 2: ns2.himalayanhosting.com ()
+Nameserver 3: ns3.himalayanhosting.com ()
+Nameserver 4: ns4.himalayanhosting.com ()
+
+Uploading Your Website
+
+Temporarily you may use one of the addresses given below to manage your web site:
+
+Temporary FTP Hostname: 174.138.23.182
+Temporary Webpage URL: http://174.138.23.182/~etutorclass/
+
+And once your domain has propagated you may use the details below:
+
+FTP Hostname: etutorclass.com
+
+
+
+smart gateway details
+pay api  : e24d5381cec871a0fd1157008ac96199fd5dfuda
+view api : 10a9e480abd81a9f258d306a2cfb0209e45dcuzi
+
+Sandbox testing link: https://sandbox.thesmartgateway.com:8080/
+
+The temporary Username and Password for testing is:
+
+Username: etutorclass
+
+Password: etutorclass123
+
+
+khalti keys:
+live_secret_key_1b91899fe8e24614873df8eec8db48f2
+live_public_key_7bd6c06332b3483890a5068abddf7b1b
+
+test_secret_key_ac3b9ea5852c45d597d141b28d2c7c44
+test_public_key_bc744f8267dc4775a38af37cab5591d0

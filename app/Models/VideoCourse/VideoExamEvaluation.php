@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models\VideoCourse;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Exams\Question;
+use App\Models\Exams\Exam;
+use App\Models\User;
+use App\Models\VideoCourse\VideoCourse;
+
+class VideoExamEvaluation extends Model
+{
+    use HasFactory;
+
+    protected $guarded=[];
+
+    public function getQuestion(): BelongsTo
+    {
+        return $this->belongsTo(Question::class, 'question_id');
+    }
+
+    public function exam(): BelongsTo
+    {
+        return $this->belongsTo(Exam::class, 'exam_id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(VideoCourse::class, 'course_id');
+    }
+}
