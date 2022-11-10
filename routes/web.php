@@ -924,9 +924,6 @@ Route::get('/student/classroom/exams/{batch}/mcq-exams/{exam}/view','App\Http\Co
 Route::delete('/student/classroom/exams/{batch}/mcq-exams/{exam}/reset','App\Http\Controllers\student\Exams\ExamController@reset')->middleware('role:Student');
 
 
-// Route::get('/student/{batch}/written-exams/{exam}/solve','App\Http\Controllers\student\Exams\WrittenExamController@solve')->middleware('role:Student');
-// Route::post('/student/{batch}/written-exams/{exam}','App\Http\Controllers\student\Exams\WrittenExamController@save')->middleware('role:Student');
-// Route::get('/student/{batch}/written-exams/{exam}/view','App\Http\Controllers\student\Exams\WrittenExamController@view')->middleware('role:Student');
 
 
 //final routes for special course classroom section
