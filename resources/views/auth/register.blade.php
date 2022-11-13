@@ -5,10 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="auth-container auth-register">
-                <div class="user-welcome text-center">
+                <div class="text-center" style="margin: auto;">
                     <div class=" justify-content-center"><img class="img-1" src="{{ asset('images/logo-w.png') }}" alt=""></div>
-                    {{-- <div class=" justify-content-center"><img class="img-2" src="{{ asset('images/logo-text.png') }}" alt=""></div>
-                    <div class=" justify-content-center"><img class="img-3" src="{{ asset('images/logo-slog.png') }}" alt=""></div> --}}
                     <div class="dont-have-account">
                         <p>Already have an account ?</p>
                         <a href="{{ route('login') }}">Log In</a>
@@ -216,22 +214,6 @@
                                 </div>
                             </div> --}}
 
-                            <div class="form-group row">
-                                <label for="interests" class="col-md-12 col-form-label col-12">{{ __('Select your Interested Course') }}</label>
-
-                                <div class="col-md-12">
-                                    <select class="form-control @error('interests') is-invalid @enderror" id="interests" name="interests" required>
-                                        @foreach($courses as $course)
-                                            <option value="{{$course->name}}">{{$course->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('interests')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
 
                             <div class="form-group row">
                                 <label for="password" class="col-md-6 col-form-label col-6">{{ __('Create Password') }}</label>
@@ -272,19 +254,7 @@
 </div>
 
     <script>
-        // function courseadd()
-        // {
-        //     var current= $('#courses').find(":selected").val();
-        //     var previous=$('#interests').val();
-        //     var final=previous;
-        //     if(current){
-        //         final =current + ', ' + previous ;
-        //         $("#interests").val(final);
-        //     }
-        //     $("#courses").val('');
-        // }
-
-        
+                
         var proviences = {
             @foreach($proviences as $pro)
             '{{$pro->name}}' : [

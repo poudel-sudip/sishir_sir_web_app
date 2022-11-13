@@ -86,11 +86,9 @@
                                 <div class="col-md-8">
                                     <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') ?? $user->role }}" required>
                                         <option value="{{$user->role}}">{{$user->role}}</option>
-                                        @if(auth()->user()->permission>=50)
                                         <option value="">---------</option>
                                         <option value="Admin">Admin</option>
                                         <option value="Student">Student</option>
-                                        @endif
                                     </select>
                                     @error('role')
                                     <span class="invalid-feedback" role="alert">
@@ -98,65 +96,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="permission" class="col-md-4 col-form-label">{{ __('Admin Permission Level') }}</label>
-
-                                <div class="col-md-8">
-                                    <select id="permission" class="form-control @error('permission') is-invalid @enderror" name="permission" value="{{ old('permission') ?? $user->permission }}" required>
-                                        <option value="{{$user->permission}}">
-                                            @if($user->permission==10)
-                                                {{ 'Sales' }}
-                                            @elseif($user->permission==20)
-                                                {{ 'Technical' }}
-                                            @elseif($user->permission==30)
-                                                {{ 'Communication' }}
-                                            @elseif($user->permission==40)
-                                                {{ 'Account' }}
-                                            @elseif($user->permission==50)
-                                                {{ 'Admin' }}
-                                            @endif
-                                        </option>
-                                        @if(auth()->user()->permission>=50)
-                                        <option value="">---------</option>
-                                        <option value="50">Admin</option>
-                                        <option value="40">Account</option>
-                                        <option value="30">Communication</option>
-                                        <option value="20">Technical</option>
-                                        <option value="10">Sales</option>
-                                        @endif
-                                    </select>
-                                    @error('permission')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="interests" class="col-md-4 col-form-label">{{ __('Select your Courses') }}</label>
-
-                                <div class="col-md-8">
-                                    <textarea class="col-12 form-control text-wrap" name="old_interests" readonly>{{$user->interests}}</textarea>
-                                    <input id="interests" type="text" class="col-12 form-control @error('interests') is-invalid @enderror" name="interests" value=" " readonly>
-                                    <div class="interest-form-group col-12 row">
-                                        <select class="form-control col-8" id="courses">
-
-                                            @foreach($courses as $course)
-                                                <option value="{{$course->name}}">{{$course->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <button class="ml-3 btn btn-primary btn-sm" onclick="javascript:courseadd()" type="button" >+</button>
-                                    </div>
-                                    @error('interests')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+                            </div>                       
 
                             <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('User Status') }}</label>
@@ -190,19 +130,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function courseadd()
-        {
-            var current= $('#courses').find(":selected").val();
-            var previous=$('#interests').val();
-            var final=previous;
-            if(current){
-                final =current + ', ' + previous ;
-                $("#interests").val(final);
-            }
-            $("#courses").val('');
-        }
-    </script>
 
 @endsection

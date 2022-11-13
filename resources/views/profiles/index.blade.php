@@ -7,12 +7,6 @@
 @section('student-title-icon')
     <i class="fas fa-address-card"></i>
 @endsection
-@section('tutor-title')
-    My Profile
-@endsection
-@section('tutor-title-icon')
-    <i class="fas fa-address-card"></i>
-@endsection
 
 @section('content')
     <div class="student-content-wrapper content-wrapper">
@@ -43,38 +37,15 @@
                     <div class="booking-data col-8">{{auth()->user()->contact}}</div>
                 </div>
             </div>
-            <div class="col-md-12 text-right text-end">
-                @if(auth()->user()->role=='Tutor')
-                <a class="btn btn-success btn-sm" href="/profile/professionaledit">Edit Professional Details</a>
-                @endif
-                <a class="btn btn-primary btn-sm" href="/profile/edit">Edit Profile</a>
-            </div>
+            
         </div>
         <div class="row">
-            {{-- <div class="col-md-12 text-end">
-            @if(auth()->user()->role=='Tutor')
-            <a class="btn btn-success btn-sm" href="/profile/professionaledit">Edit Professional Details</a>
-            @endif
-            <a class="btn btn-primary btn-sm" href="/profile/edit">Edit Profile</a>
-            </div> --}}
+            <div class="col-md-12 text-right text-end">
+                <a href="/profile/edit" class="btn btn-sm btn-primary">Edit Profile</a>
+            </div>
             <div class="col-md-12">
                 <div class="show-student-profile">
-                    {{-- <div class="single-details">
-                        <div class="booking-title">User ID:</div>
-                        <div class="booking-data">{{auth()->user()->id}}</div>
-                    </div>
-                    <div class="single-details">
-                        <div class="booking-title">User Full Name:</div>
-                        <div class="booking-data">{{auth()->user()->name}}</div>
-                    </div>
-                    <div class="single-details">
-                        <div class="booking-title">User Email:</div>
-                        <div class="booking-data">{{auth()->user()->email}}</div>
-                    </div>
-                    <div class="single-details">
-                        <div class="booking-title">User Contact:</div>
-                        <div class="booking-data">{{auth()->user()->contact}}</div>
-                    </div> --}}
+                    
                     <div class="single-details">
                         <div class="booking-title">User District/City:</div>
                         <div class="booking-data">{{auth()->user()->district_city}}</div>
@@ -95,28 +66,6 @@
                         <div class="booking-title">Last Login:</div>
                         <div class="booking-data">{{auth()->user()->last_login}}</div>
                     </div>
-                    <div class="single-details">
-                        <div class="booking-title">User Interests:</div>
-                        <div class="booking-data">{{auth()->user()->interests}}</div>
-                    </div>
-                    @if(auth()->user()->role=='Tutor')
-                    <div class="single-details">
-                        <div class="booking-title">Experience:</div>
-                        <div class="booking-data">{{auth()->user()->tutorProfile->experience}}</div>
-                    </div>
-                    <div class="single-details">
-                        <div class="booking-title">Qualification:</div>
-                        <div class="booking-data">{{auth()->user()->tutorProfile->qualification}}</div>
-                    </div>
-                    <div class="single-details">
-                        <div class="booking-title">Avg Rating:</div>
-                        <div class="booking-data">{{auth()->user()->tutorProfile->rating}}</div>
-                    </div>
-                    <div class="single-details">
-                        <div class="booking-title">Description:</div>
-                        <div class="booking-data">{!! auth()->user()->tutorProfile->description !!}</div>
-                    </div>
-                    @endif
                 </div>
             </div>
         </div>

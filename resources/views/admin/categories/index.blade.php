@@ -22,13 +22,11 @@
                     <div class="custon-table-header">
                         <h4 class="card-title">Categories table</h4>
                         <div class="text-right">
-                            @if(auth()->user()->permission>=20)
                             <a href="{{ ('/admin/categories/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Category </button></a>
-                            @endif
                         </div>
                     </div>
                     <div class="table-responsive">
-                      <table class="table table-bordered" id="category-table">
+                      <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>ID</th>
@@ -54,14 +52,12 @@
                             @endif
                             </td>
                               <td class="classroom-btn" width="160">
-                                  @if(auth()->user()->permission>=20)
                                   <a href="/admin/categories/{{$cat->id}}/edit" class="btn btn-danger">Edit</a>
                                   <form id="delete-form-{{$cat->id}}" action="/admin/categories/{{$cat->id}}" method="POST" style="display: inline">
                                       @csrf
                                       @method('DELETE')
                                       <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-warning">Delete</a>
                                   </form>
-                                  @endif
                               </td>
                           </tr>
                           @endforeach

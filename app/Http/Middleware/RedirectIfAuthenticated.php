@@ -33,21 +33,6 @@ class RedirectIfAuthenticated
                     case 'Student':
                         return redirect('/student/home');
                         break;
-                    case 'Tutor':
-                        return redirect('/tutor/home');
-                        break;
-                    case 'Vendor':
-                        return redirect('/vendor/home');
-                        break;
-                    case 'Branch':
-                        return redirect('/branch/home');
-                        break;
-                    case 'Publisher':
-                        return redirect('/publisher/home');
-                        break;
-                    case 'Team':
-                        return redirect('/team/home');
-                        break;
                     default:
                         return redirect('/');
                         break;

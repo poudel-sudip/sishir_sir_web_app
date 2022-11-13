@@ -7,11 +7,9 @@ use App\Models\Categories;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
-    //
     public function __construct()
     {
         $this->middleware('auth');
@@ -24,13 +22,11 @@ class CategoryController extends Controller
 
     public function create()
     {
-        Gate::authorize('permission','course-crud');
         return view('admin.categories.create');
     }
 
     public function store()
     {
-        Gate::authorize('permission','course-crud');
         $data=request()->validate([
             'name'=>'required | string',
             'order'=>'required | numeric',
@@ -46,7 +42,6 @@ class CategoryController extends Controller
 
     public function destroy(Categories $categories)
     {
-        Gate::authorize('permission','course-crud');
         $categories->bookings()->delete();
         $categories->batches()->delete();
         $categories->courses()->delete();
@@ -56,13 +51,11 @@ class CategoryController extends Controller
 
     public function edit(Categories $category)
     {
-        Gate::authorize('permission','course-crud');
         return view('admin.categories.edit',compact('category'));
     }
 
     public function update(Categories $category, Request $request)
     {
-        Gate::authorize('permission','course-crud');
        $data=$request->validate([
             'name'=>'required | string',
             'order'=>'required | numeric',

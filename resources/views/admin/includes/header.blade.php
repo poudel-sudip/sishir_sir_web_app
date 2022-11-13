@@ -15,19 +15,6 @@
           <div class="nav-profile-text d-flex flex-column pr-3">
             <span class="font-weight-medium mb-2">E-Tutor Class</span>
             <span class="font-weight-normal">{{ Auth::user()->name }}</span>
-            <span class="font-weight-normal">
-              @if(auth()->user()->permission==10)
-                {{ '(Sales)' }}
-              @elseif(auth()->user()->permission==20)
-                {{ '(Technical)' }}
-              @elseif(auth()->user()->permission==30)
-                {{ '(Communication)' }}
-              @elseif(auth()->user()->permission==40)
-                {{ '(Account)' }}
-              @elseif(auth()->user()->permission==50)
-                {{ '(Admin)' }}
-              @endif
-            </span>
           </div>
         </a>
       </li>

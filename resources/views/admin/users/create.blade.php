@@ -105,25 +105,6 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="permission" class="col-md-4 col-form-label">{{ __('Admin Permission Level') }}</label>
-
-                                <div class="col-md-8">
-                                    <select id="permission" class="form-control @error('permission') is-invalid @enderror" name="permission" value="{{ old('permission') }}" required>
-                                        <option value="50">Admin</option>
-                                        <option value="40">Account</option>
-                                        <option value="30">Communication</option>
-                                        <option value="20">Technical</option>
-                                        <option value="10">Sales</option>
-                                    </select>
-                                    @error('permission')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('User Status') }}</label>
 
                                 <div class="col-md-8">

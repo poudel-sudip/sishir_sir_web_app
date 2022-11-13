@@ -18,25 +18,14 @@ class ChangePasswordController extends Controller
 
     public function index()
     {
-        $headercategories=Categories::all()->where('status','=','Active');
         if(auth()->user()->role=='Admin'){
             $header='admin.layouts.app';
         }elseif (auth()->user()->role=='Student'){
             $header='student.layouts.app';
-        }elseif (auth()->user()->role=='Tutor'){
-            $header='tutors.layouts.app';
-        }elseif(auth()->user()->role=='Vendor'){
-            $header='vendors.layouts.app';
-        }elseif(auth()->user()->role=='Branch'){
-            $header='branches.layouts.app';
-        }elseif(auth()->user()->role=='Publisher'){
-            $header='publishers.layouts.app';
-        }elseif(auth()->user()->role=='Team'){
-            $header='teams.layouts.app';
         }else{
             $header='layouts.app';
         }
-        return view('auth.changePassword',compact('header','headercategories'));
+        return view('auth.changePassword',compact('header'));
     }
 
     public function store(Request $request)

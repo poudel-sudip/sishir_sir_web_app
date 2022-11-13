@@ -8,10 +8,8 @@
                 <div class="user-welcome text-center">
                     <div class=" justify-content-center"><img class="img-1" src="{{ asset('images/logo-w.png') }}" alt=""></div>
                     <div class="dont-have-account">
-                        <p>Don't have an account ? <br> <span class="h5">Register Now</span></p>
-                        <a href="{{ route('register') }}">As Student</a>
-                        <a href="{{ route('register.tutor') }}">As Tutor</a>
-                        <a href="{{ route('register.vendor') }}">As Vendor</a>
+                        <p>Don't have an account ? <br> </p>
+                        <a href="{{ route('register') }}">Register Now</a>
                     </div>
                 </div>
                 <div class="card">

@@ -3,16 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Course;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Gate;
 
 class UsersController extends Controller
 {
-    //
     public function __construct()
     {
         $this->middleware('auth');
@@ -27,13 +24,11 @@ class UsersController extends Controller
 
     public function create()
     {
-        Gate::authorize('permission','user-crud');
         return view('admin.users.create');
     }
 
     public function store()
     {
-        Gate::authorize('permission','user-crud');
         $data=request()->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'max:255','unique:users'],
@@ -41,7 +36,6 @@ class UsersController extends Controller
             'role'=>['required'],
             'contact'=>['required', 'min:10'],
             'status'=>['required'],
-            'permission'=>'numeric|min:1'
         ]);
 
         User::create([
@@ -51,7 +45,6 @@ class UsersController extends Controller
             'role'=>$data['role'],
             'contact'=>$data['contact'],
             'status'=>$data['status'],
-            'permission'=>$data['permission'],
             'last_login'=>date('Y-m-d H:i:s'),
         ]);
 
@@ -66,8 +59,7 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        $courses=Course::all()->sortBy('order');
-        Gate::authorize('permission','user-crud');
+        $courses = Course::all()->sortBy('order');
         return view('admin.users.edit', compact('user','courses'));
     }
 
@@ -83,12 +75,7 @@ class UsersController extends Controller
             'status'=>['required','string'],
             'password'=>'string',
             'old_password'=>'string',
-            'permission'=>'numeric|min:1',
-            'old_interests'=>'',
-            'interests'=>''
         ]);
-
-        $interests=$data['old_interests'].', '.$data['interests'];
 
         if($data['password']===$data['old_password'])
         {
@@ -96,7 +83,7 @@ class UsersController extends Controller
         }
         else
         {
-            $password=Hash::make($data['password']);
+            $password = Hash::make($data['password']);
         }
         $user->update([
             'name'=>$data['name'],
@@ -105,8 +92,6 @@ class UsersController extends Controller
             'role'=>$data['role'],
             'status'=>$data['status'],
             'password'=>$password,
-            'permission'=>$data['permission'],
-            'interests'=>$interests,
         ]);
 
         return redirect('/admin/users');
@@ -114,12 +99,8 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {   
-        Gate::authorize('permission','user-crud');
         $user->bookings()->delete();
-        $user->specialCourseBookings()->delete();
         $user->exam_bookings()->delete();
-        $user->video_bookings()->delete();
-        $user->ebook_bookings()->delete();
         $user->delete();
         return redirect('/admin/users');
     }

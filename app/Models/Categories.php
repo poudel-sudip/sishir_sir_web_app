@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Reports\ReportCourse;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -46,11 +45,6 @@ class Categories extends Model
     public function bookings(): HasManyThrough
     {
         return $this->hasManyThrough(Booking::class,Course::class,'category_id','course_id','id');
-    }
-
-    public function courseReport(): HasMany
-    {
-        return $this->hasMany(ReportCourse::class,'category');
     }
 
 }

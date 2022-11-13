@@ -49,21 +49,6 @@ class LoginController extends Controller
             case 'Student':
                 return '/student/home';
                 break;
-            case 'Tutor': 
-                return '/tutor/home';
-                break;
-            case 'Vendor': 
-                return '/vendor/home';
-                break;
-            case 'Branch': 
-                return '/branch/home';
-                break;
-            case 'Publisher': 
-                return '/publisher/home';
-                break;
-            case 'Team': 
-                return '/team/home';
-                break;
             default:
                 return '/';
                 break;

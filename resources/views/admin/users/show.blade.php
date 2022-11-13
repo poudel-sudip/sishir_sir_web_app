@@ -44,28 +44,6 @@
                             <div>User Status:</div>
                             <div>{{$user->status}}</div>
                         </div>
-                        @if($user->role=="Admin")
-                        <div class="course-row">
-                            <div>Admin Level:</div>
-                            <div>
-                                @if($user->permission==10)
-                                    {{ 'Sales' }}
-                                @elseif($user->permission==20)
-                                    {{ 'Technical' }}
-                                @elseif($user->permission==30)
-                                    {{ 'Communication' }}
-                                @elseif($user->permission==40)
-                                    {{ 'Account' }}
-                                @elseif($user->permission==50)
-                                    {{ 'Admin' }}
-                                @endif
-                            </div>
-                        </div>
-                        @endif
-                        <div class="course-row">
-                            <div>Interested Courses:</div>
-                            <div>{{$user->interests}}</div>
-                        </div>
                         <div class="course-row">
                             <div>Last Login:</div>
                             <div>{{$user->last_login}}</div>
@@ -102,36 +80,6 @@
                         @empty
                             <div class="course-row">
                                 <div>No Exams Booked</div>
-                            </div>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">Booked Videos</div>
-                    <div class="card-body">
-                        @forelse($user->video_bookings as $res)
-                            <div>{{$res->course->name.' - '.$res->status}}</div>
-                        @empty
-                            <div class="course-row">
-                                <div>No Videos Booked</div>
-                            </div>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">Booked E-Books</div>
-                    <div class="card-body">
-                        @forelse($user->ebook_bookings as $res)
-                            <div>{{$res->book->title.' - '.$res->status}}</div>
-                        @empty
-                            <div class="course-row">
-                                <div>No E-Books Booked</div>
                             </div>
                         @endforelse
                     </div>

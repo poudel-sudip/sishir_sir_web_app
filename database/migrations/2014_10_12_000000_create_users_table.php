@@ -20,11 +20,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->default('Student');
-            $table->integer('permission')->default(1);
             $table->string('contact')->nullable();
             $table->string('provience')->nullable();
             $table->string('district_city')->nullable();
-            $table->string('interests')->nullable();
             $table->string('status')->default('Active');
             $table->string('photo')->nullable();
             $table->string('last_login')->nullable();

@@ -23,29 +23,19 @@ Route::get('/artisancalls', function () {
 
 
 
-
-
+Route::get('/', function(){ return view('welcome'); });
 
 
 
 /*-------------------------------special routes section---------------------------*/
 
 Auth::routes();
-Route::get('/register-tutor','App\Http\Controllers\Auth\RegisterController@showTutorRegForm')->name('register.tutor');
-Route::post('/register-tutor','App\Http\Controllers\Auth\RegisterController@registerTutor');
-Route::get('/register-vendor','App\Http\Controllers\Auth\RegisterController@showVendorRegForm')->name('register.vendor');
-Route::post('/register-vendor','App\Http\Controllers\Auth\RegisterController@registerVendor');
-
-Route::get('/', 'App\Http\Controllers\FrontController@index');
 
 Route::get('change-password', 'App\Http\Controllers\Auth\ChangePasswordController@index');
 Route::post('change-password', 'App\Http\Controllers\Auth\ChangePasswordController@store')->name('change.password');
-
 Route::get('/profile', 'App\Http\Controllers\profile\ProfileController@index');
 Route::get('/profile/edit', 'App\Http\Controllers\profile\ProfileController@edit');
 Route::patch('/profile', 'App\Http\Controllers\profile\ProfileController@update');
-Route::get('/profile/professionaledit', 'App\Http\Controllers\profile\ProfileController@professionaledit');
-Route::patch('/profile/professional', 'App\Http\Controllers\profile\ProfileController@professionalupdate');
 
 
 
@@ -541,12 +531,6 @@ Route::get('/admin/video-course/{course}/tutors/{tutor}/edit','App\Http\Controll
 Route::patch('/admin/video-course/{course}/tutors/{tutor}','App\Http\Controllers\admin\Video\TutorController@update')->middleware('role:Admin');
 Route::delete('/admin/video-course/{course}/tutors/{tutor}','App\Http\Controllers\admin\Video\TutorController@destroy')->middleware('role:Admin');
 
-//admin eps korean registration
-Route::get('/admin/eps-registration','App\Http\Controllers\EpsKoreaController@index')->middleware('role:Admin');
-Route::get('/admin/eps-registration/{korea}/edit','App\Http\Controllers\EpsKoreaController@edit')->middleware('role:Admin');
-Route::patch('/admin/eps-registration/{korea}','App\Http\Controllers\EpsKoreaController@update')->middleware('role:Admin');
-Route::get('/admin/eps-registration/{korea}','App\Http\Controllers\EpsKoreaController@show')->middleware('role:Admin');
-Route::delete('/admin/eps-registration/{korea}','App\Http\Controllers\EpsKoreaController@destroy')->middleware('role:Admin');
 
 //admin ebooks categories
 Route::get('/admin/ebook/categories','App\Http\Controllers\admin\Ebook\CategoryController@index')->middleware('role:Admin');
@@ -924,117 +908,3 @@ Route::get('/student/classroom/exams/{batch}/mcq-exams/{exam}/view','App\Http\Co
 Route::delete('/student/classroom/exams/{batch}/mcq-exams/{exam}/reset','App\Http\Controllers\student\Exams\ExamController@reset')->middleware('role:Student');
 
 
-
-
-//final routes for special course classroom section
-Route::get('/special-course/classroom/chat/{course}','App\Http\Controllers\classroom\TutorCourse\ChatController@index');
-Route::post('/special-course/classroom/chat/{course}','App\Http\Controllers\classroom\TutorCourse\ChatController@store');
-
-Route::get('/special-course/classroom/files/{course}','App\Http\Controllers\classroom\TutorCourse\FileController@index');
-Route::post('/special-course/classroom/files/{course}','App\Http\Controllers\classroom\TutorCourse\FileController@store');
-Route::get('/special-course/classroom/view/{id}','App\Http\Controllers\classroom\TutorCourse\FileController@view');
-Route::delete('/special-course/classroom/files/{course}/{file}','App\Http\Controllers\classroom\TutorCourse\FileController@destroy')->middleware('role:Admin');
-
-
-Route::get('/special-course/classroom/videos/{course}','App\Http\Controllers\classroom\TutorCourse\VideoController@index');
-Route::post('/special-course/classroom/videos/{course}','App\Http\Controllers\classroom\TutorCourse\VideoController@store');
-Route::delete('/special-course/classroom/videos/{course}/{video}','App\Http\Controllers\classroom\TutorCourse\VideoController@destroy')->middleware('role:Admin');
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*---------------------------------all front public routes--------------------------------------*/
-
-// front details routes
-Route::get('/privacy', 'App\Http\Controllers\FrontController@privacy');
-Route::get('/about-us', 'App\Http\Controllers\FrontController@about');
-Route::get('/search','App\Http\Controllers\SearchController@search');
-Route::get('/popular-courses', 'App\Http\Controllers\FrontController@popularcourse');
-Route::get('/running-batches', 'App\Http\Controllers\FrontController@runningbatch');
-Route::get('/free-videos', 'App\Http\Controllers\FrontController@freevideos');
-Route::get('/notice', 'App\Http\Controllers\FrontController@notice');
-Route::get('/contact', 'App\Http\Controllers\FrontController@contact');
-Route::get('/tutors', 'App\Http\Controllers\FrontController@tutors');
-Route::get('/syllabus', 'App\Http\Controllers\FrontController@syllabus');
-Route::get('/study-materials', 'App\Http\Controllers\FrontController@materials');
-Route::get('/enquiry', 'App\Http\Controllers\FrontController@enquiry');
-Route::get('/enquiry/{courseslug}', 'App\Http\Controllers\FrontController@showCourseEnquiryForm');
-
-Route::get('/category/{slug}', 'App\Http\Controllers\FrontController@courselist');
-Route::get('/courses', 'App\Http\Controllers\FrontController@categorylist');
-Route::get('/courses/{slug}', 'App\Http\Controllers\FrontController@coursedetails');
-Route::get('/courses/{courseslug}/{batchslug}', 'App\Http\Controllers\FrontController@batchdetails');
-
-// front manual booking
-Route::get('/manual-booking', 'App\Http\Controllers\ManualBookingController@create');
-Route::post('/manual-booking','App\Http\Controllers\ManualBookingController@store');
-Route::get('/{id}/manual-booking', 'App\Http\Controllers\ManualBookingController@teamCreate');
-Route::post('/{id}/manual-booking','App\Http\Controllers\ManualBookingController@teamStore');
-
-// front blogs
-Route::get('/blogs','App\Http\Controllers\Blog\BlogController@index');
-Route::get('/blogs/{slug}','App\Http\Controllers\Blog\BlogController@show');
-Route::post('/blogs/{blog}/comments/add','App\Http\Controllers\Blog\BlogController@addComments');
-
-//front tutor mgmt
-Route::get('/tutor/{slug}', 'App\Http\Controllers\FrontController@tutorDetails');
-Route::post('/tutor/{tutor}/review/add', 'App\Http\Controllers\FrontController@saveReview');
-
-//front tutor post controller
-Route::get('/tutor-posts/{slug}', 'App\Http\Controllers\FrontTutorPostController@post');
-Route::post('/tutor-posts/{post}/comments/add','App\Http\Controllers\student\StudentHomeController@addComments')->middleware('role:Student');
-
-//front public exams mgmt
-Route::get('/public-exams', 'App\Http\Controllers\PublicExamController@examlist');
-Route::get('/public-exams/{examslug}', 'App\Http\Controllers\PublicExamController@examform');
-Route::post('/public-exams/{examslug}/attempt', 'App\Http\Controllers\PublicExamController@examshow');
-Route::post('/public-exams/{examslug}/save', 'App\Http\Controllers\PublicExamController@examsave');
-
-//front public exams results
-Route::get('/results', 'App\Http\Controllers\PublicExamController@resultlist');
-Route::get('/results/{examslug}', 'App\Http\Controllers\PublicExamController@resultshow');
-
-//front premium exams section
-Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamController@premiumExamShow');
-
-// front Korea-EPS Registration
-Route::get('/eps-registration', 'App\Http\Controllers\EpsKoreaController@create');
-Route::post('/eps-registration','App\Http\Controllers\EpsKoreaController@store');
-
-//front ebooks
-Route::get('/ebooks','App\Http\Controllers\FrontEbookController@ebookList');
-Route::get('/ebooks/{slug}','App\Http\Controllers\FrontEbookController@ebookShow');
-
-//front video course
-Route::get('/video-courses','App\Http\Controllers\FrontVideoCourseController@allCourses');
-Route::get('/video-courses/category/{slug}','App\Http\Controllers\FrontVideoCourseController@categoryCourses');
-Route::get('/video-courses/video/{slug}','App\Http\Controllers\FrontVideoCourseController@videoShow');
-Route::get('/video-courses/{slug}','App\Http\Controllers\FrontVideoCourseController@courseShow');
-
-// front careers
-Route::get('/careers','App\Http\Controllers\FrontCareerController@index');
-Route::get('/careers/{slug}','App\Http\Controllers\FrontCareerController@show');
-Route::get('/careers/apply/{slug}','App\Http\Controllers\FrontCareerController@showApplyForm');
-Route::post('/careers/apply/{slug}','App\Http\Controllers\FrontCareerController@saveApplicant');
-
-//front admin dynamic forms 
-Route::get('/forms','App\Http\Controllers\FrontDynamicFormController@formList');
-Route::get('/forms/{slug}','App\Http\Controllers\FrontDynamicFormController@showForm');
-Route::post('/forms/{slug}','App\Http\Controllers\FrontDynamicFormController@saveApplicant');
-
-//front vendor dynamic forms
-Route::get('/vendor-forms/{slug}','App\Http\Controllers\FrontDynamicFormController@showVendorForm');
-Route::post('/vendor-forms/{slug}','App\Http\Controllers\FrontDynamicFormController@saveVendorFormApplicant');
-
-
-// user free live class
-Route::post('/free-live-classes/join','App\Http\Controllers\FrontController@joinLiveClass');
