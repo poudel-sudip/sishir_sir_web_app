@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/exam-hall') }}">Exam Hall</a> </li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/exam-hall') }}">Exam Sets</a> </li>
                 <li class="breadcrumb-item"><a href="/admin/exam-hall/{{$booking->category_id}}/bookings">Bookings</a> </li>
                 <li class="breadcrumb-item active" aria-current="page">Show</li>
                 </ol>
@@ -50,11 +50,11 @@
                         <hr>
                         <div class="course-row">
                             <div>Payment Amount:</div>
-                            <div>{{$booking->paidAmount}}</div>
+                            <div>Rs. {{$booking->paymentAmount}}</div>
                         </div>
                         <div class="course-row">
                             <div>Discount:</div>
-                            <div>{{$booking->discount}}</div>
+                            <div>Rs. {{$booking->discount}}</div>
                         </div>
                         <div class="course-row">
                             <div>Payment Mode:</div>
@@ -62,10 +62,15 @@
                         </div>
                         
                         <div class="course-row">
+                            <div>Description:</div>
+                            <div>{{$booking->description}}</div>
+                        </div>
+                        
+                        <div class="course-row">
                             <div>Remarks:</div>
                             <div>{{$booking->remarks}}</div>
                         </div>
-                        
+
                         <div class="course-row">
                             <div>Created Date:</div>
                             <div>{{$booking->created_at}}</div>
@@ -78,7 +83,7 @@
 
                         <div class="course-row">
                             <div>Payment Document:</div>
-                            <div><img src="/storage/{{$booking->verificationDocument}}" class="w-100 img img-responsive"></div>
+                            <div><img src="/storage/{{$booking->verificationDocument}}" alt="" class="w-100 img img-responsive"></div>
                         </div>
                     </div>
                 </div>

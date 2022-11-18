@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\ExamHall;
+namespace App\Http\Controllers\Admin\ExamHall;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -71,7 +71,6 @@ class ExamHallController extends Controller
             "status" => "required|string|min:1",
             'oldImage' =>'string|nullable',
             'image' => 'image|nullable',
-            'class_link' => 'url|nullable',
             'isPinned' => 'string|required',
         ]);
 
@@ -88,7 +87,6 @@ class ExamHallController extends Controller
             'description'=>$request->description,
             'image'=>$image,
             'status'=>$request->status,
-            'class_link' => $request->class_link,
             'isPinned' => $request->isPinned,
         ]);
         return redirect('/admin/exam-hall');

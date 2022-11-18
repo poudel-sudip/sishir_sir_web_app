@@ -28,8 +28,8 @@
                                 <label for="category" class="col-md-4 col-form-label">{{ __('Course Category') }}</label>
                                 <div class="col-md-8">
                                     <select id="category" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ $course->category->name ?? old('category') }}">
-                                        <option value="{{$course->category->id}}">{{$course->category->name}}</option>
-                                        <option value=""></option>
+                                        <option value="{{$course->category->id ?? ''}}">{{$course->category->name ?? ''}}</option>
+                                        <option value="">-----------------</option>
                                         @foreach($categories as $cat)
                                             <option value="{{$cat->id}}">{{$cat->name}}</option>
                                         @endforeach
@@ -48,20 +48,6 @@
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $course->name }}" required autocomplete="name" autofocus>
 
                                     @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="slug" class="col-md-4 col-form-label">{{ __('Course Slug') }}</label>
-
-                                <div class="col-md-8">
-                                    <input id="slug" type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" value="{{ old('slug') ?? $course->slug }}" required readonly>
-
-                                    @error('slug')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

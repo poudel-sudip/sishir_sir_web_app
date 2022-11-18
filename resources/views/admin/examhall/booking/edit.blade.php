@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/exam-hall') }}">Exam Hall</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/exam-hall') }}">Exam Sets</a></li>
                 <li class="breadcrumb-item"><a href="/admin/exam-hall/{{$booking->category_id}}/bookings">Bookings</a></li>
               <li class="breadcrumb-item active" aria-current="page">Verify</li>
               </ol>
@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="exam_category" class="col-md-4 col-form-label">{{ __('Exam Category Name') }}</label>
+                                <label for="exam_category" class="col-md-4 col-form-label">{{ __('Exam Set Name') }}</label>
 
                                 <div class="col-md-8">
                                     <input id="exam_category" type="text" class="form-control @error('exam_category') is-invalid @enderror" name="exam_category" value="{{ old('exam_category') ?? ($booking->category->title ?? '')  }}" readonly>
@@ -65,7 +65,7 @@
                                 <label for="paymentAmount" class="col-md-4 col-form-label">{{ __('Payment Amount') }}</label>
 
                                 <div class="col-md-8">
-                                    <input id="paymentAmount" type="text" class="form-control @error('paymentAmount') is-invalid @enderror" name="paymentAmount" value="{{ old('paymentAmount') ?? ($booking->paidAmount ?? 0)}}" >
+                                    <input id="paymentAmount" type="text" class="form-control @error('paymentAmount') is-invalid @enderror" name="paymentAmount" value="{{ old('paymentAmount') ?? ($booking->paymentAmount ?? 0)}}" >
                                     <label class="">Out of Rs. {{($booking->category->price ?? '0') - ($booking->category->discount ?? '0')}} </label>
 
                                     @error('paymentAmount')
@@ -112,20 +112,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="trans_code" class="col-md-4 col-form-label">{{ __('Transaction Code') }}</label>
-
-                                <div class="col-md-8">
-                                    <input id="trans_code" type="text" class="form-control @error('trans_code') is-invalid @enderror" name="trans_code" value="{{ old('trans_code') ?? $booking->trans_code }}">
-
-                                    @error('trans_code')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            
                             <div class="form-group row">
                                 <label for="verificationDocument" class="col-md-4 col-form-label">{{ __('Verification Document') }}</label>
                                 <div class="col-md-8">

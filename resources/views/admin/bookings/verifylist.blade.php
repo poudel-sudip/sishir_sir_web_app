@@ -23,16 +23,16 @@
                             <h4 class="card-title">All Bookings Verification Requests</h4>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="verify-table">
+                            <table class="table table-bordered" id="advanced-desc-table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Date</th>
-                                        <th>Course Name</th>
-                                        <th>Batch Name</th>
-                                        <th>Booked By</th>
+                                        <th>Batch</th>
+                                        <th>Name</th>
                                         <th>Email</th>
-                                        <th>Booking Status</th>
+                                        <th>Contact</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -41,10 +41,10 @@
                                     <tr>
                                         <td>{{$booking->id}}</td>
                                         <td>{{date('Y-m-d',strtotime($booking->created_at))}}</td>
-                                        <td>{{$booking->course->name ?? ''}}</td>
                                         <td>{{$booking->batch->name ?? ''}}</td>
                                         <td>{{$booking->user_name}}</td>
                                         <td>{{$booking->user->email ?? ''}}</td>
+                                        <td>{{$booking->user->contact ?? ''}}</td>
                                         
                                         <td>
                                             @if($booking->status == 'Verified')
@@ -55,7 +55,6 @@
                                             <span class="text-info">{{$booking->status}}</span>
                                             @endif
                                         </td>
-                                        {{-- <td>{{$booking->status}}</td> --}}
                                         <td class="classroom-btn" width="170">
                                             <a href="/admin/bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
                                             @if(auth()->user()->permission>=40)
@@ -94,7 +93,6 @@
                                 })
                                 }
                             </script>
-                            <hr>
                         </div>
                     </div>
 

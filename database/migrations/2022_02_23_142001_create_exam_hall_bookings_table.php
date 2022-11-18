@@ -22,10 +22,10 @@ class CreateExamHallBookingsTable extends Migration
             $table->string('updatedBy')->nullable();
             $table->string('verificationMode', 100)->nullable();
             $table->string('verificationDocument')->nullable();
-            $table->string('paidAmount', 100)->nullable()->default('0');
+            $table->string('paymentAmount', 100)->nullable()->default('0');
             $table->string('discount', 100)->nullable()->default('0');
             $table->string('dueAmount', 100)->nullable()->default('0');
-            $table->string('trans_code')->nullable();
+            $table->mediumText('description')->nullable();
             $table->mediumText('remarks')->nullable();
             $table->timestamps();
         });

@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Verify Booking
+    Edit Booking
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Verify Booking</h3>
+            <h3 class="page-title">Edit Booking</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Verify  {{$booking->course->name}} of {{$booking->user->name}}</div>
+                    <div class="card-header">Edit Booking | {{$booking->course->name ?? ''}} | {{$booking->user->name ?? ''}}</div>
                     <div class="card-body">
                         <form method="POST" action="/admin/batches/{{$batch->id}}/bookings/{{$booking->id}}" enctype="multipart/form-data">
                             @csrf
@@ -53,20 +53,6 @@
                                     <input id="courseid" type="text" class="form-control @error('courseid') is-invalid @enderror" name="courseid" value="{{ old('courseid') ?? $booking->course->name .' - '.$booking->batch->name }}" readonly>
 
                                     @error('courseid')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="duration" class="col-md-4 col-form-label">{{ __('Course Duration') }}</label>
-
-                                <div class="col-md-8">
-                                    <input id="duration" type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" value="{{ old('duration') ?? $booking->batch->duration.' '.$booking->batch->durationType }}" readonly>
-
-                                    @error('duration')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -126,24 +112,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="accountNo" class="col-md-4 col-form-label">{{ __('Account No') }}</label>
-
-                                <div class="col-md-8">
-                                    <input id="accountNo" type="text" class="form-control @error('accountNo') is-invalid @enderror" name="accountNo" value="{{ old('accountNo') ?? $booking->accountNo }}" >
-
-                                    @error('accountNo')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="verificationDocument" class="col-md-4 col-form-label">{{ __('Verification Document') }}</label>
                                 <div class="col-md-8">
                                     <a href="/storage/{{$booking->verificationDocument}}" target="_blank">
-                                        <img src="/storage/{{$booking->verificationDocument}}" class="w-100 img img-responsive">
+                                        <img src="/storage/{{$booking->verificationDocument}}" alt="" class="w-100 img img-responsive">
                                     </a>
                                     <br><br>
                                     <input type="hidden" name="oldDocument" value="{{$booking->verificationDocument}}">
@@ -160,29 +132,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="features" class="col-md-4 col-form-label">{{ __('Booking Features') }}</label>
-
-                                <div class="col-md-8">
-                                    <select name="features" id="features" class="form-control @error('features') is-invalid @enderror" value="{{ old('features') ?? $booking->features }}"  required>
-                                        <option value="{{$booking->features}}">{{$booking->features}}</option>
-                                        <option value="">------</option>
-                                        <option value="All">All</option>
-                                        <option value="Classroom">Classroom</option>
-                                    </select>
-                                    @error('features')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('Booking Status') }}</label>
 
                                 <div class="col-md-8">
                                     <select name="status" id="status" class="form-control @error('status') is-invalid @enderror" value="{{ old('status') ?? $booking->status }}"  required>
                                         <option value="{{$booking->status}}">{{$booking->status}}</option>
+                                        <option value="">-----------</option>
                                         <option value="Unverified">Unverified</option>
                                         <option value="Verified">Verified</option>
                                     </select>

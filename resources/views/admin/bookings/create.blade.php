@@ -28,7 +28,7 @@
                                         <select name="course_name" id="course_name" class="form-control @error('course_name') is-invalid @enderror" value="{{ old('course_name') }}" autofocus required>
                                            <option value=""></option>
                                             @foreach($courses as $course)
-                                                <option value="{{$course->id}}" slug="{{$course->slug}}"> {{$course->name}} </option>
+                                                <option value="{{$course->id}}"> {{$course->name}} </option>
                                             @endforeach
                                     </select>
                                     @error('course_name')
@@ -68,34 +68,6 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="username" class="col-md-4 col-form-label">{{ __('User Full Name') }}</label>
-
-                                <div class="col-md-8">
-                                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="username" >
-
-                                    @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="description" class="col-md-4 col-form-label">{{ __('Booking Description') }} </label>
-
-                                <div class="col-md-8">
-                                    <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required>
-
-                                    @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="verificationMode" class="col-md-4 col-form-label">{{ __('Verification Mode') }}</label>
 
                                 <div class="col-md-8">
@@ -108,20 +80,6 @@
                                         <option value="Bank">Bank</option>
                                     </select>
                                     @error('verificationMode')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="accountNo" class="col-md-4 col-form-label ">{{ __('Account No') }}</label>
-
-                                <div class="col-md-8">
-                                    <input id="accountNo" type="text" class="form-control @error('accountNo') is-invalid @enderror" name="accountNo" value="{{ old('accountNo') }}" >
-
-                                    @error('accountNo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -172,22 +130,6 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="features" class="col-md-4 col-form-label">{{ __('Booking Features') }}</label>
-
-                                <div class="col-md-8">
-                                    <select name="features" id="features" class="form-control @error('features') is-invalid @enderror" value="{{ old('features') }}"  required>
-                                        <option value="All">All</option>
-                                        <option value="Classroom">Classroom</option>
-                                    </select>
-                                    @error('features')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('Booking Status') }}</label>
 
                                 <div class="col-md-8">
@@ -196,6 +138,20 @@
                                         <option value="Verified">Verified</option>
                                     </select>
                                     @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="remarks" class="col-md-4 col-form-label ">{{ __('Remarks') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="remarks" type="text" class="form-control @error('remarks') is-invalid @enderror" name="remarks" value="{{ old('remarks') }}"  >
+
+                                    @error('remarks')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -218,9 +174,39 @@
     </div>
 
     <script>
+        $(document).ready(function () 
+        {
+            $(document).on('change', '#course_name', function() {
+                var course_id = $(this).find(":selected").attr('value');
+                // console.log(course_id);
+                get_batches(course_id);                
+            });
 
-
-
+            function get_batches(id)
+            {
+                $('#batch_name').html("");
+                var op='';
+                var request = new XMLHttpRequest()
+                request.open('GET', '/courses/'+id+'/batchnames', true)
+                request.onload = function () {
+                    // Begin accessing JSON data here
+                    var data = JSON.parse(this.response);
+                    // console.log(data);
+                    if (request.status >= 200 && request.status < 400) {
+                        var batches=data.batches;
+                        batches.forEach((batch) => {
+                            op += '<option value="' + batch.id + '">' + batch.name + '</option>';
+                        });
+                        // console.log(op);
+                        $('#batch_name').append(op);
+                    } else {
+                        console.log('error');
+                        $('#batch_name').html("");
+                    }
+                }
+                request.send();
+            }
+        });
     </script>
 
 @endsection

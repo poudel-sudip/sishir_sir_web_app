@@ -1,17 +1,18 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Latest 300 Bookings
+    {{$category->title}} Bookings
 @endsection
 
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Latest 300 Bookings</h3>
+            <h3 class="page-title">{{$category->title}} Bookings</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/exam-hall') }}">Exam Sets</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Bookings</li>
               </ol>
           </nav>
         </div>  
@@ -19,24 +20,23 @@
             <div class="col-md-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                      <div class="custon-table-header">
-                          <h4 class="card-title">Latest 300 Bookings</h4>
+                        <div class="custon-table-header">
+                          <h4 class="card-title">Bookings | {{$category->title}} </h4>
                           <div class="text-right">
-                              <a href="{{ ('/admin/bookings/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Booking </button></a>
-                          </div>
-                      </div>
-                      <div class="table-responsive table-responsive-md">
+                            <a href="{{ ('/admin/exam-hall/bookings/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Create Exam Booking </button></a>
+                           </div>
+                        </div>
+                        <div class="table-responsive table-responsive-md">
                         <table class="table table-bordered" id="advanced-desc-table">
                           <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Date</th>
-                                {{-- <th>Course</th> --}}
-                                <th>Batch</th>
-                                <th>Name</th>
+                                <th>Exam Name</th>
+                                <th>Booked By</th>
                                 <th>Email</th>
                                 <th>Contact</th>
-                                {{-- <th>Due Amount</th> --}}
+                                <th>Due Amount</th>
                                 <th>Status</th>
                                 <th>Remarks</th>
                                 <th>Action</th>
@@ -44,19 +44,18 @@
                           </thead>
                           <tbody>
                               @foreach($bookings as $booking)
-                            <tr style="@if($booking->suspended) color:red !important @endif">
+                            <tr>
                                 <td>{{$booking->id}}</td>
                                 <td>{{date('Y-m-d',strtotime($booking->created_at))}}</td>
-                                {{-- <td class="text-wrap">{{$booking->course->name ?? ''}}</td> --}}
-                                <td class="text-wrap">{{$booking->batch->name ?? ''}}</td>
-                                <td class=""> {{$booking->user_name}}</td>
-                                <td class="text-wrap">{{ $booking->user->email ?? '' }}</td>
-                                <td class="text-wrap">{{ $booking->user->contact ?? '' }}</td>
-                                {{-- <td>
+                                <td>{{$booking->category->title ?? '' }}</td>
+                                <td>{{$booking->user_name}}</td>
+                                <td>{{ $booking->user->email ?? '' }}</td>
+                                <td>{{ $booking->user->contact ?? '' }}</td>
+                                <td>
                                     @if($booking->status == 'Verified' && $booking->dueAmount>10)
                                         Rs. {{ $booking->dueAmount ?? '0' }}
                                     @endif
-                                </td> --}}
+                                </td>
                                 <td>
                                     @if($booking->status == 'Verified')
                                     <span class="text-success">{{$booking->status}}</span>
@@ -66,9 +65,9 @@
                                 </td>
                                 <td class="text-wrap" max-width="150px">{{ $booking->remarks }}</td>
                                 <td class="classroom-btn" width="150">
-                                    <a href="/admin/bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                    <a href="/admin/bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
-                                    <form id="delete-form-{{$booking->id}}" action="/admin/bookings/{{$booking->id}}" method="POST" style="display: inline">
+                                    <a href="/admin/exam-hall/bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
+                                    <a href="/admin/exam-hall/bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
+                                    <form id="delete-form-{{$booking->id}}" action="/admin/exam-hall/bookings/{{$booking->id}}" method="POST" style="display: inline">
                                         @csrf
                                         @method('DELETE')
                                         <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>

@@ -6,7 +6,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Exam: {{$exam->name}}  : Questions</h3>
+            <h3 class="page-title">Questions | {{$exam->name}}</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
@@ -20,16 +20,14 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">Questions Table</h4>
-                        <div class="text-right">
-                            @if(auth()->user()->permission>=20)
-                            <a href="/admin/exams/{{$exam->id}}/questions/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Question </button></a>
-                            <a href="/admin/exams/{{$exam->id}}/questions/upload"><button type="button" class="btn btn-sm ml-3 btn-primary"> Upload Questions </button></a>
-                            @endif
-                        </div>
+                      <h4 class="card-title">Questions | {{$exam->name}} </h4>
+                      <div class="text-right">
+                        <a href="/admin/exams/{{$exam->id}}/questions/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Question </button></a>
+                        <a href="/admin/exams/{{$exam->id}}/questions/upload"><button type="button" class="btn btn-sm ml-3 btn-primary"> Upload Questions </button></a>               
+                      </div>
                     </div>
                     <div class="table-responsive table-responsive-md">
-                      <table class="table table-bordered" id="table-courses">
+                      <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>SN</th>
@@ -38,7 +36,7 @@
                             <th>Option B</th>
                             <th>Option C</th>
                             <th>Option D</th>
-                            <th>Correct Answer</th>
+                            <th>Correct Option</th>
                             <th>Action</th>
                           </tr>
                         </thead>

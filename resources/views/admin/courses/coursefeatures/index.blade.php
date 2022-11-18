@@ -20,15 +20,13 @@
                 <div class="card">
                     <div class="card-body">
                       <div class="custon-table-header">
-                          <h4 class="card-title">Course Features</h4>
+                          <h4 class="card-title">Features | {{$course->name}}</h4>
                           <div class="text-right">
-                                @if(auth()->user()->permission>=20)
                                 <a href="/admin/courses/{{$course->id}}/features/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Feature </button></a>
-                                @endif
                           </div>
                       </div>
-                      <div class="table-responsive">
-                        <table class="table table-bordered">
+                      <div class="table-responsive table-responsive-md">
+                        <table class="table table-bordered" id="advanced-desc-table">
                           <thead>
                             <tr>
                                 <th>ID</th>
@@ -45,16 +43,14 @@
                                 <td>{{$feature->title}}</td>
                                 <td><img src="/storage/{{$feature->image}}" style="max-height: 40px;max-width:40px " ></td>
                                 <td>{{$feature->isunique}}</td>
-                                <td width="270">
-                                    <a href="/admin/courses/{{$course->id}}/features/{{$feature->id}}" class="btn btn-primary btn-sm">Show</a>
-                                    @if(auth()->user()->permission>=20)
-                                    <a href="/admin/courses/{{$course->id}}/features/{{$feature->id}}/edit" class="btn btn-danger btn-sm">Edit</a>
+                                <td width="150" class="classroom-btn">
+                                    <a href="/admin/courses/{{$course->id}}/features/{{$feature->id}}" class="btn btn-primary ">Show</a>
+                                    <a href="/admin/courses/{{$course->id}}/features/{{$feature->id}}/edit" class="btn btn-danger ">Edit</a>
                                     <form id="delete-form-{{$feature->id}}" action="/admin/courses/{{$course->id}}/features/{{$feature->id}}" method="POST" style="display: inline">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="javascript:{}" onclick="javascript:deleteData({{$feature->id}});" class="btn btn-warning btn-sm">Delete</a>
+                                        <a href="javascript:{}" onclick="javascript:deleteData({{$feature->id}});" class="btn btn-warning ">Delete</a>
                                     </form>
-                                    @endif
                                 </td>
                             </tr>
                             @endforeach

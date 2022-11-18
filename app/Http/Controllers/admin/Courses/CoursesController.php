@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin\Courses;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
@@ -8,7 +8,6 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Gate;
 
 class CoursesController extends Controller
 {
@@ -27,7 +26,6 @@ class CoursesController extends Controller
 
     public function create()
     {
-        Gate::authorize('permission','course-crud');
         $categories= Categories::all()->where('status','=','Active');
         return view('admin.courses.create', compact('categories'));
     }
@@ -39,7 +37,6 @@ class CoursesController extends Controller
 
     public function edit(Course $course)
     {
-        Gate::authorize('permission','course-crud');
         $categories= Categories::all()->where('status','=','Active');
 
         return view('admin.courses.edit', compact('course','categories'));
@@ -47,8 +44,7 @@ class CoursesController extends Controller
 
     public function store()
     {
-        Gate::authorize('permission','course-crud');
-            $data=request()->validate([
+        $data=request()->validate([
             'name'=>'required',
             'description'=>'required',
             'details'=>'required | string',
@@ -76,7 +72,6 @@ class CoursesController extends Controller
 
     public function update(Course $course)
     {
-        Gate::authorize('permission','course-crud');
         $data=request()->validate([
             'name'=>'required',
             'description'=>'required',
@@ -109,9 +104,9 @@ class CoursesController extends Controller
 
     public function destroy(Course $course)
     {
-        Gate::authorize('permission','course-crud');
         $course->bookings()->delete();
         $course->batches()->delete();
+        $course->features()->delete();
         $course->delete();
         return redirect('/admin/courses');
     }

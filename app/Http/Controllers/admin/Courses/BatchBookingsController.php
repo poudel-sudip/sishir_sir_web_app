@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin\Courses;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Batch;
 use App\Models\Booking;
 use App\Models\Course;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class BatchBookingsController extends Controller
 {
@@ -25,36 +23,33 @@ class BatchBookingsController extends Controller
     public function verifiedstatus(Batch $batch)
     {
         $data=$batch->bookings()->where('status','=','Verified')->get();
-        return view('admin.batches.bookings.statusbooking',compact('data','batch'));
+        $status = 'Verified';
+        return view('admin.batches.bookings.statusbooking',compact('data','batch','status'));
     }
     public function unverifiedstatus(Batch $batch)
     {
         $data=$batch->bookings()->where('status','=','Unverified')->get();
-        return view('admin.batches.bookings.statusbooking',compact('data','batch'));
+        $status = 'Unverified';
+        return view('admin.batches.bookings.statusbooking',compact('data','batch','status'));
     }
 
     public function edit(Batch $batch, Booking $booking)
     {
-        Gate::authorize('permission','booking-crud');
         return view('admin.batches.bookings.editbooking',compact('booking','batch'));
     }
 
     public function update(Batch $batch, Booking $booking)
     {        
-        // dd(request()->all(),$batch->fee,$batch->discount);
-        Gate::authorize('permission','booking-crud');
         $data=request()->validate([
             'status'=>'string | required',
             'uploadDocument'=>'image|nullable',
-            'oldDocument'=>'',
+            'oldDocument'=>'string|nullable',
             'paymentAmount'=>'required|numeric',
             'discount'=>'required|numeric',
             'verificationMode'=>'min:1',
-            'accountNo'=>'',
             'remarks'=>'string|nullable',
-            'features'=>'string|min:3',
         ]);
-        $due=(integer)(($batch->fee - $batch->discount) - $data['paymentAmount']-$data['discount']);
+        $due = (integer)(($batch->fee - $batch->discount) - $data['paymentAmount']-$data['discount']);
         // dd(request()->all(),$batch->fee,$batch->discount,$due);
 
         $img=$data['oldDocument'];
@@ -69,9 +64,7 @@ class BatchBookingsController extends Controller
             'dueAmount'=>$due,
             'verificationDocument'=>$img,
             'verificationMode'=>$data['verificationMode'] ?? '',
-            'features'=>$data['features'],
-            'accountNo'=>$data['accountNo'] ?? '',
-            'updatedBy'=>Auth::user()->name,
+            'updatedBy'=>auth()->user()->name,
             'remarks'=>$data['remarks'],
         ]);
 
@@ -80,7 +73,6 @@ class BatchBookingsController extends Controller
 
     public function destroy(Batch $batch, Booking $booking)
     {
-        Gate::authorize('permission','booking-crud');
         $booking->delete();
         return redirect('/admin/batches/'.$batch->id.'/bookings');
     }

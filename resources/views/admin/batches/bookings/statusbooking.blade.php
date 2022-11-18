@@ -20,53 +20,53 @@
                 <div class="card">
                     <div class="card-body">
                       <div class="custon-table-header">
-                          <h4 class="card-title">{{$batch->name}} Bookings</h4>
+                          <h4 class="card-title">{{$status}} Bookings | {{$batch->name}} </h4>
                           <div class="text-right">
-                            @if(auth()->user()->permission>=40)
                               <a href="{{ ('/admin/bookings/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Booking </button></a>
-                            @endif
                           </div>
                       </div>
                       <div class="table-responsive table-responsive-md">
-                        <table class="table table-bordered" id="booking-table">
+                        <table class="table table-bordered" id="advanced-desc-table">
                           <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Date</th>
-                                <th>Course Name</th>
-                                <th>Batch Name</th>
-                                <th>Booked By</th>
-                                <th>Email</th>
-                                <th>Due Amount</th>
-                                <th>Remarks</th>
-                                <th>Action</th>
+                              <th>ID</th>
+                              <th>Date</th>
+                              <th>Batch</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Contact</th>
+                              <th>Status</th>
+                              <th>Remarks</th>
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
-                              @foreach($data as $booking)
+                            @foreach($data as $booking)
                             <tr style="@if($booking->suspended) color:red !important @endif">
                                 <td>{{$booking->id}}</td>
                                 <td>{{date('Y-m-d',strtotime($booking->created_at))}}</td>
-                                <td>{{$booking->course->name}}</td>
-                                <td>{{$booking->batch->name}}</td>
+                                <td>{{$booking->batch->name ?? ''}}</td>
                                 <td>{{$booking->user_name}}</td>
-                                <td>{{$booking->user->email}}</td>
+                                <td>{{$booking->user->email ?? ''}}</td>
+                                <td>{{$booking->user->contact ?? ''}}</td>
+    
                                 <td>
-                                    @if($booking->status == 'Verified' && $booking->dueAmount>0)
-                                        Rs. {{ $booking->dueAmount ?? '0' }}
-                                    @endif
+                                  @if($booking->status == 'Verified')
+                                  <span class="text-success">{{$booking->status}}</span>
+                                  @else
+                                  <span class="text-warning">{{$booking->status}}</span>
+                                  @endif
                                 </td>
                                 <td class="text-wrap" max-width="150px">{{ $booking->remarks }}</td>
+                                
                                 <td class="classroom-btn" width="150">
                                     <a href="/admin/batches/{{$batch->id}}/bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                    @if(auth()->user()->permission>=40)
                                     <a href="/admin/batches/{{$batch->id}}/bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
                                     <form id="delete-form-{{$booking->id}}" action="/admin/batches/{{$batch->id}}/bookings/{{$booking->id}}" method="POST" style="display: inline">
                                         @csrf
                                         @method('DELETE')
                                         <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
                                     </form>
-                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -95,7 +95,6 @@
                               })
                             }
                         </script>
-                        <hr>
                       </div>
                     </div>
                 </div>

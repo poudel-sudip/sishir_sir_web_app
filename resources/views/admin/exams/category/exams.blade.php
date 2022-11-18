@@ -22,13 +22,11 @@
                     <div class="custon-table-header">
                         <h4 class="card-title">MCQ Exams | {{ucwords($category->title)}}</h4>
                         <div class="text-right">
-                            @if(auth()->user()->permission>=20)
                             <a href="{{ ('/admin/exams/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add MCQ Exam </button></a>
-                            @endif
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">
-                      <table class="table table-bordered" id="table-courses">
+                      <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>SN</th>
@@ -95,7 +93,6 @@
                           })
                         }
                     </script>
-                    <hr>
                     </div>
                   </div>
                 </div>

@@ -118,38 +118,6 @@
     // });
 
 
-    $(document).ready(function () {
-        $(document).on('change', '#course_name', function() {
-            var course_id = $(this).find(":selected").attr('slug');
-            // console.log(course_id);
-            get_batches(course_id);                
-        });
-
-        function get_batches(id)
-        {
-            $('#batch_name').html("");
-            var op='';
-            var request = new XMLHttpRequest()
-            request.open('GET', '/api/v1/courses/'+id, true)
-            request.onload = function () {
-                // Begin accessing JSON data here
-                var data = JSON.parse(this.response);
-                if (request.status >= 200 && request.status < 400) {
-                    var batches=data.course.batches;
-                    batches.forEach((batch) => {
-                        op += '<option value="' + batch.id + '">' + batch.name + '</option>';
-                    });
-                    // console.log(op);
-                    $('#batch_name').append(op);
-                } else {
-                    console.log('error');
-                    $('#batch_name').html("");
-                }
-            }
-            request.send();
-        }
-    });
-
     $(document).ready(function(){
 
         $('.view-video').on('click',function (){

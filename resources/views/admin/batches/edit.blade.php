@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Edit {{$batch->name}}</div>
+                    <div class="card-header">Edit | {{$batch->name}}</div>
 
                     <div class="card-body">
                         <form method="POST" action="/admin/batches/{{$batch->id}}" enctype="multipart/form-data">
@@ -30,8 +30,8 @@
                                     <label for="course" class="col-sm-4 col-form-label">Course Name</label>
                                     <div class="col-sm-8">
                                         <select id="course" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ $batch->course->name ?? old('course') }}">
-                                            <option value="{{$batch->course->id}}">{{$batch->course->name}}</option>
-                                            <option value=""></option>
+                                            <option value="{{$batch->course->id ?? ''}}">{{$batch->course->name ?? ''}}</option>
+                                            <option value="">----------------</option>
 
                                             @foreach($courses as $course)
                                                 <option value="{{$course->id}}">{{$course->name}}</option>

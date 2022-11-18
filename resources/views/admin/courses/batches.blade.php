@@ -20,11 +20,9 @@
                 <div class="card">
                     <div class="card-body">
                       <div class="custon-table-header">
-                          <h4 class="card-title">{{$course->name}} Batches</h4>
+                          <h4 class="card-title">Batches | {{$course->name}}</h4>
                           <div class="text-right">
-                            @if(auth()->user()->permission>=20)
                               <a href="{{ ('/admin/batches/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Create Batch </button></a>
-                            @endif
                           </div>
                       </div>
                       <div class="table-responsive">
@@ -34,7 +32,6 @@
                                 <th>ID</th>
                                 <th>Batch Name</th>
                                 <th>Duration </th>
-                                <th>Start Date</th>
                                 <th>Time Slot</th>
                                 <th>Status</th>
                                 <th>Classroom</th>
@@ -47,7 +44,6 @@
                                 <td>{{$batch->id}}</td>
                                 <td>{{$batch->name}}</td>
                                 <td>{{$batch->duration}} {{$batch->durationType}}</td>
-                                <td>{{date('Y-m-d',strtotime($batch->startDate))}}</td>
                                 <td>{{$batch->timeSlot}}</td>
                                 <td>
                                     @if($batch->status == 'Active')
@@ -61,29 +57,22 @@
                                     @endif
                                   </td>
                                 <td> 
-                                    @if(auth()->user()->permission>=20)
                                     <a href="/classroom/chat/{{$batch->id}}" class="text-primary">View</a> 
-                                    @endif
                                 </td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
                                             <a href="/admin/batches/{{$batch->id}}" class="text-primary dropdown-item">Show</a>
-                                            @if(auth()->user()->permission>=20)
                                             <a href="/admin/batches/{{$batch->id}}/edit" class="text-danger dropdown-item">Edit</a>
                                             <form id="delete-form-{{$batch->id}}" action="/admin/batches/{{$batch->id}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <a href="javascript:{}" onclick="javascript:deleteData({{$batch->id}});" class="text-warning dropdown-item">Delete</a>
                                             </form>
-                                            @endif
                                             <br>
                                             <a href="/admin/batches/{{$batch->id}}/bookings" class="text-info dropdown-item">Bookings</a>
-                                            <a href="/admin/batch/{{$batch->id}}/followup/all" class="text-primary dropdown-item">Follow Up</a>
                                             <a href="/admin/batches/{{$batch->id}}/exams" class="text-danger dropdown-item">MCQ Exams</a>
-                                            <a href="/admin/batches/{{$batch->id}}/assignments" class="text-warning dropdown-item">Assignments</a>
-                                            <a href="/admin/batches/{{$batch->id}}/written-exams" class="text-success dropdown-item">Written Exams</a>
                                             <a href="/admin/batches/{{$batch->id}}/schedules" class="text-info dropdown-item">Schedules</a>
                                             <a href="/admin/batches/{{$batch->id}}/units" class="text-danger dropdown-item">Units</a>
                                         </div>

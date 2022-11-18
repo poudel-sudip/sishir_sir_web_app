@@ -6,7 +6,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">{{$batch->name}} :- {{$exam->name}} :- Results</h3>
+            <h3 class="page-title">Results | {{$exam->name}} | {{$batch->name}} </h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
@@ -21,10 +21,10 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">{{$batch->name}} : {{$exam->name}} : Results</h4>
+                        <h4 class="card-title">Results | {{$exam->name}} | {{$batch->name}}</h4>
                     </div>
                     <div class="table-responsive table-responsive-md">
-                      <table class="table table-bordered" id="table-courses">
+                      <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>SN</th>

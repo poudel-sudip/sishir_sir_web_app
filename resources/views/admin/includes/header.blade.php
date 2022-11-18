@@ -55,6 +55,70 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#booking-basic" aria-expanded="false" aria-controls="booking-basic">
+          <i class="mdi mdi-calendar-multiple-check menu-icon"></i>
+          <span class="menu-title">Course Bookings</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="booking-basic">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/bookings') }}">Latest Bookings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/bookings/verifylist') }}">Verify</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/bookings/all') }}">All Bookings</a>
+            </li>
+            
+          </ul>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#exams-basic" aria-expanded="false" aria-controls="exams-basic">
+          <i class="mdi mdi-playlist-check menu-icon"></i>
+          <span class="menu-title">MCQ Exams</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="exams-basic">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/exam-category') }}">Category</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/exams') }}">All Exams</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/open-exams') }}">Open Exams</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#examhall-basic" aria-expanded="false" aria-controls="examhall-basic">
+          <i class="mdi mdi-message-text-clock menu-icon"></i>
+          <span class="menu-title">Exam Hall</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="examhall-basic">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/exam-hall') }}">Exam Sets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('admin/exam-hall/bookings') }}">Latest Bookings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/exam-hall/bookings/all') }}">All Bookings</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#video-course" aria-expanded="false" aria-controls="video-course">
           <i class="mdi mdi-book-variant menu-icon"></i>
           <span class="menu-title">Video Course</span>
@@ -72,37 +136,7 @@
         </div>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#booking-basic" aria-expanded="false" aria-controls="booking-basic">
-          <i class="mdi mdi-calendar-multiple-check menu-icon"></i>
-          <span class="menu-title">Course Bookings</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="booking-basic">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/bookings') }}">Latest Bookings</a>
-            </li>
-            @if(auth()->user()->permission>=40)
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/bookings/verifylist') }}">Verify</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/bookings/duelist') }}">Due Bookings</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/bookings/suspendedlist') }}">Suspended Bookings</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/bookings/all') }}">All Bookings</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/vendor-course-bookings') }}">Vendor Bookings</a>
-            </li>
-            @endif
-          </ul>
-        </div>
-      </li>
+      
 
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#videoBooking" aria-expanded="false" aria-controls="videoBooking">
@@ -149,12 +183,7 @@
         </div>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/exam-hall') }}">
-          <i class="mdi mdi-message-text-clock menu-icon"></i>
-          <span class="menu-title">Exam Hall</span>
-        </a>
-      </li>
+   
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/booking-through-merchant') }}">
@@ -163,7 +192,6 @@
         </a>
       </li>
 
-      @if(auth()->user()->permission>=40)
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#account-basic" aria-expanded="false" aria-controls="account-basic">
           <i class="mdi mdi-book-variant menu-icon"></i>
@@ -187,7 +215,6 @@
           </ul>
         </div>
       </li>
-      @endif
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/eps-registration') }}">
@@ -245,14 +272,12 @@
         </a>
       </li>
       
-      @if(auth()->user()->permission>20)
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/vendor') }}">
           <i class="mdi mdi-account-multiple-outline menu-icon"></i>
           <span class="menu-title">Vendors</span>
         </a>
       </li>
-      @endif
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/notifications') }}">
@@ -268,30 +293,7 @@
         </a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#exams-basic" aria-expanded="false" aria-controls="exams-basic">
-          <i class="mdi mdi-playlist-check menu-icon"></i>
-          <span class="menu-title">MCQ Exams</span>
-          <i class="menu-arrow"></i>
-        </a>
-        <div class="collapse" id="exams-basic">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/exam-category') }}">Category</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/exams') }}">All Exams</a>
-            </li>
-          </ul>
-        </div>
-      </li>
       
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/open-exams') }}">
-            <i class="mdi mdi-playlist-check menu-icon"></i>
-            <span class="menu-title">Open MCQ Exams</span>
-        </a>
-      </li>
 
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#upload-basic" aria-expanded="false" aria-controls="upload-basic">

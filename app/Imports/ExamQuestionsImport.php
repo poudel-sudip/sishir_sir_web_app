@@ -18,15 +18,21 @@ class ExamQuestionsImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         $exam=$this->exam;
-        return new Question([
-            
-            'exam_id'=>$exam->id,
-            'name'=>$row['question'],
-            'opt_a'=>$row['a'],
-            'opt_b'=>$row['b'],
-            'opt_c'=>$row['c'],
-            'opt_d'=>$row['d'],
-            'opt_correct'=>$row['correct'],
-        ]);
+        if(isset($row['question'])  && isset($row['a']) && isset($row['b']) && isset($row['c']) && isset($row['d']) && isset($row['correct']))
+        {
+            return new Question([
+                'exam_id'=>$exam->id,
+                'name'=>$row['question'],
+                'opt_a'=>$row['a'],
+                'opt_b'=>$row['b'],
+                'opt_c'=>$row['c'],
+                'opt_d'=>$row['d'],
+                'opt_correct'=>$row['correct'],
+            ]);
+        }
+        else
+        {
+            dd('INVALID FORMAT. PLEASE CHECK YOUR UPLOAD FORMAT.');
+        }
     }
 }

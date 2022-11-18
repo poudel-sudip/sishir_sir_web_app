@@ -21,21 +21,17 @@
                     <div class="custon-table-header">
                         <h4 class="card-title">Course table</h4>
                         <div class="text-right">
-                            @if(auth()->user()->permission>=20)
                             <a href="{{ ('/admin/courses/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Course </button></a>
-                            @endif
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">
-                      <table class="table table-bordered" id="table-courses">
+                      <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>ID</th>
                             <th>Course Name</th>
-                            <th>Course Slug</th>
                             <th>Category</th>
                             <th>Popular</th>
-                            <th>Order</th>
                             <th>Status</th>
                             <th>Features</th>
                             <th>Action</th>
@@ -46,10 +42,8 @@
                           <tr>
                             <td>{{$course->id}}</td>
                             <td>{{$course->name}}</td>
-                            <td>{{$course->slug}}</td>
-                            <td>{{$course->category->name}}</td>
+                            <td>{{$course->category->name ?? ''}}</td>
                             <td>{{$course->isPopular}}</td>
-                            <td>{{$course->order}}</td>
                             <td>
                               @if($course->status == 'Inactive')
                               <span class="text-danger">{{$course->status}}</span>
@@ -63,14 +57,12 @@
                                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
                                     <a href="/admin/courses/{{$course->id}}" class="text-primary dropdown-item">Show</a>
-                                    @if(auth()->user()->permission>=20)
                                     <a href="/admin/courses/{{$course->id}}/edit" class="text-danger dropdown-item">Edit</a>
                                     <form id="delete-form-{{$course->id}}" action="/admin/courses/{{$course->id}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <a href="javascript:{}" onclick="javascript:deleteData({{$course->id}});" class="text-warning dropdown-item">Delete</a>
                                     </form>
-                                    @endif
                                     <a href="/admin/courses/{{$course->id}}/batches/" class="text-info dropdown-item">Batches</a>
 
                                 </div>
@@ -103,7 +95,6 @@
                           })
                         }
                     </script>
-                    <hr>
                     </div>
                   </div>
                 </div>

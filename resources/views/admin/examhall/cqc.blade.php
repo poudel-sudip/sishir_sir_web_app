@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Common Question Collections of {{$category->title}}
+    Common Question Collections | {{$category->title}}
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ url('/admin/exam-hall') }}">Exam Hall</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/admin/exam-hall') }}">Exam Sets</a></li>
                     <li class="breadcrumb-item active" aria-current="page">CQC</li>
                 </ol>
             </nav>
@@ -20,10 +20,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">Common Question Collections of {{$category->title}}</h4>
+                            <h4 class="card-title">Common Question Collections | {{$category->title}}</h4>
                         </div>
                         <div class="table-responsive table-responsive-md">
-                            <table class="table table-bordered" id="table-courses">
+                            <table class="table table-bordered" id="advanced-desc-table">
                                 <thead>
                                 <tr>
                                     <th>SN</th>
@@ -76,7 +76,6 @@
                                     })
                                 }
                             </script>
-                            <hr>
                         </div>
                     </div>
                 </div>

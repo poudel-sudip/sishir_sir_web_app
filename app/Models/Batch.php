@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use App\Models\Exams\BatchExam;
 use App\Models\Exams\Result;
-use App\Models\Exams\WrittenExam;
-use App\Models\Assignments\Assignment;
 use App\Models\BatchCQC;
 use App\Models\ClassSchedule;
 use App\Models\ClassUnit;
@@ -38,40 +36,6 @@ class Batch extends Model
 
         });
 
-        static::created(function($batch) {
-            ReportCourseBatches::create([
-                'course_id'=>$batch->course->id,
-                'batch_id'=>$batch->id,
-                'name'=>$batch->name,
-                'start'=>$batch->startDate,
-                'end'=>$batch->endDate,
-                'fee'=>$batch->fee,
-                'discount'=>$batch->discount,
-                'time'=>$batch->timeSlot,
-                'status'=>$batch->status,
-                'totalstds'=>'0',
-                'verifiedstds'=>'0'
-            ]);
-        });
-
-        static::updated(function($batch) {
-            ReportCourseBatches::where('batch_id','=',$batch->id)
-                ->update([
-                    'course_id'=>$batch->course->id,
-                    'name'=>$batch->name,
-                    'start'=>$batch->startDate,
-                    'end'=>$batch->endDate,
-                    'fee'=>$batch->fee,
-                    'discount'=>$batch->discount,
-                    'time'=>$batch->timeSlot,
-                    'status'=>$batch->status,
-                ]);
-        });
-
-        static::deleted(function($batch) {
-            ReportCourseBatches::where('batch_id','=',$batch->id)
-                ->update(['status'=>'Deleted']);
-        });
     }
 
     public function course(): BelongsTo
@@ -89,11 +53,6 @@ class Batch extends Model
         return $this->hasMany(ClassDiscussion::class)->orderBy('created_at');
     }
 
-    // public function privateChats(): HasMany
-    // {
-    //     return $this->hasMany(PrivateChat::class);
-    // }
-
     public function classFiles(): HasMany
     {
         return $this->hasMany(ClassFiles::class)->orderBy('created_at');
@@ -109,11 +68,6 @@ class Batch extends Model
         return $this->belongsToMany(Tutor::class)->orderBy('name')->withTimestamps();
     }
 
-    public function followup(): HasMany
-    {
-        return $this->hasMany(Followup::class);
-    }
-
     public function batchExams(): HasMany
     {
         return $this->hasMany(BatchExam::class, 'batch_id');
@@ -122,16 +76,6 @@ class Batch extends Model
     public function results(): HasMany
     {
         return $this->hasMany(Result::class, 'batch_id');
-    }
-
-    public function writtenExams(): HasMany
-    {
-        return $this->hasMany(WrittenExam::class, 'batch_id');
-    }
-
-    public function assignments(): HasMany
-    {
-        return $this->hasMany(Assignment::class, 'batch_id');
     }
 
     public function cqcs(): HasMany

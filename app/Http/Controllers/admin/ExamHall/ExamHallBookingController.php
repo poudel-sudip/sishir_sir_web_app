@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\ExamHall;
+namespace App\Http\Controllers\Admin\ExamHall;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,11 +15,10 @@ class ExamHallBookingController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(ExamHallCategories $category)
+    public function index()
     {
-        // dd($category->bookings);
-        $bookings=$category->bookings;
-        return view('admin.examhall.booking.index',compact('category','bookings'));
+        $bookings=ExamHallBookings::all()->sortByDesc('id')->take(300);
+        return view('admin.examhall.booking.index',compact('bookings'));
     }
 
     public function create()
@@ -51,25 +50,31 @@ class ExamHallBookingController extends Controller
             "remarks" => "string|nullable",
         ]);
 
+        $user = User::find($data['userID']);
+        if(!$user)
+        {
+            return back()->withInput()->withErrors(['userID'=>'User Not Registered. Please Check Again !!!']);
+        }
+
         $search=ExamHallBookings::where([
             ['category_id','=',$request['exam_category']],
             ['user_id','=',$request['userID']],
             ])->count();
         if($search){
-            return back()->withInput()->withErrors(['exam_category'=>'This Exam is Already Booked by the Given User. Please Check Again !!!']);
+            return back()->withInput()->withErrors(['exam_category'=>'This Exam Set is Already Booked by the Given User. Please Check Again !!!']);
         }
 
         $category = ExamHallCategories::find(request('exam_category'));
         $due=(integer)($category->price - $category->discount  - $request->paymentAmount - $request->discount);
 
         $booking = ExamHallBookings::create([
-            'user_id' => User::find(request('userID'))->id ?? auth()->user()->id,
+            'user_id' => $user->id,
             'category_id' => $category->id,
-            'user_name' => User::find(request('userID'))->name ?? auth()->user()->name,
+            'user_name' => $user->name,
             'status' => $request->status,
             'updatedBy' =>auth()->user()->name,
             'verificationMode' => $request->verificationMode,
-            'paidAmount' => $request->paymentAmount,
+            'paymentAmount' => $request->paymentAmount,
             'discount' => $request->discount,
             'dueAmount' => $due,
             'remarks' => $request->remarks,
@@ -92,7 +97,6 @@ class ExamHallBookingController extends Controller
             "status" => "required|string|min:1",
             "remarks" => "nullable|string",
             "examfee" => "required|numeric",
-            "trans_code" => "string|nullable",
         ]);
         $due=(integer)($request->examfee - $request->paymentAmount - $request->discount);
         $img=$request->oldDocument;
@@ -105,11 +109,10 @@ class ExamHallBookingController extends Controller
             "updatedBy" => auth()->user()->name,
             "verificationMode" => $request->verificationMode,
             'verificationDocument'=>$img,
-            "paidAmount" => $request->paymentAmount,
+            "paymentAmount" => $request->paymentAmount,
             "discount" => $request->discount,
             "dueAmount" => $due,
             "remarks" => $request->remarks,
-            "trans_code" => $request->trans_code,
         ]);
 
         return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
@@ -126,7 +129,13 @@ class ExamHallBookingController extends Controller
     public function allBookings()
     {
         $bookings=ExamHallBookings::all();
-        return view('admin.examhall.booking.bookinglist',compact('bookings'));
+        return view('admin.examhall.booking.allbookings',compact('bookings'));
+    }
+
+    public function setBookings(ExamHallCategories $category)
+    {
+        $bookings=$category->bookings;
+        return view('admin.examhall.booking.setbookings',compact('category','bookings'));
     }
 
 }

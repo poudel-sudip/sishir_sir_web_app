@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/exam-hall') }}">Exam Hall</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/exam-hall') }}">Exam Sets</a></li>
               <li class="breadcrumb-item active" aria-current="page">Create Booking</li>
               </ol>
           </nav>
@@ -38,11 +38,11 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="exam_category" class="col-md-4 col-form-label">{{ __('Exam Category') }}</label>
+                                <label for="exam_category" class="col-md-4 col-form-label">{{ __('Exam Set') }}</label>
 
                                 <div class="col-md-8">
                                     <select name="exam_category" id="exam_category" class="form-control @error('exam_category') is-invalid @enderror" value="{{ old('exam_category')}}"  required>
-                                        <option value="">Choose an Exam Category</option>
+                                        <option value="">Choose an Exam Set</option>
                                         @foreach($categories as $cat)
                                         <option value="{{$cat->id}}">{{$cat->title .' @ Rs. '. ($cat->price - $cat->discount)}}</option>
                                         @endforeach

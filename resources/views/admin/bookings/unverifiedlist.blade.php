@@ -24,29 +24,28 @@
                           <h4 class="card-title">All Unverified Bookings</h4>
                       </div>
                       <div class="table-responsive table-responsive-md">
-                        <table class="table table-bordered" id="main-booking-table">
+                        <table class="table table-bordered" id="advanced-desc-table">
                           <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Date</th>
-                                <th>Course Name</th>
-                                <th>Batch Name</th>
-                                <th>Booked By</th>
+                                <th>Batch</th>
+                                <th>Name</th>
                                 <th>Email</th>
+                                <th>Contact</th>
                                 <th>Status</th>
                                 <th>Remarks</th>
                                 <th>Action</th>
-                            </tr>
                           </thead>
                           <tbody>
-                              @foreach($bookings as $booking)
+                            @foreach($bookings as $booking)
                             <tr style="@if($booking->suspended) color:red !important @endif">
                                 <td>{{$booking->id}}</td>
                                 <td>{{date('Y-m-d',strtotime($booking->created_at))}}</td>
-                                <td>{{$booking->course->name ?? ''}}</td>
-                                <td>{{$booking->batch->name ?? ''}}</td>
-                                <td>{{$booking->user_name}}</td>
-                                <td>{{ $booking->user->email ?? ''}}</td>
+                                <td class="text-wrap">{{$booking->batch->name ?? ''}}</td>
+                                <td class=""> {{$booking->user_name}}</td>
+                                <td class="text-wrap">{{ $booking->user->email ?? '' }}</td>
+                                <td class="text-wrap">{{ $booking->user->contact ?? '' }}</td>
                                 <td>
                                     @if($booking->status == 'Verified')
                                     <span class="text-success">{{$booking->status}}</span>
@@ -57,14 +56,12 @@
                                 <td class="text-wrap" max-width="150px">{{ $booking->remarks }}</td>
                                 <td class="classroom-btn" width="150">
                                     <a href="/admin/bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                    @if(auth()->user()->permission>=40)
                                     <a href="/admin/bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
                                     <form id="delete-form-{{$booking->id}}" action="/admin/bookings/{{$booking->id}}" method="POST" style="display: inline">
                                         @csrf
                                         @method('DELETE')
                                         <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
                                     </form>
-                                    @endif
                                 </td>
                             </tr>
                             @endforeach

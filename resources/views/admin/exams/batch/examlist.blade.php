@@ -6,7 +6,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Batch: {{$batch->name}} :- Exam Lists</h3>
+            <h3 class="page-title">Exams | {{$batch->name}}</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
@@ -20,20 +20,18 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">Batch: {{$batch->name}} :- Exam Lists</h4>
+                        <h4 class="card-title">Exams | {{$batch->name}}</h4>
                         <div class="text-right">
-                            @if(auth()->user()->permission>=20)
                             <a href="/admin/batches/{{$batch->id}}/exams/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Associate MCQ Exam to Batch </button></a>
-                            @endif
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">
-                      <table class="table table-bordered" id="table-courses">
+                      <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>SN</th>
                             <th>Exam Name</th>
-                            <th>Date</th>
+                            {{-- <th>Date</th> --}}
                             <th>Time(HH:MM:SS)</th>
                             <th>Questions</th>
                             <th>Action</th>
@@ -45,7 +43,7 @@
                           <tr>
                             <td>{{ $i }}</td>
                             <td>{{ $exam->exam->name ?? '' }}</td>
-                            <td>{{ $exam->exam->exam_date ?? '' }}</td>
+                            {{-- <td>{{ $exam->exam->exam_date ?? '' }}</td> --}}
                             <td>{{ $exam->exam->exam_time.':00' ?? '' }} </td>
                             <td>{{ $exam->exam->questions->count() }} </td>
                            
@@ -88,7 +86,6 @@
                           })
                         }
                     </script>
-                    <hr>
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\OpenExams;
+namespace App\Http\Controllers\Admin\Exams;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,18 +12,18 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Exams\OpenExamResultExport;
 
-class ExamController extends Controller
+class OpenExamController extends Controller
 {
     public function index()
     {
         $exams=OpenExam::all();
-        return view('admin.openexams.examslist',compact('exams'));
+        return view('admin.exams.openexams.examslist',compact('exams'));
     }
 
     public function create()
     {
         $categories = ExamCategory::all();
-        return view('admin.openexams.examcreate',compact('categories'));
+        return view('admin.exams.openexams.examcreate',compact('categories'));
     }
 
     public function store(Request $request)
@@ -50,12 +50,12 @@ class ExamController extends Controller
 
     public function show(OpenExam $exam)
     {
-        return view('admin.openexams.examshow',compact('exam'));
+        return view('admin.exams.openexams.examshow',compact('exam'));
     }
 
     public function edit(OpenExam $exam)
     {
-        return view('admin.openexams.examedit',compact('exam'));
+        return view('admin.exams.openexams.examedit',compact('exam'));
     }
 
     public function update(Request $request, OpenExam $exam)
@@ -83,7 +83,7 @@ class ExamController extends Controller
     public function results(OpenExam $exam)
     {
         $results=$exam->results;
-        return view('admin.openexams.examresults',compact('exam','results'));
+        return view('admin.exams.openexams.examresults',compact('exam','results'));
     }
 
     public function export(OpenExam $exam): BinaryFileResponse

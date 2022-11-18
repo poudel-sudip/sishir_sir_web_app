@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Exam Hall Categories
+    Exam Sets
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">All Exam Hall Categories</h3>
+            <h3 class="page-title">All Exam Sets</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Exam Hall</li>
+                    <li class="breadcrumb-item active" aria-current="page">Exam Sets</li>
                 </ol>
             </nav>
         </div>
@@ -19,24 +19,24 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">Exam Hall Categories</h4>
+                            <h4 class="card-title">Exam Sets</h4>
                             <div class="text-right">
-                                <a href="{{ ('/admin/exam-hall/bookings/all') }}"><button type="button" class="btn btn-sm ml-3 btn-primary"> Show All Bookings </button></a>
-                                <a href="{{ ('/admin/exam-hall/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Exam Category </button></a>
+                                <a href="{{ ('/admin/exam-hall/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Exam Set </button></a>
                             </div>
                         </div>
                         <div class="table-responsive table-responsive-md">
-                            <table class="table table-bordered" id="table-courses">
+                            <table class="table table-bordered" id="advanced-desc-table">
                                 <thead>
                                 <tr>
                                     <th>SN</th>
-                                    <th>Category Title</th>
+                                    <th class="text-wrap">Exam Set Title</th>
                                     <th>Exams Count</th>
                                     <th>Price (Rs)</th>
                                     <th>Discount (Rs)</th>
-                                    <th>Status</th>
                                     <th>CQC</th>
-                                    <th>Bookings (Unverified/Total)</th>
+                                    <th class="text-wrap">Bookings (Unverified/Total)</th>
+                                    <th>Status</th>
+
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -49,6 +49,9 @@
                                         <td> <a href="/admin/exam-hall/{{$cat->id}}/exams">Count({{$cat->category_exams->count()}})</a> </td>
                                         <td>{{$cat->price}}</td>
                                         <td>{{$cat->discount}}</td>
+                                        
+                                        <td> <a href="/admin/exam-hall/{{$cat->id}}/cqc">CQCs({{$cat->cqcs->count()}})</a> </td>
+                                        <td> <a href="/admin/exam-hall/{{$cat->id}}/bookings">Bookings( {{$cat->bookings()->where('status','!=','Verified')->count()}}/{{$cat->bookings->count()}} )</a> </td>
                                         <td>
                                             @if($cat->status == 'Active')
                                                 <span class="text-success">{{$cat->status}}</span>
@@ -56,11 +59,7 @@
                                                 <span class="text-warning">{{$cat->status}}</span>
                                             @endif
                                         </td>
-                                        <td> <a href="/admin/exam-hall/{{$cat->id}}/cqc">CQCs({{$cat->cqcs->count()}})</a> </td>
-                                        <td class="classroom-btn" width="160">
-                                            <a href="/admin/exam-hall/{{$cat->id}}/bookings" class="btn btn-primary">Bookings({{$cat->bookings()->where('status','!=','Verified')->count()}}/{{$cat->bookings->count()}})</a>
-                                        </td>
-                                        <td class="classroom-btn" width="160">
+                                        <td class="classroom-btn" width="100">
                                             <a href="/admin/exam-hall/{{$cat->id}}/edit" class="btn btn-success">Edit</a>
                                             <form id="delete-form-{{$cat->id}}" action="/admin/exam-hall/{{$cat->id}}" method="POST" style="display: inline">
                                                 @csrf
@@ -96,7 +95,6 @@
                                     })
                                 }
                             </script>
-                            <hr>
                         </div>
                     </div>
                 </div>

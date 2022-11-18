@@ -36,41 +36,34 @@
                             <div>Booking Status:</div>
                             <div>{{$booking->status}}</div>
                         </div>
-                        <div class="course-row">
-                            <div>Booking Features:</div>
-                            <div>{{$booking->features}}</div>
-                        </div>
-                        <div class="course-row">
-                            <div>Booking Description:</div>
-                            <div>{{$booking->description}}</div>
-                        </div>
+                                           
                         <div class="course-row">
                             <div>Course Name:</div>
-                            <div>{{$booking->course->name}}</div>
+                            <div>{{$booking->course->name ?? ''}}</div>
                         </div>
                         <div class="course-row">
                             <div>Batch Name:</div>
-                            <div>{{$booking->batch->name}}</div>
+                            <div>{{$booking->batch->name ?? ''}}</div>
                         </div>
                         <div class="course-row">
                             <div>Course Fee:</div>
-                            <div>Rs. {{($booking->batch->fee)-($booking->batch->discount)}}</div>
+                            <div>Rs. {{($booking->batch->fee ?? '')-($booking->batch->discount ?? '')}}</div>
                         </div>
                         <div class="course-row">
                             <div>Course Duration:</div>
-                            <div>{{$booking->batch->duration}}  {{$booking->batch->durationType}}</div>
+                            <div>{{$booking->batch->duration ?? ''}}  {{$booking->batch->durationType ?? ''}}</div>
                         </div>
                         <div class="course-row">
                             <div>Course Start Date:</div>
-                            <div>{{$booking->batch->startDate}}</div>
+                            <div>{{$booking->batch->startDate ?? ''}}</div>
                         </div>
                         <div class="course-row">
                             <div>Course End Date:</div>
-                            <div>{{$booking->batch->endDate}}</div>
+                            <div>{{$booking->batch->endDate ?? ''}}</div>
                         </div>
                         <div class="course-row">
                             <div>Batch Status:</div>
-                            <div>{{$booking->batch->status}}</div>
+                            <div>{{$booking->batch->status ?? ''}}</div>
                         </div>
                         <hr>
                         <div class="course-row">
@@ -86,8 +79,8 @@
                             <div>{{$booking->verificationMode}}</div>
                         </div>
                         <div class="course-row">
-                            <div>Account:</div>
-                            <div>{{$booking->accountNo}}</div>
+                            <div>Booking Description:</div>
+                            <div>{{$booking->description}}</div>
                         </div>
                         <div class="course-row">
                             <div>Remarks:</div>
@@ -103,7 +96,7 @@
                         </div>
                         <div class="course-row">
                             <div>Payment Document:</div>
-                            <div><img src="/storage/{{$booking->verificationDocument}}" class="w-100 img img-responsive"></div>
+                            <div><img src="/storage/{{$booking->verificationDocument}}" alt="" class="w-100 img img-responsive"></div>
                         </div>
                     </div>
                 </div>

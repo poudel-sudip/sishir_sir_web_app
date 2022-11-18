@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin\Courses;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
@@ -17,18 +17,16 @@ class CourseFeaturesController extends Controller
 
     public function index(Course $course)
     {
-        return view('admin.coursefeatures.index',compact('course'));
+        return view('admin.courses.coursefeatures.index',compact('course'));
     }
 
     public function create(Course $course)
     {
-        Gate::authorize('permission','course-crud');
-        return view('admin.coursefeatures.create',compact('course'));
+        return view('admin.courses.coursefeatures.create',compact('course'));
     }
 
     public function store(Course $course)
     {
-        Gate::authorize('permission','course-crud');
         $data=request()->validate([
             'course_id'=>'required | min:1',
             'title'=>'required | string',
@@ -56,18 +54,16 @@ class CourseFeaturesController extends Controller
 
     public function show(Course $course,CourseFeatures $feature)
     {
-        return view('admin.coursefeatures.show',compact('feature'));
+        return view('admin.courses.coursefeatures.show',compact('feature'));
     }
 
     public function edit(Course $course, CourseFeatures $feature)
     {
-        Gate::authorize('permission','course-crud');
-        return view('admin.coursefeatures.edit',compact('feature'));
+        return view('admin.courses.coursefeatures.edit',compact('feature'));
     }
 
     public function update(Course $course, CourseFeatures $feature)
     {
-        Gate::authorize('permission','course-crud');
         $data=request()->validate([
             'course_id'=>'required | min:1',
             'title'=>'required | string',
@@ -99,7 +95,6 @@ class CourseFeaturesController extends Controller
 
     public function destroy(Course $course, CourseFeatures $feature)
     {
-        Gate::authorize('permission','course-crud');
         $feature->delete();
         return redirect('/admin/courses/'.$course->id.'/features');
     }

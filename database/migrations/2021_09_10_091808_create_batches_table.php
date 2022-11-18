@@ -29,7 +29,6 @@ class CreateBatchesTable extends Migration
             $table->string('timeSlot')->nullable();
             $table->string('classroomLink')->nullable();
             $table->string('live_link')->nullable();
-            $table->string('meetingID')->nullable();
             $table->string('class_status')->default('No Class');
             $table->string('status')->default('Inactive');
             $table->timestamps();

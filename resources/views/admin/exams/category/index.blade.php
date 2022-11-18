@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                      <table class="table table-bordered" id="category-table">
+                      <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>SN</th>
@@ -41,7 +41,7 @@
                             <tr>
                               <td>{{$i}}</td>
                               <td>{{ucwords($cat->title)}}</td>
-                              <td> <a href="/admin/exam-category/{{$cat->id}}/exams" class="btn btn-primary">Exams</a> </td>
+                              <td> <a href="/admin/exam-category/{{$cat->id}}/exams" class="btn-sm btn-info">Exams ( {{$cat->exams->count()}} ) </a> </td>
                               <td class="classroom-btn" width="160">
                                 <form id="delete-form-{{$cat->id}}" action="/admin/exam-category/{{$cat->id}}" method="POST" style="display: inline">
                                     @csrf

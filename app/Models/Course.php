@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Reports\ReportCourse;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
-
-use function Symfony\Component\Translation\t;
 
 class Course extends Model
 {
@@ -18,18 +15,6 @@ class Course extends Model
     // Either comment out $guarded variable or $fillable variable only one should be commented
 
     protected $guarded=[];
-
-    //    protected $fillable = [
-    //        'name',
-    //        'description',
-    //        'fee',
-    //        'duration',
-    //        'durationType',
-    //        'startDate',
-    //        'endDate',
-    //        'timeSlot',
-    //        'status',
-    //    ];
 
     protected static function boot()
     {
@@ -47,33 +32,6 @@ class Course extends Model
 
         });
 
-        static::created(function ($course) {
-            ReportCourse::create([
-                'category'=>$course->category_id,
-                'course_id'=>$course->id,
-                'course'=>$course->name,
-                'slug'=>$course->slug,
-                'isPopular'=>$course->isPopular,
-                'status'=>$course->status,
-            ]);
-        });
-
-        static::updated(function($course) {
-            ReportCourse::where('course_id',$course->id)
-                ->update([
-                    'category'=>$course->category_id,
-                    'course'=>$course->name,
-                    'isPopular'=>$course->isPopular,
-                    'status'=>$course->status,
-                ]);
-        });
-
-        static::deleted(function ($course) {
-            ReportCourse::where('course_id',$course->id)
-                ->update([
-                    'status'=>'Deleted',
-                ]);
-        });
     }
 
     public function category(): BelongsTo
@@ -105,8 +63,5 @@ class Course extends Model
     {
         return $this->hasMany(CourseFeatures::class)->where('isUnique','=','Yes');
     }
-    public function manualBookings(): HasMany
-    {
-        return $this->hasMany(ManualBooking::class);
-    }
+
 }

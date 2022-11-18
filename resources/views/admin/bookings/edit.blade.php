@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Verify  {{$booking->course->name}} of {{$booking->user->name}}</div>
+                    <div class="card-header">Verify Booking | {{$booking->course->name ??''}} | {{$booking->user->name ?? ''}}</div>
                     <div class="card-body">
                         <form method="POST" action="/admin/bookings/{{$booking->id}}" enctype="multipart/form-data">
                             @csrf
@@ -53,7 +53,7 @@
                                             <option value="{{$booking->course->id}}">{{$booking->course->name}}</option>
                                             <option value="">---------</option>
                                             @foreach($courses as $course)
-                                                <option value="{{$course->id}}" slug="{{$course->slug}}"> {{$course->name}} </option>
+                                                <option value="{{$course->id}}"> {{$course->name}} </option>
                                             @endforeach
                                     </select>
                                     @error('course_name')
@@ -72,20 +72,6 @@
                                         <option value="{{$booking->batch->id}}">{{$booking->batch->name}}</option>
                                     </select>
                                     @error('batch_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="duration" class="col-md-4 col-form-label">{{ __('Course Duration') }}</label>
-
-                                <div class="col-md-8">
-                                    <input id="duration" type="text" class="form-control @error('duration') is-invalid @enderror" name="duration" value="{{ old('duration') ?? $booking->batch->duration.' '.$booking->batch->durationType }}" readonly>
-
-                                    @error('duration')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -143,40 +129,12 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="form-group row">
-                                <label for="trans_code" class="col-md-4 col-form-label">{{ __('Transaction Code') }}</label>
-
-                                <div class="col-md-8">
-                                    <input id="trans_code" type="text" class="form-control @error('trans_code') is-invalid @enderror" name="trans_code" value="{{ old('trans_code') ?? $booking->trans_code }}">
-
-                                    @error('trans_code')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="accountNo" class="col-md-4 col-form-label">{{ __('Account No') }}</label>
-
-                                <div class="col-md-8">
-                                    <input id="accountNo" type="text" class="form-control @error('accountNo') is-invalid @enderror" name="accountNo" value="{{ old('accountNo') ?? $booking->accountNo }}">
-
-                                    @error('accountNo')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
+                            
                             <div class="form-group row">
                                 <label for="verificationDocument" class="col-md-4 col-form-label">{{ __('Verification Document') }}</label>
                                 <div class="col-md-8">
                                     <a href="/storage/{{$booking->verificationDocument}}" target="_blank">
-                                        <img src="/storage/{{$booking->verificationDocument}}" class="w-100 img img-responsive">
+                                        <img src="/storage/{{$booking->verificationDocument}}" alt="" class="w-100 img img-responsive">
                                     </a>
                                     <br><br>
                                     <input type="hidden" name="oldDocument" value="{{$booking->verificationDocument}}">
@@ -191,32 +149,14 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="form-group row">
-                                <label for="features" class="col-md-4 col-form-label">{{ __('Booking Features') }}</label>
-
-                                <div class="col-md-8">
-                                    <select name="features" id="features" class="form-control @error('features') is-invalid @enderror" value="{{ old('features') ?? $booking->features }}"  required>
-                                        <option value="{{$booking->features}}">{{$booking->features}}</option>
-                                        <option value="">------</option>
-                                        <option value="All">All</option>
-                                        <option value="Classroom">Classroom</option>
-                                    </select>
-                                    @error('features')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
+                        
                             <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('Booking Status') }}</label>
 
                                 <div class="col-md-8">
                                     <select name="status" id="status" class="form-control @error('status') is-invalid @enderror" value="{{ old('status') ?? $booking->status }}"  required>
                                         <option value="{{$booking->status}}">{{$booking->status}}</option>
-                                        <option value="">------</option>
+                                        <option value="">-------------</option>
                                         <option value="Unverified">Unverified</option>
                                         <option value="Verified">Verified</option>
                                     </select>
@@ -236,7 +176,7 @@
                                         <option value="{{$booking->suspended}}">
                                             @if($booking->suspended) Suspended @else Unsuspended @endif
                                         </option>
-                                        <option value="">------</option>
+                                        <option value="">--------------</option>
                                         <option value="0">Unsuspended</option>
                                         <option value="1">Suspended</option>
                                     </select>
@@ -264,7 +204,6 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <input type="hidden" name="coursefee" value="{{($booking->batch->fee)-($booking->batch->discount)}}">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Submit') }}
                                     </button>
@@ -276,4 +215,40 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () 
+        {
+            $(document).on('change', '#course_name', function() {
+                var course_id = $(this).find(":selected").attr('value');
+                // console.log(course_id);
+                get_batches(course_id);                
+            });
+
+            function get_batches(id)
+            {
+                $('#batch_name').html("");
+                var op='';
+                var request = new XMLHttpRequest()
+                request.open('GET', '/courses/'+id+'/batchnames', true)
+                request.onload = function () {
+                    // Begin accessing JSON data here
+                    if (request.status >= 200 && request.status < 400) {
+                        var data = JSON.parse(this.response);
+                        var batches=data.batches;
+                        batches.forEach((batch) => {
+                            op += '<option value="' + batch.id + '">' + batch.name + '</option>';
+                        });
+                        // console.log(op);
+                        $('#batch_name').append(op);
+                    } else {
+                        console.log('error');
+                        $('#batch_name').html("");
+                    }
+                }
+                request.send();
+            }
+        });
+    </script>
+
 @endsection

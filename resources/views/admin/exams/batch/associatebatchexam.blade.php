@@ -19,7 +19,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">{{$batch->course->name.' : '.$batch->name}}</div>
+                    <div class="card-header">{{$batch->name.' | '.$batch->course->name}}</div>
                     <div class="card-body">
                         <form method="POST" action="/admin/batches/{{$batch->id}}/exams" enctype="multipart/form-data" class="forms-sample">
                             @csrf
@@ -28,7 +28,7 @@
                                 <label for="title" class="col-md-4 col-form-label ">{{ __('Batch') }}</label>
 
                                 <div class="col-md-8">
-                                    <input id="title" type="text" class="form-control" name="title" value="{{ $batch->course->name.'  '.$batch->name }}" readonly>
+                                    <input id="title" type="text" class="form-control" name="title" value="{{ $batch->course->name.' | '.$batch->name }}" readonly>
                                 </div>
                             </div>
 

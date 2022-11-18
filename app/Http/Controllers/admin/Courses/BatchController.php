@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin\Courses;
 
 use App\Http\Controllers\Controller;
 use App\Models\Batch;
@@ -12,23 +12,20 @@ use Illuminate\Support\Facades\Gate;
 
 class BatchController extends Controller
 {
-    //
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function index(Course $course)
+    public function index()
     {
         return view('admin.batches.index',[
             'batches'=>Batch::all(),
-            'course'=>$course,
         ]);
     }
 
     public function create()
     {
-        Gate::authorize('permission','course-crud');
         return view ('admin.batches.create',[
             'courses'=>Course::all()->where('status','=','Active'),
         ]);
@@ -36,20 +33,19 @@ class BatchController extends Controller
 
     public function store()
     {
-        Gate::authorize('permission','course-crud');
         $data=request()->validate([
             'course'=>'integer | required | min:1',
             'name'=>'string | required',
             'description'=>'string',
             'fee'=>'integer | required',
             'discount'=>'integer | required',
-            'duration'=>'integer | required',
-            'durationType'=>'string',
-            'startDate'=>'date',
-            'endDate'=>'date',
+            'duration'=>'integer | nullable',
+            'durationType'=>'string | nullable',
+            'startDate'=>'date | nullable',
+            'endDate'=>'date | nullable',
             'timeSlot'=>'string|nullable',
-            'classroomLink'=>'',
-            'status'=>'',
+            'classroomLink'=>'string|nullable',
+            'status'=>'string|nullable',
         ]);
         Batch::create([
             'course_id'=>$data['course'],
@@ -75,7 +71,6 @@ class BatchController extends Controller
 
     public function edit(Batch $batch)
     {
-        Gate::authorize('permission','course-crud');
         $courses=Course::all()->where('status','=','Active');
         return view ('admin.batches.edit', compact('courses','batch'));
     }
@@ -83,7 +78,6 @@ class BatchController extends Controller
     public function update(Batch $batch)
     {
         // dd(request()->all());
-        Gate::authorize('permission','course-crud');
         $data=request()->validate([
             'course'=>'integer | required | min:1',
             'name'=>'string | required',
@@ -123,7 +117,6 @@ class BatchController extends Controller
 
     public function destroy(Batch $batch)
     {
-        Gate::authorize('permission','course-crud');
         $batch->bookings()->delete();
         $batch->delete();
         return redirect('/admin/batches');

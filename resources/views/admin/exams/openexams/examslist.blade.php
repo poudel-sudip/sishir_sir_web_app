@@ -1,17 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Batch Assignments Lists
+    Open MCQ Exam Lists
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Batch: {{$batch->name}} :- Assignment Lists</h3>
+            <h3 class="page-title">All Open MCQ Exams</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ url('/admin/batches') }}">Batches</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Assignments</li>
+              <li class="breadcrumb-item active" aria-current="page">Open Exams</li>
               </ol>
           </nav>
         </div>  
@@ -20,42 +19,44 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">Batch: {{$batch->name}} :- Assignments Lists</h4>
+                        <h4 class="card-title">Open Exams Table</h4>
                         <div class="text-right">
-                            @if(auth()->user()->permission>=20)
-                            <a href="/admin/batches/{{$batch->id}}/assignments/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Question </button></a>
-                            @endif
+                            <a href="{{ ('/admin/open-exams/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add MCQ Exam </button></a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">
-                      <table class="table table-bordered" id="table-courses">
+                      <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>SN</th>
-                            <th>Question</th>
-                            <th>Solutions Count</th>
+                            <th>Exam Name</th>
+                            <th>Created Date</th>
+                            <th>Time(HH:MM:SS)</th>
+                            <th>Questions</th>
+                            <th>Results</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                             @php($i=1)
-                            @foreach ($assignments as $assignment)
+                            @foreach ($exams as $exam)
                           <tr>
                             <td>{{ $i }}</td>
-                            <td>{{ $assignment->question ?? '' }}</td>
-                            <td>{{ $assignment->answers->count() ?? ''}}</td>
-                           
+                            <td>{{ $exam->exam->name ?? '' }}</td>
+                            <td>{{ date('Y-m-d',strtotime($exam->created_at)) }}</td>
+                            <td>{{ ($exam->exam->exam_time ?? '00:00').':00'  }} </td>
+                            <td> Count({{ $exam->exam->questions->count() ?? 0 }}) </td>
+                            <td> <a href="/admin/open-exams/{{$exam->id}}/results">{{$exam->result_status}} / Count({{ $exam->results->count() }}) </a></td>
+                            
                             <td class="classroom-btn" width="160">
-                             
-                                <form id="delete-form-{{$assignment->id}}" action="/admin/batches/{{$batch->id}}/assignments/{{$assignment->id}}" method="POST" style="display: inline">
+                                <a href="/admin/open-exams/{{$exam->id}}" class="btn btn-primary">Show</a>
+                                <a href="/admin/open-exams/{{$exam->id}}/edit" class="btn btn-danger">Edit</a>
+                                <form id="delete-form-{{$exam->id}}" action="/admin/open-exams/{{$exam->id}}" method="POST" style="display: inline">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="javascript:{}" onclick="javascript:deleteData({{$assignment->id}});" class="btn btn-warning">Delete</a>
+                                    <a href="javascript:{}" onclick="javascript:deleteData({{$exam->id}});" class="btn btn-warning">Delete</a>
                                 </form>
-                                <a href="/admin/batches/{{$batch->id}}/assignments/{{$assignment->id}}/answers" class="btn btn-primary">Answers</a>
-
                             </td>
-                            
                           </tr>
                           @php($i++)
                           @endforeach
@@ -84,7 +85,6 @@
                           })
                         }
                     </script>
-                    <hr>
                     </div>
                   </div>
                 </div>
