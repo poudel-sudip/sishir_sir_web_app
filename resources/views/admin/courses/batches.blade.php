@@ -73,8 +73,8 @@
                                             <br>
                                             <a href="/admin/batches/{{$batch->id}}/bookings" class="text-info dropdown-item">Bookings</a>
                                             <a href="/admin/batches/{{$batch->id}}/exams" class="text-danger dropdown-item">MCQ Exams</a>
-                                            <a href="/admin/batches/{{$batch->id}}/schedules" class="text-info dropdown-item">Schedules</a>
-                                            <a href="/admin/batches/{{$batch->id}}/units" class="text-danger dropdown-item">Units</a>
+                                            {{-- <a href="/admin/batches/{{$batch->id}}/schedules" class="text-info dropdown-item">Schedules</a> --}}
+                                            <a href="/admin/batches/{{$batch->id}}/units" class="text-info dropdown-item">Units</a>
                                         </div>
                                       </div>
                                 </td>

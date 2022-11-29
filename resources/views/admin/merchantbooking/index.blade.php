@@ -11,8 +11,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ url('/admin/reports') }}">Reports</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Merchant Bookings</li>
+              <li class="breadcrumb-item active" aria-current="page">Merchant Wise Bookings</li>
               </ol>
           </nav>
         </div>  
@@ -69,19 +68,6 @@
                                                     <td class="text-wrap"> {{$data->examBooking->user->email}} </td>
                                                     <td class="text-wrap"> {{$data->examBooking->user->contact}} </td>
                                                     <td class="text-wrap"> Rs. {{$data->examBooking->paidAmount}} </td>
-                                                @else
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                @endif
-                                                @break
-                                            @case('video')
-                                                @if($data->videoBooking)
-                                                    <td class="text-wrap"> {{$data->videoBooking->user->name}} </td>
-                                                    <td class="text-wrap"> {{$data->videoBooking->user->email}} </td>
-                                                    <td class="text-wrap"> {{$data->videoBooking->user->contact}} </td>
-                                                    <td class="text-wrap"> Rs. {{$data->videoBooking->paymentAmount}} </td>
                                                 @else
                                                     <td></td>
                                                     <td></td>

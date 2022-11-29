@@ -25,8 +25,8 @@
                                 <a href="/admin/audios/{{$category->id}}/files/upload"><button type="button" class="btn btn-sm ml-3 btn-success">Upload Audio</button></a>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="video-table">
+                        <div class="table-responsive table-responsive-md">
+                            <table class="table table-bordered" id="advanced-desc-table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>

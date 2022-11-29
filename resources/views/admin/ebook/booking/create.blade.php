@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ url('/admin/ebook-booking') }}">E-Book Bookings</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/ebook-bookings') }}">E-Book Bookings</a></li>
               <li class="breadcrumb-item active" aria-current="page">Add Booking</li>
               </ol>
           </nav>
@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header">Add E-Book Booking</div>
                     <div class="card-body">
-                        <form method="POST" action="/admin/ebook-booking" enctype="multipart/form-data">
+                        <form method="POST" action="/admin/ebook-bookings" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label for="book_name" class="col-md-5 col-form-label">{{ __('Book Name') }}</label>

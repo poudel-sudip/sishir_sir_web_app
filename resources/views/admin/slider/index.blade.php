@@ -21,38 +21,39 @@
                         <div class="custon-table-header">
                             <h4 class="card-title">All Slider</h4>
                             <div class="text-right">
-                                @if(auth()->user()->permission==50 || auth()->user()->permission==20 )
                                 <a href="{{ ('/admin/sliders/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Slider </button></a>
-                                @endif
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Slider Order</th>
-                                    <th>Slider Image</th>
-                                    <th>Slider Title</th>
-                                    <th>Action</th>
-                                </tr>
-                                @foreach($sliders as $slider)
+                        <div class="table-responsive table-responsive-md">
+                            <table class="table table-bordered" id="advanced-desc-table">
+                                <thead>
                                     <tr>
-                                        <td>{{$slider->id}}</td>
-                                        <td>{{$slider->order}}</td>
-                                        <td> <img src="/storage/{{$slider->image}}"> </td>
-                                        <td>{{$slider->title}}</td>
-                                        <td width="165">
-                                            @if(auth()->user()->permission==50 || auth()->user()->permission==20 )
-                                            <a href="/admin/sliders/{{$slider->id}}/edit" class="btn btn-danger btn-sm">Edit</a>
-                                            <form id="delete-form-{{$slider->id}}" action="/admin/sliders/{{$slider->id}}" method="POST" style="display: inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$slider->id}});" class="btn btn-warning btn-sm">Delete</a>
-                                            </form>
-                                            @endif
-                                        </td>
+                                        <th>ID</th>
+                                        <th>Slider Order</th>
+                                        <th>Slider Image</th>
+                                        <th>Slider Title</th>
+                                        <th>Action</th>
                                     </tr>
-                                @endforeach
+                                </thead>
+                                <tbody>
+                                    @foreach($sliders as $slider)
+                                        <tr>
+                                            <td>{{$slider->id}}</td>
+                                            <td>{{$slider->order}}</td>
+                                            <td> <img src="/storage/{{$slider->image}}" class="img img-responsive img-fluid"> </td>
+                                            <td>{{$slider->title}}</td>
+                                            <td width="100" class="classroom-btn">
+                                                <a href="/admin/sliders/{{$slider->id}}/edit" class="btn btn-danger ">Edit</a>
+                                                <form id="delete-form-{{$slider->id}}" action="/admin/sliders/{{$slider->id}}" method="POST" style="display: inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="javascript:{}" onclick="javascript:deleteData({{$slider->id}});" class="btn btn-warning ">Delete</a>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                
                             </table>
                             <script type="text/javascript">
                                 function deleteData(id)

@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Models\ExamHall\ExamHallBookings;
+use App\Models\Ebook\EbookBooking;
 use function Symfony\Component\String\u;
 
 class User extends Authenticatable implements JWTSubject
@@ -37,6 +38,11 @@ class User extends Authenticatable implements JWTSubject
     public function exam_bookings():HasMany 
     {
         return $this->hasMany(ExamHallBookings::class,'user_id')->orderByDesc('id');
+    }
+
+    public function ebook_bookings():HasMany 
+    {
+        return $this->hasMany(EbookBooking::class,'user_id')->orderByDesc('id');
     }
 
     public function userNotifications(): BelongsToMany

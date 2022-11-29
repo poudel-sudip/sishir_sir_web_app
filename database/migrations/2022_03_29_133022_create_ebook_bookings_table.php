@@ -26,7 +26,7 @@ class CreateEbookBookingsTable extends Migration
             $table->string('discount')->nullable()->default('0');
             $table->string('dueAmount')->nullable();
             $table->string('verificationDocument')->nullable();
-            $table->string('trans_code')->nullable();
+            $table->string('description')->nullable();
             $table->longText('remarks')->nullable();
             $table->timestamps();
         });

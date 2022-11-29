@@ -27,13 +27,11 @@
                         <div class="custon-table-header">
                             <h4 class="card-title">All SMS</h4>
                             <div class="text-right">
-                                @if(auth()->user()->permission>=30)
                                 <a href="{{ ('/admin/sms/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success">Add SMS</button></a>
-                                @endif
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="notification-table">
+                        <div class="table-responsive table-responsive-md">
+                            <table class="table table-bordered" id="advanced-desc-table">
                                 <thead>
                                     <tr>
                                         <th>Date</th>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Slider;
@@ -22,13 +22,11 @@ class SliderController extends Controller
 
     public function create()
     {
-        Gate::authorize('permission','slider');
         return view('admin.slider.create');
     }
 
     public function store()
     {
-        Gate::authorize('permission','slider');
         $data=request()->validate([
             'sliderImage'=>'image',
             'order'=>'',
@@ -47,13 +45,11 @@ class SliderController extends Controller
 
     public function edit(Slider $slider)
     {
-        Gate::authorize('permission','slider');
         return view('admin.slider.edit',compact('slider'));
     }
 
     public function update(Slider $slider)
     {
-        Gate::authorize('permission','slider');
         $data=request()->validate([
             'order'=>'',
             'title'=>'',
@@ -78,7 +74,6 @@ class SliderController extends Controller
 
     public function destroy(Slider $slider)
     {
-        Gate::authorize('permission','slider');
         $slider->delete();
         return redirect('/admin/sliders');
     }

@@ -25,8 +25,8 @@
                             <a href="/admin/audios/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Category </button></a>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                      <table class="table table-bordered" id="category-table">
+                    <div class="table-responsive table-responsive-md">
+                      <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>SN</th>

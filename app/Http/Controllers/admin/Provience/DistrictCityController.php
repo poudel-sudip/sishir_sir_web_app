@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\Provience;
+namespace App\Http\Controllers\Admin\Provience;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

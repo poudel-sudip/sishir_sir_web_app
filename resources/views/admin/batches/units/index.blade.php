@@ -23,13 +23,11 @@
             <div class="custon-table-header">
                 <h4 class="card-title">Units Table | {{$batch->name}}</h4>
                 <div class="text-right">
-                    @if(auth()->user()->permission>=20)
                     <a href="#add_unit" class="btn btn-success" data-toggle="modal" data-bs-toggle="modal" data-target="#add_unit" data-bs-target="#add_unit"> Add Unit</a>
-                    @endif
                 </div>
             </div>
-            <div class="table-responsive">
-              <table class="table table-bordered" id="category-table">
+            <div class="table-responsive table-responsive-md">
+              <table class="table table-bordered" id="advanced-desc-table">
                 <thead>
                   <tr>
                     <th width="50">SN</th>

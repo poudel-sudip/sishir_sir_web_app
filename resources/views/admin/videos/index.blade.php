@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Videos
+   Uploaded Videos
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Videos</h3>
+            <h3 class="page-title">Uploaded Videos</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
@@ -19,15 +19,13 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">All Videos</h4>
+                            <h4 class="card-title">All Uploaded Videos</h4>
                             <div class="text-right">
-                                @if(auth()->user()->permission==50 || auth()->user()->permission==20 )
                                 <a href="{{ ('/admin/videos/upload') }}"><button type="button" class="btn btn-sm ml-3 btn-success">Upload Video</button></a>
-                                @endif
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="video-table">
+                        <div class="table-responsive table-responsive-md">
+                            <table class="table table-bordered" id="advanced-desc-table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -45,13 +43,11 @@
                                         <td class="text-wrap">{{$video->url}}</td>
                                         <td>{{date('Y-m-d',strtotime($video->created_at))}}</td>
                                         <td>
-                                            @if(auth()->user()->permission==50 || auth()->user()->permission==20 )
                                             <form id="delete-form-{{$video->id}}" action="/admin/videos/{{$video->id}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <a href="javascript:{}" onclick="javascript:deleteData({{$video->id}});" class="btn btn-warning">Delete</a>
                                             </form>
-                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

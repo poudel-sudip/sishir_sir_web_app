@@ -26,8 +26,8 @@
                             <a href="/admin/provience/{{$provience->id}}/district-city/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add District/City </button></a>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                      <table class="table table-bordered" id="category-table">
+                    <div class="table-responsive table-responsive-md">
+                      <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>SN</th>

@@ -23,7 +23,7 @@
                             <h4 class="card-title">Applications | {{$vaccancy->title}}</h4>
                         </div>
                         <div class="table-responsive table-responsive-md">
-                            <table class="table table-bordered" id="table-courses">
+                            <table class="table table-bordered" id="advanced-desc-table">
                                 <thead>
                                 <tr>
                                     <th>SN</th>

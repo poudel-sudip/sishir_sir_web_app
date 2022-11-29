@@ -44,9 +44,9 @@ class EnquiryController extends Controller
             'message'=>$request->message,
             'provience'=>$request->provience ?? '',
             'district'=>$request->district ?? '',
-     ]);
+        ]);
 
-      return back()->with('successMessage','Your Query Has Been Submitted');
+        return back()->with('successMessage','Your Query Has Been Submitted');
     }
 
     public function update(StudentEnquiry $enquiry,Request $request)

@@ -2,12 +2,6 @@
 @section('student-title')
     Classroom Videos
 @endsection
-@section('tutor-title')
-    Classroom Videos
-@endsection
-@section('tutor-title-icon')
- <i class="fas fa-video"></i>
-@endsection
 @section('student-title-icon')
     <i class="fas fa-video"></i>
 @endsection
@@ -23,25 +17,17 @@
 
         <div class="row">
             <div class="col-md-12 text-center">
-                <h6>{{$batch->name}} <span>(Time: {{$todaytime->time ?? $batch->timeSlot ?? ''}})</span></h6>
+                <h6>{{$batch->name}} @if($batch->timeSlot) <span>({{ $batch->timeSlot ?? ''}})</span> @endif </h6>        
             </div>
             <div class="col-md-12 text-center" oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
                 <div class="chatroom-header text-center">
                     <a href="/classroom/chat/{{$batch->id}}" class="nav-link">Chat</a>
                     <a href="/classroom/files/{{$batch->id}}" class="nav-link">Files</a>
                     <a href="/classroom/videos/{{$batch->id}}" class="nav-link active">Videos</a>
-                    <a href="/classroom/assignments/{{$batch->id}}" class="nav-link">Assignments</a>
-                    <a href="/classroom/schedules/{{$batch->id}}" class="nav-link">Schedules</a>
                     <a href="/classroom/cqcs/{{$batch->id}}" class="nav-link">CQC</a>
 
-                    @if($batch->status=='Running' && $batch->classroomLink!='' && auth()->user()->role!='Student')
-                        <a href="{{$batch->classroomLink}}" target="_blank" class="nav-link" title="Zoin Class"><i class="fa fa-video-camera" aria-hidden="true"></i> Join</a>
-                    @endif
-
-                    @if($meeting)
-                        @if($meeting->status=='started')
-                            <a href="{{$meeting->join_url}}" target="_blank" class="nav-link" title="Zoin Class"><i class="fa fa-video-camera" aria-hidden="true"></i> Join</a>
-                        @endif
+                    @if($batch->status=='Running' && $batch->classroomLink!='' )
+                        <a href="{{$batch->classroomLink}}" target="_blank" class="nav-link" title="Zoin Class" oncontextmenu="return false"><i class="fa fa-video-camera" aria-hidden="true"></i> Join</a>
                     @endif
                 </div>
             </div>
@@ -67,7 +53,7 @@
                 </div>
             </div>
             @empty
-                <p class="text-center mt-5">Unit Not Assigned. Please Check All Videos.</p>
+                <p class="text-center mt-5">Unit Not Assigned. Please Check <a href="/classroom/videos/{{$batch->id}}/all">All Videos</a>.</p>
             @endforelse  
         </div>  
     </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
@@ -46,12 +46,10 @@ class AdminHomeController extends Controller
         
         $batches = Batch::all()->where('isPinned','=','Yes')->sortByDesc('status');
         $exams = ExamHallCategories::all()->where('isPinned','=','Yes');
-        $vendors = Vendor::all()->where('isPinned','=','Yes');
-        $videocourses = VideoCourse::where('isPinned','=','Yes')->get();
         $ebooks = Ebook::where('isPinned','=','Yes')->get();
         // dd($data,$exams,$vendors);
         
-        return view('admin.home',compact('data','batches','exams','vendors','videocourses','ebooks'));
+        return view('admin.home',compact('data','batches','exams','ebooks'));
     }
 
 

@@ -24,39 +24,44 @@
                                 <a href="{{ ('/admin/home-popup/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Pop Up </button></a>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Popup Title</th>
-                                    <th>Popup Image</th>
-                                    <th>Popup Link</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                                @foreach($popup as $popup)
+                        <div class="table-responsive table-responsive-md">
+                            <table class="table table-bordered" id="advanced-desc-table">
+                                <thead>
                                     <tr>
-                                        <td>{{$popup->id}}</td>
-                                        <td>{{$popup->title}}</td>
-                                        <td> <img src="/storage/{{$popup->image}}"> </td>
-                                        <td>{{$popup->link}}</td>
-                                        <td>
-                                            @if($popup->status == 'Inactive')
-                                            <span class="text-danger">{{$popup->status}}</span>
-                                            @else
-                                            <span class="text-info">{{$popup->status}}</span>
-                                            @endif
-                                        </td>
-                                        <td width="165">
-                                            <a href="/admin/home-popup/{{$popup->id}}/edit" class="btn btn-danger btn-sm">Edit</a>
-                                            <form id="delete-form-{{$popup->id}}" action="/admin/home-popup/{{$popup->id}}" method="POST" style="display: inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$popup->id}});" class="btn btn-warning btn-sm">Delete</a>
-                                            </form>
-                                        </td>
+                                        <th>ID</th>
+                                        <th>Popup Title</th>
+                                        <th>Popup Image</th>
+                                        <th>Popup Link</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
-                                @endforeach
+                                </thead>
+                                <tbody>
+                                    @foreach($popup as $popup)
+                                        <tr>
+                                            <td>{{$popup->id}}</td>
+                                            <td>{{$popup->title}}</td>
+                                            <td> <img src="/storage/{{$popup->image}}"> </td>
+                                            <td>{{$popup->link}}</td>
+                                            <td>
+                                                @if($popup->status == 'Inactive')
+                                                <span class="text-danger">{{$popup->status}}</span>
+                                                @else
+                                                <span class="text-info">{{$popup->status}}</span>
+                                                @endif
+                                            </td>
+                                            <td width="100" class="classroom-btn">
+                                                <a href="/admin/home-popup/{{$popup->id}}/edit" class="btn btn-danger btn-sm">Edit</a>
+                                                <form id="delete-form-{{$popup->id}}" action="/admin/home-popup/{{$popup->id}}" method="POST" style="display: inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="javascript:{}" onclick="javascript:deleteData({{$popup->id}});" class="btn btn-warning btn-sm">Delete</a>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                
                             </table>
                             <script type="text/javascript">
                                 function deleteData(id)

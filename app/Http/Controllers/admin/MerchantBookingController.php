@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,6 +17,6 @@ class MerchantBookingController extends Controller
     {
         $bookings = MerchantBooking::all();
         // dd($bookings);
-        return view('admin.reports.booking.merchantbooking',compact('bookings'));
+        return view('admin.merchantbooking.index',compact('bookings'));
     }
 }

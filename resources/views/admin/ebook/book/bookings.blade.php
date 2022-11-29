@@ -23,11 +23,11 @@
                       <div class="custon-table-header">
                           <h4 class="card-title">Bookings | {{$book->title}}</h4>
                             <div class="text-right">
-                                <a href="{{ ('/admin/ebook-booking/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Booking </button></a>
+                                <a href="{{ ('/admin/ebook-bookings/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Booking </button></a>
                             </div>
                       </div>
                       <div class="table-responsive table-responsive-md">
-                        <table class="table table-bordered" id="main-booking-table">
+                        <table class="table table-bordered" id="advanced-desc-table">
                           <thead>
                             <tr>
                                 <th>ID</th>
@@ -65,15 +65,13 @@
                                 </td>
                                 <td class="text-wrap" max-width="150px">{{ $booking->remarks }}</td>
                                 <td class="classroom-btn" width="150">
-                                    <a href="/admin/ebook-booking/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                    @if(auth()->user()->permission>=40)
-                                    <a href="/admin/ebook-booking/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
-                                    <form id="delete-form-{{$booking->id}}" action="/admin/ebook-booking/{{$booking->id}}" method="POST" style="display: inline">
+                                    <a href="/admin/ebook-bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
+                                    <a href="/admin/ebook-bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
+                                    <form id="delete-form-{{$booking->id}}" action="/admin/ebook-bookings/{{$booking->id}}" method="POST" style="display: inline">
                                         @csrf
                                         @method('DELETE')
                                         <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
                                     </form>
-                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -102,7 +100,7 @@
                             })
                             }
                         </script>
-                        <hr>
+                        
                       </div>
                     </div>
                 </div>

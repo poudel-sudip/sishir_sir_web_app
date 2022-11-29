@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\Ebook;
+namespace App\Http\Controllers\Admin\Ebook;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

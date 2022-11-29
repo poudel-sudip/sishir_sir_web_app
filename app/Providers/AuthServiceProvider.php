@@ -39,98 +39,11 @@ class AuthServiceProvider extends ServiceProvider
             {
                 $status =$b->status;
             }
-            if($status=='Verified' || $user->role=='Admin' || $user->role=='Tutor')
+            if($status=='Verified' || $user->role=='Admin')
             {
                 return true;
             }
         });
 
-        Gate::define('permission',function (User $user,$action)
-        {
-            $user=Auth::user();
-            switch ($action) 
-            {
-                case 'user-crud':
-                    if($user->permission>=30)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case 'course-crud':
-                    if($user->permission>=20)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case 'booking-crud':
-                    if($user->permission>=40)
-                    {
-                        return true;
-                    }
-                    break;
-                
-                case 'zoom':
-                    if($user->permission>=30)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case 'slider':
-                    if($user->permission>=20)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case 'testimonial':
-                    if($user->permission>=20)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case 'tutor':
-                    if($user->permission>=20)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case 'notification':
-                    if($user->permission>=30)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case 'video':
-                    if($user->permission>=20)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case 'blog':
-                    if($user->permission>=20)
-                    {
-                        return true;
-                    }
-                    break;
-
-                case 'enquiry':
-                    if($user->permission>=20)
-                    {
-                        return true;
-                    }
-                    break;
-
-                default:
-                    return false;
-                    break;
-            }
-        });
     }
 }

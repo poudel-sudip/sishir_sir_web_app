@@ -21,38 +21,41 @@
                         <div class="custon-table-header">
                             <h4 class="card-title">All Testimonials</h4>
                             <div class="text-right">
-                                @if(auth()->user()->permission==50 || auth()->user()->permission==20 )
                                 <a href="{{ ('/admin/testimonials/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Testimonial </button></a>
-                                @endif
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Testimonial By</th>
-                                    <th>As</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                                @foreach($testimonials as $testimonial)
-                                <tr>
-                                    <td>{{$testimonial->id}}</td>
-                                    <td>{{$testimonial->name}}</td>
-                                    <td> {{$testimonial->role}} </td>
-                                    <td>{{date('Y-m-d',strtotime($testimonial->created_at))}}</td>
-                                    <td width="165">
-                                        @if(auth()->user()->permission==50 || auth()->user()->permission==20 )
-                                        <a href="/admin/testimonials/{{$testimonial->id}}/edit" class="btn btn-danger btn-sm">Edit</a>
-                                        <form id="delete-form-{{$testimonial->id}}" action="/admin/testimonials/{{$testimonial->id}}" method="POST" style="display: inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <a href="javascript:{}" onclick="javascript:deleteData({{$testimonial->id}});" class="btn btn-warning btn-sm">Delete</a>
-                                        </form>
-                                        @endif
-                                    </td>
-                                </tr>
-                                @endforeach
+                        <div class="table-responsive table-responsive-md">
+                            <table class="table table-bordered" id="advanced-desc-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Testimonial By</th>
+                                        <th>As</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($testimonials as $testimonial)
+                                    <tr>
+                                        <td>{{$testimonial->id}}</td>
+                                        <td>{{$testimonial->name}}</td>
+                                        <td> {{$testimonial->role}} </td>
+                                        <td>{{date('Y-m-d',strtotime($testimonial->created_at))}}</td>
+                                        <td width="165">
+                                            @if(auth()->user()->permission==50 || auth()->user()->permission==20 )
+                                            <a href="/admin/testimonials/{{$testimonial->id}}/edit" class="btn btn-danger btn-sm">Edit</a>
+                                            <form id="delete-form-{{$testimonial->id}}" action="/admin/testimonials/{{$testimonial->id}}" method="POST" style="display: inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a href="javascript:{}" onclick="javascript:deleteData({{$testimonial->id}});" class="btn btn-warning btn-sm">Delete</a>
+                                            </form>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                                
                             </table>
                             <script type="text/javascript">
                                 function deleteData(id)

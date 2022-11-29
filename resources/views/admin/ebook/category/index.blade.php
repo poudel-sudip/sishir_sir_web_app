@@ -25,13 +25,12 @@
                             <a href="{{ ('/admin/ebook/categories/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Category </button></a>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                      <table class="table table-bordered" id="category-table">
+                    <div class="table-responsive table-responsive-md">
+                      <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>SN</th>
                             <th>Name</th>
-                            <th>Slug</th>
                             <th>Order</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -43,7 +42,6 @@
                           <tr>
                             <td>{{$i}}</td>
                             <td>{{$cat->name}}</td>
-                            <td>{{$cat->slug}}</td>
                             <td>{{$cat->order}}</td>
                             <td><span class='text-{{$cat->status == "Active" ? "success" : "danger"}}'>{{$cat->status}}</span></td>
                             <td class="classroom-btn" width="160">

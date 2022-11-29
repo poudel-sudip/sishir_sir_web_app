@@ -3,13 +3,6 @@
 @section('student-title')
     Classroom Files
 @endsection
-
-@section('tutor-title')
-    Classroom  Files
-@endsection
-@section('tutor-title-icon')
-    <i class="fas fa-file-pdf"></i>
-@endsection
 @section('student-title-icon')
     <i class="fas fa-file-alt"></i>
 @endsection
@@ -24,25 +17,17 @@
 
         <div class="row">
             <div class="col-md-12 text-center">
-                <h6>{{$batch->name}} <span>(Time: {{$todaytime->time ?? $batch->timeSlot ?? ''}})</span></h6>
+                <h6>{{$batch->name}} @if($batch->timeSlot) <span>({{ $batch->timeSlot ?? ''}})</span> @endif </h6>        
             </div>
             <div class="col-md-12 text-center" oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
                 <div class="chatroom-header text-center">
                     <a href="/classroom/chat/{{$batch->id}}" class="nav-link">Chat</a>
                     <a href="/classroom/files/{{$batch->id}}" class="nav-link active">Files</a>
                     <a href="/classroom/videos/{{$batch->id}}" class="nav-link">Videos</a>
-                    <a href="/classroom/assignments/{{$batch->id}}" class="nav-link">Assignments</a>
-                    <a href="/classroom/schedules/{{$batch->id}}" class="nav-link">Schedules</a>
                     <a href="/classroom/cqcs/{{$batch->id}}" class="nav-link">CQC</a>
 
-                    @if($batch->status=='Running' && $batch->classroomLink!='' && auth()->user()->role!='Student')
-                        <a href="{{$batch->classroomLink}}" target="_blank" class="nav-link" title="Zoin Class"><i class="fa fa-video-camera" aria-hidden="true"></i> Join</a>
-                    @endif
-
-                    @if($meeting)
-                        @if($meeting->status=='started')
-                            <a href="{{$meeting->join_url}}" target="_blank" class="nav-link" title="Zoin Class"><i class="fa fa-video-camera" aria-hidden="true"></i> Join</a>
-                        @endif
+                    @if($batch->status=='Running' && $batch->classroomLink!='' )
+                        <a href="{{$batch->classroomLink}}" target="_blank" class="nav-link" title="Zoin Class" oncontextmenu="return false"><i class="fa fa-video-camera" aria-hidden="true"></i> Join</a>
                     @endif
                 </div>
             </div>
@@ -315,7 +300,22 @@
                         $('#file-title').html(data.fileTitle);
                         $('#file-image').html("");
                         $('#file-image').append(
-                            '<iframe src="/storage/'+data.filePath+'" frameBorder="0" scrolling="auto" height="600" width="100%"></iframe>'
+                            // '<iframe src="/storage/'+data.filePath+'" frameBorder="0" scrolling="auto" height="600" width="100%"></iframe>'
+                            `<object data="/storage/`+data.filePath+`"
+                            type="application/pdf"
+                            width="100%"
+                            height="600">
+                                <iframe
+                                src="/storage/`+data.filePath+`"
+                                width="100%"
+                                height="100%"
+                                style="border: none">
+		                            <p>
+			                            Your browser does not support PDFs.
+			                            <a href="/storage/`+data.filePath+`">Download the PDF</a>
+                                    </p>
+	                            </iframe>
+                            </object>`
                         )
                     }
                 })

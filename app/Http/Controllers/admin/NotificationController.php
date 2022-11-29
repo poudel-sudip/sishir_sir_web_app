@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Batch;
@@ -9,7 +9,6 @@ use App\Models\Notification;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Mockery\Matcher\Not;
-use Illuminate\Support\Facades\Gate;
 
 class NotificationController extends Controller
 {
@@ -26,14 +25,12 @@ class NotificationController extends Controller
 
     public function create()
     {
-        Gate::authorize('permission','notification');
         $batches=Batch::all()->sortBy('created_at');
         return view('admin.notifications.create',compact('batches'));
     }
 
     public function store(Request $request)
     {
-        Gate::authorize('permission','notification');
         $data=$request->validate([
             'group'=>'',
             'allusers'=>'',
@@ -115,14 +112,12 @@ class NotificationController extends Controller
 
     public function edit(Notification $notification)
     {
-        Gate::authorize('permission','notification');
         $batches=Batch::all()->sortBy('created_at');
         return view('admin.notifications.edit',compact('notification','batches'));
     }
 
     public function update(Notification $notification)
     {
-        Gate::authorize('permission','notification');
         $data=request()->validate([
             'group'=>'',
             'allusers'=>'',
@@ -199,7 +194,6 @@ class NotificationController extends Controller
 
     public function destroy(Notification $notification)
     {
-        Gate::authorize('permission','notification');
         $notification->users()->detach();
         $notification->delete();
         return redirect('/admin/notifications');

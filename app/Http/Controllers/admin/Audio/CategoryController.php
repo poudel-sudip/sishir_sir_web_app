@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin\Audio;
+namespace App\Http\Controllers\Admin\Audio;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

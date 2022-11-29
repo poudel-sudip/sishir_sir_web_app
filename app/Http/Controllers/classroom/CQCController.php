@@ -5,7 +5,6 @@ namespace App\Http\Controllers\classroom;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Batch;
-use App\Models\ClassSchedule;
 use App\Models\BatchCQC;
 
 class CQCController extends Controller
@@ -16,14 +15,11 @@ class CQCController extends Controller
             $header='admin.layouts.app';
         }elseif (auth()->user()->role=='Student'){
             $header='student.layouts.app';
-        }elseif (auth()->user()->role=='Tutor'){
-            $header='tutors.layouts.app';
         }else{
             $header='layouts.app';
         }
-        $todaytime=ClassSchedule::where('batch_id','=',$batch->id)->whereDate('date','=',date('Y-m-d'))->first();
         $cqcs=$batch->cqcs;
-        return view('classroom.cqc',compact('batch','todaytime','cqcs','header'));
+        return view('classroom.cqc',compact('batch','cqcs','header'));
     }
 
     public function store(Request $request, Batch $batch)

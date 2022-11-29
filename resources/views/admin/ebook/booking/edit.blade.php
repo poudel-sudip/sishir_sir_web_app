@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ url('/admin/ebook-booking') }}">E-Book Bookings</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/ebook-bookings') }}">E-Book Bookings</a></li>
               <li class="breadcrumb-item active" aria-current="page">Edit</li>
               </ol>
           </nav>
@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header">Edit  {{$booking->book->title ?? ''}} of {{$booking->user->name ?? ''}}</div>
                     <div class="card-body">
-                        <form method="POST" action="/admin/ebook-booking/{{$booking->id}}" enctype="multipart/form-data">
+                        <form method="POST" action="/admin/ebook-bookings/{{$booking->id}}" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
 

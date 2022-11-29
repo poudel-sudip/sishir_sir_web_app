@@ -20,14 +20,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">Comments table : {{$blog->title}}</h4>
-                            <div class="text-right">
-{{--                                <a href="{{ ('/admin/blogs/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Blog </button></a>--}}
-
-                            </div>
+                            <h4 class="card-title">Comments | {{$blog->title}}</h4>
                         </div>
                         <div class="table-responsive table-responsive-md">
-                            <table class="table table-bordered" id="table-courses">
+                            <table class="table table-bordered" id="advanced-desc-table">
                                 <thead>
                                 <tr>
                                     <th>SN</th>
@@ -152,7 +148,7 @@
                                 }
 
                             </script>
-                            <hr>
+                            
                         </div>
                     </div>
                 </div>

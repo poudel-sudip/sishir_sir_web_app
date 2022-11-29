@@ -11,7 +11,7 @@
           <div class="search-area">
               <form action="/search/" method="GET">
                   <div class="input-group input-home-search">
-                      <input type="text" class="form-control" placeholder="Search (courses, tutors)" aria-label="Recipient's username" aria-describedby="button-addon2" name="query">
+                      <input type="text" class="form-control" placeholder="Search (courses)" aria-label="Recipient's username" aria-describedby="button-addon2" name="query">
                       <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
                   </div>
               </form>
@@ -47,8 +47,6 @@
                                 <a class="nav-link btn-register dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">{{ __('Register') }}</a>
                                 <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
                                   <li><a class="dropdown-item" href="{{ route('register') }}"><strong>As Student</strong></a></li>
-                                  <li><a class="dropdown-item" href="{{ route('register.tutor') }}"><strong>As Tutor</strong></a></li>
-                                  <li><a class="dropdown-item" href="{{ route('register.vendor') }}"><strong>As Vendor</strong></a></li>
                                 </ul>
                             </li>
                           @endif

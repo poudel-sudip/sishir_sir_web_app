@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
 class TestimonialController extends Controller
 {
@@ -22,13 +21,11 @@ class TestimonialController extends Controller
 
     public function create()
     {
-        Gate::authorize('permission','testimonial');
         return view('admin.testimonial.create');
     }
 
     public function store()
     {
-        Gate::authorize('permission','testimonial');
         $data=request()->validate([
             'name'=>'required | string',
             'role'=>'',
@@ -53,13 +50,11 @@ class TestimonialController extends Controller
 
     public function edit(Testimonial $testimonial)
     {
-        Gate::authorize('permission','testimonial');
         return view('admin.testimonial.edit',compact('testimonial'));
     }
 
     public function update(Testimonial $testimonial)
     {
-        Gate::authorize('permission','testimonial');
         $data=request()->validate([
             'name'=>'required | string',
             'role'=>'',
@@ -85,7 +80,6 @@ class TestimonialController extends Controller
 
     public function destroy(Testimonial $testimonial)
     {
-        Gate::authorize('permission','testimonial');
         $testimonial->delete();
         return redirect('/admin/testimonials');
     }

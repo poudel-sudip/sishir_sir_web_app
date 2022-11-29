@@ -15,18 +15,16 @@
     @endif
     <div class="row">
         <div class="col-md-12 text-center">
-            <h6>{{$batch->name}} <span>(Time: {{$todaytime->time ?? $batch->timeSlot ?? ''}})</span></h6>
+            <h6>{{$batch->name}} @if($batch->timeSlot) <span>({{ $batch->timeSlot ?? ''}})</span> @endif </h6>        
         </div>
         <div class="col-md-12 text-center" oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
             <div class="chatroom-header">
                 <a href="/classroom/chat/{{$batch->id}}" class="nav-link ">Chat</a>
                 <a href="/classroom/files/{{$batch->id}}" class="nav-link">Files</a>
                 <a href="/classroom/videos/{{$batch->id}}" class="nav-link">Videos</a>
-                <a href="/classroom/assignments/{{$batch->id}}" class="nav-link">Assignments</a>
-                <a href="/classroom/schedules/{{$batch->id}}" class="nav-link ">Schedules</a>
                 <a href="/classroom/cqcs/{{$batch->id}}" class="nav-link active">CQC</a>
 
-                @if($batch->status=='Running' && $batch->classroomLink!='' && auth()->user()->role!='Student')
+                @if($batch->status=='Running' && $batch->classroomLink!='' )
                     <a href="{{$batch->classroomLink}}" target="_blank" class="nav-link" title="Zoin Class" oncontextmenu="return false"><i class="fa fa-video-camera" aria-hidden="true"></i> Join</a>
                 @endif
 
@@ -35,7 +33,7 @@
     </div>
     <div class="container">
         <div class="col-md-12">
-            <div class="enrolled-table table-responsive">
+            <div class="enrolled-table table-responsive table-responsive-md">
                 <table class="table" style="width:100%">
                     <thead class="table-light">
                         <tr>
@@ -44,7 +42,7 @@
                             <th>Posted By</th>
                             <th>Question</th>
                             @if(auth()->user()->role!='Student')
-                            <th></th>
+                                <th></th>
                             @endif
                         </tr>
                     </thead>

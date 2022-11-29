@@ -33,7 +33,7 @@ class StudentHomeController extends Controller
         $batches=array_unique($batches);
         $myexams=BatchExam::whereIn('batch_id',$batches)->count();
         $exam_hall=auth()->user()->exam_bookings()->count();
-        $video_bookings = auth()->user()->video_bookings()->count();
+        // $video_bookings = auth()->user()->video_bookings()->count();
         $ebook_bookings = auth()->user()->ebook_bookings()->count();
         $count= (object) [
             'bookings'=> (object) [
@@ -44,7 +44,7 @@ class StudentHomeController extends Controller
                 'suspended'=>$suspendedBooking,
                 'exams'=>$myexams,
                 'exam_hall'=>$exam_hall,
-                'video_booking'=>$video_bookings,
+                // 'video_booking'=>$video_bookings,
                 'ebook_booking'=>$ebook_bookings,
             ],
             'orientations' => Orientation::whereDate('date','>=',date("Y-m-d"))->where('status','=','Active')->count(),

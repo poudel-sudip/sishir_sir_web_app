@@ -21,13 +21,11 @@
                         <div class="custon-table-header">
                             <h4 class="card-title">All Study Materials</h4>
                             <div class="text-right">
-                                @if(auth()->user()->permission==50 || auth()->user()->permission==20 )
                                 <a href="{{ ('/admin/studyMaterials/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Study Material </button></a>
-                                @endif
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="batches-table">
+                        <div class="table-responsive table-responsive-md">
+                            <table class="table table-bordered" id="advanced-desc-table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -41,14 +39,12 @@
                                         <td>{{$data->id}}</td>
                                         <td>{{$data->title}}</td>
                                         <td width="165">
-                                            @if(auth()->user()->permission==50 || auth()->user()->permission==20 )
                                             <a href="/storage/{{$data->filePath}}" target="_blank" class="btn btn-primary btn-sm">View</a>
                                             <form id="delete-form-{{$data->id}}" action="/admin/studyMaterials/{{$data->id}}" method="POST" style="display: inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <a href="javascript:{}" onclick="javascript:deleteData({{$data->id}});" class="btn btn-warning btn-sm">Delete</a>
                                             </form>
-                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

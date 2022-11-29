@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Video;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class VideoController extends Controller
@@ -25,13 +24,11 @@ class VideoController extends Controller
 
     public function upload()
     {
-        Gate::authorize('permission','video');
         return view('admin.videos.upload');
     }
 
     public function store(Request $request)
     {
-        Gate::authorize('permission','video');
         $request->validate([
             'file' => 'required',
         ]);
@@ -55,7 +52,6 @@ class VideoController extends Controller
 
     public function destroy(Video $video)
     {
-        Gate::authorize('permission','video');
         $filepath='uploads/videos/'.$video->filename;
         File::delete($filepath);
         $video->delete();

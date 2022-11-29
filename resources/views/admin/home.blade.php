@@ -109,11 +109,17 @@
                       <div class="row">
                         <div class="col-8 booking-un-verified">
                           <p class="text-success">Verified<span class="booking-badge">{{ $batch->bookings()->where('status','=','Verified')->count() }}</p>
+                        </div>
+                        <div class="text-right col-4 classroom-btn" style="padding-left: 0;padding-right:0">
+                          <a class="btn btn-outline-success" title="Verified" href="{{ url('/admin/batches/'.$batch->id.'/verified') }}">View</a>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-8 booking-un-verified">
                           <p class="text-warning">Unverified<span class="booking-badge-un">{{ $batch->bookings()->where('status','!=','Verified')->count() }}</p>
                         </div>
-                        <div class="text-right col-4" style="padding-left: 0;padding-right:0">
-                          <a class="view-from-dashboard-button text-primary" href="{{ url('/admin/batches/'.$batch->id.'/Verified') }}">View</a>
-                          <a class="view-from-dashboard-button text-primary" href="{{ url('/admin/batches/'.$batch->id.'/Unverified') }}" style="line-height: 2">View</a>
+                        <div class="text-right col-4 classroom-btn" style="padding-left: 0;padding-right:0">
+                          <a class="btn btn-outline-warning" title="Unverified" href="{{ url('/admin/batches/'.$batch->id.'/unverified') }}">View</a>
                         </div>
                       </div>
                       
@@ -142,8 +148,8 @@
                           <p class="text-success">Verified<span class="booking-badge">{{ $exam->bookings()->where('status','=','Verified')->count() }}</p>
                           <p class="text-warning">Unverified<span class="booking-badge-un">{{ $exam->bookings()->where('status','!=','Verified')->count() }}</p>
                         </div>
-                        <div class="text-right col-4" style="padding-left: 0;padding-right:0">
-                          <a class="view-from-dashboard-button text-primary" href="{{ url('/admin/exam-hall/'.$exam->id.'/bookings') }}">View</a>
+                        <div class="text-right col-4 classroom-btn" style="padding-left: 0;padding-right:0">
+                          <a class="btn btn-outline-info" title="View All" href="{{ url('/admin/exam-hall/'.$exam->id.'/bookings') }}">View</a>
                         </div>
                       </div>
                       
