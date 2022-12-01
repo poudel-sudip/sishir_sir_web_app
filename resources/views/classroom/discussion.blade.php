@@ -185,6 +185,9 @@
                 <a href="/classroom/files/{{$batch->id}}" class="nav-link">Files</a>
                 <a href="/classroom/videos/{{$batch->id}}" class="nav-link">Videos</a>
                 <a href="/classroom/cqcs/{{$batch->id}}" class="nav-link">CQC</a>
+                @if(auth()->user()->role == 'Student')
+                <a href="/student/classroom/exams/{{$batch->id}}" class="nav-link">Exams</a>
+                @endif
 
                 @if($batch->status=='Running' && $batch->classroomLink!='' )
                     <a href="{{$batch->classroomLink}}" target="_blank" class="nav-link" title="Zoin Class" oncontextmenu="return false"><i class="fa fa-video-camera" aria-hidden="true"></i> Join</a>

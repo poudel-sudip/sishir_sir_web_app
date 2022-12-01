@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    Enroll Courses
+    Enroll New Course Batch
 @endsection
 @section('student-title-icon')
     <i class="far fa-calendar-plus"></i>
@@ -29,11 +29,11 @@
             </div>
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Enroll A Course') }}</div>
+                    <div class="card-header">{{ __('Enroll A Course Batch') }}</div>
 
                     <div class="card-body enroll_form">
 
-                        <form method="POST" action="/student/courses" enctype="multipart/form-data">
+                        <form method="POST" action="/student/course-bookings" enctype="multipart/form-data">
                             @if (session('alreadybooked'))
                                 <div class="alert alert-danger">
                                     {{ session('alreadybooked') }}
@@ -74,8 +74,8 @@
                             </div>
 
 
-                            {{-- <div class="form-group row">
-                                <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Booking Description') }} </label>
+                            <div class="form-group row">
+                                <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Booking Remarks') }} </label>
 
                                 <div class="col-md-8">
                                     <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" >
@@ -86,7 +86,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div>
 
 
                             <div class="form-group row mb-0">
@@ -108,7 +108,7 @@
     <script>
         $(document).ready(function () {
             $(document).on('change', '#course_name', function() {
-                var course_id = $(this).find(":selected").attr('slug');
+                var course_id = $(this).find(":selected").attr('value');
                 // console.log(course_id);
                 get_batches(course_id);                
             });
@@ -118,19 +118,19 @@
                 $('#batch_name').html("");
                 var op='';
                 var request = new XMLHttpRequest()
-                request.open('GET', '/api/v1/courses/'+id, true)
+                request.open('GET', '/courses/'+id+'/batchnames', true)
                 request.onload = function () {
                     // Begin accessing JSON data here
                     var data = JSON.parse(this.response);
                     if (request.status >= 200 && request.status < 400) {
-                        var batches=data.course.batches;
+                        var batches=data.batches;
                         batches.forEach((batch) => {
                             op += '<option value="' + batch.id + '">' + batch.name + '</option>';
                         });
                         // console.log(op);
                         $('#batch_name').append(op);
                     } else {
-                        console.log('error');
+                        // console.log('error');
                         $('#batch_name').html("");
                     }
                 }

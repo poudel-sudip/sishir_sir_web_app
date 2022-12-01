@@ -35,7 +35,7 @@
                     <div class="card-header">{{ __('Booking. ID: ') }} {{$booking->id}} {{$booking->course->name.' '.$booking->batch->name}}</div>
 
                     <div class="card-body enroll_form">
-                        <form id="verifyCourseForm" method="POST" action="/student/courses/{{$booking->id}}" enctype="multipart/form-data">
+                        <form id="verifyCourseForm" method="POST" action="/student/course-bookings/{{$booking->id}}" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             @if(session('error_message'))
@@ -201,7 +201,7 @@
 
         function pay_esewa()
         {
-            var path="https://esewa.com.np/epay/main";
+            var path="{{Config::get('payment.esewa_pay_url')}}";
             var params= {
                 amt: {{ $booking->batch->fee - $booking->batch->discount }},
                 psc: 0,
@@ -209,9 +209,9 @@
                 txAmt: 0,
                 tAmt: {{ $booking->batch->fee - $booking->batch->discount}},
                 pid: "{{$booking->id.'-'.time()}}",
-                scd: "NP-ES-ODADEPL",
-                su: '{{url("student/courses/$booking->id/esewaSuccess")}}',
-                fu: '{{url("student/courses/$booking->id/payment-failed")}}'
+                scd: "{{Config::get('payment.esewa_scd')}}",
+                su: '{{url("student/course-bookings/$booking->id/esewaSuccess")}}',
+                fu: '{{url("student/course-bookings/$booking->id/payment-failed")}}'
             };
 
             var form = document.createElement("form");
@@ -238,10 +238,10 @@
         {
             var config = {
                 // replace the publicKey with yours
-                "publicKey": "live_public_key_7bd6c06332b3483890a5068abddf7b1b",
+                "publicKey": "{{Config::get('payment.khalti_public_key')}}",
                 "productIdentity": "{{$booking->id.'-'.time()}}",
                 "productName": "{{$booking->batch->name}}",
-                "productUrl": "{{url('student/courses/'.$booking->id)}}",
+                "productUrl": "{{url('student/course-bookings/'.$booking->id)}}",
                 "paymentPreference": [
                     "KHALTI",
                     "EBANKING",
@@ -266,7 +266,7 @@
 
                             $.ajax({
                                 method: 'POST',
-                                url: '{{url("student/courses/$booking->id/khaltiSuccess")}}',
+                                url: '{{url("student/course-bookings/$booking->id/khaltiSuccess")}}',
                                 data: payload,
 
                                 success: function(response) {
@@ -278,20 +278,20 @@
                                     else
                                     {
                                         checkout.hide();
-                                        window.location = '{{url("student/courses/$booking->id/payment-failed")}}';
+                                        window.location = '{{url("student/course-bookings/$booking->id/payment-failed")}}';
                                     }
                                 },
 
                                 error: function(data) {
                                     // console.log('Error:',data);
-                                    window.location = '{{url("student/courses/$booking->id/payment-failed")}}';
+                                    window.location = '{{url("student/course-bookings/$booking->id/payment-failed")}}';
                                 },
                             });
                         }
                     },
                     onError (error) {
                         // console.log(error);
-                        window.location = '{{url("student/courses/$booking->id/payment-failed")}}';
+                        window.location = '{{url("student/course-bookings/$booking->id/payment-failed")}}';
                     },
                     onClose () {
                         console.log('widget is closing');

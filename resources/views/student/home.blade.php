@@ -19,94 +19,62 @@
         @endif</div>
     <section class="news-feeds student-content-wrapper">
         <div class="main-news-home">
-            <div class="student-home-block">
+            <div class="student-home-block mt-4">
+
                 <div class="student-dashboard-card block-first">
                     <div class="first-row">
-                        <span>Classroom</span>
-                        <i class="fas fa-laptop"></i>
-                    </div>
-                    <div class="second-row">
-                        <a class="btn" href="/student/enrolled/classroom">View Classes</a>
-                        <span>{{$count->bookings->classroom ?? '-'}}</span>
-                    </div>
-                </div>
-                {{-- <div class="student-dashboard-card block-second">
-                    <div class="first-row">
-                        <span>My Exam</span>
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <div class="second-row">
-                        <a class="btn" href="/student/exams">View Exams</a>
-                        <span>{{$count->bookings->exams ?? '-'}}</span>
-                    </div>
-                </div> --}}
-
-                <div class="student-dashboard-card block-sixth">
-                    <div class="first-row">
-                        <span>Exam Hall</span>
-                        <i class="fas fa-th-list"></i>
-                    </div>
-                    <div class="second-row">
-                        <a class="btn" href="/student/exam-hall">View Exam Hall</a>
-                        <span>{{$count->bookings->exam_hall ?? '-'}}</span>
-                    </div>
-                </div>
-
-                {{-- second row --}}
-
-                <div class="student-dashboard-card block-fifth">
-                    <div class="first-row">
-                        <span>Video Bookings</span>
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <div class="second-row">
-                        <a class="btn" href="/student/video-course">View Courses</a>
-                        <span>{{$count->bookings->video_booking ?? '-'}}</span>
-                    </div>
-                </div>
-
-                <div class="student-dashboard-card block-fourth">
-                    <div class="first-row">
-                        <span>E-Book Booking</span>
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <div class="second-row">
-                        <a class="btn" href="/student/ebook">View E-Books</a>
-                        <span>{{$count->bookings->ebook_booking ?? '-'}}</span>
-                    </div>
-                </div>
-
-                <div class="student-dashboard-card block-third">
-                    <div class="first-row">
-                        <span>Total Bookings</span>
+                        <span>Course Bookings</span>
                         <i class="far fa-calendar-check"></i>
                     </div>
                     <div class="second-row">
-                        <a class="btn" href="/student/enrolled">View Bookings</a>
+                        <a class="btn" href="/student/course-bookings">View Bookings</a>
                         <span>{{$count->bookings->total ?? '-'}}</span>
                     </div>
                 </div>
 
                 <div class="student-dashboard-card block-second">
                     <div class="first-row">
-                        <span>Free Classes </span>
-                        <i class="fas fa-broadcast-tower"></i>
+                        <span>Course Classroom</span>
+                        <i class="fas fa-laptop"></i>
                     </div>
                     <div class="second-row">
-                        <a class="btn" href="/student/free-orientations">View Classes</a>
-                        <span>{{$count->orientations ?? '-'}}</span>
+                        <a class="btn" href="/student/course-classroom">View Classes</a>
+                        <span>{{$count->bookings->classroom ?? '-'}}</span>
                     </div>
                 </div>
 
+                <div class="student-dashboard-card block-third">
+                    <div class="first-row">
+                        <span>ExamSet Bookings</span>
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="second-row">
+                        <a class="btn" href="/student/exam-bookings">View Bookings</a>
+                        <span>{{$count->bookings->exam_hall ?? '-'}}</span>
+                    </div>
+                </div>
+
+                <div class="student-dashboard-card block-fourth">
+                    <div class="first-row">
+                        <span>E-Book Bookings</span>
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="second-row">
+                        <a class="btn" href="/student/ebook-bookings">View Bookings</a>
+                        <span>{{$count->bookings->ebook_booking ?? '-'}}</span>
+                    </div>
+                </div>
+                
+
             </div>
 
-            <div class="news-feeds-list">
+            {{-- <div class="news-feeds-list">
                 <h3>News Feeds</h3>
-                @forelse ($post as $post)
+                @forelse ($posts as $post)
                     <div class="news-post">
                         <div class="post-tutor-user">
-                            <img src="/storage/{{$post->tutor->user->photo}}" alt="">
-                            <div><a href="/tutor/{{$post->tutor->slug}}">{{ $post->tutor->name }} </a><span> posted on {!! date('d-M-y g:ia',strtotime($post->created_at)) !!}</span></div>
+                            <img src="{{ $post->user ? ($post->user->photo ? ('/storage/$post->user->photo') : (asset('images/student.jpg'))) : (asset('images/student.jpg')) }}" alt="">
+                            <div><a>{{ $post->author }}</a><span> posted on {!! date('d-M-y g:ia',strtotime($post->created_at)) !!}</span></div>
                         </div>
                         <div class="student-post-dec readMore">{!! $post->description !!}</div>
                         <img src="/storage/{{$post->thumbnail}}" class="w-100" alt="">
@@ -116,30 +84,29 @@
                                 <a href="javascript:{}" onclick="javascript:postData({{$post->id}});"><i class="fas fa-comment"></i> Leave a comment</a>                                         
                             </div>
                             <div class="post-comment-share">
-                                {{-- <span>Views: {{$post->views}}</span> --}}
                                 @if (count($post->comments->where('status','Published')) <= 1)
                                 <span>{{$post->comments->where('status','Published')->count()}} Comment</span>
                                 @else
                                 <a class="comment-count-button" href="javascript:{}" onclick="javascript:postComments({{$post->id}});">{{$post->comments->where('status','Published')->count()}} Comments</a>
                                 @endif
                                 <div class="post-share-student"><span><i class="fas fa-share-square"></i> Share</span>
-                                {{-- share on media start--}}
+                                <!-- share on media start-->
                                 <div class="post-share-option">
-                                    <a target="_blank" href='//facebook.com/sharer/sharer.php?u={{url(`/tutor-posts/`. $post->slug)}}'><i class="fab fa-facebook-f"></i></a>
-                                    <a target="_blank" href='//twitter.com/intent/tweet?text="{{$post->title}}"&url="{{url(`/tutor-posts/`. $post->slug)}}"'><i class="fab fa-twitter"></i></a>
-                                    <a target="_blank" href='//reddit.com/submit?title="{{$post->title}}"&url="{{url(`/tutor-posts/`. $post->slug)}}"'><i class="fab fa-reddit-alien"></i></a>
-                                    <a target="_blank" href='//telegram.me/share/url?url="{{url(`/tutor-posts/`. $post->slug)}}"&text="{{$post->title}}"'><i class="fab fa-telegram-plane"></i></a>
-                                    <a target="_blank" href='//wa.me/?text="{{url(`/tutor-posts/`. $post->slug)}}"'><i class="fab fa-whatsapp"></i></a>
-                                    <a target="_blank" href='//linkedin.com/sharing/share-offsite?mini="true"&url="{{url(`/tutor-posts/`. $post->slug)}}"&title="{{$post->title}}"'><i class="fab fa-linkedin-in"></i></a>
-                                    <a target="_blank" href='//pinterest.com/pin/create/button/?url="{{url(`/tutor-posts/`. $post->slug)}}"'><i class="fab fa-pinterest-p"></i></a>
+                                    <a target="_blank" href='//facebook.com/sharer/sharer.php?u={{url(`/blogs/`. $post->slug)}}'><i class="fab fa-facebook-f"></i></a>
+                                    <a target="_blank" href='//twitter.com/intent/tweet?text="{{$post->title}}"&url="{{url(`/blogs/`. $post->slug)}}"'><i class="fab fa-twitter"></i></a>
+                                    <a target="_blank" href='//reddit.com/submit?title="{{$post->title}}"&url="{{url(`/blogs/`. $post->slug)}}"'><i class="fab fa-reddit-alien"></i></a>
+                                    <a target="_blank" href='//telegram.me/share/url?url="{{url(`/blogs/`. $post->slug)}}"&text="{{$post->title}}"'><i class="fab fa-telegram-plane"></i></a>
+                                    <a target="_blank" href='//wa.me/?text="{{url(`/blogs/`. $post->slug)}}"'><i class="fab fa-whatsapp"></i></a>
+                                    <a target="_blank" href='//linkedin.com/sharing/share-offsite?mini="true"&url="{{url(`/blogs/`. $post->slug)}}"&title="{{$post->title}}"'><i class="fab fa-linkedin-in"></i></a>
+                                    <a target="_blank" href='//pinterest.com/pin/create/button/?url="{{url(`/blogs/`. $post->slug)}}"'><i class="fab fa-pinterest-p"></i></a>
                                 </div>
-                                {{-- share on media end--}}
+                                <!-- share on media end-->
                                 </div> 
                             </div>
                             
                         </div>
                         <div id="write-comment-{{ $post->id }}" class="write-comment-student">
-                            <form  action="/tutor-posts/{{$post->id}}/comments/add" method="POST" enctype="multipart/form-data">
+                            <form  action="/blogs/{{$post->id}}/comments/add" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="post-comment-textarea">
                                     <div class="text-area">
@@ -172,9 +139,9 @@
                         
                     </div>
                 @empty
-                    <p>Tutors post not available</p>
+                    <p>Blog Posts not available</p>
                 @endforelse
-            </div>
+            </div> --}}
         </div>
         <div class="news-feeds-contact">
             @include('student.studentContact')

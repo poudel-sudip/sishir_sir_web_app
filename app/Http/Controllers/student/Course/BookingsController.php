@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\student;
+namespace App\Http\Controllers\Student\Course;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
@@ -12,17 +12,23 @@ use App\Models\MerchantBooking;
 
 class BookingsController extends Controller
 {
-    //
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $data = [];
+        $data['bookings'] = auth()->user()->bookings()->get();
+        return view('student.courses.bookings.index',$data);
+    }
+
     public function create()
     {
-        $headercategories=Categories::all()->where('status','=','Active');
-        $courses=Course::where('status','=','Active')->get();
-        return view('student.courses.enroll',compact('courses','headercategories'));
+        $data = [];
+        $data['courses'] = Course::where('status','=','Active')->get();
+        return view('student.courses.bookings.create',$data);
     }
 
     public function store()
@@ -30,7 +36,7 @@ class BookingsController extends Controller
         $data=request()->validate([
             'course_name'=>'integer | required | min:1',
             'batch_name'=>'integer | required | min:1',
-            // 'description'=>'string | nullable',
+            'description'=>'string | nullable',
         ]);
         $search=Booking::where([
             ['course_id','=',$data['course_name']],
@@ -45,23 +51,21 @@ class BookingsController extends Controller
             'batch_id'=>$data['batch_name'],
             'user_id'=> auth()->user()->id,
             'user_name'=>auth()->user()->name,
-            // 'description'=>$data['description'],
+            'description'=>$data['description'],
             'status'=>'Unverified',
             'updatedBy'=>auth()->user()->name,
         ]);
-        return redirect('/student/courses/'.$booking->id.'/edit');
+        return redirect('/student/course-bookings/'.$booking->id.'/edit');
     }
 
     public function show(Booking $booking)
     {
-        $headercategories=Categories::all()->where('status','=','Active');
-        return view('student.courses.show',compact('booking','headercategories'));
+        return view('student.courses.bookings.show',compact('booking'));
     }
 
     public function edit(Booking $booking)
     {
-        $headercategories=Categories::all()->where('status','=','Active');
-        return view('student.courses.verify',compact('booking','headercategories'));
+        return view('student.courses.bookings.verify',compact('booking'));
     }
 
     public function update(Booking $booking)
@@ -81,7 +85,14 @@ class BookingsController extends Controller
         ]);
         
         // return redirect('/student/home');
-        return redirect('/student/enrolled');
+        return redirect('/student/course-bookings');
+    }
+
+    public function destroy(Booking $booking)
+    {
+        // dd($booking);
+        $booking->delete();
+        return redirect('/student/course-bookings');
     }
 
     public function esewaSuccess(Booking $booking, Request $request)
@@ -90,12 +101,12 @@ class BookingsController extends Controller
         if(isset($request->oid) && isset($request->amt) && isset($request->refId))
         {
             // dd($request->all(), $booking);
-            $url = "https://esewa.com.np/epay/transrec";
+            $url = config('payment.esewa_verify_url');
             $data =[
                 'amt'=> ($booking->batch->fee - $booking->batch->discount),
                 'rid'=> $request->refId,
                 'pid'=> $request->oid,
-                'scd'=> 'NP-ES-ODADEPL'
+                'scd'=> config('payment.esewa_scd')
             ];
             
             $curl = curl_init($url);
@@ -124,11 +135,11 @@ class BookingsController extends Controller
                     'booking_id' => $booking->id,
                 ]);
 
-                return redirect('/student/enrolled/classroom')->with('success_message','Transction Completed Succesfully.');
+                return redirect('/student/course-classroom')->with('success_message','Transction Completed Succesfully.');
             }
         }
 
-        return redirect("/student/courses/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+        return redirect("/student/course-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
 
     }
 
@@ -139,7 +150,7 @@ class BookingsController extends Controller
             'amount'  => ($booking->batch->fee - $booking->batch->discount) * 100
         ));
         
-        $url = "https://khalti.com/api/v2/payment/verify/";
+        $url = config('payment.khalti_verify_url');
         
         # Make the call using API.
         $ch = curl_init();
@@ -148,7 +159,7 @@ class BookingsController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS,$args);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         
-        $headers = ['Authorization: Key live_secret_key_1b91899fe8e24614873df8eec8db48f2'];
+        $headers = ['Authorization: Key '.config('payment.khalti_secret_key')];
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         
         // Response
@@ -174,7 +185,7 @@ class BookingsController extends Controller
             ]);
             return response()->json([
                 'success' => 1,
-                'redirecto' => url('/student/enrolled/classroom')
+                'redirecto' => url('/student/course-classroom')
             ], 200);
         }
         else
@@ -189,7 +200,7 @@ class BookingsController extends Controller
 
     public function paymentFailed(Booking $booking, Request $request)
     {
-        return redirect("/student/courses/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+        return redirect("/student/course-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
     }
 
     public function get_xml_node_value($node, $xml)
@@ -207,6 +218,13 @@ class BookingsController extends Controller
         }
 
         return false;
+    }
+
+    public function classroom()
+    {
+        $data = [];
+        $data['bookings'] = auth()->user()->bookings()->where([['status','=','Verified'],['suspended','=',false]])->orderByDesc('id')->get();
+        return view('student.courses.bookings.classroom',$data);
     }
 
 }

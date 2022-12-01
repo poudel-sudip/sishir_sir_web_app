@@ -235,20 +235,6 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
-                                  <div class="form-group row">
-                                    <label for="live_link" class="col-sm-4 col-form-label">Live Link</label>
-                                    <div class="col-sm-8">
-                                        <input id="live_link" type="text" class="form-control @error('live_link') is-invalid @enderror" name="live_link" value="{{ old('live_link') ?? $batch->live_link }}">
-  
-                                        @error('live_link')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                  </div>
-                                </div>
 
                                 <div class="col-md-6">
                                   <div class="form-group row">

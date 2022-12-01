@@ -33,15 +33,17 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('classroom',function (User $user,Batch $batch)
         {
             $user=Auth::user();
-            $booking=Booking::all()->where('batch_id',$batch->id)->where('user_id',$user->id);
-            $status='';
-            foreach ($booking as $b)
-            {
-                $status =$b->status;
-            }
-            if($status=='Verified' || $user->role=='Admin')
+            if($user->role == 'Admin')
             {
                 return true;
+            }
+            $booking = Booking::where([['batch_id','=',$batch->id],['user_id','=',$user->id]])->first();
+            if($booking)
+            {
+                if($booking->status == 'Verified' && $booking->suspended == false)
+                {
+                    return true;
+                }
             }
         });
 

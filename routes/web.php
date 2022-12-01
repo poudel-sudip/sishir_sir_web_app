@@ -419,36 +419,44 @@ Route::delete('/admin/audios/{category}/files/{audio}','App\Http\Controllers\Adm
 
 /*------------------------------------all student section routes---------------------------*/
 
-//final routes for students section
-Route::get('/student/home', 'App\Http\Controllers\student\StudentHomeController@index')->middleware('role:Student');
-Route::get('/student/enrolled', 'App\Http\Controllers\student\StudentHomeController@enroll')->middleware('role:Student');
-Route::get('/student/enrolled/approved', 'App\Http\Controllers\student\StudentHomeController@approved')->middleware('role:Student');
-Route::get('/student/enrolled/pending', 'App\Http\Controllers\student\StudentHomeController@pending')->middleware('role:Student');
-Route::get('/student/enrolled/suspended', 'App\Http\Controllers\student\StudentHomeController@suspended')->middleware('role:Student');
-Route::get('/student/enrolled/classroom', 'App\Http\Controllers\student\StudentHomeController@classroom')->middleware('role:Student');
+//final routes for students panel section
+Route::get('/student/home', 'App\Http\Controllers\Student\StudentHomeController@index')->middleware('role:Student');
 
-Route::get('/student/courses/enroll', 'App\Http\Controllers\student\BookingsController@create')->middleware('role:Student');
-Route::post('/student/courses','App\Http\Controllers\student\BookingsController@store')->middleware('role:Student');
-Route::get('/student/courses/{booking}','App\Http\Controllers\student\BookingsController@show')->middleware('role:Student');
-Route::get('/student/courses/{booking}/edit','App\Http\Controllers\student\BookingsController@edit')->middleware('role:Student');
+//student notifications
+Route::get('/student/notifications', 'App\Http\Controllers\Student\NotificationController@index')->middleware('role:Student');
+Route::get('/student/notifications/{notification}', 'App\Http\Controllers\Student\NotificationController@show')->middleware('role:Student');
 
-Route::any('/student/courses/{booking}/esewaSuccess','App\Http\Controllers\student\BookingsController@esewaSuccess')->middleware('role:Student');
-Route::post('/student/courses/{booking}/khaltiSuccess','App\Http\Controllers\student\BookingsController@khaltiSuccess')->middleware('role:Student');
-Route::any('/student/courses/{booking}/payment-failed','App\Http\Controllers\student\BookingsController@paymentFailed')->middleware('role:Student');
+//student course bookings
+Route::get('/student/course-bookings', 'App\Http\Controllers\Student\Course\BookingsController@index')->middleware('role:Student');
+Route::get('/student/course-bookings/create', 'App\Http\Controllers\Student\Course\BookingsController@create')->middleware('role:Student');
+Route::post('/student/course-bookings', 'App\Http\Controllers\Student\Course\BookingsController@store')->middleware('role:Student');
+Route::get('/student/course-bookings/{booking}/edit', 'App\Http\Controllers\Student\Course\BookingsController@edit')->middleware('role:Student');
+Route::any('/student/course-bookings/{booking}/esewaSuccess','App\Http\Controllers\Student\Course\BookingsController@esewaSuccess')->middleware('role:Student');
+Route::post('/student/course-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\Course\BookingsController@khaltiSuccess')->middleware('role:Student');
+Route::any('/student/course-bookings/{booking}/payment-failed','App\Http\Controllers\Student\Course\BookingsController@paymentFailed')->middleware('role:Student');
+Route::get('/student/course-bookings/{booking}', 'App\Http\Controllers\Student\Course\BookingsController@show')->middleware('role:Student');
+Route::patch('/student/course-bookings/{booking}','App\Http\Controllers\Student\Course\BookingsController@update')->middleware('role:Student');
+Route::delete('/student/course-bookings/{booking}', 'App\Http\Controllers\Student\Course\BookingsController@destroy')->middleware('role:Student');
 
-Route::patch('/student/courses/{booking}','App\Http\Controllers\student\BookingsController@update')->middleware('role:Student');
+Route::get('/student/course-classroom', 'App\Http\Controllers\Student\Course\BookingsController@classroom')->middleware('role:Student');
 
-Route::get('/student/notifications', 'App\Http\Controllers\student\NotificationController@index')->middleware('role:Student');
-Route::get('/student/notifications/{notification}', 'App\Http\Controllers\student\NotificationController@show')->middleware('role:Student');
+//classroom batch exams
+Route::get('/student/classroom/exams/{batch}','App\Http\Controllers\Student\Course\ExamController@index');
+Route::get('/student/classroom/exams/{batch}/mcq-exams/{exam}/attempt','App\Http\Controllers\Student\Course\ExamController@takeExam');
+Route::post('/student/classroom/exams/{batch}/mcq-exams/{exam}/result','App\Http\Controllers\Student\Course\ExamController@store')->middleware('role:Student');
+Route::get('/student/classroom/exams/{batch}/mcq-exams/{exam}/view','App\Http\Controllers\Student\Course\ExamController@show');
+Route::delete('/student/classroom/exams/{batch}/mcq-exams/{exam}/reset','App\Http\Controllers\Student\Course\ExamController@reset')->middleware('role:Student');
 
 
-//students tutor special courses bookings
-Route::get('/student/tutor-special/courses','App\Http\Controllers\student\TutorCourseBookingController@index')->middleware('role:Student');
-Route::get('/student/tutor-special/courses/enroll','App\Http\Controllers\student\TutorCourseBookingController@enroll')->middleware('role:Student');
-Route::post('/student/tutor-special/courses','App\Http\Controllers\student\TutorCourseBookingController@store')->middleware('role:Student');
-Route::get('/student/tutor-special/courses/{booking}','App\Http\Controllers\student\TutorCourseBookingController@show')->middleware('role:Student');
-Route::get('/student/tutor-special/courses/{booking}/edit','App\Http\Controllers\student\TutorCourseBookingController@edit')->middleware('role:Student');
-Route::patch('/student/tutor-special/courses/{booking}','App\Http\Controllers\student\TutorCourseBookingController@verify')->middleware('role:Student');
+
+
+
+
+
+
+
+
+
 
 //student section exam hall booking section
 Route::get('/student/exam-hall','App\Http\Controllers\student\ExamHall\ExamBookingController@index')->middleware('role:Student');
@@ -523,13 +531,6 @@ Route::get('/student/ebook/{booking}/chapters/{chapter}','App\Http\Controllers\s
 
 //student free orientation class mgmt
 Route::get('/student/free-orientations','App\Http\Controllers\student\StudentHomeController@orientations')->middleware('role:Student');
-
-//classroom batch exams
-Route::get('/student/classroom/exams/{batch}','App\Http\Controllers\student\Exams\ExamController@index');
-Route::get('/student/classroom/exams/{batch}/mcq-exams/{exam}/attempt','App\Http\Controllers\student\Exams\ExamController@takeExam');
-Route::post('/student/classroom/exams/{batch}/mcq-exams/{exam}/result','App\Http\Controllers\student\Exams\ExamController@store')->middleware('role:Student');
-Route::get('/student/classroom/exams/{batch}/mcq-exams/{exam}/view','App\Http\Controllers\student\Exams\ExamController@show');
-Route::delete('/student/classroom/exams/{batch}/mcq-exams/{exam}/reset','App\Http\Controllers\student\Exams\ExamController@reset')->middleware('role:Student');
 
 
 

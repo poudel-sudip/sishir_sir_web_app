@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\student;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
@@ -15,16 +15,14 @@ class NotificationController extends Controller
     }
     public function index()
     {
-        $headercategories=Categories::all()->where('status','=','Active');
         $notifications=auth()->user()->userNotifications()->withPivot('read')->orderByDesc('created_at')->get();
-        return view('student.notifications.index',compact('notifications','headercategories'));
+        return view('student.notifications.index',compact('notifications'));
     }
 
     public function show(Notification $notification)
     {
         auth()->user()->userNotifications()->where('notification_id','=',$notification->id)->update(['read'=>'Yes']);
-        $headercategories=Categories::all()->where('status','=','Active');
-        return view('student.notifications.show',compact('notification','headercategories'));
+        return view('student.notifications.show',compact('notification'));
     }
 
 

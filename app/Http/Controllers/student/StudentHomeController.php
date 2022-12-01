@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\student;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Models\Booking;
-use App\Models\Categories;
-use App\Models\Exams\BatchExam;
-use App\Models\TutorPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Orientation;
+use App\Models\Blog;
 
 class StudentHomeController extends Controller
 {
@@ -22,37 +18,37 @@ class StudentHomeController extends Controller
     {
         $user=auth()->user();
 
-        $totalBookings=auth()->user()->bookings()->count();
-        $approved=auth()->user()->bookings()->where('status','=','Verified')->get();
-        $approvedBookings=$approved->count();
-        $suspendedBooking=auth()->user()->bookings()->where([['status','=','Verified'],['suspended','=',true]])->count();
-        $batches=[];
-        foreach ($approved as $booking) {
-            $batches[]= $booking['batch_id'];
-        }
-        $batches=array_unique($batches);
-        $myexams=BatchExam::whereIn('batch_id',$batches)->count();
-        $exam_hall=auth()->user()->exam_bookings()->count();
+        // $totalBookings=auth()->user()->bookings()->count();
+        // $approved=auth()->user()->bookings()->where('status','=','Verified')->get();
+        // $approvedBookings=$approved->count();
+        // $suspendedBooking=auth()->user()->bookings()->where([['status','=','Verified'],['suspended','=',true]])->count();
+        // $batches=[];
+        // foreach ($approved as $booking) {
+        //     $batches[]= $booking['batch_id'];
+        // }
+        // $batches=array_unique($batches);
+        // $myexams=BatchExam::whereIn('batch_id',$batches)->count();
+        // $exam_hall=auth()->user()->exam_bookings()->count();
         // $video_bookings = auth()->user()->video_bookings()->count();
-        $ebook_bookings = auth()->user()->ebook_bookings()->count();
+        // $ebook_bookings = auth()->user()->ebook_bookings()->count();
         $count= (object) [
-            'bookings'=> (object) [
-                'total'=>$totalBookings,
-                'approved'=>$approvedBookings,
-                'pending'=>$totalBookings-$approvedBookings,
-                'classroom'=>$approvedBookings-$suspendedBooking,
-                'suspended'=>$suspendedBooking,
-                'exams'=>$myexams,
-                'exam_hall'=>$exam_hall,
-                // 'video_booking'=>$video_bookings,
-                'ebook_booking'=>$ebook_bookings,
-            ],
-            'orientations' => Orientation::whereDate('date','>=',date("Y-m-d"))->where('status','=','Active')->count(),
+        //     'bookings'=> (object) [
+        //         'total'=>$totalBookings,
+        //         'approved'=>$approvedBookings,
+        //         'pending'=>$totalBookings-$approvedBookings,
+        //         'classroom'=>$approvedBookings-$suspendedBooking,
+        //         'suspended'=>$suspendedBooking,
+        //         'exams'=>$myexams,
+        //         'exam_hall'=>$exam_hall,
+        //         // 'video_booking'=>$video_bookings,
+        //         'ebook_booking'=>$ebook_bookings,
+        //     ],
+        //     'orientations' => Orientation::whereDate('date','>=',date("Y-m-d"))->where('status','=','Active')->count(),
         ];
-        $post=TutorPost::all()->where('status','=','Published')->sortByDesc('id')->take(25);
+        $posts=Blog::all()->where('status','=','Published')->sortByDesc('id')->take(25);
         // dd($approved,$myexams);
-        $headercategories=Categories::all()->where('status','=','Active');
-        return view('student.home',compact('user','count','headercategories','post'));
+        // $headercategories=Categories::all()->where('status','=','Active');
+        return view('student.home',compact('user','count','posts'));
     }
 
     public function addComments(TutorPost $post,Request $request)

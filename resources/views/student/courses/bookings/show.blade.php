@@ -34,10 +34,12 @@
                         <div class="booking-title">Booking Status:</div>
                         <div class="booking-data">{{$booking->status}}</div>
                     </div>
+                    @if($booking->status == 'Verified' && $booking->dueAmount > 1)
                     <div class="single-details">
-                        <div class="booking-title">Allowed Booking Features:</div>
-                        <div class="booking-data">{{$booking->features}}</div>
+                        <div class="booking-title">Due Amount:</div>
+                        <div class="booking-data">{{$booking->dueAmount ?? '-'}}</div>
                     </div>
+                    @endif
                     <div class="single-details">
                         <div class="booking-title">Course Name:</div>
                         <div class="booking-data">{{$booking->course->name}}</div>
@@ -48,8 +50,6 @@
                     </div>
                     <div class="single-details">
                         <div class="booking-title">Course Fee:</div>
-
-                        
                         <div class="booking-data">Rs. {{($booking->batch->fee)-($booking->batch->discount)}}</div>
                     </div>
                     <div class="single-details">

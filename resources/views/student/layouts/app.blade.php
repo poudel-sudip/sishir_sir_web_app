@@ -143,26 +143,19 @@
               <a class="nav-link" aria-current="page" href="/student/home"><i class="fas fa-house-user"></i> Student Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/student/enrolled"><i class="far fa-calendar-check text-primary"></i>Bookings</a>
+              <a class="nav-link" href="/student/course-bookings"><i class="far fa-calendar-check text-primary"></i>Course Bookings</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/student/enrolled/classroom"><i class="fas fa-laptop text-pink"></i> My Classroom</a>
+              <a class="nav-link" href="/student/course-classroom"><i class="fas fa-laptop text-pink"></i> Course Classroom</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/student/ebook-bookings"><i class="fas fa-book-open text-black"></i>E-Book Bookings</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/student/tutor-special/courses"><i class="fas fa-chalkboard-teacher text-info"></i>Tutor Specials</a>
+              <a class="nav-link" href="/student/exam-bookings"><i class="fas fa-laptop-house text-info"></i>Exam Set Bookings</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/student/video-course"><i class="far fa-list-alt text-orange"></i>Video Bookings</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/student/ebook"><i class="fas fa-book-open text-black"></i>E-Book Bookings</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/student/exam-hall"><i class="fas fa-laptop-house text-info"></i>Exam Hall</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/student/messenger"><i class="fas fa-comments text-success" aria-hidden="true"></i>Messenger</a>
-            </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="/profile"><i class="fas fa-user text-primary" aria-hidden="true"></i>Profile</a>
             </li>

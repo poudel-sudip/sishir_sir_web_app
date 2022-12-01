@@ -19,9 +19,7 @@
                 <div class="col-md-6">
                    <h4> Classrooms :</h4>  
                 </div>
-                {{-- <div class="col-6 text-end">
-                    <a href="/student/exams" class="btn btn-primary btn-sm"> My Exams</a>
-                </div> --}}
+                
                 <div class="col-md-6 text-end">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -40,22 +38,17 @@
                 <div class="col-md-12">
                     <div class="student-classrooms">
                         <div class="student-classroom-batch">
-                            <h5>{{$booking->course->name}} <strong class="tutor-classroom-time text-success">(Time: {{$booking->batch->timeSlot}})</strong> </h5>
+                            <h5>{{$booking->course->name}} @if($booking->batch->timeSlot) <strong class="tutor-classroom-time text-success">(Time: {{$booking->batch->timeSlot}})</strong> @endif </h5>
                             <h4>{{$booking->batch->name}}</h4>
                         </div>
                         <div class="s-classroom-btn">
                             <a href="/classroom/chat/{{$booking->batch->id}}" class="btn btn-primary">Chat</a>
                             <a href="/classroom/files/{{$booking->batch->id}}" class="btn btn-warning">PDF Files</a>
                             <a href="/classroom/videos/{{$booking->batch->id}}" class="btn btn-danger">Videos</a>
-                            <a href="/classroom/assignments/{{$booking->batch->id}}" class="btn btn-info">Assignments</a>
                             <a href="/student/classroom/exams/{{$booking->batch->id}}" class="btn btn-primary">Exams</a>
-                            @if($booking->batch->status=='Running' && $booking->features=='All')
-                                <a href="/classroom/schedules/{{$booking->batch->id}}" class="btn btn-secondary m-1">Schedules</a>
+                            @if($booking->batch->status=='Running')
                                 @if($booking->batch->classroomLink!='')
                                 <a href="{{$booking->batch->classroomLink}}" target="_blank" class="btn btn-success">Join</a>
-                                @endif
-                                @if($booking->batch->live_link!='')
-                                <a href="{{$booking->batch->live_link}}" target="_blank" class="btn btn-danger">Live</a>
                                 @endif
                             @endif
                         </div>
