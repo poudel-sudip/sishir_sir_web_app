@@ -43,23 +43,22 @@
     </style>
     
      <!-- Global site tag (gtag.js) - Google Analytics -->
-     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZS3KVP4N6H"></script>
+     {{-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZS3KVP4N6H"></script>
      <script>
        window.dataLayer = window.dataLayer || [];
        function gtag(){dataLayer.push(arguments);}
        gtag('js', new Date());
      
        gtag('config', 'G-ZS3KVP4N6H');
-     </script>
+     </script> --}}
 
     <!-- Scripts -->
     <script src="{{ asset('js/libraries/jquery-3.6.0.min.js') }}"></script>
-    <script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script>
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
    {{-- summernote --}}
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" />
+   {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" /> --}}
 
 </head>
 <body>

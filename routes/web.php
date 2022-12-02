@@ -447,8 +447,21 @@ Route::post('/student/classroom/exams/{batch}/mcq-exams/{exam}/result','App\Http
 Route::get('/student/classroom/exams/{batch}/mcq-exams/{exam}/view','App\Http\Controllers\Student\Course\ExamController@show');
 Route::delete('/student/classroom/exams/{batch}/mcq-exams/{exam}/reset','App\Http\Controllers\Student\Course\ExamController@reset')->middleware('role:Student');
 
+//student ebook booking
+Route::get('/student/ebook-bookings','App\Http\Controllers\Student\Ebook\BookingController@index')->middleware('role:Student');
+Route::get('/student/ebook-bookings/create','App\Http\Controllers\Student\Ebook\BookingController@create')->middleware('role:Student');
+Route::post('/student/ebook-bookings','App\Http\Controllers\Student\Ebook\BookingController@store')->middleware('role:Student');
+Route::get('/student/ebook-bookings/{booking}/edit','App\Http\Controllers\Student\Ebook\BookingController@edit')->middleware('role:Student');
+Route::patch('/student/ebook-bookings/{booking}','App\Http\Controllers\Student\Ebook\BookingController@update')->middleware('role:Student');
+Route::delete('/student/ebook-bookings/{booking}','App\Http\Controllers\Student\Ebook\BookingController@destroy')->middleware('role:Student');
 
+Route::get('/student/ebook-bookings/{booking}/esewaSuccess','App\Http\Controllers\Student\Ebook\BookingController@esewaSuccess')->middleware('role:Student');
+Route::post('/student/ebook-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\Ebook\BookingController@khaltiSuccess')->middleware('role:Student');
+Route::get('/student/ebook-bookings/{booking}/payment-failed','App\Http\Controllers\Student\Ebook\BookingController@paymentFailed')->middleware('role:Student');
 
+//student ebook chapters
+Route::get('/student/ebook-bookings/{booking}/chapters','App\Http\Controllers\Student\Ebook\ChapterController@index')->middleware('role:Student');
+Route::get('/student/ebook-bookings/{booking}/chapters/{chapter}','App\Http\Controllers\Student\Ebook\ChapterController@show')->middleware('role:Student');
 
 
 
@@ -513,21 +526,6 @@ Route::post('/student/video-course/{booking}/exams/{exam}/save','App\Http\Contro
 Route::get('/student/video-course/{booking}/exams/{exam}/view','App\Http\Controllers\student\Video\ExamController@viewExam')->middleware('role:Student');
 Route::delete('/student/video-course/{booking}/exams/{exam}/reset','App\Http\Controllers\student\Video\ExamController@resetExam')->middleware('role:Student');
 
-//student ebook booking
-Route::get('/student/ebook','App\Http\Controllers\student\Ebook\BookingController@index')->middleware('role:Student');
-Route::get('/student/ebook/enroll','App\Http\Controllers\student\Ebook\BookingController@create')->middleware('role:Student');
-Route::post('/student/ebook','App\Http\Controllers\student\Ebook\BookingController@store')->middleware('role:Student');
-Route::get('/student/ebook/{booking}/edit','App\Http\Controllers\student\Ebook\BookingController@edit')->middleware('role:Student');
-Route::patch('/student/ebook/{booking}','App\Http\Controllers\student\Ebook\BookingController@update')->middleware('role:Student');
-Route::delete('/student/ebook/{booking}','App\Http\Controllers\student\Ebook\BookingController@destroy')->middleware('role:Student');
-
-Route::get('/student/ebook/{booking}/esewaSuccess','App\Http\Controllers\student\Ebook\BookingController@esewaSuccess')->middleware('role:Student');
-Route::post('/student/ebook/{booking}/khaltiSuccess','App\Http\Controllers\student\Ebook\BookingController@khaltiSuccess')->middleware('role:Student');
-Route::get('/student/ebook/{booking}/payment-failed','App\Http\Controllers\student\Ebook\BookingController@paymentFailed')->middleware('role:Student');
-
-//student ebook chapters
-Route::get('/student/ebook/{booking}/chapters','App\Http\Controllers\student\Ebook\ChapterController@index')->middleware('role:Student');
-Route::get('/student/ebook/{booking}/chapters/{chapter}','App\Http\Controllers\student\Ebook\ChapterController@show')->middleware('role:Student');
 
 //student free orientation class mgmt
 Route::get('/student/free-orientations','App\Http\Controllers\student\StudentHomeController@orientations')->middleware('role:Student');

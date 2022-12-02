@@ -37,7 +37,7 @@ class ChapterController extends Controller
         ]);
 
         $pdf="";
-        if(isset($data['pdf_file']))
+        if(isset($request['pdf_file']))
         {
             $pdf=request('pdf_file')->store('uploads','public');
         }     

@@ -16,7 +16,8 @@
         <div class="alert alert-success" role="alert">
             {{ session('status') }}
         </div>
-        @endif</div>
+        @endif
+    </div>
     <section class="news-feeds student-content-wrapper">
         <div class="main-news-home">
             <div class="student-home-block mt-4">

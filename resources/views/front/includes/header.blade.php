@@ -27,11 +27,11 @@
                   <!-- Right Side Of Navbar -->
                   <ul class="navbar-nav justify-content-end">
                       <!-- Authentication Links -->
-                      <li class="nav-item manual-booking">
+                      {{-- <li class="nav-item manual-booking">
                         <a class="nav-link login-user" href="/manual-booking" role="button">
                           Manual Booking
                       </a>
-                      </li>
+                      </li> --}}
                       @guest
                           @if (Route::has('login'))
                               <li class="nav-item">

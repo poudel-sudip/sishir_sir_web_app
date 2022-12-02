@@ -51,7 +51,7 @@ class StudentHomeController extends Controller
         return view('student.home',compact('user','count','posts'));
     }
 
-    public function addComments(TutorPost $post,Request $request)
+    public function addComments(Blog $post,Request $request)
     {
          // dd($request->all());
          $request->validate([
@@ -62,7 +62,6 @@ class StudentHomeController extends Controller
          ]);
  
          $post->comments()->create([
-             'post_id'=>$post->id,
              'name'=>$request->name,
              'email'=>$request->email,
              'contact'=>$request->contact,
@@ -73,53 +72,6 @@ class StudentHomeController extends Controller
          return redirect('/student/home');
     }
 
-    public function enroll()
-    {
-        $headercategories=Categories::all()->where('status','=','Active');
-        return view('student.enrolled',[
-            'bookings'=>auth()->user()->bookings()->get(),
-            'headercategories'=>$headercategories,
-        ]);
-    }
-
-    public function pending()
-    {
-        return view('student.enrolled',[
-            'bookings'=>auth()->user()->bookings()->where('status','!=','Verified')->get(),
-            'headercategories'=>Categories::all()->where('status','=','Active'),
-        ]);
-    }
-
-    public function approved()
-    {
-        return view('student.enrolled',[
-            'bookings'=>auth()->user()->bookings()->where('status','=','Verified')->get(),
-            'headercategories'=>Categories::all()->where('status','=','Active'),
-        ]);
-    }
-
     
-    public function suspended()
-    {
-        return view('student.enrolled',[
-            'bookings'=>auth()->user()->bookings()->where('suspended','=',true)->get(),
-            'headercategories'=>Categories::all()->where('status','=','Active'),
-        ]);
-    }
-
-    public function classroom()
-    {
-        return view('student.classroom',[
-            'bookings'=>auth()->user()->bookings()->where('status','=','Verified')->where('suspended','=',false)->orderBy('id','DESC')->get(),
-            'headercategories'=>Categories::all()->where('status','=','Active'),
-        ]);
-    }
-
-    public function orientations()
-    {
-        $orientations = Orientation::whereDate('date','>=',date("Y-m-d"))->where('status','=','Active')->get();
-        // dd($orientations);
-        return view('student.orientations.index',compact('orientations'));
-    }
 
 }

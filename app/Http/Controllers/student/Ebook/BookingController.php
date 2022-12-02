@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\student\Ebook;
+namespace App\Http\Controllers\Student\Ebook;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -52,7 +52,7 @@ class BookingController extends Controller
             'remarks'=>$request->remarks,
         ]);
 
-        return redirect('/student/ebook/'.$booking->id.'/edit');
+        return redirect('/student/ebook-bookings/'.$booking->id.'/edit');
     }
 
     public function edit(EbookBooking $booking)
@@ -76,30 +76,30 @@ class BookingController extends Controller
             'status' => 'Processing',
         ]);
 
-        return redirect('/student/ebook');
+        return redirect('/student/ebook-bookings');
     }
 
     public function destroy(EbookBooking $booking)
     {
         $booking->delete();
-        return redirect('/student/ebook');
+        return redirect('/student/ebook-bookings');
     }
 
     public function paymentFailed(EbookBooking $booking)
     {
-        return redirect("/student/ebook/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+        return redirect("/student/ebook-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
     }
 
     public function esewaSuccess(EbookBooking $booking, Request $request)
     {
         if(isset($request->oid) && isset($request->amt) && isset($request->refId))
         {
-            $url = "https://esewa.com.np/epay/transrec";
+            $url = config('payment.esewa_verify_url');
             $data =[
                 'amt'=> ($booking->book->price - $booking->book->discount),
                 'rid'=> $request->refId,
                 'pid'=> $request->oid,
-                'scd'=> 'NP-ES-ODADEPL'
+                'scd'=> config('payment.esewa_scd')
             ];
             
             $curl = curl_init($url);
@@ -125,12 +125,12 @@ class BookingController extends Controller
                     'merchant' => 'esewa',
                     'booking_id' => $booking->id,
                 ]);
-                return redirect('/student/ebook')->with('success_message','Transction Completed Succesfully.');
+                return redirect('/student/ebook-bookings')->with('success_message','Transction Completed Succesfully.');
             }
             
         }
 
-        return redirect("/student/ebook/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+        return redirect("/student/ebook-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
     }
 
     public function khaltiSuccess(EbookBooking $booking, Request $request)
@@ -140,7 +140,7 @@ class BookingController extends Controller
             'amount'  => ($booking->book->price - $booking->book->discount) * 100
         ));
         
-        $url = "https://khalti.com/api/v2/payment/verify/";
+        $url = config('payment.khalti_verify_url');
         
         # Make the call using API.
         $ch = curl_init();
@@ -149,7 +149,7 @@ class BookingController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS,$args);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         
-        $headers = ['Authorization: Key test_secret_key_ac3b9ea5852c45d597d141b28d2c7c44'];
+        $headers = ['Authorization: Key '.config('payment.khalti_secret_key')];
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         
         // Response
@@ -174,7 +174,7 @@ class BookingController extends Controller
             ]);
             return response()->json([
                 'success' => 1,
-                'redirecto' => url('/student/ebook')
+                'redirecto' => url('/student/ebook-bookings')
             ], 200);
         }
         else
