@@ -18,36 +18,17 @@ class StudentHomeController extends Controller
     {
         $user=auth()->user();
 
-        // $totalBookings=auth()->user()->bookings()->count();
-        // $approved=auth()->user()->bookings()->where('status','=','Verified')->get();
-        // $approvedBookings=$approved->count();
-        // $suspendedBooking=auth()->user()->bookings()->where([['status','=','Verified'],['suspended','=',true]])->count();
-        // $batches=[];
-        // foreach ($approved as $booking) {
-        //     $batches[]= $booking['batch_id'];
-        // }
-        // $batches=array_unique($batches);
-        // $myexams=BatchExam::whereIn('batch_id',$batches)->count();
-        // $exam_hall=auth()->user()->exam_bookings()->count();
-        // $video_bookings = auth()->user()->video_bookings()->count();
-        // $ebook_bookings = auth()->user()->ebook_bookings()->count();
         $count= (object) [
-        //     'bookings'=> (object) [
-        //         'total'=>$totalBookings,
-        //         'approved'=>$approvedBookings,
-        //         'pending'=>$totalBookings-$approvedBookings,
-        //         'classroom'=>$approvedBookings-$suspendedBooking,
-        //         'suspended'=>$suspendedBooking,
-        //         'exams'=>$myexams,
-        //         'exam_hall'=>$exam_hall,
-        //         // 'video_booking'=>$video_bookings,
-        //         'ebook_booking'=>$ebook_bookings,
-        //     ],
-        //     'orientations' => Orientation::whereDate('date','>=',date("Y-m-d"))->where('status','=','Active')->count(),
+            'bookings'=> (object) [
+                'courses'=>$user->bookings()->count(),
+                'classroom'=>$user->bookings()->where([['status','=','Verified'],['suspended','=',false]])->count(),
+                'exams'=>$user->exam_bookings()->count(),
+                'ebooks'=>$user->ebook_bookings()->count(),
+            ],
         ];
+        
         $posts=Blog::all()->where('status','=','Published')->sortByDesc('id')->take(25);
-        // dd($approved,$myexams);
-        // $headercategories=Categories::all()->where('status','=','Active');
+        // dd($count);
         return view('student.home',compact('user','count','posts'));
     }
 

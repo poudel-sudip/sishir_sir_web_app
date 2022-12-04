@@ -16,7 +16,7 @@ class CQCController extends Controller
     public function index(ExamHallCategories $category)
     {
         // dd($category,$category->cqcs);
-        return view('student.ExamHall.cqc.cqc',compact('category'));
+        return view('student.examhall.cqc.cqc',compact('category'));
     }
 
     public function store(Request $request, ExamHallCategories $category)
@@ -28,6 +28,6 @@ class CQCController extends Controller
             'question' => $request->question,
         ]);
 
-        return redirect('/student/exam-hall/'.$category->id.'/cqc');
+        return redirect('/student/exam-bookings/'.$category->id.'/cqc');
     }
 }

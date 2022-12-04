@@ -32,7 +32,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function bookings(): HasMany
     {
-        return $this->hasMany(Booking::class)->orderBy('created_at','DESC');
+        return $this->hasMany(Booking::class,'user_id')->orderByDesc('id');
     }
 
     public function exam_bookings():HasMany 

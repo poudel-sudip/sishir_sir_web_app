@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    Enroll Exams
+    Enroll Exam Set
 @endsection
 @section('student-title-icon')
     <i class="fas fa-calendar-check"></i>
@@ -12,11 +12,11 @@
         <div class="row justify-content-center">
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">{{ __('Book an Exam') }}</div>
+                    <div class="card-header">{{ __('Enroll an Exam Set') }}</div>
 
                     <div class="card-body enroll_form">
 
-                        <form method="POST" action="/student/exam-hall" enctype="multipart/form-data" id="verifyCourseForm">
+                        <form method="POST" action="/student/exam-bookings" enctype="multipart/form-data" id="verifyCourseForm">
                             @if (session('alreadybooked'))
                                 <div class="alert alert-danger">
                                     {{ session('alreadybooked') }}
@@ -25,7 +25,7 @@
                            
                             @csrf
                             <div class="form-group row">
-                                <label for="exam_category" class="col-md-4 col-form-label text-md-right">{{ __('Exam Category') }}</label>
+                                <label for="exam_category" class="col-md-4 col-form-label text-md-right">{{ __('Exam Set') }}</label>
 
                                 <div class="col-md-8">
                                     <select name="exam_category" id="exam_category" class="enroll-form-control @error('exam_category') is-invalid @enderror" value="{{ old('exam_category') }}" autofocus required>

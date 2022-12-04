@@ -44,13 +44,13 @@ class ExamController extends Controller
         });
 
         // dd($category,$cat_exams);
-        return view('student.ExamHall.Exams.myexams',compact('category','cat_exams'));
+        return view('student.examhall.exams.myexams',compact('category','cat_exams'));
     }
 
     public function takeExam(ExamHallCategories $category, Exam $exam)
     {
         // dd($category,$exam);
-        return view('student.ExamHall.Exams.takeexam',compact('category','exam'));
+        return view('student.examhall.exams.takeexam',compact('category','exam'));
     }
 
     public function store(Request $request, ExamHallCategories $category, Exam $exam)
@@ -71,23 +71,7 @@ class ExamController extends Controller
                 $correct_answer = $question->opt_correct;
                 $my_answer="";
 
-                // if($question->opt_correct=="A")
-                // {
-                //     $correct_answer=$question->opt_a;
-                // }
-                // elseif($question->opt_correct=="B")
-                // {
-                //     $correct_answer=$question->opt_b;
-                // }
-                // elseif($question->opt_correct=="C")
-                // {
-                //     $correct_answer=$question->opt_c;
-                // }
-                // elseif($question->opt_correct=="D")
-                // {
-                //     $correct_answer=$question->opt_d;
-                // }
-
+                
                 if(isset($data['ans-'.$i])){
                     $ans=explode("=>",$data['ans-'.$i]);
                     if($question->opt_correct==$ans[0])
@@ -124,7 +108,7 @@ class ExamController extends Controller
             'wrong_questions'=>$wrong_questions,
         ]);
 
-        return redirect('/student/exam-hall/'.$category->id.'/exams');
+        return redirect('/student/exam-bookings/'.$category->id.'/exams');
     }
 
     public function show(ExamHallCategories $category, Exam $exam)
@@ -142,7 +126,7 @@ class ExamController extends Controller
             ['exam_id','=',$exam->id],
         ])->get();
         // dd($evaluations->first()->question);
-        return view('student.ExamHall.Exams.showresult',[
+        return view('student.examhall.exams.showresult',[
             'result'=>$result,
             'answers'=>$evaluations,
             'category'=>$category,
@@ -166,7 +150,7 @@ class ExamController extends Controller
             ['exam_id','=',$exam->id],
         ])->delete();
 
-        return redirect('/student/exam-hall/'.$category->id.'/exams');
+        return redirect('/student/exam-bookings/'.$category->id.'/exams');
     }
 
 }

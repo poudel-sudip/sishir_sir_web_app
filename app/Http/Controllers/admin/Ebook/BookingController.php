@@ -83,7 +83,7 @@ class BookingController extends Controller
             'remarks' => $request->remarks,
         ]);
 
-        return redirect('/admin/ebook-booking');
+        return redirect('/admin/ebook-bookings');
     }
 
     public function show(EbookBooking $booking)
@@ -133,13 +133,12 @@ class BookingController extends Controller
             'trans_code' => $request->trans_code,
         ]);
 
-        return redirect('/admin/ebook-booking');
+        return redirect('/admin/ebook-bookings');
     }
 
     public function destroy(EbookBooking $booking)
     {
-        $booking->vendorBooking()->delete();
         $booking->delete();
-        return redirect('/admin/ebook-booking');
+        return redirect('/admin/ebook-bookings');
     }
 }

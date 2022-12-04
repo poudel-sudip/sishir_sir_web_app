@@ -29,7 +29,7 @@
                     </div>
                     <div class="second-row">
                         <a class="btn" href="/student/course-bookings">View Bookings</a>
-                        <span>{{$count->bookings->total ?? '-'}}</span>
+                        <span>{{$count->bookings->courses ?? '-'}}</span>
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
                     </div>
                     <div class="second-row">
                         <a class="btn" href="/student/exam-bookings">View Bookings</a>
-                        <span>{{$count->bookings->exam_hall ?? '-'}}</span>
+                        <span>{{$count->bookings->exams ?? '-'}}</span>
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                     </div>
                     <div class="second-row">
                         <a class="btn" href="/student/ebook-bookings">View Bookings</a>
-                        <span>{{$count->bookings->ebook_booking ?? '-'}}</span>
+                        <span>{{$count->bookings->ebooks ?? '-'}}</span>
                     </div>
                 </div>
                 

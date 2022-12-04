@@ -1,7 +1,7 @@
 @extends('student.layouts.app')
 
 @section('student-title')
-    Verify Exam Booking
+    Verify Exam Set Booking
 @endsection
 @section('student-title-icon')
     <i class="far fa-check-circle"></i>
@@ -16,7 +16,7 @@
                     <div class="card-header">{{ __('Booking. ID: ') }} {{$booking->id}} {{$booking->category->title ?? ''}}</div>
 
                     <div class="card-body enroll_form">
-                        <form id="verifyCourseForm" method="POST" action="/student/exam-hall/{{$booking->id}}" enctype="multipart/form-data">
+                        <form id="verifyCourseForm" method="POST" action="/student/exam-bookings/{{$booking->id}}" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             @if(session('error_message'))
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="exam_category" class="col-md-4 col-form-label text-md-right">{{ __('Exam Category') }}</label>
+                                <label for="exam_category" class="col-md-4 col-form-label text-md-right">{{ __('Exam Set') }}</label>
 
                                 <div class="col-md-8">
                                     <input id="exam_category" type="text" class="form-control @error('exam_category') is-invalid @enderror" name="exam_category" value="{{ old('exam_category') ?? ($booking->category->title.' @ Rs.'. ($booking->category->price - $booking->category->discount)) }}" readonly>
@@ -61,12 +61,7 @@
                                         <option value="Manual">Manual</option>
                                         <option value="Esewa">Esewa</option>
                                         <option value="Khalti">Khalti</option>
-                                        <!-- <option value="Self">Self</option>
-                                        <option value="Connect IPS">Connect IPS</option>
-                                        <option value="IME Pay">IME Pay</option>
-                                        <option value="Esewa">Esewa</option>
-                                        <option value="Khalti">Khalti</option>
-                                        <option value="Bank">Bank</option> -->
+                                        
                                     </select>
                                     @error('verificationMode')
                                     <span class="invalid-feedback" role="alert">
@@ -118,7 +113,7 @@
                                     <button type="button" class="btn btn-primary" id="submitbtn">
                                         {{ __('Verify') }}
                                     </button>
-                                    <a href="{{ url('/student/exam-hall') }}" class="btn btn-secondary">Verify Later</a>
+                                    <a href="{{ url('/student/exam-bookings') }}" class="btn btn-secondary">Verify Later</a>
                                 </div>
                             </div>
                         </form>
@@ -137,7 +132,7 @@
 
       function pay_esewa()
       {
-        var path="https://esewa.com.np/epay/main";
+        var path="{{Config::get('payment.esewa_pay_url')}}";
         var params= {
             amt: {{ $booking->category->price - $booking->category->discount }},
             psc: 0,
@@ -145,9 +140,9 @@
             txAmt: 0,
             tAmt: {{$booking->category->price - $booking->category->discount}},
             pid: "{{$booking->id.'-'.time()}}",
-            scd: "NP-ES-ODADEPL",
-            su: '{{url("student/exam-hall/$booking->id/esewaSuccess")}}',
-            fu: '{{url("student/exam-hall/$booking->id/payment-failed")}}'
+            scd: "{{Config::get('payment.esewa_scd')}}",
+            su: '{{url("student/exam-bookings/$booking->id/esewaSuccess")}}',
+            fu: '{{url("student/exam-bookings/$booking->id/payment-failed")}}'
         };
 
         var form = document.createElement("form");
@@ -209,10 +204,10 @@
         {
             var config = {
                 // replace the publicKey with yours
-                "publicKey": "test_public_key_bc744f8267dc4775a38af37cab5591d0",
+                "publicKey": "{{Config::get('payment.khalti_public_key')}}",
                 "productIdentity": "{{$booking->id.'-'.time()}}",
                 "productName": "{{$booking->category->title}}",
-                "productUrl": "{{url('student/exam-hall')}}",
+                "productUrl": "{{url('student/exam-bookings')}}",
                 "paymentPreference": [
                     "KHALTI",
                     "EBANKING",
@@ -237,7 +232,7 @@
 
                             $.ajax({
                                 method: 'POST',
-                                url: '{{url("student/exam-hall/$booking->id/khaltiSuccess")}}',
+                                url: '{{url("student/exam-bookings/$booking->id/khaltiSuccess")}}',
                                 data: payload,
 
                                 success: function(response) {
@@ -249,20 +244,20 @@
                                     else
                                     {
                                         checkout.hide();
-                                        window.location = '{{url("student/exam-hall/$booking->id/payment-failed")}}';
+                                        window.location = '{{url("student/exam-bookings/$booking->id/payment-failed")}}';
                                     }
                                 },
 
                                 error: function(data) {
                                     // console.log('Error:',data);
-                                    window.location = '{{url("student/exam-hall/$booking->id/payment-failed")}}';
+                                    window.location = '{{url("student/exam-bookings/$booking->id/payment-failed")}}';
                                 },
                             });
                         }
                     },
                     onError (error) {
                         // console.log(error);
-                        window.location = '{{url("student/exam-hall/$booking->id/payment-failed")}}';
+                        window.location = '{{url("student/exam-bookings/$booking->id/payment-failed")}}';
                     },
                     onClose () {
                         console.log('widget is closing');

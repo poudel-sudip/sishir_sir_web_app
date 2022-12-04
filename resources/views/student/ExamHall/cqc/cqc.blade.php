@@ -44,7 +44,7 @@
     <div class="row">
         <div class="col-md-12">
             <hr>
-            <form method="POST" action="/student/exam-hall/{{$category->id}}/cqc" enctype="multipart/form-data">
+            <form method="POST" action="/student/exam-bookings/{{$category->id}}/cqc" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group row">

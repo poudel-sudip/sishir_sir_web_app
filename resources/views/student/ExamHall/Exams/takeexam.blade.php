@@ -26,7 +26,7 @@
                             </div>
                         @endif
 
-                        <form action="/student/exam-hall/{{$category->id}}/exams/{{$exam->id}}/save" method="POST" id="exam-form">
+                        <form action="/student/exam-bookings/{{$category->id}}/exams/{{$exam->id}}/save" method="POST" id="exam-form">
                             @csrf
                             <div class="owl-carousel MCQ-exam">
                             @php($key=-1)

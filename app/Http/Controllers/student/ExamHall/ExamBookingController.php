@@ -18,7 +18,7 @@ class ExamBookingController extends Controller
     public function index()
     {
         $bookings=auth()->user()->exam_bookings()->get();
-        return view('student.ExamHall.index',[
+        return view('student.examhall.bookings.index',[
             'bookings'=>$bookings,
         ]);
     }
@@ -26,7 +26,7 @@ class ExamBookingController extends Controller
     public function enroll()
     {
         $categories=ExamHallCategories::where('status','Active')->get();
-        return view('student.ExamHall.enroll',compact('categories'));
+        return view('student.examhall.bookings.enroll',compact('categories'));
     }
 
     public function store(Request $request)
@@ -43,7 +43,7 @@ class ExamBookingController extends Controller
             ])->count();
             
         if($search){
-            return back()->withInput()->with('alreadybooked', 'You Have Already Booked This Exam Category!');
+            return back()->withInput()->with('alreadybooked', 'You Have Already Booked This Exam Set!');
         }
 
         $booking= ExamHallBookings::create([
@@ -55,7 +55,7 @@ class ExamBookingController extends Controller
             'remarks'=>$request->remarks,
         ]);
 
-        return redirect('/student/exam-hall/'.$booking->id.'/edit');
+        return redirect('/student/exam-bookings/'.$booking->id.'/edit');
 
     }
 
@@ -63,12 +63,12 @@ class ExamBookingController extends Controller
     {
         // dd($booking);
         $booking->delete();
-        return redirect('/student/exam-hall');
+        return redirect('/student/exam-bookings');
     }
 
     public function edit(ExamHallBookings $booking)
     {
-        return view('student.ExamHall.verify',compact('booking'));
+        return view('student.examhall.bookings.verify',compact('booking'));
     }
 
     public function manualVerify(Request $request, ExamHallBookings $booking)
@@ -85,11 +85,11 @@ class ExamBookingController extends Controller
         $booking->update([
             'verificationMode'=>$request->verificationMode,
             'verificationDocument'=>$imagePath,
-            'paidAmount'=>$request->paymentAmount,
+            'paymentAmount'=>$request->paymentAmount,
             'status'=>'Processing',
         ]);
 
-        return redirect('/student/exam-hall');
+        return redirect('/student/exam-bookings');
     }
 
     public function esewaSuccess(ExamHallBookings $booking, Request $request)
@@ -99,12 +99,12 @@ class ExamBookingController extends Controller
         if(isset($request->oid) && isset($request->amt) && isset($request->refId))
         {
             // dd($request->all(), $booking);
-            $url = "https://esewa.com.np/epay/transrec";
+            $url = config('payment.esewa_verify_url');
             $data =[
                 'amt'=> ($booking->category->price - $booking->category->discount),
                 'rid'=> $request->refId,
                 'pid'=> $request->oid,
-                'scd'=> 'NP-ES-ODADEPL'
+                'scd'=> config('payment.esewa_scd')
             ];
             
             $curl = curl_init($url);
@@ -121,7 +121,7 @@ class ExamBookingController extends Controller
                 $booking->update([
                     'status'=>'Verified',
                     'verificationMode'=>'Esewa',
-                    'paidAmount'=>$data['amt'],
+                    'paymentAmount'=>$data['amt'],
                     'remarks'=>'Booked by Student with Direct Esewa Payment',
                     'updatedBy'=>auth()->user()->name,
                 ]);
@@ -131,18 +131,18 @@ class ExamBookingController extends Controller
                     'merchant' => 'esewa',
                     'booking_id' => $booking->id,
                 ]);
-                return redirect('/student/exam-hall')->with('success_message','Transction Completed Succesfully.');
+                return redirect('/student/exam-bookings')->with('success_message','Transction Completed Succesfully.');
             }
         }
 
-        return redirect("/student/exam-hall/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+        return redirect("/student/exam-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
 
 
     }
 
     public function paymentFailed(ExamHallBookings $booking, Request $request)
     {
-        return redirect("/student/exam-hall/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+        return redirect("/student/exam-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
     }
 
     public function khaltiSuccess(ExamHallBookings $booking, Request $request)
@@ -152,7 +152,7 @@ class ExamBookingController extends Controller
             'amount'  => ($booking->category->price - $booking->category->discount) * 100
         ));
         
-        $url = "https://khalti.com/api/v2/payment/verify/";
+        $url = config('payment.khalti_verify_url');
         
         # Make the call using API.
         $ch = curl_init();
@@ -161,7 +161,7 @@ class ExamBookingController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS,$args);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         
-        $headers = ['Authorization: Key test_secret_key_ac3b9ea5852c45d597d141b28d2c7c44'];
+        $headers = ['Authorization: Key '.config('payment.khalti_secret_key')];
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         
         // Response
@@ -174,7 +174,7 @@ class ExamBookingController extends Controller
             $booking->update([
                 'status'=>'Verified',
                 'verificationMode'=>'Khalti',
-                'paidAmount'=>($booking->category->price - $booking->category->discount),
+                'paymentAmount'=>($booking->category->price - $booking->category->discount),
                 'remarks'=>'Booked by Student with Direct Khalti Payment',
                 'updatedBy'=>auth()->user()->name,
             ]);
@@ -186,7 +186,7 @@ class ExamBookingController extends Controller
             ]);
             return response()->json([
                 'success' => 1,
-                'redirecto' => url('/student/exam-hall')
+                'redirecto' => url('/student/exam-bookings')
             ], 200);
         }
         else

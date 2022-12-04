@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    Enrolled Exams
+    Enrolled Exam Sets
 @endsection
 
 @section('student-title-icon')
@@ -12,18 +12,18 @@
     <div class="student-content-wrapper student-enroll-section">
         <div class="row mb-2">
             <div class="col-md-12 text-end">
-                <a class="student-enroll-btn" href="{{ url('/student/exam-hall/enroll') }}">Book an Exam</a>
+                <a class="student-enroll-btn" href="{{ url('/student/exam-bookings/create') }}">Book an Exam Set</a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="enrolled-table table-responsive">
+                <div class="enrolled-table table-responsive table-responsive-md">
                     <table class="table" style="width:100%">
                         <thead class="table-light">
                             <tr>
                                 <th>ID</th>
                                 {{-- <th>Date</th> --}}
-                                <th>Exam Category</th>
+                                <th>Exam Set</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -37,18 +37,15 @@
                                 <td>{{$booking->status}}</td>
                                 <td>
                                     @if($booking->status!="Verified")
-                                        <a href="/student/exam-hall/{{$booking->id}}/edit" class="btn btn-warning btn-sm mb-1 ">Verify</a> 
-                                        <form id="delete-form-{{$booking->id}}" action="/student/exam-hall/{{$booking->id}}" method="POST" style="display: inline">
+                                        <a href="/student/exam-bookings/{{$booking->id}}/edit" class="btn btn-warning btn-sm mb-1 ">Verify</a> 
+                                        <form id="delete-form-{{$booking->id}}" action="/student/exam-bookings/{{$booking->id}}" method="POST" style="display: inline">
                                             @csrf
                                             @method('DELETE')
                                             <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-danger btn-sm">Delete</a>
                                         </form>
                                     @else
-                                        <a href="/student/exam-hall/{{$booking->category_id}}/exams" class="btn btn-success btn-sm mb-1 ">Show Exams</a> 
-                                        <a href="/student/exam-hall/{{$booking->category_id}}/cqc" class="btn btn-info btn-sm mb-1 ">CQQ</a> 
-                                        @if($booking->category->class_link)
-                                        <a href="{{$booking->category->class_link}}" target="_blank" class="btn btn-danger btn-sm mb-1 ">Live Class</a> 
-                                        @endif
+                                        <a href="/student/exam-bookings/{{$booking->category_id}}/exams" class="btn btn-success btn-sm mb-1 ">Show Exams</a> 
+                                        <a href="/student/exam-bookings/{{$booking->category_id}}/cqc" class="btn btn-info btn-sm mb-1 ">CQQ</a> 
                                     @endif
                                 </td>
                             </tr>
