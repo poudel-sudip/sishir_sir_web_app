@@ -204,7 +204,7 @@
             }); // course-carousel
 
             $('.course-carousel').owlCarousel({
-                items: 5,
+                items: 3,
                 smartSpeed: 500,
                 nav: true,
                 loop: true,
@@ -212,14 +212,14 @@
                 navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
                 responsive: {
                     0: {
-                        items: 2,
+                        items: 1,
                         nav: false
                     },
                     600: {
-                        items: 3
+                        items: 2
                     },
                     1000: {
-                        items: 5
+                        items: 3
                     }
                 }
             });

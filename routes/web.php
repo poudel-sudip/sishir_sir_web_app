@@ -23,7 +23,9 @@ Route::get('/artisancalls', function () {
 
 
 
-Route::get('/', function(){ return view('welcome'); });
+// Route::get('/', function(){ return view('welcome'); });
+Route::get('/', function(){ return view('front.index1'); });
+
 
 
 
