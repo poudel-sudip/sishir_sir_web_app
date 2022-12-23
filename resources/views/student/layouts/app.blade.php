@@ -141,12 +141,12 @@
             <li class="active nav-item">
               <a class="nav-link" aria-current="page" href="/student/home"><i class="fas fa-house-user"></i> Student Home</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="/student/course-bookings"><i class="far fa-calendar-check text-primary"></i>Course Bookings</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/student/course-classroom"><i class="fas fa-laptop text-pink"></i> Course Classroom</a>
-            </li>
+            </li> --}}
             
             <li class="nav-item">
               <a class="nav-link" href="/student/ebook-bookings"><i class="fas fa-book-open text-black"></i>E-Book Bookings</a>

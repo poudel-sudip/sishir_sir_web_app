@@ -33,7 +33,7 @@
         </a>
       </li>
 
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
           <i class="mdi mdi-book-variant menu-icon"></i>
           <span class="menu-title">Courses</span>
@@ -74,7 +74,7 @@
             
           </ul>
         </div>
-      </li>
+      </li> --}}
 
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#exams-basic" aria-expanded="false" aria-controls="exams-basic">
@@ -149,19 +149,19 @@
         </a>
       </li>
       
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/notifications') }}">
           <i class="mdi mdi-bell menu-icon"></i>
           <span class="menu-title">Notifications</span>
         </a>
-      </li>
+      </li> --}}
 
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/sms') }}">
           <i class="mdi mdi-comment menu-icon"></i>
           <span class="menu-title">SMS</span>
         </a>
-      </li>
+      </li> --}}
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/blogs') }}">
@@ -236,12 +236,12 @@
         </a>
       </li>
 
-      {{-- <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/tutors') }}">
-          <i class="mdi mdi-account-multiple-outline menu-icon"></i>
-          <span class="menu-title">Tutors</span>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/menus') }}">
+          <i class="mdi mdi-alpha-m-box menu-icon"></i>
+          <span class="menu-title">Menus</span>
         </a>
-      </li> --}}
+      </li>
       
       <li class="nav-item sidebar-actions">
         <a class="nav-link" href="{{ url('/change-password') }}">

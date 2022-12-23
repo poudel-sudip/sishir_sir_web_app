@@ -22,7 +22,7 @@
         <div class="main-news-home">
             <div class="student-home-block mt-4">
 
-                <div class="student-dashboard-card block-first">
+                {{-- <div class="student-dashboard-card block-first">
                     <div class="first-row">
                         <span>Course Bookings</span>
                         <i class="far fa-calendar-check"></i>
@@ -42,7 +42,7 @@
                         <a class="btn" href="/student/course-classroom">View Classes</a>
                         <span>{{$count->bookings->classroom ?? '-'}}</span>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="student-dashboard-card block-third">
                     <div class="first-row">
