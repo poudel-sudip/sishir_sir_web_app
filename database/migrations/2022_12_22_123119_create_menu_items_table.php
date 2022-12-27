@@ -18,8 +18,10 @@ class CreateMenuItemsTable extends Migration
             $table->bigInteger('subgroup_id');
             $table->string('name');
             $table->string('slug')->nullable();
+            $table->string('type', 100)->nullable()->default('file');
             $table->string('filename')->nullable();
             $table->string('fileurl')->nullable();
+            $table->longText('description')->nullable();
             $table->string('order')->nullable()->default(1);
             $table->string('status')->nullable()->default('Inactive');
             $table->timestamps();

@@ -38,6 +38,10 @@
                             <div>{{$item->name}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Menu Type:</div>
+                            <div>{{$item->type}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>File Name:</div>
                             <div>{{$item->filename}}</div>
                         </div>
@@ -50,9 +54,15 @@
                             <div>{{$item->status}}</div>
                         </div>
                         <div class="course-row">
-                            <div>Menu File:</div>
-                            <div><iframe src="/storage/{{$item->fileurl}}" frameborder="0" style="width: 100%; min-height:500px"></iframe></div>
+                            <div>Menu Description:</div>
+                            <div>{!! $item->description !!}</div>
                         </div>
+                        @if($item->fileurl)
+                        <div class="course-row">
+                            <div>Menu File:</div>
+                            <div><iframe src="/storage/{{$item->fileurl}}" frameborder="0" style="width: 100%; min-height:500px" target="_parent"></iframe></div>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

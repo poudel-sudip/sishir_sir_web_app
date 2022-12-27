@@ -50,6 +50,23 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="type" class="col-sm-3 col-form-label">{{ __('Item Type') }}</label>
+                            <div class="col-md-9">
+                                <select id="type" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') ?? $item->type }}" required>
+                                    <option value="{{$item->type}}">{{$item->type}}</option>
+                                    <option value="">-----------------</option>
+                                    <option value="file">file</option>
+                                    <option value="text">text</option>
+                                </select>
+                                @error('type')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="file" class="col-sm-3 col-form-label">{{ __('Item File') }}</label>
                             <div class="col-md-9">
                                 <small>{{$item->filename}}</small>
@@ -57,6 +74,18 @@
                                 <input type="hidden" name="old_file" value="{{$item->fileurl}}">
                                 <input type="hidden" name="filename" value="{{$item->filename}}">
                                 @error('file')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-3 col-form-label">{{ __('Item Description') }}</label>
+                            <div class="col-md-9">
+                                <textarea name="description" id="description" class="summernote form-control @error('description') is-invalid @enderror">{{old('description') ?? $item->description}}</textarea>
+                                @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

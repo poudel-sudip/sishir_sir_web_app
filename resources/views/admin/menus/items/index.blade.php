@@ -33,7 +33,7 @@
                           <tr>
                             <th>SN</th>
                             <th>Name</th>
-                            <th>File</th>
+                            <th>Type</th>
                             <th width="20">Order</th>
                             <th>Status</th>
                             <th width="100">Action</th>
@@ -44,8 +44,8 @@
                             @foreach($items as $item)
                           <tr>
                             <td width="50">{{$i}}</td>
-                            <td>{{$item->name}}</td>
-                            <td class="text-wrap">{{$item->filename}}</td>
+                            <td class="text-wrap">{{$item->name}}</td>
+                            <td>{{ucwords($item->type)}}</td>
                             <td>{{$item->order}}</td>
                             <td>
                               @if($item->status == 'Inactive')

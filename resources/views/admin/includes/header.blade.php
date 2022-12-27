@@ -243,6 +243,20 @@
         </a>
       </li>
       
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/books') }}">
+          <i class="mdi mdi-alpha-b-box menu-icon"></i>
+          <span class="menu-title">My Books</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/advertisement') }}">
+          <i class="mdi mdi-alpha-a-box menu-icon"></i>
+          <span class="menu-title">Advertisement</span>
+        </a>
+      </li>
+
       <li class="nav-item sidebar-actions">
         <a class="nav-link" href="{{ url('/change-password') }}">
           <i class="mdi mdi-key-variant menu-icon"></i>

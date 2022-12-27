@@ -40,11 +40,18 @@ class ItemController extends Controller
             'name' => 'string|required',
             'order' => 'numeric|required',
             'status' => 'string|required',
-            'file' => 'required|file|mimes:pdf',
+            'file' => 'nullable|file|mimes:pdf',
+            'description' => 'string|nullable',
+            'type' => 'string|required',
         ]);
-        $data = $request->only(['name','order','status']);
+        $data = $request->only(['name','order','status','description','type']);
         $data['filename'] = '';
         $data['fileurl'] = '';
+        if($data['type'] == 'file' && !isset($request->file))
+        {
+            return back()->withInput()->withErrors(['file' => 'Please select a pdf file']);
+        }
+
         if(isset($request->file))
         {
             $data['filename'] = $request->file->getClientOriginalName();
@@ -70,11 +77,18 @@ class ItemController extends Controller
             'order' => 'numeric|required',
             'status' => 'string|required',
             'file' => 'nullable|file|mimes:pdf',
-            'old_file' => 'required|string',
-            'filename' => 'required|string',
+            'old_file' => 'nullable|string',
+            'filename' => 'nullable|string',
+            'description' => 'string|nullable',
+            'type' => 'string|required',
         ]);
-        $data = $request->only(['name','order','status','filename']);
+        $data = $request->only(['name','order','status','filename','type','description']);
         $data['fileurl'] = $request->old_file;
+
+        if($data['type'] == 'file' && $request->old_file =='')
+        {
+            return back()->withInput()->withErrors(['file' => 'Please select a pdf file']);
+        }
         if(isset($request->file))
         {
             $data['filename'] = $request->file->getClientOriginalName();

@@ -49,9 +49,24 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="type" class="col-sm-3 col-form-label">{{ __('Item Type') }}</label>
+                            <div class="col-md-9">
+                                <select id="type" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}" required>
+                                    <option value="file">file</option>
+                                    <option value="text">text</option>
+                                </select>
+                                @error('type')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="file" class="col-sm-3 col-form-label">{{ __('Item File') }}</label>
                             <div class="col-md-9">
-                                <input id="file" type="file" class="form-control @error('file') is-invalid @enderror" name="file" value="{{ old('file') ?? 1  }}" required autocomplete="file" >
+                                <input id="file" type="file" class="form-control @error('file') is-invalid @enderror" name="file" value="{{ old('file') ?? 1  }}" autocomplete="file" >
                                 @error('file')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -60,6 +75,17 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-3 col-form-label">{{ __('Item Description') }}</label>
+                            <div class="col-md-9">
+                                <textarea name="description" id="description" class="summernote form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
+                                @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="status" class="col-sm-3 col-form-label">{{ __('Item Status') }}</label>
@@ -75,6 +101,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-3">
                                 <button type="submit" class="btn btn-primary">

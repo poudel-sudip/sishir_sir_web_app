@@ -428,7 +428,20 @@ Route::get('/admin/menus/{group}/sub-groups/{subgroup}/items/{item}','App\Http\C
 Route::patch('/admin/menus/{group}/sub-groups/{subgroup}/items/{item}','App\Http\Controllers\Admin\Menus\ItemController@update')->middleware('role:Admin');
 Route::delete('/admin/menus/{group}/sub-groups/{subgroup}/items/{item}','App\Http\Controllers\Admin\Menus\ItemController@destroy')->middleware('role:Admin');
 
+// admin personal books management 
+Route::get('/admin/books','App\Http\Controllers\Admin\Books\BookController@index')->middleware('role:Admin');
+Route::get('/admin/books/create','App\Http\Controllers\Admin\Books\BookController@create')->middleware('role:Admin');
+Route::post('/admin/books','App\Http\Controllers\Admin\Books\BookController@store')->middleware('role:Admin');
+Route::get('/admin/books/{book}/edit','App\Http\Controllers\Admin\Books\BookController@edit')->middleware('role:Admin');
+Route::get('/admin/books/{book}','App\Http\Controllers\Admin\Books\BookController@show')->middleware('role:Admin');
+Route::patch('/admin/books/{book}','App\Http\Controllers\Admin\Books\BookController@update')->middleware('role:Admin');
+Route::delete('/admin/books/{book}','App\Http\Controllers\Admin\Books\BookController@destroy')->middleware('role:Admin');
 
+// admin avertisement management 
+Route::get('/admin/advertisement','App\Http\Controllers\Admin\Advertisement\ADController@index')->middleware('role:Admin');
+Route::get('/admin/advertisement/create','App\Http\Controllers\Admin\Advertisement\ADController@create')->middleware('role:Admin');
+Route::post('/admin/advertisement','App\Http\Controllers\Admin\Advertisement\ADController@store')->middleware('role:Admin');
+Route::delete('/admin/advertisement/{ad}','App\Http\Controllers\Admin\Advertisement\ADController@destroy')->middleware('role:Admin');
 
 
 
