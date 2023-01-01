@@ -13,8 +13,13 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Loksewa Aayog</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Loksewa Aayog</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="">list 1</a></li>
+              <li><a class="dropdown-item" href="">list 2</a></li>
+              <li><a class="dropdown-item" href="">list 3</a></li>
+            </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Downloads</a>
@@ -23,13 +28,13 @@
             <a class="nav-link" href="#">University Update</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Shishir's Book</a>
+            <a class="nav-link" href="/books">Shishir's Book</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Public Health Day</a>
+            <a class="nav-link" href="/public-exams">Mock Test</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Blogs</a>
+            <a class="nav-link" href="/blogs">Blogs</a>
           </li>
           
         </ul>
@@ -38,8 +43,8 @@
   </nav>
   <div class="container-fluid my-3 px-5">
     <div class="row">
-      <div class="col-md-6">
-        <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=yes&font_color=c61a09&aj_time=yes&font_size=24&api=8311z7m197" width="300" height="50"></iframe>
+      <div class="col-md-6 pt-2">
+        <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=yes&font_color=1375b9&aj_time=yes&font_size=24&api=8311z7m197" width="300" height="50"></iframe>
       </div>
       <div class="col-md-6 auth-nav">
         <nav class="navbar navbar-expand">

@@ -7,23 +7,15 @@
 <footer class="page-footer">
   <div class="container">
     <div class="row px-md-3">
-      <div class="col-sm-4 col-lg-3 py-3">
-        <ul class="footer-menu">
-          <li><a href="/about-us">About Us</a></li>
-          <li><a href="/blogs">Blogs</a></li>
-          <li><a href="/privacy">Terms & Condition</a></li>
-          <li><a href="/privacy">Privacy</a></li>
-          <li><a href="/contact">Contact Us</a></li>
-          <li><a href="/enquiry">Enquiries</a></li>
-          <li><a href="/forms">Forms</a></li>
-          <li><a href="/careers">Careers</a></li>
-        </ul>
+      
+      <div class="col-sm-4 col-lg-4">
+        <div class="fb-page" data-href="https://www.facebook.com/Shisirkumaradhikari/" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Shisirkumaradhikari/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Shisirkumaradhikari/">Shisir Kumar Adhikari</a></blockquote></div>
       </div>
   
-      <div class="col-sm-8 col-lg-9 py-3">
+      <div class="col-sm-8 col-lg-8 py-3">
         <div class="social-media-support">
           <div class="footer-logo">
-            <img src="{{ asset('images/logo.png') }}" alt="footer-logo" width="200">
+            <img src="{{ asset('images/logo.png') }}" alt="footer-logo" height="80">
           </div>
         </div>
         
@@ -46,9 +38,7 @@
                 <div class="info-mobile"><span class="icon-phone"></span> +977- 9825423047</div>
               </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <h3 class="mt-3">connect with us :</h3>
+            <h3 class="mt-5">Connect with us :</h3>
             <div class="footer-sosmed">
               <a href="https://www.facebook.com/etutorclass" target="_blank"><i class="fab fa-facebook-f"></i></a>
               <a href="https://wa.me/9779857084806" target="_blank"><i class="icon-whatsapp"></i></a>
@@ -58,8 +48,21 @@
               <a href="https://www.instagram.com/etutorclass_official/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
           </div>
+          <div class="col-md-4 py-3">
+            <ul class="footer-menu">
+              <li><a href="/about-us">About Us</a></li>
+              <li><a href="/blogs">Blogs</a></li>
+              <li><a href="/privacy">Terms & Condition</a></li>
+              <li><a href="/privacy">Privacy</a></li>
+              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="/enquiry">Enquiries</a></li>
+              <li><a href="/forms">Forms</a></li>
+              <li><a href="/careers">Careers</a></li>
+            </ul>
+          </div>
         </div>
     </div>
+    
   </div>
 {{-- <div class="footer-card-section">
   <div class="container">
@@ -82,7 +85,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <p id="copyright">Copyright &copy; 2022 <a href=""></a>. All right reserved by <a href="">ODD Experts Pvt. Ltd.</a></p>
+        <p id="copyright">Copyright &copy; 2022 <a href="">Shishir Adhikari.</a> All right reserved. By <a href="">ODD Experts Pvt. Ltd.</a></p>
       </div>
       <div class="col-md-6">
        
@@ -90,3 +93,6 @@
     </div>
   </div>
 </div>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0" nonce="KN2MLonG"></script>

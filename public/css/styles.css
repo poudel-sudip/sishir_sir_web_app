@@ -43,9 +43,9 @@ p {
 }
 
 .topbar .search-area .btn {
-    background: #3490dc;
+    background: #1375b9;
     color: #ffffff;
-    border-color: #3490dc;
+    border-color: #1375b9;
 }
 
 .topbar .search-area input {
@@ -71,17 +71,17 @@ p {
 .topbar .btn-login {
     color: #ffffff;
     padding: 6px 20px;
-    background: #3490dc;
+    background: #1375b9;
     border-radius: 2px;
     font-weight: 600;
-    border: 1px solid #3490dc;
+    border: 1px solid #1375b9;
 }
 
 .topbar .btn-register {
-    color: #3490dc;
+    color: #1375b9;
     padding: 5px 20px;
     background: transparent;
-    border: 2px solid #3490dc;
+    border: 2px solid #1375b9;
     border-radius: 2px;
     margin-left: 5px;
     font-weight: 600;
@@ -89,7 +89,7 @@ p {
 
 .topbar .btn-register:hover {
     color: #fff;
-    background: #3490dc;
+    background: #1375b9;
 }
 
 @media (min-width: 768px) {
@@ -133,7 +133,7 @@ p {
 /*====================== main navbar======================= */
 
 .main-navbar {
-    background: #3490dc;
+    background: #1375b9;
     padding-top: 0.1rem !important;
     padding-bottom: 0.1rem !important;
 }
@@ -178,7 +178,7 @@ p {
     background: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     padding: 10px 15px 20px;
-    border-top: 5px solid #3490dc;
+    border-top: 5px solid #1375b9;
 }
 
 .mega-dropdown-menu .megha-menu-ul {
@@ -199,7 +199,7 @@ p {
 }
 
 .mega-dropdown-menu .megha-menu-ul a:hover {
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .mega-dropdown-menu>li ul>li>a:hover,
@@ -209,7 +209,7 @@ p {
 
 .mega-dropdown-menu .dropdown-header {
     font-size: 16px;
-    color: #3490dc;
+    color: #1375b9;
     padding: 5px 60px 5px 5px;
     line-height: 30px;
     border-bottom: 1px solid #ddd;
@@ -220,7 +220,7 @@ p {
     content: '';
     width: 70px;
     height: 3px;
-    background: #3490dc;
+    background: #1375b9;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -305,7 +305,7 @@ p {
 }
 
 .subnav .subnav-content a:hover {
-    color: #3490dc;
+    color: #1375b9;
     background: #eff0f1;
 }
 
@@ -332,11 +332,11 @@ p {
 }
 
 .page-hero .sidebar-see-more a:hover {
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .page-hero .side-navbar .course-nav li:hover .subnavbtn {
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .page-hero .side-navbar .course-nav .subnavbtn::after {
@@ -373,7 +373,7 @@ p {
 
 .page-hero .hero-section .owl-nav i {
     padding: 10px;
-    color: #3490dc;
+    color: #1375b9;
     font-size: 16px;
 }
 
@@ -387,7 +387,7 @@ p {
 }
 
 .hero-section .owl-nav button:hover {
-    background: #3490dc;
+    background: #1375b9;
 }
 
 .hero-section .owl-nav button:hover i {
@@ -431,14 +431,14 @@ p {
 .course-section .header-view-more a {
     font-size: 12px;
     padding: 5px 10px;
-    color: #3490dc;
+    color: #1375b9;
     background: #dfebf5;
     border-radius: 4px;
     font-weight: 600;
 }
 
 .course-section .header-view-more a:hover {
-    background: #3490dc;
+    background: #1375b9;
     color: #ffffff;
 }
 
@@ -487,7 +487,7 @@ p {
 }
 
 .course-section .card-course .post-category a {
-    color: #3490dc;
+    color: #1375b9;
     font-size: 14px;
 }
 
@@ -509,14 +509,14 @@ p {
 
 .course-section .card-course .course-price {
     background: #c1d7e8;
-    color: #3490dc;
+    color: #1375b9;
     padding: 2px 10px;
     border-radius: 3px;
     font-size: 14px;
 }
 
 .course-section .card-course .course-price:hover {
-    background: #3490dc;
+    background: #1375b9;
     color: #ffffff;
 }
 
@@ -528,7 +528,7 @@ p {
 
 .course-section .card-course .start-course span {
     padding-left: 20px;
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .course_book_btn {
@@ -536,12 +536,12 @@ p {
     padding: 5px;
     font-size: 12px;
     color: #fff;
-    background: #3490dc;
+    background: #1375b9;
     border-radius: 5px;
 }
 
 .course_book_btn:hover {
-    border: 1px solid #3490dc;
+    border: 1px solid #1375b9;
     background: #fff;
 }
 
@@ -564,7 +564,7 @@ p {
 
 .course-section .course-container .owl-nav i {
     padding: 10px;
-    color: #3490dc;
+    color: #1375b9;
     font-size: 16px;
 }
 
@@ -573,7 +573,7 @@ p {
 }
 
 .course-section .course-container .owl-nav button:hover {
-    background: #3490dc;
+    background: #1375b9;
 }
 
 .course-section .course-container .owl-nav button:hover i {
@@ -614,7 +614,7 @@ p {
 }
 
 .home-sub-heading {
-    color: #3490dc;
+    color: #1375b9;
     font-size: 11px;
     text-transform: uppercase;
 }
@@ -780,8 +780,8 @@ p {
     padding-left: 10px;
     padding-right: 10px;
     width: 50px;
-    border: 2px solid #3490dc;
-    color: #3490dc;
+    border: 2px solid #1375b9;
+    color: #1375b9;
 }
 
 .work-container .body p {
@@ -805,9 +805,9 @@ p {
 .review-section .review-container .reviw-item {
     padding: 10px 15px;
     background: #ffffff;
-    margin: 10px;
+    margin: 20px;
     border-radius: 8px;
-    border-left: 2px solid #3490dc;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .review-container .review-content .image-center img {
@@ -852,7 +852,7 @@ p {
 
 .review-section .profile-details p {
     font-size: 14px;
-    color: #3490dc;
+    color: #1375b9;
     font-style: italic;
 }
 
@@ -876,18 +876,9 @@ p {
     top: 42%;
 }
 
-.review-section .review-container .owl-nav button {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.678);
-    border: 1px solid #aaafad;
-}
-
 .review-section .review-container .owl-nav i {
-    padding: 10px;
-    color: #3490dc;
-    font-size: 16px;
+    color: #1375b9;
+    font-size: 24px;
 }
 
 .review-section .review-container .owl-nav .owl-next {
@@ -896,7 +887,7 @@ p {
 }
 
 .review-section .review-container .owl-nav button:hover {
-    background: #3490dc;
+    background: #1375b9;
 }
 
 .review-section .review-container .owl-nav button:hover i {
@@ -938,7 +929,7 @@ p {
 
 .top-tutors-section .top-tutors-container .tutor-details p {
     font-size: 15px;
-    color: #3490dc;
+    color: #1375b9;
     font-style: italic;
 }
 
@@ -961,7 +952,7 @@ p {
 
 .top-tutors-section .top-tutors-container .owl-nav i {
     padding: 10px;
-    color: #3490dc;
+    color: #1375b9;
     font-size: 16px;
 }
 
@@ -971,7 +962,7 @@ p {
 }
 
 .top-tutors-section .top-tutors-container .owl-nav button:hover {
-    background: #3490dc;
+    background: #1375b9;
 }
 
 .top-tutors-section .top-tutors-container .owl-nav button:hover i {
@@ -1002,7 +993,7 @@ p {
 }
 
 .about-page .page-sub-heading {
-    color: #3490dc;
+    color: #1375b9;
     font-size: 13px;
     text-transform: uppercase;
 }
@@ -1072,7 +1063,7 @@ p {
 }
 
 .course-page .side-navbar .course-nav::-webkit-scrollbar-thumb {
-    background-color: #3490dc;
+    background-color: #1375b9;
     /* color of the scroll thumb */
     border-radius: 20px;
     /* roundness of the scroll thumb */
@@ -1096,7 +1087,7 @@ p {
 }
 
 .course-page .side-navbar .course-nav li:hover a {
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .course-page .side-navbar .course-nav a::after {
@@ -1146,14 +1137,14 @@ p {
 
 .all-course-list .card-course .course-price {
     background: #c1d7e8;
-    color: #3490dc;
+    color: #1375b9;
     padding: 2px 10px;
     border-radius: 3px;
     font-size: 14px;
 }
 
 .all-course-list .card-course .course-price:hover {
-    background: #3490dc;
+    background: #1375b9;
     color: #ffffff;
 }
 
@@ -1165,7 +1156,7 @@ p {
 
 .all-course-list .card-course .start-course span {
     padding-left: 20px;
-    color: #3490dc;
+    color: #1375b9;
 }
 
 
@@ -1208,7 +1199,7 @@ p {
 }
 
 .course-details-page .booking-btn {
-    background: #3490dc;
+    background: #1375b9;
     color: #ffffff;
     width: 100%;
 }
@@ -1241,7 +1232,7 @@ p {
     margin-right: 15px;
     padding: 3px 10px;
     border-radius: 10px;
-    background: #3490dc;
+    background: #1375b9;
     color: #ffffff;
     font-weight: 600;
     text-decoration: none;
@@ -1254,8 +1245,8 @@ p {
 
 .student-classroom-btn:hover {
     background: transparent;
-    color: #3490dc;
-    border: 1px solid #3490dc;
+    color: #1375b9;
+    border: 1px solid #1375b9;
 }
 
 .tab-course-description .nav-link {
@@ -1267,12 +1258,12 @@ p {
 
 .tab-course-description .nav-link.active {
     border: 3px solid !important;
-    border-color: #ffffff #ffffff #3490dc !important;
-    color: #3490dc !important;
+    border-color: #ffffff #ffffff #1375b9 !important;
+    color: #1375b9 !important;
 }
 
 .tab-course-description .nav-link:hover {
-    color: #3490dc !important;
+    color: #1375b9 !important;
     border-color: #fff #fff #e9ecef !important;
 }
 
@@ -1282,7 +1273,7 @@ p {
 }
 
 .tab-content .nav-feature-icon h5 {
-    color: #3490dc;
+    color: #1375b9;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -1596,13 +1587,13 @@ p {
     color: #fff;
 }
 
-.page-footer .footer-logo {
+/* .page-footer .footer-logo {
     width: 70%;
 }
 
 .page-footer .footer-logo img {
     width: 100%;
-}
+} */
 
 .page-footer h5 {
     font-weight: 500;
@@ -1726,7 +1717,7 @@ p {
 }
 
 .page-footer .info-email .icon-mail2:hover {
-    background: #3490dc;
+    background: #1375b9;
     color: #fff;
 }
 
@@ -1773,7 +1764,7 @@ p {
 }
 
 .footer-sosmed a:hover {
-    background-color: #3490dc;
+    background-color: #1375b9;
     text-decoration: none;
 }
 
@@ -1810,7 +1801,7 @@ p {
 /*================= authentication section =========================*/
 
 .auth-container {
-    background: #3490dc;
+    background: #1375b9;
     display: grid;
     grid-template-columns: 1fr 1.2fr;
     border-radius: 5px;
@@ -1882,7 +1873,7 @@ p {
     border-bottom: 0;
     font-size: 20px;
     font-weight: 600;
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .auth-container .card {
@@ -1891,8 +1882,8 @@ p {
 }
 
 .auth-container .form-control {
-    border: 0;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
 }
 
 .auth-register .user-welcome {
@@ -1932,7 +1923,7 @@ p {
 }
 
 .auth-container .dont-have-account a:hover {
-    color: #3490dc;
+    color: #1375b9;
     background: #ffffff;
 }
 
@@ -1966,14 +1957,14 @@ p {
 
 .student-top-header h2 {
     font-size: 16px;
-    color: #3490dc;
+    color: #1375b9;
     margin-top: 8px;
 }
 
 .student-top-header h2 span i {
     font-size: 25px;
     color: #ffffff;
-    background: #3490dc;
+    background: #1375b9;
     border-radius: 50%;
     padding: 10px;
 }
@@ -2077,7 +2068,7 @@ p {
         height: 35px;
         border-radius: 50%;
         display: inline;
-        background: #3490dc;
+        background: #1375b9;
         color: #ffff;
         font-size: 20px;
         text-transform: uppercase;
@@ -2597,8 +2588,8 @@ p {
 }
 
 .post-comment-textarea .comment-arrow button {
-    background: #3490dc;
-    border: #3490dc;
+    background: #1375b9;
+    border: #1375b9;
     color: #fff;
     border-radius: 3px;
 }
@@ -2753,7 +2744,7 @@ p {
 
 .student-enroll-section .student-enroll-btn {
     padding: 3px 10px;
-    background: #3490dc;
+    background: #1375b9;
     color: #ffffff;
     border-radius: 5px;
     text-decoration: none;
@@ -2814,8 +2805,8 @@ p {
 }
 
 .student_exam_card .exam-submit-button {
-    background: #3490dc;
-    border: #3490dc;
+    background: #1375b9;
+    border: #1375b9;
     border-radius: 3px;
     color: #ffffff;
     font-weight: 500;
@@ -2900,13 +2891,13 @@ p {
 
 .MCQ-exam .owl-nav button span {
     background: #ffffff;
-    border: 2px solid #3490dc;
-    color: #3490dc;
+    border: 2px solid #1375b9;
+    color: #1375b9;
 }
 
 
 /* .MCQ-exam .owl-nav button:hover {
-    background: #3490dc !important;
+    background: #1375b9 !important;
 }
 
 .MCQ-exam .owl-nav button:hover i {
@@ -2915,7 +2906,7 @@ p {
 
 .MCQ-exam .owl-nav i {
     padding: 5px;
-    color: #3490dc;
+    color: #1375b9;
     font-size: 22px;
 } */
 
@@ -3005,7 +2996,7 @@ p {
     }
     /* mcq-dots */
     /* .mcq-question {
-        border-right: 2px solid #3490dc;
+        border-right: 2px solid #1375b9;
     } */
 }
 
@@ -3256,7 +3247,7 @@ p {
 }
 
 .show-booking-courses .single-details:nth-child(even) {
-    background: #3490dc1c;
+    background: #1375b91c;
 }
 
 .enroll_form .form-group {
@@ -3264,14 +3255,14 @@ p {
 }
 
 .enroll_form .form-control {
-    border: 0;
-    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+    border: 1px solid rgb(0 0 0 / 16%);
+    /* box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px; */
 }
 
 .enroll_form .enroll-form-control {
     width: 100%;
-    border: 0;
-    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+    border: 1px solid rgb(0 0 0 / 16%);
+    /* box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px; */
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     border-radius: 0.25rem;
@@ -3280,7 +3271,7 @@ p {
 }
 
 .enroll_form select.enroll-form-control:focus {
-    color: #3490dc;
+    color: #1375b9;
     border: 0;
 }
 
@@ -3329,7 +3320,7 @@ p {
 }
 
 .booking-processing .first-step .f-point {
-    background: #3490dc;
+    background: #1375b9;
 }
 
 .booking-processing .point,
@@ -3338,7 +3329,7 @@ p {
 }
 
 .verify-processing .first-step div {
-    background: #3490dc;
+    background: #1375b9;
 }
 
 .verify-processing .second-step div {
@@ -3421,7 +3412,7 @@ p {
 }
 
 .show-student-profile .single-details:nth-child(even) {
-    background: #3490dc1c;
+    background: #1375b91c;
 }
 
 
@@ -3465,13 +3456,13 @@ p {
 }
 
 .chatroom-section .chatroom-header a.active {
-    border-bottom: 5px double #3490dc;
-    color: #3490dc;
+    border-bottom: 5px double #1375b9;
+    color: #1375b9;
 }
 
 .chatroom-section .chatroom-title {
     padding: 4px 10px;
-    background: #3490dc94;
+    background: #1375b994;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
@@ -3502,7 +3493,7 @@ p {
 }
 
 .chatroom-section .chat-box::-webkit-scrollbar-thumb {
-    background-color: #3490dc;
+    background-color: #1375b9;
     border-radius: 20px;
 }
 
@@ -3545,7 +3536,7 @@ p {
 }
 
 .chatroom-section .your-message .message-send i {
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .your-message select {
@@ -3604,8 +3595,8 @@ p {
 .chatroom-section .create-new-file {
     padding: 30px 40px;
     font-size: 35px;
-    border: 2px solid #3490dc;
-    color: #3490dc;
+    border: 2px solid #1375b9;
+    color: #1375b9;
     position: relative;
     margin-top: 20px;
 }
@@ -3616,7 +3607,7 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #3490dc;
+    background-color: #1375b9;
     color: #ffffff;
     font-size: 15px;
     padding-top: 40px;
@@ -3641,7 +3632,7 @@ p {
 }
 
 .chatroom-section .single-file .user-files h4 a:hover {
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .chatroom-section .single-file .user-name-time {
@@ -3665,7 +3656,9 @@ p {
 .chatroom-section .hidden-lx {
     display: none;
 }
-
+.hidden{
+    display: none;
+}
 @media(max-width:767px) {
     .chatroom-section .single-file {
         margin-top: 5px;
@@ -3731,7 +3724,7 @@ p {
 }
 
 .messanger-section::-webkit-scrollbar-thumb {
-    background-color: #3490dc96;
+    background-color: #1375b996;
     border-radius: 20px;
 }
 
@@ -3806,7 +3799,7 @@ p {
 
 .chatroom-section .video-btn .view-video span {
     font-size: 50px;
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .chatroom-section .video-btn h5 {
@@ -3834,7 +3827,7 @@ p {
 
 .student-notification .notification-icon span {
     font-size: 28px;
-    color: #3490dc;
+    color: #1375b9;
     padding-top: 5px;
 }
 
@@ -3906,12 +3899,12 @@ p {
     padding-left: 10px;
     font-size: 13px;
     font-weight: 600;
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .notification-detail-date span {
     font-size: 11px;
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .input-home-search input:focus {
@@ -3931,7 +3924,7 @@ p {
 }
 
 .search-area-container .single-search-area li a {
-    color: #3490dc;
+    color: #1375b9;
     font-weight: 500;
 }
 
@@ -3950,7 +3943,7 @@ p {
 }
 
 .inquiry-section .inquiry-seen-btn {
-    background: #3490dc;
+    background: #1375b9;
     padding: 10px 8px;
     cursor: pointer;
     height: 120px;
@@ -3974,7 +3967,7 @@ p {
     width: 300px;
     background: #f0efef;
     padding: 10px;
-    border: 1px solid #3490dc;
+    border: 1px solid #1375b9;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -4005,9 +3998,9 @@ select.inquiry-input {
 .inquiry-section button {
     width: 100%;
     color: #ffffff;
-    background: #3490dc;
+    background: #1375b9;
     padding: 3px;
-    border: 1px solid #3490dc;
+    border: 1px solid #1375b9;
     border-radius: 4px;
 }
 
@@ -4050,7 +4043,7 @@ select.inquiry-input {
 }
 
 .call-us-section .call-us-seen-btn {
-    background: #3490dc;
+    background: #1375b9;
     padding: 10px 8px;
     cursor: pointer;
     height: 120px;
@@ -4074,7 +4067,7 @@ select.inquiry-input {
     width: 180px;
     background: #f0efef;
     padding: 5px;
-    border: 1px solid #3490dc;
+    border: 1px solid #1375b9;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: 1s;
     animation-delay: 2s;
@@ -4101,7 +4094,7 @@ select.inquiry-input {
 } */
 
 .call-us-section .call-us-details span {
-    color: #3490dc;
+    color: #1375b9;
     padding-right: 5px;
 }
 
@@ -4160,7 +4153,7 @@ select.inquiry-input {
 .blog-container .main-blog .blog-footer-user i {
     padding: 5px 8px 0;
     font-size: 30px;
-    background: #3490dc;
+    background: #1375b9;
     color: #fff;
     border-radius: 50%;
     margin-right: 10px;
@@ -4198,7 +4191,7 @@ select.inquiry-input {
 
 .blog-container .single-blog .blog-image {
     width: 100%;
-    /* height: 200px; */
+    height: 230px;
     overflow: hidden;
 }
 
@@ -4284,7 +4277,7 @@ select.inquiry-input {
 }
 
 .blogs-comment-container .commentter h5 {
-    color: #3490dc;
+    color: #1375b9;
     font-size: 16px;
     font-weight: 600;
     text-transform: capitalize;
@@ -4317,9 +4310,9 @@ select.inquiry-input {
 }
 
 .blogs-comment-container .comment-submit {
-    border: 1px solid #3490dc;
+    border: 1px solid #1375b9;
     color: #ffffff;
-    background: #3490dc;
+    background: #1375b9;
     border-radius: 4px;
     padding: 3px 15px;
 }
@@ -4392,7 +4385,7 @@ select.inquiry-input {
 
 .tutor-review-container .t-single-review .reviewer-icon {
     font-size: 25px;
-    color: #3490dc;
+    color: #1375b9;
     border-radius: 50%;
     border: 1px solid;
     overflow: hidden;
@@ -4400,7 +4393,7 @@ select.inquiry-input {
 }
 
 .tutor-review-container .t-single-review h4 {
-    color: #3490dc;
+    color: #1375b9;
     font-size: 16px;
     font-weight: 600;
     text-transform: capitalize;
@@ -4433,9 +4426,9 @@ select.inquiry-input {
 }
 
 .leave-review .comment-submit {
-    border: 1px solid #3490dc;
+    border: 1px solid #1375b9;
     color: #ffffff;
-    background: #3490dc;
+    background: #1375b9;
     border-radius: 4px;
     padding: 3px 15px;
 }
@@ -4456,7 +4449,7 @@ select.inquiry-input {
     float: right;
     font-size: 13px;
     border: 0;
-    background: #3490dc;
+    background: #1375b9;
     color: #ffffff;
     padding: 2px 10px;
     border-radius: 1px;
@@ -4546,14 +4539,14 @@ label.star:before {
 
 .tutor-top-header h2 {
     font-size: 16px;
-    color: #3490dc;
+    color: #1375b9;
     margin-top: 8px;
 }
 
 .tutor-top-header h2 span i {
     font-size: 25px;
     color: #ffffff;
-    background: #3490dc;
+    background: #1375b9;
     border-radius: 50%;
     padding: 10px;
 }
@@ -4615,7 +4608,7 @@ label.star:before {
 
 .tutor-side-navbar .nav-link i {
     padding-right: 10px;
-    color: #3490dc;
+    color: #1375b9;
 }
 
 .tutor-container {
@@ -4957,7 +4950,7 @@ label.star:before {
 
 .chapter-file-carousel .owl-nav i {
     padding: 10px;
-    color: #3490dc;
+    color: #1375b9;
     font-size: 24px;
 }
 
@@ -4972,7 +4965,7 @@ label.star:before {
 
 
 /* .chapter-file-carousel .owl-nav button:hover {
-    background: #3490dc;
+    background: #1375b9;
 }
 
 .chapter-file-carousel .owl-nav button:hover i {
@@ -5068,7 +5061,7 @@ label.star:before {
 
 .student-video-list a i {
     font-size: 50px;
-    color: #3490dc;
+    color: #1375b9;
     padding-top: 70px;
 }
 
@@ -5104,7 +5097,7 @@ label.star:before {
 
 .rcmd-single-vid a i {
     font-size: 40px;
-    color: #3490dc;
+    color: #1375b9;
     padding-top: 30px;
 }
 
@@ -5124,27 +5117,30 @@ label.star:before {
 
 /* shishir-css */
 .shishir-header .main-nav{
-    background: #c61a09;
+    background: #1375b9;
 }
 .shishir-header .navbar-nav .nav-link{
-    color: #fff;
-    font-size: 22px;
+    color: #ffffff;
+    font-size: 18px;
 }
 .auth-nav .navbar{
    float: right;
 }
+.dropdown-toggle::after{
+    vertical-align: 0 !important;
+}
 .auth-nav .btn-login{
     color: #000 !important;
-    border: 2px solid #c61a09;
+    border: 2px solid #1375b9;
     border-radius: 8px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     padding: 3px 20px !important;
 }
 .auth-nav .btn-register{
-    background: #c61a09;
+    background: #1375b9;
     color: #fff;
-    border: 2px #c61a09;
+    border: 2px #1375b9;
     border-radius: 8px;
     padding: 5px 20px !important;
     margin-left: -5px;
@@ -5163,13 +5159,13 @@ label.star:before {
 }
 .home-slider .owl-nav i{
     font-size: 30px;
-    color: #c61a09;
+    color: #1375b9;
 }
 
 /* video course */
 .video-course .post-thumb{
     margin: 30px;
-    border: 2px solid #c61a09;
+    border: 2px solid #1375b9;
     overflow: hidden;
     border-radius: 20px;
     height: 250px;
@@ -5184,21 +5180,26 @@ label.star:before {
 }
 .video-course .owl-nav i{
     font-size: 24px;
-    color: #c61a09;
+    color: #1375b9;
 }
 
 /* mock-test */
 .mocktest-container{
-    border: 2px solid #c61a09;
+    border: 2px solid #1375b9;
     border-radius: 20px;
     padding: 30px 30px 20px;
 }
 .mocktest-container .mock-heading{
     color: rgb(142, 141, 141);
 }
-.mock-premium{
-    color: #c61a09;
-    margin-bottom: 20px;
+.mock-premium .nav-link{
+    font-size: 24px;
+    font-weight: 500;
+    color: rgb(73, 73, 73);
+}
+.mock-premium .active{
+    color: #1375b9 !important;
+    border-bottom: 2px solid #1375b9 !important;
 }
 .mock-test .mock-btn{
     border: 2px solid;
@@ -5215,20 +5216,20 @@ label.star:before {
 }
 .mock-test .mock-btn1{
     margin-right: 10px;
-    background: #c61a09;
-    border-color: #c61a09;
+    background: #1375b9;
+    border-color: #1375b9;
     color: #fff;
 }
 .mock-test .mock-btn2{
     background: #fff;
-    border-color: #c61a09;
+    border-color: #1375b9;
     color: #000000;
 }
 
 /* home-blog */
 .home-blog .blog-section{
-    padding: 30px;
-    background: #c61a09;
+    /* padding: 30px; */
+    background: #ffffff;
     border-radius: 20px;
     margin-left: 50px;
     margin-right: 50px;
@@ -5237,7 +5238,7 @@ label.star:before {
 }
 @media (max-width: 541px){
     .home-blog .blog-section{
-        padding: 20px;
+        /* padding: 20px; */
         margin-left: 10px;
         margin-right: 10px;
         margin-bottom: 60px;
@@ -5255,10 +5256,10 @@ label.star:before {
     width: 100%;
 }
 .blog-section .blog-footer{
-    padding-top: 20px;
+    padding: 20px 30px 30px;
 }
 .blog-section .blog-footer p{
-    color: #fff;
+    color: #000000;
     font-size: 18px;
 } 
 .blog-section .blog-footer .blog-details{
@@ -5268,25 +5269,35 @@ label.star:before {
 .blog-section .blog-footer .blog-details a{
     padding: 10px 30px;
     border: 2px solid #ffffff;
-    background: #c61a09;
+    background: #1375b9;
     color: #ffffff;
     font-size: 24px;
     font-weight: 500;
     border-radius: 10px;
 }
-
+.home-blog-list img{
+    width: 100%;
+}
+.home-blog-btn{
+    position: absolute;
+    bottom: 30px;
+}
+.home-blog-btn .btn{
+    background: #1375b9;
+    color: #ffffff;
+}
 /* home-ebook */
 .home-ebook .ebook-section{
     padding: 10px;
     background: #ffffff;
     border-radius: 5px;
-    margin-left: 50px;
-    margin-right: 50px;
+    /* margin-left: 50px;
+    margin-right: 50px; */
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .ebook-section .ebook-header{
     width: 100%;
-    height: 300px;
+    height: 200px;
     overflow: hidden;
 }
 @media (max-width: 541px){
@@ -5317,30 +5328,56 @@ label.star:before {
 }
 .loksewa-today .loksewa-title{
     padding: 10px 20px;
-    background: #c61a09;
+    background: #1375b9;
     color: #fff;
     width: 340px;
 }
 .loksewa-today .loksewa-selector h2{
-    color: #c61a09;
+    color: #1375b9;
     display: inline;
     font-weight: 600;
 }
 .loksewa-today .loksewa-selector select{
-    border: 2px solid #c61a09;
+    border: 2px solid #1375b9;
     font-size: 20px;
     padding: 2px 10px;
     margin-left: 15px;
     margin-right: 15px;
 }
 .loksewa-content span{
-    border: 2px solid #c61a09;
+    border: 2px solid #1375b9;
     padding: 5px 10px;
 }
 .loksewa-content span.span-left{
-    color: #c61a09;
+    color: #1375b9;
     margin-right: 20px;
 }
 .loksewa-content span.span-right{
     margin-left: 20px;
+}
+
+.enquiry-popup{
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: #1375b9;
+    padding: 10px 10px 10px 15px;
+    z-index: 99;
+    border-radius: 50%;
+}
+.enquiry-popup a{
+    color: #ffffff;
+    font-size: 20px;
+}
+.enquiry-popup i{
+    padding-right: 5px;
+}
+.enquiry-popup span{
+    display: none;
+}
+.enquiry-popup:hover{
+    border-radius: 5px;
+}
+.enquiry-popup:hover span{
+    display: inline-block;
 }

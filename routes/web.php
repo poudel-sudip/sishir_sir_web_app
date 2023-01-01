@@ -24,10 +24,31 @@ Route::get('/artisancalls', function () {
 
 
 // Route::get('/', function(){ return view('welcome'); });
-Route::get('/', function(){ return view('front.index1'); });
+Route::get('/', 'App\Http\Controllers\FrontController@index');
+Route::get('/enquiry', 'App\Http\Controllers\FrontController@enquiry');
+Route::get('/enquiry/{courseslug}', 'App\Http\Controllers\FrontController@showCourseEnquiryForm');
 
 
+// front blogs
+Route::get('/blogs','App\Http\Controllers\Blog\BlogController@index');
+Route::get('/blogs/{slug}','App\Http\Controllers\Blog\BlogController@show');
+Route::post('/blogs/{blog}/comments/add','App\Http\Controllers\Blog\BlogController@addComments');
 
+//front public exams mgmt
+Route::get('/public-exams', 'App\Http\Controllers\PublicExamController@examlist');
+Route::get('/public-exams/{examslug}', 'App\Http\Controllers\PublicExamController@examform');
+Route::post('/public-exams/{examslug}/attempt', 'App\Http\Controllers\PublicExamController@examshow');
+Route::post('/public-exams/{examslug}/save', 'App\Http\Controllers\PublicExamController@examsave');
+
+//front public exams results
+Route::get('/results', 'App\Http\Controllers\PublicExamController@resultlist');
+Route::get('/results/{examslug}', 'App\Http\Controllers\PublicExamController@resultshow');
+
+//front premium exams section
+Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamController@premiumExamShow');
+
+//front ebooks
+Route::get('/books','App\Http\Controllers\FrontController@books');
 
 /*-------------------------------special routes section---------------------------*/
 
