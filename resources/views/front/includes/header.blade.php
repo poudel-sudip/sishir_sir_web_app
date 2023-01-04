@@ -9,11 +9,27 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         {{-- <a class="navbar-brand" href="#">Hidden brand</a> --}}
+        <?php
+          $menus = App\Models\Menu\MenuGroup::where('status','=','Active')->orderBy('order')->get();
+        ?>
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
           </li>
-          <li class="nav-item dropdown">
+          @foreach($menus as $mainmenu)
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">{{ucwords($mainmenu->name)}}</a>
+              <?php
+                $submenus = $mainmenu->subGroups()->where('status','=','Active')->orderBy('order')->get();
+              ?>
+              <ul class="dropdown-menu">
+                @foreach($submenus as $submenu)
+                  <li><a class="dropdown-item" href="/{{$mainmenu->slug}}/{{$submenu->slug}}">{{ucwords($submenu->name)}}</a></li>
+                @endforeach
+              </ul>
+            </li>
+          @endforeach
+          {{-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Loksewa Aayog</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="">list 1</a></li>
@@ -26,7 +42,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">University Update</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link" href="/books">Shishir's Book</a>
           </li>

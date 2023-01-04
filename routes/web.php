@@ -24,31 +24,6 @@ Route::get('/artisancalls', function () {
 
 
 // Route::get('/', function(){ return view('welcome'); });
-Route::get('/', 'App\Http\Controllers\FrontController@index');
-Route::get('/enquiry', 'App\Http\Controllers\FrontController@enquiry');
-Route::get('/enquiry/{courseslug}', 'App\Http\Controllers\FrontController@showCourseEnquiryForm');
-
-
-// front blogs
-Route::get('/blogs','App\Http\Controllers\Blog\BlogController@index');
-Route::get('/blogs/{slug}','App\Http\Controllers\Blog\BlogController@show');
-Route::post('/blogs/{blog}/comments/add','App\Http\Controllers\Blog\BlogController@addComments');
-
-//front public exams mgmt
-Route::get('/public-exams', 'App\Http\Controllers\PublicExamController@examlist');
-Route::get('/public-exams/{examslug}', 'App\Http\Controllers\PublicExamController@examform');
-Route::post('/public-exams/{examslug}/attempt', 'App\Http\Controllers\PublicExamController@examshow');
-Route::post('/public-exams/{examslug}/save', 'App\Http\Controllers\PublicExamController@examsave');
-
-//front public exams results
-Route::get('/results', 'App\Http\Controllers\PublicExamController@resultlist');
-Route::get('/results/{examslug}', 'App\Http\Controllers\PublicExamController@resultshow');
-
-//front premium exams section
-Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamController@premiumExamShow');
-
-//front ebooks
-Route::get('/books','App\Http\Controllers\FrontController@books');
 
 /*-------------------------------special routes section---------------------------*/
 
@@ -596,61 +571,6 @@ Route::post('/student/exam-bookings/{category}/cqc','App\Http\Controllers\Studen
 
 
 
-
-
-// Route::get('/admin/reports','App\Http\Controllers\Admin\Report\ReportController@index')->middleware('role:Admin');
-
-// Route::get('/admin/reports/course','App\Http\Controllers\Admin\Report\CourseReportController@index')->middleware('role:Admin');
-// Route::get('/admin/reports/course/all','App\Http\Controllers\Admin\Report\CourseReportController@courseReport')->middleware('role:Admin');
-// Route::get('/admin/reports/course/all/export','App\Http\Controllers\Admin\Report\CourseReportController@exportCategoryCourses')->middleware('role:Admin');
-// Route::get('/admin/reports/course/{course}','App\Http\Controllers\Admin\Report\CourseReportController@courseBatchReport')->middleware('role:Admin');
-// Route::get('/admin/reports/course/{course}/export','App\Http\Controllers\Admin\Report\CourseReportController@exportCourseBatches')->middleware('role:Admin');
-
-// Route::get('/admin/reports/batch','App\Http\Controllers\Admin\Report\BatchReportController@index')->middleware('role:Admin');
-// Route::get('/admin/reports/batch/{batch}/all','App\Http\Controllers\Admin\Report\BatchReportController@batchReport')->middleware('role:Admin');
-// Route::get('/admin/reports/batch/{batch}/all/export','App\Http\Controllers\Admin\Report\BatchReportController@exportBatchReport')->middleware('role:Admin');
-// Route::get('/admin/reports/batch/{batch}/pending','App\Http\Controllers\Admin\Report\BatchReportController@batchPendingReport')->middleware('role:Admin');
-// Route::get('/admin/reports/batch/{batch}/pending/export','App\Http\Controllers\Admin\Report\BatchReportController@exportBatchPendingReport')->middleware('role:Admin');
-// Route::get('/admin/reports/batch/{batch}/verified','App\Http\Controllers\Admin\Report\BatchReportController@batchVerifiedReport')->middleware('role:Admin');
-// Route::get('/admin/reports/batch/{batch}/verified/export','App\Http\Controllers\Admin\Report\BatchReportController@exportBatchVerifiedReport')->middleware('role:Admin');
-
-// Route::get('/admin/reports/user','App\Http\Controllers\Admin\Report\UserReportController@index')->middleware('role:Admin');
-// Route::get('/admin/reports/user/all','App\Http\Controllers\Admin\Report\UserReportController@userReport')->middleware('role:Admin');
-// Route::get('/admin/reports/user/all/export','App\Http\Controllers\Admin\Report\UserReportController@exportUsers')->middleware('role:Admin');
-
-// Route::post('/admin/reports/user/filterbydate','App\Http\Controllers\Admin\Report\UserReportController@filterUsersDate')->middleware('role:Admin');
-// Route::post('/admin/reports/user/filterbydistrict','App\Http\Controllers\Admin\Report\UserReportController@filterUsersDistrict')->middleware('role:Admin');
-// Route::post('/admin/reports/user/filterbyprovience','App\Http\Controllers\Admin\Report\UserReportController@filterUsersProvience')->middleware('role:Admin');
-// Route::post('/admin/reports/user/filterbycourse','App\Http\Controllers\Admin\Report\UserReportController@filterUsersCourse')->middleware('role:Admin');
-// Route::get('/admin/reports/user/filter/{key}/{value}/download','App\Http\Controllers\Admin\Report\UserReportController@filteredUsersDownload')->middleware('role:Admin');
-
-
-// Route::get('/admin/reports/tutor','App\Http\Controllers\Admin\Report\TutorReportController@index')->middleware('role:Admin');
-// Route::get('/admin/reports/tutor/all','App\Http\Controllers\Admin\Report\TutorReportController@tutorReport')->middleware('role:Admin');
-// Route::get('/admin/reports/tutor/all/export','App\Http\Controllers\Admin\Report\TutorReportController@exportTutors')->middleware('role:Admin');
-// Route::get('/admin/reports/tutor/{tutor}/batches','App\Http\Controllers\Admin\Report\TutorReportController@tutorBatchReport')->middleware('role:Admin');
-// Route::get('/admin/reports/tutor/{tutor}/batches/export','App\Http\Controllers\Admin\Report\TutorReportController@exportTutorBatches')->middleware('role:Admin');
-
-// Route::get('/admin/reports/booking','App\Http\Controllers\Admin\Report\BookingReportController@index')->middleware('role:Admin');
-// Route::get('/admin/reports/booking/all','App\Http\Controllers\Admin\Report\BookingReportController@bookingReport')->middleware('role:Admin');
-// Route::get('/admin/reports/booking/all/export','App\Http\Controllers\Admin\Report\BookingReportController@exportBookings')->middleware('role:Admin');
-// Route::post('/admin/reports/booking/daily','App\Http\Controllers\Admin\Report\BookingReportController@dailyBookingReport')->middleware('role:Admin');
-// Route::get('/admin/reports/booking/daily/{date}/export','App\Http\Controllers\Admin\Report\BookingReportController@dailyBookingsExport')->middleware('role:Admin');
-// Route::post('/admin/reports/booking/monthly','App\Http\Controllers\Admin\Report\BookingReportController@monthlyBookingReport')->middleware('role:Admin');
-// Route::get('/admin/reports/booking/monthly/{date}/export','App\Http\Controllers\Admin\Report\BookingReportController@monthlyBookingsExport')->middleware('role:Admin');
-// Route::post('/admin/reports/booking/yearly','App\Http\Controllers\Admin\Report\BookingReportController@yearlyBookingReport')->middleware('role:Admin');
-// Route::get('/admin/reports/booking/yearly/{date}/export','App\Http\Controllers\Admin\Report\BookingReportController@YearlyBookingsExport')->middleware('role:Admin');
-
-// Route::get('/admin/followup','App\Http\Controllers\Admin\FollowupController@index')->middleware('role:Admin');
-// Route::get('/admin/batch/{batch}/followup/all','App\Http\Controllers\Admin\FollowupController@followupAll')->middleware('role:Admin');
-// Route::get('/admin/batch/{batch}/followup/batch','App\Http\Controllers\Admin\FollowupController@followupBatch')->middleware('role:Admin');
-// Route::get('/admin/batch/{batch}/followup/followed','App\Http\Controllers\Admin\FollowupController@followupFollowed')->middleware('role:Admin');
-// Route::get('/admin/batch/{batch}/followup/all/download','App\Http\Controllers\Admin\FollowupController@downloadFollowupAll')->middleware('role:Admin');
-// Route::get('/admin/batch/{batch}/followup/batch/download','App\Http\Controllers\Admin\FollowupController@downloadFollowupBatch')->middleware('role:Admin');
-// Route::get('/admin/batch/{batch}/followup/followed/download','App\Http\Controllers\Admin\FollowupController@downloadFollowupFollowed')->middleware('role:Admin');
-// Route::get('/admin/batch/{batch}/{user}/followup','App\Http\Controllers\Admin\FollowupController@edit')->middleware('role:Admin');
-// Route::patch('/admin/batch/{batch}/{user}/followup','App\Http\Controllers\Admin\FollowupController@update')->middleware('role:Admin');
-
 // //admin manual bookings
 // Route::get('/admin/manual-booking','App\Http\Controllers\ManualBookingController@index')->middleware('role:Admin');
 // Route::get('/admin/manual-booking/{mbooking}/edit','App\Http\Controllers\ManualBookingController@edit')->middleware('role:Admin');
@@ -671,23 +591,6 @@ Route::post('/student/exam-bookings/{category}/cqc','App\Http\Controllers\Studen
 // Route::put('/admin/tutors/{tutor}/review/{review}/{status}','App\Http\Controllers\Admin\tutors\TutorController@updateReviews')->middleware('role:Admin');
 // Route::delete('/admin/tutors/{tutor}/review/{review}/delete','App\Http\Controllers\Admin\tutors\TutorController@destroyReview')->middleware('role:Admin');
 
-// Route::get('/admin/tutors/{tutor}/courses', 'App\Http\Controllers\Admin\tutors\TutorCourseController@index')->middleware('role:Admin');
-// Route::get('/admin/tutors/{tutor}/courses/{course}', 'App\Http\Controllers\Admin\tutors\TutorCourseController@show')->middleware('role:Admin');
-// Route::get('/admin/tutors/{tutor}/courses/{course}/edit', 'App\Http\Controllers\Admin\tutors\TutorCourseController@edit')->middleware('role:Admin');
-// Route::patch('/admin/tutors/{tutor}/courses/{course}', 'App\Http\Controllers\Admin\tutors\TutorCourseController@update')->middleware('role:Admin');
-// Route::delete('/admin/tutors/{tutor}/courses/{course}', 'App\Http\Controllers\Admin\tutors\TutorCourseController@destroy')->middleware('role:Admin');
-
-// Route::get('/admin/tutors/{tutor}/courses/{course}/bookings', 'App\Http\Controllers\Admin\tutors\TutorCourseBookingController@index')->middleware('role:Admin');
-// Route::get('/admin/tutors/{tutor}/courses/{course}/bookings/{booking}', 'App\Http\Controllers\Admin\tutors\TutorCourseBookingController@show')->middleware('role:Admin');
-// Route::get('/admin/tutors/{tutor}/courses/{course}/bookings/{booking}/edit', 'App\Http\Controllers\Admin\tutors\TutorCourseBookingController@edit')->middleware('role:Admin');
-// Route::patch('/admin/tutors/{tutor}/courses/{course}/bookings/{booking}', 'App\Http\Controllers\Admin\tutors\TutorCourseBookingController@update')->middleware('role:Admin');
-// Route::delete('/admin/tutors/{tutor}/courses/{course}/bookings/{booking}', 'App\Http\Controllers\Admin\tutors\TutorCourseBookingController@destroy')->middleware('role:Admin');
-
-// Route::get('/admin/tutors/{tutor}/courses/{course}/payments', 'App\Http\Controllers\Admin\tutors\TutorPaymentController@index')->middleware('role:Admin');
-// Route::patch('/admin/tutors/{tutor}/courses/{course}/payments/{pay}', 'App\Http\Controllers\Admin\tutors\TutorPaymentController@update')->middleware('role:Admin');
-
-
-
 
 // Route::get('/admin/enquiry-form','App\Http\Controllers\Leads\EnquiryController@getEnquiryFormList')->middleware('role:Admin');
 // Route::post('/admin/enquiry-form','App\Http\Controllers\Leads\EnquiryController@saveEnquiryForm')->middleware('role:Admin');
@@ -699,112 +602,6 @@ Route::post('/student/exam-bookings/{category}/cqc','App\Http\Controllers\Studen
 // Route::get('/admin/free-videos/create','App\Http\Controllers\Admin\FreeVideoController@create')->middleware('role:Admin');
 // Route::post('/admin/free-videos','App\Http\Controllers\Admin\FreeVideoController@store')->middleware('role:Admin');
 // Route::delete('/admin/free-videos/{video}','App\Http\Controllers\Admin\FreeVideoController@destroy')->middleware('role:Admin');
-
-// //admin zoom meetings management
-// Route::get('/admin/zoom/meetings','App\Http\Controllers\Zoom\MeetingController@list')->middleware('role:Admin');
-// Route::get('/admin/zoom/meetings/create','App\Http\Controllers\Zoom\MeetingController@add')->middleware('role:Admin');
-// Route::post('/admin/zoom/meetings','App\Http\Controllers\Zoom\MeetingController@create')->middleware('role:Admin');
-// Route::get('/admin/zoom/meetings/{id}','App\Http\Controllers\Zoom\MeetingController@get')->middleware('role:Admin');
-// Route::get('/admin/zoom/meetings/{id}/edit','App\Http\Controllers\Zoom\MeetingController@edit')->middleware('role:Admin');
-// Route::patch('/admin/zoom/meetings/{id}','App\Http\Controllers\Zoom\MeetingController@update')->middleware('role:Admin');
-// Route::delete('/admin/zoom/meetings/{id}','App\Http\Controllers\Zoom\MeetingController@delete')->middleware('role:Admin');
-
-
-// //assignment admin mgmt
-// Route::get('/admin/batches/{batch}/assignments','App\Http\Controllers\Admin\AssignmentController@index')->middleware('role:Admin');
-// Route::get('/admin/batches/{batch}/assignments/create','App\Http\Controllers\Admin\AssignmentController@create')->middleware('role:Admin');
-// Route::post('/admin/batches/{batch}/assignments','App\Http\Controllers\Admin\AssignmentController@store')->middleware('role:Admin');
-// Route::get('/admin/batches/{batch}/assignments/{assignment}/answers','App\Http\Controllers\Admin\AssignmentController@answers')->middleware('role:Admin');
-// Route::get('/admin/batches/{batch}/assignments/{assignment}/answers/{answer}','App\Http\Controllers\Admin\AssignmentController@answerview')->middleware('role:Admin');
-// Route::post('/admin/batches/{batch}/assignments/{assignment}/answers/{answer}','App\Http\Controllers\Admin\AssignmentController@remarks')->middleware('role:Admin');
-// Route::delete('/admin/batches/{batch}/assignments/{assignment}','App\Http\Controllers\Admin\AssignmentController@destroy')->middleware('role:Admin');
-
-
-// //written exams admin
-// Route::get('/admin/batches/{batch}/written-exams','App\Http\Controllers\Admin\Exams\WrittenExamController@index')->middleware('role:Admin');
-// Route::get('/admin/batches/{batch}/written-exams/create','App\Http\Controllers\Admin\Exams\WrittenExamController@create')->middleware('role:Admin');
-// Route::post('/admin/batches/{batch}/written-exams','App\Http\Controllers\Admin\Exams\WrittenExamController@store')->middleware('role:Admin');
-// Route::get('/admin/batches/{batch}/written-exams/{exam}/solutions','App\Http\Controllers\Admin\Exams\WrittenExamController@solutions')->middleware('role:Admin');
-// Route::get('/admin/batches/{batch}/written-exams/{exam}/solutions/{solution}','App\Http\Controllers\Admin\Exams\WrittenExamController@solutionview')->middleware('role:Admin');
-// Route::post('/admin/batches/{batch}/written-exams/{exam}/solutions/{solution}','App\Http\Controllers\Admin\Exams\WrittenExamController@remarks')->middleware('role:Admin');
-// Route::delete('/admin/batches/{batch}/written-exams/{exam}','App\Http\Controllers\Admin\Exams\WrittenExamController@destroy')->middleware('role:Admin');
-
-// //schedules admin
-// Route::get('/admin/batches/{batch}/schedules','App\Http\Controllers\classroom\ScheduleController@index')->middleware('role:Admin');
-// Route::get('/admin/batches/{batch}/schedules/create','App\Http\Controllers\classroom\ScheduleController@create')->middleware('role:Admin');
-// Route::post('/admin/batches/{batch}/schedules','App\Http\Controllers\classroom\ScheduleController@store')->middleware('role:Admin');
-// Route::delete('/admin/batches/{batch}/schedules/{schedule}','App\Http\Controllers\classroom\ScheduleController@destroy')->middleware('role:Admin');
-
-
-
-
-
-// //admin accounts mgmt
-// Route::get('/admin/accounts/incomes','App\Http\Controllers\Admin\Accounts\IncomeController@index')->middleware('role:Admin');
-// Route::get('/admin/accounts/incomes/courses/add','App\Http\Controllers\Admin\Accounts\IncomeController@addCourseIncome')->middleware('role:Admin');
-// Route::get('/admin/accounts/incomes/others/add','App\Http\Controllers\Admin\Accounts\IncomeController@addOtherIncome')->middleware('role:Admin');
-// Route::post('/admin/accounts/incomes/courses','App\Http\Controllers\Admin\Accounts\IncomeController@storeCourseIncome')->middleware('role:Admin');
-// Route::post('/admin/accounts/incomes/others','App\Http\Controllers\Admin\Accounts\IncomeController@storeOtherIncome')->middleware('role:Admin');
-// Route::delete('/admin/accounts/incomes/{income}','App\Http\Controllers\Admin\Accounts\IncomeController@destroy')->middleware('role:Admin');
-
-// Route::get('/admin/accounts/expenses','App\Http\Controllers\Admin\Accounts\ExpenseController@index')->middleware('role:Admin');
-// Route::get('/admin/accounts/expenses/tutor','App\Http\Controllers\Admin\Accounts\ExpenseController@addTutorSalary')->middleware('role:Admin');
-// Route::post('/admin/accounts/expenses/tutor','App\Http\Controllers\Admin\Accounts\ExpenseController@storeTutorSalary')->middleware('role:Admin');
-// Route::get('/admin/accounts/expenses/staff','App\Http\Controllers\Admin\Accounts\ExpenseController@addStaffSalary')->middleware('role:Admin');
-// Route::post('/admin/accounts/expenses/staff','App\Http\Controllers\Admin\Accounts\ExpenseController@storeStaffSalary')->middleware('role:Admin');
-// Route::get('/admin/accounts/expenses/refund','App\Http\Controllers\Admin\Accounts\ExpenseController@addRefund')->middleware('role:Admin');
-// Route::post('/admin/accounts/expenses/refund','App\Http\Controllers\Admin\Accounts\ExpenseController@storeRefund')->middleware('role:Admin');
-// Route::get('/admin/accounts/expenses/others','App\Http\Controllers\Admin\Accounts\ExpenseController@addOtherExpenses')->middleware('role:Admin');
-// Route::post('/admin/accounts/expenses/others','App\Http\Controllers\Admin\Accounts\ExpenseController@storeOtherExpenses')->middleware('role:Admin');
-// Route::delete('/admin/accounts/expenses/{expense}','App\Http\Controllers\Admin\Accounts\ExpenseController@destroy')->middleware('role:Admin');
-
-// Route::get('/admin/accounts/reports','App\Http\Controllers\Admin\Accounts\ReportController@index')->middleware('role:Admin');
-
-// Route::get('/admin/accounts/reports/incomes','App\Http\Controllers\Admin\Accounts\IncomeReportController@index')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/incomes/course','App\Http\Controllers\Admin\Accounts\IncomeReportController@courseIncomeReport')->middleware('role:Admin');
-// Route::get('/admin/accounts/reports/incomes/others','App\Http\Controllers\Admin\Accounts\IncomeReportController@otherIncomeReport')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/incomes/daily','App\Http\Controllers\Admin\Accounts\IncomeReportController@dailyIncomeReport')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/incomes/monthly','App\Http\Controllers\Admin\Accounts\IncomeReportController@monthlyIncomeReport')->middleware('role:Admin');
-// Route::get('/admin/accounts/reports/incomes/deleted','App\Http\Controllers\Admin\Accounts\IncomeReportController@deletedIncomeReport')->middleware('role:Admin');
-// Route::patch('/admin/accounts/reports/incomes/deleted/{income}','App\Http\Controllers\Admin\Accounts\IncomeReportController@restoreIncomeReport')->middleware('role:Admin');
-
-// Route::get('/admin/accounts/reports/expenses','App\Http\Controllers\Admin\Accounts\ExpenseReportController@index')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/expenses/tutor','App\Http\Controllers\Admin\Accounts\ExpenseReportController@tutorExpenseReport')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/expenses/course','App\Http\Controllers\Admin\Accounts\ExpenseReportController@courseExpenseReport')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/expenses/staff','App\Http\Controllers\Admin\Accounts\ExpenseReportController@staffExpenseReport')->middleware('role:Admin');
-// Route::get('/admin/accounts/reports/expenses/others','App\Http\Controllers\Admin\Accounts\ExpenseReportController@otherExpenseReport')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/expenses/daily','App\Http\Controllers\Admin\Accounts\ExpenseReportController@dailyExpenseReport')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/expenses/monthly','App\Http\Controllers\Admin\Accounts\ExpenseReportController@monthlyExpenseReport')->middleware('role:Admin');
-// Route::get('/admin/accounts/reports/expenses/deleted','App\Http\Controllers\Admin\Accounts\ExpenseReportController@deletedExpenseReport')->middleware('role:Admin');
-// Route::patch('/admin/accounts/reports/expenses/deleted/{expense}','App\Http\Controllers\Admin\Accounts\ExpenseReportController@restoreExpenseReport')->middleware('role:Admin');
-
-// Route::get('/admin/accounts/reports/gross','App\Http\Controllers\Admin\Accounts\GrossReportController@index')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/gross/course','App\Http\Controllers\Admin\Accounts\GrossReportController@courseReport')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/gross/daily','App\Http\Controllers\Admin\Accounts\GrossReportController@dailyReport')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/gross/monthly','App\Http\Controllers\Admin\Accounts\GrossReportController@monthlyReport')->middleware('role:Admin');
-// Route::post('/admin/accounts/reports/gross/yearly','App\Http\Controllers\Admin\Accounts\GrossReportController@yearlyReport')->middleware('role:Admin');
-
-// //admin collections 
-// Route::get('/admin/accounts/collections','App\Http\Controllers\Admin\Accounts\ReportController@collections')->middleware('role:Admin');
-
-
-// //admin vendor routes
-// Route::get('/admin/vendor','App\Http\Controllers\Admin\Vendors\VendorController@index')->middleware('role:Admin');
-// Route::get('/admin/vendor/create','App\Http\Controllers\Admin\Vendors\VendorController@create')->middleware('role:Admin');
-// Route::post('/admin/vendor','App\Http\Controllers\Admin\Vendors\VendorController@store')->middleware('role:Admin');
-// Route::get('/admin/vendor/{vendor}','App\Http\Controllers\Admin\Vendors\VendorController@show')->middleware('role:Admin');
-// Route::get('/admin/vendor/{vendor}/edit','App\Http\Controllers\Admin\Vendors\VendorController@edit')->middleware('role:Admin');
-// Route::patch('/admin/vendor/{vendor}','App\Http\Controllers\Admin\Vendors\VendorController@update')->middleware('role:Admin');
-// Route::delete('/admin/vendor/{vendor}','App\Http\Controllers\Admin\Vendors\VendorController@destroy')->middleware('role:Admin');
-
-// //admin vendor bookings
-// Route::get('/admin/vendor/{vendor}/bookings/course','App\Http\Controllers\Admin\Vendors\BookingController@courseBookings')->middleware('role:Admin');
-// Route::get('/admin/vendor/{vendor}/bookings/exam','App\Http\Controllers\Admin\Vendors\BookingController@examBookings')->middleware('role:Admin');
-// Route::get('/admin/vendor/{vendor}/bookings/video','App\Http\Controllers\Admin\Vendors\BookingController@videoBookings')->middleware('role:Admin');
-// Route::get('/admin/vendor/{vendor}/bookings/ebook','App\Http\Controllers\Admin\Vendors\BookingController@ebookBookings')->middleware('role:Admin');
-
-// //admin vendor users
-// Route::get('/admin/vendor/{vendor}/students','App\Http\Controllers\Admin\Vendors\VendorController@students')->middleware('role:Admin');
 
 
 // //admin video course categories
@@ -879,78 +676,6 @@ Route::post('/student/exam-bookings/{category}/cqc','App\Http\Controllers\Studen
 
 
 
-
-// Route::get('/admin/branches','App\Http\Controllers\Admin\Branch\BranchController@index')->middleware('role:Admin');
-// Route::get('/admin/branches/create','App\Http\Controllers\Admin\Branch\BranchController@create')->middleware('role:Admin');
-// Route::post('/admin/branches','App\Http\Controllers\Admin\Branch\BranchController@store')->middleware('role:Admin');
-// Route::get('/admin/branches/{branch}','App\Http\Controllers\Admin\Branch\BranchController@show')->middleware('role:Admin');
-// Route::get('/admin/branches/{branch}/edit','App\Http\Controllers\Admin\Branch\BranchController@edit')->middleware('role:Admin');
-// Route::patch('/admin/branches/{branch}','App\Http\Controllers\Admin\Branch\BranchController@update')->middleware('role:Admin');
-// Route::delete('/admin/branches/{branch}','App\Http\Controllers\Admin\Branch\BranchController@destroy')->middleware('role:Admin');
-
-// //vendor wise bookings in admin
-// Route::get('/admin/vendor-course-bookings','App\Http\Controllers\Admin\Vendors\BookingController@allVendorsCourseBookings')->middleware('role:Admin');
-// Route::get('/admin/vendor-video-bookings','App\Http\Controllers\Admin\Vendors\BookingController@allVendorsVideoBookings')->middleware('role:Admin');
-// Route::get('/admin/vendor-ebook-bookings','App\Http\Controllers\Admin\Vendors\BookingController@allVendorsEbookBookings')->middleware('role:Admin');
-// Route::get('/admin/vendor-exam-bookings','App\Http\Controllers\Admin\Vendors\BookingController@allVendorsExamBookings')->middleware('role:Admin');
-
-// //admin publisher mgmt 
-// Route::get('/admin/publishers','App\Http\Controllers\Admin\Publisher\PublisherController@index')->middleware('role:Admin');
-// Route::get('/admin/publishers/create','App\Http\Controllers\Admin\Publisher\PublisherController@create')->middleware('role:Admin');
-// Route::post('/admin/publishers','App\Http\Controllers\Admin\Publisher\PublisherController@store')->middleware('role:Admin');
-// Route::get('/admin/publishers/{publisher}','App\Http\Controllers\Admin\Publisher\PublisherController@show')->middleware('role:Admin');
-// Route::get('/admin/publishers/{publisher}/edit','App\Http\Controllers\Admin\Publisher\PublisherController@edit')->middleware('role:Admin');
-// Route::patch('/admin/publishers/{publisher}','App\Http\Controllers\Admin\Publisher\PublisherController@update')->middleware('role:Admin');
-// Route::delete('/admin/publishers/{publisher}','App\Http\Controllers\Admin\Publisher\PublisherController@destroy')->middleware('role:Admin');
-
-// //admin publisher book mgmt
-// Route::get('/admin/publishers/{publisher}/books','App\Http\Controllers\Admin\Publisher\BookController@index')->middleware('role:Admin');
-// Route::get('/admin/publishers/{publisher}/books/{ebook}','App\Http\Controllers\Admin\Publisher\BookController@show')->middleware('role:Admin');
-// Route::delete('/admin/publishers/{publisher}/books/{ebook}','App\Http\Controllers\Admin\Publisher\BookController@destroy')->middleware('role:Admin');
-
-
-// //admin dynamic form category mgmt
-// Route::get('/admin/dynamic-forms/categories','App\Http\Controllers\Admin\Forms\CategoryController@index')->middleware('role:Admin');
-// Route::get('/admin/dynamic-forms/categories/create','App\Http\Controllers\Admin\Forms\CategoryController@create')->middleware('role:Admin');
-// Route::post('/admin/dynamic-forms/categories','App\Http\Controllers\Admin\Forms\CategoryController@store')->middleware('role:Admin');
-// Route::get('/admin/dynamic-forms/categories/{category}/edit','App\Http\Controllers\Admin\Forms\CategoryController@edit')->middleware('role:Admin');
-// Route::get('/admin/dynamic-forms/categories/{category}','App\Http\Controllers\Admin\Forms\CategoryController@show')->middleware('role:Admin');
-// Route::post('/admin/dynamic-forms/categories/{category}/reset','App\Http\Controllers\Admin\Forms\CategoryController@reset')->middleware('role:Admin');
-// Route::patch('/admin/dynamic-forms/categories/{category}','App\Http\Controllers\Admin\Forms\CategoryController@update')->middleware('role:Admin');
-// Route::delete('/admin/dynamic-forms/categories/{category}','App\Http\Controllers\Admin\Forms\CategoryController@destroy')->middleware('role:Admin');
-
-// //admin dynamic form sub category mgmt
-// Route::get('/admin/dynamic-forms/categories/{category}/sub-categories','App\Http\Controllers\Admin\Forms\SubCategoryController@index')->middleware('role:Admin');
-// Route::get('/admin/dynamic-forms/categories/{category}/sub-categories/create','App\Http\Controllers\Admin\Forms\SubCategoryController@create')->middleware('role:Admin');
-// Route::post('/admin/dynamic-forms/categories/{category}/sub-categories','App\Http\Controllers\Admin\Forms\SubCategoryController@store')->middleware('role:Admin');
-// Route::delete('/admin/dynamic-forms/categories/{category}/sub-categories/{subCategory}','App\Http\Controllers\Admin\Forms\SubCategoryController@destroy')->middleware('role:Admin');
-
-// // //admin dynamic form applicants
-// Route::get('/admin/dynamic-forms/categories/{category}/applicants','App\Http\Controllers\Admin\Forms\ApplicantController@index')->middleware('role:Admin');
-// Route::get('/admin/dynamic-forms/categories/{category}/applicants/upload','App\Http\Controllers\Admin\Forms\ApplicantController@uploadForm')->middleware('role:Admin');
-// Route::post('/admin/dynamic-forms/categories/{category}/applicants/filter','App\Http\Controllers\Admin\Forms\ApplicantController@filterApplicants')->middleware('role:Admin');
-// Route::get('/admin/dynamic-forms/categories/{category}/applicants/export/{query}','App\Http\Controllers\Admin\Forms\ApplicantController@exportFilteredApplicants')->middleware('role:Admin');
-// Route::get('/admin/dynamic-forms/categories/{category}/applicants/export','App\Http\Controllers\Admin\Forms\ApplicantController@exportApplicants')->middleware('role:Admin');
-// Route::post('/admin/dynamic-forms/categories/{category}/applicants/import','App\Http\Controllers\Admin\Forms\ApplicantController@importApplicants')->middleware('role:Admin');
-// Route::get('/admin/dynamic-forms/categories/{category}/applicants/{applicant}','App\Http\Controllers\Admin\Forms\ApplicantController@show')->middleware('role:Admin');
-// Route::patch('/admin/dynamic-forms/categories/{category}/applicants/{applicant}','App\Http\Controllers\Admin\Forms\ApplicantController@update')->middleware('role:Admin');
-// Route::delete('/admin/dynamic-forms/categories/{category}/applicants/{applicant}','App\Http\Controllers\Admin\Forms\ApplicantController@destroy')->middleware('role:Admin');
-
-// // //admin team assign for dynamic form applicants
-// Route::get('/admin/dynamic-forms/categories/{category}/team-assign','App\Http\Controllers\Admin\Forms\TeamAssignController@index')->middleware('role:Admin');
-// Route::get('/admin/dynamic-forms/categories/{category}/team-assign/create','App\Http\Controllers\Admin\Forms\TeamAssignController@create')->middleware('role:Admin');
-// Route::post('/admin/dynamic-forms/categories/{category}/team-assign','App\Http\Controllers\Admin\Forms\TeamAssignController@store')->middleware('role:Admin');
-// Route::delete('/admin/dynamic-forms/categories/{category}/team-assign/{assign}','App\Http\Controllers\Admin\Forms\TeamAssignController@destroy')->middleware('role:Admin');
-
-// //admin dynamic forms groups
-// Route::get('/admin/dynamic-forms/groups','App\Http\Controllers\Admin\Forms\GroupController@index')->middleware('role:Admin');
-// Route::post('/admin/dynamic-forms/groups','App\Http\Controllers\Admin\Forms\GroupController@store')->middleware('role:Admin');
-// Route::patch('/admin/dynamic-forms/groups','App\Http\Controllers\Admin\Forms\GroupController@update')->middleware('role:Admin');
-// Route::delete('/admin/dynamic-forms/groups/{group}','App\Http\Controllers\Admin\Forms\GroupController@destroy')->middleware('role:Admin');
-// Route::get('/admin/dynamic-forms/groups/{group}/forms','App\Http\Controllers\Admin\Forms\GroupController@forms')->middleware('role:Admin');
-// Route::get('/admin/dynamic-forms/groups/{group}/applicants','App\Http\Controllers\Admin\Forms\GroupController@applicants')->middleware('role:Admin');
-
-
 // //admin orientation management
 // Route::get('/admin/orientations','App\Http\Controllers\Admin\Orientation\OrientationController@index')->middleware('role:Admin');
 // Route::get('/admin/orientations/create','App\Http\Controllers\Admin\Orientation\OrientationController@create')->middleware('role:Admin');
@@ -964,27 +689,42 @@ Route::post('/student/exam-bookings/{category}/cqc','App\Http\Controllers\Studen
 // Route::get('/admin/orientations/{orientation}/participants','App\Http\Controllers\Admin\Orientation\ParticipantController@index')->middleware('role:Admin');
 // Route::delete('/admin/orientations/{orientation}/participants/{participant}','App\Http\Controllers\Admin\Orientation\ParticipantController@destroy')->middleware('role:Admin');
 
-// //admin teams mgmt
-// Route::get('/admin/teams','App\Http\Controllers\Admin\Teams\TeamController@index')->middleware('role:Admin');
-// Route::get('/admin/teams/create','App\Http\Controllers\Admin\Teams\TeamController@create')->middleware('role:Admin');
-// Route::post('/admin/teams','App\Http\Controllers\Admin\Teams\TeamController@store')->middleware('role:Admin');
-// Route::get('/admin/teams/{team}','App\Http\Controllers\Admin\Teams\TeamController@show')->middleware('role:Admin');
-// Route::get('/admin/teams/{team}/edit','App\Http\Controllers\Admin\Teams\TeamController@edit')->middleware('role:Admin');
-// Route::patch('/admin/teams/{team}','App\Http\Controllers\Admin\Teams\TeamController@update')->middleware('role:Admin');
-// Route::delete('/admin/teams/{team}','App\Http\Controllers\Admin\Teams\TeamController@destroy')->middleware('role:Admin');
 
 
 
 
+/********************************************************************************************************************************************************************************************** */
+/*--------------------------Front Routes -----------------------------------------------------*/
+
+Route::get('/', 'App\Http\Controllers\FrontController@index');
+Route::get('/enquiry', 'App\Http\Controllers\FrontController@enquiry');
+Route::get('/enquiry/{courseslug}', 'App\Http\Controllers\FrontController@showCourseEnquiryForm');
+
+// front blogs
+Route::get('/blogs','App\Http\Controllers\Blog\BlogController@index');
+Route::get('/blogs/{slug}','App\Http\Controllers\Blog\BlogController@show');
+Route::post('/blogs/{blog}/comments/add','App\Http\Controllers\Blog\BlogController@addComments');
+
+//front public exams mgmt
+Route::get('/public-exams', 'App\Http\Controllers\PublicExamController@examlist');
+Route::get('/public-exams/{examslug}', 'App\Http\Controllers\PublicExamController@examform');
+Route::post('/public-exams/{examslug}/attempt', 'App\Http\Controllers\PublicExamController@examshow');
+Route::post('/public-exams/{examslug}/save', 'App\Http\Controllers\PublicExamController@examsave');
+
+//front public exams results
+Route::get('/results', 'App\Http\Controllers\PublicExamController@resultlist');
+Route::get('/results/{examslug}', 'App\Http\Controllers\PublicExamController@resultshow');
+
+//front premium exams section
+Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamController@premiumExamShow');
+
+//front ebooks
+Route::get('/books','App\Http\Controllers\FrontController@books');
+
+//front menu details
+Route::get('/{groupslug}/{menuslug}','App\Http\Controllers\FrontController@getMenuItemList');
+Route::get('/{groupslug}/{menuslug}/{itemslug}','App\Http\Controllers\FrontController@getMenuItemDetail');
 
 
 
-
-
-
-
-
-
-
-
-
+/******************************************************************************************************************************* */

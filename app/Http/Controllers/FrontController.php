@@ -21,50 +21,84 @@ use App\Models\OpenExams\OpenExam;
 use App\Models\ExamHall\ExamHallCategories;
 use App\Models\Blog;
 use App\Models\Books\Book;
+use App\Models\Menu\MenuGroup;
+use App\Models\Menu\MenuSubGroup;
+use App\Models\Menu\MenuItem;
 
 class FrontController extends Controller
 {
     public function index()
     {
-        $categories=Categories::all()->where('status','=','Active')->sortBy('order');
-        $headercategories=$categories;
-        $sliders=Slider::all()->sortBy('order');
-        $popularCourses=Course::where('isPopular','=','Yes')->where('status','=','Active')->orderBy('order')->take(10)->get();
-        $testimonials=Testimonial::all()->take(10);
-        // $tutors=Tutor::where('status','=','Active')->where('rating','>',0)->get()->sortByDesc('rating')->take(10);
-        // $videos=FreeVideo::all()->sortByDesc('id')->take(10);
-        $runningBatches=Batch::all()->where('status','=','Running')->take(8)->sortByDesc('created_at');
-        $homepopup=HomePopup::where('status','=','Active')->first();
-        $orientations = Orientation::whereDate('date','>=',date("Y-m-d"))->where('status','=','Active')->get();
-        $premiumExams=ExamHallCategories::where('status','Active')->get();
-        $exams=OpenExam::where('result_status','=','Unpublished')->get()->sortByDesc('id');
-        $last_blog=Blog::where('status','=','Published')->orderByDesc('created_at')->first();
-        $blogs=Blog::where('status','=','Published')->get()->sortByDesc('created_at');
-        $books=Book::all()->take(4);
+        // $categories=Categories::all()->where('status','=','Active')->sortBy('order');
+        // $popularCourses=Course::where('isPopular','=','Yes')->where('status','=','Active')->orderBy('order')->take(10)->get();
+        // $runningBatches=Batch::all()->where('status','=','Running')->take(8)->sortByDesc('created_at');
+        // $orientations = Orientation::whereDate('date','>=',date("Y-m-d"))->where('status','=','Active')->get();
 
-        return view('front.index',[
-            'categories'=>$categories,
-            'sliders'=>$sliders,
-            'popularCourses'=>$popularCourses,
-            'testimonials'=>$testimonials,
-            'headercategories'=>$headercategories,
-            // 'tutors'=>$tutors,
-            // 'videos'=>$videos,
-            'runningBatches'=>$runningBatches,
-            'homepopup'=>$homepopup,
-            'proviences'=>Provience::all()->sortBy('name'),
-            'orientations' => $orientations,
-            'exams' => $exams,
-            'premiumExams' => $premiumExams,
-            'last_blog' => $last_blog,
-            'blogs' => $blogs,
-            'books' => $books,
-        ]);
+        $data = [];
+        $data['sliders'] = Slider::all()->sortBy('order');
+        $data['premiumExams'] = ExamHallCategories::where('status','Active')->get();
+        $data['exams'] = OpenExam::where('result_status','=','Unpublished')->get()->sortByDesc('id');
+        $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('created_at')->first();
+        $data['blogs'] = Blog::where('status','=','Published')->get()->sortByDesc('created_at');
+        $data['books'] = Book::where('status','=','Active')->get()->sortBy('order');
+        $data['testimonials'] = Testimonial::all()->sortByDesc('created_at')->take(10);
+        // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
+
+        return view('front.index',$data);
+    }
+
+    public function getMenuItemList($groupslug, $menuslug)
+    {
+        $data = [];
+        $mainMenu = MenuGroup::where([['slug',$groupslug],['status','Active']])->first();
+        if(!$mainMenu)
+        {
+            abort(404);
+        }
+        $data['mainMenu'] = $mainMenu;
+
+        $subMenu = MenuSubGroup::where([['slug',$menuslug],['status','Active']])->first();
+        if(!$subMenu)
+        {
+            abort(404);
+        }
+        $data['subMenu'] = $subMenu;
+
+        $data['menuItems'] = $subMenu->items()->where('status','Active')->orderBy('order')->get();
+        // dd($data);
+        return view('front.menulist',$data);
+    }
+
+    public function getMenuItemDetail($groupslug, $menuslug, $itemslug)
+    {
+        $data = [];
+        $mainMenu = MenuGroup::where([['slug',$groupslug],['status','Active']])->first();
+        if(!$mainMenu)
+        {
+            abort(404);
+        }
+        $data['mainMenu'] = $mainMenu;
+
+        $subMenu = MenuSubGroup::where([['slug',$menuslug],['status','Active']])->first();
+        if(!$subMenu)
+        {
+            abort(404);
+        }
+        $data['subMenu'] = $subMenu;
+        
+        $menuItem = MenuItem::where([['slug',$itemslug],['status','Active']])->first();
+        if(!$menuItem)
+        {
+            abort(404);
+        }
+        $data['menuItem'] = $menuItem;
+        // dd($data);
+        return view('front.menuitemdetail',$data);
     }
 
     public function popularcourse()
     {
-        $headercategories=Categories::all()->where('status','=','Active');
+        $headercategories = Categories::all()->where('status','=','Active');
         $data=Course::all()->where('isPopular','=','Yes')->where('status','=','Active')->sortBy('order');
         return view('front.popularcourse',compact('data','headercategories'));
     }
