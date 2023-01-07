@@ -15,10 +15,45 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="blog-container mt-5">
-            <ul>
-                @forelse($menuItems as $item)
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="table-responsive table-responsive-md">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Title</th>
+                                <th>File</th>
+                            </tr>
+                        </thead>
+                        
+                        @php($i=1)
+                        @forelse($menuItems as $item)
+                        <tbody>
+                            <tr>
+                                <td>{{$i}}</td>
+                                <td>{{$item->name}}</td>
+                                <td>
+                                    @if($item->type == 'text')  
+                                        <a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}/{{$item->slug}}"><i class="fas fa-eye text-success"></i></a>
+                                    @else()
+                                        <a href="/storage/{{$item->fileurl}}" target="_blank"><i class="fas fa-file-pdf text-danger"></i></a>
+                                    @endif
+                            </td>
+                            </tr>
+                        </tbody>
+                        @php($i++)
+                    @empty              
+                    <div>No Menu Items Published</div>
+                @endforelse
+                    </table>
+                </div>
+            </div>
+        </div>
+        {{-- <div class="blog-container mt-5">
+                <ul>
+                    @forelse($menuItems as $item)
                     <li>
                         <h6>{{$item->name}}</h6> 
                         <div>
@@ -33,7 +68,7 @@
                     <div>No Menu Items Published</div>
                 @endforelse
             </ul>
-        </div>
+        </div> --}}
     </div>
 
 @endsection

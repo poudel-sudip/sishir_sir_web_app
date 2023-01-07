@@ -4107,9 +4107,16 @@ select.inquiry-input {
 }
 
 .blog-container .single-blog h4 {
-    font-size: 16px;
+    font-size: 18px;
     padding-left: 10px;
     font-weight: 600;
+    line-height: 1.8;
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .blog-container .main-blog {
@@ -4194,19 +4201,23 @@ select.inquiry-input {
     height: 230px;
     overflow: hidden;
 }
+.blog-container .single-blog{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
 
 .blog-container .single-blog .blog-details {
     background: #ffffff;
-    padding: 10px 10px 15px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 15px 10px 15px;
 }
 
 .blog-container .single-blog img {
     width: 100%;
+    height: 230px;
+    object-fit: contain;
 }
 
 .blog-container .single-blog .blog-description {
-    height: 55px;
+    height: 64px;
     overflow: hidden;
 }
 
@@ -5254,13 +5265,37 @@ label.star:before {
 }
 .blog-section .blog-header img{
     width: 100%;
+    height: 300px;
+    object-fit: contain;
 }
 .blog-section .blog-footer{
     padding: 20px 30px 30px;
 }
-.blog-section .blog-footer p{
-    color: #000000;
+.blog-section .blog-footer h3{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.blog-section .blog-footer .blog-footer-details{
+    height: 100px;
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+.blog-section .blog-footer .blog-footer-details p, 
+.blog-section .blog-footer .blog-footer-details span, 
+.blog-section .blog-footer .blog-footer-details div{
     font-size: 18px;
+    text-align: justify;
+    line-height: 2;
+    font-weight: 500;
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0;
+    color: #606060 !important;
 } 
 .blog-section .blog-footer .blog-details{
     margin-bottom: -40px;
@@ -5277,10 +5312,22 @@ label.star:before {
 }
 .home-blog-list img{
     width: 100%;
+    height: 120px;
+    object-fit: cover;
+}
+.home-blog-list h4{
+    text-align: justify;
+    display: -webkit-box;
+    max-width: 100%;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .home-blog-btn{
     position: absolute;
     bottom: 30px;
+    right: 0;
 }
 .home-blog-btn .btn{
     background: #1375b9;
@@ -5297,8 +5344,17 @@ label.star:before {
 }
 .ebook-section .ebook-header{
     width: 100%;
-    height: 200px;
+    height: 300px;
     overflow: hidden;
+}
+.ebook-footer h4{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.ebook-section .ebook-header img{
+    height: 300px;
+    object-fit: contain;
 }
 @media (max-width: 541px){
     .home-ebook .ebook-section{
@@ -5317,7 +5373,7 @@ label.star:before {
     padding-top: 20px;
 }
 .ebook-section .ebook-footer p{
-    font-size: 24px;
+    font-size: 18px;
 }
 
 /* loksewa-today */

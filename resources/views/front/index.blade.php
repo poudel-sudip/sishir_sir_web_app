@@ -87,7 +87,8 @@
                         </div>
                         <div class="blog-footer">
                             <h3>{{$last_blog->title}}</h3>
-                            <p>{!! $last_blog->description !!}</p>
+                            <div class="blog-footer-details">{!! $last_blog->description !!}</div>
+                            <div class="mb-3 mt-2"><small class="text-primary">Published: {{date('Y-m-d',strtotime($last_blog->created_at))}}</small> <small class="text-success" style="float: right">By: {{$last_blog->author}}</small></div>
                             <div class="blog-details"><a href="/blogs/{{$last_blog->slug}}">View Details</a></div>
                         </div>
                     </div>
@@ -130,14 +131,14 @@
                             <img src="/storage/{{$book->thumbnail}}" alt="">
                         </div>
                         <div class="ebook-footer">
-                            <a href=""><h4>{{ $book->title }}</h4></a>
-                            <p>Price: <strong class="text-danger">RS. {{ $book->price }}</strong></p>
+                            <a href=""><h4 title="{{ $book->title }}">{{ $book->title }}</h4></a>
+                            <p>Price: <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ $book->price - $book->discount }}</strong></p>
                         </div>
                     </div>
                 </div>
                 @endforeach
 
-                <div class="col-12 text-end">
+                <div class="col-12 text-end mt-2">
                     <a href="/books" class="btn" style="background:#1375b9;color:#fff">View all...</a>
                 </div>
             </div>

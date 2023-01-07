@@ -36,11 +36,11 @@ class FrontController extends Controller
 
         $data = [];
         $data['sliders'] = Slider::all()->sortBy('order');
-        $data['premiumExams'] = ExamHallCategories::where('status','Active')->get();
-        $data['exams'] = OpenExam::where('result_status','=','Unpublished')->get()->sortByDesc('id');
+        $data['premiumExams'] = ExamHallCategories::all()->where('status','Active')->take(4);
+        $data['exams'] = OpenExam::all()->where('result_status','=','Unpublished')->take(4)->sortByDesc('id');
         $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('created_at')->first();
-        $data['blogs'] = Blog::where('status','=','Published')->get()->sortByDesc('created_at');
-        $data['books'] = Book::where('status','=','Active')->get()->sortBy('order');
+        $data['blogs'] = Blog::all()->where('status','=','Published')->sortByDesc('created_at')->take(5);
+        $data['books'] = Book::all()->where('status','=','Active')->take(4)->sortBy('order');
         $data['testimonials'] = Testimonial::all()->sortByDesc('created_at')->take(10);
         // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
 
