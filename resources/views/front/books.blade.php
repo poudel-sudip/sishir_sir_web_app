@@ -26,7 +26,7 @@
             <div class="row">
                 @forelse($books as $book)
                 <div class="col-md-4 mb-2">
-                    <div class="single-blog">
+                    <div class="single-blog mb-3">
                         <div class="blog-image">
                             <img src="/storage/{{$book->thumbnail}}">
                         </div>
