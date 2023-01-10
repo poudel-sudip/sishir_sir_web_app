@@ -7,11 +7,6 @@
 <footer class="page-footer">
   <div class="container">
     <div class="row px-md-3">
-      
-      <div class="col-sm-4 col-lg-4">
-        <div class="fb-page" data-href="https://www.facebook.com/Shisirkumaradhikari/" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Shisirkumaradhikari/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Shisirkumaradhikari/">Shisir Kumar Adhikari</a></blockquote></div>
-      </div>
-  
       <div class="col-sm-8 col-lg-8 py-3">
         <div class="social-media-support">
           <div class="footer-logo">
@@ -22,32 +17,6 @@
         <hr>
         
         <div class="row">
-          <div class="col-md-8">
-            <h3 class="mt-3">Info & Support :</h3>
-            <div class="row">
-              <div class="col-6">
-                <div class="info-mobile"><span class="icon-phone"></span> +977- 9825423047</div>
-              </div>
-              <div class="col-6">
-                <div class="info-mobile"><span class="icon-phone"></span> +977- 9825423047</div>
-              </div>
-              <div class="col-6">
-                <div class="info-mobile"><span class="icon-phone"></span> +977- 9825423047</div>
-              </div>
-              <div class="col-6">
-                <div class="info-mobile"><span class="icon-phone"></span> +977- 9825423047</div>
-              </div>
-            </div>
-            <h3 class="mt-5">Connect with us :</h3>
-            <div class="footer-sosmed">
-              <a href="https://www.facebook.com/etutorclass" target="_blank"><i class="fab fa-facebook-f"></i></a>
-              <a href="https://wa.me/9779857084806" target="_blank"><i class="icon-whatsapp"></i></a>
-              <a href="https://www.youtube.com/channel/UCafKF2Hf5nx-WtRuPFTprsQ" target="_blank"><i class="icon-youtube"></i></a>
-              <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-              <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
-              <a href="https://www.instagram.com/etutorclass_official/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
-          </div>
           <div class="col-md-4 py-3">
             <ul class="footer-menu">
               <li><a href="/about-us">About Us</a></li>
@@ -60,7 +29,32 @@
               <li><a href="/careers">Careers</a></li>
             </ul>
           </div>
+          <div class="col-md-8">
+            <h3 class="mt-3">Info & Support :</h3>
+            <div class="row">
+              <div class="col-6">
+                <div class="info-mobile"><span class="icon-mail2"></span>  info@shisiradhikari.com</div>
+              </div>
+              <div class="col-6">
+                <div class="info-mobile"><span class="icon-phone"></span> +977- 981-2417639</div>
+              </div>
+            </div>
+            <h3 class="mt-5">Connect with us :</h3>
+            <div class="footer-sosmed">
+              <a href="https://www.facebook.com/groups/Healthandloksewa" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              {{-- <a href="https://wa.me/9779857084806" target="_blank"><i class="icon-whatsapp"></i></a> --}}
+              <a href="https://chat.whatsapp.com/FF97kXQ75RwAz8gP5MYGja" target="_blank"><i class="icon-whatsapp"></i></a>
+              <a href="https://www.youtube.com/channel/UCSFeHpNoMSF-BBgsDtro0zw" target="_blank"><i class="icon-youtube"></i></a>
+              <a href="https://twitter.com/ShisirAdhikari" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+              <a href="https://www.instagram.com/shisirkumaradhikari" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          
         </div>
+    </div>
+    <div class="col-sm-4 col-lg-4">
+      <div class="fb-page" data-href="https://www.facebook.com/Shisirkumaradhikari/" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Shisirkumaradhikari/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Shisirkumaradhikari/">Shisir Kumar Adhikari</a></blockquote></div>
     </div>
     
   </div>

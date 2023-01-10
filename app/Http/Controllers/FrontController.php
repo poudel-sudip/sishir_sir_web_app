@@ -24,6 +24,7 @@ use App\Models\Books\Book;
 use App\Models\Menu\MenuGroup;
 use App\Models\Menu\MenuSubGroup;
 use App\Models\Menu\MenuItem;
+use App\Models\Advertisement;
 
 class FrontController extends Controller
 {
@@ -42,6 +43,7 @@ class FrontController extends Controller
         $data['blogs'] = Blog::all()->where('status','=','Published')->sortByDesc('created_at')->take(5);
         $data['books'] = Book::all()->where('status','=','Active')->take(4)->sortBy('order');
         $data['testimonials'] = Testimonial::all()->sortByDesc('created_at')->take(10);
+        $data['ads'] = Advertisement::all();
         // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
 
         return view('front.index',$data);

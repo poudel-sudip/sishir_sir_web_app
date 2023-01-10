@@ -9,27 +9,40 @@
             @endforeach
         </div>
     </section>
-    <section class="video-course mt-3 mb-5">
+    <section class="video-course mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center relative">
-                    <h2 class="mb-3 wow fadeInUp">Videos Courses</h2>
+                    <h2 class="home-section-heading mb-3 wow fadeInUp">Videos Courses</h2>
                 </div>
             </div>
-            <div class="course-container">
-                <div class="owl-carousel course-carousel">
+            <div class="course-container position-relative">
+                <div class="elfsight-app-f553e3a0-98b2-48e2-906a-70b290b09fe1"></div>
+                {{-- <div class="owl-carousel course-carousel">
                     <div class="post-thumb">
                         <a class="play_video_btn course-price " href="#play_video" video-id="" data-bs-toggle="modal" data-bs-target="#play_video"><img src="images/course1.jpg" alt="" ></a>
                     </div>
-                </div>
+                </div> --}}
+                <div class="video-gallery-hide"></div>
             </div>
         </div>
     </section>
-    <section class="mock-test mt-3 mb-5">
+    <section class="home-banner">
+        <div class="container">
+            <div class="row">
+                @foreach ($ads as $ads)
+                <div class="col-md-12 mb-2">
+                    <img class="w-100" src="/storage/{{$ads->banner}}" alt="">
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    <section class="mock-test mb-5 mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center relative">
-                    <h2 class="mb-3 wow fadeInUp">Mock Tests</h2>
+                    <h2 class="home-section-heading mb-3 wow fadeInUp">Mock Tests</h2>
                 </div>
             </div>
             <div class="mocktest-container">
@@ -76,7 +89,7 @@
         <div class="container">
             <div class="row mb-3">
                 <div class="col-md-12 text-center relative">
-                    <h2 class="mb-3 wow fadeInUp">Blogs</h2>
+                    <h2 class="home-section-heading mb-3 wow fadeInUp">Blogs</h2>
                 </div>
             </div>
             <div class="row">
@@ -100,8 +113,8 @@
                             <div class="col-4">
                                 <img src="/storage/{{$blog->image}}">
                             </div>
-                            <div class="col-6">
-                                <h4><a href="/blogs/{{$blog->slug}}">{{$blog->title}}</a></h4>
+                            <div class="col-8">
+                                <h4 class="blog-list-title"><a href="/blogs/{{$blog->slug}}">{{$blog->title}}</a></h4>
                                 <div>Published: <span class="text-primary"> {{date('Y-m-d',strtotime($blog->created_at))}}</span></div>
                                 <div>By: <span class="text-success"> {{$blog->author}}</span></div>
                             </div>
@@ -120,7 +133,7 @@
         <div class="container">
             <div class="row mb-3">
                 <div class="col-md-12 text-center relative">
-                    <h2 class="mb-3 wow fadeInUp">Shishir Books</h2>
+                    <h2 class="home-section-heading mb-3 wow fadeInUp">My Books</h2>
                 </div>
             </div>
             <div class="row">
@@ -151,7 +164,7 @@
   <div class="container">
     <div class="row mb-3">
         <div class="col-md-12 text-center relative">
-            <h2 class="mb-3 wow fadeInUp">Testimonial</h2>
+            <h2 class="home-section-heading mb-3 wow fadeInUp">Testimonial</h2>
         </div>
     </div>
     <div class="review-container">
@@ -182,7 +195,7 @@
 </section>
 @endif
 
-    <section class="loksewa-today mt-3 mb-5">
+    {{-- <section class="loksewa-today mt-3 mb-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 loksewa-selector mb-2">
@@ -203,11 +216,11 @@
                 </div> 
             </div>
         </div>
-    </section>
+    </section> --}}
 
 
 <!-- Modal HTML -->
-<div class="modal fade" id="play_video" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="play_video" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="">
             <div class="modal-header">
@@ -230,14 +243,14 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <div class="enquiry-popup">
     <a href="/enquiry"><i class="fas fa-comment-alt"></i><span>Enquiry</span></a> 
 </div>
-
-<script>
-    //home page player
+{{-- youtube video palylist --}}
+<script src="https://apps.elfsight.com/p/platform.js" defer></script>
+{{-- <script>
     $(document).ready(function(){
         $('.play_video_btn').click(function(){
             console.log('hello');
@@ -248,7 +261,7 @@
         });
     });
     
-  </script>
+  </script> --}}
 
 @endsection
 

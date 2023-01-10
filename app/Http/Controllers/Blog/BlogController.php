@@ -20,6 +20,7 @@ class BlogController extends Controller
 
    public function show($slug)
    {
+       $lateat_blogs=Blog::all()->where('status','=','Published')->sortByDesc('created_at')->take(10);
        $blog=Blog::where('slug',$slug)->first();
        if(!$blog)
        {
@@ -27,7 +28,7 @@ class BlogController extends Controller
        }
        $headercategories=Categories::all()->where('status','=','Active');
 
-       return view('front.blogs.show',compact('blog','headercategories'));
+       return view('front.blogs.show',compact('blog','headercategories', 'lateat_blogs'));
    }
 
    public function addComments(Blog $blog,Request $request)
