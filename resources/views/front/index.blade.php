@@ -1,13 +1,36 @@
 @extends('front.layouts.app')
 @section('content')
     <section class="home-slider">
-        <div class="main-slider owl-carousel">
-            @foreach($sliders as $slider)
-                <div class="single-item">
-                    <img src="/storage/{{$slider->image}}" alt="{{$slider->title}}" width="100%">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="main-slider owl-carousel">
+                        @foreach($sliders as $slider)
+                            <div class="single-item">
+                                <img src="/storage/{{$slider->image}}" alt="{{$slider->title}}" width="100%">
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-            @endforeach
+                <div class="col-md-4">
+                    <div class="homepage-side-update">
+                        <div class="update-header"><h5><i class="fas fa-clock"></i> अपडेट</h5></div>
+                        <div class="update-body">
+                            <ul>
+                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli</a></li>
+                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli</a></li>
+                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli, speaks a lot as Ganga, according to leaders of both parties, had played the role of a key interlocutor and helped thaw the relations between the two leaders— arch-rivals until just a few days before.</a></li>
+                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli</a></li>
+                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli speaks a lot as Ganga, according to leaders of both parties,</a></li>
+                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli</a></li>
+                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli speaks a lot as Ganga, according to leaders of both parties,</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        
     </section>
     <section class="video-course mt-4">
         <div class="container">

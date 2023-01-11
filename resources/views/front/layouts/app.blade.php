@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <title>@yield('title') | {{ config('app.name') }}</title>
-  <meta name="description" content="E-Tutor Class is Nepal’s First Open Online Tutoring Class which connects Teachers, Students, Institutions, School, Colleges in a single platform and fulfills the common needs of both the teacher and the students i.e., the giver and the receiver. It is dedicated to enhancing Learning system quality and access through the integration of technology. It manages expert resources from various fields in our work ecosystem and utilizes their skills, experiences, knowledge as well as time to provide bundle-up services to the students at reasonable charges so that they can excel in their future and career.">
-  <meta name="keywords" content="E-tutor Class, e-tutor, online class, online class in Nepal, best online class, Loksewa class, online psc. class, top online preparation class in nepal, top online course preparation in nepal, top online institute near me, online psc course in nepal, psc class 2078, top loksewa aayog preparation in Nepal, top loksewa institute near me, loksewa online preparation, loksewa aayog course, loksewa aayog online exam prepataion, competitive exam preparation in Nepal, Online institute near me, psc online preparation class in nepal, online psc preparation gandaki pradesh">
+  <meta name="description" content="Mr. Shisir Kumar Adhikari is a government job holder public health practitioner, young academician, good trainer and author of Mentor Series Books.">
+  <meta name="keywords" content="health loksewa, health, books, shishir adhikari, shishir sir, shisir adhikari, loksewa, loksewa health, shishir loksewa, psc, psc health ">
 
-  <meta property="og:image" content="https://www.etutorclass.com/images/logo.webp" />
-  <meta property="og:description" content="E-Tutor Class is Nepal’s First Open Online Tutoring Class which connects Teachers, Students, Institutions, School, Colleges in a single platform and fulfills the common needs of both the teacher and the students i.e., the giver and the receiver. It is dedicated to enhancing Learning system quality and access through the integration of technology." />
-  <meta property="og:title" content="Nepal’s First Open Online Tutoring Class" />
+  <meta property="og:image" content="" />
+  <meta property="og:description" content="Mr. Shisir Kumar Adhikari is a government job holder public health practitioner, young academician, good trainer and author of Mentor Series Books." />
+  <meta property="og:title" content="Health Loksewa" />
 
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
 

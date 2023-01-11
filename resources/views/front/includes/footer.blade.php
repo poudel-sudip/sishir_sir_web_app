@@ -79,7 +79,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <p id="copyright">Copyright &copy; 2022 <a href="">Shishir Adhikari.</a> All right reserved. By <a href="">ODD Experts Pvt. Ltd.</a></p>
+        <p id="copyright">Copyright &copy; <script> document.write(new Date().getFullYear()); </script> All right reserved <a href="">Shishir Adhikari.</a> By <a href="">ODD Experts Pvt. Ltd.</a></p>
       </div>
       <div class="col-md-6">
        

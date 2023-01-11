@@ -70,7 +70,7 @@
                                 <label for="sliderImage" class="col-md-4 col-form-label">{{ __('Slider Image') }}</label>
 
                                 <div class="col-md-8">
-                                    <small class="text-info">Note: Image Dimensions 905 * 370</small>
+                                    <small class="text-info">Note: Image Dimensions 1200 * 610</small>
                                     <input id="sliderImage" type="file" class="form-control @error('sliderImage') is-invalid @enderror" name="sliderImage" value="{{ old('sliderImage') }}" required >
 
                                     @error('sliderImage')

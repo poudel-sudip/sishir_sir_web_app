@@ -1,6 +1,6 @@
 <header class="shishir-header">
   <nav class="navbar navbar-expand-lg main-nav">
-    <div class="container-fluid">
+    <div class="container-fluid px-5">
       <div class="site-logo">
         <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('images/logo.png') }}" alt="Logo" height="60"></a>
       </div>
@@ -57,7 +57,7 @@
       </div>
     </div>
   </nav>
-  <div class="container-fluid my-3 px-5">
+  <div class="container mt-2">
     <div class="row">
       <div class="col-md-6 pt-2">
         <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=yes&font_color=1375b9&aj_time=yes&font_size=24&api=8311z7m197" width="300" height="50"></iframe>
