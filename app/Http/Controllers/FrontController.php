@@ -23,6 +23,7 @@ use App\Models\Blog;
 use App\Models\Books\Book;
 use App\Models\Menu\MenuGroup;
 use App\Models\Menu\MenuSubGroup;
+use App\Models\Menu\MenuItemCategory;
 use App\Models\Menu\MenuItem;
 use App\Models\Advertisement;
 
@@ -44,12 +45,14 @@ class FrontController extends Controller
         $data['books'] = Book::all()->where('status','=','Active')->take(4)->sortBy('order');
         $data['testimonials'] = Testimonial::all()->sortByDesc('created_at')->take(10);
         $data['ads'] = Advertisement::all();
-        // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
+        $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
 
+        // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
+        // dd($data);
         return view('front.index',$data);
     }
 
-    public function getMenuItemList($groupslug, $menuslug)
+    public function getMenuCategories($groupslug, $menuslug)
     {
         $data = [];
         $mainMenu = MenuGroup::where([['slug',$groupslug],['status','Active']])->first();
@@ -66,12 +69,43 @@ class FrontController extends Controller
         }
         $data['subMenu'] = $subMenu;
 
-        $data['menuItems'] = $subMenu->items()->where('status','Active')->orderBy('order')->get();
+        $data['menuCategories'] = $subMenu->categories()->where('status','=','Active')->orderBy('order')->get();
+        // $data['menuItems'] = $subMenu->items()->where('menu_items.status','=','Active')->orderBy('order')->get();
+        // dd($data);
+        return view('front.menucategories',$data);
+    }
+
+    public function getMenuItems($groupslug, $menuslug, $catslug)
+    {
+        $data = [];
+        $mainMenu = MenuGroup::where([['slug',$groupslug],['status','Active']])->first();
+        if(!$mainMenu)
+        {
+            abort(404);
+        }
+        $data['mainMenu'] = $mainMenu;
+
+        $subMenu = MenuSubGroup::where([['slug',$menuslug],['status','Active']])->first();
+        if(!$subMenu)
+        {
+            abort(404);
+        }
+        $data['subMenu'] = $subMenu;
+
+        $menuCategory = MenuItemCategory::where([['slug',$catslug],['status','Active']])->first();
+        if(!$menuCategory)
+        {
+            abort(404);
+        }
+        $data['menuCategory'] = $menuCategory;
+
+        $data['menuItems'] = $menuCategory->items()->where('status','=','Active')->orderBy('order')->get();
+
         // dd($data);
         return view('front.menulist',$data);
     }
 
-    public function getMenuItemDetail($groupslug, $menuslug, $itemslug)
+    public function getMenuItemDetail($groupslug, $menuslug, $catslug, $itemslug)
     {
         $data = [];
         $mainMenu = MenuGroup::where([['slug',$groupslug],['status','Active']])->first();
@@ -88,12 +122,20 @@ class FrontController extends Controller
         }
         $data['subMenu'] = $subMenu;
         
+        $menuCategory = MenuItemCategory::where([['slug',$catslug],['status','Active']])->first();
+        if(!$menuCategory)
+        {
+            abort(404);
+        }
+        $data['menuCategory'] = $menuCategory;
+
         $menuItem = MenuItem::where([['slug',$itemslug],['status','Active']])->first();
         if(!$menuItem)
         {
             abort(404);
         }
         $data['menuItem'] = $menuItem;
+
         // dd($data);
         return view('front.menuitemdetail',$data);
     }

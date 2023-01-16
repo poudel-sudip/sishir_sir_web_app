@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Show Menu Item | {{$subgroup->name}} | {{$group->name}}
+    Show Menu Item | {{$category->name}} | {{$subgroup->name}} | {{$group->name}}
 @endsection
 
 @section('content')
@@ -12,7 +12,8 @@
                     <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ url('/admin/menus') }}">Menu Groups</a></li>
                     <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups') }}">Sub Menus</a></li>
-                    <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/items') }}">Sub Menus</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories') }}">Categories</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items') }}">Items</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Show</li>
                 </ol>
             </nav>
@@ -32,6 +33,10 @@
                         <div class="course-row">
                             <div>Sub Menu:</div>
                             <div>{{$subgroup->name}}</div>
+                        </div>
+                        <div class="course-row">
+                            <div>Menu Category:</div>
+                            <div>{{$category->name}}</div>
                         </div>
                         <div class="course-row">
                             <div>Menu Name:</div>

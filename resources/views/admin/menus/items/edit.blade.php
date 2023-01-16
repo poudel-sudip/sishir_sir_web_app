@@ -12,7 +12,8 @@
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="{{ url('/admin/menus') }}">Menu Groups</a></li>
                 <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups') }}">Sub Groups</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/items') }}">Items</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories') }}">Categories</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items') }}">Items</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Edit </li>
                 </ol>
             </nav>
@@ -20,9 +21,9 @@
         <div class="row justify-content-center">
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Edit Menu Item | {{$subgroup->name}} | {{$group->name}}</div>
+                    <div class="card-header">Edit Menu Item | {{$category->name}} | {{$subgroup->name}} | {{$group->name}}</div>
                   <div class="card-body">
-                    <form class="forms-sample" method="POST" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/items/{{$item->id}}" enctype="multipart/form-data">
+                    <form class="forms-sample" method="POST" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$category->id}}/items/{{$item->id}}" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
                         <div class="form-group row">

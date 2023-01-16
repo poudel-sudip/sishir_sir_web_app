@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Menu\MenuGroup;
 use App\Models\Menu\MenuSubGroup;
+use App\Models\Menu\MenuItemCategory;
 use App\Models\Menu\MenuItem;
 
 class ItemController extends Controller
@@ -15,25 +16,27 @@ class ItemController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(MenuGroup $group, MenuSubGroup $subgroup)
+    public function index(MenuGroup $group, MenuSubGroup $subgroup, MenuItemCategory $category)
     {
         $data = [];
         $data['group'] = $group;
         $data['subgroup'] = $subgroup;
-        $data['items'] = $subgroup->items;
+        $data['category'] = $category;
+        $data['items'] = $category->items;
         // dd($data);
         return view('admin.menus.items.index',$data);
     }
 
-    public function create(MenuGroup $group, MenuSubGroup $subgroup)
+    public function create(MenuGroup $group, MenuSubGroup $subgroup, MenuItemCategory $category)
     {
         $data = [];
         $data['group'] = $group;
         $data['subgroup'] = $subgroup;
+        $data['category'] = $category;
         return view('admin.menus.items.create',$data);
     }
 
-    public function store(Menugroup $group, MenuSubGroup $subgroup, Request $request)
+    public function store(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, Request $request)
     {
         // dd($request->all());
         $request->validate([
@@ -57,20 +60,21 @@ class ItemController extends Controller
             $data['filename'] = $request->file->getClientOriginalName();
             $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
         }
-        $subgroup->items()->create($data);
-        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/items');
+        $category->items()->create($data);
+        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items');
     }
 
-    public function edit(Menugroup $group, MenuSubGroup $subgroup, MenuItem $item)
+    public function edit(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item)
     {
         $data = [];
         $data['group'] = $group;
         $data['subgroup'] = $subgroup;
+        $data['category'] = $category;
         $data['item'] = $item;
         return view('admin.menus.items.edit',$data);
     }
 
-    public function update(Menugroup $group, MenuSubGroup $subgroup, MenuItem $item, Request $request)
+    public function update(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item, Request $request)
     {
         $request->validate([
             'name' => 'string|required',
@@ -96,21 +100,22 @@ class ItemController extends Controller
         }
         // dd($request->all(),$data);
         $item->update($data);
-        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/items');
+        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items');
     }
 
-    public function show(Menugroup $group, MenuSubGroup $subgroup, MenuItem $item)
+    public function show(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item)
     {
         $data = [];
         $data['group'] = $group;
         $data['subgroup'] = $subgroup;
+        $data['category'] = $category;
         $data['item'] = $item;
         return view('admin.menus.items.show',$data);
     }
 
-    public function destroy(Menugroup $group, MenuSubGroup $subgroup, MenuItem $item)
+    public function destroy(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item)
     {
         $item->delete();
-        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/items');
+        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items');
     }
 }

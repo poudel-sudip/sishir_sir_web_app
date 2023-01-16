@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMenuItemsTable extends Migration
+class CreateMenuItemCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateMenuItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('menu_items', function (Blueprint $table) {
+        Schema::create('menu_item_categories', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('category_id');
+            $table->bigInteger('subgroup_id')->nullable();
             $table->string('name');
             $table->string('slug')->nullable();
-            $table->string('type', 100)->nullable()->default('file');
-            $table->string('filename')->nullable();
-            $table->string('fileurl')->nullable();
-            $table->longText('description')->nullable();
             $table->string('order')->nullable()->default(1);
             $table->string('status')->nullable()->default('Inactive');
             $table->timestamps();
@@ -35,6 +31,6 @@ class CreateMenuItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_items');
+        Schema::dropIfExists('menu_item_categories');
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class MenuSubGroup extends Model
 {
@@ -29,8 +30,13 @@ class MenuSubGroup extends Model
         return $this->belongsTo(MenuGroup::class, 'group_id');
     }
 
-    public function items(): HasMany
+    public function items(): HasManyThrough
     {
-        return $this->hasMany(MenuItem::class, 'subgroup_id');
+        return $this->hasManyThrough(MenuItem::class, MenuItemCategory::class,'subgroup_id','category_id');
+    }
+
+    public function categories(): HasMany
+    {
+        return $this->hasMany(MenuItemCategory::class, 'subgroup_id');
     }
 }

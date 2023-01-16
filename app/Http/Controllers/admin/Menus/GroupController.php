@@ -60,7 +60,6 @@ class GroupController extends Controller
 
     public function destroy(MenuGroup $group, Request $request)
     {
-        $group->items()->delete();
         $group->subGroups()->delete();
         $group->delete();
         return redirect('/admin/menus');

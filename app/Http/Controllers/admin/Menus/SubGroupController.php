@@ -64,6 +64,7 @@ class SubGroupController extends Controller
     public function destroy(MenuGroup $group, MenuSubGroup $subgroup, Request $request)
     {
         $subgroup->items()->delete();
+        $subgroup->categories()->delete();
         $subgroup->delete();
         return redirect('/admin/menus/'.$group->id.'/sub-groups');
     }

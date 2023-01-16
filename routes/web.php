@@ -415,14 +415,23 @@ Route::get('/admin/menus/{group}/sub-groups/{subgroup}/edit','App\Http\Controlle
 Route::patch('/admin/menus/{group}/sub-groups/{subgroup}','App\Http\Controllers\Admin\Menus\SubGroupController@update')->middleware('role:Admin');
 Route::delete('/admin/menus/{group}/sub-groups/{subgroup}','App\Http\Controllers\Admin\Menus\SubGroupController@destroy')->middleware('role:Admin');
 
+//admin menu item category mgmt
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories','App\Http\Controllers\Admin\Menus\CategoryController@index')->middleware('role:Admin');
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/create','App\Http\Controllers\Admin\Menus\CategoryController@create')->middleware('role:Admin');
+Route::post('/admin/menus/{group}/sub-groups/{subgroup}/categories','App\Http\Controllers\Admin\Menus\CategoryController@store')->middleware('role:Admin');
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/edit','App\Http\Controllers\Admin\Menus\CategoryController@edit')->middleware('role:Admin');
+Route::patch('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}','App\Http\Controllers\Admin\Menus\CategoryController@update')->middleware('role:Admin');
+Route::delete('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}','App\Http\Controllers\Admin\Menus\CategoryController@destroy')->middleware('role:Admin');
+
+
 // admin menu item management 
-Route::get('/admin/menus/{group}/sub-groups/{subgroup}/items','App\Http\Controllers\Admin\Menus\ItemController@index')->middleware('role:Admin');
-Route::get('/admin/menus/{group}/sub-groups/{subgroup}/items/create','App\Http\Controllers\Admin\Menus\ItemController@create')->middleware('role:Admin');
-Route::post('/admin/menus/{group}/sub-groups/{subgroup}/items','App\Http\Controllers\Admin\Menus\ItemController@store')->middleware('role:Admin');
-Route::get('/admin/menus/{group}/sub-groups/{subgroup}/items/{item}/edit','App\Http\Controllers\Admin\Menus\ItemController@edit')->middleware('role:Admin');
-Route::get('/admin/menus/{group}/sub-groups/{subgroup}/items/{item}','App\Http\Controllers\Admin\Menus\ItemController@show')->middleware('role:Admin');
-Route::patch('/admin/menus/{group}/sub-groups/{subgroup}/items/{item}','App\Http\Controllers\Admin\Menus\ItemController@update')->middleware('role:Admin');
-Route::delete('/admin/menus/{group}/sub-groups/{subgroup}/items/{item}','App\Http\Controllers\Admin\Menus\ItemController@destroy')->middleware('role:Admin');
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items','App\Http\Controllers\Admin\Menus\ItemController@index')->middleware('role:Admin');
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/create','App\Http\Controllers\Admin\Menus\ItemController@create')->middleware('role:Admin');
+Route::post('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items','App\Http\Controllers\Admin\Menus\ItemController@store')->middleware('role:Admin');
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}/edit','App\Http\Controllers\Admin\Menus\ItemController@edit')->middleware('role:Admin');
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}','App\Http\Controllers\Admin\Menus\ItemController@show')->middleware('role:Admin');
+Route::patch('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}','App\Http\Controllers\Admin\Menus\ItemController@update')->middleware('role:Admin');
+Route::delete('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}','App\Http\Controllers\Admin\Menus\ItemController@destroy')->middleware('role:Admin');
 
 // admin personal books management 
 Route::get('/admin/books','App\Http\Controllers\Admin\Books\BookController@index')->middleware('role:Admin');
@@ -722,8 +731,9 @@ Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamControll
 Route::get('/books','App\Http\Controllers\FrontController@books');
 
 //front menu details
-Route::get('/{groupslug}/{menuslug}','App\Http\Controllers\FrontController@getMenuItemList');
-Route::get('/{groupslug}/{menuslug}/{itemslug}','App\Http\Controllers\FrontController@getMenuItemDetail');
+Route::get('/{groupslug}/{menuslug}','App\Http\Controllers\FrontController@getMenuCategories');
+Route::get('/{groupslug}/{menuslug}/{catslug}','App\Http\Controllers\FrontController@getMenuItems');
+Route::get('/{groupslug}/{menuslug}/{catslug}/{itemslug}','App\Http\Controllers\FrontController@getMenuItemDetail');
 
 
 

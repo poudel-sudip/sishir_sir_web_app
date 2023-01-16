@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class MenuGroup extends Model
 {
@@ -16,11 +15,6 @@ class MenuGroup extends Model
     public function subGroups(): HasMany
     {
         return $this->hasMany(MenuSubGroup::class, 'group_id');
-    }
-
-    public function items(): HasManyThrough
-    {
-        return $this->hasManyThrough(MenuItem::class, MenuSubGroup::class,'group_id','subgroup_id');
     }
 
     protected static function boot()

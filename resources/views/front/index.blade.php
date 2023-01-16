@@ -17,13 +17,24 @@
                         <div class="update-header"><h5><i class="fas fa-clock"></i> अपडेट</h5></div>
                         <div class="update-body">
                             <ul>
-                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli</a></li>
-                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli</a></li>
-                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli, speaks a lot as Ganga, according to leaders of both parties, had played the role of a key interlocutor and helped thaw the relations between the two leaders— arch-rivals until just a few days before.</a></li>
-                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli</a></li>
-                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli speaks a lot as Ganga, according to leaders of both parties,</a></li>
-                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli</a></li>
-                                <li><a href="#"><i class="far fa-check-circle"></i> The photo taken at the Balkot-based residence of Oli speaks a lot as Ganga, according to leaders of both parties,</a></li>
+                                @forelse($updates as $update)
+                                    <?php
+                                        $link = "#";
+                                        if($update->category)
+                                        {
+                                            if($update->category->subGroup)
+                                            {
+                                                if($update->category->subGroup->group)
+                                                {
+                                                    $link = '/'.$update->category->subGroup->group->slug.'/'.$update->category->subGroup->slug.'/'.$update->category->slug.'/'.$update->slug;
+                                                }
+                                            }
+                                        }
+                                    ?>                                    
+                                    <li><a href="{{$link}}"><i class="far fa-check-circle"></i>{{ucwords($update->name)}}</a></li>
+                                @empty
+                                    <li>No Updates Available</li>
+                                @endforelse
                             </ul>
                         </div>
                     </div>

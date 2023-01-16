@@ -24,7 +24,17 @@
               ?>
               <ul class="dropdown-menu">
                 @foreach($submenus as $submenu)
-                  <li><a class="dropdown-item" href="/{{$mainmenu->slug}}/{{$submenu->slug}}">{{ucwords($submenu->name)}}</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">{{ucwords($submenu->name)}}</a>
+                    <?php
+                      $childmenus = $submenu->categories()->where('status','=','Active')->orderBy('order')->get();
+                    ?>
+                    <ul>
+                      @foreach($childmenus as $cmenu)
+                        <a href="/{{$mainmenu->slug}}/{{$submenu->slug}}/{{$cmenu->slug}}"> {{ucwords($cmenu->name)}} </a>
+                      @endforeach
+                    </ul>
+                  </li>
                 @endforeach
               </ul>
             </li>

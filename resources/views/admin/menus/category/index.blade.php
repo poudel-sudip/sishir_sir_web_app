@@ -1,17 +1,18 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-   Menu Sub Groups | {{$group->name}}
+   Menu Item Categories | {{$subgroup->name}} | {{$group->name}}
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-        <h3 class="page-title">Menu Sub Groups | {{$group->name}}</h3>
+        <h3 class="page-title">Menu Categories | {{$subgroup->name}} | {{$group->name}}</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
               <li class="breadcrumb-item"><a href="{{ url('/admin/menus') }}">Menu Groups</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Sub Menus </li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups') }}">Sub Menus</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Menu Categories </li>
             </ol>
         </nav>
         </div>
@@ -21,9 +22,9 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">Sub Menus | {{$group->name}}</h4>
+                        <h4 class="card-title">Menu Item Categories | {{$subgroup->name}} | {{$group->name}}</h4>
                         <div class="text-right">
-                            <a href="{{ ('/admin/menus/'.$group->id.'/sub-groups/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Sub Menu </button></a>
+                            <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Menu Category </button></a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">
@@ -33,32 +34,32 @@
                             <th>SN</th>
                             <th>Name</th>
                             <th>Order</th>
-                            <th>Menu Item Category</th>
+                            <th>Menu Items</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           @php($i=1)
-                            @foreach($subgroups as $subgroup)
+                            @foreach($categories as $cat)
                           <tr>
                             <td width="50">{{$i}}</td>
-                            <td>{{$subgroup->name}}</td>
-                            <td>{{$subgroup->order}}</td>
-                            <td><a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories">Categories ( {{$subgroup->categories->count()}} ) </a></td>
+                            <td>{{ucwords($cat->name)}}</td>
+                            <td>{{$cat->order}}</td>
+                            <td><a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$cat->id}}/items">Items ( {{$cat->items->count()}} ) </a></td>
                             <td>
-                              @if($subgroup->status == 'Inactive')
-                                <span class="text-danger">{{$subgroup->status}}</span>
+                              @if($cat->status == 'Inactive')
+                                <span class="text-danger">{{$cat->status}}</span>
                                 @else
-                                <span class="text-success">{{$subgroup->status}}</span>
+                                <span class="text-success">{{$cat->status}}</span>
                               @endif
                             </td>
-                            <td class="classroom-btn" width="160">
-                              <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/edit" class="btn btn-danger">Edit</a>
-                              <form id="delete-form-{{$subgroup->id}}" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}" method="POST" style="display: inline">
+                            <td class="classroom-btn" width="100">
+                              <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$cat->id}}/edit" class="btn btn-danger">Edit</a>
+                              <form id="delete-form-{{$cat->id}}" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$cat->id}}" method="POST" style="display: inline">
                                 @csrf
                                 @method('DELETE')
-                                <a href="javascript:{}" onclick="javascript:deleteData({{$subgroup->id}});" class="btn btn-warning">Delete</a>
+                                <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-warning">Delete</a>
                               </form>
                           </td>
                           </tr>

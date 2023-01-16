@@ -23,9 +23,9 @@ class MenuItem extends Model
         });
     }
 
-    public function subgroup(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(MenuSubGroup::class, 'subgroup_id');
+        return $this->belongsTo(MenuItemCategory::class, 'category_id');
     }
 
 

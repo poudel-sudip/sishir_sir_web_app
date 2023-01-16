@@ -10,6 +10,7 @@
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item">{{ucwords($mainMenu->name)}}</li>
                         <li class="breadcrumb-item"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}">{{ucwords($subMenu->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}/{{$menuCategory->slug}}">{{ucwords($menuCategory->name)}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ucwords($menuItem->name)}}</li>
                     </ol>
                 </div>
@@ -22,6 +23,9 @@
             <div>
                 {!! $menuItem->description !!}
             </div>
+            @if($menuItem->type == 'file')
+                <div><a href="/storage/{{$menuItem->fileurl}}" target="_blank" class="text-primary">Download</a></div>
+            @endif
         </div>
     </div>
 
