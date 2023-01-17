@@ -99,7 +99,7 @@ class FrontController extends Controller
         }
         $data['menuCategory'] = $menuCategory;
 
-        $data['menuItems'] = $menuCategory->items()->where('status','=','Active')->orderBy('order')->get();
+        $data['menuItems'] = $menuCategory->items()->where('status','=','Active')->orderByDesc('id')->get();
 
         // dd($data);
         return view('front.menulist',$data);
@@ -159,9 +159,20 @@ class FrontController extends Controller
     }
     public function books()
     {
-        $books=Book::all()->sortByDesc('id');
+        $books=Book::all()->where('status','=','Active')->sortByDesc('id');
         return view('front.books',compact('books'));
     }
+
+    public function singleBook($slug)
+    {
+        $book = Book::where('slug',$slug)->where('status','=','Active')->first();
+        if(!$book)
+        {
+            abort(404,'Book Not Found');
+        }
+        return view('front.singlebook',compact('book'));
+    }
+
     public function contact()
     {
         return view('front.contact');
@@ -325,6 +336,71 @@ class FrontController extends Controller
         ]);
         // dd($class->join_link);
         return redirect($class->join_link);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $query = trim($query);
+        if(!$query)
+        {
+            return back();
+        }
+        $data = [];
+        $data['query'] = $query;
+
+        $data['menu_posts'] = MenuItem::where([['status','=','Active'],['name','Like','%'.$query.'%']])
+        ->get()
+        ->map(function($update)
+        {
+            $link = "#";
+            if($update->category)
+            {
+                if($update->category->subGroup)
+                {
+                    if($update->category->subGroup->group)
+                    {
+                        $link = '/'.$update->category->subGroup->group->slug.'/'.$update->category->subGroup->slug.'/'.$update->category->slug.'/'.$update->slug;
+                    }
+                }
+            }
+            return [
+                'id' => $update->id,
+                'title' => $update->name,
+                'slug' => $update->slug,
+                'created_at' => $update->created_at,
+                'link' => $link,
+            ];
+        })
+        ->toArray();
+        
+        $data['blogs'] = Blog::where([['status','=','Published'],['title','Like','%'.$query.'%']])
+        ->get(['id','title','slug','created_at'])
+        ->map(function($b){
+            $b['link'] = '/blogs/'.$b->slug;
+            return $b;
+        })
+        ->toArray();
+
+        $data['books'] = Book::where([['status','=','Active'],['title','Like','%'.$query.'%']])
+        ->get(['id','title','slug','created_at'])
+        ->map(function($b){
+            $b['link'] = '/books/'.$b->slug;
+            return $b;
+        })
+        ->toArray();
+
+        $data['premium_exams'] = ExamHallCategories::where([['status','=','Active'],['title','Like','%'.$query.'%']])
+        ->get(['id','title','slug','created_at'])
+        ->map(function($e){
+            $e['link'] = '/exam-hall/premium/'.$e->slug;
+            return $e;
+        })
+        ->toArray();
+
+        // dd($data);
+        
+        return view('front.search',$data);
     }
 
 }

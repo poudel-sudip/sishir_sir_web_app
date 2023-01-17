@@ -729,6 +729,10 @@ Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamControll
 
 //front ebooks
 Route::get('/books','App\Http\Controllers\FrontController@books');
+Route::get('/books/{slug}','App\Http\Controllers\FrontController@singleBook');
+
+//front search mgmt
+Route::get('/search','App\Http\Controllers\FrontController@search');
 
 //front menu details
 Route::get('/{groupslug}/{menuslug}','App\Http\Controllers\FrontController@getMenuCategories');

@@ -31,7 +31,7 @@
                             <img src="/storage/{{$book->thumbnail}}">
                         </div>
                         <div class="blog-details">
-                            <h4>{{$book->title}}</h4>
+                            <h4><a href="/books/{{$book->slug}}">{{$book->title}}</a></h4>
                             <div class="">{!! $book->description !!}</div>
                             <div>
                                 <span>Price: <strong class="text-success">RS. {{$book->price - $book->discount}}</strong></span>
