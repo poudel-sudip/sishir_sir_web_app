@@ -33,7 +33,8 @@
                             <th>SN</th>
                             <th>Name</th>
                             <th>Order</th>
-                            <th>Menu Item Category</th>
+                            <th>Type</th>
+                            <th>Categories</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
@@ -43,9 +44,14 @@
                             @foreach($subgroups as $subgroup)
                           <tr>
                             <td width="50">{{$i}}</td>
-                            <td>{{$subgroup->name}}</td>
+                            <td>{{ucwords($subgroup->name)}}</td>
                             <td>{{$subgroup->order}}</td>
-                            <td><a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories">Categories ( {{$subgroup->categories->count()}} ) </a></td>
+                            <td>{{ucwords($subgroup->type)}}</td>
+                            <td width="75">
+                              @if($subgroup->type == 'heading')
+                              <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories">Categories ( {{$subgroup->categories->count()}} ) </a>
+                              @endif
+                            </td>
                             <td>
                               @if($subgroup->status == 'Inactive')
                                 <span class="text-danger">{{$subgroup->status}}</span>
@@ -53,7 +59,8 @@
                                 <span class="text-success">{{$subgroup->status}}</span>
                               @endif
                             </td>
-                            <td class="classroom-btn" width="160">
+                            <td class="classroom-btn" width="125">
+                              <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}" class="btn btn-info">Show</a>
                               <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/edit" class="btn btn-danger">Edit</a>
                               <form id="delete-form-{{$subgroup->id}}" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}" method="POST" style="display: inline">
                                 @csrf

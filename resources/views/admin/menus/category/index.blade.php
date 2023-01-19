@@ -34,6 +34,7 @@
                             <th>SN</th>
                             <th>Name</th>
                             <th>Order</th>
+                            <th>Type</th>
                             <th>Menu Items</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -46,7 +47,12 @@
                             <td width="50">{{$i}}</td>
                             <td>{{ucwords($cat->name)}}</td>
                             <td>{{$cat->order}}</td>
-                            <td><a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$cat->id}}/items">Items ( {{$cat->items->count()}} ) </a></td>
+                            <td>{{ucwords($cat->type)}}</td>
+                            <td width="50">
+                              @if($cat->type == 'heading')
+                              <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$cat->id}}/items">Items ( {{$cat->items->count()}} ) </a>
+                              @endif
+                            </td>
                             <td>
                               @if($cat->status == 'Inactive')
                                 <span class="text-danger">{{$cat->status}}</span>
@@ -54,7 +60,8 @@
                                 <span class="text-success">{{$cat->status}}</span>
                               @endif
                             </td>
-                            <td class="classroom-btn" width="100">
+                            <td class="classroom-btn" width="125">
+                              <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$cat->id}}" class="btn btn-info">Show</a>
                               <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$cat->id}}/edit" class="btn btn-danger">Edit</a>
                               <form id="delete-form-{{$cat->id}}" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$cat->id}}" method="POST" style="display: inline">
                                 @csrf

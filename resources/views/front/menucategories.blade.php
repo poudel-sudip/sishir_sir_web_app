@@ -16,20 +16,40 @@
         </div>
     </div>
     <div class="container mb-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="table-responsive table-responsive-md ">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>SN</th>
-                                <th>Title</th>
-                                <th>View</th>
-                            </tr>
-                        </thead>
-                        
-                        @php($i=1)
-                        @forelse($menuCategories as $cat)
+        
+        @if($subMenu->type != 'heading')
+            <div class="blog-container mt-5">
+                <h5>{{$subMenu->name}}</h5>
+                <div>
+                    {!! $subMenu->description !!}
+                </div>
+                @if($subMenu->type == 'file')
+                    <div><a href="/storage/{{$subMenu->fileurl}}" target="_blank" download class="text-primary"> <i class="fa fa-download"></i>  Download</a></div>
+                    <div class="mt-4">
+                        <iframe src="/storage/{{$subMenu->fileurl}}" 
+                            frameborder="0" 
+                            style="width: 100%; min-height:500px" 
+                            target="_parent">
+                        </iframe>
+                    </div>
+                @endif
+            </div>
+        @else
+            <div class="table-responsive table-responsive-md ">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Title</th>
+                            <th>View</th>
+                        </tr>
+                    </thead>
+                    <?php 
+                        $menuCategories = $subMenu->categories()->where('status','=','Active')->orderBy('order')->get(['id','name','slug']); 
+                        $i = 1;
+                    ?>
+
+                    @forelse($menuCategories as $cat)
                         <tbody>
                             <tr>
                                 <td>{{$i}}</td>
@@ -39,30 +59,12 @@
                         </tbody>
                         @php($i++)
                     @empty              
-                    <div>No Menu Categories Published</div>
-                @endforelse
-                    </table>
-                </div>
+                        <div>No Menu Categories Published</div>
+                    @endforelse
+                </table>
             </div>
-        </div>
-        {{-- <div class="blog-container mt-5">
-                <ul>
-                    @forelse($menuItems as $item)
-                    <li>
-                        <h6>{{$item->name}}</h6> 
-                        <div>
-                            @if($item->type == 'text')  
-                                <a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}/{{$item->slug}}">View Details</a>
-                            @else()
-                                <a href="/storage/{{$item->fileurl}}" target="_blank">Download</a>
-                            @endif
-                        </div>
-                    </li>
-                @empty              
-                    <div>No Menu Items Published</div>
-                @endforelse
-            </ul>
-        </div> --}}
+        @endif
+
     </div>
 
 @endsection

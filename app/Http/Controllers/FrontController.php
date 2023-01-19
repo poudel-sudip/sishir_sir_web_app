@@ -45,9 +45,86 @@ class FrontController extends Controller
         $data['books'] = Book::all()->where('status','=','Active')->take(4)->sortBy('order');
         $data['testimonials'] = Testimonial::all()->sortByDesc('created_at')->take(10);
         $data['ads'] = Advertisement::all();
-        $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
-
         // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
+        // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
+        
+        $data['updates'] = [];
+
+        $menu_items = MenuItem::where('status','=','Active')
+        ->orderByDesc('id')
+        ->take(10)
+        ->get(['id','category_id','name','slug','created_at'])
+        ->map(function($update)
+        {
+            $link = "#";
+            if($update->category)
+            {
+                if($update->category->subGroup)
+                {
+                    if($update->category->subGroup->group)
+                    {
+                        $link = '/'.$update->category->subGroup->group->slug.'/'.$update->category->subGroup->slug.'/'.$update->category->slug.'/'.$update->slug;
+                    }
+                }
+            }
+            return (object)[
+                'title' => $update->name,
+                'created_at' => $update->created_at,
+                'link' => $link,
+            ];
+        })
+        ->toArray();
+
+        $menu_categories = MenuItemCategory::where([['status','=','Active'],['type','!=','heading']])
+        ->orderByDesc('id')
+        ->take(10)
+        ->get(['id','subgroup_id','name','slug','created_at'])
+        ->map(function($cat)
+        {
+            $link = "#";
+            if($cat->subGroup)
+            {
+                if($cat->subGroup->group)
+                {
+                    $link = '/'.$cat->subGroup->group->slug.'/'.$cat->subGroup->slug.'/'.$cat->slug;
+                }
+            }
+            return (object)[
+                'title' => $cat->name,
+                'created_at' => $cat->created_at,
+                'link' => $link,
+            ];
+        })
+        ->toArray();
+
+        $menu_submenus = MenuSubGroup::where([['status','=','Active'],['type','!=','heading']])
+        ->orderByDesc('id')
+        ->take(10)
+        ->get(['id','group_id','name','slug','created_at'])
+        ->map(function($cat)
+        {
+            $link = "#";
+            
+            if($cat->group)
+            {
+                $link = '/'.$cat->group->slug.'/'.$cat->slug;
+            }
+            
+            return (object)[
+                'title' => $cat->name,
+                'created_at' => $cat->created_at,
+                'link' => $link,
+            ];
+        })
+        ->toArray();
+
+        $data['updates'] = array_merge($data['updates'], $menu_submenus);
+        $data['updates'] = array_merge($data['updates'], $menu_categories);
+        $data['updates'] = array_merge($data['updates'], $menu_items);
+
+        usort($data['updates'], function($a, $b) {return strcmp($b->created_at,$a->created_at);});
+        $data['updates'] = array_slice($data['updates'], 0, 10, true);
+        
         // dd($data);
         return view('front.index',$data);
     }
@@ -69,8 +146,6 @@ class FrontController extends Controller
         }
         $data['subMenu'] = $subMenu;
 
-        $data['menuCategories'] = $subMenu->categories()->where('status','=','Active')->orderBy('order')->get();
-        // $data['menuItems'] = $subMenu->items()->where('menu_items.status','=','Active')->orderBy('order')->get();
         // dd($data);
         return view('front.menucategories',$data);
     }
@@ -349,7 +424,9 @@ class FrontController extends Controller
         $data = [];
         $data['query'] = $query;
 
-        $data['menu_posts'] = MenuItem::where([['status','=','Active'],['name','Like','%'.$query.'%']])
+        $data['menu_posts'] = [];
+
+        $menu_items = MenuItem::where([['status','=','Active'],['name','Like','%'.$query.'%']])
         ->get()
         ->map(function($update)
         {
@@ -373,7 +450,55 @@ class FrontController extends Controller
             ];
         })
         ->toArray();
+
+        $menu_categories = MenuItemCategory::where([['status','=','Active'],['type','!=','heading'],['name','Like','%'.$query.'%']])
+        ->get()
+        ->map(function($cat)
+        {
+            $link = "#";
+            if($cat->subGroup)
+            {
+                if($cat->subGroup->group)
+                {
+                    $link = '/'.$cat->subGroup->group->slug.'/'.$cat->subGroup->slug.'/'.$cat->slug;
+                }
+            }
+            return [
+                'id' => $cat->id,
+                'title' => $cat->name,
+                'slug' => $cat->slug,
+                'created_at' => $cat->created_at,
+                'link' => $link,
+            ];
+        })
+        ->toArray();
+
+        $menu_submenus = MenuSubGroup::where([['status','=','Active'],['type','!=','heading'],['name','Like','%'.$query.'%']])
+        ->get()
+        ->map(function($cat)
+        {
+            $link = "#";
+            
+            if($cat->group)
+            {
+                $link = '/'.$cat->group->slug.'/'.$cat->slug;
+            }
+            
+            return [
+                'id' => $cat->id,
+                'title' => $cat->name,
+                'slug' => $cat->slug,
+                'created_at' => $cat->created_at,
+                'link' => $link,
+            ];
+        })
+        ->toArray();
+
         
+        $data['menu_posts'] = array_merge($data['menu_posts'], $menu_submenus);
+        $data['menu_posts'] = array_merge($data['menu_posts'], $menu_categories);
+        $data['menu_posts'] = array_merge($data['menu_posts'], $menu_items);
+
         $data['blogs'] = Blog::where([['status','=','Published'],['title','Like','%'.$query.'%']])
         ->get(['id','title','slug','created_at'])
         ->map(function($b){

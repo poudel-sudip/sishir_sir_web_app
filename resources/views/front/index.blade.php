@@ -17,21 +17,8 @@
                         <div class="update-header"><h5><i class="fas fa-clock"></i> अपडेट</h5></div>
                         <div class="update-body">
                             <ul>
-                                @forelse($updates as $update)
-                                    <?php
-                                        $link = "#";
-                                        if($update->category)
-                                        {
-                                            if($update->category->subGroup)
-                                            {
-                                                if($update->category->subGroup->group)
-                                                {
-                                                    $link = '/'.$update->category->subGroup->group->slug.'/'.$update->category->subGroup->slug.'/'.$update->category->slug.'/'.$update->slug;
-                                                }
-                                            }
-                                        }
-                                    ?>                                    
-                                    <li><a href="{{$link}}"><i class="far fa-check-circle"></i>{{ucwords($update->name)}}</a></li>
+                                @forelse($updates as $update)                            
+                                    <li><a href="{{$update->link}}"><i class="far fa-check-circle"></i>{{ucwords($update->title)}}</a></li>
                                 @empty
                                     <li>No Updates Available</li>
                                 @endforelse

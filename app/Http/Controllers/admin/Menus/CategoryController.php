@@ -35,14 +35,39 @@ class CategoryController extends Controller
 
     public function store(Menugroup $group, MenuSubGroup $subgroup, Request $request)
     {
+
         $data = $request->validate([
             'name' => 'string|required',
             'order' => 'numeric|required',
             'status' => 'string|required',
+            'type' => 'string|required',
         ]);
+
+        if($data['type'] == 'text' || $data['type'] == 'Text')
+        {
+            $request->validate(['description' => 'string|required|min:5']);
+            $data['description'] = $request->description;
+        }
+        elseif($data['type'] == 'file' || $data['type'] == 'File')
+        {
+            $request->validate([ 'file' => 'required|file|mimes:pdf' ]);
+            $data['filename'] = $request->file->getClientOriginalName();
+            $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
+        }
+
+        // dd($request->all(),$data);
 
         $subgroup->categories()->create($data);
         return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories');
+    }
+
+    public function show(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category)
+    {
+        $data = [];
+        $data['group'] = $group;
+        $data['subgroup'] = $subgroup;
+        $data['category'] = $category;
+        return view('admin.menus.category.show',$data);
     }
 
     public function edit(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category)
@@ -57,11 +82,52 @@ class CategoryController extends Controller
 
     public function update(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'name' => 'string|required',
             'order' => 'numeric|required',
             'status' => 'string|required',
+            'file' => 'nullable|file|mimes:pdf',
+            'old_file' => 'nullable|string',
+            'filename' => 'nullable|string',
+            'description' => 'string|nullable',
+            'type' => 'string|required',
         ]);
+
+        $data = $request->only(['name','order','status','type']);
+
+        if($data['type'] == 'heading' || $data['type'] == 'Heading')
+        {
+            $data['filename'] = '';
+            $data['fileurl'] = '';
+            $data['description'] = '';
+        }
+        elseif($data['type'] == 'text' || $data['type'] == 'Text')
+        {
+            $request->validate(['description' => 'string|required|min:5']);
+            $data['filename'] = '';
+            $data['fileurl'] = '';
+            $data['description'] = $request->description;
+        }
+        elseif($data['type'] == 'file' || $data['type'] == 'File')
+        {
+            $data['description'] = '';
+
+            if($request->old_file == '' && !isset($request->file))
+            {
+                return back()->withInput()->withErrors(['file' => 'Please select a pdf file']);
+            }
+            elseif(isset($request->file))
+            {
+                $data['filename'] = $request->file->getClientOriginalName();
+                $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
+            }
+            else
+            {
+                $data['fileurl'] = $request->old_file;
+                $data['filename'] = $request->filename;
+            }
+        }
+        else {}
 
         $category->update($data);
         return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories');

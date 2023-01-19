@@ -412,6 +412,7 @@ Route::get('/admin/menus/{group}/sub-groups','App\Http\Controllers\Admin\Menus\S
 Route::get('/admin/menus/{group}/sub-groups/create','App\Http\Controllers\Admin\Menus\SubGroupController@create')->middleware('role:Admin');
 Route::post('/admin/menus/{group}/sub-groups','App\Http\Controllers\Admin\Menus\SubGroupController@store')->middleware('role:Admin');
 Route::get('/admin/menus/{group}/sub-groups/{subgroup}/edit','App\Http\Controllers\Admin\Menus\SubGroupController@edit')->middleware('role:Admin');
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}','App\Http\Controllers\Admin\Menus\SubGroupController@show')->middleware('role:Admin');
 Route::patch('/admin/menus/{group}/sub-groups/{subgroup}','App\Http\Controllers\Admin\Menus\SubGroupController@update')->middleware('role:Admin');
 Route::delete('/admin/menus/{group}/sub-groups/{subgroup}','App\Http\Controllers\Admin\Menus\SubGroupController@destroy')->middleware('role:Admin');
 
@@ -420,6 +421,7 @@ Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories','App\Http\Con
 Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/create','App\Http\Controllers\Admin\Menus\CategoryController@create')->middleware('role:Admin');
 Route::post('/admin/menus/{group}/sub-groups/{subgroup}/categories','App\Http\Controllers\Admin\Menus\CategoryController@store')->middleware('role:Admin');
 Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/edit','App\Http\Controllers\Admin\Menus\CategoryController@edit')->middleware('role:Admin');
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}','App\Http\Controllers\Admin\Menus\CategoryController@show')->middleware('role:Admin');
 Route::patch('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}','App\Http\Controllers\Admin\Menus\CategoryController@update')->middleware('role:Admin');
 Route::delete('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}','App\Http\Controllers\Admin\Menus\CategoryController@destroy')->middleware('role:Admin');
 

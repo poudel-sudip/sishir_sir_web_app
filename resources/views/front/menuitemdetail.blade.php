@@ -24,7 +24,14 @@
                 {!! $menuItem->description !!}
             </div>
             @if($menuItem->type == 'file')
-                <div><a href="/storage/{{$menuItem->fileurl}}" target="_blank" class="text-primary">Download</a></div>
+                <div><a href="/storage/{{$menuItem->fileurl}}" target="_blank" download class="text-primary"> <i class="fa fa-download"></i>  Download</a></div>
+                <div class="mt-4">
+                    <iframe src="/storage/{{$menuItem->fileurl}}" 
+                        frameborder="0" 
+                        style="width: 100%; min-height:500px" 
+                        target="_parent">
+                    </iframe>
+                </div>
             @endif
         </div>
     </div>

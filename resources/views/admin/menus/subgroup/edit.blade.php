@@ -25,8 +25,8 @@
                         @csrf
                         @method('PATCH')
                         <div class="form-group row">
-                            <label for="name" class="col-sm-3 col-form-label">{{ __('Sub Menu Name') }}</label>
-                            <div class="col-md-9">
+                            <label for="name" class="col-sm-4 col-form-label">{{ __('Sub Menu Name') }}</label>
+                            <div class="col-md-8">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $subgroup->name }}" required autocomplete="name" autofocus>
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -37,8 +37,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="order" class="col-sm-3 col-form-label">{{ __('Menu Order') }}</label>
-                            <div class="col-md-9">
+                            <label for="order" class="col-sm-4 col-form-label">{{ __('Sub Menu Order') }}</label>
+                            <div class="col-md-8">
                                 <input id="order" type="number" class="form-control @error('order') is-invalid @enderror" name="order" value="{{ old('order') ?? $subgroup->order }}" required autocomplete="order" >
                                 @error('order')
                                 <span class="invalid-feedback" role="alert">
@@ -49,8 +49,53 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="status" class="col-sm-3 col-form-label">{{ __('Menu Status') }}</label>
-                            <div class="col-md-9">
+                            <label for="type" class="col-sm-4 col-form-label">{{ __('Sub Menu Type') }}</label>
+                            <div class="col-md-8">
+                                <select id="type" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}" required>
+                                    <option value="{{$subgroup->type}}">{{ucwords($subgroup->type)}}</option>
+                                    <option value="">-------------------</option>
+                                    <option value="heading">Heading</option>
+                                    <option value="text">Text</option>
+                                    <option value="file">File</option>
+                                </select>
+                                @error('type')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="file" class="col-sm-4 col-form-label">{{ __('Sub Menu File') }}</label>
+                            <div class="col-md-8">
+                                <small>{{$subgroup->filename}}</small>
+                                <input id="file" type="file" class="form-control @error('file') is-invalid @enderror" name="file" value="{{ old('file')}}"  autocomplete="file" >
+                                <input type="hidden" name="old_file" value="{{$subgroup->fileurl}}">
+                                <input type="hidden" name="filename" value="{{$subgroup->filename}}">
+                                @error('file')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-4 col-form-label">{{ __('Sub Menu Description') }}</label>
+                            <div class="col-md-8">
+                                <textarea name="description" id="description" class="summernote form-control @error('description') is-invalid @enderror">{{old('description') ?? $subgroup->description}}</textarea>
+                                @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="status" class="col-sm-4 col-form-label">{{ __('Sub Menu Status') }}</label>
+                            <div class="col-md-8">
                                 <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required>
                                     <option value="{{$subgroup->status}}">{{$subgroup->status}}</option>
                                     <option value="">-------------------</option>
@@ -65,7 +110,7 @@
                             </div>
                         </div>
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-3">
+                            <div class="col-md-4 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Submit') }}
                                 </button>

@@ -19,6 +19,10 @@ class CreateMenuSubGroupsTable extends Migration
             $table->string('name');
             $table->string('slug')->nullable();
             $table->string('order')->nullable()->default(1);
+            $table->string('type', 100)->nullable()->default('heading');
+            $table->string('filename')->nullable();
+            $table->string('fileurl')->nullable();
+            $table->longText('description')->nullable();
             $table->string('status')->nullable()->default('Inactive');
             $table->timestamps();
         });

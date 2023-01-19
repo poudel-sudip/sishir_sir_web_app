@@ -10,49 +10,48 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         {{-- <a class="navbar-brand" href="#">Hidden brand</a> --}}
         <?php
-          $menus = App\Models\Menu\MenuGroup::where('status','=','Active')->orderBy('order')->get();
+          $parent_menus = App\Models\Menu\MenuGroup::where('status','=','Active')->orderBy('order')->take(5)->get();
         ?>
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
           </li>
-          @foreach($menus as $mainmenu)
+
+          @foreach($parent_menus as $parent)
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">{{ucwords($mainmenu->name)}}</a>
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">{{ucwords($parent->name)}}</a>
               <?php
-                $submenus = $mainmenu->subGroups()->where('status','=','Active')->orderBy('order')->get();
+                $child_menus = $parent->subGroups()->where('status','=','Active')->orderBy('order')->take(10)->get(['id','name','slug','type']);
               ?>
               <ul class="dropdown-menu">
-                @foreach($submenus as $submenu)
+                @foreach($child_menus as $child)
+                  <?php 
+                    $child_link = "#";
+                    if($child->type != 'heading')
+                    {
+                      $child_link = "/".$parent->slug."/".$child->slug;
+                    }
+                  ?>
+                  
                   <li>
-                    <a class="dropdown-item" href="#">{{ucwords($submenu->name)}}</a>
-                    <?php
-                      $childmenus = $submenu->categories()->where('status','=','Active')->orderBy('order')->get();
-                    ?>
-                    <ul>
-                      @foreach($childmenus as $cmenu)
-                        <a href="/{{$mainmenu->slug}}/{{$submenu->slug}}/{{$cmenu->slug}}"> {{ucwords($cmenu->name)}} </a>
-                      @endforeach
-                    </ul>
+                    <a class="dropdown-item" href="{{$child_link}}">{{ucwords($child->name)}}</a>
+                    @if($child->type == 'heading')
+                      <?php
+                        $grandchild_menus = $child->categories()->where('status','=','Active')->orderBy('order')->take(7)->get(['id','name','slug','type']);
+                      ?>
+
+                      <ul style="list-style: none">
+                        @foreach($grandchild_menus as $grandchild)
+                          <li><a href="/{{$parent->slug}}/{{$child->slug}}/{{$grandchild->slug}}"> {{ucwords($grandchild->name)}} </a></li>
+                        @endforeach
+                      </ul>
+                    @endif
                   </li>
                 @endforeach
               </ul>
             </li>
           @endforeach
-          {{-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Loksewa Aayog</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">list 1</a></li>
-              <li><a class="dropdown-item" href="">list 2</a></li>
-              <li><a class="dropdown-item" href="">list 3</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Downloads</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">University Update</a>
-          </li> --}}
+          
           <li class="nav-item">
             <a class="nav-link" href="/books">Shishir's Book</a>
           </li>
