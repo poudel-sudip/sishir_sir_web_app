@@ -30,6 +30,20 @@
                         <div class="col-md-12 mt-3">
                             <div class="blog-full-description">{!! $blog->description !!}</div>
                         </div>
+                        <div class="col-md-12 mt-4">
+                            <h5>Share On:</h5>
+                            {{-- share on media start--}}
+                            <div class="post-share-option">
+                                <a target="_blank" href='//facebook.com/sharer/sharer.php?u={{url(`/blogs/`. $blog->slug)}}'><i class="fab fa-facebook-f"></i></a>
+                                <a target="_blank" href='//twitter.com/intent/tweet?text="{{$blog->title}}"&url="{{url(`/blogs/`. $blog->slug)}}"'><i class="fab fa-twitter"></i></a>
+                                <a target="_blank" href='//reddit.com/submit?title="{{$blog->title}}"&url="{{url(`/blogs/`. $blog->slug)}}"'><i class="fab fa-reddit-alien"></i></a>
+                                <a target="_blank" href='//telegram.me/share/url?url="{{url(`/blogs/`. $blog->slug)}}"&text="{{$blog->title}}"'><i class="fab fa-telegram-plane"></i></a>
+                                <a target="_blank" href='//wa.me/?text="{{url(`/blogs/`. $blog->slug)}}"'><i class="fab fa-whatsapp"></i></a>
+                                <a target="_blank" href='//linkedin.com/sharing/share-offsite?mini="true"&url="{{url(`/blogs/`. $blog->slug)}}"&title="{{$blog->title}}"'><i class="fab fa-linkedin-in"></i></a>
+                                <a target="_blank" href='//pinterest.com/pin/create/button/?url="{{url(`/blogs/`. $blog->slug)}}"'><i class="fab fa-pinterest-p"></i></a>
+                            </div>
+                            {{-- share on media end--}}
+                        </div>
                     </div>
                     <div class="row blogs-comment-container mt-4">
                         <div class="col-md-12">
