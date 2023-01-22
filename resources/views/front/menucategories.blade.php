@@ -23,8 +23,21 @@
                 <div>
                     {!! $subMenu->description !!}
                 </div>
+
+                <div class="post-share-option" >
+                    @php($shareLink = url($mainMenu->slug.'/'.$subMenu->slug))
+                    <h6 class="text-primary my-2 d-inline-block">Share On: </h6>
+                    <a target="_blank" href='//facebook.com/sharer/sharer.php?u={{$shareLink}}'><i class="fab fa-facebook-f"></i></a>
+                    <a target="_blank" href='//twitter.com/intent/tweet?text="{{$subMenu->name}}"&url="{{$shareLink}}"'><i class="fab fa-twitter"></i></a>
+                    <a target="_blank" href='//reddit.com/submit?title="{{$subMenu->name}}"&url="{{$shareLink}}"'><i class="fab fa-reddit-alien"></i></a>
+                    <a target="_blank" href='//telegram.me/share/url?url="{{$shareLink}}"&text="{{$subMenu->name}}"'><i class="fab fa-telegram-plane"></i></a>
+                    <a target="_blank" href='//wa.me/?text="{{$shareLink}}"'><i class="fab fa-whatsapp"></i></a>
+                    <a target="_blank" href='//linkedin.com/sharing/share-offsite?mini="true"&url="{{$shareLink}}"&title="{{$subMenu->name}}"'><i class="fab fa-linkedin-in"></i></a>
+                    <a target="_blank" href='//pinterest.com/pin/create/button/?url="{{$shareLink}}"'><i class="fab fa-pinterest-p"></i></a>
+                </div>
+
                 @if($subMenu->type == 'file')
-                    <div><a href="/storage/{{$subMenu->fileurl}}" target="_blank" download class="text-primary"> <i class="fa fa-download"></i>  Download</a></div>
+                    <div> <a href="/storage/{{$subMenu->fileurl}}" target="_blank" download class="text-primary"> <i class="fa fa-download"></i>  Download</a> </div>
                     <div class="mt-4">
                         <iframe src="/storage/{{$subMenu->fileurl}}" 
                             frameborder="0" 
@@ -42,6 +55,7 @@
                             <th>SN</th>
                             <th>Title</th>
                             <th>View</th>
+                            <th>Share</th>
                         </tr>
                     </thead>
                     <?php 
@@ -54,7 +68,19 @@
                             <tr>
                                 <td>{{$i}}</td>
                                 <td>{{$cat->name}}</td>
-                                <td><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}/{{$cat->slug}}"><i class="fas fa-eye text-success"></i></a> </td>
+                                <td width="50"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}/{{$cat->slug}}"><i class="fas fa-eye text-success"></i></a> </td>
+                                <td style="max-width: 50px">
+                                    <div class="d-inline post-share-option">
+                                        @php($shareLink = url($mainMenu->slug.'/'.$subMenu->slug.'/'.$cat->slug))
+                                        <a target="_blank" href='//facebook.com/sharer/sharer.php?u={{$shareLink}}'><i class="fab fa-facebook-f"></i></a>
+                                        <a target="_blank" href='//twitter.com/intent/tweet?text="{{$cat->name}}"&url="{{$shareLink}}"'><i class="fab fa-twitter"></i></a>
+                                        {{-- <a target="_blank" href='//reddit.com/submit?title="{{$cat->name}}"&url="{{$shareLink}}"'><i class="fab fa-reddit-alien"></i></a> --}}
+                                        {{-- <a target="_blank" href='//telegram.me/share/url?url="{{$shareLink}}"&text="{{$cat->name}}"'><i class="fab fa-telegram-plane"></i></a> --}}
+                                        <a target="_blank" href='//wa.me/?text="{{$shareLink}}"'><i class="fab fa-whatsapp"></i></a>
+                                        {{-- <a target="_blank" href='//linkedin.com/sharing/share-offsite?mini="true"&url="{{$shareLink}}"&title="{{$cat->name}}"'><i class="fab fa-linkedin-in"></i></a> --}}
+                                        {{-- <a target="_blank" href='//pinterest.com/pin/create/button/?url="{{$shareLink}}"'><i class="fab fa-pinterest-p"></i></a> --}}
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                         @php($i++)
