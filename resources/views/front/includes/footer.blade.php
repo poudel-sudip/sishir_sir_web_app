@@ -12,6 +12,10 @@
           <div class="footer-logo">
             <img src="{{ asset('images/logo.png') }}" alt="footer-logo" height="80">
           </div>
+          <div class="visitor-tracker mt-3">
+            <u><span>अन्तिम अध्यावधिक मिती: </span><span id="last_date"></span></u>
+            <div><span>वेबसाईट हेरिएको: </span><strong> 022556</strong></div>
+          </div>
         </div>
         
         <hr>
@@ -90,3 +94,8 @@
 
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0" nonce="KN2MLonG"></script>
+
+<script>
+  const d = new Date();
+  document.getElementById("last_date").innerHTML = d;
+  </script>

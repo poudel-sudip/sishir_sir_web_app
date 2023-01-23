@@ -1,6 +1,21 @@
 @extends('front.layouts.app')
 @section('content')
-    <section class="home-slider">
+    <section class=" mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="marquee-text">
+                        <marquee width="100%" direction="left" height="25px">
+                            @foreach ($updates as $update)
+                            <span style="padding-right: 10rem"><i class="fas fa-star text-danger"></i> {{($update->title)}}</span>
+                            @endforeach
+                        </marquee>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="home-slider mt-2">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
@@ -165,7 +180,7 @@
                             <img src="/storage/{{$book->thumbnail}}" alt="">
                         </div>
                         <div class="ebook-footer">
-                            <a href=""><h4 title="{{ $book->title }}">{{ $book->title }}</h4></a>
+                            <a href="/books"><h4 title="{{ $book->title }}">{{ $book->title }}</h4></a>
                             <p>Price: <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ $book->price - $book->discount }}</strong></p>
                         </div>
                     </div>
