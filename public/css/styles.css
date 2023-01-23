@@ -2628,11 +2628,6 @@ p {
     font-size: 28px;
 }
 
-.news-post .post-share-option a i:hover {
-    color: #ffffff;
-    border-radius: 50%;
-}
-
 .post-share-option a .fa-facebook-f {
     color: #4267B2;
     padding: 5px 10px;
@@ -2694,6 +2689,11 @@ p {
 
 .post-share-option a .fa-pinterest-p:hover {
     background: #E60023;
+}
+
+.post-share-option a i:hover {
+    color: #ffffff !important;
+    border-radius: 5px;
 }
 
 @media (max-width:767px) {
