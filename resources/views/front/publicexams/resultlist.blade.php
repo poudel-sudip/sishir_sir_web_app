@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-
+@section('page_title', 'Results')
 @section('content')
     <div class="container">
         <div class="row">

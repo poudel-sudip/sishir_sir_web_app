@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-
+@section('page_title', 'Enquiry')
 @section('content')
     <div class="container">
         <div class="row">
@@ -33,17 +33,11 @@
                                 @endif
 
                                 <div class="form-group row">
-                                    <label for="course_name" class="col-md-4 col-form-label text-md-right">{{ __('Select a Course') }}</label>
+                                    <label for="course" class="col-md-4 col-form-label text-md-right">{{ __('Enter Your Course') }}</label>
             
                                     <div class="col-md-8">
-                                        <select name="course" id="course_name" class="enroll-form-control @error('course') is-invalid @enderror">
-                                            <option value="">Select an Intrested Course</option>
-                                            @foreach($headercategories as $cat)
-                                                @foreach($cat->courses()->where('status','=','Active')->get()  as $course)
-                                                    <option value="{{$course->id}}">{{$course->name}}</option>
-                                                @endforeach
-                                            @endforeach
-                                        </select>
+                                        <input id="course" type="text" class="form-control @error('course') is-invalid @enderror" name="course" placeholder="Your Interested Course" >
+
                                         @error('course')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

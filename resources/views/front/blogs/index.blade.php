@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-
+@section('page_title', 'Blogs')
 @section('content')
     <div class="container">
         <div class="row">
@@ -13,27 +13,7 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="blog-container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="main-blog">
-                        <div class="blog-image">
-                            <a href="/blogs/{{$last_blog->slug}}"><img src="/storage/{{$last_blog->image}}"></a>
-                        </div>
-                        <div class="blog-details">
-                            <h4><a href="/blogs/{{$last_blog->slug}}">{{$last_blog->title}}</a></h4>
-                            <div class="blog-description">{!! $last_blog->description !!}</div>
-                            <div class="blog-footer-user">
-                                <i class="fa fa-user"></i>
-                                <h5>{{$last_blog->author}}</h5>
-                                <span class="text-primary">at {{date('Y-m-d',strtotime($last_blog->created_at))}}</span>
-                            </div>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+        
     </div>
     {{-- <hr> --}}
     <style>

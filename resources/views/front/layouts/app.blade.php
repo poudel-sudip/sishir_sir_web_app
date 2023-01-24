@@ -6,7 +6,7 @@
 
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <title>@yield('title') | {{ config('app.name') }}</title>
+  <title>@yield('page_title') | {{ config('app.name') }}</title>
   <meta name="description" content="Mr. Shisir Kumar Adhikari is a government job holder public health practitioner, young academician, good trainer and author of Mentor Series Books.">
   <meta name="keywords" content="health loksewa, health, books, shishir adhikari, shishir sir, shisir adhikari, loksewa, loksewa health, shishir loksewa, psc, psc health ">
 
@@ -40,6 +40,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/libraries/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script>
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=63ce36b638862e00198c0bcc&product=inline-share-buttons&source=platform" async="async"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>

@@ -14,7 +14,14 @@
           </div>
           <div class="visitor-tracker mt-3">
             <u><span>अन्तिम अध्यावधिक मिती: </span><span id="last_date"></span></u>
-            <div><span>वेबसाईट हेरिएको: </span><strong> 022556</strong></div>
+            <div>
+              <span>वेबसाईट हेरिएको: </span>
+              <?php 
+                $page = View::getSection('page_title', '');
+                $view_count = Helper::viewCount($page);
+              ?>
+              <strong> {{$view_count->web_view_count}} </strong>
+            </div>
           </div>
         </div>
         
@@ -62,21 +69,6 @@
     </div>
     
   </div>
-{{-- <div class="footer-card-section">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <ul class="footer-card-list">
-          <li><img src="{{ asset('images/card1.jpg') }}" alt="card"></li>
-          <li><img src="{{ asset('images/card2.jpg') }}" alt="card"></li>
-          <li><img src="{{ asset('images/card3.jpg') }}" alt="card"></li>
-          <li><img src="{{ asset('images/card4.jpg') }}" alt="card"></li>
-          <li><img src="{{ asset('images/card5.jpg') }}" alt="card"></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div> --}}
 </footer>
 
 <div class="lower-footer">
@@ -98,4 +90,4 @@
 <script>
   const d = new Date();
   document.getElementById("last_date").innerHTML = d;
-  </script>
+</script>

@@ -1,12 +1,14 @@
 @extends('layouts.app')
-
+@section('page_title','Login')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="auth-container">
                 <div class="user-welcome text-center">
-                    <div class=" justify-content-center"><img class="img-1" src="{{ asset('images/logo-w.png') }}" alt=""></div>
+                    <div class="mb-4 justify-content-center">
+                        <a href="/"><img class="img-1" src="{{ asset('images/logo.png') }}" alt=""></a>
+                    </div>
                     <div class="dont-have-account">
                         <p>Don't have an account ? <br> </p>
                         <a href="{{ route('register') }}">Register Now</a>

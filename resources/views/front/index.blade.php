@@ -1,4 +1,5 @@
 @extends('front.layouts.app')
+@section('page_title','Home')
 @section('content')
     <section class=" mt-4">
         <div class="container">

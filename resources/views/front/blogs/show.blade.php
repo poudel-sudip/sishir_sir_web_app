@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-
+@section('page_title', ucwords($blog->title))
 @section('content')
     <div class="container">
         <div class="row">
@@ -7,8 +7,9 @@
                 <h2>Blog Details</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
-                      <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+                        <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ ('/blogs') }}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ucwords($blog->title)}}</li>
                     </ol>
                 </div>
             </div>
@@ -31,6 +32,7 @@
                             <div class="blog-full-description">{!! $blog->description !!}</div>
                         </div>
                         <div class="col-md-12 mt-4">
+                            {{-- <div class="sharethis-inline-share-buttons"></div> --}}
                             <h5>Share On:</h5>
                             {{-- share on media start--}}
                             <div class="post-share-option">

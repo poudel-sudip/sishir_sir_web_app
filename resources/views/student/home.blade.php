@@ -1,4 +1,5 @@
 @extends('student.layouts.app')
+@section('page_title','Student Home')
 @section('student-title')
     Student Home
 @endsection

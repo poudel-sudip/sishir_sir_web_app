@@ -18,9 +18,9 @@ class CreateStudentEnquiriesTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('contact');
-            $table->string('provience');
-            $table->string('district');
-            $table->bigInteger('course_id');
+            $table->string('provience')->nullable();
+            $table->string('district')->nullable();
+            $table->string('course')->nullable();
             $table->longText('message')->nullable();
             $table->string('status')->nullable();
             $table->longText('remarks')->nullable();

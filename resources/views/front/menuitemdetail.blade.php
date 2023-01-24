@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-
+@section('page_title', ucwords($menuItem->name))
 @section('content')
     <div class="container">
         <div class="row">

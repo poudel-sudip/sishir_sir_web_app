@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-
+@section('page_title', 'All Books')
 @section('content')
 <style>
     .single-blog p, .single-blog .blog-description span {

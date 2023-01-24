@@ -26,6 +26,7 @@ use App\Models\Menu\MenuSubGroup;
 use App\Models\Menu\MenuItemCategory;
 use App\Models\Menu\MenuItem;
 use App\Models\Advertisement;
+use App\Helpers\Helper;
 
 class FrontController extends Controller
 {
@@ -124,7 +125,6 @@ class FrontController extends Controller
 
         usort($data['updates'], function($a, $b) {return strcmp($b->created_at,$a->created_at);});
         $data['updates'] = array_slice($data['updates'], 0, 10, true);
-        
         // dd($data);
         return view('front.index',$data);
     }

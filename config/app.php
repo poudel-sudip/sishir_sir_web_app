@@ -232,6 +232,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
+        
+        'Helper' =>  App\Helpers\Helper::class,
     ],
 
 ];

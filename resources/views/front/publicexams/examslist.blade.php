@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-
+@section('page_title', 'Exams')
 @section('content')
 <style>
     #free-exam ul{
