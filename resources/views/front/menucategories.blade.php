@@ -75,13 +75,10 @@
                                 <td style="max-width: 50px">
                                     <div class="d-inline post-share-option">
                                         @php($shareLink = url($mainMenu->slug.'/'.$subMenu->slug.'/'.$cat->slug))
-                                        <a target="_blank" href='//facebook.com/sharer/sharer.php?u={{$shareLink}}'><i class="fab fa-facebook-f"></i></a>
-                                        <a target="_blank" href='//twitter.com/intent/tweet?text="{{$cat->name}}"&url="{{$shareLink}}"'><i class="fab fa-twitter"></i></a>
-                                        {{-- <a target="_blank" href='//reddit.com/submit?title="{{$cat->name}}"&url="{{$shareLink}}"'><i class="fab fa-reddit-alien"></i></a> --}}
-                                        {{-- <a target="_blank" href='//telegram.me/share/url?url="{{$shareLink}}"&text="{{$cat->name}}"'><i class="fab fa-telegram-plane"></i></a> --}}
-                                        <a target="_blank" href='//wa.me/?text="{{$shareLink}}"'><i class="fab fa-whatsapp"></i></a>
-                                        {{-- <a target="_blank" href='//linkedin.com/sharing/share-offsite?mini="true"&url="{{$shareLink}}"&title="{{$cat->name}}"'><i class="fab fa-linkedin-in"></i></a> --}}
-                                        {{-- <a target="_blank" href='//pinterest.com/pin/create/button/?url="{{$shareLink}}"'><i class="fab fa-pinterest-p"></i></a> --}}
+                                        <a href="javascript:void();" onclick="createPopupWin('//facebook.com/sharer/sharer.php?u={{$shareLink}}&t={{$cat[`name`]}}')"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="javascript:void();" onclick="createPopupWin('//twitter.com/intent/tweet?text={{$cat[`name`]}}&url={{$shareLink}}')"><i class="fab fa-twitter"></i></a>
+                                        <a href="javascript:void();" onclick="createPopupWin('//wa.me/?text={{$shareLink}}')"><i class="fab fa-whatsapp"></i></a>
+                                        <a href="javascript:void();" onclick="createPopupWin('//pinterest.com/pin/create/button/?url={{$shareLink}}')"><i class="fab fa-pinterest-p"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -95,5 +92,15 @@
         @endif
 
     </div>
+
+    <script>
+        function createPopupWin(url) {
+            let height = 400;
+            let width = 800;
+            var left = ( screen.width - width ) / 2;
+            var top = ( screen.height - height ) / 2;
+            var newWindow = window.open( url, "Center Window", 'resizable = yes, width=' + width + ', height=' + height + ', top='+ top + ', left=' + left);
+        }
+    </script>
 
 @endsection
