@@ -5,6 +5,7 @@ namespace App\Helpers;
 use Illuminate\Container\Container;
 use Illuminate\Support\Collection;
 use App\Models\PostViewCounter;
+use App\Models\User;
 
 class Helper
 {
@@ -30,5 +31,10 @@ class Helper
         }
                 
         return (object)$data;
+    }
+
+    public static function lastUpdated()
+    {
+        return now();
     }
 }

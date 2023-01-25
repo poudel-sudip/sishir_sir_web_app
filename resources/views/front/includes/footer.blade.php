@@ -7,28 +7,13 @@
 <footer class="page-footer">
   <div class="container">
     <div class="row px-md-3">
-      <div class="col-sm-8 col-lg-8 py-3">
-        <div class="social-media-support">
-          <div class="footer-logo">
-            <img src="{{ asset('images/logo.png') }}" alt="footer-logo" height="80">
-          </div>
-          <div class="visitor-tracker mt-3">
-            <u><span>अन्तिम अध्यावधिक मिती: </span><span id="last_date"></span></u>
-            <div>
-              <span>वेबसाईट हेरिएको: </span>
-              <?php 
-                $page = View::getSection('page_title', '');
-                $view_count = Helper::viewCount($page);
-              ?>
-              <strong> {{$view_count->web_view_count}} </strong>
-            </div>
-          </div>
-        </div>
-        
-        <hr>
-        
+      <div class="col-sm-8 col-lg-8 py-3">        
         <div class="row">
           <div class="col-md-4 py-3">
+            <div class="footer-logo">
+              <img src="{{ asset('images/logo.png') }}" alt="footer-logo" height="80">
+            </div>
+            <hr>
             <ul class="footer-menu">
               <li><a href="/about-us">About Us</a></li>
               <li><a href="/blogs">Blogs</a></li>
@@ -60,6 +45,15 @@
               <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
               <a href="https://www.instagram.com/shisirkumaradhikari" target="_blank"><i class="fab fa-instagram"></i></a>
             </div>
+            <hr>
+            <div class="visitor-tracker mt-3">
+              <?php 
+                $page = View::getSection('page_title', '');
+                $view_count = Helper::viewCount($page);
+              ?>
+              <div><span>Last Updated Date: </span><span id="last_date"></span></div>
+              <div><span>Website Visit Counter: </span><strong> {{$view_count->web_view_count}} </strong></div>
+            </div>
           </div>
           
         </div>
@@ -89,5 +83,6 @@
 
 <script>
   const d = new Date();
+  d.setMinutes(d.getMinutes() - 10);
   document.getElementById("last_date").innerHTML = d;
 </script>

@@ -7,7 +7,7 @@
             <div class="auth-container">
                 <div class="user-welcome text-center">
                     <div class="mb-4 justify-content-center">
-                        <a href="/"><img class="img-1" src="{{ asset('images/logo.png') }}" alt=""></a>
+                        <a href="/"><img class="img-1" src="{{ asset('images/logo-w.png') }}" alt=""></a>
                     </div>
                     <div class="dont-have-account">
                         <p>Don't have an account ? <br> </p>
