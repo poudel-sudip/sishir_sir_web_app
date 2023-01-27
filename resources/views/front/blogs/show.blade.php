@@ -5,7 +5,7 @@
 @if($blog->image)
 @section('og-image', asset('/storage/'.$blog->image))
 @endif
-@section('og-description', strip_tags($blog->description))
+@section('og-description', strip_tags(str_replace('<', '  <', $blog->description)))
 
 @section('content')
     <div class="container">

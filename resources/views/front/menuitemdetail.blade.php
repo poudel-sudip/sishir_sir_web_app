@@ -3,7 +3,7 @@
 @section('page_title', ucwords($menuItem->name))
 @section('og-title', ucwords($menuItem->name))
 @section('og-url', url('/'.$mainMenu->slug.'/'.$subMenu->slug.'/'.$menuCategory->slug.'/'.$menuItem->slug))
-@section('og-description', strip_tags($menuItem->description) ? strip_tags($menuItem->description) : $menuItem->name )
+@section('og-description', strip_tags($menuItem->description) ? strip_tags(str_replace('<', '  <', $menuItem->description)) : $menuItem->name )
 
 @section('content')
     <div class="container">

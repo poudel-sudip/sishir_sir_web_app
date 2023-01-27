@@ -32,7 +32,7 @@
                         </div>
                         <div class="blog-details">
                             <h4><a href="/blogs/{{$blog->slug}}">{{$blog->title}}</a></h4>
-                            <div class="blog-description">{!! $blog->description !!}</div>
+                            <div class="blog-description">{!! Helper::excerpt($blog->description,220) !!}</div>
                             <div class="blog-footer">
                                 <div><i class="fa fa-commenting text-primary" aria-hidden="true"></i> <span class="text-success">{{$blog->comments->where('status','Published')->count()}}</span></div>
                                 <div class="text-end">Published: <span class="text-primary"> {{date('Y-m-d',strtotime($blog->created_at))}}</span></div>

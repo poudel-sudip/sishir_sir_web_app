@@ -37,4 +37,33 @@ class Helper
     {
         return now();
     }
+
+    public static function excerpt($content, $max_length = 500, $cut_off = '...', $keep_word = true)
+    {
+        $content = strip_tags(str_replace('<', '  <', $content));
+
+        if(strlen($content) <= $max_length) 
+        {
+            return $content;
+        }
+
+        if(strlen($content) > $max_length) 
+        {
+            if($keep_word) {
+                $content = substr($content, 0, $max_length + 1);
+
+                if($last_space = strrpos($content, ' ')) {
+                    $content = substr($content, 0, $last_space);
+                    $content = rtrim($content);
+                    $content .=  $cut_off;
+                }
+            } else {
+                $content = substr($content, 0, $max_length);
+                $content = rtrim($content);
+                $content .=  $cut_off;
+            }
+        }
+
+        return $content;
+    }
 }

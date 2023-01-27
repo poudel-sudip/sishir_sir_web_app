@@ -137,7 +137,7 @@
                         </div>
                         <div class="blog-footer">
                             <h3>{{$last_blog->title}}</h3>
-                            <div class="blog-footer-details">{!! $last_blog->description !!}</div>
+                            <div class="blog-footer-details">{!! Helper::excerpt($last_blog->description,500) !!}</div>
                             <div class="mb-3 mt-2"><small class="text-primary">Published: {{date('Y-m-d',strtotime($last_blog->created_at))}}</small> <small class="text-success" style="float: right">By: {{$last_blog->author}}</small></div>
                             <div class="blog-details"><a href="/blogs/{{$last_blog->slug}}">View Details</a></div>
                         </div>
