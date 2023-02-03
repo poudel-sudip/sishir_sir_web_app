@@ -17,6 +17,7 @@
             <ul class="footer-menu">
               <li><a href="/about-us">About Us</a></li>
               <li><a href="/blogs">Blogs</a></li>
+              <li><a href="/results">Results</a></li>
               <li><a href="/privacy">Terms & Condition</a></li>
               <li><a href="/privacy">Privacy</a></li>
               <li><a href="/contact">Contact Us</a></li>

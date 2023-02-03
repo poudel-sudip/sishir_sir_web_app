@@ -23,6 +23,7 @@ class CreateMenuSubGroupsTable extends Migration
             $table->string('filename')->nullable();
             $table->string('fileurl')->nullable();
             $table->longText('description')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->string('status')->nullable()->default('Inactive');
             $table->timestamps();
         });

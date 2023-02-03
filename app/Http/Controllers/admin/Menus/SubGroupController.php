@@ -34,6 +34,7 @@ class SubGroupController extends Controller
             'order' => 'numeric|required',
             'status' => 'string|required',
             'type' => 'string|required',
+            'thumbnail' => 'image|nullable',
         ]);
 
         if($data['type'] == 'text' || $data['type'] == 'Text')
@@ -46,6 +47,11 @@ class SubGroupController extends Controller
             $request->validate([ 'file' => 'required|file|mimes:pdf' ]);
             $data['filename'] = $request->file->getClientOriginalName();
             $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
+        }
+
+        if(isset($request->thumbnail))
+        {
+            $data['thumbnail'] = $request->thumbnail->store('uploads','public');
         }
 
         $group->subGroups()->create($data);
@@ -80,8 +86,10 @@ class SubGroupController extends Controller
             'filename' => 'nullable|string',
             'description' => 'string|nullable',
             'type' => 'string|required',
+            'thumbnail' => 'image|nullable',
+            'old_thumbnail' => 'string|nullable',
         ]);
-
+        
         $data = $request->only(['name','order','status','type']);
 
         if($data['type'] == 'heading' || $data['type'] == 'Heading')
@@ -117,6 +125,12 @@ class SubGroupController extends Controller
             }
         }
         else {}
+
+        $data['thumbnail'] = $request->old_thumbnail;
+        if(isset($request->thumbnail))
+        {
+            $data['thumbnail'] = $request->thumbnail->store('uploads','public');
+        }
 
         $subgroup->update($data);
         return redirect('/admin/menus/'.$group->id.'/sub-groups');

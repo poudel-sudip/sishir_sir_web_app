@@ -17,7 +17,7 @@
     </div>
     <section class="about-page">
         <div class="container">
-            <div>TQ= Total Question, LQ= Leaved Questions, CQ= Correct Questions, WQ= Wrong Questions, MO= Marks Obtained</div>
+            <div>TQ= Total Question, FM= Full Marks, LQ= Leaved Questions, CQ= Correct Questions, WQ= Wrong Questions, MO= Marks Obtained</div>
             <div class="public-exam-section table-responsive">
                 <table class="table table-bordered" id="table-courses">
                     <thead>
@@ -25,6 +25,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>TQ</th>
+                        <th>FM</th>
                         <th>LQ</th>
                         <th>CQ</th>
                         <th>WQ</th>
@@ -38,6 +39,7 @@
                         <td>{{ $result->id }}</td>
                         <td>{{ $result->name }}</td>
                         <td>{{ $result->total_questions ?? '' }}</td>
+                        <td>{{ ($result->total_questions * ($exam->exam->marks_per_question ?? 1)) }}</td>
                         <td>{{ $result->leaved_questions ?? '' }} </td>
                         <td>{{ $result->correct_questions ?? '' }} </td>
                         <td>{{ $result->wrong_questions ?? '' }} </td>

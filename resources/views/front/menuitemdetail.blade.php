@@ -4,6 +4,9 @@
 @section('og-title', ucwords($menuItem->name))
 @section('og-url', url('/'.$mainMenu->slug.'/'.$subMenu->slug.'/'.$menuCategory->slug.'/'.$menuItem->slug))
 @section('og-description', strip_tags($menuItem->description) ? strip_tags(str_replace('<', '  <', $menuItem->description)) : $menuItem->name )
+@if($menuItem->thumbnail)
+@section('og-image', asset('/storage/'.$menuItem->thumbnail))
+@endif
 
 @section('content')
     <div class="container">

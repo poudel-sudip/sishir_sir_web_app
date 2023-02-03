@@ -41,6 +41,7 @@ class CategoryController extends Controller
             'order' => 'numeric|required',
             'status' => 'string|required',
             'type' => 'string|required',
+            'thumbnail' => 'image|nullable',
         ]);
 
         if($data['type'] == 'text' || $data['type'] == 'Text')
@@ -53,6 +54,11 @@ class CategoryController extends Controller
             $request->validate([ 'file' => 'required|file|mimes:pdf' ]);
             $data['filename'] = $request->file->getClientOriginalName();
             $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
+        }
+
+        if(isset($request->thumbnail))
+        {
+            $data['thumbnail'] = $request->thumbnail->store('uploads','public');
         }
 
         // dd($request->all(),$data);
@@ -91,6 +97,8 @@ class CategoryController extends Controller
             'filename' => 'nullable|string',
             'description' => 'string|nullable',
             'type' => 'string|required',
+            'thumbnail' => 'image|nullable',
+            'old_thumbnail' => 'string|nullable',
         ]);
 
         $data = $request->only(['name','order','status','type']);
@@ -129,6 +137,12 @@ class CategoryController extends Controller
         }
         else {}
 
+        $data['thumbnail'] = $request->old_thumbnail;
+        if(isset($request->thumbnail))
+        {
+            $data['thumbnail'] = $request->thumbnail->store('uploads','public');
+        }
+        
         $category->update($data);
         return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories');
     }

@@ -46,6 +46,7 @@ class ItemController extends Controller
             'file' => 'nullable|file|mimes:pdf',
             'description' => 'string|nullable',
             'type' => 'string|required',
+            'thumbnail' => 'image|nullable',
         ]);
         $data = $request->only(['name','order','status','description','type']);
         $data['filename'] = '';
@@ -60,6 +61,12 @@ class ItemController extends Controller
             $data['filename'] = $request->file->getClientOriginalName();
             $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
         }
+
+        if(isset($request->thumbnail))
+        {
+            $data['thumbnail'] = $request->thumbnail->store('uploads','public');
+        }
+
         $category->items()->create($data);
         return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items');
     }
@@ -85,6 +92,8 @@ class ItemController extends Controller
             'filename' => 'nullable|string',
             'description' => 'string|nullable',
             'type' => 'string|required',
+            'thumbnail' => 'image|nullable',
+            'old_thumbnail' => 'string|nullable',
         ]);
         $data = $request->only(['name','order','status','filename','type','description']);
         $data['fileurl'] = $request->old_file;
@@ -98,6 +107,13 @@ class ItemController extends Controller
             $data['filename'] = $request->file->getClientOriginalName();
             $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
         }
+        
+        $data['thumbnail'] = $request->old_thumbnail;
+        if(isset($request->thumbnail))
+        {
+            $data['thumbnail'] = $request->thumbnail->store('uploads','public');
+        }
+
         // dd($request->all(),$data);
         $item->update($data);
         return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items');

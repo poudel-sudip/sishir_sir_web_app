@@ -55,6 +55,10 @@
                             <div>{{$category->status}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Thumbnail:</div>
+                            <div><img src="/storage/{{$category->thumbnail}}" alt="" class="img img-fluid" style="max-height:200px"></div>
+                        </div>
+                        <div class="course-row">
                             <div>Menu Category  Description:</div>
                             <div>{!! $category->description !!}</div>
                         </div>

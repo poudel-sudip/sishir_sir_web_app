@@ -23,6 +23,7 @@ class CreateMenuItemsTable extends Migration
             $table->string('fileurl')->nullable();
             $table->longText('description')->nullable();
             $table->string('order')->nullable()->default(1);
+            $table->string('thumbnail')->nullable();
             $table->string('status')->nullable()->default('Inactive');
             $table->timestamps();
         });

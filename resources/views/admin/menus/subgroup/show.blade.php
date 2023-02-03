@@ -50,6 +50,10 @@
                             <div>{{$subgroup->status}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Thumbnail:</div>
+                            <div><img src="/storage/{{$subgroup->thumbnail}}" alt="" class="img img-fluid" style="max-height:200px"></div>
+                        </div>
+                        <div class="course-row">
                             <div>Sub Menu Description:</div>
                             <div>{!! $subgroup->description !!}</div>
                         </div>

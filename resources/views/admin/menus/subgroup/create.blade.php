@@ -88,6 +88,18 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="thumbnail" class="col-sm-4 col-form-label">Thumbnail <small>(875*667 : 300kb)</small></label>
+                            <div class="col-md-8">
+                                <input id="thumbnail" type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" value="{{ old('thumbnail') ?? 1  }}" autocomplete="thumbnail" >
+                                @error('thumbnail')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="status" class="col-sm-4 col-form-label">{{ __('Sub Menu Status') }}</label>
                             <div class="col-md-8">
                                 <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required>

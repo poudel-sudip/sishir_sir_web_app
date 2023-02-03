@@ -59,6 +59,10 @@
                             <div>{{$item->status}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Thumbnail:</div>
+                            <div><img src="/storage/{{$item->thumbnail}}" alt="" class="img img-fluid" style="max-height:200px"></div>
+                        </div>
+                        <div class="course-row">
                             <div>Menu Description:</div>
                             <div>{!! $item->description !!}</div>
                         </div>
