@@ -110,9 +110,23 @@
           <li class="nav-item">
             <a class="nav-link" href="/books">My Book</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/public-exams">Mock Test</a>
+          
+           <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Mock Test</a>
+              <ul class="dropdown-menu">
+                  <li class="parent-dropdown">
+                    <a class="dropdown-item" aria-current="page" href="/public-exams">Exams</a>
+                  </li>
+                  <li class="parent-dropdown">
+                    <a class="dropdown-item" aria-current="page" href="/results">Results</a>
+                  </li>
+              </ul>
           </li>
+          
+          <!--<li class="nav-item">-->
+          <!--  <a class="nav-link" href="/public-exams">Mock Test</a>-->
+          <!--</li>-->
+          
           <li class="nav-item">
             <a class="nav-link" href="/blogs">Blogs</a>
           </li>

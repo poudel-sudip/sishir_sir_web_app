@@ -87,6 +87,7 @@
                     <div class="nav nav-tabs mock-premium" id="nav-tab" role="tablist">
                       <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Premium</button>
                       <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Free</button>
+                      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-result" type="button" role="tab" aria-controls="nav-result" aria-selected="false">Results</button>
                     </div>
                   </nav>
                   <div class="tab-content pt-4" id="nav-tabContent">
@@ -112,10 +113,18 @@
                             @endforeach
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="nav-result" role="tabpanel" aria-labelledby="nav-result-tab" tabindex="0">
+                        <div class="row">
+                            <div class="col-md-6 mb-5">
+                               {{-- <h3 class="mb-3 mock-heading">Results</h3> --}}
+                                <a href="/results" class="mock-btn mock-btn1">View Exam Results...</a>
+                            </div>
+                        </div>
+                    </div>
                   </div>
                   <div class="row">
                     <div class="col-12 text-end">
-                        <a href="/public-exams" class="btn" style="background:#1375b9; color:#fff;">View all...</a>
+                        <a href="/public-exams" class="btn" style="background:#1375b9; color:#fff;">View all exams...</a>
                     </div>
                 </div>
             </div>
