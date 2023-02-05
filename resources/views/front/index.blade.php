@@ -13,6 +13,9 @@
                         </marquee>
                     </div>
                 </div>
+                <div class="col-md-4 text-end">
+                    <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=1375b9&aj_time=yes&font_size=18&line_brake=0&bikram_sambat=0&nst=no&api=500122n569" width="307" height="22"></iframe>
+                </div>
             </div>
         </div>
     </section>
