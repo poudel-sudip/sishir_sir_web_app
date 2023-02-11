@@ -1,14 +1,14 @@
 @extends('front.layouts.app')
 @section('page_title','Home')
 @section('content')
-    <section class=" mt-4">
+    <section class="mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     <div class="marquee-text">
                         <marquee width="100%" direction="left" height="25px">
                             @foreach ($updates as $update)
-                            <span style="padding-right: 10rem"><i class="fas fa-star text-danger"></i> {{($update->title)}}</span>
+                            <span style="padding-right: 10rem"><a href="{{$update->link}}"><i class="fas fa-star text-danger"></i> {{($update->title)}}</a></span>
                             @endforeach
                         </marquee>
                     </div>

@@ -3079,11 +3079,21 @@ p {
 .mcq-check-option .mcq-option {
     font-weight: 500;
 }
-
+.mcq-qstn-row label, .mcq-qstn-row label p{
+    text-transform: uppercase;
+    color: #000000;
+}
+.mcq-question-list h6,
+.mcq-question-list h5,
+.mcq-solution-sheet h5 {
+    color: #1375b9 !important;
+    font-size: 18px;
+}
 .mcq-question-list h6 p,
 .mcq-question-list h5 p,
 .mcq-solution-sheet h5 p {
     display: inline;
+    color: #1375b9;
 }
 
 .mcq-question-list {
@@ -5129,11 +5139,16 @@ label.star:before {
 /* shishir-css */
 .shishir-header .main-nav{
     background: #1375b9;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 .shishir-header .main-nav .navbar-nav .nav-link{
     color: #ffffff;
     font-size: 17px;
-    padding: .2rem 1.5rem 0.2rem .2rem !important;
+    padding: 0.7rem .8rem 0.7rem .8rem !important;
+}
+.shishir-header .main-nav .navbar-nav .nav-link:hover{
+    background: #0c4e7b;
 }
 .auth-nav .navbar{
    float: right;
@@ -5212,7 +5227,7 @@ label.star:before {
     padding: 30px 30px 20px;
 }
 .mocktest-container .mock-heading{
-    color: rgb(142, 141, 141);
+    color: rgb(49 48 48);
     font-size: 20px;
 }
 .mock-premium .nav-link{
@@ -5516,12 +5531,20 @@ label.star:before {
     display: block;
 }
 .sub-drop-icon::after{
-    font-family: "Font Awesome 5 Free";
+    /* font-family: "Font Awesome 5 Free";
     content: "\f054";
     position: absolute;
     right: 10px;
     font-size: 12px;
-    padding-top: 5px;
+    padding-top: 5px; */
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
 }
 .marquee-text{
     border-left: 5px solid #0077b5;
