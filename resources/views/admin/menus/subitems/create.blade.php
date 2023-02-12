@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Create Menu Item
+    Create Menu Sub Item
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Create Menu Item</h3>
+            <h3 class="page-title">Create Menu Sub Item</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
@@ -14,6 +14,7 @@
                 <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups') }}">Sub Groups</a></li>
                 <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories') }}">Categories</a></li>
                 <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items') }}">Items</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items/'.$item->id.'/sub-items') }}">Sub Items</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Add </li>
                 </ol>
             </nav>
@@ -21,12 +22,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Add Menu Item | {{$category->name}} | {{$subgroup->name}} | {{$group->name}}</div>
+                    <div class="card-header">Add Menu Sub Item | {{$item->name}} | {{$category->name}} | {{$subgroup->name}} | {{$group->name}}</div>
                   <div class="card-body">
-                    <form class="forms-sample" method="POST" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$category->id}}/items" enctype="multipart/form-data">
+                    <form class="forms-sample" method="POST" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$category->id}}/items/{{$item->id}}/sub-items" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
-                            <label for="name" class="col-sm-4 col-form-label">{{ __('Item Name') }}</label>
+                            <label for="name" class="col-sm-4 col-form-label">{{ __('Sub Item Name') }}</label>
                             <div class="col-md-8">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                 @error('name')
@@ -38,7 +39,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="order" class="col-sm-4 col-form-label">{{ __('Item Order') }}</label>
+                            <label for="order" class="col-sm-4 col-form-label">{{ __('Sub Item Order') }}</label>
                             <div class="col-md-8">
                                 <input id="order" type="number" class="form-control @error('order') is-invalid @enderror" name="order" value="{{ old('order') ?? 1  }}" required autocomplete="order" >
                                 @error('order')
@@ -50,10 +51,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="type" class="col-sm-4 col-form-label">{{ __('Item Type') }}</label>
+                            <label for="type" class="col-sm-4 col-form-label">{{ __('Sub Item Type') }}</label>
                             <div class="col-md-8">
                                 <select id="type" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}" required>
-                                    <option value="heading">Heading</option>
+                                    {{-- <option value="heading">Heading</option> --}}
                                     <option value="file">file</option>
                                     <option value="text">text</option>
                                 </select>
@@ -66,7 +67,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="file" class="col-sm-4 col-form-label">{{ __('Item File') }}</label>
+                            <label for="file" class="col-sm-4 col-form-label">{{ __('Sub Item File') }}</label>
                             <div class="col-md-8">
                                 <input id="file" type="file" class="form-control @error('file') is-invalid @enderror" name="file" value="{{ old('file') ?? 1  }}" autocomplete="file" >
                                 @error('file')
@@ -78,7 +79,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="description" class="col-sm-4 col-form-label">{{ __('Item Description') }}</label>
+                            <label for="description" class="col-sm-4 col-form-label">{{ __('Sub Item Description') }}</label>
                             <div class="col-md-8">
                                 <textarea name="description" id="description" class="summernote form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
                                 @error('description')
@@ -102,7 +103,7 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label for="status" class="col-sm-4 col-form-label">{{ __('Item Status') }}</label>
+                            <label for="status" class="col-sm-4 col-form-label">{{ __('Sub Item Status') }}</label>
                             <div class="col-md-8">
                                 <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required>
                                     <option value="Inactive">Inactive</option>

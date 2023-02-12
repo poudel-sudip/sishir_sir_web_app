@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="container mb-5">
+    <div class="container my-5">
         
         @if($subMenu->type != 'heading')
             <div class="blog-container mt-5">

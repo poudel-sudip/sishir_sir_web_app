@@ -28,7 +28,7 @@
         
         @if($menuCategory->type != 'heading')
         
-            <div class="blog-container mt-5">
+            <div class="blog-container my-5">
                 <h4 class="mb-2">{{$menuCategory->name}}</h4>
                 <div>
                     {!! $menuCategory->description !!}

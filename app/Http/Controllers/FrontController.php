@@ -25,6 +25,7 @@ use App\Models\Menu\MenuGroup;
 use App\Models\Menu\MenuSubGroup;
 use App\Models\Menu\MenuItemCategory;
 use App\Models\Menu\MenuItem;
+use App\Models\Menu\MenuSubItem;
 use App\Models\Advertisement;
 use App\Helpers\Helper;
 
@@ -213,6 +214,48 @@ class FrontController extends Controller
 
         // dd($data);
         return view('front.menuitemdetail',$data);
+    }
+
+    public function getMenuSubItemDetail($groupslug, $menuslug, $catslug, $itemslug, $subitemslug)
+    {
+        $data = [];
+        $mainMenu = MenuGroup::where([['slug',$groupslug],['status','Active']])->first();
+        if(!$mainMenu)
+        {
+            abort(404);
+        }
+        $data['mainMenu'] = $mainMenu;
+
+        $subMenu = MenuSubGroup::where([['slug',$menuslug],['status','Active']])->first();
+        if(!$subMenu)
+        {
+            abort(404);
+        }
+        $data['subMenu'] = $subMenu;
+        
+        $menuCategory = MenuItemCategory::where([['slug',$catslug],['status','Active']])->first();
+        if(!$menuCategory)
+        {
+            abort(404);
+        }
+        $data['menuCategory'] = $menuCategory;
+
+        $menuItem = MenuItem::where([['slug',$itemslug],['status','Active']])->first();
+        if(!$menuItem)
+        {
+            abort(404);
+        }
+        $data['menuItem'] = $menuItem;
+
+        $menuSubItem = MenuSubItem::where([['slug',$subitemslug],['status','Active']])->first();
+        if(!$menuSubItem)
+        {
+            abort(404);
+        }
+        $data['menuSubItem'] = $menuSubItem;
+
+        // dd($data);
+        return view('front.menusubitemdetail',$data);
     }
 
     public function popularcourse()

@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class MenuItem extends Model
+class MenuSubItem extends Model
 {
     use HasFactory;
     protected $guarded = [];
@@ -24,15 +23,8 @@ class MenuItem extends Model
         });
     }
 
-    public function category(): BelongsTo
+    public function item(): BelongsTo
     {
-        return $this->belongsTo(MenuItemCategory::class, 'category_id');
+        return $this->belongsTo(MenuItem::class, 'item_id');
     }
-
-    public function subItems(): HasMany
-    {
-        return $this->hasMany(MenuSubItem::class, 'item_id');
-    }
-
-
 }

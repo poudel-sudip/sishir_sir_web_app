@@ -56,6 +56,7 @@
                                 <select id="type" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') ?? $item->type }}" required>
                                     <option value="{{$item->type}}">{{$item->type}}</option>
                                     <option value="">-----------------</option>
+                                    <option value="heading">Heading</option>
                                     <option value="file">file</option>
                                     <option value="text">text</option>
                                 </select>

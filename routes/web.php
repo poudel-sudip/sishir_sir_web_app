@@ -435,6 +435,15 @@ Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/ite
 Route::patch('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}','App\Http\Controllers\Admin\Menus\ItemController@update')->middleware('role:Admin');
 Route::delete('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}','App\Http\Controllers\Admin\Menus\ItemController@destroy')->middleware('role:Admin');
 
+// admin menu sub-item management 
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}/sub-items','App\Http\Controllers\Admin\Menus\SubItemController@index')->middleware('role:Admin');
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}/sub-items/create','App\Http\Controllers\Admin\Menus\SubItemController@create')->middleware('role:Admin');
+Route::post('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}/sub-items','App\Http\Controllers\Admin\Menus\SubItemController@store')->middleware('role:Admin');
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}/sub-items/{subitem}/edit','App\Http\Controllers\Admin\Menus\SubItemController@edit')->middleware('role:Admin');
+Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}/sub-items/{subitem}','App\Http\Controllers\Admin\Menus\SubItemController@show')->middleware('role:Admin');
+Route::patch('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}/sub-items/{subitem}','App\Http\Controllers\Admin\Menus\SubItemController@update')->middleware('role:Admin');
+Route::delete('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}/sub-items/{subitem}','App\Http\Controllers\Admin\Menus\SubItemController@destroy')->middleware('role:Admin');
+
 // admin personal books management 
 Route::get('/admin/books','App\Http\Controllers\Admin\Books\BookController@index')->middleware('role:Admin');
 Route::get('/admin/books/create','App\Http\Controllers\Admin\Books\BookController@create')->middleware('role:Admin');
@@ -740,6 +749,7 @@ Route::get('/search','App\Http\Controllers\FrontController@search');
 Route::get('/{groupslug}/{menuslug}','App\Http\Controllers\FrontController@getMenuCategories');
 Route::get('/{groupslug}/{menuslug}/{catslug}','App\Http\Controllers\FrontController@getMenuItems');
 Route::get('/{groupslug}/{menuslug}/{catslug}/{itemslug}','App\Http\Controllers\FrontController@getMenuItemDetail');
+Route::get('/{groupslug}/{menuslug}/{catslug}/{itemslug}/{subitemslug}','App\Http\Controllers\FrontController@getMenuSubItemDetail');
 
 
 

@@ -8,35 +8,38 @@ use App\Models\Menu\MenuGroup;
 use App\Models\Menu\MenuSubGroup;
 use App\Models\Menu\MenuItemCategory;
 use App\Models\Menu\MenuItem;
+use App\Models\Menu\MenuSubItem;
 
-class ItemController extends Controller
+class SubItemController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function index(MenuGroup $group, MenuSubGroup $subgroup, MenuItemCategory $category)
+    public function index(MenuGroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item)
     {
         $data = [];
         $data['group'] = $group;
         $data['subgroup'] = $subgroup;
         $data['category'] = $category;
-        $data['items'] = $category->items;
+        $data['item'] = $item;
+        $data['subItems'] = $item->subItems;
         // dd($data);
-        return view('admin.menus.items.index',$data);
+        return view('admin.menus.subitems.index',$data);
     }
 
-    public function create(MenuGroup $group, MenuSubGroup $subgroup, MenuItemCategory $category)
+    public function create(MenuGroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item)
     {
         $data = [];
         $data['group'] = $group;
         $data['subgroup'] = $subgroup;
         $data['category'] = $category;
-        return view('admin.menus.items.create',$data);
+        $data['item'] = $item;
+        return view('admin.menus.subitems.create',$data);
     }
 
-    public function store(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, Request $request)
+    public function store(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item, Request $request)
     {
         // dd($request->all());
         $data = $request->validate([
@@ -64,21 +67,22 @@ class ItemController extends Controller
             $data['thumbnail'] = $request->thumbnail->store('uploads','public');
         }
 
-        $category->items()->create($data);
-        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items');
+        $item->subItems()->create($data);
+        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items/'.$item->id.'/sub-items');
     }
 
-    public function edit(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item)
+    public function edit(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item, MenuSubItem $subitem)
     {
         $data = [];
         $data['group'] = $group;
         $data['subgroup'] = $subgroup;
         $data['category'] = $category;
         $data['item'] = $item;
-        return view('admin.menus.items.edit',$data);
+        $data['subitem'] = $subitem;
+        return view('admin.menus.subitems.edit',$data);
     }
 
-    public function update(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item, Request $request)
+    public function update(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item, MenuSubItem $subitem, Request $request)
     {
         $request->validate([
             'name' => 'string|required',
@@ -136,24 +140,24 @@ class ItemController extends Controller
         }
 
         // dd($request->all(),$data);
-        $item->update($data);
-        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items');
+        $subitem->update($data);
+        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items/'.$item->id.'/sub-items');
     }
 
-    public function show(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item)
+    public function show(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item, MenuSubItem $subitem)
     {
         $data = [];
         $data['group'] = $group;
         $data['subgroup'] = $subgroup;
         $data['category'] = $category;
         $data['item'] = $item;
-        return view('admin.menus.items.show',$data);
+        $data['subitem'] = $subitem;
+        return view('admin.menus.subitems.show',$data);
     }
 
-    public function destroy(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item)
+    public function destroy(Menugroup $group, MenuSubGroup $subgroup, MenuItemCategory $category, MenuItem $item, MenuSubItem $subitem)
     {
-        $item->subItems()->delete();
-        $item->delete();
-        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items');
+        $subitem->delete();
+        return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items/'.$item->id.'/sub-items');
     }
 }
