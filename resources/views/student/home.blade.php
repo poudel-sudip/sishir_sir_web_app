@@ -145,9 +145,9 @@
                 @endforelse
             </div> --}}
         </div>
-        <div class="news-feeds-contact">
+        {{-- <div class="news-feeds-contact">
             @include('student.studentContact')
-        </div>
+        </div> --}}
     </section>
     <script>
         function postData(id){

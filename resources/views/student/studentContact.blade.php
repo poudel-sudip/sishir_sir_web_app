@@ -1,4 +1,4 @@
-<div class="home-booking-details">
+{{-- <div class="home-booking-details">
     <h5>Booking Details</h5>
     <h6>Bank Details</h6>
     <img src="{{ asset('images/megha-bank.jpg') }}" alt="" class="w-100">
@@ -18,7 +18,8 @@
         </div>   
     </div>
     
-</div>
+</div> --}}
+{{-- 
 <div class="all-contact-details">
     <h5>Contact</h5>
     <h6>Head Office</h6>
@@ -40,4 +41,4 @@
     <a href=""><i class="fas fa-mobile"></i> +977 9857084808 (Sales)</a>
     <a href=""><i class="fas fa-mobile-alt"></i> +977 9801784807 (Sales)</a>
     <a href=""><i class="fas fa-mobile"></i> +977 9857084808 (Sales)</a>
-</div>
+</div> --}}
