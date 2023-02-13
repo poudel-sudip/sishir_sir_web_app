@@ -3078,10 +3078,11 @@ p {
 
 .mcq-check-option .mcq-option {
     font-weight: 500;
+    text-transform: uppercase;
+    color: #1375b9;
 }
 .mcq-qstn-row label, .mcq-qstn-row label p{
-    text-transform: uppercase;
-    color: #000000;
+    color: #1375b9;
 }
 .mcq-question-list h6,
 .mcq-question-list h5,
@@ -5148,7 +5149,12 @@ label.star:before {
     padding: 0.7rem .8rem 0.7rem .8rem !important;
 }
 .shishir-header .main-nav .navbar-nav .nav-link:hover{
-    background: #0c4e7b;
+    background: #e41d19;
+}
+.shishir-header .main-nav .dropdown-item:focus, 
+.shishir-header .main-nav .dropdown-item:hover{
+    color: #ffffff;
+    background-color: #1375b9;
 }
 .auth-nav .navbar{
    float: right;
@@ -5523,8 +5529,11 @@ label.star:before {
     width: 100%;
 }
 .shishir-header .child-dropdown a:hover {
-    color: #3490dc;
-    background: #eff0f1;
+    color: #ffffff;
+    background: #3490dc;
+}
+#free-exam ul li{
+    line-height: 1.9;
 }
 
 .parent-dropdown:hover .child-dropdown {
