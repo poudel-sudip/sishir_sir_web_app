@@ -39,6 +39,13 @@
                 </div>
 
                 <div class="col-6 single-search-area">
+                    <h5> Library Materials: {{count($library_materials)}} </h5>
+                    @foreach($library_materials as $post)
+                        <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
+                    @endforeach
+                </div>
+
+                <div class="col-6 single-search-area">
                     <h5> Premium Exams: {{count($premium_exams)}} </h5>
                     @foreach($premium_exams as $post)
                         <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
