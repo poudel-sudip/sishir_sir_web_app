@@ -459,8 +459,22 @@ Route::get('/admin/advertisement/create','App\Http\Controllers\Admin\Advertiseme
 Route::post('/admin/advertisement','App\Http\Controllers\Admin\Advertisement\ADController@store')->middleware('role:Admin');
 Route::delete('/admin/advertisement/{ad}','App\Http\Controllers\Admin\Advertisement\ADController@destroy')->middleware('role:Admin');
 
+// admin material library Category management
+Route::get('/admin/library','App\Http\Controllers\Admin\Library\CategoryController@index')->middleware('role:Admin');
+Route::get('/admin/library/create','App\Http\Controllers\Admin\Library\CategoryController@create')->middleware('role:Admin');
+Route::post('/admin/library','App\Http\Controllers\Admin\Library\CategoryController@store')->middleware('role:Admin');
+Route::get('/admin/library/{category}/edit','App\Http\Controllers\Admin\Library\CategoryController@edit')->middleware('role:Admin');
+Route::patch('/admin/library/{category}','App\Http\Controllers\Admin\Library\CategoryController@update')->middleware('role:Admin');
+Route::delete('/admin/library/{category}','App\Http\Controllers\Admin\Library\CategoryController@destroy')->middleware('role:Admin');
 
-
+// admin material library items management
+Route::get('/admin/library/{category}/materials','App\Http\Controllers\Admin\Library\MaterialController@index')->middleware('role:Admin');
+Route::get('/admin/library/{category}/materials/create','App\Http\Controllers\Admin\Library\MaterialController@create')->middleware('role:Admin');
+Route::post('/admin/library/{category}/materials','App\Http\Controllers\Admin\Library\MaterialController@store')->middleware('role:Admin');
+Route::get('/admin/library/{category}/materials/{material}/edit','App\Http\Controllers\Admin\Library\MaterialController@edit')->middleware('role:Admin');
+Route::get('/admin/library/{category}/materials/{material}','App\Http\Controllers\Admin\Library\MaterialController@show')->middleware('role:Admin');
+Route::patch('/admin/library/{category}/materials/{material}','App\Http\Controllers\Admin\Library\MaterialController@update')->middleware('role:Admin');
+Route::delete('/admin/library/{category}/materials/{material}','App\Http\Controllers\Admin\Library\MaterialController@destroy')->middleware('role:Admin');
 
 
 
@@ -741,6 +755,11 @@ Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamControll
 //front ebooks
 Route::get('/books','App\Http\Controllers\FrontController@books');
 Route::get('/books/{slug}','App\Http\Controllers\FrontController@singleBook');
+
+//front library materials
+Route::get('/library','App\Http\Controllers\FrontController@getLibrary');
+Route::get('/library/{catslug}','App\Http\Controllers\FrontController@getLibraryContents');
+Route::get('/library/{catslug}/{matslug}','App\Http\Controllers\FrontController@getLibraryContentDetail');
 
 //front search mgmt
 Route::get('/search','App\Http\Controllers\FrontController@search');

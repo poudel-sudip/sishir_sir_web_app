@@ -28,6 +28,8 @@ use App\Models\Menu\MenuItem;
 use App\Models\Menu\MenuSubItem;
 use App\Models\Advertisement;
 use App\Helpers\Helper;
+use App\Models\Library\LibraryMaterial;
+use App\Models\Library\LibraryCategory;
 
 class FrontController extends Controller
 {
@@ -49,8 +51,38 @@ class FrontController extends Controller
         $data['ads'] = Advertisement::all();
         // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
         // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
-        
+        $data['libraries'] = LibraryCategory::where('status','=','Active')->orderByDesc('id')->take(9)->get();
+
         $data['updates'] = [];
+
+        $menu_sub_items = MenuSubItem::where('status','=','Active')
+        ->orderByDesc('id')
+        ->take(10)
+        ->get(['id','item_id','name','slug','created_at'])
+        ->map(function($update)
+        {
+            $link = "#";
+            if($update->item)
+            {
+                if($update->item->category)
+                {
+                    if($update->item->category->subGroup)
+                    {
+                        if($update->item->category->subGroup->group)
+                        {
+                            $link = '/'.$update->item->category->subGroup->group->slug.'/'.$update->item->category->subGroup->slug.'/'.$update->item->category->slug.'/'.$update->item->slug.'/'.$update->slug;
+                        }
+                    }
+                }
+            }
+            
+            return (object)[
+                'title' => $update->name,
+                'created_at' => $update->created_at,
+                'link' => $link,
+            ];
+        })
+        ->toArray();
 
         $menu_items = MenuItem::where('status','=','Active')
         ->orderByDesc('id')
@@ -120,9 +152,32 @@ class FrontController extends Controller
         })
         ->toArray();
 
+        $library_materials = LibraryMaterial::where('status','=','Active')
+        ->orderByDesc('id')
+        ->take(10)
+        ->get(['id','name','slug','created_at','category_id'])
+        ->map(function($cat)
+        {
+            $link = "#";
+            
+            if($cat->category)
+            {
+                $link = '/library/'.$cat->category->slug.'/'.$cat->slug;
+            }
+            
+            return (object)[
+                'title' => $cat->name,
+                'created_at' => $cat->created_at,
+                'link' => $link,
+            ];
+        })
+        ->toArray();
+
         $data['updates'] = array_merge($data['updates'], $menu_submenus);
         $data['updates'] = array_merge($data['updates'], $menu_categories);
         $data['updates'] = array_merge($data['updates'], $menu_items);
+        $data['updates'] = array_merge($data['updates'], $menu_sub_items);
+        $data['updates'] = array_merge($data['updates'], $library_materials);
 
         usort($data['updates'], function($a, $b) {return strcmp($b->created_at,$a->created_at);});
         $data['updates'] = array_slice($data['updates'], 0, 10, true);
@@ -256,6 +311,41 @@ class FrontController extends Controller
 
         // dd($data);
         return view('front.menusubitemdetail',$data);
+    }
+
+    public function getLibrary()
+    {
+        $library_categories = LibraryCategory::where('status','=','Active')->orderByDesc('id')->get();
+        return view('front.libraries',compact('library_categories'));
+    }
+
+    public function getLibraryContents($catslug)
+    {
+        $library_category = LibraryCategory::where([['slug',$catslug],['status','Active']])->first();
+        if(!$library_category)
+        {
+            abort(404);
+        }
+
+        $library_materials = $library_category->materials()->where('status','=','Active')->orderByDesc('id')->get(['id','name','slug','created_at','thumbnail']);
+        // dd($library_materials);
+        return view('front.librarycontents',compact('library_category','library_materials'));
+    }
+
+    public function getLibraryContentDetail($catslug, $matslug)
+    {
+        $library_category = LibraryCategory::where([['slug',$catslug],['status','Active']])->first();
+        if(!$library_category)
+        {
+            abort(404);
+        }
+
+        $material = LibraryMaterial::where([['slug',$matslug],['status','Active']])->first();
+        if(!$material)
+        {
+            abort(404);
+        }
+        return view('front.librarycontentdetail',compact('library_category','material'));
     }
 
     public function popularcourse()
@@ -469,6 +559,35 @@ class FrontController extends Controller
 
         $data['menu_posts'] = [];
 
+        $menu_sub_items = MenuSubItem::where([['status','=','Active'],['name','Like','%'.$query.'%']])
+        ->get()
+        ->map(function($update)
+        {
+            $link = "#";
+            if($update->item)
+            {
+                if($update->item->category)
+                {
+                    if($update->item->category->subGroup)
+                    {
+                        if($update->item->category->subGroup->group)
+                        {
+                            $link = '/'.$update->item->category->subGroup->group->slug.'/'.$update->item->category->subGroup->slug.'/'.$update->item->category->slug.'/'.$update->item->slug.'/'.$update->slug;
+                        }
+                    }
+                }
+            }
+            
+            return [
+                'id' => $update->id,
+                'title' => $update->name,
+                'slug' => $update->slug,
+                'created_at' => $update->created_at,
+                'link' => $link,
+            ];
+        })
+        ->toArray();
+
         $menu_items = MenuItem::where([['status','=','Active'],['name','Like','%'.$query.'%']])
         ->get()
         ->map(function($update)
@@ -541,6 +660,8 @@ class FrontController extends Controller
         $data['menu_posts'] = array_merge($data['menu_posts'], $menu_submenus);
         $data['menu_posts'] = array_merge($data['menu_posts'], $menu_categories);
         $data['menu_posts'] = array_merge($data['menu_posts'], $menu_items);
+        $data['menu_posts'] = array_merge($data['menu_posts'], $menu_sub_items);
+        usort($data['menu_posts'], function($a, $b) {return strcmp($b['created_at'],$a['created_at']);});
 
         $data['blogs'] = Blog::where([['status','=','Published'],['title','Like','%'.$query.'%']])
         ->get(['id','title','slug','created_at'])
@@ -563,6 +684,27 @@ class FrontController extends Controller
         ->map(function($e){
             $e['link'] = '/exam-hall/premium/'.$e->slug;
             return $e;
+        })
+        ->toArray();
+
+        $data['library_materials'] = LibraryMaterial::where([['status','=','Active'],['name','Like','%'.$query.'%']])
+        ->get(['id','name','slug','created_at','category_id'])
+        ->map(function($cat)
+        {
+            $link = "#";
+            
+            if($cat->category)
+            {
+                $link = '/library/'.$cat->category->slug.'/'.$cat->slug;
+            }
+            
+            return [
+                'id' => $cat->id,
+                'title' => $cat->name,
+                'slug' => $cat->slug,
+                'created_at' => $cat->created_at,
+                'link' => $link,
+            ];
         })
         ->toArray();
 

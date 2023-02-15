@@ -144,6 +144,41 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/menus') }}">
+          <i class="mdi mdi-alpha-m-box menu-icon"></i>
+          <span class="menu-title">Menus</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/books') }}">
+          <i class="mdi mdi-alpha-b-box menu-icon"></i>
+          <span class="menu-title">My Books</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/library') }}">
+          <i class="mdi mdi-alpha-l-box menu-icon"></i>
+          <span class="menu-title">Material Library</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/blogs') }}">
+            <i class="mdi mdi-file-delimited menu-icon"></i>
+            <span class="menu-title">Blogs</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/testimonials') }}">
+          <i class="mdi mdi-comment-processing menu-icon"></i>
+          <span class="menu-title">Testimonials</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/booking-through-merchant') }}">
           <i class="mdi mdi-alpha-m-box menu-icon"></i>
           <span class="menu-title">Wallet Bookings</span>
@@ -164,12 +199,6 @@
         </a>
       </li> --}}
 
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/blogs') }}">
-            <i class="mdi mdi-file-delimited menu-icon"></i>
-            <span class="menu-title">Blogs</span>
-        </a>
-      </li>
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/sliders') }}">
@@ -182,13 +211,6 @@
         <a class="nav-link" href="{{ url('/admin/home-popup') }}">
           <i class="mdi mdi-select-all menu-icon"></i>
           <span class="menu-title">Home Popup</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/testimonials') }}">
-          <i class="mdi mdi-comment-processing menu-icon"></i>
-          <span class="menu-title">Testimonials</span>
         </a>
       </li>
 
@@ -234,20 +256,6 @@
         <a class="nav-link" href="{{ url('/leads/enquiries') }}">
             <i class="mdi mdi-comment-account menu-icon"></i>
             <span class="menu-title">Enquiries</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/menus') }}">
-          <i class="mdi mdi-alpha-m-box menu-icon"></i>
-          <span class="menu-title">Menus</span>
-        </a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/books') }}">
-          <i class="mdi mdi-alpha-b-box menu-icon"></i>
-          <span class="menu-title">My Books</span>
         </a>
       </li>
 
