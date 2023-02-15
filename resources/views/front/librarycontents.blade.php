@@ -16,7 +16,29 @@
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ ('/library') }}">Library</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ucwords($library_category->name)}}</li>
+                        {{-- <li class="breadcrumb-item active" aria-current="page">{{ucwords($library_category->name)}}</li> --}}
+
+                        @if($library_category)
+                            @php 
+                            $cur = $library_category;
+                            $bcm = [];
+                            while($cur)
+                            {
+                            $c = (object)[
+                                'name' => $cur->name,
+                                'link' => '/library/'.$cur->slug,
+                            ];
+                            array_push($bcm,$c);
+                            $cur = $cur->parent;
+                            } 
+                            $bcm = array_reverse($bcm);
+                            @endphp
+
+                            @foreach($bcm as $b)
+                            <li class="breadcrumb-item"><a href="{{$b->link}}">{{ucwords($b->name)}}</a></li>
+                            @endforeach
+
+                        @endif
                     </ol>
                 </div>
             </div>
@@ -25,7 +47,20 @@
     <div class="container">
         <div class="blog-container mt-5">
             <div class="row">
-                @forelse($library_materials as $material)
+                @foreach($directories as $dir)
+                <div class="col-md-3 mb-2">
+                    <div class="single-blog text-center py-3">
+                        <div class="">
+                            <a href="/library/{{$dir->slug}}"><i class="h1 fa fa-folder text-primary"></i></a>
+                        </div>
+                        <div class="blog-details">
+                            <h5><a href="/library/{{$dir->slug}}">{{ucwords($dir->name)}}</a></h5>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+                @foreach($library_materials as $material)
                 <div class="col-md-4 mb-2">
                     <div class="single-blog text-center py-3">
                         <div class="">
@@ -36,10 +71,12 @@
                         </div>
                     </div>
                 </div>
-                @empty
-              
+                @endforeach
+
+                @if(!$directories->count() && !$library_materials->count())
                     <div>No Materials Published</div>
-                @endforelse
+                @endif
+
             </div>
         </div>
     </div>

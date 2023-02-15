@@ -19,6 +19,8 @@ class MaterialController extends Controller
         $data = [];
         $data['category'] = $category;
         $data['materials'] = $category->materials;
+        
+        // dd($data,$category->childs,$category->parent);
         return view('admin.library.materials.index',$data);
     }
 
@@ -31,7 +33,7 @@ class MaterialController extends Controller
     {
         $data = $request->validate([
             'name' => 'string|required',
-            'order' => 'numeric|required',
+            // 'order' => 'numeric|required',
             'status' => 'string|required',
             'type' => 'string|required',
             'thumbnail' => 'image|nullable',
@@ -56,7 +58,8 @@ class MaterialController extends Controller
 
         $category->materials()->create($data);
 
-        return redirect('/admin/library/'.$category->id.'/materials');
+        // return redirect('/admin/library/'.$category->id.'/materials');
+        return redirect('/admin/library/'.$category->id.'/directories');
     }
 
     public function show(LibraryCategory $category, LibraryMaterial $material)
@@ -79,12 +82,12 @@ class MaterialController extends Controller
     {
         $request->validate([
             'name' => 'string|required',
-            'order' => 'numeric|required',
+            // 'order' => 'numeric|required',
             'status' => 'string|required',
             'file' => 'nullable|file|mimes:pdf',
             'old_file' => 'nullable|string',
             'filename' => 'nullable|string',
-            'description' => 'string|nullable',
+            // 'description' => 'string|nullable',
             'type' => 'string|required',
             'thumbnail' => 'image|nullable',
             'old_thumbnail' => 'string|nullable',
@@ -127,13 +130,15 @@ class MaterialController extends Controller
         }
 
         $material->update($data);
-        return redirect('/admin/library/'.$category->id.'/materials');
+        // return redirect('/admin/library/'.$category->id.'/materials');
+        return redirect('/admin/library/'.$category->id.'/directories');
     }
 
     public function destroy(LibraryCategory $category, LibraryMaterial $material, Request $request)
     {
         $material->delete();
-        return redirect('/admin/library/'.$category->id.'/materials');
+        // return redirect('/admin/library/'.$category->id.'/materials');
+        return redirect('/admin/library/'.$category->id.'/directories');
     }
 
 }

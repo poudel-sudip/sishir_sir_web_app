@@ -10,8 +10,8 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">Library Categories</a></li>
-                    <li class="breadcrumb-item"><a href="{{ url('/admin/library/'.$category->id.'/materials') }}">Materials</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">Library</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/library/'.$category->id.'/directories') }}">{{ucwords($category->name)}}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Show</li>
                 </ol>
             </nav>

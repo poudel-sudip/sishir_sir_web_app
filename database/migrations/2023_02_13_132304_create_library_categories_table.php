@@ -15,6 +15,7 @@ class CreateLibraryCategoriesTable extends Migration
     {
         Schema::create('library_categories', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('parent_id')->nullable();
             $table->string('name');
             $table->string('slug')->nullable();
             $table->string('order')->nullable()->default(1);

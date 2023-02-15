@@ -9,9 +9,9 @@
             <h3 class="page-title">Edit Library Material</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">Library Categories</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/library/'.$category->id.'/materials') }}">Materials</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">Library</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/admin/library/'.$category->id.'/directories') }}">{{ucwords($category->name)}}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Edit</li>
                 </ol>
             </nav>
@@ -36,7 +36,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="order" class="col-sm-4 col-form-label">{{ __('Material Order') }}</label>
                             <div class="col-md-8">
                                 <input id="order" type="number" class="form-control @error('order') is-invalid @enderror" name="order" value="{{ old('order') ?? $material->order }}" required autocomplete="order" >
@@ -46,16 +46,16 @@
                                 </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row">
                             <label for="type" class="col-sm-4 col-form-label">{{ __('Material Type') }}</label>
                             <div class="col-md-8">
                                 <select id="type" class="form-control @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}" required>
                                     <option value="{{$material->type}}">{{ucwords($material->type)}}</option>
-                                    <option value="">-------------------</option>
+                                    {{-- <option value="">-------------------</option>
                                     <option value="text">Text</option>
-                                    <option value="file">File</option>
+                                    <option value="file">File</option> --}}
                                 </select>
                                 @error('type')
                                 <span class="invalid-feedback" role="alert">
@@ -80,7 +80,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="description" class="col-sm-4 col-form-label">{{ __('Material Description') }}</label>
                             <div class="col-md-8">
                                 <textarea name="description" id="description" class="summernote form-control @error('description') is-invalid @enderror">{{old('description') ?? $material->description}}</textarea>
@@ -90,7 +90,7 @@
                                 </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row">
                             <label for="thumbnail" class="col-sm-4 col-form-label">Thumbnail <small>(875*667 : 300kb)</small></label>

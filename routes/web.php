@@ -461,10 +461,11 @@ Route::delete('/admin/advertisement/{ad}','App\Http\Controllers\Admin\Advertisem
 
 // admin material library Category management
 Route::get('/admin/library','App\Http\Controllers\Admin\Library\CategoryController@index')->middleware('role:Admin');
-Route::get('/admin/library/create','App\Http\Controllers\Admin\Library\CategoryController@create')->middleware('role:Admin');
+// Route::get('/admin/library/create','App\Http\Controllers\Admin\Library\CategoryController@create')->middleware('role:Admin');
 Route::post('/admin/library','App\Http\Controllers\Admin\Library\CategoryController@store')->middleware('role:Admin');
-Route::get('/admin/library/{category}/edit','App\Http\Controllers\Admin\Library\CategoryController@edit')->middleware('role:Admin');
-Route::patch('/admin/library/{category}','App\Http\Controllers\Admin\Library\CategoryController@update')->middleware('role:Admin');
+// Route::get('/admin/library/{category}/edit','App\Http\Controllers\Admin\Library\CategoryController@edit')->middleware('role:Admin');
+Route::get('/admin/library/{category}/directories','App\Http\Controllers\Admin\Library\CategoryController@getChilds')->middleware('role:Admin');
+Route::patch('/admin/library','App\Http\Controllers\Admin\Library\CategoryController@update')->middleware('role:Admin');
 Route::delete('/admin/library/{category}','App\Http\Controllers\Admin\Library\CategoryController@destroy')->middleware('role:Admin');
 
 // admin material library items management

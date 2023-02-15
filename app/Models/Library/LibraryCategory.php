@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LibraryCategory extends Model
 {
@@ -26,5 +27,15 @@ class LibraryCategory extends Model
     public function materials(): HasMany
     {
         return $this->hasMany(LibraryMaterial::class, 'category_id');
+    }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(LibraryCategory::class, 'parent_id');
+    }
+
+    public function childs(): HasMany
+    {
+        return $this->hasMany(LibraryCategory::class, 'parent_id');
     }
 }

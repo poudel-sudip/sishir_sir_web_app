@@ -15,54 +15,116 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = LibraryCategory::all();
+        $data = [];
+        $data['category'] = null;
+        $categories = LibraryCategory::where('parent_id','=',null)->orderBy('name')->get();
         $data['categories'] = $categories;
         // dd($data);
         return view('admin.library.category.index',$data);
     }
 
-    public function create()
+    public function getChilds(LibraryCategory $category)
     {
-        return view('admin.library.category.create');
+        $data = [];
+        $data['category'] = $category;
+        $data['categories'] = $category->childs->sortBy('name');
+        return view('admin.library.category.index',$data);
     }
+
+    // public function create()
+    // {
+    //     return view('admin.library.category.create');
+    // }
 
     public function store(Request $request)
     {
         // dd($request->all());
-        $data = $request->validate([
-            'name' => 'string|required',
-            'order' => 'numeric|required',
-            'status' => 'string|required',
+        $request->validate([
+            'folderName' => 'required|string',
+            'parent' => 'numeric|nullable',
         ]);
 
-        LibraryCategory::create($data);
-
-        return redirect('/admin/library');
-    }
-
-    public function edit(LibraryCategory $category)
-    {
-        $data[] = [];
-        $data['group'] = $category;
-        return view('admin.library.category.edit',$data);
-    }
-
-    public function update(LibraryCategory $category, Request $request)
-    {
-        $data = $request->validate([
-            'name' => 'string|required',
-            'order' => 'numeric|required',
-            'status' => 'string|required',
+        LibraryCategory::create([
+            'name' => $request->folderName,
+            'parent_id' => $request->parent ?? null,
+            'status' => 'Active',
         ]);
 
-        $category->update($data);
+        if($request->parent)
+        {
+            return redirect('/admin/library/'.$request->parent.'/directories');
+        }
+        else
+        {
+            return redirect('/admin/library'); 
+        }
+
+        // $data = $request->validate([
+        //     'name' => 'string|required',
+        //     'order' => 'numeric|required',
+        //     'status' => 'string|required',
+        // ]);
+
+        // LibraryCategory::create($data);
+
+        // return redirect('/admin/library');
+    }
+
+    // public function edit(LibraryCategory $category)
+    // {
+    //     $data[] = [];
+    //     $data['group'] = $category;
+    //     return view('admin.library.category.edit',$data);
+    // }
+
+    public function update(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            "folder_id" => "required|numeric",
+            "folder_name" => "required|string",
+        ]);
+
+        $category = LibraryCategory::find($request->folder_id);
+        if($category)
+        {
+            $category->update([
+                'name' => ucwords($request->folder_name),
+            ]);
+
+            if($category->parent_id)
+            {
+                return redirect('/admin/library/'.$category->parent_id.'/directories'); 
+            }
+        }
+
         return redirect('/admin/library');
+
+
+        // $data = $request->validate([
+        //     'name' => 'string|required',
+        //     'order' => 'numeric|required',
+        //     'status' => 'string|required',
+        // ]);
+
+        // $category->update($data);
+        // return redirect('/admin/library');
     }
 
     public function destroy(LibraryCategory $category, Request $request)
     {
+        // dd($request->all());
+        $category->childs()->delete();
         $category->materials()->delete();
         $category->delete();
-        return redirect('/admin/library');
+
+        if($request->parent)
+        {
+            return redirect('/admin/library/'.$request->parent.'/directories');
+        }
+        else
+        {
+            return redirect('/admin/library'); 
+        }
     }
 }

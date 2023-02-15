@@ -51,7 +51,7 @@ class FrontController extends Controller
         $data['ads'] = Advertisement::all();
         // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
         // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
-        $data['libraries'] = LibraryCategory::where('status','=','Active')->orderByDesc('id')->take(9)->get();
+        $data['libraries'] = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->take(8)->get();
 
         $data['updates'] = [];
 
@@ -315,7 +315,7 @@ class FrontController extends Controller
 
     public function getLibrary()
     {
-        $library_categories = LibraryCategory::where('status','=','Active')->orderByDesc('id')->get();
+        $library_categories = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->get();
         return view('front.libraries',compact('library_categories'));
     }
 
@@ -326,10 +326,10 @@ class FrontController extends Controller
         {
             abort(404);
         }
-
+        $directories = $library_category->childs;
         $library_materials = $library_category->materials()->where('status','=','Active')->orderByDesc('id')->get(['id','name','slug','created_at','thumbnail']);
-        // dd($library_materials);
-        return view('front.librarycontents',compact('library_category','library_materials'));
+        // dd($directories);
+        return view('front.librarycontents',compact('library_category','directories','library_materials'));
     }
 
     public function getLibraryContentDetail($catslug, $matslug)

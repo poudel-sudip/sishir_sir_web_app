@@ -69,7 +69,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <?php
-          $parent_menus = App\Models\Menu\MenuGroup::where('status','=','Active')->orderBy('order')->take(5)->get();
+          $parent_menus = App\Models\Menu\MenuGroup::where('status','=','Active')->orderBy('order')->take(10)->get();
         ?>
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
@@ -92,7 +92,7 @@
                     <a class="dropdown-item @if($child->type == 'heading') sub-drop-icon @endif" href="{{$child_link}}">{{ucwords($child->name)}}</a>
                     @if($child->type == 'heading')
                       <?php
-                        $grandchild_menus = $child->categories()->where('status','=','Active')->orderBy('order')->take(7)->get(['id','name','slug','type']);
+                        $grandchild_menus = $child->categories()->where('status','=','Active')->orderBy('order')->take(10)->get(['id','name','slug','type']);
                       ?>
 
                       <div class="child-dropdown">

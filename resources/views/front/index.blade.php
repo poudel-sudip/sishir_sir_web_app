@@ -188,7 +188,7 @@
             </div>
             <div class="row">
                 @foreach ($libraries as $cat)
-                <div class="col-sm-2 col-md-3">
+                <div class="col-sm-6 col-md-3">
                     <div class="ebook-section">
                         <div>
                             <a href="/library/{{$cat->slug}}"><i class="h1 fa fa-folder text-primary"></i></a>
