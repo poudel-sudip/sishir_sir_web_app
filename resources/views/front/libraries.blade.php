@@ -25,14 +25,12 @@
         <div class="blog-container mt-5">
             <div class="row">
                 @forelse($library_categories as $cat)
-                <div class="col-md-3 mb-2">
-                    <div class="single-blog text-center py-3">
+                <div class="col-md-3 mb-3">
+                    <div class="single-blog text-center py-3 library-item">
                         <div class="">
                             <a href="/library/{{$cat->slug}}"><i class="h1 fa fa-folder text-primary"></i></a>
                         </div>
-                        <div class="blog-details">
-                            <h5><a href="/library/{{$cat->slug}}">{{$cat->name}}</a></h5>
-                        </div>
+                        <h5><a href="/library/{{$cat->slug}}">{{$cat->name}}</a></h5>
                     </div>
                 </div>
                 @empty
