@@ -48,14 +48,12 @@
         <div class="blog-container mt-5">
             <div class="row">
                 @foreach($directories as $dir)
-                <div class="col-md-3 mb-2">
-                    <div class="single-blog text-center py-3">
+                <div class="col-md-3 mb-3">
+                    <div class="single-blog text-center py-3 library-item">
                         <div class="">
                             <a href="/library/{{$dir->slug}}"><i class="h1 fa fa-folder text-primary"></i></a>
                         </div>
-                        <div class="blog-details">
-                            <h5><a href="/library/{{$dir->slug}}">{{ucwords($dir->name)}}</a></h5>
-                        </div>
+                        <h5><a href="/library/{{$dir->slug}}">{{ucwords($dir->name)}}</a></h5>
                     </div>
                 </div>
                 @endforeach

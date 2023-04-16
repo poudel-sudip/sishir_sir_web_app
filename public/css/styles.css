@@ -5570,3 +5570,12 @@ label.star:before {
     color: #ded4b3;
     padding-left: 10px;
 }
+.library-item:hover{
+    background-color: #e41d19;
+}
+.library-item:hover a{
+    color: #ffffff;
+}
+.library-item i{
+    color: #0077b5;
+}

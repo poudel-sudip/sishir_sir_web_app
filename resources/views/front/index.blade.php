@@ -188,10 +188,10 @@
             </div>
             <div class="row">
                 @foreach ($libraries as $cat)
-                <div class="col-sm-6 col-md-3">
-                    <div class="ebook-section">
+                <div class="col-sm-6 col-md-3 mb-3">
+                    <div class="ebook-section library-item">
                         <div>
-                            <a href="/library/{{$cat->slug}}"><i class="h1 fa fa-folder text-primary"></i></a>
+                            <a href="/library/{{$cat->slug}}"><i class="h1 fa fa-folder"></i></a>
                         </div>
                         <div class="ebook-footer h5">
                             <a href="/library/{{$cat->slug}}">{{ucwords($cat->name)}}</a>
