@@ -266,6 +266,13 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/imp-links') }}">
+          <i class="mdi mdi-alpha-l-box menu-icon"></i>
+          <span class="menu-title">Important Links</span>
+        </a>
+      </li>
+
       <li class="nav-item sidebar-actions">
         <a class="nav-link" href="{{ url('/change-password') }}">
           <i class="mdi mdi-key-variant menu-icon"></i>

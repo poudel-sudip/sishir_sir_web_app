@@ -42,15 +42,13 @@
                                         <td>{{$testimonial->name}}</td>
                                         <td> {{$testimonial->role}} </td>
                                         <td>{{date('Y-m-d',strtotime($testimonial->created_at))}}</td>
-                                        <td width="165">
-                                            @if(auth()->user()->permission==50 || auth()->user()->permission==20 )
+                                        <td class="classroom-btn" width="100">
                                             <a href="/admin/testimonials/{{$testimonial->id}}/edit" class="btn btn-danger btn-sm">Edit</a>
                                             <form id="delete-form-{{$testimonial->id}}" action="/admin/testimonials/{{$testimonial->id}}" method="POST" style="display: inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <a href="javascript:{}" onclick="javascript:deleteData({{$testimonial->id}});" class="btn btn-warning btn-sm">Delete</a>
                                             </form>
-                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
