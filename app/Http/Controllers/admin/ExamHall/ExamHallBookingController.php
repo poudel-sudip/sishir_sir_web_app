@@ -50,7 +50,7 @@ class ExamHallBookingController extends Controller
             "remarks" => "string|nullable",
         ]);
 
-        $user = User::find($data['userID']);
+        $user = User::find($request['userID']);
         if(!$user)
         {
             return back()->withInput()->withErrors(['userID'=>'User Not Registered. Please Check Again !!!']);
