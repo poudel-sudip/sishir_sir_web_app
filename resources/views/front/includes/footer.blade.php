@@ -22,8 +22,15 @@
               <li><a href="/privacy">Privacy</a></li>
               <li><a href="/contact">Contact Us</a></li>
               <li><a href="/enquiry">Enquiries</a></li>
-              <li><a href="/forms">Forms</a></li>
-              <li><a href="/careers">Careers</a></li>
+              <li><a href="/testimonials">Testimonials</a></li>
+              {{-- <li><a href="/careers">Careers</a></li> --}}
+              <?php
+                $footer_links = App\Models\ImportantLink::orderBy('link_order')->get();
+                //output contains fields: id, link_title, link_url, link_category, link_order
+              ?>
+              @foreach($footer_links as $link)
+              <li><a href="{{$link->link_url}}" target="_blank">{{$link->link_title}}</a></li>
+              @endforeach
             </ul>
           </div>
           <div class="col-md-8">

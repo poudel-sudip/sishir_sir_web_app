@@ -713,4 +713,34 @@ class FrontController extends Controller
         return view('front.search',$data);
     }
 
+    public function getTestimonials()
+    {
+        $data['testimonials'] = Testimonial::all()->sortByDesc('created_at');
+        return view('front.testimonials',$data);
+    }
+
+    public function addTestimonials(Request $request)
+    {
+        $data = request()->validate([
+            'name'=>'required | string',
+            'testimonial_as'=>'required | string',
+            'email'=>'nullable|email',
+            'message'=>'required|string',
+            'photo'=>'image|nullable',
+        ]);
+        $imgpath = ' ';
+        if(isset($data['photo']))
+        {
+            $imgpath=request('photo')->store('uploads','public');
+        }
+        Testimonial::create([
+           'name'=>$data['name'],
+           'role'=>$data['testimonial_as'] ?? 'Visitor',
+           'email'=>$data['email'],
+           'message'=>$data['message'],
+           'image'=>$imgpath,
+        ]);
+        return redirect('/testimonials');
+    }
+
 }

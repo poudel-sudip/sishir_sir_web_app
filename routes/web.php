@@ -477,7 +477,13 @@ Route::get('/admin/library/{category}/materials/{material}','App\Http\Controller
 Route::patch('/admin/library/{category}/materials/{material}','App\Http\Controllers\Admin\Library\MaterialController@update')->middleware('role:Admin');
 Route::delete('/admin/library/{category}/materials/{material}','App\Http\Controllers\Admin\Library\MaterialController@destroy')->middleware('role:Admin');
 
-
+// admin imp links management
+Route::get('/admin/imp-links','App\Http\Controllers\Admin\LinksController@index')->middleware('role:Admin');
+Route::get('/admin/imp-links/create','App\Http\Controllers\Admin\LinksController@create')->middleware('role:Admin');
+Route::post('/admin/imp-links','App\Http\Controllers\Admin\LinksController@store')->middleware('role:Admin');
+Route::get('/admin/imp-links/{link}/edit','App\Http\Controllers\Admin\LinksController@edit')->middleware('role:Admin');
+Route::patch('/admin/imp-links/{link}','App\Http\Controllers\Admin\LinksController@update')->middleware('role:Admin');
+Route::delete('/admin/imp-links/{link}','App\Http\Controllers\Admin\LinksController@destroy')->middleware('role:Admin');
 
 
 
@@ -764,6 +770,10 @@ Route::get('/library/{catslug}/{matslug}','App\Http\Controllers\FrontController@
 
 //front search mgmt
 Route::get('/search','App\Http\Controllers\FrontController@search');
+
+//front testimonials
+Route::get('/testimonials','App\Http\Controllers\FrontController@getTestimonials');
+Route::post('/testimonials/add','App\Http\Controllers\FrontController@addTestimonials');
 
 //front menu details
 Route::get('/{groupslug}/{menuslug}','App\Http\Controllers\FrontController@getMenuCategories');

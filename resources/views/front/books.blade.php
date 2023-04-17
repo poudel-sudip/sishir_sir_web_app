@@ -42,7 +42,7 @@
                 </div>
                 @empty
               
-                    <div>No Blogs Published</div>
+                    <div>No Books Published</div>
                 @endforelse
             </div>
         </div>
