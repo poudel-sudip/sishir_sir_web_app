@@ -5151,6 +5151,7 @@ label.star:before {
 }
 .shishir-header .main-nav .navbar-nav .nav-link:hover{
     background: #e41d19;
+    border-bottom: 3px solid #ffc107;
 }
 .shishir-header .main-nav .dropdown-item:focus, 
 .shishir-header .main-nav .dropdown-item:hover{
@@ -5452,28 +5453,60 @@ label.star:before {
 
 .enquiry-popup{
     position: fixed;
-    bottom: 1rem;
+    top: 45%;
     right: 1rem;
-    background: #1375b9;
-    padding: 10px 10px 10px 15px;
+    /* background: #1375b9; */
+    /* padding: 10px 10px 10px 15px; */
     z-index: 99;
     border-radius: 50%;
 }
 .enquiry-popup a{
-    color: #ffffff;
-    font-size: 20px;
+    color: #1375b9;
+    font-size: 16px;
 }
 .enquiry-popup i{
     padding-right: 5px;
+    vertical-align: middle;
+    font-size: 20px;
 }
 .enquiry-popup span{
     display: none;
 }
 .enquiry-popup:hover{
     border-radius: 5px;
+    cursor: pointer;
 }
 .enquiry-popup:hover span{
     display: inline-block;
+    animation: 5s infinite alternate slidein;
+}
+#home-call-poup{
+    position: fixed;
+    right: 5px;
+    top: 50%;
+    z-index: 99;
+    margin-right: 1rem;
+}
+#home-call-poup i{
+    padding-right: 5px;
+    color: #1375b9;
+    font-size: 20px;
+}
+#home-call-poup span{
+    display: none;
+}
+#home-call-poup:hover{
+    border-radius: 5px;
+    cursor: pointer;
+}
+#home-call-poup:hover span{
+    display: inline-block;
+    animation: 5s infinite alternate slidein;
+}
+#home-call-poup .popupdiv{
+    display: none;
+    border: 1px solid #c1d7e8;
+    padding: 5px;
 }
  /* home update */
  .homepage-side-update{

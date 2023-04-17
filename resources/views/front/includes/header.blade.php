@@ -1,4 +1,4 @@
-<header class="shishir-header">
+<header class="shishir-header sticky-sm-top">
   <div class="topbar">
     <div class="container">
       <div class="row">
@@ -73,7 +73,7 @@
         ?>
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
+            <a class="nav-link active" aria-current="page" href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
           </li>
 
           @foreach($parent_menus as $parent)

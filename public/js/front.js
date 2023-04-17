@@ -312,7 +312,13 @@
             //     });
             // });
             /***/
+            $(document).ready(function() {
+                $('#home-call-poup').click(function() {
+                    $('.popupdiv').toggle();
+                });
+              });
         })
+        
 
         /******/
     });

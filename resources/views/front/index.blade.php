@@ -49,7 +49,7 @@
         </div>
         
     </section>
-    <section class="video-course mt-4">
+    {{-- <section class="video-course mt-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center relative">
@@ -58,15 +58,10 @@
             </div>
             <div class="course-container position-relative">
                 <div class="elfsight-app-f553e3a0-98b2-48e2-906a-70b290b09fe1"></div>
-                {{-- <div class="owl-carousel course-carousel">
-                    <div class="post-thumb">
-                        <a class="play_video_btn course-price " href="#play_video" video-id="" data-bs-toggle="modal" data-bs-target="#play_video"><img src="images/course1.jpg" alt="" ></a>
-                    </div>
-                </div> --}}
                 <div class="video-gallery-hide"></div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="home-banner">
         <div class="container">
             <div class="row">
@@ -327,6 +322,12 @@
     <div class="enquiry-popup">
         <a href="/enquiry"><i class="fas fa-comment-alt"></i><span>Enquiry</span></a> 
     </div>
+    <div id="home-call-poup">
+        <i class="fas fa-mobile-alt"></i><span>Call Us</span>
+        <div class="popupdiv">
+            <a href="tel:+977-9812417639"><span class="icon-phone"></span>+977 9812417639</a>
+        </div>
+    </div>
     {{-- youtube video palylist --}}
     <script src="https://apps.elfsight.com/p/platform.js" defer></script>
     {{-- <script>
@@ -341,6 +342,37 @@
         });
     
     </script> --}}
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "255614494928169");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    {{-- for messenger plugin --}}
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v16.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
 
 @endsection
 
