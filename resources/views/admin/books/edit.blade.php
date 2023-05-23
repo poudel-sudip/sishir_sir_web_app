@@ -22,7 +22,27 @@
                     <div class="card-body">
                         <form method="POST" action="/admin/books/{{$book->id}}" enctype="multipart/form-data" class="forms-sample">
                             @csrf
-                            @method('PATCH')                          
+                            @method('PATCH')   
+                            
+                            <div class="form-group row">
+                                <label for="category" class="col-md-4 col-form-label">{{ __('Book Category') }}</label>
+
+                                <div class="col-md-8">
+                                    <select id="category" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}">
+                                        <option value="{{$book->category->id ?? ''}}">{{ucwords($book->category->name ?? ' ')}}</option>
+                                        <option value="">----------------------</option>
+                                        @foreach($categories as $cat)
+                                        <option value="{{$cat->id}}">{{ucwords($cat->name)}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label">{{ __('Book Title') }}</label>
 

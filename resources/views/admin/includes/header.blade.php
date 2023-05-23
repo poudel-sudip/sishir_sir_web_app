@@ -151,10 +151,21 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/books') }}">
+        <a class="nav-link" data-toggle="collapse" href="#books" aria-expanded="false" aria-controls="books">
           <i class="mdi mdi-alpha-b-box menu-icon"></i>
           <span class="menu-title">My Books</span>
+          <i class="menu-arrow"></i>
         </a>
+        <div class="collapse" id="books">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/books/categories') }}">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/books') }}">All Books</a>
+            </li>
+          </ul>
+        </div>
       </li>
 
       <li class="nav-item">
@@ -214,7 +225,7 @@
         </a>
       </li>
 
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#upload-basic" aria-expanded="false" aria-controls="upload-basic">
           <i class="mdi mdi-cloud-upload menu-icon"></i>
           <span class="menu-title">Uploads</span>
@@ -236,7 +247,7 @@
             </li>
           </ul>
         </div>
-      </li>
+      </li> --}}
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/provience') }}">

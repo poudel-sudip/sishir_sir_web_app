@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Str;
+use App\Models\Books\Book;
 
 class Categories extends Model
 {
@@ -30,6 +31,12 @@ class Categories extends Model
 
         });
 
+    }
+
+
+    public function books(): HasMany
+    {
+        return$this->hasMany(Book::class,'category_id');
     }
 
     public function courses(): HasMany

@@ -445,6 +445,14 @@ Route::patch('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/i
 Route::delete('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}/sub-items/{subitem}','App\Http\Controllers\Admin\Menus\SubItemController@destroy')->middleware('role:Admin');
 
 // admin personal books management 
+Route::get('/admin/books/categories','App\Http\Controllers\Admin\Books\BookController@categoryIndex')->middleware('role:Admin');
+Route::get('/admin/books/categories/create','App\Http\Controllers\Admin\Books\BookController@categoryCreate')->middleware('role:Admin');
+Route::post('/admin/books/categories','App\Http\Controllers\Admin\Books\BookController@categoryStore')->middleware('role:Admin');
+Route::get('/admin/books/categories/{category}/edit','App\Http\Controllers\Admin\Books\BookController@categoryEdit')->middleware('role:Admin');
+Route::patch('/admin/books/categories/{category}','App\Http\Controllers\Admin\Books\BookController@categoryUpdate')->middleware('role:Admin');
+Route::delete('/admin/books/categories/{category}','App\Http\Controllers\Admin\Books\BookController@categoryDestroy')->middleware('role:Admin');
+Route::get('/admin/books/categories/{category}/books','App\Http\Controllers\Admin\Books\BookController@categoryBooks')->middleware('role:Admin');
+
 Route::get('/admin/books','App\Http\Controllers\Admin\Books\BookController@index')->middleware('role:Admin');
 Route::get('/admin/books/create','App\Http\Controllers\Admin\Books\BookController@create')->middleware('role:Admin');
 Route::post('/admin/books','App\Http\Controllers\Admin\Books\BookController@store')->middleware('role:Admin');
@@ -762,6 +770,7 @@ Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamControll
 //front ebooks
 Route::get('/books','App\Http\Controllers\FrontController@books');
 Route::get('/books/{slug}','App\Http\Controllers\FrontController@singleBook');
+Route::get('/books-category/{slug}','App\Http\Controllers\FrontController@categoryBooks');
 
 //front library materials
 Route::get('/library','App\Http\Controllers\FrontController@getLibrary');

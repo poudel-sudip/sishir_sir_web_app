@@ -1,5 +1,13 @@
 @extends('front.layouts.app')
+
 @section('page_title', ucwords($book->title))
+@section('og-title', ucwords($book->title))
+@section('og-url', url('/books/'.$book->slug))
+@section('og-description', strip_tags($book->description) ? strip_tags(str_replace('<', '  <', $book->description)) : $book->title )
+@if($book->thumbnail)
+@section('og-image', asset('/storage/'.$book->thumbnail))
+@endif
+
 @section('content')
     <div class="container">
         <div class="row">

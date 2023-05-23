@@ -350,25 +350,38 @@ class FrontController extends Controller
 
     public function popularcourse()
     {
-        $headercategories = Categories::all()->where('status','=','Active');
         $data=Course::all()->where('isPopular','=','Yes')->where('status','=','Active')->sortBy('order');
-        return view('front.popularcourse',compact('data','headercategories'));
+        return view('front.popularcourse',compact('data'));
     }
     public function runningbatch()
     {
-        $headercategories=Categories::all()->where('status','=','Active')->sortBy('order');
         $data=Batch::all()->where('status','=','Running');
-        return view('front.runningbatches',compact('data','headercategories'));
+        return view('front.runningbatches',compact('data'));
     }
     public function about()
     {
-        $headercategories=Categories::all()->where('status','=','Active')->sortBy('order');
-        return view('front.about',compact('headercategories'));
+        return view('front.about');
     }
     public function books()
     {
-        $books=Book::all()->where('status','=','Active')->sortByDesc('id');
-        return view('front.books',compact('books'));
+        $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->take(15)->get();
+        $data['categories'] = Categories::where(['status'=>'Active','type'=>'book'])->whereHas('books')->get();
+        // dd($data);
+        return view('front.books',$data);
+    }
+
+    public function categoryBooks($slug)
+    {
+        $category = Categories::where('slug',$slug)->where('type','=','book')->first();
+        if(!$category)
+        {
+            abort(404,'Book Category Not Found');
+        }
+        $data['categories'] = Categories::where(['status'=>'Active','type'=>'book'])->whereHas('books')->get();
+        $data['category'] = $category;
+        $data['books'] = $category->books()->where('status','=','Active')->get();
+        
+        return view('front.categorybooks',$data);
     }
 
     public function singleBook($slug)
@@ -387,9 +400,8 @@ class FrontController extends Controller
     }
     public function enquiry()
     {
-        $headercategories=Categories::all()->where('status','=','Active')->sortBy('order');
         $proviences = Provience::all()->sortBy('name');
-        return view('front.admissionForm',compact('proviences','headercategories'));
+        return view('front.admissionForm',compact('proviences'));
     }
 
     public function showCourseEnquiryForm($courseslug)
@@ -429,15 +441,13 @@ class FrontController extends Controller
            abort(404);
         }
         $categories=Categories::all()->where('status','=','Active')->sortBy('order');
-        $headercategories=$categories;
-        return view('front.categoryCourses',compact('categories','category','headercategories'));
+        return view('front.categoryCourses',compact('categories','category'));
     }
     public function categorylist()
     {
         $course=Course::all()->where('status','Active')->sortBy('order');
         $categories=Categories::all()->where('status','=','Active')->sortBy('order');
-        $headercategories=$categories;
-        return view('front.allCategory',compact('categories','course','headercategories'));
+        return view('front.allCategory',compact('categories','course'));
     }
     public function coursedetails($slug)
     {
@@ -446,14 +456,12 @@ class FrontController extends Controller
         {
             abort(404);
         }
-        $headercategories=Categories::all()->where('status','=','Active')->sortBy('order');
 
-        return view('front.coursedetails',compact('headercategories','course'));
+        return view('front.coursedetails',compact('course'));
     }
 
     public function batchdetails($courseslug,$batchslug)
     {
-        $headercategories=Categories::all()->where('status','=','Active')->sortBy('order');
         $course=Course::where('slug',$courseslug)->first();
         if(!$course)
         {
@@ -465,26 +473,24 @@ class FrontController extends Controller
             abort(404);
         }
 
-        return view('front.batchdetails',compact('headercategories','batch'));
+        return view('front.batchdetails',compact('batch'));
     }
 
     public function tutorDetails($slug)
     {
-        $headercategories=Categories::all()->where('status','=','Active')->sortBy('order');
         $tutor=Tutor::where('slug',$slug)->first();
         if(!$tutor)
         {
             abort(404);
         }
         $tutorposts=$tutor->posts()->where('status','=','Published')->get(); //you can use this when you need to display particular tutor posts 
-        return view('front.tutordetails',compact('headercategories','tutor','tutorposts'));
+        return view('front.tutordetails',compact('tutor','tutorposts'));
     }
 
     // public function freevideos()
     // {
-    //     $headercategories=Categories::all()->where('status','=','Active')->sortBy('order');
     //     $videos=FreeVideo::all()->sortByDesc('id');
-    //     return view('front.freeVideos',compact('videos','headercategories'));
+    //     return view('front.freeVideos',compact('videos'));
     // }
     public function notice()
     {

@@ -5,12 +5,74 @@ namespace App\Http\Controllers\Admin\Books;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Books\Book;
+use App\Models\Categories;
 
 class BookController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function categoryIndex()
+    {  
+        $data['categories'] = Categories::where('type','=','book')->get();
+        return view('admin.books.category.index',$data);
+    }
+
+    public function categoryCreate()
+    {
+        return view('admin.books.category.create');
+    }
+
+    public function categoryStore()
+    {
+        $data = request()->validate([
+            'name'=>'required | string',
+            // 'order'=>'required | numeric',
+            'status'=>'required',
+        ]);
+        Categories::create([
+            'type' => 'book',
+            'name'=>$data['name'],
+            'status'=>$data['status'],
+            // 'order'=>$data['order'],
+        ]);
+        return redirect('/admin/books/categories');
+    }  
+
+    public function categoryEdit(Categories $category)
+    {
+        $data['category'] = $category;
+        return view('admin.books.category.edit',$data);
+    }
+
+    public function categoryUpdate(Categories $category, Request $request)
+    {
+       $data = $request->validate([
+            'name'=>'required | string',
+            // 'order'=>'required | numeric',
+            'status'=>'required',
+        ]);
+        $category->update([
+            'name'=>$data['name'],
+            'status'=>$data['status'],
+            // 'order'=>$data['order'],
+        ]);
+        return redirect('/admin/books/categories');
+    }
+
+    public function categoryDestroy(Categories $category)
+    {
+        $category->delete();
+        return redirect('/admin/books/categories');
+    }
+
+    public function categoryBooks(Categories $category)
+    {
+        $data['category'] = $category;
+        $data['books'] = $category->books;
+        return view('admin.books.category.books',$data);
     }
 
     public function index()
@@ -22,13 +84,15 @@ class BookController extends Controller
 
     public function create()
     {
-        return view('admin.books.create');
+        $data['categories'] = Categories::where(['type'=>'book','status'=>'Active'])->get();
+        return view('admin.books.create',$data);
     }
     
     public function store(Request $request)
     {
         // dd($request->all());
         $request->validate([
+            'category' => 'numeric|nullable',
             "title" => "string|required",
             "order" => "numeric|required",
             "author" => "string|nullable",
@@ -46,7 +110,17 @@ class BookController extends Controller
             $data['thumbnail'] = $request->thumbnail->store('uploads','public');
         }
 
-        Book::create($data);
+        if($request->category)
+        {
+            $data['category_id'] = $request->category;
+        }
+
+        $book = Book::create($data);
+
+        if($book->category)
+        {
+            return redirect('/admin/books/categories/'.$book->category_id.'/books');
+        }
         return redirect('/admin/books');
     }
 
@@ -57,13 +131,16 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
-        return view('admin.books.edit',compact('book'));
+        $data['categories'] = Categories::where(['type'=>'book','status'=>'Active'])->get();
+        $data['book'] = $book;
+        return view('admin.books.edit',$data);
     }
 
     public function update(Book $book, Request $request)
     {
         // dd($request->all());
         $request->validate([
+            'category' => 'numeric|nullable',
             "title" => "string|required",
             "order" => "numeric|required",
             "author" => "string|nullable",
@@ -76,17 +153,32 @@ class BookController extends Controller
         ]);
         $data = $request->only(['title','order','author','price','discount','status','description']);
         $data['thumbnail'] = $request->old_thumbnail;
+        $data['category_id'] = $request->category;
         if(isset($request->thumbnail))
         {
             $data['thumbnail'] = $request->thumbnail->store('uploads','public');
         }
+        
         $book->update($data);
+
+        if($book->category)
+        {
+            return redirect('/admin/books/categories/'.$book->category_id.'/books');
+        }
+
         return redirect('/admin/books');
     }
 
     public function destroy(Book $book)
     {
+        $category = $book->category;
+
         $book->delete();
+
+        if($category)
+        {
+            return redirect('/admin/books/categories/'.$category->id.'/books');
+        }
         return redirect('/admin/books');
     }
 

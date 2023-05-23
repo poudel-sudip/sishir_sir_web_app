@@ -5,6 +5,8 @@ namespace App\Models\Books;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Categories;
 
 class Book extends Model
 {
@@ -20,5 +22,10 @@ class Book extends Model
             $count = static::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
             $book->slug = $count ? "{$slug}-{$count}" : $slug;
         });
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Categories::class, 'category_id');
     }
 }

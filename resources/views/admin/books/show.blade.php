@@ -26,6 +26,11 @@
                         </div>
                     
                         <div class="course-row">
+                            <div>Book Category:</div>
+                            <div>{{ucwords($book->category->name ?? ' ')}}</div>
+                        </div>
+
+                        <div class="course-row">
                             <div>Book Title:</div>
                             <div>{{ucwords($book->title)}}</div>
                         </div>
