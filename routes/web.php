@@ -486,12 +486,19 @@ Route::patch('/admin/library/{category}/materials/{material}','App\Http\Controll
 Route::delete('/admin/library/{category}/materials/{material}','App\Http\Controllers\Admin\Library\MaterialController@destroy')->middleware('role:Admin');
 
 // admin imp links management
-Route::get('/admin/imp-links','App\Http\Controllers\Admin\LinksController@index')->middleware('role:Admin');
-Route::get('/admin/imp-links/create','App\Http\Controllers\Admin\LinksController@create')->middleware('role:Admin');
-Route::post('/admin/imp-links','App\Http\Controllers\Admin\LinksController@store')->middleware('role:Admin');
-Route::get('/admin/imp-links/{link}/edit','App\Http\Controllers\Admin\LinksController@edit')->middleware('role:Admin');
-Route::patch('/admin/imp-links/{link}','App\Http\Controllers\Admin\LinksController@update')->middleware('role:Admin');
-Route::delete('/admin/imp-links/{link}','App\Http\Controllers\Admin\LinksController@destroy')->middleware('role:Admin');
+Route::get('/admin/imp-links','App\Http\Controllers\Admin\LinksController@categoryIndex')->middleware('role:Admin');
+Route::get('/admin/imp-links/create','App\Http\Controllers\Admin\LinksController@categoryCreate')->middleware('role:Admin');
+Route::post('/admin/imp-links','App\Http\Controllers\Admin\LinksController@categoryStore')->middleware('role:Admin');
+Route::get('/admin/imp-links/{category}/edit','App\Http\Controllers\Admin\LinksController@categoryEdit')->middleware('role:Admin');
+Route::patch('/admin/imp-links/{category}','App\Http\Controllers\Admin\LinksController@categoryUpdate')->middleware('role:Admin');
+Route::delete('/admin/imp-links/{category}','App\Http\Controllers\Admin\LinksController@categoryDestroy')->middleware('role:Admin');
+
+Route::get('/admin/imp-links/{category}/links','App\Http\Controllers\Admin\LinksController@index')->middleware('role:Admin');
+Route::get('/admin/imp-links/{category}/links/create','App\Http\Controllers\Admin\LinksController@create')->middleware('role:Admin');
+Route::post('/admin/imp-links/{category}/links','App\Http\Controllers\Admin\LinksController@store')->middleware('role:Admin');
+Route::get('/admin/imp-links/{category}/links/{link}/edit','App\Http\Controllers\Admin\LinksController@edit')->middleware('role:Admin');
+Route::patch('/admin/imp-links/{category}/links/{link}','App\Http\Controllers\Admin\LinksController@update')->middleware('role:Admin');
+Route::delete('/admin/imp-links/{category}/links/{link}','App\Http\Controllers\Admin\LinksController@destroy')->middleware('role:Admin');
 
 
 

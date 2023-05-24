@@ -28,8 +28,17 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h2>{{$book->title}}</h2>
-                            <h6 style="display: inline; margin-right:20px"><span class="icon-user-tie text-primary"></span> {{$book->author}}</h6>
-                            <span>Published On: <span class="text-primary text-13">{{$book->created_at}}</span></span>
+                            <div class="d-flex flex-wrap">
+                                <h6 class="mx-3"><span class="icon-user-tie text-primary"></span> {{$book->author}}</h6>
+                                <div class="mx-3">Edition: <strong class="text-primary">{{$book->edition}}</strong></div>
+                                <div class="mx-3">Published On: <strong class="text-primary">{{$book->published_year}}</strong></div>
+                                <div class="mx-3">Pages: <strong class="text-primary">{{$book->pages}}</strong></div>
+                                <div class="mx-3">Availability: <strong class="text-primary ">{{ucwords($book->availability)}}</strong></div>
+                            </div>
+                                                        
+                        </div>
+                        <div class="col-12">
+                            <div class="sharethis-inline-share-buttons"></div>
                         </div>
                     </div>
                     <div class="row mt-3">

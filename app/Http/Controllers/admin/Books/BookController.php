@@ -96,6 +96,10 @@ class BookController extends Controller
             "title" => "string|required",
             "order" => "numeric|required",
             "author" => "string|nullable",
+            "edition" => "string|nullable",
+            "published_year" => "string|nullable",
+            "pages" => "string|nullable",
+            "availability" => "string|required",
             "price" => "numeric|required",
             "discount" => "numeric|nullable",
             "description" => "string|required",
@@ -103,7 +107,7 @@ class BookController extends Controller
             "thumbnail" => "image|required",
         ]);
 
-        $data = $request->only(['title','order','author','price','discount','status','description']);
+        $data = $request->only(['title','order','author','edition','published_year','pages','availability','price','discount','status','description']);
         $data['thumbnail'] = '';
         if(isset($request->thumbnail))
         {
@@ -144,6 +148,10 @@ class BookController extends Controller
             "title" => "string|required",
             "order" => "numeric|required",
             "author" => "string|nullable",
+            "edition" => "string|nullable",
+            "published_year" => "string|nullable",
+            "pages" => "string|nullable",
+            "availability" => "string|required",
             "price" => "numeric|required",
             "discount" => "numeric|nullable",
             "description" => "string|required",
@@ -151,7 +159,7 @@ class BookController extends Controller
             "thumbnail" => "image|nullable",
             "old_thumbnail" => "string|nullable",
         ]);
-        $data = $request->only(['title','order','author','price','discount','status','description']);
+        $data = $request->only(['title','order','author','edition','published_year','pages','availability','price','discount','status','description']);
         $data['thumbnail'] = $request->old_thumbnail;
         $data['category_id'] = $request->category;
         if(isset($request->thumbnail))

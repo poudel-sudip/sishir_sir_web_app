@@ -86,6 +86,66 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="edition" class="col-md-4 col-form-label">{{ __('Book Edition') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="edition" name="edition" type="text" class="form-control @error('edition') is-invalid @enderror" value="{{ old('edition') ?? $book->edition }}" >
+
+                                    @error('edition')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="pages" class="col-md-4 col-form-label">{{ __('Book Pages') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="pages" name="pages" type="text" class="form-control @error('pages') is-invalid @enderror" value="{{ old('pages') ?? $book->pages }}" >
+
+                                    @error('pages')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="published_year" class="col-md-4 col-form-label">{{ __('Published Year') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="published_year" name="published_year" type="text" class="form-control @error('published_year') is-invalid @enderror" value="{{ old('published_year') ?? $book->published_year }}" >
+
+                                    @error('published_year')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="availability" class="col-md-4 col-form-label">{{ __('Book Availability') }}</label>
+
+                                <div class="col-md-8">
+                                    <select id="availability" class="form-control @error('availability') is-invalid @enderror" name="availability" value="{{ old('availability') }}" required>
+                                        <option value="{{$book->availability}}">{{$book->availability}}</option>
+                                        <option value="">---------------</option>
+                                        <option value="In Stock">In Stock</option>
+                                        <option value="Out Of Stock">Out Of Stock</option>
+                                    </select>
+                                    @error('availability')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="price" class="col-md-4 col-form-label">{{ __('Book Price') }}</label>
 
                                 <div class="col-md-8">

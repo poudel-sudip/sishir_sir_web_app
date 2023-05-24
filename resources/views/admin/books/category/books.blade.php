@@ -34,7 +34,8 @@
                             <th>Category</th>
                             <th>Book Title</th>
                             <th>Price</th>
-                            <th>Order</th>
+                            <th>Edition</th>
+                            <th>Pub. Year</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
@@ -47,7 +48,8 @@
                             <td class="text-wrap">{{ucwords($row->category->name ?? '')}}</td>
                             <td class="text-wrap">{{ucwords($row->title ?? '')}}</td>
                             <td><s class="text-danger mr-2">{{$row->price ?? ''}} </s> <span class="ml-2 text-primary">{{$row->price - $row->discount}}</span> </td>
-                            <td>{{$row->order}} </td>
+                            <td>{{$row->edition}} </td>
+                            <td>{{$row->published_year}} </td>
                             <td><span class='text-{{$row->status == "Active" ? "success" : "danger"}}'>{{$row->status}}</span></td>
                             <td class="classroom-btn" width="100">
                               <a href="/admin/books/{{$row->id}}" class="btn btn-primary">Show</a>

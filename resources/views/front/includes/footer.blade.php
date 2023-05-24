@@ -5,7 +5,21 @@
   }
 </style>
 <footer class="page-footer">
+  
   <div class="container">
+    <div class="row px-md-3 mb-3">
+      @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'imp_link'])->whereHas('imp_links')->get() as $c)
+      <div class="col-12 col-sm-6 col-md-4">
+        <h6>{{ucwords($c->name)}}</h6>
+        <hr>
+        <ul>
+          @foreach($c->imp_links as $l)
+          <li><a href="{{$l->link_url}}" target="_blank" style="color:inherit;font:inherit;">{{ucwords($l->link_title)}}</a></li>
+          @endforeach
+        </ul>
+      </div>
+      @endforeach
+    </div>
     <div class="row px-md-3">
       <div class="col-sm-8 col-lg-8 py-3">        
         <div class="row">
@@ -24,13 +38,6 @@
               <li><a href="/enquiry">Enquiries</a></li>
               <li><a href="/testimonials">Testimonials</a></li>
               {{-- <li><a href="/careers">Careers</a></li> --}}
-              <?php
-                $footer_links = App\Models\ImportantLink::orderBy('link_order')->get();
-                //output contains fields: id, link_title, link_url, link_category, link_order
-              ?>
-              @foreach($footer_links as $link)
-              <li><a href="{{$link->link_url}}" target="_blank">{{$link->link_title}}</a></li>
-              @endforeach
             </ul>
           </div>
           <div class="col-md-8">

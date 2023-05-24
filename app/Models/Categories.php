@@ -39,6 +39,11 @@ class Categories extends Model
         return$this->hasMany(Book::class,'category_id');
     }
 
+    public function imp_links(): HasMany
+    {
+        return$this->hasMany(ImportantLink::class,'category_id');
+    }
+
     public function courses(): HasMany
     {
         return$this->hasMany(Course::class,'category_id','id')->orderBy('name','ASC');

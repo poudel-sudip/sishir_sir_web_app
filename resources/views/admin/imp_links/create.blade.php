@@ -1,16 +1,17 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Create Links
+    {{$category->name}} | Create Links
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Create Links</h3>
+            <h3 class="page-title">{{$category->name}} | Create Links</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/imp-links') }}">Links</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/imp-links') }}">Links Categories</a></li>
+                <li class="breadcrumb-item"><a href="/admin/imp-links/{{$category->id}}/links">Links</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Add </li>
                 </ol>
             </nav>
@@ -20,7 +21,7 @@
                 <div class="card">
                     <div class="card-header">Add Important Link</div>
                   <div class="card-body">
-                    <form class="forms-sample" method="POST" action="{{ ('/admin/imp-links') }}" enctype="multipart/form-data">
+                    <form class="forms-sample" method="POST" action="/admin/imp-links/{{$category->id}}/links" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="link_title" class="col-sm-3 col-form-label">{{ __('Link Title') }}</label>
@@ -39,18 +40,6 @@
                             <div class="col-md-9">
                                 <input id="link_url" type="text" class="form-control @error('link_url') is-invalid @enderror" name="link_url" value="{{ old('link_url') }}" required autocomplete="link_url" >
                                 @error('link_url')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="link_category" class="col-sm-3 col-form-label">{{ __('Link Category') }}</label>
-                            <div class="col-md-9">
-                                <input id="link_category" type="text" class="form-control @error('link_category') is-invalid @enderror" name="link_category" value="{{ old('link_category') }}" autocomplete="link_category" >
-                                @error('link_category')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

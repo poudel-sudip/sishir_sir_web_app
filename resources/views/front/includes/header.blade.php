@@ -107,20 +107,31 @@
             </li>
           @endforeach
           
-          <li class="nav-item">
+          {{-- <li class="nav-item ">
             <a class="nav-link" href="/books">My Book</a>
+          </li> --}}
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/books" role="button" aria-expanded="false">My Books</a>
+            <ul class="dropdown-menu">
+              @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'book'])->whereHas('books')->orderByDesc('id')->take(5)->get() as $b)
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/books-category/{{$b->slug}}">{{ucwords($b->name)}}</a>
+              </li>
+              @endforeach
+            </ul>
           </li>
           
-           <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Mock Test</a>
-              <ul class="dropdown-menu">
-                  <li class="parent-dropdown">
-                    <a class="dropdown-item" aria-current="page" href="/public-exams">Exams</a>
-                  </li>
-                  <li class="parent-dropdown">
-                    <a class="dropdown-item" aria-current="page" href="/results">Results</a>
-                  </li>
-              </ul>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Mock Test</a>
+            <ul class="dropdown-menu">
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/public-exams">Exams</a>
+              </li>
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/results">Results</a>
+              </li>
+            </ul>
           </li>
           
           <!--<li class="nav-item">-->

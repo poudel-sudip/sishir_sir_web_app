@@ -46,6 +46,26 @@
                         </div>
 
                         <div class="course-row">
+                            <div>Book Edition: </div>
+                            <div>{{ucwords($book->edition)}}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Book Published Year: </div>
+                            <div>{{ucwords($book->published_year)}}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Book Pages: </div>
+                            <div>{{ucwords($book->pages)}}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Book Availability: </div>
+                            <div>{{ucwords($book->availability)}}</div>
+                        </div>
+
+                        <div class="course-row">
                             <div>Book Price: </div>
                             <div>Rs. {{$book->price ?? '0'}}</div>
                         </div>
