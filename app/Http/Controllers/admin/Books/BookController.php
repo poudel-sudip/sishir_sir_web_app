@@ -75,6 +75,67 @@ class BookController extends Controller
         return view('admin.books.category.books',$data);
     }
 
+    public function publisherIndex()
+    {  
+        $data['categories'] = Categories::where('type','=','book_publisher')->get();
+        return view('admin.books.publisher.index',$data);
+    }
+
+    public function publisherCreate()
+    {
+        return view('admin.books.publisher.create');
+    }
+
+    public function publisherStore()
+    {
+        $data = request()->validate([
+            'name'=>'required | string',
+            'order'=>'required | numeric',
+            'status'=>'required',
+        ]);
+        Categories::create([
+            'type' => 'book_publisher',
+            'name'=>$data['name'],
+            'status'=>$data['status'],
+            'order'=>$data['order'],
+        ]);
+        return redirect('/admin/books/publishers');
+    }  
+
+    public function publisherEdit(Categories $category)
+    {
+        $data['category'] = $category;
+        return view('admin.books.publisher.edit',$data);
+    }
+
+    public function publisherUpdate(Categories $category, Request $request)
+    {
+       $data = $request->validate([
+            'name'=>'required | string',
+            'order'=>'required | numeric',
+            'status'=>'required',
+        ]);
+        $category->update([
+            'name'=>$data['name'],
+            'status'=>$data['status'],
+            'order'=>$data['order'],
+        ]);
+        return redirect('/admin/books/publishers');
+    }
+
+    public function publisherDestroy(Categories $category)
+    {
+        $category->delete();
+        return redirect('/admin/books/publishers');
+    }
+
+    public function publisherBooks(Categories $category)
+    {
+        $data['category'] = $category;
+        $data['books'] = $category->books;
+        return view('admin.books.publisher.books',$data);
+    }
+
     public function index()
     {
         $data = [];
@@ -85,6 +146,7 @@ class BookController extends Controller
     public function create()
     {
         $data['categories'] = Categories::where(['type'=>'book','status'=>'Active'])->get();
+        $data['publishers'] = Categories::where('type','=','book_publisher')->get();
         return view('admin.books.create',$data);
     }
     
@@ -93,6 +155,7 @@ class BookController extends Controller
         // dd($request->all());
         $request->validate([
             'category' => 'numeric|nullable',
+            'publisher' => 'numeric|nullable',
             "title" => "string|required",
             "order" => "numeric|required",
             "author" => "string|nullable",
@@ -119,6 +182,11 @@ class BookController extends Controller
             $data['category_id'] = $request->category;
         }
 
+        if($request->publisher)
+        {
+            $data['publisher_id'] = $request->publisher;
+        }
+
         $book = Book::create($data);
 
         if($book->category)
@@ -136,6 +204,7 @@ class BookController extends Controller
     public function edit(Book $book)
     {
         $data['categories'] = Categories::where(['type'=>'book','status'=>'Active'])->get();
+        $data['publishers'] = Categories::where('type','=','book_publisher')->get();
         $data['book'] = $book;
         return view('admin.books.edit',$data);
     }
@@ -145,6 +214,7 @@ class BookController extends Controller
         // dd($request->all());
         $request->validate([
             'category' => 'numeric|nullable',
+            'publisher' => 'numeric|nullable',
             "title" => "string|required",
             "order" => "numeric|required",
             "author" => "string|nullable",
@@ -162,6 +232,7 @@ class BookController extends Controller
         $data = $request->only(['title','order','author','edition','published_year','pages','availability','price','discount','status','description']);
         $data['thumbnail'] = $request->old_thumbnail;
         $data['category_id'] = $request->category;
+        $data['publisher_id'] = $request->publisher;
         if(isset($request->thumbnail))
         {
             $data['thumbnail'] = $request->thumbnail->store('uploads','public');

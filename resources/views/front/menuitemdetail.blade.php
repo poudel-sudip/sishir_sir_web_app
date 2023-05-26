@@ -37,9 +37,9 @@
                     </div>
     
                     <div class="my-4 row align-items-center">
-                        @if($menuItem->type == 'file')
+                        @if($menuItem->type == 'file' && $menuItem->download)
                         <div class="col-md-4">
-                            <a href="/storage/{{$menuItem->fileurl}}" target="_blank" download class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                            <a href="/storage/{{$menuItem->fileurl}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
                         </div>
                         @endif
                         <div class="col-md-8">
@@ -49,11 +49,12 @@
     
                     @if($menuItem->type == 'file')
                         <div class="mt-4">
-                            <iframe src="/storage/{{$menuItem->fileurl}}" 
+                            <div class="pdf-container" id="pdf-container" style="max-height:800px;overflow-y: scroll;"></div>
+                            {{-- <iframe src="/storage/{{$menuItem->fileurl}}" 
                                 frameborder="0" 
                                 style="width: 100%; min-height:700px" 
                                 target="_parent">
-                            </iframe>
+                            </iframe> --}}
                         </div>
                     @endif
                 </div>
@@ -128,6 +129,29 @@
             @endif
         </div> --}}
     </div>
+
+    <script src="{{asset('/js/pdf.min.js') }}"></script>
+    <script src="{{asset('/js/pdf.worker.min.js') }}"></script>
+    <script src="{{asset('/js/pdf_reader.js') }}"></script>
+    <script>
+        load_pdf_reader("/storage/{{$menuItem->fileurl}}");
+
+        function handleDownload(event) {
+            event.preventDefault(); // Prevent the default behavior of the link
+
+            var downloadUrl = event.target.getAttribute("href");
+
+            var link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = ""; // Set an empty value for the download attribute to preserve the original filename
+
+            document.body.appendChild(link);
+
+            link.click(); // Simulate a click event to initiate the download
+
+            document.body.removeChild(link); // Remove the dynamically created link element
+        }
+    </script>
 
     <script>
         function createPopupWin(url) {

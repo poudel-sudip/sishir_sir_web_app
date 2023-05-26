@@ -43,6 +43,10 @@
                             <div>{{ucwords($category->type)}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Can Download:</div>
+                            <div>{{$category->download ? 'Yes' : 'No'}}</div>
+                        </div>
+                        <div class="course-row">
                             <div> Category File Name:</div>
                             <div>{{$category->filename}}</div>
                         </div>

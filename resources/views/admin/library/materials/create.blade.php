@@ -89,6 +89,30 @@
                         </div> --}}
 
                         <div class="form-group row">
+                            <label for="can_download" class="col-md-4 col-form-label">{{ __('Can Download') }}</label>
+
+                            <div class="col-md-8 row">
+                                <div class="col-sm-4">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                        <input id="membershipRadios1" type="radio" class="form-check-input" name="can_download" value="1" >Yes</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                        <input id="membershipRadios2" type="radio" class="form-check-input" name="can_download" value="0" checked >No</label>
+                                    </div>
+                                </div>
+                                @error('can_download')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="thumbnail" class="col-sm-4 col-form-label">Thumbnail <small>(875*667 : 300kb)</small></label>
                             <div class="col-md-8">
                                 <input id="thumbnail" type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" value="{{ old('thumbnail') ?? 1  }}" autocomplete="thumbnail" >

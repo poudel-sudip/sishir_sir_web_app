@@ -453,6 +453,14 @@ Route::patch('/admin/books/categories/{category}','App\Http\Controllers\Admin\Bo
 Route::delete('/admin/books/categories/{category}','App\Http\Controllers\Admin\Books\BookController@categoryDestroy')->middleware('role:Admin');
 Route::get('/admin/books/categories/{category}/books','App\Http\Controllers\Admin\Books\BookController@categoryBooks')->middleware('role:Admin');
 
+Route::get('/admin/books/publishers','App\Http\Controllers\Admin\Books\BookController@publisherIndex')->middleware('role:Admin');
+Route::get('/admin/books/publishers/create','App\Http\Controllers\Admin\Books\BookController@publisherCreate')->middleware('role:Admin');
+Route::post('/admin/books/publishers','App\Http\Controllers\Admin\Books\BookController@publisherStore')->middleware('role:Admin');
+Route::get('/admin/books/publishers/{category}/edit','App\Http\Controllers\Admin\Books\BookController@publisherEdit')->middleware('role:Admin');
+Route::patch('/admin/books/publishers/{category}','App\Http\Controllers\Admin\Books\BookController@publisherUpdate')->middleware('role:Admin');
+Route::delete('/admin/books/publishers/{category}','App\Http\Controllers\Admin\Books\BookController@publisherDestroy')->middleware('role:Admin');
+Route::get('/admin/books/publishers/{category}/books','App\Http\Controllers\Admin\Books\BookController@publisherBooks')->middleware('role:Admin');
+
 Route::get('/admin/books','App\Http\Controllers\Admin\Books\BookController@index')->middleware('role:Admin');
 Route::get('/admin/books/create','App\Http\Controllers\Admin\Books\BookController@create')->middleware('role:Admin');
 Route::post('/admin/books','App\Http\Controllers\Admin\Books\BookController@store')->middleware('role:Admin');

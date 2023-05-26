@@ -42,6 +42,24 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="publisher" class="col-md-4 col-form-label">{{ __('Book Publisher') }}</label>
+
+                                <div class="col-md-8">
+                                    <select id="publisher" class="form-control @error('publisher') is-invalid @enderror" name="publisher" value="{{ old('publisher') }}">
+                                        <option value="">Choose one Option...</option>
+                                        @foreach($publishers as $cat)
+                                        <option value="{{$cat->id}}">{{ucwords($cat->name)}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('publisher')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label">{{ __('Book Title') }}</label>
 
                                 <div class="col-md-8">

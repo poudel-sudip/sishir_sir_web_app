@@ -46,6 +46,10 @@
                             <div>{{$material->order}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Material Can Download:</div>
+                            <div>{{$material->download ? 'Yes' : 'No'}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Material Status:</div>
                             <div>{{$material->status}}</div>
                         </div>

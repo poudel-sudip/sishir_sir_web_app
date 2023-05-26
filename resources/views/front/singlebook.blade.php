@@ -33,11 +33,13 @@
                                 <div class="mx-3">Edition: <strong class="text-primary">{{$book->edition}}</strong></div>
                                 <div class="mx-3">Published On: <strong class="text-primary">{{$book->published_year}}</strong></div>
                                 <div class="mx-3">Pages: <strong class="text-primary">{{$book->pages}}</strong></div>
+                                <div class="mx-3">Category: <strong class="text-primary ">{{ucwords($book->category->name ?? '')}}</strong></div>
+                                <div class="mx-3">Publisher: <strong class="text-primary ">{{ucwords($book->publisher->name ?? '')}}</strong></div>
                                 <div class="mx-3">Availability: <strong class="text-primary ">{{ucwords($book->availability)}}</strong></div>
                             </div>
                                                         
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 my-3">
                             <div class="sharethis-inline-share-buttons"></div>
                         </div>
                     </div>

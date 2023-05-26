@@ -52,6 +52,10 @@
                             <div>{{$subitem->type}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Can Download:</div>
+                            <div>{{$subitem->download ? 'Yes' : 'No'}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>File Name:</div>
                             <div>{{$subitem->filename}}</div>
                         </div>

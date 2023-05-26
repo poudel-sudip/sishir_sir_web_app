@@ -44,7 +44,11 @@ class SubGroupController extends Controller
         }
         elseif($data['type'] == 'file' || $data['type'] == 'File')
         {
-            $request->validate([ 'file' => 'required|file|mimes:pdf' ]);
+            $request->validate([ 
+                'file' => 'required|file|mimes:pdf',
+                'can_download' => 'required|boolean',
+            ]);
+            $data['download'] = $request->can_download;
             $data['filename'] = $request->file->getClientOriginalName();
             $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
         }
@@ -88,6 +92,7 @@ class SubGroupController extends Controller
             'type' => 'string|required',
             'thumbnail' => 'image|nullable',
             'old_thumbnail' => 'string|nullable',
+            'can_download' => 'required|boolean',
         ]);
         
         $data = $request->only(['name','order','status','type']);
@@ -108,7 +113,7 @@ class SubGroupController extends Controller
         elseif($data['type'] == 'file' || $data['type'] == 'File')
         {
             $data['description'] = '';
-
+            $data['download'] = $request->can_download;
             if($request->old_file == '' && !isset($request->file))
             {
                 return back()->withInput()->withErrors(['file' => 'Please select a pdf file']);

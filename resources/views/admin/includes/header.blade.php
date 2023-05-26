@@ -162,6 +162,9 @@
               <a class="nav-link" href="{{ url('/admin/books/categories') }}">Categories</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/books/publishers') }}">Publishers</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/books') }}">All Books</a>
             </li>
           </ul>

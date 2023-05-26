@@ -13,7 +13,7 @@
         <h6>{{ucwords($c->name)}}</h6>
         <hr>
         <ul>
-          @foreach($c->imp_links as $l)
+          @foreach($c->imp_links->sortBy('order') as $l)
           <li><a href="{{$l->link_url}}" target="_blank" style="color:inherit;font:inherit;">{{ucwords($l->link_title)}}</a></li>
           @endforeach
         </ul>

@@ -5612,3 +5612,48 @@ label.star:before {
 .library-item i{
     color: #0077b5;
 }
+
+.pdf-container {
+    position: relative;
+    /* height: 600px;  */
+    width: 100%;
+    overflow: hidden;
+    background-color: #525252;
+}
+
+.pdf-inner-container {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+.pdf-inner-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.pdf-inner-container::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.pdf-inner-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.pdf-pages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+
+}
+
+.pdf-page {
+    width: 100%;
+    margin: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transform-origin: center;
+}
