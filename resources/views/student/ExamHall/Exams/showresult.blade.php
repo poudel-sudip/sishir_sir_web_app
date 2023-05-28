@@ -54,9 +54,15 @@
                                 @else
                                 <i class="fa fa-times text-danger" aria-hidden="true"></i> <span>{!!$ans->your_ans!!}</span>
                                 @endif
-                                {{-- {{$ans->your_ans}} --}}
                             </div>
                         </div>
+                        @if(trim($ans->getQuestion->rationale))
+                        <hr>
+                        <h6>Rationale / Justification:</h6>
+                        <div>
+                            {!! $ans->getQuestion->rationale ?? '' !!}
+                        </div>
+                        @endif
                     </div>
                     @php($i++)
                     @endforeach

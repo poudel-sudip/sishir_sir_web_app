@@ -17,7 +17,7 @@
             </nav>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">Question Edit</div>
                     <div class="card-body">
@@ -100,7 +100,7 @@
                             </div>
                            
                             <div class="form-group row align-items-center">
-                                <label for="optionCorrect" class="col-md-4 col-form-label">{{ __('Correct Answer') }}</label>
+                                <label for="optionCorrect" class="col-md-4 col-form-label"><strong>{{ __('Correct Answer') }}</strong></label>
 
                                 <div class="col-md-8">
                                     <input id="optionCorrect" type="text" class="form-control @error('optionCorrect') is-invalid @enderror" name="optionCorrect" value="{{ old('optionCorrect') ?? $question->opt_correct }}"  >
@@ -112,8 +112,22 @@
                                     @enderror
                                 </div>
                             </div>
-                           
-    
+                               
+                            <div class="form-group row align-items-center">
+                                <label for="rationale" class="col-md-4 col-form-label"><strong>{{ __('Rationale / Justification') }}</strong></label>
+
+                                <div class="col-md-8">
+                                    {{-- <input id="rationale" type="text" class="form-control @error('rationale') is-invalid @enderror" name="rationale" value="{{ old('rationale') ?? $question->rationale }}"  > --}}
+                                    <textarea id="rationale" class="form-control summernote @error('rationale') is-invalid @enderror" name="rationale" >{{ old('rationale') ?? $question->rationale }}</textarea>
+
+                                    @error('rationale')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

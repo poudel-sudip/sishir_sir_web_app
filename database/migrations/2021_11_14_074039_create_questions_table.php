@@ -22,6 +22,7 @@ class CreateQuestionsTable extends Migration
             $table->longText('opt_c')->nullable();
             $table->longText('opt_d')->nullable();
             $table->string('opt_correct')->nullable();
+            $table->longText('rationale')->nullable();
             $table->timestamps();
         });
     }

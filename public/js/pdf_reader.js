@@ -1,6 +1,6 @@
 //first needs to load pdf min and pdf worker
 
-let currentScale = 1;
+let currentScale = 2;
 let currentRotation = 0;
 let currentPage = 1;
 let totalPages = 0;

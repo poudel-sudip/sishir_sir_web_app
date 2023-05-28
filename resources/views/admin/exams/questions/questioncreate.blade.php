@@ -17,7 +17,7 @@
             </nav>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">Add Question</div>
                     <div class="card-body">
@@ -113,6 +113,20 @@
                                 </div>
                             </div>
                            
+                            <div class="form-group row align-items-center">
+                                <label for="rationale" class="col-md-4 col-form-label"><strong>{{ __('Rationale / Justification') }}</strong></label>
+
+                                <div class="col-md-8">
+                                    {{-- <input id="rationale" type="text" class="form-control @error('rationale') is-invalid @enderror" name="rationale" value="{{ old('rationale') }}"  > --}}
+                                    <textarea id="rationale" class="form-control summernote @error('rationale') is-invalid @enderror" name="rationale" >{{ old('rationale') }}</textarea>
+
+                                    @error('rationale')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
     
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

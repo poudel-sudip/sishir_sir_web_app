@@ -176,8 +176,10 @@ Route::get('/admin/exams/{exam}/questions','App\Http\Controllers\Admin\Exams\Que
 Route::get('/admin/exams/{exam}/questions/create','App\Http\Controllers\Admin\Exams\QuestionController@create')->middleware('role:Admin');
 Route::get('/admin/exams/{exam}/questions/upload','App\Http\Controllers\Admin\Exams\QuestionController@upload')->middleware('role:Admin');
 Route::post('/admin/exams/{exam}/questions/import','App\Http\Controllers\Admin\Exams\QuestionController@import')->middleware('role:Admin');
+Route::get('/admin/exams/{exam}/questions/download','App\Http\Controllers\Admin\Exams\QuestionController@download')->middleware('role:Admin');
 Route::post('/admin/exams/{exam}/questions','App\Http\Controllers\Admin\Exams\QuestionController@store')->middleware('role:Admin');
 Route::get('/admin/exams/{exam}/questions/{question}/edit','App\Http\Controllers\Admin\Exams\QuestionController@edit')->middleware('role:Admin');
+Route::get('/admin/exams/{exam}/questions/{question}','App\Http\Controllers\Admin\Exams\QuestionController@show')->middleware('role:Admin');
 Route::patch('/admin/exams/{exam}/questions/{question}','App\Http\Controllers\Admin\Exams\QuestionController@update')->middleware('role:Admin');
 Route::delete('/admin/exams/{exam}/questions/{question}','App\Http\Controllers\Admin\Exams\QuestionController@destroy')->middleware('role:Admin');
 
