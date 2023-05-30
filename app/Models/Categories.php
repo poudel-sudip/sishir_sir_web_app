@@ -34,9 +34,19 @@ class Categories extends Model
     }
 
 
+    public function pub_books(): HasMany
+    {
+        return$this->hasMany(Book::class,'publisher_id');
+    }
+
     public function books(): HasMany
     {
         return$this->hasMany(Book::class,'category_id');
+    }
+
+    public function imp_links(): HasMany
+    {
+        return$this->hasMany(ImportantLink::class,'category_id');
     }
 
     public function courses(): HasMany

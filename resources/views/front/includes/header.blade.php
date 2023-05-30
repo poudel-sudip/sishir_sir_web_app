@@ -69,11 +69,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <?php
-          $parent_menus = App\Models\Menu\MenuGroup::where('status','=','Active')->orderBy('order')->take(10)->get();
+          $parent_menus = App\Models\Menu\MenuGroup::where('status','=','Active')->orderBy('order')->take(8)->get();
         ?>
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+            <a class="nav-link active" aria-current="page" href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> </a>
           </li>
 
           @foreach($parent_menus as $parent)
@@ -107,20 +107,31 @@
             </li>
           @endforeach
           
-          <li class="nav-item">
+          {{-- <li class="nav-item ">
             <a class="nav-link" href="/books">My Book</a>
+          </li> --}}
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/books" role="button" aria-expanded="false">My Books</a>
+            <ul class="dropdown-menu">
+              @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'book_publisher'])->whereHas('pub_books')->orderBy('order')->take(5)->get() as $b)
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/books-category/{{$b->slug}}">{{ucwords($b->name)}}</a>
+              </li>
+              @endforeach
+            </ul>
           </li>
           
-           <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Mock Test</a>
-              <ul class="dropdown-menu">
-                  <li class="parent-dropdown">
-                    <a class="dropdown-item" aria-current="page" href="/public-exams">Exams</a>
-                  </li>
-                  <li class="parent-dropdown">
-                    <a class="dropdown-item" aria-current="page" href="/results">Results</a>
-                  </li>
-              </ul>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Mock Test</a>
+            <ul class="dropdown-menu">
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/public-exams">Exams</a>
+              </li>
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/results">Results</a>
+              </li>
+            </ul>
           </li>
           
           <!--<li class="nav-item">-->

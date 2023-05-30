@@ -31,6 +31,11 @@
                         </div>
 
                         <div class="course-row">
+                            <div>Book Publisher:</div>
+                            <div>{{ucwords($book->publisher->name ?? ' ')}}</div>
+                        </div>
+
+                        <div class="course-row">
                             <div>Book Title:</div>
                             <div>{{ucwords($book->title)}}</div>
                         </div>
@@ -43,6 +48,26 @@
                         <div class="course-row">
                             <div>Book Author: </div>
                             <div>{{ucwords($book->author)}}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Book Edition: </div>
+                            <div>{{ucwords($book->edition)}}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Book Published Year: </div>
+                            <div>{{ucwords($book->published_year)}}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Book Pages: </div>
+                            <div>{{ucwords($book->pages)}}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Book Availability: </div>
+                            <div>{{ucwords($book->availability)}}</div>
                         </div>
 
                         <div class="course-row">

@@ -1,32 +1,31 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Edit Category
+    Create Important Links Category
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Edit Category</h3>
+            <h3 class="page-title">Create Important Links Category</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/books/categories') }}">Categories</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Edit Category </li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/imp-links') }}">Links Category</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add </li>
                 </ol>
             </nav>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Edit Category</div>
+                    <div class="card-header">Add Important Links Category</div>
                   <div class="card-body">
-                    <form class="forms-sample" method="POST" action="{{ ('/admin/books/categories/'.$category->id) }}" enctype="multipart/form-data">
+                    <form class="forms-sample" method="POST" action="{{ ('/admin/imp-links') }}" enctype="multipart/form-data">
                         @csrf
-                        @method('PATCH')
                         <div class="form-group row">
                             <label for="name" class="col-sm-3 col-form-label">{{ __('Category Name') }}</label>
                             <div class="col-md-9">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ??$category->name }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -35,24 +34,10 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group row">
-                            <label for="order" class="col-sm-3 col-form-label">{{ __('Category Order') }}</label>
-                            <div class="col-md-9">
-                                <input id="order" type="number" class="form-control @error('order') is-invalid @enderror" name="order" value="{{ old('order') ?? $category->order }}" required autocomplete="order" >
-                                @error('order')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div> --}}
-
                         <div class="form-group row">
                             <label for="status" class="col-sm-3 col-form-label">{{ __('Category Status') }}</label>
                             <div class="col-md-9">
                                 <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required>
-                                    <option value="{{$category->status}}">{{$category->status}}</option>
-                                    <option value="">---------------------</option>
                                     <option value="Inactive">Inactive</option>
                                     <option value="Active">Active</option>
                                 </select>

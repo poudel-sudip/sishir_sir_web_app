@@ -372,15 +372,25 @@ class FrontController extends Controller
 
     public function categoryBooks($slug)
     {
-        $category = Categories::where('slug',$slug)->where('type','=','book')->first();
+        $category = Categories::where('slug',$slug)->whereIn('type',['book','book_publisher'])->first();
         if(!$category)
         {
             abort(404,'Book Category Not Found');
         }
         $data['categories'] = Categories::where(['status'=>'Active','type'=>'book'])->whereHas('books')->get();
         $data['category'] = $category;
-        $data['books'] = $category->books()->where('status','=','Active')->get();
-        
+        if($category->type == 'book')
+        {
+            $data['books'] = $category->books()->where('status','=','Active')->get();
+        }
+        elseif($category->type == 'book_publisher')
+        {
+            $data['books'] = $category->pub_books()->where('status','=','Active')->get();
+        }
+        else{
+            $data['books'] = [];
+        }
+
         return view('front.categorybooks',$data);
     }
 

@@ -8,6 +8,8 @@ use App\Models\Exams\Exam;
 use App\Models\Exams\Question;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ExamQuestionsImport;
+use App\Exports\Exams\ExamQuestionExport;
+
 class QuestionController extends Controller
 {
     /**
@@ -45,6 +47,7 @@ class QuestionController extends Controller
             'optionC'=>'string|nullable',
             'optionD'=>'string|nullable',
             'optionCorrect'=>'required|string|max:1',
+            'rationale'=>'string|nullable',
         ]);
         // dd($request->all());
         if(strtoupper($request->optionCorrect) =='A' || strtoupper($request->optionCorrect) =='B' || strtoupper($request->optionCorrect) =='C' || strtoupper($request->optionCorrect) =='D' )
@@ -56,6 +59,7 @@ class QuestionController extends Controller
                 'opt_c'=>$request->optionC,
                 'opt_d'=>$request->optionD,
                 'opt_correct'=>strtoupper($request->optionCorrect),
+                'rationale'=>$request->rationale,
             ]);
     
             return redirect('/admin/exams/'.$exam->id.'/questions')->with('success','Data Saved Successfully');    
@@ -73,9 +77,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Exam $exam, Question $question)
     {
-        //
+        return view('admin.exams.questions.questionshow',compact('exam','question'));
     }
 
     /**
@@ -105,6 +109,7 @@ class QuestionController extends Controller
             'optionC'=>'string|nullable',
             'optionD'=>'string|nullable',
             'optionCorrect'=>'required|string|max:1',
+            'rationale'=>'string|nullable',
         ]);
         // dd($request->all());
 
@@ -115,6 +120,7 @@ class QuestionController extends Controller
             'opt_c'=>$request->optionC,
             'opt_d'=>$request->optionD,
             'opt_correct'=>strtoupper($request->optionCorrect),
+            'rationale'=>$request->rationale,
         ]);
 
         return redirect('/admin/exams/'.$exam->id.'/questions')->with('success','Data Updated Successfully');
@@ -147,6 +153,14 @@ class QuestionController extends Controller
         Excel::import(new ExamQuestionsImport($exam),request()->file('file'));
         return redirect('/admin/exams/'.$exam->id.'/questions');
 
+    }
+
+    public function download(Request $request, Exam $exam)
+    {
+        $symbols = array("~"," ", "!", "@", "#", "$", "%", "^", "&", "*", "+", "=", ";", "\"", "<", ">", "/", "|", "`");
+
+        $filename = str_replace($symbols,'_',$exam->name).'_questions.xlsx';
+        return Excel::download(new ExamQuestionExport($exam), $filename);
     }
 
 }

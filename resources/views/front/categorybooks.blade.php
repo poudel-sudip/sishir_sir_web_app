@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('page_title', 'All Books')
+@section('page_title', $category->name.' | Books')
 @section('content')
     <style>
         .single-blog p, .single-blog .blog-description span {
@@ -12,11 +12,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>All Books</h2>
+                <h2>{{ucwords($category->name)}} | Books</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Shishir Books</li>
+                        <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/books-category/{{$category->slug}}">{{ucwords($category->name)}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Books</li>
                     </ol>
                 </div>
             </div>

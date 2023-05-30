@@ -21,6 +21,7 @@ class CreateLibraryMaterialsTable extends Migration
             $table->string('type', 100)->nullable()->default('file');
             $table->string('filename')->nullable();
             $table->string('fileurl')->nullable();
+            $table->tinyInteger('download')->default(0);
             $table->longText('description')->nullable();
             $table->string('order')->nullable()->default(1);
             $table->string('thumbnail')->nullable();

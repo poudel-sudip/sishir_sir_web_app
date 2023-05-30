@@ -47,6 +47,10 @@
                             <div>{{$item->type}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Can Download:</div>
+                            <div>{{$item->download ? 'Yes' : 'No'}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>File Name:</div>
                             <div>{{$item->filename}}</div>
                         </div>

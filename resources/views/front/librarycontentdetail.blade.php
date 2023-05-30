@@ -33,7 +33,11 @@
             </div>
             
             <div class="my-4 row">
-                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @if($material->type == 'file' && $material->download)
+                    <a href="/storage/{{$material ->fileurl}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                    @endif
+                </div>
                 <div class="col-md-8"><div class="sharethis-inline-share-buttons" ></div></div>
             </div>
             
@@ -56,84 +60,27 @@
 
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.10.100/pdf.min.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{asset('/js/pdf.min.js') }}"></script>
+    <script src="{{asset('/js/pdf.worker.min.js') }}"></script>
+    <script src="{{asset('/js/pdf_reader.js') }}"></script>
     <script>
-        //pdf js script  
-        var filePath = "/storage/{{$material->fileurl}}";
+        load_pdf_reader("/storage/{{$material->fileurl}}");
 
-        function Num(num) {
-            var num = num;
+        function handleDownload(event) {
+            event.preventDefault(); // Prevent the default behavior of the link
 
-            return function () {
-                return num;
-            }
-        };
+            var downloadUrl = event.target.getAttribute("href");
 
-        function renderPDF(url, canvasContainer, options) {
-            var options = options || {
-                    scale: 1.7
-                },          
-                func,
-                pdfDoc,
-                def = $.Deferred(),
-                promise = $.Deferred().resolve().promise(),         
-                width, 
-                height,
-                makeRunner = function(func, args) {
-                    return function() {
-                        return func.call(null, args);
-                    };
-                };
+            var link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = ""; // Set an empty value for the download attribute to preserve the original filename
 
-            function renderPage(num) {          
-                var def = $.Deferred(),
-                currPageNum = new Num(num);
-                pdfDoc.getPage(currPageNum()).then(function(page) {
-                    var viewport = page.getViewport(options.scale);
-                    var canvas = document.createElement("canvas");
-                    canvas.setAttribute("class","img img-fluid");
-                    canvas.setAttribute("id","pdfCanvas"+num);
-                    // canvas.setAttribute("onclick","popCanvas('{{url('/dashboard/showcanvas')}}','"+document.getElementById('pdfPath').innerHTML+"','"+num+"');");
-                    var ctx = canvas.getContext('2d');
-                    var renderContext = {
-                        canvasContext: ctx,
-                        viewport: viewport
-                    };
+            document.body.appendChild(link);
 
-                    if(currPageNum() === 1) {                   
-                        height = viewport.height;
-                        width = viewport.width;
-                    }
+            link.click(); // Simulate a click event to initiate the download
 
-                    canvas.height = height;
-                    canvas.width = width;
-
-                    canvasContainer.appendChild(canvas);
-
-                    page.render(renderContext).then(function() {                                        
-                        def.resolve();
-                    });
-                })
-
-                return def.promise();
-            }
-
-            function renderPages(data) {
-                pdfDoc = data;
-
-                var pagesCount = pdfDoc.numPages;
-                for (var i = 1; i <= pagesCount; i++) { 
-                    func = renderPage;
-                    promise = promise.then(makeRunner(func, i));
-                }
-            }
-
-            PDFJS.disableWorker = true;
-            PDFJS.getDocument(url).then(renderPages);       
-        };
-
-        var body = document.getElementById("my_pdf_viewer");
-        renderPDF(filePath, body);
+            document.body.removeChild(link); // Remove the dynamically created link element
+        }
     </script>
 
     <script>

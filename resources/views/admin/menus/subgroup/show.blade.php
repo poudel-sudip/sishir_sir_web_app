@@ -38,6 +38,10 @@
                             <div>{{ucwords($subgroup->type)}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Can Download:</div>
+                            <div>{{$subgroup->download ? 'Yes' : 'No'}}</div>
+                        </div>
+                        <div class="course-row">
                             <div> Sub Menu File Name:</div>
                             <div>{{$subgroup->filename}}</div>
                         </div>

@@ -51,7 +51,8 @@
                             <td class="text-wrap">{!! $question->opt_c !!}</td>
                             <td class="text-wrap">{!! $question->opt_d !!}</td>
                             <td>{{ $question->opt_correct }}</td>
-                            <td class="classroom-btn" width="160">
+                            <td class="classroom-btn" width="100">
+                                <a href="/admin/exams/{{$exam->id}}/questions/{{$question->id}}" class="btn btn-info">Show</a>
                                 <a href="/admin/exams/{{$exam->id}}/questions/{{$question->id}}/edit" class="btn btn-danger">Edit</a>
                                 <form id="delete-form-{{$question->id}}" action="/admin/exams/{{$exam->id}}/questions/{{$question->id}}" method="POST" style="display: inline">
                                     @csrf
@@ -89,8 +90,9 @@
                     </script>
                     <hr>
                     </div>
-                    <div class="description small">
+                    <div class="description small d-flex justify-content-between">
                       <a href="{{ asset('admin/files/questionupload.xlsx') }}" target="_blank">Download Bulk Question Upload Sample</a>
+                      <a href="/admin/exams/{{$exam->id}}/questions/download" target="_blank">Download Exam Questions</a>
                     </div>
                   </div>
                 </div>

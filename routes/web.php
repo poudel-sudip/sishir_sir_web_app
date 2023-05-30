@@ -176,8 +176,10 @@ Route::get('/admin/exams/{exam}/questions','App\Http\Controllers\Admin\Exams\Que
 Route::get('/admin/exams/{exam}/questions/create','App\Http\Controllers\Admin\Exams\QuestionController@create')->middleware('role:Admin');
 Route::get('/admin/exams/{exam}/questions/upload','App\Http\Controllers\Admin\Exams\QuestionController@upload')->middleware('role:Admin');
 Route::post('/admin/exams/{exam}/questions/import','App\Http\Controllers\Admin\Exams\QuestionController@import')->middleware('role:Admin');
+Route::get('/admin/exams/{exam}/questions/download','App\Http\Controllers\Admin\Exams\QuestionController@download')->middleware('role:Admin');
 Route::post('/admin/exams/{exam}/questions','App\Http\Controllers\Admin\Exams\QuestionController@store')->middleware('role:Admin');
 Route::get('/admin/exams/{exam}/questions/{question}/edit','App\Http\Controllers\Admin\Exams\QuestionController@edit')->middleware('role:Admin');
+Route::get('/admin/exams/{exam}/questions/{question}','App\Http\Controllers\Admin\Exams\QuestionController@show')->middleware('role:Admin');
 Route::patch('/admin/exams/{exam}/questions/{question}','App\Http\Controllers\Admin\Exams\QuestionController@update')->middleware('role:Admin');
 Route::delete('/admin/exams/{exam}/questions/{question}','App\Http\Controllers\Admin\Exams\QuestionController@destroy')->middleware('role:Admin');
 
@@ -453,6 +455,14 @@ Route::patch('/admin/books/categories/{category}','App\Http\Controllers\Admin\Bo
 Route::delete('/admin/books/categories/{category}','App\Http\Controllers\Admin\Books\BookController@categoryDestroy')->middleware('role:Admin');
 Route::get('/admin/books/categories/{category}/books','App\Http\Controllers\Admin\Books\BookController@categoryBooks')->middleware('role:Admin');
 
+Route::get('/admin/books/publishers','App\Http\Controllers\Admin\Books\BookController@publisherIndex')->middleware('role:Admin');
+Route::get('/admin/books/publishers/create','App\Http\Controllers\Admin\Books\BookController@publisherCreate')->middleware('role:Admin');
+Route::post('/admin/books/publishers','App\Http\Controllers\Admin\Books\BookController@publisherStore')->middleware('role:Admin');
+Route::get('/admin/books/publishers/{category}/edit','App\Http\Controllers\Admin\Books\BookController@publisherEdit')->middleware('role:Admin');
+Route::patch('/admin/books/publishers/{category}','App\Http\Controllers\Admin\Books\BookController@publisherUpdate')->middleware('role:Admin');
+Route::delete('/admin/books/publishers/{category}','App\Http\Controllers\Admin\Books\BookController@publisherDestroy')->middleware('role:Admin');
+Route::get('/admin/books/publishers/{category}/books','App\Http\Controllers\Admin\Books\BookController@publisherBooks')->middleware('role:Admin');
+
 Route::get('/admin/books','App\Http\Controllers\Admin\Books\BookController@index')->middleware('role:Admin');
 Route::get('/admin/books/create','App\Http\Controllers\Admin\Books\BookController@create')->middleware('role:Admin');
 Route::post('/admin/books','App\Http\Controllers\Admin\Books\BookController@store')->middleware('role:Admin');
@@ -486,12 +496,19 @@ Route::patch('/admin/library/{category}/materials/{material}','App\Http\Controll
 Route::delete('/admin/library/{category}/materials/{material}','App\Http\Controllers\Admin\Library\MaterialController@destroy')->middleware('role:Admin');
 
 // admin imp links management
-Route::get('/admin/imp-links','App\Http\Controllers\Admin\LinksController@index')->middleware('role:Admin');
-Route::get('/admin/imp-links/create','App\Http\Controllers\Admin\LinksController@create')->middleware('role:Admin');
-Route::post('/admin/imp-links','App\Http\Controllers\Admin\LinksController@store')->middleware('role:Admin');
-Route::get('/admin/imp-links/{link}/edit','App\Http\Controllers\Admin\LinksController@edit')->middleware('role:Admin');
-Route::patch('/admin/imp-links/{link}','App\Http\Controllers\Admin\LinksController@update')->middleware('role:Admin');
-Route::delete('/admin/imp-links/{link}','App\Http\Controllers\Admin\LinksController@destroy')->middleware('role:Admin');
+Route::get('/admin/imp-links','App\Http\Controllers\Admin\LinksController@categoryIndex')->middleware('role:Admin');
+Route::get('/admin/imp-links/create','App\Http\Controllers\Admin\LinksController@categoryCreate')->middleware('role:Admin');
+Route::post('/admin/imp-links','App\Http\Controllers\Admin\LinksController@categoryStore')->middleware('role:Admin');
+Route::get('/admin/imp-links/{category}/edit','App\Http\Controllers\Admin\LinksController@categoryEdit')->middleware('role:Admin');
+Route::patch('/admin/imp-links/{category}','App\Http\Controllers\Admin\LinksController@categoryUpdate')->middleware('role:Admin');
+Route::delete('/admin/imp-links/{category}','App\Http\Controllers\Admin\LinksController@categoryDestroy')->middleware('role:Admin');
+
+Route::get('/admin/imp-links/{category}/links','App\Http\Controllers\Admin\LinksController@index')->middleware('role:Admin');
+Route::get('/admin/imp-links/{category}/links/create','App\Http\Controllers\Admin\LinksController@create')->middleware('role:Admin');
+Route::post('/admin/imp-links/{category}/links','App\Http\Controllers\Admin\LinksController@store')->middleware('role:Admin');
+Route::get('/admin/imp-links/{category}/links/{link}/edit','App\Http\Controllers\Admin\LinksController@edit')->middleware('role:Admin');
+Route::patch('/admin/imp-links/{category}/links/{link}','App\Http\Controllers\Admin\LinksController@update')->middleware('role:Admin');
+Route::delete('/admin/imp-links/{category}/links/{link}','App\Http\Controllers\Admin\LinksController@destroy')->middleware('role:Admin');
 
 
 
