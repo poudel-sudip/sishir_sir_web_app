@@ -47,7 +47,7 @@ class FrontController extends Controller
         $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('created_at')->first();
         $data['blogs'] = Blog::all()->where('status','=','Published')->sortByDesc('created_at')->take(5);
         $data['books'] = Book::all()->where('status','=','Active')->take(4)->sortBy('order');
-        $data['testimonials'] = Testimonial::all()->sortByDesc('created_at')->take(10);
+        $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->take(20)->get();
         $data['ads'] = Advertisement::all();
         // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
         // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
@@ -381,11 +381,11 @@ class FrontController extends Controller
         $data['category'] = $category;
         if($category->type == 'book')
         {
-            $data['books'] = $category->books()->where('status','=','Active')->get();
+            $data['books'] = $category->books()->where('status','=','Active')->orderBy('edition')->get();
         }
         elseif($category->type == 'book_publisher')
         {
-            $data['books'] = $category->pub_books()->where('status','=','Active')->get();
+            $data['books'] = $category->pub_books()->where('status','=','Active')->orderBy('edition')->get();
         }
         else{
             $data['books'] = [];
@@ -731,7 +731,7 @@ class FrontController extends Controller
 
     public function getTestimonials()
     {
-        $data['testimonials'] = Testimonial::all()->sortByDesc('created_at');
+        $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->get();
         return view('front.testimonials',$data);
     }
 
@@ -755,6 +755,7 @@ class FrontController extends Controller
            'email'=>$data['email'],
            'message'=>$data['message'],
            'image'=>$imgpath,
+           'status'=>'Inactive',
         ]);
         return redirect('/testimonials');
     }

@@ -32,7 +32,7 @@
       
     <div class="row px-md-3 mb-3">
       @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'imp_link'])->whereHas('imp_links')->get() as $c)
-      <div class="col-12 col-sm-6 col-md-4">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <h6>{{ucwords($c->name)}}</h6>
         <hr>
         <ul>
@@ -107,7 +107,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <p id="copyright">Copyright &copy; <script> document.write(new Date().getFullYear()); </script> All right reserved <a href="">Shishir Adhikari.</a> By <a href="">ODD Experts Pvt. Ltd.</a></p>
+        <p id="copyright">Copyright &copy; <script> document.write(new Date().getFullYear()); </script> All right reserved <a href="">Shisir Adhikari.</a> By <a href="">ODD Experts Pvt. Ltd.</a></p>
       </div>
       <div class="col-md-6">
        

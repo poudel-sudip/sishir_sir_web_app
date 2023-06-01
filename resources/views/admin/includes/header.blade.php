@@ -14,7 +14,7 @@
             <!--change to offline or busy as needed-->
           </div>
           <div class="nav-profile-text d-flex flex-column pr-3">
-            <span class="font-weight-medium mb-2">Shishir Adhikari</span>
+            <span class="font-weight-medium mb-2">Shisir Adhikari</span>
             <span class="font-weight-normal">{{ Auth::user()->name }}</span>
           </div>
         </a>
