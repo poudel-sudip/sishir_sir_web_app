@@ -7,6 +7,29 @@
 <footer class="page-footer">
   
   <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'imp_link'])->whereHas('imp_links')->get() as $c)
+            <button class="nav-link {{ $c->id == 1 ? 'active' : '' }}" id="nav-{{ $c->id }}" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-{{ $c->id }}" aria-selected="true">{{ucwords($c->name)}}</button>
+            @endforeach
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'imp_link'])->whereHas('imp_links')->get() as $c)
+          <div class="tab-pane fade show {{ $c->id == 1 ? 'active' : '' }}" id="nav-{{ $c->id }}" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+            @foreach($c->imp_links->sortBy('order') as $l)
+            <a href="{{$l->link_url}}" target="_blank" style="color:inherit;font:inherit;">{{ucwords($l->link_title)}}</a>
+            @endforeach
+          </div>
+          @endforeach
+        </div>
+      </div>
+      
+      </div>
+
+      
     <div class="row px-md-3 mb-3">
       @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'imp_link'])->whereHas('imp_links')->get() as $c)
       <div class="col-12 col-sm-6 col-md-4">
