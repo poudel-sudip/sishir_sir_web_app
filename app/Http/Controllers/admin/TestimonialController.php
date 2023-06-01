@@ -44,6 +44,7 @@ class TestimonialController extends Controller
            'email'=>$data['email'],
            'message'=>$data['description'],
            'image'=>$imgpath,
+           'status' => 'Active',
         ]);
         return redirect('/admin/testimonials');
     }
@@ -62,6 +63,7 @@ class TestimonialController extends Controller
             'description'=>'string',
             'image'=>'',
             'oldImage'=>'string',
+            'status'=>'string|required',
         ]);
         $imagePath=$data['oldImage'];
         if(isset($data['image']))
@@ -74,6 +76,7 @@ class TestimonialController extends Controller
             'email'=>$data['email'],
             'message'=>$data['description'],
             'image'=>$imagePath,
+            'status'=>$data['status'],
         ]);
         return redirect('/admin/testimonials');
     }

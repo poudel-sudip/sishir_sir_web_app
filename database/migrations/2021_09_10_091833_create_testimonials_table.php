@@ -20,6 +20,7 @@ class CreateTestimonialsTable extends Migration
             $table->string('role')->default('Visitor');
             $table->string('image')->nullable();
             $table->longText('message');
+            $table->string('status')->nullable()->default('Inactive');
             $table->timestamps();
         });
     }

@@ -96,6 +96,24 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="status" class="col-md-4 col-form-label">{{ __('Status') }}</label>
+
+                                <div class="col-md-8">
+                                    <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') ?? $testimonial->status }}" required>
+                                        <option value="{{$testimonial->status}}">{{$testimonial->status}}</option>
+                                        <option value="">------------</option>
+                                        <option value="Inactive">Inactive</option>
+                                        <option value="Active">Active</option>
+                                    </select>
+                                    @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
