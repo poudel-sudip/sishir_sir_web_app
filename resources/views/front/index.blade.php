@@ -1,6 +1,7 @@
 @extends('front.layouts.app')
 @section('page_title','Home')
 @section('content')
+
     <section class="mt-4">
         <div class="container">
             <div class="row">
@@ -319,7 +320,7 @@
         </div>
     </div> --}}
 
-    <div class="enquiry-popup">
+    {{-- <div class="enquiry-popup ">
         <a href="/enquiry"><i class="fas fa-comment-alt"></i><span>Enquiry</span></a> 
     </div>
     <div id="home-call-poup">
@@ -327,7 +328,7 @@
         <div class="popupdiv">
             <a href="tel:+977-9812417639"><span class="icon-phone"></span>+977 9812417639</a>
         </div>
-    </div>
+    </div> --}}
     {{-- youtube video palylist --}}
     <script src="https://apps.elfsight.com/p/platform.js" defer></script>
     {{-- <script>

@@ -365,7 +365,7 @@ class FrontController extends Controller
     public function books()
     {
         $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->take(15)->get();
-        $data['categories'] = Categories::where(['status'=>'Active','type'=>'book'])->whereHas('books')->get();
+        $data['categories'] = Categories::where(['status'=>'Active','type'=>'book_publisher'])->whereHas('pub_books')->get();
         // dd($data);
         return view('front.books',$data);
     }
@@ -377,7 +377,7 @@ class FrontController extends Controller
         {
             abort(404,'Book Category Not Found');
         }
-        $data['categories'] = Categories::where(['status'=>'Active','type'=>'book'])->whereHas('books')->get();
+        $data['categories'] = Categories::where(['status'=>'Active','type'=>'book_publisher'])->whereHas('pub_books')->get();
         $data['category'] = $category;
         if($category->type == 'book')
         {
