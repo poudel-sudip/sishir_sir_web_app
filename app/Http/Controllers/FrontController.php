@@ -30,6 +30,7 @@ use App\Models\Advertisement;
 use App\Helpers\Helper;
 use App\Models\Library\LibraryMaterial;
 use App\Models\Library\LibraryCategory;
+use App\Models\Forms\DynamicForm;
 
 class FrontController extends Controller
 {
@@ -53,6 +54,8 @@ class FrontController extends Controller
         // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
         $data['libraries'] = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->take(8)->get();
 
+        $data['dynamic_forms'] = DynamicForm::where('banner','!=','')->where('status','=','Active')->orderByDesc('id')->take(5)->get();
+        
         $data['updates'] = [];
 
         $menu_sub_items = MenuSubItem::where('status','=','Active')

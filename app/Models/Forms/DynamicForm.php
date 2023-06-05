@@ -22,18 +22,17 @@ class DynamicForm extends Model
             $slug = Str::slug($form->title);
             $count = static::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
             $form->slug = $count ? "{$slug}-{$count}" : $slug;
-
         });
     }
 
     public function applicants(): HasMany
     {
-        return $this->hasMany(FormApplicant::class, 'form_id');
+        return $this->hasMany(DynamicFormApplicant::class, 'form_id');
     }
 
-    public function category(): BelongsTo
+    public function group(): BelongsTo
     {
-        return $this->belongsTo(DynamicFormCategory::class, 'category_id');
+        return $this->belongsTo(DynamicFormGroup::class, 'group_id');
     }
-
+      
 }

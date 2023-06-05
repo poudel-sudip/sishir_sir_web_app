@@ -20,6 +20,7 @@
             </div>
         </div>
     </section>
+
     <section class="home-slider mt-2">
         <div class="container">
             <div class="row">
@@ -50,6 +51,7 @@
         </div>
         
     </section>
+
     {{-- <section class="video-course mt-4">
         <div class="container">
             <div class="row">
@@ -63,17 +65,137 @@
             </div>
         </div>
     </section> --}}
+
     <section class="home-banner">
         <div class="container">
             <div class="row">
                 @foreach ($ads as $ads)
                 <div class="col-md-12 mb-2">
-                    <img class="w-100" src="/storage/{{$ads->banner}}" alt="">
+                    <img class="img img-fluid" src="/storage/{{$ads->banner}}" alt="">
                 </div>
                 @endforeach
             </div>
         </div>
     </section>
+    
+    @if(count($dynamic_forms))
+    <section class="home-slider my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-slider owl-carousel">
+                        @foreach($dynamic_forms as $form)
+                            <div class="single-item row form-row">
+                                <div class="col-sm-6 col-md-8 form-banner"><img src="/storage/{{$form->banner}}" alt=""></div>
+                                <div class="col-sm-6 col-md-4 form-fillup">
+                                    <h4>Class Registeration Form</h4>
+                                    <form  action="/dynamic-forms/{{$form->slug}}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        @if (Session::has('successMessage'))
+                                        <div class="form-group row my-2">
+                                            <div class="alert alert-success">{!! Session::get('successMessage') !!}</div>
+                                        </div>
+                                        @endif
+
+                                        <div class="form-group row my-2">
+                                            <label for="sub_course" class="col-12 col-form-label">{{ __('Course') }}</label>
+                    
+                                            <div class="col-12">
+                                                <select name="sub_course" id="sub_course" class="form-control @error('sub_course') is-invalid @enderror">
+                                                    @php($subs = array_map('trim', explode(',', $form->sub_categories)))
+                                                    @foreach($subs as $cat)
+                                                        <option value="{{ucwords($cat)}}">{{ucwords($cat)}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('sub_course')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        @if(isset($form->name) && $form->name)
+                                            <div class="form-group row my-2">
+                                                <label for="element_name" class="col-12 col-form-label">Name</label>
+                
+                                                <div class="col-12">
+                                                    <input id="element_name" type="text" class="form-control @error('element_name') is-invalid @enderror" name="element_name" value="{{ old('element_name') }}" required>
+                
+                                                    @error('element_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        @endif
+                                        
+                                        @if(isset($form->email) && $form->email)
+                                            <div class="form-group row my-2">
+                                                <label for="element_email" class="col-12 col-form-label">Email</label>
+                
+                                                <div class="col-12">
+                                                    <input id="element_email" type="email" class="form-control @error('element_email') is-invalid @enderror" name="element_email" value="{{ old('element_email') }}" required>
+                
+                                                    @error('element_email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                        @if(isset($form->contact) && $form->contact)
+                                            <div class="form-group row my-2">
+                                                <label for="element_contact" class="col-12 col-form-label">Contact</label>
+                
+                                                <div class="col-12">
+                                                    <input id="element_contact" type="number" class="form-control @error('element_contact') is-invalid @enderror" name="element_contact" value="{{ old('element_contact') }}" required>
+                
+                                                    @error('element_contact')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        @endif
+                                                                                                        
+                                        @if(isset($form->message) && $form->message)
+                                            <div class="form-group row my-2">
+                                                <label for="element_message" class="col-12 col-form-label">Message</label>
+                
+                                                <div class="col-12">
+                                                    <textarea name="element_message" id="element_message" rows="2" class="form-control @error('element_message') is-invalid @enderror"> {{ old('element_message') }} </textarea>
+                                                    
+                                                    @error('element_message')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        @endif
+                                        
+                                        <div class="form-group row mt-2">
+                                            <div class="col-12 ">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </section>
+    @endif
+
     <section class="mock-test mb-5 mt-5">
         <div class="container">
             <div class="row">
@@ -130,6 +252,7 @@
             
         </div>
     </section>
+
     <section class="home-blog mt-3 mb-5">
         <div class="container">
             <div class="row mb-3">
@@ -174,6 +297,7 @@
             </div>
         </div>
     </section>
+
     @if(count($libraries))
     <section class="home-ebook mt-3 mb-5">
         <div class="container">
@@ -203,6 +327,7 @@
         </div>
     </section>
     @endif
+
     @if(count($books))
     <section class="home-ebook mt-3 mb-5">
         <div class="container">
@@ -233,65 +358,43 @@
         </div>
     </section>
     @endif
+
     {{-- review section start --}}
     @if(count($testimonials))
     <section class="review-section">
-    <div class="container">
-        <div class="row mb-3">
-            <div class="col-md-12 text-center relative">
-                <h2 class="home-section-heading mb-3 wow fadeInUp">Testimonial</h2>
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-md-12 text-center relative">
+                    <h2 class="home-section-heading mb-3 wow fadeInUp">Testimonial</h2>
+                </div>
             </div>
-        </div>
-        <div class="review-container">
-        <div class="row">
-            <div class="review-slider owl-carousel">
-                @foreach($testimonials as $testimonial)
-                    <div class="reviw-item">
-                        <div class="reviewer">
-                            <div class="profile-image">
-                                <img src="/storage/{{$testimonial->image}}" alt="Feedback Review">
+            <div class="review-container">
+            <div class="row">
+                <div class="review-slider owl-carousel">
+                    @foreach($testimonials as $testimonial)
+                        <div class="reviw-item">
+                            <div class="reviewer">
+                                <div class="profile-image">
+                                    <img src="/storage/{{$testimonial->image}}" alt="Feedback Review">
+                                </div>
+                                <div class="profile-details">
+                                    <h5>{{$testimonial->name}}</h5>
+                                    <p>{{$testimonial->role}}</p>
+                                </div>
                             </div>
-                            <div class="profile-details">
-                                <h5>{{$testimonial->name}}</h5>
-                                <p>{{$testimonial->role}}</p>
+                            <div class="review-content">
+                                <div class="review">
+                                    <p>{{$testimonial->message}}</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="review-content">
-                            <div class="review">
-                                <p>{{$testimonial->message}}</p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+            </div>
             </div>
         </div>
-        </div>
-    </div>
     </section>
     @endif
-
-    {{-- <section class="loksewa-today mt-3 mb-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 loksewa-selector mb-2">
-                    <h2>आ. ब </h2>   
-                        <select name="" id="">
-                            <option value="">079-80</option>
-                        </select>   
-                    <h2> का.</h2>
-                </div>
-                <div class="col-md-8"><h2 class="loksewa-title">लोकसेवा आयोगमा आज </h2></div>
-            </div>
-            <div class="row mt-5">
-                <div class="col-md-12 text-center mb-5">
-                    <h3 class="loksewa-content"><span class="span-left">कुल विज्ञापन</span>  |  <span class="span-right">150</span></h3>
-                </div> 
-                <div class="col-md-12 text-center mb-3">
-                    <h3 class="loksewa-content"><span class="span-left">विज्ञापित कुल पद</span>  |  <span class="span-right">150</span></h3>
-                </div> 
-            </div>
-        </div>
-    </section> --}}
 
 
     <!-- Modal HTML -->
@@ -320,15 +423,18 @@
         </div>
     </div> --}}
 
-    {{-- <div class="enquiry-popup ">
-        <a href="/enquiry"><i class="fas fa-comment-alt"></i><span>Enquiry</span></a> 
-    </div>
-    <div id="home-call-poup">
-        <i class="fas fa-mobile-alt"></i><span>Call Us</span>
-        <div class="popupdiv">
-            <a href="tel:+977-9812417639"><span class="icon-phone"></span>+977 9812417639</a>
+    {{-- 
+        <div class="enquiry-popup ">
+            <a href="/enquiry"><i class="fas fa-comment-alt"></i><span>Enquiry</span></a> 
         </div>
-    </div> --}}
+        <div id="home-call-poup">
+            <i class="fas fa-mobile-alt"></i><span>Call Us</span>
+            <div class="popupdiv">
+                <a href="tel:+977-9812417639"><span class="icon-phone"></span>+977 9812417639</a>
+            </div>
+        </div> 
+    --}}
+
     {{-- youtube video palylist --}}
     <script src="https://apps.elfsight.com/p/platform.js" defer></script>
     {{-- <script>
@@ -343,6 +449,7 @@
         });
     
     </script> --}}
+
     <!-- Messenger Chat Plugin Code -->
     <div id="fb-root"></div>
 

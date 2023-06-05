@@ -510,6 +510,45 @@ Route::get('/admin/imp-links/{category}/links/{link}/edit','App\Http\Controllers
 Route::patch('/admin/imp-links/{category}/links/{link}','App\Http\Controllers\Admin\LinksController@update')->middleware('role:Admin');
 Route::delete('/admin/imp-links/{category}/links/{link}','App\Http\Controllers\Admin\LinksController@destroy')->middleware('role:Admin');
 
+//admin dynamic form group mgmt
+Route::get('/admin/dynamic-forms/groups','App\Http\Controllers\Admin\Forms\FormGroupController@index')->middleware('role:Admin');
+Route::post('/admin/dynamic-forms/groups','App\Http\Controllers\Admin\Forms\FormGroupController@store')->middleware('role:Admin');
+Route::patch('/admin/dynamic-forms/groups','App\Http\Controllers\Admin\Forms\FormGroupController@update')->middleware('role:Admin');
+Route::delete('/admin/dynamic-forms/groups/{group}','App\Http\Controllers\Admin\Forms\FormGroupController@destroy')->middleware('role:Admin');
+Route::get('/admin/dynamic-forms/groups/{group}/forms','App\Http\Controllers\Admin\Forms\FormGroupController@forms')->middleware('role:Admin');
+
+//admin dynamic forms mgmt
+Route::get('/admin/dynamic-forms','App\Http\Controllers\Admin\Forms\FormController@formLists')->middleware('role:Admin');
+Route::get('/admin/dynamic-forms/create','App\Http\Controllers\Admin\Forms\FormController@createForm')->middleware('role:Admin');
+Route::post('/admin/dynamic-forms','App\Http\Controllers\Admin\Forms\FormController@saveForm')->middleware('role:Admin');
+Route::get('/admin/dynamic-forms/{vform}','App\Http\Controllers\Admin\Forms\FormController@showForm')->middleware('role:Admin');
+Route::get('/admin/dynamic-forms/{vform}/edit','App\Http\Controllers\Admin\Forms\FormController@editForm')->middleware('role:Admin');
+Route::post('/admin/dynamic-forms/{vform}/reset','App\Http\Controllers\Admin\Forms\FormController@resetForm')->middleware('role:Admin');
+Route::patch('/admin/dynamic-forms/{vform}','App\Http\Controllers\Admin\Forms\FormController@updateForm')->middleware('role:Admin');
+Route::delete('/admin/dynamic-forms/{vform}','App\Http\Controllers\Admin\Forms\FormController@destroyForm')->middleware('role:Admin');
+
+//admin dynamic form applicants mgmt
+Route::get('/admin/dynamic-forms/{vform}/applicants','App\Http\Controllers\Admin\Forms\FormController@applicantLists')->middleware('role:Admin');
+Route::get('/admin/dynamic-forms/{vform}/applicants/upload','App\Http\Controllers\Admin\Forms\FormController@uploadApplicantListForm')->middleware('role:Admin');
+Route::get('/admin/dynamic-forms/{vform}/applicants/export','App\Http\Controllers\Admin\Forms\FormController@exportApplicantLists')->middleware('role:Admin');
+Route::post('/admin/dynamic-forms/{vform}/applicants/import','App\Http\Controllers\Admin\Forms\FormController@importApplicantLists')->middleware('role:Admin');
+Route::post('/admin/dynamic-forms/{vform}/applicants/filter','App\Http\Controllers\Admin\Forms\FormController@filteredApplicantLists')->middleware('role:Admin');
+Route::get('/admin/dynamic-forms/{vform}/applicants/export/{query}','App\Http\Controllers\Admin\Forms\FormController@exportFilteredApplicantLists')->middleware('role:Admin');
+Route::get('/admin/dynamic-forms/{vform}/applicants/{applicant}','App\Http\Controllers\Admin\Forms\FormController@showApplicant')->middleware('role:Admin');
+Route::patch('/admin/dynamic-forms/{vform}/applicants/{applicant}','App\Http\Controllers\Admin\Forms\FormController@updateApplicant')->middleware('role:Admin');
+Route::delete('/admin/dynamic-forms/{vform}/applicants/{applicant}','App\Http\Controllers\Admin\Forms\FormController@destroyApplicant')->middleware('role:Admin');
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -800,6 +839,11 @@ Route::get('/search','App\Http\Controllers\FrontController@search');
 //front testimonials
 Route::get('/testimonials','App\Http\Controllers\FrontController@getTestimonials');
 Route::post('/testimonials/add','App\Http\Controllers\FrontController@addTestimonials');
+
+//front dynamic forms
+Route::get('/dynamic-forms/{slug}','App\Http\Controllers\FrontDynamicFormController@showDynamicForm');
+Route::post('/dynamic-forms/{slug}','App\Http\Controllers\FrontDynamicFormController@saveDynamicFormApplicant');
+
 
 //front menu details
 Route::get('/{groupslug}/{menuslug}','App\Http\Controllers\FrontController@getMenuCategories');

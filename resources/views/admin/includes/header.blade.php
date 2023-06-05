@@ -228,6 +228,24 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#forms-section" aria-expanded="false" aria-controls="forms-section">
+          <i class="mdi mdi-alpha-f-box menu-icon"></i>
+          <span class="menu-title">Dynamic Forms</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="forms-section">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/dynamic-forms/groups') }}">Form Groups</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/dynamic-forms') }}">Form List</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
       {{-- <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#upload-basic" aria-expanded="false" aria-controls="upload-basic">
           <i class="mdi mdi-cloud-upload menu-icon"></i>
