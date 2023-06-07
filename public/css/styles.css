@@ -5668,4 +5668,42 @@ label.star:before {
 #st-1 .st-btn > img{
     height: 25px !important;
     width: 25px !important;
+.form-row {
+    position: relative;
+    align-items:stretch;
+    overflow: hidden;
+}
+.form-row .form-banner {
+    z-index: 0;
+    overflow: hidden;
+}
+.form-row .form-fillup {
+    padding: 20px 50px 20px 10px;
+}
+.form-row .form-banner img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .form-row {
+        position: relative;
+    }
+    .form-row .form-banner{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        
+    }            
+    .form-row .form-fillup {
+        width: 100%;
+        margin-left: 15px;
+        z-index: 1;
+        color: #fff;
+        background: rgba(0,0,0,.6);
+    }
 }

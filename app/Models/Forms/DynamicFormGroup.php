@@ -5,8 +5,8 @@ namespace App\Models\Forms;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class DynamicFormGroup extends Model
 {
@@ -26,14 +26,8 @@ class DynamicFormGroup extends Model
         });
     }
 
-    public function categories(): HasMany
+    public function forms(): HasMany
     {
-        return $this->hasMany(DynamicFormCategory::class, 'group_id');
+        return $this->hasMany(DynamicForm::class, 'group_id');
     }
-
-    public function applicants(): HasManyThrough
-    {
-        return $this->hasManyThrough(FormApplicant::class, DynamicFormCategory::class, 'group_id', 'category_id');
-    }
-
 }
