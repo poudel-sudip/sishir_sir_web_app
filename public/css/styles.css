@@ -5594,6 +5594,7 @@ label.star:before {
     padding-top: 5px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     border-radius: 5px;
+    background: #d3ddf1;
 }
 .visitor-tracker span{
     font-size: 13px;
@@ -5656,4 +5657,15 @@ label.star:before {
     margin: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     transform-origin: center;
+}
+
+.st-btn{
+    min-width: 45px !important;
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50% !important;
+}
+#st-1 .st-btn > img{
+    height: 25px !important;
+    width: 25px !important;
 }
