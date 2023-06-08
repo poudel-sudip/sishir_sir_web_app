@@ -802,6 +802,7 @@ Route::post('/student/exam-bookings/{category}/cqc','App\Http\Controllers\Studen
 /*--------------------------Front Routes -----------------------------------------------------*/
 
 Route::get('/', 'App\Http\Controllers\FrontController@index');
+Route::get('/about-us', 'App\Http\Controllers\FrontController@about');
 Route::get('/enquiry', 'App\Http\Controllers\FrontController@enquiry');
 Route::get('/enquiry/{courseslug}', 'App\Http\Controllers\FrontController@showCourseEnquiryForm');
 

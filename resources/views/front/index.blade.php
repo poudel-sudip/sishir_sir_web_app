@@ -1,7 +1,12 @@
 @extends('front.layouts.app')
 @section('page_title','Home')
 @section('content')
-
+    <style>
+        body{
+            overflow-x: hidden;
+        }
+    </style>
+    
     <section class="mt-4">
         <div class="container">
             <div class="row">

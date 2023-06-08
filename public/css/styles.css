@@ -5619,7 +5619,7 @@ label.star:before {
     /* height: 600px;  */
     width: 100%;
     overflow: hidden;
-    background-color: #525252;
+    background-color: #1375b9;
 }
 
 .pdf-inner-container {
@@ -5707,4 +5707,39 @@ label.star:before {
         color: #fff;
         background: rgba(0,0,0,.6);
     }
+}
+
+.footer-imp-link ul{
+    list-style-type: none;
+}
+
+.footer-imp-link ul li i{
+    padding-right: 8px;
+}
+
+.footer-imp-link .tab-content{
+    background: #f5f6f7;
+    overflow: hidden;
+    padding-top: 15px;
+}
+
+.footer-imp-link .tab-content li a{
+    color: #1375b9 !important;
+    line-height: 1.8 !important;
+}
+
+.footer-imp-link button.nav-link{
+    background: #1375b9;
+    color: #ffffff;
+    border-radius: 0;
+}
+
+.footer-imp-link button.active{
+    color: #fff !important;
+    background-color: #e41d19  !important;
+    border-color: #e41d19  !important;
+}
+
+.footer-imp-link .nav-tabs{
+    background: #1375b9 !important;
 }
