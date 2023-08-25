@@ -22,7 +22,7 @@
         }
     }
 </style>
-    <div class="container">
+    <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>Exam Hall</h2>
@@ -37,7 +37,7 @@
     </div>
   
     <section class="course-page">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row">
                 <div class="col-md-9">
                     <div class="all-course-list">

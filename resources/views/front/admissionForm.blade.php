@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('page_title', 'Enquiry')
 @section('content')
-    <div class="container">
+    <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>Enquiry Form</h2>
@@ -15,7 +15,7 @@
         </div>
     </div>
     <section class="contact-page">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card mb-5">

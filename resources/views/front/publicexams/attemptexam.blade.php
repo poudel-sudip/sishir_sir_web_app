@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('page_title', 'Attempt: '.ucwords($exam->name))
 @section('content')
-    <div class="container">
+    <div class="container-fluid px-md-5">
         <div class="public-exam-section mt-3">
         <div class="row">
             <div class="col-md-12">

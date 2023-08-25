@@ -52,7 +52,7 @@
 </div> --}}
 
 <footer class="page-footer">
-  <div class="container-fluid px-4"> 
+  <div class="container-fluid px-md-4"> 
     <div class="row">
       <div class="col-md-4">
         <div class="footer-logo">
@@ -63,9 +63,9 @@
           <li><a href="/about-us">About Us</a></li>
           <li><a href="/blogs">Blogs</a></li>
           <li><a href="/results">Results</a></li>
-          <li><a href="/privacy">Terms & Condition</a></li>
-          <li><a href="/privacy">Privacy</a></li>
-          <li><a href="/contact">Contact Us</a></li>
+          {{-- <li><a href="/privacy">Terms & Condition</a></li> --}}
+          {{-- <li><a href="/privacy">Privacy</a></li> --}}
+          {{-- <li><a href="/contact">Contact Us</a></li> --}}
           <li><a href="/enquiry">Enquiries</a></li>
           <li><a href="/testimonials">Testimonials</a></li>
           {{-- <li><a href="/careers">Careers</a></li> --}}
@@ -100,9 +100,17 @@
           <div><span>Last Updated Date: </span><span id="last_date"></span></div>
           <div><span>Website Visit Counter: </span><strong> {{$view_count->web_view_count}} </strong></div>
         </div>
-      </div>
+      </div>         
+
       <div class="col-md-4">
-        <div class="fb-page" data-href="https://www.facebook.com/Shisirkumaradhikari/" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Shisirkumaradhikari/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Shisirkumaradhikari/">Shisir Kumar Adhikari</a></blockquote></div>
+        <div class="fb-continer">
+          <div class="fb-page" data-href="https://www.facebook.com/Shisirkumaradhikari/" data-tabs="timeline"  data-small-header="false" data-container-width="100%" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+            <blockquote cite="https://www.facebook.com/Shisirkumaradhikari/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/Shisirkumaradhikari/">Shisir Kumar Adhikari</a>
+            </blockquote>
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>

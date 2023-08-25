@@ -8,7 +8,7 @@
     </style>
     
     <section class="mt-4">
-        <div class="container">
+        <div class="container-fluidb px-md-5">
             <div class="row">
                 <div class="col-md-8">
                     <div class="marquee-text">
@@ -27,7 +27,7 @@
     </section>
 
     <section class="home-slider mt-2">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row">
                 <div class="col-md-8">
                     <div class="main-slider owl-carousel">
@@ -58,7 +58,7 @@
     </section>
 
     {{-- <section class="video-course mt-4">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row">
                 <div class="col-md-12 text-center relative">
                     <h2 class="home-section-heading mb-3 wow fadeInUp">Videos Courses</h2>
@@ -72,10 +72,10 @@
     </section> --}}
 
     <section class="home-banner">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row">
                 @foreach ($ads as $ads)
-                <div class="col-md-12 mb-2">
+                <div class="col-md-12 mb-2 text-center">
                     <img class="img img-fluid" src="/storage/{{$ads->banner}}" alt="">
                 </div>
                 @endforeach
@@ -85,7 +85,7 @@
     
     @if(count($dynamic_forms))
     <section class="home-slider my-5">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row">
                 <div class="col-md-12">
                     <div class="main-slider owl-carousel">
@@ -202,7 +202,7 @@
     @endif
 
     <section class="mock-test mb-5 mt-5">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row">
                 <div class="col-md-12 text-center relative">
                     <h2 class="home-section-heading mb-3 wow fadeInUp">Mock Tests</h2>
@@ -259,7 +259,7 @@
     </section>
 
     <section class="home-blog mt-3 mb-5">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row mb-3">
                 <div class="col-md-12 text-center relative">
                     <h2 class="home-section-heading mb-3 wow fadeInUp">Blogs</h2>
@@ -305,7 +305,7 @@
 
     @if(count($libraries))
     <section class="home-ebook mt-3 mb-5">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row mb-3">
                 <div class="col-md-12 text-center relative">
                     <h2 class="home-section-heading mb-3 wow fadeInUp">Library</h2>
@@ -335,7 +335,7 @@
 
     @if(count($books))
     <section class="home-ebook mt-3 mb-5">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row mb-3">
                 <div class="col-md-12 text-center relative">
                     <h2 class="home-section-heading mb-3 wow fadeInUp">My Books</h2>
@@ -344,7 +344,7 @@
             <div class="row">
                 @foreach ($books as $book)
                 <div class="col-md-3">
-                    <div class="ebook-section">
+                    <div class="ebook-section border border-primary">
                         <div class="ebook-header">
                             <img src="/storage/{{$book->thumbnail}}" alt="">
                         </div>
@@ -367,7 +367,7 @@
     {{-- review section start --}}
     @if(count($testimonials))
     <section class="review-section">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row mb-3">
                 <div class="col-md-12 text-center relative">
                     <h2 class="home-section-heading mb-3 wow fadeInUp">Testimonial</h2>

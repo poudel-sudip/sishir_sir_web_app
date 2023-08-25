@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('page_title', 'Results: '.ucwords($exam->name))
 @section('content')
-    <div class="container">
+    <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>{{$exam->name}} Results</h2>
@@ -16,7 +16,7 @@
         </div>
     </div>
     <section class="about-page">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div>TQ= Total Question, FM= Full Marks, LQ= Leaved Questions, CQ= Correct Questions, WQ= Wrong Questions, MO= Marks Obtained</div>
             <div class="public-exam-section table-responsive">
                 <table class="table table-bordered" id="table-courses">

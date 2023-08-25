@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('page_title', 'Blogs')
 @section('content')
-    <div class="container">
+    <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>All Blogs</h2>
@@ -21,7 +21,7 @@
             display: none
         }
     </style>
-    <div class="container">
+    <div class="container-fluid px-md-5">
         <div class="blog-container mt-5">
             <div class="row">
                 @forelse($blogs as $blog)

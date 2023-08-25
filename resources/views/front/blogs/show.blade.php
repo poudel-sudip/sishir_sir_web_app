@@ -8,7 +8,7 @@
 @section('og-description', strip_tags(str_replace('<', '  <', $blog->description)))
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>Blog Details</h2>

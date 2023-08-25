@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>Public Exams</h2>
@@ -16,7 +16,7 @@
         </div>
     </div>
     <section class="about-page">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="public-exam-section">
                 <div class="row">
                     <div class="col-md-12">

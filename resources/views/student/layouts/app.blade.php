@@ -69,7 +69,7 @@
   @include('front.includes.header')
 
   <section class="student-top-header">
-    <div class="container">
+    <div class="container-fluid px-md-5">
       <div class="row">
         <div class="col-md-6 col-8">
           <h2 class=""><span>@yield('student-title-icon')</span> @yield('student-title')</h2>
@@ -134,7 +134,7 @@
   </section>
 
   <section class="student">
-    <div class="container">
+    <div class="container-fluid px-md-5">
       <div class="student-main-container">
         <div class="student-side-navbar" id="student-side-navbar">
           <ul class="nav flex-column student-sidebar-list" id="student-nav">

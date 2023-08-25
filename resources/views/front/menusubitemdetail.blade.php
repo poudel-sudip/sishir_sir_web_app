@@ -9,7 +9,7 @@
 @endif
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>{{ucwords($menuSubItem->name)}}</h2>
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container-fluid px-md-5">
 
         <div class="blog-container mt-5">
             <h4 class="mb-2">{{$menuSubItem->name}}</h4>

@@ -9,7 +9,7 @@
     }
     </style>   
 
-    <div class="container">
+    <div class="container-fluid px-md-5container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>{{ucwords($category->name)}} | Books</h2>
@@ -25,7 +25,7 @@
     </div>
 
     <section class="course-page">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="row course-details">
                 <div class="col-md-3">
                     <div class="side-navbar">

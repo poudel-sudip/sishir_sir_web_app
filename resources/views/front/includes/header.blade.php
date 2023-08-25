@@ -1,6 +1,6 @@
 <header class="shishir-header sticky-sm-top">
   <div class="topbar">
-    <div class="container">
+    <div class="container-fluid px-md-5">
       <div class="row">
         <div class="col-md-2 text-sm">
           <div class="site-logo">

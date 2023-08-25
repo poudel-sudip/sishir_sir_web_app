@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('page_title', ucwords($exam->title))
 @section('content')
-    <div class="container">
+    <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>{{$exam->title}}</h2>
@@ -17,7 +17,7 @@
     </div>
 
     <section class="course-details-page mb-5">
-        <div class="container">
+        <div class="container-fluid px-md-5">
             <div class="card p-3">
                 <div class="card-title">
                     <div class="h3 text-center">{{$exam->title}}</div>

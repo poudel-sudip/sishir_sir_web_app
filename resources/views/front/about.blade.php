@@ -5,7 +5,7 @@
 @section('og-url', url('/about-us'))
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>About Us</h2>
