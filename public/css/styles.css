@@ -1598,8 +1598,9 @@ p {
 .page-footer h5 {
     font-weight: 500;
     margin-bottom: 16px;
-    color: #d4d5d6;
-    font-size: 15px;
+    /* color: #d4d5d6; */
+    color: #ffffff;
+    font-size: 20px;
 }
 
 .page-footer hr {
@@ -1680,8 +1681,16 @@ p {
 }
 
 .page-footer .info-email {
+    font-size: 16px;
+    /* font-style: italic; */
+}
+
+.page-footer .info-phone {
     font-size: 14px;
-    font-style: italic;
+}
+
+.page-footer .info-phone span {
+    margin-right: 10px;
 }
 
 .page-footer .info-email span {
@@ -1734,7 +1743,8 @@ p {
     padding-bottom: 4px;
     color: rgba(255, 255, 255, 1);
     transition: all .2s ease;
-    font-weight: 600;
+    /* font-weight: 600; */
+    font-size: 16px!important;
     text-decoration: none;
 }
 
@@ -1766,6 +1776,30 @@ p {
 .footer-sosmed a:hover {
     background-color: #1375b9;
     text-decoration: none;
+}
+
+.footer-sosmed a.facebook {
+    background-color: #1375b9;
+}
+
+.footer-sosmed a.twitter {
+    background-color: #4EB6E6;
+}
+
+.footer-sosmed a.whatsapp {
+    background-color: #25d366;
+}
+
+.footer-sosmed a.youtube {
+    background-color: #d32525;
+}
+
+.footer-sosmed a.instagram {
+    background-color: #FF1E76;
+}
+
+.footer-sosmed a.tiktok {
+    background-color: #3F3030;
 }
 
 .footer-card-section {
@@ -5181,7 +5215,7 @@ label.star:before {
     margin-left: -5px;
 }
 .auth-nav .nav-link{
-    font-size: 18px !important;
+    font-size: 16px !important;
     font-weight: 600;
 }
 /* home page */
@@ -5604,14 +5638,32 @@ label.star:before {
     color: #ded4b3;
     padding-left: 10px;
 }
+
+.library-item {
+    transition: all .7s ease-in-out;
+}
+
 .library-item:hover{
-    background-color: #e41d19;
+    /* background-color: #e41d19; */
+    background-color: #1375b9 !important; 
 }
+
+.library-item a{
+    transition: all .7s ease-in-out;
+}
+
 .library-item:hover a{
-    color: #ffffff;
+    color: #ffffff !important; 
 }
+
 .library-item i{
     color: #0077b5;
+    transition: all .7s ease-in-out;
+}
+
+.library-item:hover i{
+    color: #ffffff !important; 
+    transform: rotate(360deg);
 }
 
 .pdf-container {

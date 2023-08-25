@@ -69,7 +69,7 @@
 {{--  <script src="{{ asset('js/libraries.js') }}"></script>--}}
   <script src="{{ asset('js/front.js') }}"></script>
 
-  <script type="text/javascript" src="{{asset('js/noprint.js')}}"></script>
+  {{-- <script type="text/javascript" src="{{asset('js/noprint.js')}}"></script> --}}
 
 </body>
 </html>

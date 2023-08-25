@@ -17,7 +17,7 @@
     </div>
 
     <div class="container">
-        <div class="search-area-container">
+        <div class="search-area-container" style="height: auto !important;">
             <div class="row">
                 <div class="col md-12">
                     <h4>Search Results for : {{$query ?? ''}}</h4>

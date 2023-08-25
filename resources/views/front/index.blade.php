@@ -314,7 +314,7 @@
             <div class="row">
                 @foreach ($libraries as $cat)
                 <div class="col-sm-6 col-md-3 mb-3">
-                    <div class="ebook-section library-item">
+                    <div class="ebook-section library-item border border-primary">
                         <div>
                             <a href="/library/{{$cat->slug}}"><i class="h1 fa fa-folder"></i></a>
                         </div>

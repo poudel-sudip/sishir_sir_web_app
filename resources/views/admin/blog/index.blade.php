@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <div class="table-responsive table-responsive-md">
-                            <table class="table table-bordered" id="advanced-desc-table">
+                            <table class="table table-bordered" id="advanced-asc-table">
                                 <thead>
                                 <tr>
                                     <th>SN</th>

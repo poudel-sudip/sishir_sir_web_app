@@ -19,7 +19,7 @@ class BlogController extends Controller
 
     public function index()
     {
-        $blogs=Blog::all()->sortByDesc('created_at');
+        $blogs=Blog::all()->sortByDesc('id');
         return view('admin.blog.index',[
             'blogs'=>$blogs,
         ]);
@@ -37,6 +37,7 @@ class BlogController extends Controller
             'description'=>['required'],
             'status'=>['required'],
             'image'=>['image'],
+            'author'=>['nullable'],
         ]);
         $img=$request->image->store('uploads','public');
         Blog::create([
@@ -44,7 +45,7 @@ class BlogController extends Controller
             'description'=>$request->description,
             'status'=>$request->status,
             'image'=>$img,
-            'author'=>auth()->user()->name,
+            'author'=>$request->author ?? auth()->user()->name,
         ]);
         return redirect('/admin/blogs');
     }
@@ -67,6 +68,7 @@ class BlogController extends Controller
             'old_image' => '',
             'status' => 'min:1',
             'image'=>'',
+            'author' => '',
         ]);
         $img=$request->old_image;
         if(isset($request->image))
@@ -78,6 +80,7 @@ class BlogController extends Controller
             'description'=>$request->description,
             'image'=>$img,
             'status'=>$request->status,
+            'author'=>$request->author ?? auth()->user()->name,
         ]);
         return redirect('/admin/blogs');
     }

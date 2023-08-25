@@ -63,7 +63,7 @@
 
   {{-- main navbar --}}
   <nav class="navbar navbar-expand-lg main-nav">
-    <div class="container">
+    <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fa fa-bars text-white" aria-hidden="true"></i>
       </button>

@@ -72,24 +72,24 @@
         </ul>
       </div>
       <div class="col-md-4">
-        <h3 class="mt-3">Info & Support :</h3>
+        <h5 class="mt-3">Info & Support :</h5>
         <div class="row">
           <div class="col-12">
-            <div class="info-mobile"><span class="icon-mail2"></span>  info@shisiradhikari.com</div>
+            <div class="info-phone"><span class="icon-mail2"></span>  info@shisiradhikari.com</div>
           </div>
           <div class="col-12">
-            <div class="info-mobile"><span class="icon-phone"></span> +977- 981-2417639</div>
+            <div class="info-phone"><span class="icon-whatsapp"></span>  +977 - 981-2417639</div>
           </div>
         </div>
-        <h3 class="mt-5">Connect with us :</h3>
+        <h5 class="mt-5">Connect with us :</h5>
         <div class="footer-sosmed">
-          <a href="https://www.facebook.com/groups/Healthandloksewa" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          {{-- <a href="https://wa.me/9779857084806" target="_blank"><i class="icon-whatsapp"></i></a> --}}
-          <a href="https://chat.whatsapp.com/FF97kXQ75RwAz8gP5MYGja" target="_blank"><i class="icon-whatsapp"></i></a>
-          <a href="https://www.youtube.com/channel/UCSFeHpNoMSF-BBgsDtro0zw" target="_blank"><i class="icon-youtube"></i></a>
-          <a href="https://twitter.com/ShisirAdhikari" target="_blank"><i class="fab fa-twitter"></i></a>
-          <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
-          <a href="https://www.instagram.com/shisirkumaradhikari" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a class="facebook" href="https://www.facebook.com/groups/Healthandloksewa" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          {{-- <a class="whatsapp" href="https://wa.me/9779857084806" target="_blank"><i class="icon-whatsapp"></i></a> --}}
+          <a class="whatsapp" href="https://chat.whatsapp.com/FF97kXQ75RwAz8gP5MYGja" target="_blank"><i class="icon-whatsapp"></i></a>
+          <a class="youtube" href="https://www.youtube.com/channel/UCSFeHpNoMSF-BBgsDtro0zw" target="_blank"><i class="icon-youtube"></i></a>
+          <a class="twitter" href="https://twitter.com/ShisirAdhikari" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a class="tiktok" href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+          <a class="instagram" href="https://www.instagram.com/shisirkumaradhikari" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
         <hr>
         <div class="visitor-tracker mt-3">
@@ -111,12 +111,10 @@
 <div class="lower-footer">
   <div class="container">
     <div class="row">
-      <div class="col-md-6">
-        <p id="copyright">Copyright &copy; <script> document.write(new Date().getFullYear()); </script> All right reserved <a href="">Shisir Adhikari.</a> By <a href="">ODD Experts Pvt. Ltd.</a></p>
+      <div class="col-12 text-center">
+        <div id="copyright" style="font-size: 14px">Copyright &copy; <script> document.write(new Date().getFullYear()); </script> All right reserved <a href="#">Shisir Adhikari.</a> By <a target="_blank" href="//etutorclass.com">E-Tutor Class Pvt. Ltd.</a></div>
       </div>
-      <div class="col-md-6">
-       
-      </div>
+      
     </div>
   </div>
 </div>

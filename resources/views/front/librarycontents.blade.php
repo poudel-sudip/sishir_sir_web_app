@@ -49,9 +49,9 @@
             <div class="row">
                 @foreach($directories as $dir)
                 <div class="col-md-3 mb-3">
-                    <div class="single-blog text-center py-3 library-item">
+                    <div class="single-blog text-center py-3 library-item border border-primary">
                         <div class="">
-                            <a href="/library/{{$dir->slug}}"><i class="h1 fa fa-folder text-primary"></i></a>
+                            <a href="/library/{{$dir->slug}}"><i class="h1 fa fa-folder"></i></a>
                         </div>
                         <h5><a href="/library/{{$dir->slug}}">{{ucwords($dir->name)}}</a></h5>
                     </div>
@@ -60,7 +60,7 @@
 
                 @foreach($library_materials as $material)
                 <div class="col-md-4 mb-2">
-                    <div class="single-blog text-center py-3">
+                    <div class="single-blog text-center py-3 border border-primary border-2">
                         <div class="">
                             <a href="/library/{{$library_category->slug}}/{{$material->slug}}"><img src="/storage/{{$material->thumbnail}}" onerror="this.src='{{asset('images/default-post.png')}}'" class="img img-fluid" style="max-height:150px"></a>
                         </div>
