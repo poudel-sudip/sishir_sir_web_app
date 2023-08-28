@@ -1,17 +1,18 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    My Books | {{$category->name}}
+    Books | {{$category->name}}
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-        <h3 class="page-title">{{$category->name}} | My Books</h3>
+        <h3 class="page-title">Books | {{$category->name}} | {{$publisher->name}} </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ url('/admin/books/categories') }}">Categories</a></li>
-              <li class="breadcrumb-item active" aria-current="page">My Books </li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/books/publishers') }}">Publishers</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/books/publishers/'.$publisher->id.'/categories') }}">Categories</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Books </li>
             </ol>
         </nav>
         </div>
@@ -21,9 +22,9 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">{{$category->name}} | My Books</h4>
+                        <h4 class="card-title"> Books | {{$category->name}} | {{$publisher->name}}</h4>
                         <div class="text-right">
-                            <a href="{{ ('/admin/books/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Book </button></a>
+                            <a href="/admin/books/publishers/{{$publisher->id}}/categories/{{$category->id}}/books/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Book </button></a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">

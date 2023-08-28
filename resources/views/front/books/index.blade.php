@@ -28,10 +28,10 @@
             <div class="row course-details">
                 <div class="col-md-3">
                     <div class="side-navbar">
-                        <h5><a href="{{ url('/books') }}">All Categories</a></h5>
+                        <h5><a href="{{ url('/books') }}">All Books</a></h5>
                         <ul class="course-nav">
                             @foreach($categories as $cat)
-                                <li><a href="/books-category/{{$cat->slug}}">{{$cat->name}}</a></li>
+                                <li><a href="/book-publishers/{{$cat->publisher->slug}}/category/{{$cat->slug}}">{{$cat->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -41,19 +41,21 @@
                         <div class="row">
                             @forelse($books as $book)
                             <div class="col-md-4 my-3">
-                                <div class="single-blog pt-3 border border-primary border-2">
-                                    <div class="blog-image">
-                                        <img src="/storage/{{$book->thumbnail}}">
-                                    </div>
-                                    <div class="blog-details">
-                                        <h4><a href="/books/{{$book->slug}}">{{$book->title}}</a></h4>
-                                        {{-- <div class="">{!! $book->description !!}</div> --}}
-                                        <div class="mx-2">
-                                            <span>Price: <strong class="text-success">Rs. {{$book->price - $book->discount}}</strong></span>
-                                            <span class="text-danger" style="float: right"><s>Rs. {{ $book->price }}</s></span>
+                                <a href="/books/{{$book->slug}}">
+                                    <div class="single-blog pt-3 border border-primary border-2">
+                                        <div class="blog-image">
+                                            <img src="/storage/{{$book->thumbnail}}">
+                                        </div>
+                                        <div class="blog-details">
+                                            <h4><a href="/books/{{$book->slug}}">{{$book->title}}</a></h4>
+                                            {{-- <div class="">{!! $book->description !!}</div> --}}
+                                            <div class="mx-2">
+                                                <span>Price: <strong class="text-success">Rs. {{$book->price - $book->discount}}</strong></span>
+                                                <span class="text-danger" style="float: right"><s>Rs. {{ $book->price }}</s></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             @empty
                                 <div>No Books Published</div>

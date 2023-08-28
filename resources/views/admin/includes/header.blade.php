@@ -158,9 +158,9 @@
         </a>
         <div class="collapse" id="books">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/books/categories') }}">Categories</a>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/books/publishers') }}">Publishers</a>
             </li>

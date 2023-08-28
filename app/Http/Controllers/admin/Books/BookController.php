@@ -14,66 +14,15 @@ class BookController extends Controller
         $this->middleware('auth');
     }
 
-    public function categoryIndex()
-    {  
-        $data['categories'] = Categories::where('type','=','book')->get();
-        return view('admin.books.category.index',$data);
-    }
 
-    public function categoryCreate()
-    {
-        return view('admin.books.category.create');
-    }
 
-    public function categoryStore()
-    {
-        $data = request()->validate([
-            'name'=>'required | string',
-            // 'order'=>'required | numeric',
-            'status'=>'required',
-        ]);
-        Categories::create([
-            'type' => 'book',
-            'name'=>$data['name'],
-            'status'=>$data['status'],
-            // 'order'=>$data['order'],
-        ]);
-        return redirect('/admin/books/categories');
-    }  
 
-    public function categoryEdit(Categories $category)
-    {
-        $data['category'] = $category;
-        return view('admin.books.category.edit',$data);
-    }
+ 
 
-    public function categoryUpdate(Categories $category, Request $request)
-    {
-       $data = $request->validate([
-            'name'=>'required | string',
-            // 'order'=>'required | numeric',
-            'status'=>'required',
-        ]);
-        $category->update([
-            'name'=>$data['name'],
-            'status'=>$data['status'],
-            // 'order'=>$data['order'],
-        ]);
-        return redirect('/admin/books/categories');
-    }
 
-    public function categoryDestroy(Categories $category)
-    {
-        $category->delete();
-        return redirect('/admin/books/categories');
-    }
+    
 
-    public function categoryBooks(Categories $category)
-    {
-        $data['category'] = $category;
-        $data['books'] = $category->books;
-        return view('admin.books.category.books',$data);
-    }
+    
 
     public function publisherIndex()
     {  
@@ -125,37 +74,130 @@ class BookController extends Controller
 
     public function publisherDestroy(Categories $category)
     {
+        $category->pub_categories()->delete();
         $category->delete();
         return redirect('/admin/books/publishers');
     }
 
-    public function publisherBooks(Categories $category)
+    public function publisherCategories(Categories $publisher)
     {
+        $data['categories'] = $publisher->pub_categories;
+        $data['publisher'] = $publisher;
+        return view('admin.books.category.index',$data);
+    }
+
+    public function categoryCreate(Categories $publisher)
+    {
+        $data['publisher'] = $publisher;
+        return view('admin.books.category.create',$data);
+    }
+
+    
+    public function categoryStore(Categories $publisher, Request $request)
+    {
+        $data = $request->validate([
+            'category_name'=>'required | string',
+            'order'=>'required | numeric',
+            'status'=>'required | string',
+            'image' => 'nullable | image',
+            // 'description' => 'nullable | string',
+        ]);
+
+        $image = null;
+        if(isset($data['image']))
+        {
+            $image = $request->image->store('uploads','public');
+        }
+
+        $publisher->pub_categories()->create([
+            'type' => 'book_category',
+            'name' => $data['category_name'],
+            'status' => $data['status'],
+            'order' => $data['order'],
+            // 'description' => $data['description'],
+            'image' => $image,
+        ]);
+        
+        return redirect('/admin/books/publishers/'.$publisher->id.'/categories');
+    } 
+
+    public function categoryShow(Categories $publisher, Categories $category)
+    {
+        $data['publisher'] = $publisher;
         $data['category'] = $category;
-        $data['books'] = $category->books;
-        return view('admin.books.publisher.books',$data);
+        return view('admin.books.category.show',$data);
     }
 
-    public function index()
+    public function categoryEdit(Categories $publisher, Categories $category)
     {
-        $data = [];
-        $data['books'] = Book::all();
-        return view('admin.books.index',$data);
+        $data['publisher'] = $publisher;
+        $data['category'] = $category;
+        return view('admin.books.category.edit',$data);
     }
 
-    public function create()
+    public function categoryUpdate(Categories $publisher, Categories $category, Request $request)
     {
-        $data['categories'] = Categories::where(['type'=>'book','status'=>'Active'])->get();
-        $data['publishers'] = Categories::where('type','=','book_publisher')->get();
+        $data = $request->validate([
+            'category_name'=>'required | string',
+            'order'=>'required | numeric',
+            'status'=>'required | string',
+            'old_image' => 'required | string',
+            'image' => 'nullable | image',
+        ]);
+
+        $image = $data['old_image'];
+        if(isset($data['image']))
+        {
+            $image = $request->image->store('uploads','public');
+        }
+        
+
+        $category->update([
+            'name' => $data['category_name'],
+            'status' => $data['status'],
+            'order' => $data['order'],
+            'image' => $image,
+        ]);
+
+        return redirect('/admin/books/publishers/'.$publisher->id.'/categories');
+    }
+    
+
+    public function categoryDestroy(Categories $publisher, Categories $category)
+    {
+        $category->delete();
+        return redirect('/admin/books/publishers/'.$publisher->id.'/categories');
+    }
+
+    public function categoryBooks(Categories $publisher, Categories $category)
+    {
+        $data['publisher'] = $publisher;
+        $data['category'] = $category;
+        $data['books'] = $category->cat_books;
+        return view('admin.books.category.books',$data);
+    }
+
+    // public function publisherBooks(Categories $publisher)
+    // {
+    //     $data['publisher'] = $publisher;
+    //     $data['books'] = $publisher->pub_books;
+    //     return view('admin.books.publisher.books',$data);
+    // }
+
+    
+    public function create(Categories $publisher, Categories $category)
+    {
+        $data['publisher'] = $publisher;
+        $data['category'] = $category;
         return view('admin.books.create',$data);
     }
     
-    public function store(Request $request)
+    public function store(Categories $publisher, Categories $category, Request $request)
     {
         // dd($request->all());
         $request->validate([
-            'category' => 'numeric|nullable',
-            'publisher' => 'numeric|nullable',
+            'category' => 'string|required',
+            'publisher' => 'string|required',
             "title" => "string|required",
             "order" => "numeric|required",
             "author" => "string|nullable",
@@ -171,29 +213,30 @@ class BookController extends Controller
         ]);
 
         $data = $request->only(['title','order','author','edition','published_year','pages','availability','price','discount','status','description']);
+        
+        $data['publisher_id'] = $publisher->id;
+        $data['category_id'] = $category->id;
         $data['thumbnail'] = '';
         if(isset($request->thumbnail))
         {
             $data['thumbnail'] = $request->thumbnail->store('uploads','public');
         }
-
-        if($request->category)
-        {
-            $data['category_id'] = $request->category;
-        }
-
-        if($request->publisher)
-        {
-            $data['publisher_id'] = $request->publisher;
-        }
-
+      
         $book = Book::create($data);
 
-        if($book->category)
+        if($book->category && $book->publisher)
         {
-            return redirect('/admin/books/categories/'.$book->category_id.'/books');
+            return redirect('/admin/books/publishers/'.$book->publisher_id.'/categories/'.$book->category_id.'/books');
         }
+
         return redirect('/admin/books');
+    }
+
+    public function index()
+    {
+        $data = [];
+        $data['books'] = Book::all();
+        return view('admin.books.index',$data);
     }
 
     public function show(Book $book)
@@ -203,8 +246,8 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
-        $data['categories'] = Categories::where(['type'=>'book','status'=>'Active'])->get();
-        $data['publishers'] = Categories::where('type','=','book_publisher')->get();
+        // $data['categories'] = Categories::where([['type','=','book_category'],['status','=','Active']])->get();
+        // $data['publishers'] = Categories::where([['type','=','book_publisher'],['status','=','Active']])->get();
         $data['book'] = $book;
         return view('admin.books.edit',$data);
     }
@@ -213,8 +256,8 @@ class BookController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'category' => 'numeric|nullable',
-            'publisher' => 'numeric|nullable',
+            'category' => 'string|nullable',
+            'publisher' => 'string|nullable',
             "title" => "string|required",
             "order" => "numeric|required",
             "author" => "string|nullable",
@@ -230,9 +273,8 @@ class BookController extends Controller
             "old_thumbnail" => "string|nullable",
         ]);
         $data = $request->only(['title','order','author','edition','published_year','pages','availability','price','discount','status','description']);
+        
         $data['thumbnail'] = $request->old_thumbnail;
-        $data['category_id'] = $request->category;
-        $data['publisher_id'] = $request->publisher;
         if(isset($request->thumbnail))
         {
             $data['thumbnail'] = $request->thumbnail->store('uploads','public');
@@ -240,9 +282,10 @@ class BookController extends Controller
         
         $book->update($data);
 
-        if($book->category)
+
+        if($book->category && $book->publisher)
         {
-            return redirect('/admin/books/categories/'.$book->category_id.'/books');
+            return redirect('/admin/books/publishers/'.$book->publisher_id.'/categories/'.$book->category_id.'/books');
         }
 
         return redirect('/admin/books');
@@ -251,13 +294,15 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $category = $book->category;
+        $publisher = $book->publisher;
 
         $book->delete();
 
-        if($category)
+        if($category && $publisher)
         {
-            return redirect('/admin/books/categories/'.$category->id.'/books');
+            return redirect('/admin/books/publishers/'.$publisher->id.'/categories/'.$category->id.'/books');
         }
+
         return redirect('/admin/books');
     }
 

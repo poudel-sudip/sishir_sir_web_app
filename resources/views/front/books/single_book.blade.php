@@ -16,7 +16,12 @@
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ ('/books') }}">Books</a></li>
+                        @if($book->publisher)
+                        <li class="breadcrumb-item"><a href="/book-publishers/{{$book->publisher->slug}}">{{ucwords($book->publisher->name)}}</a></li>
+                        @endif
+                        @if($book->category)
+                        <li class="breadcrumb-item"><a href="/book-publishers/{{$book->publisher->slug}}/category/{{$book->category->slug}}">{{ucwords($book->category->name)}}</a></li>
+                        @endif
                         <li class="breadcrumb-item active" aria-current="page">{{ucwords($book->title)}}</li>
                     </ol>
                 </div>

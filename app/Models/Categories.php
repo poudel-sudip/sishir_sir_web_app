@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 use App\Models\Books\Book;
 
@@ -31,17 +32,26 @@ class Categories extends Model
 
         });
 
-    }
+    }    
 
+    public function pub_categories(): HasMany
+    {
+        return$this->hasMany(Categories::class,'parent_id')->where('type','=','book_category');
+    }
 
     public function pub_books(): HasMany
     {
         return$this->hasMany(Book::class,'publisher_id');
     }
 
-    public function books(): HasMany
+    public function cat_books(): HasMany
     {
         return$this->hasMany(Book::class,'category_id');
+    }
+
+    public function publisher(): BelongsTo
+    {
+        return $this->belongsTo(Categories::class, 'parent_id')->where('type','=','book_publisher');
     }
 
     public function imp_links(): HasMany

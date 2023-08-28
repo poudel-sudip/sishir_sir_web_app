@@ -365,37 +365,90 @@ class FrontController extends Controller
     {
         return view('front.about');
     }
+
     public function books()
     {
         $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->take(15)->get();
-        $data['categories'] = Categories::where(['status'=>'Active','type'=>'book_publisher'])->whereHas('pub_books')->get();
+        $data['categories'] = Categories::where(['status'=>'Active','type'=>'book_category'])->whereHas('cat_books')->get();
         // dd($data);
-        return view('front.books',$data);
+        return view('front.books.index',$data);
     }
 
-    public function categoryBooks($slug)
+    public function publisherBookCategories($slug)
     {
-        $category = Categories::where('slug',$slug)->whereIn('type',['book','book_publisher'])->first();
+        $publisher = Categories::where('slug',$slug)->where('type','=','book_publisher')->first();
+        if(!$publisher)
+        {
+            abort(404,'Book Publisher Not Found');
+        }
+
+        $data['publisher'] = $publisher;
+        $data['categories'] = $publisher->pub_categories()->where('status','=','Active')->get();
+        
+        return view('front.books.publisher_category',$data);
+    }
+
+    public function publisherAllBooks($slug)
+    {
+        $publisher = Categories::where('slug',$slug)->where('type','=','book_publisher')->first();
+        if(!$publisher)
+        {
+            abort(404,'Book Publisher Not Found');
+        }
+
+        $data['publisher'] = $publisher;
+        $data['category'] = null;
+        $data['categories'] = $publisher->pub_categories()->where('status','=','Active')->get();
+        $data['books'] = $publisher->pub_books()->where('status','=','Active')->get();
+
+        return view('front.books.publisher_category_books',$data);
+    }
+
+    public function publisherCategoryBooks($pslug,$cslug)
+    {
+        $publisher = Categories::where('slug',$pslug)->where('type','=','book_publisher')->first();
+        if(!$publisher)
+        {
+            abort(404,'Book Publisher Not Found');
+        }
+
+        $category = Categories::where('slug',$cslug)->where('type','=','book_category')->first();
         if(!$category)
         {
             abort(404,'Book Category Not Found');
         }
-        $data['categories'] = Categories::where(['status'=>'Active','type'=>'book_publisher'])->whereHas('pub_books')->get();
-        $data['category'] = $category;
-        if($category->type == 'book')
-        {
-            $data['books'] = $category->books()->where('status','=','Active')->orderBy('edition')->get();
-        }
-        elseif($category->type == 'book_publisher')
-        {
-            $data['books'] = $category->pub_books()->where('status','=','Active')->orderBy('edition')->get();
-        }
-        else{
-            $data['books'] = [];
-        }
 
-        return view('front.categorybooks',$data);
+        $data['publisher'] = $publisher;
+        $data['category'] = $category;
+        $data['categories'] = $publisher->pub_categories()->where('status','=','Active')->get();
+        $data['books'] = $category->cat_books()->where('status','=','Active')->get();
+
+        return view('front.books.publisher_category_books',$data);
     }
+
+    // public function categoryBooks($slug)
+    // {
+    //     $category = Categories::where('slug',$slug)->whereIn('type',['book','book_publisher'])->first();
+    //     if(!$category)
+    //     {
+    //         abort(404,'Book Category Not Found');
+    //     }
+    //     $data['categories'] = Categories::where(['status'=>'Active','type'=>'book_publisher'])->whereHas('pub_books')->get();
+    //     $data['category'] = $category;
+    //     if($category->type == 'book')
+    //     {
+    //         $data['books'] = $category->books()->where('status','=','Active')->orderBy('edition')->get();
+    //     }
+    //     elseif($category->type == 'book_publisher')
+    //     {
+    //         $data['books'] = $category->pub_books()->where('status','=','Active')->orderBy('edition')->get();
+    //     }
+    //     else{
+    //         $data['books'] = [];
+    //     }
+
+    //     return view('front.books.categorybooks',$data);
+    // }
 
     public function singleBook($slug)
     {
@@ -404,7 +457,7 @@ class FrontController extends Controller
         {
             abort(404,'Book Not Found');
         }
-        return view('front.singlebook',compact('book'));
+        return view('front.books.single_book',compact('book'));
     }
 
     public function contact()

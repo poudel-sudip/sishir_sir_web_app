@@ -10,8 +10,10 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/books') }}">My Books</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Add Book </li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/books/publishers') }}">Publishers</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/books/publishers/'.$publisher->id.'/categories') }}">Categories</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/books/publishers/'.$publisher->id.'/categories/'.$category->id.'/books') }}">Books</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add</li>
                 </ol>
             </nav>
         </div>
@@ -20,14 +22,42 @@
                 <div class="card">
                     <div class="card-header">Add Book</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ ('/admin/books') }}" enctype="multipart/form-data" class="forms-sample">
+                        <form method="POST" action="/admin/books/publishers/{{$publisher->id}}/categories/{{$category->id}}/books" enctype="multipart/form-data" class="forms-sample">
                             @csrf
                                      
+                            <div class="form-group row">
+                                <label for="publisher" class="col-md-4 col-form-label">{{ __('Book Publisher') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="publisher" name="publisher" type="text" class="form-control @error('publisher') is-invalid @enderror" value="{{ old('publisher') ?? $publisher->name }}" required autocomplete="publisher" readonly>
+
+                                    @error('publisher')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="category" class="col-md-4 col-form-label">{{ __('Book Category') }}</label>
 
                                 <div class="col-md-8">
-                                    <select id="category" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}">
+                                    <input id="category" name="category" type="text" class="form-control @error('category') is-invalid @enderror" value="{{ old('category') ?? $category->name }}" required autocomplete="category" readonly>
+
+                                    @error('category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- <div class="form-group row">
+                                <label for="category" class="col-md-4 col-form-label">{{ __('Book Category') }}</label>
+
+                                <div class="col-md-8">
+                                    <select id="category" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" required>
                                         <option value="">Choose one Option...</option>
                                         @foreach($categories as $cat)
                                         <option value="{{$cat->id}}">{{ucwords($cat->name)}}</option>
@@ -39,9 +69,9 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="publisher" class="col-md-4 col-form-label">{{ __('Book Publisher') }}</label>
 
                                 <div class="col-md-8">
@@ -57,7 +87,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label">{{ __('Book Title') }}</label>

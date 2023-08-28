@@ -42,10 +42,10 @@
             </div>
             
             @if($material->type == 'file')
-                <div class="mt-4">
-                    <!-- <div id="my_pdf_viewer" class="text-center" oncontextmenu="return false"> </div> -->
+                <div class="mt-4">                    
+                    <div class="pdf-container" id="pdf-container" style="max-height:800px;overflow-y: scroll;"></div>
                     
-                    <iframe src="/storage/{{$material->fileurl}}#toolbar=0" 
+                    {{-- <iframe src="/storage/{{$material->fileurl}}#toolbar=0" 
                         oncontextmenu="return false" 
                         onselectstart="return false" 
                         ondragstart="return false"
@@ -53,7 +53,7 @@
                         style="width: 100%; min-height:700px" 
                         target="_parent"
                         nodownload>
-                    </iframe> 
+                    </iframe>  --}}
                 </div>
             @endif
         </div>

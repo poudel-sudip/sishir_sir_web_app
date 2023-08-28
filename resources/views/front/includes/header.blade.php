@@ -114,9 +114,9 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/books" role="button" aria-expanded="false">My Books</a>
             <ul class="dropdown-menu">
-              @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'book'])->whereHas('books')->orderBy('order')->take(5)->get() as $b)
+              @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'book_publisher'])->whereHas('pub_categories')->orderBy('order')->take(5)->get() as $b)
               <li class="parent-dropdown">
-                <a class="dropdown-item" aria-current="page" href="/books-category/{{$b->slug}}">{{ucwords($b->name)}}</a>
+                <a class="dropdown-item" aria-current="page" href="/book-publishers/{{$b->slug}}">{{ucwords($b->name)}}</a>
               </li>
               @endforeach
             </ul>

@@ -22,9 +22,9 @@
                   <div class="card-body">
                     <div class="custon-table-header">
                         <h4 class="card-title">{{$category->name}} | Books</h4>
-                        <div class="text-right">
+                        {{-- <div class="text-right">
                             <a href="{{ ('/admin/books/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Book </button></a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="table-responsive table-responsive-md">
                       <table class="table table-bordered" id="advanced-desc-table">

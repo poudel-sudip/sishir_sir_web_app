@@ -25,6 +25,35 @@
                             @method('PATCH')   
                             
                             <div class="form-group row">
+                                <label for="publisher" class="col-md-4 col-form-label">{{ __('Book Publisher') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="publisher" name="publisher" type="text" class="form-control @error('publisher') is-invalid @enderror" value="{{ old('publisher') ?? $book->publisher->name ?? '' }}" required autocomplete="publisher" readonly>
+
+                                    @error('publisher')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="category" class="col-md-4 col-form-label">{{ __('Book Category') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="category" name="category" type="text" class="form-control @error('category') is-invalid @enderror" value="{{ old('category') ?? $book->category->name ?? '' }}" required autocomplete="category" readonly>
+
+                                    @error('category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{--                             
+                            <div class="form-group row">
                                 <label for="category" class="col-md-4 col-form-label">{{ __('Book Category') }}</label>
 
                                 <div class="col-md-8">
@@ -60,7 +89,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label">{{ __('Book Title') }}</label>

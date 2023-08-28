@@ -33,7 +33,7 @@
                             <th>SN</th>
                             <th>Name</th>
                             {{-- <th>Slug</th> --}}
-                            <th>Books</th>
+                            <th>Categories</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
@@ -45,7 +45,7 @@
                             <td>{{$i}}</td>
                             <td>{{$cat->name}}</td>
                             {{-- <td>{{$cat->slug}}</td> --}}
-                            <td><a href="/admin/books/publishers/{{$cat->id}}/books">Books ({{$cat->pub_books()->count()}}) </a></td>
+                            <td><a href="/admin/books/publishers/{{$cat->id}}/categories">Categories ({{$cat->pub_categories()->count()}}) </a></td>
                             <td class="text-wrap"><span class="text-{{$cat->status == 'Active' ? 'success' : 'danger'}}">{{$cat->status}}</span></td>
                             <td class="classroom-btn" width="50">
                               <a href="/admin/books/publishers/{{$cat->id}}/edit" class="btn btn-warning">Edit</a>

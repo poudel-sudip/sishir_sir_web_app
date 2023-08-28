@@ -26,11 +26,11 @@ class Book extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Categories::class, 'category_id');
+        return $this->belongsTo(Categories::class, 'category_id')->where('type','=','book_category');
     }
 
     public function publisher(): BelongsTo
     {
-        return $this->belongsTo(Categories::class, 'publisher_id');
+        return $this->belongsTo(Categories::class, 'publisher_id')->where('type','=','book_publisher');
     }
 }
