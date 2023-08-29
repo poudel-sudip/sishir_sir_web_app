@@ -382,24 +382,24 @@ Route::resource('/admin/studyMaterials', App\Http\Controllers\Admin\StudyMateria
 Route::get('/admin/studyMaterials/{id}/delete', [App\Http\Controllers\Admin\StudyMaterialController::class,'destroy']);
 
 // admin video uploads section
-Route::get('/admin/videos','App\Http\Controllers\Admin\VideoController@index')->middleware('role:Admin');
-Route::get('/admin/videos/upload','App\Http\Controllers\Admin\VideoController@upload')->middleware('role:Admin');
-Route::post('/admin/videos','App\Http\Controllers\Admin\VideoController@store')->middleware('role:Admin');
-Route::delete('/admin/videos/{video}','App\Http\Controllers\Admin\VideoController@destroy')->middleware('role:Admin');
+// Route::get('/admin/videos','App\Http\Controllers\Admin\VideoController@index')->middleware('role:Admin');
+// Route::get('/admin/videos/upload','App\Http\Controllers\Admin\VideoController@upload')->middleware('role:Admin');
+// Route::post('/admin/videos','App\Http\Controllers\Admin\VideoController@store')->middleware('role:Admin');
+// Route::delete('/admin/videos/{video}','App\Http\Controllers\Admin\VideoController@destroy')->middleware('role:Admin');
 
 //admin audio uploads categories
-Route::get('/admin/audios','App\Http\Controllers\Admin\Audio\CategoryController@index')->middleware('role:Admin');
-Route::get('/admin/audios/create','App\Http\Controllers\Admin\Audio\CategoryController@create')->middleware('role:Admin');
-Route::get('/admin/audios/{category}/edit','App\Http\Controllers\Admin\Audio\CategoryController@edit')->middleware('role:Admin');
-Route::post('/admin/audios','App\Http\Controllers\Admin\Audio\CategoryController@store')->middleware('role:Admin');
-Route::patch('/admin/audios/{category}','App\Http\Controllers\Admin\Audio\CategoryController@update')->middleware('role:Admin');
-Route::delete('/admin/audios/{category}','App\Http\Controllers\Admin\Audio\CategoryController@destroy')->middleware('role:Admin');
+// Route::get('/admin/audios','App\Http\Controllers\Admin\Audio\CategoryController@index')->middleware('role:Admin');
+// Route::get('/admin/audios/create','App\Http\Controllers\Admin\Audio\CategoryController@create')->middleware('role:Admin');
+// Route::get('/admin/audios/{category}/edit','App\Http\Controllers\Admin\Audio\CategoryController@edit')->middleware('role:Admin');
+// Route::post('/admin/audios','App\Http\Controllers\Admin\Audio\CategoryController@store')->middleware('role:Admin');
+// Route::patch('/admin/audios/{category}','App\Http\Controllers\Admin\Audio\CategoryController@update')->middleware('role:Admin');
+// Route::delete('/admin/audios/{category}','App\Http\Controllers\Admin\Audio\CategoryController@destroy')->middleware('role:Admin');
 
 //admin audio files
-Route::get('/admin/audios/{category}/files','App\Http\Controllers\Admin\Audio\AudioController@index')->middleware('role:Admin');
-Route::get('/admin/audios/{category}/files/upload','App\Http\Controllers\Admin\Audio\AudioController@upload')->middleware('role:Admin');
-Route::post('/admin/audios/{category}/files','App\Http\Controllers\Admin\Audio\AudioController@store')->middleware('role:Admin');
-Route::delete('/admin/audios/{category}/files/{audio}','App\Http\Controllers\Admin\Audio\AudioController@destroy')->middleware('role:Admin');
+// Route::get('/admin/audios/{category}/files','App\Http\Controllers\Admin\Audio\AudioController@index')->middleware('role:Admin');
+// Route::get('/admin/audios/{category}/files/upload','App\Http\Controllers\Admin\Audio\AudioController@upload')->middleware('role:Admin');
+// Route::post('/admin/audios/{category}/files','App\Http\Controllers\Admin\Audio\AudioController@store')->middleware('role:Admin');
+// Route::delete('/admin/audios/{category}/files/{audio}','App\Http\Controllers\Admin\Audio\AudioController@destroy')->middleware('role:Admin');
 
 //admin menu group mgmt
 Route::get('/admin/menus','App\Http\Controllers\Admin\Menus\GroupController@index')->middleware('role:Admin');
@@ -543,6 +543,11 @@ Route::get('/admin/dynamic-forms/{vform}/applicants/{applicant}','App\Http\Contr
 Route::patch('/admin/dynamic-forms/{vform}/applicants/{applicant}','App\Http\Controllers\Admin\Forms\FormController@updateApplicant')->middleware('role:Admin');
 Route::delete('/admin/dynamic-forms/{vform}/applicants/{applicant}','App\Http\Controllers\Admin\Forms\FormController@destroyApplicant')->middleware('role:Admin');
 
+// // admin free videos
+Route::get('/admin/free-videos','App\Http\Controllers\Admin\FreeVideoController@index')->middleware('role:Admin');
+Route::get('/admin/free-videos/create','App\Http\Controllers\Admin\FreeVideoController@create')->middleware('role:Admin');
+Route::post('/admin/free-videos','App\Http\Controllers\Admin\FreeVideoController@store')->middleware('role:Admin');
+Route::delete('/admin/free-videos/{video}','App\Http\Controllers\Admin\FreeVideoController@destroy')->middleware('role:Admin');
 
 
 
@@ -810,6 +815,7 @@ Route::get('/', 'App\Http\Controllers\FrontController@index');
 Route::get('/about-us', 'App\Http\Controllers\FrontController@about');
 Route::get('/enquiry', 'App\Http\Controllers\FrontController@enquiry');
 Route::get('/enquiry/{courseslug}', 'App\Http\Controllers\FrontController@showCourseEnquiryForm');
+Route::get('/free-videos/{video}', 'App\Http\Controllers\FrontController@playFreeVideo');
 
 // front blogs
 Route::get('/blogs','App\Http\Controllers\Blog\BlogController@index');

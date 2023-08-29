@@ -246,7 +246,7 @@
         </div>
       </li>
 
-      {{-- <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#upload-basic" aria-expanded="false" aria-controls="upload-basic">
           <i class="mdi mdi-cloud-upload menu-icon"></i>
           <span class="menu-title">Uploads</span>
@@ -255,9 +255,9 @@
         <div class="collapse" id="upload-basic">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/videos') }}">Videos</a>
+              <a class="nav-link" href="{{ url('/admin/free-videos') }}">Videos</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/audios') }}">Audios</a>
             </li>
             <li class="nav-item">
@@ -265,10 +265,10 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/syllabus') }}">Syllabus</a>
-            </li>
+            </li> --}}
           </ul>
         </div>
-      </li> --}}
+      </li>
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/provience') }}">

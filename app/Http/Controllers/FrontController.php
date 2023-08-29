@@ -56,6 +56,7 @@ class FrontController extends Controller
 
         $data['dynamic_forms'] = DynamicForm::where('banner','!=','')->where('status','=','Active')->orderByDesc('id')->take(5)->get();
         
+        $data['videos'] = FreeVideo::take(6)->get();
         $data['updates'] = [];
 
         $menu_sub_items = MenuSubItem::where('status','=','Active')
@@ -816,4 +817,8 @@ class FrontController extends Controller
         return redirect('/testimonials');
     }
 
+    public function playFreeVideo(FreeVideo $video)
+    {
+        return view('front.play_free_video',compact('video'));
+    }
 }

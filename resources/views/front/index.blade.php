@@ -364,6 +364,40 @@
     </section>
     @endif
 
+    @if(count($videos))
+        <section class="course-section page-section">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    <div class="col-md-12 text-center relative">
+                        <h2 class="mb-3 wow fadeInUp">Videos</h2>
+                        {{-- <div class="header-view-more"><a href="{{ url('/free-videos') }}">View More</a></div> --}}
+                    </div>
+                </div>
+                <div class="course-container">
+                    <div class="owl-carousel course-carousel">
+                        @foreach($videos as $video)
+                            <div class="card-course">
+                                <div class="header">
+                                    <div class="post-thumb" style="height:200px">
+                                        <img src="https://img.youtube.com/vi/{{$video->video_id}}/maxresdefault.jpg" alt="" >
+                                    </div>
+
+                                </div>
+                                <div class="body">
+                                    <h5 class="post-title text-center" style="font-size: 16px">{{$video->title}}</h5>
+                                    <div class="course-info text-center">
+                                        <a class="btn-sm btn-primary" href="/free-videos/{{$video->id}}" >Play Video</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    @endif
+
     {{-- review section start --}}
     @if(count($testimonials))
     <section class="review-section">
@@ -400,33 +434,7 @@
         </div>
     </section>
     @endif
-
-
-    <!-- Modal HTML -->
-    {{-- <div class="modal fade" id="play_video" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="videoModalLabel">Free Video</h5>
-                    <button type="button" class="close border-danger" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="text-danger">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <iframe
-                        id="video_iframe"
-                        class="embed-responsive-item"
-                        src=""
-                        frameborder="0"
-                        width="100%"
-                        allowfullscreen
-                        style="min-height: 400px;">
-
-                    </iframe>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+   
 
     {{-- 
         <div class="enquiry-popup ">
@@ -441,7 +449,7 @@
     --}}
 
     {{-- youtube video palylist --}}
-    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+    {{-- <script src="https://apps.elfsight.com/p/platform.js" defer></script> --}}
     {{-- <script>
         $(document).ready(function(){
             $('.play_video_btn').click(function(){
