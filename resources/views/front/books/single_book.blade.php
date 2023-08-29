@@ -27,39 +27,56 @@
                 </div>
             </div>
         </div>
-        <div class="blogs-details-container bg-white">
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>{{$book->title}}</h2>
-                            <div class="d-flex flex-wrap">
-                                <h6 class="mx-3"><span class="icon-user-tie text-primary"></span> {{$book->author}}</h6>
-                                <div class="mx-3">Edition: <strong class="text-primary">{{$book->edition}}</strong></div>
-                                <div class="mx-3">Published On: <strong class="text-primary">{{$book->published_year}}</strong></div>
-                                <div class="mx-3">Pages: <strong class="text-primary">{{$book->pages}}</strong></div>
-                                <div class="mx-3">Category: <strong class="text-primary ">{{ucwords($book->category->name ?? '')}}</strong></div>
-                                <div class="mx-3">Publisher: <strong class="text-primary ">{{ucwords($book->publisher->name ?? '')}}</strong></div>
-                                <div class="mx-3">Availability: <strong class="text-primary ">{{ucwords($book->availability)}}</strong></div>
+        <div class="blogs-details-container ebook-section" style="background:#f3f8fc;">            
+            <div class="ebook-page-details">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img src="/storage/{{$book->thumbnail}}" onerror="this.src='{{asset('images/default-post.png')}}'" class="img img-fluid">                                
                             </div>
-                                                        
+                            <div class="col-md-7 book-details">
+                                <div class="addto-ebook-favorite">
+                                    <button onclick="" title="Add to favorite"><i class="fas fa-heart"></i></button>
+                                </div>
+                                <h2 class="mt-3 mt-md-0">{{strtoupper($book->title)}}</h2>
+                                <h6>
+                                    Publisher: <strong class="text-primary"> {{ucwords($book->publisher->name ?? ' ')}} </strong>
+                                </h6>
+                                <h6>
+                                    Category: <strong class="text-primary"> {{ucwords($book->category->name ?? ' ')}} </strong>
+                                </h6>
+                                <h6>
+                                    Author(s): <strong class="text-primary"> {{ucwords($book->author ?? ' ')}} </strong>
+                                </h6>
+                                <h6>
+                                    Edition: <strong class="text-primary"> {{ucwords($book->edition ?? ' ')}} </strong>
+                                </h6>
+                                <h6>
+                                    Published On: <strong class="text-primary"> {{ucwords($book->published_year ?? ' ')}} </strong>
+                                </h6>
+                                <h6>
+                                    Pages: <strong class="text-primary"> {{ucwords($book->pages ?? ' ')}} </strong>
+                                </h6>
+                                <h6>
+                                    Price: <strong class="text-success"> Rs. {{$book->price - $book->discount}}/- </strong>
+                                </h6>                                
+                                <h6>
+                                    Availability: <strong class="text-primary"> {{ucwords($book->availability ?? ' ')}} </strong>
+                                </h6>
+                               
+                                <div class="book-description text-secondary">
+                                    {!! $book->description !!}
+                                </div>
+                                <div class="mt-3 ">
+                                    <div class="text-end sharethis-inline-share-buttons"></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-12 my-3">
-                            <div class="sharethis-inline-share-buttons"></div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <img src="/storage/{{$book->thumbnail}}" style="width: 100%">
-                        </div>
-                        <div class="col-md-12 mt-3">
-                            <div class="blog-full-description">{!! $book->description !!}</div>
-                        </div>
-                    </div> 
-                </div>
-                
-            </div>
+                    </div>                    
+                </div>      
+            </div>            
         </div>
     </div>
 
-@endsection
+@endsection 

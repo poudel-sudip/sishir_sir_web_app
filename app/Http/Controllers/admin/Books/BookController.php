@@ -14,16 +14,6 @@ class BookController extends Controller
         $this->middleware('auth');
     }
 
-
-
-
- 
-
-
-    
-
-    
-
     public function publisherIndex()
     {  
         $data['categories'] = Categories::where('type','=','book_publisher')->get();
@@ -99,15 +89,15 @@ class BookController extends Controller
             'category_name'=>'required | string',
             'order'=>'required | numeric',
             'status'=>'required | string',
-            'image' => 'nullable | image',
+            // 'image' => 'nullable | image',
             // 'description' => 'nullable | string',
         ]);
 
         $image = null;
-        if(isset($data['image']))
-        {
-            $image = $request->image->store('uploads','public');
-        }
+        // if(isset($data['image']))
+        // {
+        //     $image = $request->image->store('uploads','public');
+        // }
 
         $publisher->pub_categories()->create([
             'type' => 'book_category',
@@ -141,15 +131,16 @@ class BookController extends Controller
             'category_name'=>'required | string',
             'order'=>'required | numeric',
             'status'=>'required | string',
-            'old_image' => 'required | string',
-            'image' => 'nullable | image',
+            // 'old_image' => 'required | string',
+            // 'image' => 'nullable | image',
         ]);
 
-        $image = $data['old_image'];
-        if(isset($data['image']))
-        {
-            $image = $request->image->store('uploads','public');
-        }
+        $image = null;
+        // $image = $data['old_image'];
+        // if(isset($data['image']))
+        // {
+        //     $image = $request->image->store('uploads','public');
+        // }
         
 
         $category->update([

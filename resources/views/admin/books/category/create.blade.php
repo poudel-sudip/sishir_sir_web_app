@@ -60,7 +60,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="image" class="col-md-3 col-form-label">{{ __('Category Image') }}</label>
                             <div class="col-md-9">
                                 <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required >
@@ -71,7 +71,7 @@
                                 </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- <div class="form-group row">
                             <label for="description" class="col-md-12 col-form-label">{{ __('Category Description') }}</label>

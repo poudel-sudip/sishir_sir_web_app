@@ -24,31 +24,24 @@
     </div>
 
     <section class="course-page">
+
         <div class="container-fluid px-md-5">
-            <div class="row course-details">
-                <div class="col-md-12">
-                    <div class="blog-container">
-                        <div class="row">
-                            @forelse($categories as $category)
-                            <div class="col-md-3 my-3">
-                                <a href="/book-publishers/{{$publisher->slug}}/category/{{$category->slug}}">
-                                    <div class="single-blog pt-3 border border-primary border-2">
-                                        <div class="blog-image">
-                                            <img src="/storage/{{$category->image}}" class="img img-fluid" style="max-height: 200px">
-                                        </div>
-                                        <div class="blog-details text-center">
-                                            <h4><a href="/book-publishers/{{$publisher->slug}}/category/{{$category->slug}}">{{ucwords($category->name)}}</a></h4>                                        
-                                        </div>
-                                    </div>
-                                </a>
+            <div class="blog-container mt-5">
+                <div class="row">
+                    @forelse($categories as $cat)
+                        <div class="col-md-3 mb-3">
+                            <div class="single-blog text-center py-3 library-item border border-primary">
+                                <div class="">
+                                    <a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}"><i class="h1 fa fa-book"></i></a>
+                                </div>
+                                <h5><a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">{{ucwords($cat->name)}}</a></h5>
                             </div>
-                            @empty
-                                <div>No Book Category Published</div>
-                            @endforelse
                         </div>
-                    </div>
+                    @empty                  
+                        <div>No Book Category Published</div>
+                    @endforelse
                 </div>
-            </div>            
+            </div>
         </div>
     </section>
 

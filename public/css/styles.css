@@ -5795,3 +5795,135 @@ label.star:before {
 .footer-imp-link .nav-tabs{
     background: #1375b9 !important;
 }
+
+
+.ebook-section{
+    background: rgba(237, 237, 237, 1);
+    margin: 0;
+    padding: 0 0 40px 0;
+}
+.ebook-container{
+    margin: 0;
+    padding: 50px 0 50px;
+    position: relative;
+    
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.ebook-container .e-banner-heading{
+    background: rgba(23, 52, 75, 0.59);
+    padding: 5px 10px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 2.4rem;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* for tab view */
+@media(max-width:992px) and (min-width:768px){
+    .ebook-container{
+        background-size: cover;
+    }
+    
+}
+/* for media query */
+@media (max-width: 778px){
+    .ebook-container{
+        background-size: cover;
+    }
+    .ebook-container .e-banner-heading{
+        width: auto;
+        font-size: 28px;
+    }
+   
+}
+
+
+
+/*ebook details*/
+.ebook-page-details{
+    border: 1px solid #C2C2C2;
+    border-radius: 15px;
+    padding: 30px 20px;
+    margin: 50px 0;
+    background: #f8f8f8;
+}
+.ebook-page-details .book-image-side h6{
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
+    border-bottom: 1px solid #bfbdbd;
+    padding-bottom: 5px;
+    width: 164px;
+}
+.ebook-page-details .book-image-side li{
+    background: transparent;
+    display: grid;
+    grid-template-columns: 45px 1fr;
+    border: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+.ebook-page-details .book-image-side li .ebook-author{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.ebook-page-details .book-image-side li span{
+    display: block;
+    font-size: 12px;
+}
+.ebook-page-details .book-details h2{
+    color: #19ADED;
+    font-size: 32px;
+    line-height: 2;
+    font-weight: 600;
+}
+
+.ebook-page-details .book-details span{
+    font-size: 20px;
+}
+.book-details .book-description{
+    text-align: justify;
+    line-height: 1.8;
+    margin-top: 10px;
+}
+.book-details .book-description p, .book-details .book-description span{
+    font-size: 16px;
+}
+.ebook-page-details .book-details{
+    position: relative;
+    padding-right: 20px;
+}
+.ebook-page-details .addto-ebook-favorite{
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+.ebook-page-details .addto-ebook-favorite button{
+    border: 0;
+    background: transparent;
+}
+.ebook-page-details .addto-ebook-favorite button i{
+    font-size: 32px;
+    color: #3490dc;
+}
+
+.hidden{
+    display: none !important;
+}
+@media(max-width: 768px){
+    .ebook-page-details .book-details h2{
+        font-size: 26px;
+        line-height: 1.5;
+        padding-right: 40px;
+    }
+    .ebook-page-details .addto-ebook-favorite{
+        right: 5px;
+        top: 5px;
+    }
+}
