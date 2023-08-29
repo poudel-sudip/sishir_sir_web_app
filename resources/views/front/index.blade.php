@@ -333,43 +333,75 @@
     </section>
     @endif
 
-    @if(count($books))
-    <section class="home-ebook mt-3 mb-5">
-        <div class="container-fluid px-md-5">
-            <div class="row mb-3">
-                <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3 wow fadeInUp">My Books</h2>
-                </div>
-            </div>
-            <div class="row">
-                @foreach ($books as $book)
-                <div class="col-md-3">
-                    <div class="ebook-section border border-primary">
-                        <div class="ebook-header">
-                            <img src="/storage/{{$book->thumbnail}}" alt="">
-                        </div>
-                        <div class="ebook-footer">
-                            <a href="/books"><h4 title="{{ $book->title }}">{{ $book->title }}</h4></a>
-                            <p>Price: <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ $book->price - $book->discount }}</strong></p>
-                        </div>
+    {{-- @if(count($books))
+        <section class="home-ebook mt-3 mb-5">
+            <div class="container-fluid px-md-5">
+                <div class="row mb-3">
+                    <div class="col-md-12 text-center relative">
+                        <h2 class="home-section-heading mb-3 wow fadeInUp">My Books</h2>
                     </div>
                 </div>
-                @endforeach
+                <div class="row">
+                    @foreach ($books as $book)
+                    <div class="col-md-3">
+                        <div class="ebook-section border border-primary">
+                            <div class="ebook-header">
+                                <img src="/storage/{{$book->thumbnail}}" alt="">
+                            </div>
+                            <div class="ebook-footer">
+                                <a href="/books"><h4 title="{{ $book->title }}">{{ $book->title }}</h4></a>
+                                <p>Price: <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ $book->price - $book->discount }}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
 
-                <div class="col-12 text-end mt-2">
-                    <a href="/books" class="btn" style="background:#1375b9;color:#fff">View all...</a>
+                    <div class="col-12 text-end mt-2">
+                        <a href="/books" class="btn" style="background:#1375b9;color:#fff">View all...</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    @endif
+        </section>
+    @endif --}}
 
-    @if(count($videos))
-        <section class="course-section page-section">
+    @if(count($books))
+        <section class="course-section">
             <div class="container-fluid px-md-5">
                 <div class="row">
                     <div class="col-md-12 text-center relative">
-                        <h2 class="mb-3 wow fadeInUp">Videos</h2>
+                        <h2 class="home-section-heading mb-3 wow fadeInUp">My Books</h2>
+                    </div>
+                </div>
+                <div class="course-container">
+                    <div class="owl-carousel course-carousel">
+                        @foreach($books as $book)
+                            <div class="card-course border-primary">
+                                <div class="header">
+                                    <div class="post-thumb" style="height:200px">
+                                        <img src="/storage/{{$book->thumbnail}}" alt="" >
+                                    </div>
+                                </div>
+                                <div class="body ebook-footer mt-2">
+                                    <a href="/books/{{$book->slug}}"><h4 title="{{ $book->title }}">{{ $book->title }}</h4></a>
+                                    <p>Price: <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ $book->price - $book->discount }}</strong></p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="text-end mt-2">
+                        <a href="/books" class="btn" style="background:#1375b9;color:#fff">View all...</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+    @if(count($videos))
+        <section class="course-section">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    <div class="col-md-12 text-center relative">
+                        <h2 class="home-section-heading mb-3 wow fadeInUp">Videos</h2>
                         {{-- <div class="header-view-more"><a href="{{ url('/free-videos') }}">View More</a></div> --}}
                     </div>
                 </div>
@@ -400,7 +432,7 @@
 
     {{-- review section start --}}
     @if(count($testimonials))
-    <section class="review-section">
+    <section class="review-section mt-5">
         <div class="container-fluid px-md-5">
             <div class="row mb-3">
                 <div class="col-md-12 text-center relative">

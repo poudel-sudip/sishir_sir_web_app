@@ -43,12 +43,12 @@ class FrontController extends Controller
 
         $data = [];
         $data['sliders'] = Slider::all()->sortBy('order');
-        $data['premiumExams'] = ExamHallCategories::all()->where('status','Active')->take(4);
-        $data['exams'] = OpenExam::all()->where('result_status','=','Unpublished')->take(4)->sortByDesc('id');
-        $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('created_at')->first();
-        $data['blogs'] = Blog::all()->where('status','=','Published')->sortByDesc('created_at')->take(5);
-        $data['books'] = Book::all()->where('status','=','Active')->take(4)->sortBy('order');
-        $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->take(20)->get();
+        $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(4)->get();
+        $data['exams'] = OpenExam::where('result_status','=','Unpublished')->orderByDesc('id')->take(4)->get();
+        $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('id')->first();
+        $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->take(5)->get();
+        $data['books'] = Book::where('status','=','Active')->orderBy('order')->take(12)->get();
+        $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->take(15)->get();
         $data['ads'] = Advertisement::all();
         // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
         // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
@@ -56,7 +56,7 @@ class FrontController extends Controller
 
         $data['dynamic_forms'] = DynamicForm::where('banner','!=','')->where('status','=','Active')->orderByDesc('id')->take(5)->get();
         
-        $data['videos'] = FreeVideo::take(6)->get();
+        $data['videos'] = FreeVideo::orderByDesc('id')->take(9)->get();
         $data['updates'] = [];
 
         $menu_sub_items = MenuSubItem::where('status','=','Active')
