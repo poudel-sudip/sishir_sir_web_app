@@ -314,7 +314,7 @@
             <div class="row">
                 @foreach ($libraries as $cat)
                 <div class="col-sm-6 col-md-3 mb-3">
-                    <div class="ebook-section library-item border border-primary">
+                    <div class="ebook-section library-item border border-primary text-center">
                         <div>
                             <a href="/library/{{$cat->slug}}"><i class="h1 fa fa-folder"></i></a>
                         </div>
@@ -411,7 +411,7 @@
                             <div class="card-course">
                                 <div class="header">
                                     <div class="post-thumb" style="height:200px">
-                                        <img src="https://img.youtube.com/vi/{{$video->video_id}}/maxresdefault.jpg" alt="" >
+                                        <img src="https://img.youtube.com/vi/{{$video->video_id}}/hqdefault.jpg" alt="" >
                                     </div>
 
                                 </div>

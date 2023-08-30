@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Categories;
 
 class Book extends Model
@@ -32,5 +33,10 @@ class Book extends Model
     public function publisher(): BelongsTo
     {
         return $this->belongsTo(Categories::class, 'publisher_id')->where('type','=','book_publisher');
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(BookReview::class, 'book_id');
     }
 }

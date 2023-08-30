@@ -458,7 +458,34 @@ class FrontController extends Controller
         {
             abort(404,'Book Not Found');
         }
-        return view('front.books.single_book',compact('book'));
+        $book_reviews = $book->reviews()->orderByDesc('id')->take(30)->get();
+
+        return view('front.books.single_book',compact('book','book_reviews'));
+    }
+
+    public function addBookReview($slug, Request $request)
+    {
+        $book = Book::where('slug',$slug)->first();
+        if(!$book)
+        {
+            abort(404);
+        }
+        
+        $request->validate([
+            'rating' => 'required|numeric|lt:6|gt:0',
+            'name' => 'required|string',
+            'email' => 'nullable|email',
+            'contents' => 'required|string',
+        ]);
+
+        $book->reviews()->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'rating' => intval($request->rating),
+            'message' => $request->contents,
+        ]);
+
+        return redirect('/books/'.$book->slug);
     }
 
     public function contact()

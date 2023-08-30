@@ -53,6 +53,7 @@
                             <td>{{$row->published_year}} </td>
                             <td><span class='text-{{$row->status == "Active" ? "success" : "danger"}}'>{{$row->status}}</span></td>
                             <td class="classroom-btn" width="100">
+                              <a href="/admin/books/{{$row->id}}/reviews" class="btn btn-info">Reviews</a>
                               <a href="/admin/books/{{$row->id}}" class="btn btn-primary">Show</a>
                               <a href="/admin/books/{{$row->id}}/edit" class="btn btn-warning">Edit</a>
                               <form id="delete-form-{{$row->id}}" action="/admin/books/{{$row->id}}" method="POST" class="d-inline">

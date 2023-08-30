@@ -41,6 +41,11 @@
                         </div>
 
                         <div class="course-row">
+                            <div>Book Rating:</div>
+                            <div>{{number_format($book->reviews()->avg('rating'), 2)}}/5.00</div>
+                        </div>
+
+                        <div class="course-row">
                             <div>Book Order: </div>
                             <div>{{$book->order}}</div>
                         </div>
@@ -53,6 +58,11 @@
                         <div class="course-row">
                             <div>Book Edition: </div>
                             <div>{{ucwords($book->edition)}}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Book ISBN: </div>
+                            <div>{{$book->isbn}}</div>
                         </div>
 
                         <div class="course-row">
@@ -77,6 +87,11 @@
                         <div class="course-row">
                             <div>Book Discount: </div>
                             <div>Rs. {{$book->discount ?? '0'}}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Book Purchase Link: </div>
+                            <div>{{$book->purchase_link}}</div>
                         </div>
 
                         <div class="course-row">

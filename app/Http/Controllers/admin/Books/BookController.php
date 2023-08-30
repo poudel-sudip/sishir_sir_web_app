@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Books;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Books\Book;
+use App\Models\Books\BookReview;
 use App\Models\Categories;
 
 class BookController extends Controller
@@ -193,17 +194,19 @@ class BookController extends Controller
             "order" => "numeric|required",
             "author" => "string|nullable",
             "edition" => "string|nullable",
+            "isbn" => "string|nullable",
             "published_year" => "string|nullable",
             "pages" => "string|nullable",
             "availability" => "string|required",
             "price" => "numeric|required",
             "discount" => "numeric|nullable",
+            "purchase_link" => "string|nullable",
             "description" => "string|required",
             "status" => "string|required",
             "thumbnail" => "image|required",
         ]);
 
-        $data = $request->only(['title','order','author','edition','published_year','pages','availability','price','discount','status','description']);
+        $data = $request->only(['title','order','author','edition','isbn','published_year','pages','availability','price','discount','purchase_link','status','description']);
         
         $data['publisher_id'] = $publisher->id;
         $data['category_id'] = $category->id;
@@ -253,17 +256,19 @@ class BookController extends Controller
             "order" => "numeric|required",
             "author" => "string|nullable",
             "edition" => "string|nullable",
+            "isbn" => "string|nullable",
             "published_year" => "string|nullable",
             "pages" => "string|nullable",
             "availability" => "string|required",
             "price" => "numeric|required",
             "discount" => "numeric|nullable",
+            "purchase_link" => "string|nullable",
             "description" => "string|required",
             "status" => "string|required",
             "thumbnail" => "image|nullable",
             "old_thumbnail" => "string|nullable",
         ]);
-        $data = $request->only(['title','order','author','edition','published_year','pages','availability','price','discount','status','description']);
+        $data = $request->only(['title','order','author','edition','isbn','published_year','pages','availability','price','discount','purchase_link','status','description']);
         
         $data['thumbnail'] = $request->old_thumbnail;
         if(isset($request->thumbnail))
@@ -295,6 +300,18 @@ class BookController extends Controller
         }
 
         return redirect('/admin/books');
+    }
+
+    public function reviewList(Book $book)
+    {
+        $reviews = $book->reviews()->orderByDesc('id')->get();
+        return view('admin.books.reviews',compact('book','reviews'));
+    }
+
+    public function reviewDestroy(Book $book, BookReview $review)
+    {
+        $review->delete();
+        return redirect('/admin/books/'.$book->id.'/reviews');
     }
 
 }

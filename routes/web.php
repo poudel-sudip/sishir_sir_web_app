@@ -476,6 +476,9 @@ Route::get('/admin/books/{book}','App\Http\Controllers\Admin\Books\BookControlle
 Route::patch('/admin/books/{book}','App\Http\Controllers\Admin\Books\BookController@update')->middleware('role:Admin');
 Route::delete('/admin/books/{book}','App\Http\Controllers\Admin\Books\BookController@destroy')->middleware('role:Admin');
 
+Route::get('/admin/books/{book}/reviews','App\Http\Controllers\Admin\Books\BookController@reviewList')->middleware('role:Admin');
+Route::delete('/admin/books/{book}/reviews/{review}','App\Http\Controllers\Admin\Books\BookController@reviewDestroy')->middleware('role:Admin');
+
 // admin avertisement management 
 Route::get('/admin/advertisement','App\Http\Controllers\Admin\Advertisement\ADController@index')->middleware('role:Admin');
 Route::get('/admin/advertisement/create','App\Http\Controllers\Admin\Advertisement\ADController@create')->middleware('role:Admin');
@@ -837,6 +840,7 @@ Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamControll
 
 //front ebooks
 Route::get('/books','App\Http\Controllers\FrontController@books');
+Route::post('/books/{slug}/review/add','App\Http\Controllers\FrontController@addBookReview');
 Route::get('/books/{slug}','App\Http\Controllers\FrontController@singleBook');
 Route::get('/book-publishers/{slug}/all-books','App\Http\Controllers\FrontController@publisherAllBooks');
 Route::get('/book-publishers/{pslug}/category/{cslug}','App\Http\Controllers\FrontController@publisherCategoryBooks');

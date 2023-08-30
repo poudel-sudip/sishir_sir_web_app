@@ -25,8 +25,10 @@ class CreateBooksTable extends Migration
             $table->longText('description')->nullable();
             $table->string('author')->nullable();
             $table->string('edition')->nullable();
+            $table->string('isbn')->nullable();
             $table->string('pages')->nullable();
             $table->string('availability')->nullable()->default('In Stock');
+            $table->text('purchase_link')->nullable();
             $table->string('published_year')->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('status', 100)->nullable()->default('Inactive');

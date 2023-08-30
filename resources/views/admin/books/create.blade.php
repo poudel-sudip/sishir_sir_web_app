@@ -146,6 +146,20 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="isbn" class="col-md-4 col-form-label">{{ __('Book ISBN') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="isbn" name="isbn" type="text" class="form-control @error('isbn') is-invalid @enderror" value="{{ old('isbn') }}" >
+
+                                    @error('isbn')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="pages" class="col-md-4 col-form-label">{{ __('Book Pages') }}</label>
 
                                 <div class="col-md-8">
@@ -210,6 +224,20 @@
                                     <input id="discount" name="discount" type="number" class="form-control @error('discount') is-invalid @enderror"  value="{{ old('discount') ?? 0}}" required >
 
                                     @error('discount')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="purchase_link" class="col-md-4 col-form-label">{{ __('Book Purchase Link') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="purchase_link" name="purchase_link" type="text" class="form-control @error('purchase_link') is-invalid @enderror" value="{{ old('purchase_link') }}" >
+
+                                    @error('purchase_link')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
