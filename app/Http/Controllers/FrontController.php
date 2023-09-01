@@ -400,7 +400,7 @@ class FrontController extends Controller
         $data['publisher'] = $publisher;
         $data['category'] = null;
         $data['categories'] = $publisher->pub_categories()->where('status','=','Active')->get();
-        $data['books'] = $publisher->pub_books()->where('status','=','Active')->get();
+        $data['books'] = $publisher->pub_books()->where('status','=','Active')->orderByDesc('id')->get();
 
         return view('front.books.publisher_category_books',$data);
     }
@@ -422,7 +422,7 @@ class FrontController extends Controller
         $data['publisher'] = $publisher;
         $data['category'] = $category;
         $data['categories'] = $publisher->pub_categories()->where('status','=','Active')->get();
-        $data['books'] = $category->cat_books()->where('status','=','Active')->get();
+        $data['books'] = $category->cat_books()->where('status','=','Active')->orderByDesc('id')->get();
 
         return view('front.books.publisher_category_books',$data);
     }
@@ -659,7 +659,11 @@ class FrontController extends Controller
 
         $data['menu_posts'] = [];
 
-        $menu_sub_items = MenuSubItem::where([['status','=','Active'],['name','Like','%'.$query.'%']])
+        $menu_sub_items = MenuSubItem::where('status','=','Active')
+        ->where(function($req) use($query) {
+            $req->where('name','Like','%'.$query.'%')
+            ->orWhere('search_tags','Like','%'.$query.'%');
+        })
         ->get()
         ->map(function($update)
         {
@@ -688,7 +692,11 @@ class FrontController extends Controller
         })
         ->toArray();
 
-        $menu_items = MenuItem::where([['status','=','Active'],['name','Like','%'.$query.'%']])
+        $menu_items = MenuItem::where('status','=','Active')
+        ->where(function($req) use($query) {
+            $req->where('name','Like','%'.$query.'%')
+            ->orWhere('search_tags','Like','%'.$query.'%');
+        })
         ->get()
         ->map(function($update)
         {
@@ -713,7 +721,12 @@ class FrontController extends Controller
         })
         ->toArray();
 
-        $menu_categories = MenuItemCategory::where([['status','=','Active'],['type','!=','heading'],['name','Like','%'.$query.'%']])
+        $menu_categories = MenuItemCategory::where('status','=','Active')
+        ->where('type','!=','heading')
+        ->where(function($req) use($query) {
+            $req->where('name','Like','%'.$query.'%')
+            ->orWhere('search_tags','Like','%'.$query.'%');
+        })
         ->get()
         ->map(function($cat)
         {
@@ -735,7 +748,12 @@ class FrontController extends Controller
         })
         ->toArray();
 
-        $menu_submenus = MenuSubGroup::where([['status','=','Active'],['type','!=','heading'],['name','Like','%'.$query.'%']])
+        $menu_submenus = MenuSubGroup::where('status','=','Active')
+        ->where('type','!=','heading')
+        ->where(function($req) use($query) {
+            $req->where('name','Like','%'.$query.'%')
+            ->orWhere('search_tags','Like','%'.$query.'%');
+        })
         ->get()
         ->map(function($cat)
         {
@@ -763,7 +781,11 @@ class FrontController extends Controller
         $data['menu_posts'] = array_merge($data['menu_posts'], $menu_sub_items);
         usort($data['menu_posts'], function($a, $b) {return strcmp($b['created_at'],$a['created_at']);});
 
-        $data['blogs'] = Blog::where([['status','=','Published'],['title','Like','%'.$query.'%']])
+        $data['blogs'] = Blog::where('status','=','Published')
+        ->where(function($req) use($query) {
+            $req->where('title','Like','%'.$query.'%')
+            ->orWhere('search_tags','Like','%'.$query.'%');
+        })
         ->get(['id','title','slug','created_at'])
         ->map(function($b){
             $b['link'] = '/blogs/'.$b->slug;
@@ -771,7 +793,11 @@ class FrontController extends Controller
         })
         ->toArray();
 
-        $data['books'] = Book::where([['status','=','Active'],['title','Like','%'.$query.'%']])
+        $data['books'] = Book::where('status','=','Active')
+        ->where(function($req) use($query) {
+            $req->where('title','Like','%'.$query.'%')
+            ->orWhere('search_tags','Like','%'.$query.'%');
+        })
         ->get(['id','title','slug','created_at'])
         ->map(function($b){
             $b['link'] = '/books/'.$b->slug;
@@ -779,7 +805,11 @@ class FrontController extends Controller
         })
         ->toArray();
 
-        $data['premium_exams'] = ExamHallCategories::where([['status','=','Active'],['title','Like','%'.$query.'%']])
+        $data['premium_exams'] = ExamHallCategories::where('status','=','Active')
+        ->where(function($req) use($query) {
+            $req->where('title','Like','%'.$query.'%')
+            ->orWhere('search_tags','Like','%'.$query.'%');
+        })
         ->get(['id','title','slug','created_at'])
         ->map(function($e){
             $e['link'] = '/exam-hall/premium/'.$e->slug;
@@ -787,7 +817,11 @@ class FrontController extends Controller
         })
         ->toArray();
 
-        $data['library_materials'] = LibraryMaterial::where([['status','=','Active'],['name','Like','%'.$query.'%']])
+        $data['library_materials'] = LibraryMaterial::where('status','=','Active')
+        ->where(function($req) use($query) {
+            $req->where('name','Like','%'.$query.'%')
+            ->orWhere('search_tags','Like','%'.$query.'%');
+        })
         ->get(['id','name','slug','created_at','category_id'])
         ->map(function($cat)
         {

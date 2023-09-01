@@ -22,6 +22,7 @@ class CreateExamHallCategoriesTable extends Migration
             $table->string('price');
             $table->string('discount')->nullable()->default('0');
             $table->string('image')->nullable();
+            $table->longText('search_tags')->nullable();
             $table->string('status', 100)->default('Inactive');
             $table->timestamps();
         });

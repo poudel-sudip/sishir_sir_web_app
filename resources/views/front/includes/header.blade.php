@@ -1,6 +1,6 @@
 <header class="shishir-header sticky-sm-top">
   <div class="topbar">
-    <div class="container-fluid px-md-5">
+    <div class="container">
       <div class="row">
         <div class="col-md-2 text-sm">
           <div class="site-logo">
@@ -63,7 +63,7 @@
 
   {{-- main navbar --}}
   <nav class="navbar navbar-expand-lg main-nav">
-    <div class="container-fluid">
+    <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fa fa-bars text-white" aria-hidden="true"></i>
       </button>

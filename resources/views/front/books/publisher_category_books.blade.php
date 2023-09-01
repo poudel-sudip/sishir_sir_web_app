@@ -33,7 +33,7 @@
                 <div class="col-md-3">
                     <div class="side-navbar">
                         <h5><a href="/book-publishers/{{$publisher->slug}}/all-books">All Books</a></h5>
-                        <ul class="course-nav">
+                        <ul class="course-nav" style="height:auto; min-height: 370px; ">
                             @foreach($categories as $cat)
                                 <li><a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">{{ucwords($cat->name)}}</a></li>
                             @endforeach

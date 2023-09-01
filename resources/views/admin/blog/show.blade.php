@@ -29,6 +29,12 @@
                             <div>Author Name:</div>
                             <div>{{$blog->author}}</div>
                         </div>
+
+                        <div class="course-row">
+                            <div>Search Tags:</div>
+                            <div>{{$blog->search_tags}}</div>
+                        </div>
+
                         <div class="course-row">
                             <div>Created Date : </div>
                             <div>{{$blog->created_at}}</div>

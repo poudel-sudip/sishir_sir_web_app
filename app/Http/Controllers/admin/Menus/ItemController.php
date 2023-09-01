@@ -45,6 +45,7 @@ class ItemController extends Controller
             'status' => 'string|required',
             'type' => 'string|required',
             'thumbnail' => 'image|nullable',
+            'search_tags' => 'string|nullable',
         ]);
 
         if($data['type'] == 'text' || $data['type'] == 'Text')
@@ -96,9 +97,10 @@ class ItemController extends Controller
             'thumbnail' => 'image|nullable',
             'old_thumbnail' => 'string|nullable',
             'can_download' => 'required|boolean',
+            'search_tags' => 'string|nullable',
         ]);
 
-        $data = $request->only(['name','order','status','type']);
+        $data = $request->only(['name','order','status','type','search_tags']);
         
         if($data['type'] == 'heading' || $data['type'] == 'Heading')
         {

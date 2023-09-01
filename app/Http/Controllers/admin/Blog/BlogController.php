@@ -38,6 +38,7 @@ class BlogController extends Controller
             'status'=>['required'],
             'image'=>['image'],
             'author'=>['nullable'],
+            'search_tags'=>['nullable'],
         ]);
         $img=$request->image->store('uploads','public');
         Blog::create([
@@ -46,6 +47,7 @@ class BlogController extends Controller
             'status'=>$request->status,
             'image'=>$img,
             'author'=>$request->author ?? auth()->user()->name,
+            'search_tags' => $request->search_tags,
         ]);
         return redirect('/admin/blogs');
     }
@@ -69,6 +71,7 @@ class BlogController extends Controller
             'status' => 'min:1',
             'image'=>'',
             'author' => '',
+            'search_tags' => '',
         ]);
         $img=$request->old_image;
         if(isset($request->image))
@@ -81,6 +84,7 @@ class BlogController extends Controller
             'image'=>$img,
             'status'=>$request->status,
             'author'=>$request->author ?? auth()->user()->name,
+            'search_tags'=>$request->search_tags,
         ]);
         return redirect('/admin/blogs');
     }

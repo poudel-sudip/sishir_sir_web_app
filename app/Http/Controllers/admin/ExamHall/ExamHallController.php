@@ -38,6 +38,7 @@ class ExamHallController extends Controller
             'description'=>'required|string',
             'status'=>'required|string|min:1',
             'image' => 'required|image',
+            'search_tags' => 'nullable|string',
         ]);
 
         $image=request('image')->store('uploads','public');
@@ -49,6 +50,7 @@ class ExamHallController extends Controller
             'description'=>$request->description,
             'image'=>$image,
             'status'=>$request->status,
+            'search_tags'=>$request->search_tags,
         ]);
 
         return redirect('/admin/exam-hall');
@@ -72,6 +74,7 @@ class ExamHallController extends Controller
             'oldImage' =>'string|nullable',
             'image' => 'image|nullable',
             'isPinned' => 'string|required',
+            'search_tags' => 'nullable|string',
         ]);
 
         $image=$request->oldImage;
@@ -88,6 +91,7 @@ class ExamHallController extends Controller
             'image'=>$image,
             'status'=>$request->status,
             'isPinned' => $request->isPinned,
+            'search_tags' => $request->search_tags,
         ]);
         return redirect('/admin/exam-hall');
     }

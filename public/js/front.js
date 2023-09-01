@@ -176,8 +176,8 @@
             //         $(this).toggleClass('open');
             //     });
             // });
-            // main slider
 
+            // main slider
             $('.main-slider').owlCarousel({
                 smartSpeed: 500,
                 nav: true,
@@ -201,14 +201,17 @@
                         items: 1
                     }
                 }
-            }); // course-carousel
-
+            }); 
+            
+            // course-carousel
             $('.course-carousel').owlCarousel({
                 items: 3,
                 smartSpeed: 500,
                 nav: true,
                 loop: true,
                 lazyLoad: true,
+                autoplay: true,
+                autoplayHoverPause: true,
                 navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
                 responsive: {
                     0: {
@@ -233,6 +236,8 @@
                 smartSpeed: 400,
                 loop: true,
                 nav: true,
+                autoplay: true,
+                autoplayHoverPause: true,
                 navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
                 responsiveClass: true,
                 responsive: {
@@ -253,6 +258,8 @@
                 smartSpeed: 600,
                 nav: true,
                 loop: true,
+                autoplay: true,
+                autoplayHoverPause: true,
                 navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
                 responsive: {
                     0: {
@@ -291,6 +298,8 @@
                 smartSpeed: 600,
                 nav: true,
                 loop: false,
+                autoplay: true,
+                autoplayHoverPause: true,
                 navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
                 responsive: {
                     0: {

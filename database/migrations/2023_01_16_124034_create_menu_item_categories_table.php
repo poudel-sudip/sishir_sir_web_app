@@ -25,6 +25,7 @@ class CreateMenuItemCategoriesTable extends Migration
             $table->tinyInteger('download')->default(0);
             $table->longText('description')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->longText('search_tags')->nullable();
             $table->string('status')->nullable()->default('Inactive');
             $table->timestamps();
         });

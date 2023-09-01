@@ -31,6 +31,7 @@ class CreateBooksTable extends Migration
             $table->text('purchase_link')->nullable();
             $table->string('published_year')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->longText('search_tags')->nullable();
             $table->string('status', 100)->nullable()->default('Inactive');
             $table->timestamps();
         });

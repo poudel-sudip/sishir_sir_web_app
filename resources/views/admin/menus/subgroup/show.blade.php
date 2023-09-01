@@ -50,6 +50,10 @@
                             <div>{{$subgroup->order}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Search Tags:</div>
+                            <div>{{$subgroup->search_tags}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Sub Menu Status:</div>
                             <div>{{$subgroup->status}}</div>
                         </div>

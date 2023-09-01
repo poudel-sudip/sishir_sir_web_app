@@ -58,6 +58,10 @@
                             <div>{{$material->created_at}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Search Tags:</div>
+                            <div>{{$material->search_tags}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Thumbnail:</div>
                             <div><img src="/storage/{{$material->thumbnail}}" alt="" class="img img-fluid" style="max-height:200px"></div>
                         </div>

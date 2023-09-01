@@ -59,6 +59,10 @@
                             <div>{{$item->order}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Search Tags:</div>
+                            <div>{{$item->search_tags}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Menu Status:</div>
                             <div>{{$item->status}}</div>
                         </div>

@@ -55,6 +55,10 @@
                             <div>{{$category->order}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Search Tags:</div>
+                            <div>{{$category->search_tags}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Menu Category  Status:</div>
                             <div>{{$category->status}}</div>
                         </div>

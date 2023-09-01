@@ -204,9 +204,10 @@ class BookController extends Controller
             "description" => "string|required",
             "status" => "string|required",
             "thumbnail" => "image|required",
+            'search_tags' => 'string|nullable',
         ]);
 
-        $data = $request->only(['title','order','author','edition','isbn','published_year','pages','availability','price','discount','purchase_link','status','description']);
+        $data = $request->only(['title','order','author','edition','isbn','published_year','pages','availability','price','discount','purchase_link','status','search_tags','description']);
         
         $data['publisher_id'] = $publisher->id;
         $data['category_id'] = $category->id;
@@ -267,8 +268,9 @@ class BookController extends Controller
             "status" => "string|required",
             "thumbnail" => "image|nullable",
             "old_thumbnail" => "string|nullable",
+            'search_tags' => 'string|nullable',
         ]);
-        $data = $request->only(['title','order','author','edition','isbn','published_year','pages','availability','price','discount','purchase_link','status','description']);
+        $data = $request->only(['title','order','author','edition','isbn','published_year','pages','availability','price','discount','purchase_link','status','search_tags','description']);
         
         $data['thumbnail'] = $request->old_thumbnail;
         if(isset($request->thumbnail))

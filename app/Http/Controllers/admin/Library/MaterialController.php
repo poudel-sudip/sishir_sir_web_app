@@ -37,6 +37,7 @@ class MaterialController extends Controller
             'status' => 'string|required',
             'type' => 'string|required',
             'thumbnail' => 'image|nullable',
+            'search_tags' => 'nullable|string',
         ]);
 
         if($data['type'] == 'text' || $data['type'] == 'Text')
@@ -96,9 +97,10 @@ class MaterialController extends Controller
             'thumbnail' => 'image|nullable',
             'old_thumbnail' => 'string|nullable',
             'can_download' => 'required|boolean',
+            'search_tags' => 'nullable|string',
         ]);
         
-        $data = $request->only(['name','order','status','type']);
+        $data = $request->only(['name','order','status','type','search_tags']);
 
         if($data['type'] == 'text' || $data['type'] == 'Text')
         {

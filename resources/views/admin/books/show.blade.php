@@ -95,6 +95,11 @@
                         </div>
 
                         <div class="course-row">
+                            <div>Search Tags:</div>
+                            <div>{{$book->search_tags}}</div>
+                        </div>
+
+                        <div class="course-row">
                             <div>Book Status: </div>
                             <div>{{$book->status}}</div>
                         </div>

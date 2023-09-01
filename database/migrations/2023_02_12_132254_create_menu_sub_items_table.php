@@ -25,6 +25,7 @@ class CreateMenuSubItemsTable extends Migration
             $table->longText('description')->nullable();
             $table->string('order')->nullable()->default(1);
             $table->string('thumbnail')->nullable();
+            $table->longText('search_tags')->nullable();
             $table->string('status')->nullable()->default('Inactive');
             $table->timestamps();
         });

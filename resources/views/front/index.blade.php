@@ -333,37 +333,6 @@
     </section>
     @endif
 
-    {{-- @if(count($books))
-        <section class="home-ebook mt-3 mb-5">
-            <div class="container-fluid px-md-5">
-                <div class="row mb-3">
-                    <div class="col-md-12 text-center relative">
-                        <h2 class="home-section-heading mb-3 wow fadeInUp">My Books</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    @foreach ($books as $book)
-                    <div class="col-md-3">
-                        <div class="ebook-section border border-primary">
-                            <div class="ebook-header">
-                                <img src="/storage/{{$book->thumbnail}}" alt="">
-                            </div>
-                            <div class="ebook-footer">
-                                <a href="/books"><h4 title="{{ $book->title }}">{{ $book->title }}</h4></a>
-                                <p>Price: <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ $book->price - $book->discount }}</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-
-                    <div class="col-12 text-end mt-2">
-                        <a href="/books" class="btn" style="background:#1375b9;color:#fff">View all...</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif --}}
-
     @if(count($books))
         <section class="course-section">
             <div class="container-fluid px-md-5">
@@ -409,7 +378,21 @@
                     <div class="owl-carousel course-carousel">
                         @foreach($videos as $video)
                             <div class="card-course">
-                                <div class="header">
+                                <a href="/free-videos/{{$video->id}}">
+                                    <div class="single-video w-100" style="position: relative;">
+                                        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; cursor: pointer;z-index:99" ></div>
+                                        <iframe
+                                            class="embed-responsive-item"
+                                            src="https://www.youtube.com/embed/{{$video->video_id}}"
+                                            frameborder="0"
+                                            width="100%"
+                                            height="100%"
+                                            allowfullscreen
+                                            style="width:100%; height:100%; min-height:210px">
+                                        </iframe>                                        
+                                    </div>
+                                </a>
+                                {{-- <div class="header">
                                     <div class="post-thumb" style="height:200px">
                                         <img src="https://img.youtube.com/vi/{{$video->video_id}}/hqdefault.jpg" alt="" >
                                     </div>
@@ -420,7 +403,7 @@
                                     <div class="course-info text-center">
                                         <a class="btn-sm btn-primary" href="/free-videos/{{$video->id}}" >Play Video</a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         @endforeach
                     </div>
