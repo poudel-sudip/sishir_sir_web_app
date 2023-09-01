@@ -47,8 +47,8 @@ class FrontController extends Controller
         $data['exams'] = OpenExam::where('result_status','=','Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('id')->first();
         $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->take(5)->get();
-        $data['books'] = Book::where('status','=','Active')->orderBy('order')->take(12)->get();
-        $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->take(15)->get();
+        $data['books'] = Book::where('status','=','Active')->orderBy('order')->take(9)->get();
+        $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->take(12)->get();
         $data['ads'] = Advertisement::all();
         // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
         // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
@@ -369,7 +369,7 @@ class FrontController extends Controller
 
     public function books()
     {
-        $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->take(15)->get();
+        $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->get();
         $data['categories'] = Categories::where(['status'=>'Active','type'=>'book_category'])->whereHas('cat_books')->get();
         // dd($data);
         return view('front.books.index',$data);
@@ -876,6 +876,12 @@ class FrontController extends Controller
            'status'=>'Inactive',
         ]);
         return redirect('/testimonials');
+    }
+
+    public function allFreeVideos()
+    {
+        $videos = FreeVideo::orderByDesc('id')->get();
+        return view('front.all_free_video',compact('videos'));
     }
 
     public function playFreeVideo(FreeVideo $video)

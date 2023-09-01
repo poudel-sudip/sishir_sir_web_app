@@ -407,7 +407,9 @@
                             </div>
                         @endforeach
                     </div>
-
+                    <div class="text-end mt-2">
+                        <a href="/free-videos" class="btn" style="background:#1375b9;color:#fff">View all...</a>
+                    </div>
                 </div>
             </div>
         </section>

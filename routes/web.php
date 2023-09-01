@@ -818,6 +818,7 @@ Route::get('/', 'App\Http\Controllers\FrontController@index');
 Route::get('/about-us', 'App\Http\Controllers\FrontController@about');
 Route::get('/enquiry', 'App\Http\Controllers\FrontController@enquiry');
 Route::get('/enquiry/{courseslug}', 'App\Http\Controllers\FrontController@showCourseEnquiryForm');
+Route::get('/free-videos', 'App\Http\Controllers\FrontController@allFreeVideos');
 Route::get('/free-videos/{video}', 'App\Http\Controllers\FrontController@playFreeVideo');
 
 // front blogs
