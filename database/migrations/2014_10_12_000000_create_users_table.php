@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('district_city')->nullable();
             $table->string('status')->default('Active');
             $table->string('photo')->nullable();
+            $table->string('blood_group')->nullable();
             $table->string('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -37,6 +37,10 @@
                             <div>{{$user->contact}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Blood Group:</div>
+                            <div>{{$user->blood_group}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Role:</div>
                             <div>{{$user->role}}</div>
                         </div>

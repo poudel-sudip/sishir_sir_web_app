@@ -36,6 +36,7 @@ class UsersController extends Controller
             'role'=>['required'],
             'contact'=>['required', 'min:10'],
             'status'=>['required'],
+            'blood_group'=>['required'],
         ]);
 
         User::create([
@@ -45,7 +46,7 @@ class UsersController extends Controller
             'role'=>$data['role'],
             'contact'=>$data['contact'],
             'status'=>$data['status'],
-            'last_login'=>date('Y-m-d H:i:s'),
+            'blood_group'=>$data['blood_group'],
         ]);
 
         return redirect('/admin/users');
@@ -66,7 +67,6 @@ class UsersController extends Controller
     public function update(User $user)
     {
         // dd(request()->all());
-        Gate::authorize('permission','user-crud');
         $data=request()->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'max:255'],
@@ -75,6 +75,7 @@ class UsersController extends Controller
             'status'=>['required','string'],
             'password'=>'string',
             'old_password'=>'string',
+            'blood_group'=>['required'],
         ]);
 
         if($data['password']===$data['old_password'])
@@ -92,6 +93,7 @@ class UsersController extends Controller
             'role'=>$data['role'],
             'status'=>$data['status'],
             'password'=>$password,
+            'blood_group'=>$data['blood_group'],
         ]);
 
         return redirect('/admin/users');

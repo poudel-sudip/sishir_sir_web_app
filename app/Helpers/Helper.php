@@ -6,31 +6,59 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Collection;
 use App\Models\PostViewCounter;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class Helper
 {
 
-    public static function viewCount($page = '')
-    {
-        $agent                   =  request()->header('User-Agent');
+    public static function viewCount($title = '', $url = '')
+    {        
         $data['page']            = '';
         $data['page_view_count'] = '0';
         $data['web_view_count']  = '0';
-
-        if($page)
+        
+        if($title && $url)
         {
-            $page = ucfirst($page);
-            PostViewCounter::create([
-                'title'      => $page,
-                'user_agent' => $agent,
+            $postViewCounter = PostViewCounter::firstOrCreate([
+                'title' => $title,
+                'url' => $url,
             ]);
 
-            $data['page']            = $page;
-            $data['page_view_count'] = PostViewCounter::where('title','=',$page)->count();
-            $data['web_view_count']  = PostViewCounter::count();
+            $postViewCounter->increment('view_count');
+            $currentViewCount = $postViewCounter->view_count;
+            $totalViewCount = PostViewCounter::getTotalViewCount();
+            
+            $data['page']            = $title;
+            $data['page_view_count'] = $currentViewCount;
+            $data['web_view_count']  = $totalViewCount;
+
         }
+        
+        return (object)$data;       
+        
+        
+        
+        // $agent                   =  request()->header('User-Agent');
+        // $data['page']            = '';
+        // $data['page_view_count'] = '0';
+        // $data['web_view_count']  = '0';
+
+        // if($page)
+        // {
+        //     $page = ucfirst($page);
+        //     PostViewCounter::create([
+        //         'title'      => $page,
+        //         'user_agent' => $agent,
+        //     ]);
+
+        //     $data['page']            = $page;
+        //     // $data['page_view_count'] = PostViewCounter::where('title','=',$page)->count();
+        //     // $data['web_view_count']  = PostViewCounter::count();
+        //     $data['page_view_count'] = DB::table('post_view_counters')->where('title','=',$page)->count();
+        //     $data['web_view_count']  = DB::table('post_view_counters')->count();
+        // }
                 
-        return (object)$data;
+        
     }
 
     public static function lastUpdated()

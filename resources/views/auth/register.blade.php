@@ -64,6 +64,28 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="blood_group" class="col-md-6 col-form-label">{{ __('Blood Group') }}</label>
+
+                                <div class="col-md-12">
+                                    <select name="blood_group" id="blood_group" class="form-control @error('blood_group') is-invalid @enderror" value="{{ old('blood_group') }}" required autocomplete="blood_group">
+                                        <option value="AB Positive">AB Positive (AB+)</option>
+                                        <option value="AB Negative">AB Negative (AB-)</option>
+                                        <option value="A Positive">A Positive (A+)</option>
+                                        <option value="A Negative">A Negative (A-)</option>
+                                        <option value="B Positive">B Positive (B+)</option>
+                                        <option value="B Negative">B Negative (B-)</option>
+                                        <option value="O Positive">O Positive (O+)</option>
+                                        <option value="O Negative">O Negative (O-)</option>
+                                    </select>
+                                    @error('blood_group')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <div class="col-md-6">
                                     <label for="provience" class="col-form-label">{{ __('Provience') }}</label>
                                     <select name="provience" id="provience" class="form-control @error('provience') is-invalid @enderror" required onchange="getCities()">

@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PostViewCounter extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    // protected $guarded = [];
+    protected $fillable = ['title', 'url', 'view_count'];
+
+    public static function getTotalViewCount()
+    {
+        return self::sum('view_count');
+    }
 }

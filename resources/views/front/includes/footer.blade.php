@@ -75,10 +75,13 @@
         <h5 class="mt-3">Info & Support :</h5>
         <div class="row">
           <div class="col-12">
-            <div class="info-phone"><span class="icon-mail2"></span>  info@shisiradhikari.com</div>
+            <div class="info-phone"><a href="mailto:info@shisiradhikari.com" style="color:#fff"><span class="icon-mail2"></span>  info@shisiradhikari.com</a></div>
           </div>
           <div class="col-12">
-            <div class="info-phone"><span class="icon-whatsapp"></span>  +977 - 981-2417639</div>
+            <div class="info-phone"><a target="_blank" href="https://wa.me/9779848003441" style="color:#fff"><span class="icon-whatsapp"></span>  +977 - 981-2417639</a></div>
+          </div>
+          <div class="col-12">
+            <div class="info-phone"><a target="_blank" href="https://wa.me/9779848003441" style="color:#fff"><span class="icon-whatsapp"></span>  +977 984-8003441</a></div>
           </div>
         </div>
         <h5 class="mt-5">Connect with us :</h5>
@@ -94,8 +97,9 @@
         <hr>
         <div class="visitor-tracker mt-3">
           <?php 
-            $page = View::getSection('page_title', '');
-            $view_count = Helper::viewCount($page);
+            $page_title = View::getSection('page_title', '');
+            $page_url = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+            $view_count = Helper::viewCount($page_title,$page_url);
           ?>
           <div><span>Last Updated Date: </span><span id="last_date"></span></div>
           <div><span>Website Visit Counter: </span><strong> {{$view_count->web_view_count}} </strong></div>

@@ -67,6 +67,30 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="blood_group" class="col-md-4 col-form-label">{{ __('Blood Group') }}</label>
+
+                                <div class="col-md-8">
+                                    <select name="blood_group" id="blood_group" class="form-control @error('blood_group') is-invalid @enderror" value="{{ old('blood_group') }}" required autocomplete="blood_group">
+                                        <option value="{{ucwords($user->blood_group)}}">{{ucwords($user->blood_group)}}</option>
+                                        <option value="">---------</option>
+                                        <option value="AB Positive">AB Positive (AB+)</option>
+                                        <option value="AB Negative">AB Negative (AB-)</option>
+                                        <option value="A Positive">A Positive (A+)</option>
+                                        <option value="A Negative">A Negative (A-)</option>
+                                        <option value="B Positive">B Positive (B+)</option>
+                                        <option value="B Negative">B Negative (B-)</option>
+                                        <option value="O Positive">O Positive (O+)</option>
+                                        <option value="O Negative">O Negative (O-)</option>
+                                    </select>
+                                    @error('blood_group')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label">{{ __('User Password') }} </label>
 
                                 <div class="col-md-8">

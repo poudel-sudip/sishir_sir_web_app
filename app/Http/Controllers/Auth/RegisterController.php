@@ -58,6 +58,7 @@ class RegisterController extends Controller
             'contact'=>['required','numeric','digits:10'],
             'district_city'=>['required','string','min:1'],
             'provience'=>['required','string','min:1'],
+            'blood_group'=>['required','string'],
         ]);
     }
 
@@ -76,6 +77,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'district_city'=>ucwords($data['district_city']),
             'provience'=>ucwords($data['provience']),
+            'blood_group'=>ucwords($data['blood_group']),
         ]);
     }
 
