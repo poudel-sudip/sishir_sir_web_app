@@ -1802,6 +1802,10 @@ p {
     background-color: #3F3030;
 }
 
+.footer-sosmed a.linkedin {
+    background-color: #0077b5;
+}
+
 .footer-card-section {
     border-top: 1px solid #3b3b3b;
     width: 100%;
