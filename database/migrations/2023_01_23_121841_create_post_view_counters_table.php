@@ -15,9 +15,11 @@ class CreatePostViewCountersTable extends Migration
     {
         Schema::create('post_view_counters', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
-            $table->text('url')->nullable();
+            $table->string('title')->nullable();
+            $table->text('url');
             $table->unsignedBigInteger('view_count')->default(0);
+            $table->unsignedBigInteger('download_count')->default(0);
+            $table->unsignedBigInteger('share_count')->default(0);
             $table->timestamps();
         });
     }

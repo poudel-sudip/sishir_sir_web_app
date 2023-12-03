@@ -51,25 +51,33 @@
     <script src="{{ asset('js/app.js') }}" defer></script>   
 
 </head>
-<body>
+<body>  
+
+  <?php 
+    $page_title = View::getSection('page_title', '');
+    $page_url = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+    $view_count = Helper::viewCount($page_title,$page_url);
+  ?>
 
   <!-- Back to top button -->
   <div class="back-to-top"></div>
 
   @include('front.includes.header')
+
   @yield('content')
 
   @include('front.includes.footer')
 
-<script src="{{ asset('js/libraries/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/libraries/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('js/libraries/wow.min.js') }}"></script>
-{{--<script src="{{ asset('js/main.js') }}"></script>--}}
+  <script src="{{ asset('js/libraries/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('js/libraries/owl.carousel.min.js') }}"></script>
+  <script src="{{ asset('js/libraries/wow.min.js') }}"></script>
+  {{--<script src="{{ asset('js/main.js') }}"></script>--}}
 
-{{--  <script src="{{ asset('js/libraries.js') }}"></script>--}}
+  {{--  <script src="{{ asset('js/libraries.js') }}"></script>--}}
   <script src="{{ asset('js/front.js') }}"></script>
 
   <script type="text/javascript" src="{{asset('js/noprint.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/share.js')}}"></script>
 
 </body>
 </html>

@@ -33,6 +33,7 @@
                     </div>
 
                     <div class="col-md-4">
+                        <div class="h5 my-1 text-end"> <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span> </div>
                         <div class="h5 my-1">Exam Price: {{$exam->price}} </div>
                         <div class="h5 my-1">Discounted Price: {{$exam->price - $exam->discount}} </div>
                         <div class="h5 my-1">No of Sets: {{$exam->category_exams->count()}} </div>

@@ -85,10 +85,13 @@
                             <div>Rs. {{$book->price ?? '0'}}</div>
                         </div>
                         <div class="course-row">
-                            <div>Book Discount: </div>
-                            <div>Rs. {{$book->discount ?? '0'}}</div>
+                            <div> Discount (%): </div>
+                            <div>{{$book->discount ?? '0'}}%</div>
                         </div>
-
+                        <div class="course-row">
+                            <div> Final Book Price: </div>
+                            <div>Rs. {{ ($book->price - (($book->price*$book->discount)/100)) }}</div>
+                        </div>
                         <div class="course-row">
                             <div>Book Purchase Link: </div>
                             <div>{{$book->purchase_link}}</div>

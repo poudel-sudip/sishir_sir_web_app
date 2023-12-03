@@ -14,22 +14,22 @@ class Helper
     public static function viewCount($title = '', $url = '')
     {        
         $data['page']            = '';
-        $data['page_view_count'] = '0';
+        // $data['page_view_count'] = '0';
         $data['web_view_count']  = '0';
         
         if($title && $url)
         {
             $postViewCounter = PostViewCounter::firstOrCreate([
-                'title' => $title,
+                // 'title' => $title,
                 'url' => $url,
             ]);
 
             $postViewCounter->increment('view_count');
-            $currentViewCount = $postViewCounter->view_count;
+            // $currentViewCount = $postViewCounter->view_count;
             $totalViewCount = PostViewCounter::getTotalViewCount();
             
             $data['page']            = $title;
-            $data['page_view_count'] = $currentViewCount;
+            // $data['page_view_count'] = $currentViewCount;
             $data['web_view_count']  = $totalViewCount;
 
         }
@@ -58,6 +58,73 @@ class Helper
         //     $data['web_view_count']  = DB::table('post_view_counters')->count();
         // }
                 
+        
+    }
+
+    public static function downloadCount($title = '', $url = '')
+    {        
+        $data['page']            = '';
+        $data['page_download_count'] = '0';
+        
+        if($title && $url)
+        {
+            $postViewCounter = PostViewCounter::firstOrCreate([
+                'url' => $url,
+            ]);
+
+            $currentDownloadCount = $postViewCounter->download_count;
+            
+            $data['page']            = $title;
+            $data['page_download_count'] = $currentDownloadCount;
+
+        }
+        
+        return (object)$data;       
+        
+    }
+
+    public static function shareCount($title = '', $url = '')
+    {        
+        $data['page']            = '';
+        $data['page_share_count'] = '0';
+        
+        if($title && $url)
+        {
+            $postViewCounter = PostViewCounter::firstOrCreate([
+                'url' => $url,
+            ]);
+
+            $currentShareCount = $postViewCounter->share_count;
+            
+            $data['page']            = $title;
+            $data['page_share_count'] = $currentShareCount;
+
+        }
+        
+        return (object)$data;       
+        
+    }
+
+    public static function pageCounterCounts($title = '', $url = '')
+    {        
+        $data['page']            = '';
+        $data['page_view_count'] = '0';
+        $data['page_share_count'] = '0';
+        $data['page_download_count'] = '0';
+        
+        if($title && $url)
+        {
+            $postViewCounter = PostViewCounter::firstOrCreate([
+                'url' => $url,
+            ]);
+            
+            $data['page']            = $title;
+            $data['page_view_count'] = $postViewCounter->view_count;
+            $data['page_share_count'] = $postViewCounter->share_count;
+            $data['page_download_count'] = $postViewCounter->download_count;
+        }
+        
+        return (object)$data;       
         
     }
 

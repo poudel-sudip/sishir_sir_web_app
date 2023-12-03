@@ -67,6 +67,10 @@
                                         </strong>
                                     </h5>
                                 @endif
+                                <h6 class="text-end">
+                                    <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
+                                    <span class="mx-2"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
+                                </h6>
                                 <h6>
                                     Publisher: <strong class="text-primary"> {{ucwords($book->publisher->name ?? ' ')}} </strong>
                                 </h6>
@@ -88,8 +92,16 @@
                                 <h6>
                                     Pages: <strong class="text-primary"> {{ucwords($book->pages ?? ' ')}} </strong>
                                 </h6>
+                                @if($book->discount  > 0)
                                 <h6>
-                                    Price: <strong class="text-success"> Rs. {{$book->price - $book->discount}}/- </strong>
+                                    Book Price: <strong class="text-primary"> Rs. {{ucwords($book->price)}}/- </strong>
+                                </h6>
+                                <h6>
+                                    Book Discount: <strong class="text-primary">{{ucwords($book->discount)}}% </strong>
+                                </h6>
+                                @endif
+                                <h6>
+                                    Final Price: <strong class="text-success"> Rs. {{($book->price - (($book->price*$book->discount)/100))}}/- </strong>
                                 </h6>                                
                                 <h6>
                                     Availability: <strong class="text-primary"> {{ucwords($book->availability ?? ' ')}} </strong>
@@ -105,7 +117,7 @@
                                         @endif
                                     </div>
                                     <div class="col-md-6 my-2">
-                                        <div class="text-end sharethis-inline-share-buttons"></div>
+                                        <div class="sharethis-inline-share-buttons" onclick="handleShare(event)" ></div>
                                     </div>
                                 </div>
                             </div>
@@ -206,4 +218,11 @@
         </div>
     </div>    
 
+    <script>
+        function handleShare(event){
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'share', page: 'Single Book Details',pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
+        }
+    </script>
 @endsection 

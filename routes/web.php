@@ -820,6 +820,7 @@ Route::get('/enquiry', 'App\Http\Controllers\FrontController@enquiry');
 Route::get('/enquiry/{courseslug}', 'App\Http\Controllers\FrontController@showCourseEnquiryForm');
 Route::get('/free-videos', 'App\Http\Controllers\FrontController@allFreeVideos');
 Route::get('/free-videos/{video}', 'App\Http\Controllers\FrontController@playFreeVideo');
+Route::get('/page-counter-increment', 'App\Http\Controllers\FrontController@pageCounterIncrement');
 
 // front blogs
 Route::get('/blogs','App\Http\Controllers\Blog\BlogController@index');

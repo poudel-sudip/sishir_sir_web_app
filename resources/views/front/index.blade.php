@@ -352,7 +352,7 @@
                                 </div>
                                 <div class="body ebook-footer mt-2">
                                     <a href="/books/{{$book->slug}}"><h4 title="{{ $book->title }}">{{ $book->title }}</h4></a>
-                                    <p>Price: <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ $book->price - $book->discount }}</strong></p>
+                                    <p>Price: <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ ($book->price - (($book->price*$book->discount)/100)) }}</strong></p>
                                 </div>
                             </div>
                         @endforeach

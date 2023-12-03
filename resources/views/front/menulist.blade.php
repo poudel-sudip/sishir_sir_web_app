@@ -24,25 +24,31 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid px-md-5 mb-5">
+    <div class="container-fluid px-md-5 ">
         
         @if($menuCategory->type != 'heading')
         
-            <div class="blog-container my-5">
-                <h4 class="mb-2">{{$menuCategory->name}}</h4>
-                <div>
-                    {!! $menuCategory->description !!}
+            <div class="blog-container ">
+                <h3 class="text-primary">{{strtoupper($menuCategory->name)}}</h3>
+                <div class="px-5">
+                    <span class="mx-2"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($menuCategory->created_at))}}</span>
+                    <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
+                    <span class="mx-2"><i class="fa fa-download"></i> {{$counterData->page_download_count}}</span>
+                    <span class="mx-2"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
                 </div>
 
                 <div class="my-4 row align-items-center">
-                    @if($menuCategory->type == 'file' && $menuCategory->download)
                     <div class="col-md-4">
+                        @if($menuCategory->type == 'file' && $menuCategory->download)
                         <a href="/storage/{{$menuCategory->fileurl}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                        @endif
                     </div>
-                    @endif
-                    <div class="col-md-8">
-                        <div class="sharethis-inline-share-buttons"></div>
-                    </div>
+                    <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
+                </div>
+
+
+                <div>
+                    {!! $menuCategory->description !!}
                 </div>
 
                 @if($menuCategory->type == 'file')
@@ -55,6 +61,13 @@
                         </iframe> --}}
                     </div>
                 @endif
+
+                <div class="my-4 row">
+                    <div class="col-md-4">&nbsp;</div>
+                    <div class="col-md-8">
+                        <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
+                    </div>
+                </div>
             </div>
         @else
             <div class="table-responsive table-responsive-md ">
@@ -64,7 +77,7 @@
                             <th>SN</th>
                             <th>Title</th>
                             <th>View</th>
-                            <th>Share</th>
+                            {{-- <th>Share</th> --}}
                         </tr>
                     </thead>
                     <?php 
@@ -78,7 +91,7 @@
                                 <td>{{$i}}</td>
                                 <td>{{$item->name}}</td>
                                 <td width="50"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}/{{$menuCategory->slug}}/{{$item->slug}}"><i class="fas fa-eye text-success"></i></a></td>
-                                <td style="max-width: 50px">
+                                {{-- <td style="max-width: 50px">
                                     <div class="d-inline post-share-option">
                                         @php($shareLink = url($mainMenu->slug.'/'.$subMenu->slug.'/'.$menuCategory->slug.'/'.$item->slug))
                                         <a href="javascript:void();" onclick="createPopupWin('//facebook.com/sharer/sharer.php?u={{$shareLink}}&t={{$item[`name`]}}')"><i class="fab fa-facebook-f"></i></a>
@@ -86,7 +99,7 @@
                                         <a href="javascript:void();" onclick="createPopupWin('//wa.me/?text={{$shareLink}}')"><i class="fab fa-whatsapp"></i></a>
                                         <a href="javascript:void();" onclick="createPopupWin('//pinterest.com/pin/create/button/?url={{$shareLink}}')"><i class="fab fa-pinterest-p"></i></a>
                                     </div>
-                                </td>
+                                </td> --}}
                             </tr>
                         </tbody>
                         @php($i++)
@@ -119,6 +132,16 @@
             link.click(); // Simulate a click event to initiate the download
 
             document.body.removeChild(link); // Remove the dynamically created link element
+
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'download', page: 'Menu Category',pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
+        }
+
+        function handleShare(event){
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'share', page: 'Menu Category',pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
         }
     </script>
 

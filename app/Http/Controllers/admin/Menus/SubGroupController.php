@@ -52,6 +52,7 @@ class SubGroupController extends Controller
             $data['download'] = $request->can_download;
             $data['filename'] = $request->file->getClientOriginalName();
             $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
+            $data['description'] = $request->description;
         }
 
         if(isset($request->thumbnail))
@@ -114,7 +115,7 @@ class SubGroupController extends Controller
         }
         elseif($data['type'] == 'file' || $data['type'] == 'File')
         {
-            $data['description'] = '';
+            $data['description'] = $request->description;
             $data['download'] = $request->can_download;
             if($request->old_file == '' && !isset($request->file))
             {

@@ -26,9 +26,13 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2>{{$blog->title}}</h2>
-                            <h6 style="display: inline; margin-right:20px"><span class="icon-user-tie text-primary"></span> {{$blog->author}}</h6>
-                            <span>Published On: <span class="text-primary text-13">{{$blog->created_at}}</span></span>
+                            <h3 class="text-primary">{{strtoupper($blog->title)}}</h3>
+                        </div>
+                        <div class="">
+                            <span class="mx-2"><i class="fa fa-user"></i> {{$blog->author}}</span>
+                            <span class="mx-2"><i class="fa fa-pen"></i> {{$blog->created_at}}</span>
+                            <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
+                            <span class="mx-2"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -39,7 +43,7 @@
                             <div class="blog-full-description">{!! $blog->description !!}</div>
                         </div>
                         <div class="col-md-12 mt-4">
-                            <div class="sharethis-inline-share-buttons"></div>
+                            <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
                         </div>
                     </div>
                     <div class="row blogs-comment-container mt-4">
@@ -109,4 +113,13 @@
         </div>
     </div>
 
+    <script>
+        function handleShare(event)
+        {
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'share', page: 'Blog Show',pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
+        }
+    </script>
+ 
 @endsection

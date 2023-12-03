@@ -218,7 +218,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="discount" class="col-md-4 col-form-label">{{ __('Book Discount') }}</label>
+                                <label for="discount" class="col-md-4 col-form-label">{{ __('Book Discount (%)') }}</label>
 
                                 <div class="col-md-8">
                                     <input id="discount" name="discount" type="number" class="form-control @error('discount') is-invalid @enderror"  value="{{ old('discount') ?? 0}}" required >

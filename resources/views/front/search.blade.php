@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('page_title', 'Search: '.ucwords($query ?? ''))
+{{-- @section('page_title', 'Search: '.ucwords($query ?? '')) --}}
 @section('content')
     <div class="container-fluid px-md-5">
         <div class="row">

@@ -62,7 +62,9 @@
 
 </head>
 <body>
-
+  <?php 
+    $view_count = Helper::viewCount('','');
+  ?>
   <!-- Back to top button -->
   <div class="back-to-top"></div>
 

@@ -54,7 +54,7 @@
                                             <h4><a href="/books/{{$book->slug}}">{{$book->title}}</a></h4>
                                             {{-- <div class="">{!! $book->description !!}</div> --}}
                                             <div class="mx-2">
-                                                <span>Price: <strong class="text-success">Rs. {{$book->price - $book->discount}}</strong></span>
+                                                <span>Price: <strong class="text-success">Rs. {{($book->price - (($book->price*$book->discount)/100))}}</strong></span>
                                                 <span class="text-danger" style="float: right"><s>Rs. {{ $book->price }}</s></span>
                                             </div>
                                         </div>

@@ -31,6 +31,7 @@ use App\Helpers\Helper;
 use App\Models\Library\LibraryMaterial;
 use App\Models\Library\LibraryCategory;
 use App\Models\Forms\DynamicForm;
+use App\Models\PostViewCounter;
 
 class FrontController extends Controller
 {
@@ -43,12 +44,12 @@ class FrontController extends Controller
 
         $data = [];
         $data['sliders'] = Slider::all()->sortBy('order');
-        $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(4)->get();
+        $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(4)->get(['id','title','slug']);
         $data['exams'] = OpenExam::where('result_status','=','Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('id')->first();
-        $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->take(5)->get();
-        $data['books'] = Book::where('status','=','Active')->orderBy('order')->take(9)->get();
-        $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->take(12)->get();
+        $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->take(5)->get(['id','title','slug','image','author','created_at']);
+        $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->take(9)->get(['id','title','slug','price','discount','thumbnail']);
+        $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->take(9)->get();
         $data['ads'] = Advertisement::all();
         // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
         // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
@@ -61,7 +62,7 @@ class FrontController extends Controller
 
         $menu_sub_items = MenuSubItem::where('status','=','Active')
         ->orderByDesc('id')
-        ->take(10)
+        ->take(8)
         ->get(['id','item_id','name','slug','created_at'])
         ->map(function($update)
         {
@@ -90,7 +91,7 @@ class FrontController extends Controller
 
         $menu_items = MenuItem::where('status','=','Active')
         ->orderByDesc('id')
-        ->take(10)
+        ->take(8)
         ->get(['id','category_id','name','slug','created_at'])
         ->map(function($update)
         {
@@ -115,7 +116,7 @@ class FrontController extends Controller
 
         $menu_categories = MenuItemCategory::where([['status','=','Active'],['type','!=','heading']])
         ->orderByDesc('id')
-        ->take(10)
+        ->take(8)
         ->get(['id','subgroup_id','name','slug','created_at'])
         ->map(function($cat)
         {
@@ -137,7 +138,7 @@ class FrontController extends Controller
 
         $menu_submenus = MenuSubGroup::where([['status','=','Active'],['type','!=','heading']])
         ->orderByDesc('id')
-        ->take(10)
+        ->take(8)
         ->get(['id','group_id','name','slug','created_at'])
         ->map(function($cat)
         {
@@ -158,7 +159,7 @@ class FrontController extends Controller
 
         $library_materials = LibraryMaterial::where('status','=','Active')
         ->orderByDesc('id')
-        ->take(10)
+        ->take(8)
         ->get(['id','name','slug','created_at','category_id'])
         ->map(function($cat)
         {
@@ -206,6 +207,10 @@ class FrontController extends Controller
         }
         $data['subMenu'] = $subMenu;
 
+        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $counterData = Helper::pageCounterCounts('Menu Sub Group',$pgurl);
+
+        $data['counterData'] = $counterData;
         // dd($data);
         return view('front.menucategories',$data);
     }
@@ -235,6 +240,11 @@ class FrontController extends Controller
         $data['menuCategory'] = $menuCategory;
 
         $data['menuItems'] = $menuCategory->items()->where('status','=','Active')->orderByDesc('id')->get();
+
+        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $counterData = Helper::pageCounterCounts('Menu Category',$pgurl);
+
+        $data['counterData'] = $counterData;
 
         // dd($data);
         return view('front.menulist',$data);
@@ -270,6 +280,11 @@ class FrontController extends Controller
             abort(404);
         }
         $data['menuItem'] = $menuItem;
+
+        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $counterData = Helper::pageCounterCounts('Menu Item',$pgurl);
+
+        $data['counterData'] = $counterData;
 
         // dd($data);
         return view('front.menuitemdetail',$data);
@@ -313,6 +328,10 @@ class FrontController extends Controller
         }
         $data['menuSubItem'] = $menuSubItem;
 
+        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $counterData = Helper::pageCounterCounts('Menu Sub Item',$pgurl);
+
+        $data['counterData'] = $counterData;
         // dd($data);
         return view('front.menusubitemdetail',$data);
     }
@@ -320,7 +339,12 @@ class FrontController extends Controller
     public function getLibrary()
     {
         $library_categories = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->get();
-        return view('front.libraries',compact('library_categories'));
+        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        // $counterData = Helper::pageCounterCounts('Library',$pgurl);
+
+        $data['library_categories'] = $library_categories;
+        // $data['counterData'] = $counterData;
+        return view('front.libraries',$data);
     }
 
     public function getLibraryContents($catslug)
@@ -349,7 +373,11 @@ class FrontController extends Controller
         {
             abort(404);
         }
-        return view('front.librarycontentdetail',compact('library_category','material'));
+
+        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $counterData = Helper::pageCounterCounts('Library Materials',$pgurl);
+
+        return view('front.librarycontentdetail',compact('library_category','material','counterData'));
     }
 
     public function popularcourse()
@@ -460,7 +488,10 @@ class FrontController extends Controller
         }
         $book_reviews = $book->reviews()->orderByDesc('id')->take(30)->get();
 
-        return view('front.books.single_book',compact('book','book_reviews'));
+        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $counterData = Helper::pageCounterCounts('Single Book Detail',$pgurl);
+
+        return view('front.books.single_book',compact('book','book_reviews','counterData'));
     }
 
     public function addBookReview($slug, Request $request)
@@ -590,6 +621,7 @@ class FrontController extends Controller
     {
         return view('front.notice');
     }
+
     public function saveReview(Tutor $tutor,Request $request)
     {
         $validator=Validator::make($request->all(),[
@@ -886,6 +918,57 @@ class FrontController extends Controller
 
     public function playFreeVideo(FreeVideo $video)
     {
-        return view('front.play_free_video',compact('video'));
+        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $counterData = Helper::pageCounterCounts('Play Free Video',$pgurl);
+        return view('front.play_free_video',compact('video','counterData'));
     }
+
+    public function pageCounterIncrement(Request $request)
+    {
+        $data['page']            = '';
+        $data['page_view_count'] = '0';
+        $data['page_share_count'] = '0';
+        $data['page_download_count'] = '0';
+
+        if(isset($request->data))
+        {
+            $fetched = json_decode($request->data);
+            if(isset($fetched->type) && isset($fetched->page) && isset($fetched->pageurl) && trim($fetched->page) && trim($fetched->type) && $fetched->pageurl)
+            {
+                $postViewCounter = PostViewCounter::firstOrCreate([
+                    'url' => $fetched->pageurl,
+                ]);
+
+                if(strtolower(trim($fetched->type)) == 'share')
+                {
+                    $postViewCounter->increment('share_count');
+                }
+                elseif(strtolower(trim($fetched->type)) == 'download')
+                {
+                    $postViewCounter->increment('download_count');
+                }
+                else
+                {}
+
+                $data['page']            = trim($fetched->page);
+                $data['page_view_count'] = $postViewCounter->view_count;
+                $data['page_share_count'] = $postViewCounter->share_count;
+                $data['page_download_count'] = $postViewCounter->download_count;
+                return response()->json([
+                    'success'=>true,
+                    'message'=>'Data Counter Update Fetch Successful',
+                    'data'=>(object)$data,
+                ]);          
+            }
+           
+        }
+
+        return response()->json([
+            'success'=>false,
+            'message'=>'Data Counter Update Fetch Failed',
+            'data'=>(object)$data,
+        ]); 
+    }
+
+    
 }

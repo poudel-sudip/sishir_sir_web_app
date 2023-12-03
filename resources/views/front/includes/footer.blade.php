@@ -78,7 +78,7 @@
             <div class="info-phone"><a href="mailto:info@shisiradhikari.com" style="color:#fff"><span class="icon-mail2"></span>  info@shisiradhikari.com</a></div>
           </div>
           <div class="col-12">
-            <div class="info-phone"><a target="_blank" href="https://chat.whatsapp.com/I9oq3Lxys8lD5rXuFl4d7L" style="color:#fff"><span class="icon-whatsapp"></span>  +977 - 981-2417639</a></div>
+            <div class="info-phone"><a target="_blank" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" style="color:#fff"><span class="icon-whatsapp"></span>  +977 - 981-2417639</a></div>
           </div>
 
         </div>
@@ -86,7 +86,7 @@
         <div class="footer-sosmed">
           <a class="facebook" href="https://www.facebook.com/groups/Healthandloksewa" target="_blank"><i class="fab fa-facebook-f"></i></a>
           {{-- <a class="whatsapp" href="https://wa.me/9779857084806" target="_blank"><i class="icon-whatsapp"></i></a> --}}
-          <a class="whatsapp" href="https://chat.whatsapp.com/I9oq3Lxys8lD5rXuFl4d7L" target="_blank"><i class="icon-whatsapp"></i></a>
+          <a class="whatsapp" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" target="_blank"><i class="icon-whatsapp"></i></a>
           <a class="youtube" href="https://www.youtube.com/channel/UCSFeHpNoMSF-BBgsDtro0zw" target="_blank"><i class="icon-youtube"></i></a>
           <a class="twitter" href="https://twitter.com/ShisirAdhikari" target="_blank"><i class="fab fa-twitter"></i></a>
           <a class="tiktok" href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
@@ -95,11 +95,7 @@
         </div>
         <hr>
         <div class="visitor-tracker mt-3">
-          <?php 
-            $page_title = View::getSection('page_title', '');
-            $page_url = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-            $view_count = Helper::viewCount($page_title,$page_url);
-          ?>
+          
           <div><span>Last Updated Date: </span><span id="last_date"></span></div>
           <div><span>Website Visit Counter: </span><strong> {{$view_count->web_view_count}} </strong></div>
         </div>

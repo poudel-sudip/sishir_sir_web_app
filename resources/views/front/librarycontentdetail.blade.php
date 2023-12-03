@@ -26,21 +26,27 @@
     </div>
     <div class="container-fluid px-md-5">
 
-        <div class="blog-container mt-5">
-            <h4 class="mb-2">{{$material->name}}</h4>
+        <div class="blog-container ">
+            <h3 class="text-primary">{{strtoupper($material->name)}}</h3>
+            <div class="px-5">
+                <span class="mx-2"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($material->created_at))}}</span>
+                <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
+                <span class="mx-2"><i class="fa fa-download"></i> {{$counterData->page_download_count}}</span>
+                <span class="mx-2"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
+            </div>
+            <div class="my-4 row align-items-center">
+                <div class="col-md-4">
+                    @if($material->type == 'file' && $material->download)
+                    <a href="/storage/{{$material->fileurl}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                    @endif
+                </div>
+                <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
+            </div>
+
             <div>
                 {!! $material->description !!}
             </div>
-            
-            <div class="my-4 row">
-                <div class="col-md-4">
-                    @if($material->type == 'file' && $material->download)
-                    <a href="/storage/{{$material ->fileurl}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
-                    @endif
-                </div>
-                <div class="col-md-8"><div class="sharethis-inline-share-buttons" ></div></div>
-            </div>
-            
+
             @if($material->type == 'file')
                 <div class="mt-4">                    
                     <div class="pdf-container" id="pdf-container" style="max-height:800px;overflow-y: scroll;"></div>
@@ -56,8 +62,14 @@
                     </iframe>  --}}
                 </div>
             @endif
+            <div class="my-4 row">
+                <div class="col-md-4">&nbsp;</div>
+                <div class="col-md-8">
+                    <div class="sharethis-inline-share-buttons" onclick="handleShare(event)" ></div>
+                </div>
+            </div>
         </div>
-
+        
     </div>
 
     <script src="{{asset('/js/pdf.min.js') }}"></script>
@@ -80,6 +92,16 @@
             link.click(); // Simulate a click event to initiate the download
 
             document.body.removeChild(link); // Remove the dynamically created link element
+            
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'download', page: 'Library Material',pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
+        }
+
+        function handleShare(event){
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'share', page: 'Library Material',pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
         }
     </script>
 

@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use function Symfony\Component\String\b;
+use App\Helpers\Helper;
 
 class BlogController extends Controller
 {
@@ -18,18 +19,19 @@ class BlogController extends Controller
        return view('front.blogs.index',compact('headercategories','blogs','last_blog',));
    }
 
-   public function show($slug)
-   {
-       $lateat_blogs=Blog::all()->where('status','=','Published')->sortByDesc('created_at')->take(10);
-       $blog=Blog::where('slug',$slug)->first();
-       if(!$blog)
-       {
-           abort(404);
-       }
-       $headercategories=Categories::all()->where('status','=','Active');
-
-       return view('front.blogs.show',compact('blog','headercategories', 'lateat_blogs'));
-   }
+    public function show($slug)
+    {
+        $lateat_blogs=Blog::all()->where('status','=','Published')->sortByDesc('created_at')->take(10);
+        $blog=Blog::where('slug',$slug)->first();
+        if(!$blog)
+        {
+            abort(404);
+        }
+        //    $headercategories=Categories::all()->where('status','=','Active');
+        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $counterData = Helper::pageCounterCounts('Blog Show',$pgurl);
+        return view('front.blogs.show',compact('blog', 'lateat_blogs','counterData'));
+    }
 
    public function addComments(Blog $blog,Request $request)
    {

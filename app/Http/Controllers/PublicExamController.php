@@ -7,7 +7,7 @@ use App\Models\OpenExams\OpenExam;
 use App\Models\Exams\Question;
 use App\Models\OpenExams\OpenExamResult;
 use App\Models\ExamHall\ExamHallCategories;
-
+use App\Helpers\Helper;
 
 class PublicExamController extends Controller
 {
@@ -118,7 +118,9 @@ class PublicExamController extends Controller
            abort(404);
         }
         $results=$exam->results;
-        return view('front.publicexams.resultshow',compact('exam','results'));
+        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $counterData = Helper::pageCounterCounts('Premium Exam Show',$pgurl);
+        return view('front.publicexams.resultshow',compact('exam','results','counterData'));
     }
 
     public function premiumExamShow($slug)
@@ -129,7 +131,10 @@ class PublicExamController extends Controller
            abort(404);
         }
 
-        return view('front.publicexams.showpremiumexam',compact('exam'));
+        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $counterData = Helper::pageCounterCounts('Premium Exam Show',$pgurl);
+
+        return view('front.publicexams.showpremiumexam',compact('exam','counterData'));
     }
 
 }

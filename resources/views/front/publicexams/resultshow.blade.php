@@ -17,6 +17,7 @@
     </div>
     <section class="about-page">
         <div class="container-fluid px-md-5">
+            <div class="text-end"><span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span></div>
             <div>TQ= Total Question, FM= Full Marks, LQ= Leaved Questions, CQ= Correct Questions, WQ= Wrong Questions, MO= Marks Obtained</div>
             <div class="public-exam-section table-responsive">
                 <table class="table table-bordered" id="table-courses">
