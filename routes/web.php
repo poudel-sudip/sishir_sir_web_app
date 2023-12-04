@@ -552,6 +552,15 @@ Route::get('/admin/free-videos/create','App\Http\Controllers\Admin\FreeVideoCont
 Route::post('/admin/free-videos','App\Http\Controllers\Admin\FreeVideoController@store')->middleware('role:Admin');
 Route::delete('/admin/free-videos/{video}','App\Http\Controllers\Admin\FreeVideoController@destroy')->middleware('role:Admin');
 
+Route::get('/admin/qr-books','App\Http\Controllers\Admin\Books\QRBookController@index')->middleware('role:Admin');
+Route::get('/admin/qr-books/create','App\Http\Controllers\Admin\Books\QRBookController@create')->middleware('role:Admin');
+Route::post('/admin/qr-books','App\Http\Controllers\Admin\Books\QRBookController@store')->middleware('role:Admin');
+Route::get('/admin/qr-books/{book}/edit','App\Http\Controllers\Admin\Books\QRBookController@edit')->middleware('role:Admin');
+Route::get('/admin/qr-books/{book}/show','App\Http\Controllers\Admin\Books\QRBookController@show')->middleware('role:Admin');
+Route::patch('/admin/qr-books/{book}','App\Http\Controllers\Admin\Books\QRBookController@update')->middleware('role:Admin');
+Route::delete('/admin/qr-books/{book}','App\Http\Controllers\Admin\Books\QRBookController@destroy')->middleware('role:Admin');
+Route::get('/admin/qr-books/{book}/scans','App\Http\Controllers\Admin\Books\QRBookController@scanMembers')->middleware('role:Admin');
+Route::get('/admin/qr-books/{book}/scans/export','App\Http\Controllers\Admin\Books\QRBookController@scanMembersExport')->middleware('role:Admin');
 
 
 
@@ -847,6 +856,9 @@ Route::get('/books/{slug}','App\Http\Controllers\FrontController@singleBook');
 Route::get('/book-publishers/{slug}/all-books','App\Http\Controllers\FrontController@publisherAllBooks');
 Route::get('/book-publishers/{pslug}/category/{cslug}','App\Http\Controllers\FrontController@publisherCategoryBooks');
 Route::get('/book-publishers/{slug}','App\Http\Controllers\FrontController@publisherBookCategories');
+
+Route::get('/qr-book-scans/{bslug}/{bsn}','App\Http\Controllers\FrontController@qrBookScanForm');
+Route::post('/qr-book-scans/{book}/{member}','App\Http\Controllers\FrontController@qrBookScanMemberStore');
 
 //front library materials
 Route::get('/library','App\Http\Controllers\FrontController@getLibrary');

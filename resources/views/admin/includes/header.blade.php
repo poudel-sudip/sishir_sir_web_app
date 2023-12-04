@@ -186,6 +186,13 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/qr-books') }}">
+          <i class="mdi mdi-alpha-b-box menu-icon"></i>
+          <span class="menu-title">Books For QR</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/testimonials') }}">
           <i class="mdi mdi-comment-processing menu-icon"></i>
           <span class="menu-title">Testimonials</span>

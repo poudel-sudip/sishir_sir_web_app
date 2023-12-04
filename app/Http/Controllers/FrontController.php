@@ -32,6 +32,7 @@ use App\Models\Library\LibraryMaterial;
 use App\Models\Library\LibraryCategory;
 use App\Models\Forms\DynamicForm;
 use App\Models\PostViewCounter;
+use App\Models\Books\QRBook;
 
 class FrontController extends Controller
 {
@@ -970,5 +971,78 @@ class FrontController extends Controller
         ]); 
     }
 
+    public function qrBookScanForm($bslug,$bsn)
+    {
+        $book = QRBook::where('slug',$bslug)->first();
+        if(!$book)
+        {
+            abort(404,'Book Not Found');
+        }
+
+        $furl = $book->slug.'/'.$bsn;
+        $furl = url('/qr-book-scans/'.$furl);
+
+        $qrbook = $book->scanMembers()->where('book_link','=',$furl)->first();
+
+        if(!$qrbook)
+        {
+            abort(404,'Book Serial Not Found');
+        }
+
+        $formshow = false;
+
+        if(!$qrbook->name && !$qrbook->contact)
+        {
+            $formshow = true;
+        }
+
+        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        // $counterData = Helper::pageCounterCounts('QR Scan For Book',$pgurl);
+
+        $data['formshow'] = $formshow;
+        $data['qrbook'] = $qrbook;
+        $data['book'] = $book;
+        $data['proviences'] = Provience::all();
+        // $data['counterData'] = $counterData;
+        // dd($data);
+        return view('front.books.qr_book_scan',$data);
+    }
     
+    public function qrBookScanMemberStore($book, $member, Request $request)
+    {
+        $book = QRBook::find($book);
+        if(!$book)
+        {
+            abort(404,'Book Not Found');
+        }
+
+        $member = $book->scanMembers()->find($member);
+
+        if($member)
+        {
+            $request->validate([
+                'full_name' => 'required|string',
+                'email' => 'nullable|email',
+                'contact' => 'numeric|required|digits:10',
+                'provience' => 'required|string',
+                'district' => 'nullable|string',
+            ]);
+
+            $member->update([
+                'name' => $request->full_name,
+                'email' => $request->email,
+                'contact' => $request->contact,
+                'provience' => $request->provience,
+                'district' => $request->district,
+                'scan_date' => date('Y-m-d G:i:s'),
+            ]);
+
+            return redirect($member->book_link)->with('successMessage','Your Data Has Been Submitted Successfully.');
+
+        }
+
+        abort(403,'Book QR Link Not Found');
+
+    }
+
 }
