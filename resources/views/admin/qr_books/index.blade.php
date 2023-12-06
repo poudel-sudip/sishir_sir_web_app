@@ -35,6 +35,7 @@
                     <th>Book</th>
                     <th>Edition</th>
                     <th>Pub. Year</th>
+                    <th>Winners</th>
                     <th>Quantity</th>
                     <th>Action</th>
                   </tr>
@@ -44,14 +45,15 @@
                   @foreach($books as $row)
                     <tr>
                       <td>{{$i}}</td>
-                      <td class="text-wrap">{{ucwords($row->category ?? '')}}</td>
-                      <td class="text-wrap">{{ucwords($row->title ?? '')}}</td>
-                      <td class="text-wrap">{{ucwords($row->publisher ?? '')}}</td>
-                      <td>{{$row->edition}} </td>
-                      <td>{{$row->published_year}} </td>
+                      <td class="text-wrap">{{ucwords($row->book->category->name ?? '')}}</td>
+                      <td class="text-wrap">{{ucwords($row->book->category->publisher->name ?? '')}}</td>
+                      <td class="text-wrap">{{ucwords($row->book->title ?? '')}}</td>
+                      <td>{{$row->book->edition ?? ''}} </td>
+                      <td>{{$row->book->published_year ?? ''}} </td>
+                      <td><a href="/admin/qr-books/{{$row->id}}/winners">Winners ({{$row->winners()->count()}})</a></td>
                       <td><a href="/admin/qr-books/{{$row->id}}/scans">Show ({{$row->quantity}})</a></td>
                       <td class="classroom-btn" width="100">
-                        <a href="/admin/qr-books/{{$row->id}}/show" class="btn btn-primary">Show</a>
+                        {{-- <a href="/admin/qr-books/{{$row->id}}/show" class="btn btn-primary">Show</a> --}}
                         <a href="/admin/qr-books/{{$row->id}}/edit" class="btn btn-warning">Edit</a>
                         <form id="delete-form-{{$row->id}}" action="/admin/qr-books/{{$row->id}}" method="POST" class="d-inline">
                           @csrf

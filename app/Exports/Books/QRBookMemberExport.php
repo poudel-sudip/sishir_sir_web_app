@@ -31,7 +31,11 @@ class QRBookMemberExport implements FromCollection, WithHeadings
                 'contact'=>$result->contact,
                 'provience'=>$result->provience,
                 'district'=>$result->district,
+                'course'=>$result->course,
                 'date'=>$result->scan_date,
+                'type'=>$result->is_main ? 'Original':'Dublicate',
+                'winner'=>$result->is_winner ? 'Yes':'No',
+                'win_type'=>$result->winner_remarks,
             ];
         });
         // dd($members);
@@ -41,6 +45,6 @@ class QRBookMemberExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ["SN","Book Link", "Name", "Email","Contact","Provience","District","Date"];
+        return ["SN","Book Link", "Name", "Email","Contact","Provience","District","Preparation Course","Date","Scan Type","Winner","Winner Type"];
     }
 }

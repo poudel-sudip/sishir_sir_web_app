@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-  QR Generated Book Scan Members
+  QR Generated Book Winners
 @endsection
 
 @section('content')
   <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">QR Generated Book Scan Members </h3>
+      <h3 class="page-title">QR Generated Book Winners </h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
           <li class="breadcrumb-item"><a href="{{ url('/admin/qr-books') }}">QR Books</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Scan Members</li>
+          <li class="breadcrumb-item active" aria-current="page">Winners</li>
         </ol>
       </nav>
     </div>  
@@ -20,9 +20,9 @@
         <div class="card">
           <div class="card-body">
             <div class="custon-table-header">
-              <h4 class="card-title">QR Generated Book Scan Members || {{$book->title}}</h4>
+              <h4 class="card-title">QR Generated Book Winners || {{$book->title}}</h4>
               <div class="text-right">
-                <a href="/admin/qr-books/{{$book->id}}/scans/export"><button type="button" class="btn btn-sm ml-3 btn-info"> Excel Export </button></a>
+                <a href="/admin/qr-books/{{$book->id}}/winners/create"><button type="button" class="btn btn-sm ml-3 btn-info"> Add Winner </button></a>
               </div>
             </div>
           
@@ -32,7 +32,6 @@
                   <tr>
                     <th>SN</th>
                     <th>Book Link</th>
-                    <th>User Type</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Contact</th>
@@ -40,6 +39,7 @@
                     <th>District</th>
                     <th>Course</th>
                     <th>Date</th>
+                    <th>Winner Type</th>
                     {{-- <th>Action</th> --}}
                   </tr>
                 </thead>
@@ -49,7 +49,6 @@
                     <tr>
                       <td width='75'>{{$i}}</td>
                       <td class="text-wrap">{{$rev->book_link ?? ''}}</td>
-                      <td class="text-wrap">{{$rev->is_main ? 'Original' : 'Dublicate'}}</td>
                       <td class="text-wrap">{{$rev->name}}</td>
                       <td class="text-wrap">{{$rev->email}}</td>
                       <td class="text-wrap">{{$rev->contact}}</td>
@@ -57,14 +56,7 @@
                       <td class="text-wrap">{{$rev->district}}</td>
                       <td class="text-wrap">{{$rev->course}}</td>
                       <td class="text-wrap">{{$rev->scan_date}}</td>
-
-                      {{-- <td width='75'>
-                        <form id="delete-form-{{$rev->id}}" action="/admin/books/{{$book->id}}/reviews/{{$rev->id}}" method="POST" class="d-inline">
-                          @csrf
-                          @method('DELETE')
-                          <a href="javascript:{}" onclick="javascript:deleteData({{$rev->id}});">Delete</a>
-                        </form>
-                      </td> --}}
+                      <td class="text-wrap">{{ucwords($rev->winner_remarks)}}</td>
                     </tr>
                     @php($i++)
                   @endforeach

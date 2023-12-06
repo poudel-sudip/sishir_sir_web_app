@@ -33,15 +33,12 @@
                                     <img src="/storage/{{$book->thumbnail}}" onerror="this.src='{{asset('images/default-post.png')}}'" class="img img-fluid">                                
                                 </div>     
                                 <hr>
-                                {{-- <h6 class="text-end">
-                                    <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
-                                    <span class="mx-2"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
-                                </h6> --}}
+                               
                                 <h6>
-                                    Publisher: <strong class="text-primary"> {{ucwords($book->publisher ?? ' ')}} </strong>
+                                    Publisher: <strong class="text-primary"> {{ucwords($book->category->publisher->name ?? ' ')}} </strong>
                                 </h6>
                                 <h6>
-                                    Category: <strong class="text-primary"> {{ucwords($book->category ?? ' ')}} </strong>
+                                    Category: <strong class="text-primary"> {{ucwords($book->category->name ?? ' ')}} </strong>
                                 </h6>
                                 <h6>
                                     Author(s): <strong class="text-primary"> {{ucwords($book->author ?? ' ')}} </strong>
@@ -69,123 +66,121 @@
                                 <h6>
                                     Final Price: <strong class="text-success"> Rs. {{($book->price - (($book->price*$book->discount)/100))}}/- </strong>
                                 </h6>                                
-                                {{-- <h6>
-                                    Availability: <strong class="text-primary"> {{ucwords($book->availability ?? ' ')}} </strong>
-                                </h6> --}}
+                               
                                
                                 <div class="book-description text-secondary">
                                     {!! $book->description !!}
                                 </div>
-                                {{-- <div class="row">                                    
-                                    <div class="col-md-6 my-2">
-                                        <div class="sharethis-inline-share-buttons" onclick="handleShare(event)" ></div>
-                                    </div>
-                                </div> --}}                           
+                                                        
                             </div>
+
                             <div class="col-md-6 border border-2 rounded p-3">
-                                @if (Session::has('successMessage'))
-                                    <div class="form-group row">
-                                        <div class="alert alert-success">{!! Session::get('successMessage') !!}</div>
-                                    </div>
-                                @endif
+                                
+                                <h3 class="text-center">{{strtoupper('Fill your form For LUCKY DRAW')}}</h3>
+                                <div class="enroll-form">
+                                    <form action="/qr-book-scans/{{$qrbook->id}}/{{$main_book->id}}" method="post" enctype="multipart/form-data">
+                                        
+                                        @csrf()
 
-                                @if($formshow)
-                                    <h3 class="text-center">{{strtoupper('Fill your form')}}</h3>
-                                    <div class="enroll-form">
-                                        <form action="/qr-book-scans/{{$book->id}}/{{$qrbook->id}}" method="post" enctype="multipart/form-data">
-                                            
-                                            @csrf()
-
-                                            <div class="form-group row">
-                                                <label for="full_name" class="col-12 col-form-label text-md-right">{{ __('Full Name') }}</label>
-                        
-                                                <div class="col-12">
-                                                    <input id="full_name"  name="full_name" type="text" class="form-control @error('full_name') is-invalid @enderror" placeholder="Enter Your Full Name" value="{{ old('full_name') }}" required>
-            
-                                                    @error('full_name')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label for="email" class="col-12 col-form-label text-md-right">{{ __('Email') }}</label>
-                        
-                                                <div class="col-12">
-                                                    <input id="email" name="email" type="text" class="form-control @error('email') is-invalid @enderror"  placeholder="Enter Your Email" value="{{ old('email') }}" >
-            
-                                                    @error('email')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label for="contact" class="col-12 col-form-label text-md-right">{{ __('Contact Number') }}</label>
-                        
-                                                <div class="col-12">
-                                                    <input id="contact" name="contact" type="text" class="form-control @error('contact') is-invalid @enderror"  placeholder="Enter Your Contact Number" value="{{ old('contact') }}" required>
-            
-                                                    @error('contact')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label for="provience" class="col-12 col-form-label text-md-right">{{ __('Provience') }}</label>
-                        
-                                                <div class="col-12">
-                                                    <select name="provience" id="provience" class="form-control @error('provience') is-invalid @enderror" onchange="getCities()">
-                                                        <option value="">Select your Provience</option>
-                                                        @foreach($proviences as $pro)
-                                                            <option value="{{$pro->name}}">{{$pro->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('provience')
+                                        <div class="form-group row">
+                                            <label for="full_name" class="col-12 col-form-label text-md-right">{{ __('Full Name') }}</label>
+                    
+                                            <div class="col-12">
+                                                <input id="full_name"  name="full_name" type="text" class="form-control @error('full_name') is-invalid @enderror" placeholder="Enter Your Full Name" value="{{ old('full_name') }}" required>
+        
+                                                @error('full_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
-                                                    @enderror
-                                                </div>
+                                                @enderror
                                             </div>
-                                            
-                                            <div class="form-group row">
-                                                <label for="district" class="col-12 col-form-label text-md-right">{{ __('District') }}</label>
-                        
-                                                <div class="col-12">
-                                                    <select name="district" id="district" class="form-control @error('district') is-invalid @enderror">
-                                                        <option value="">Select an District</option>
-                                                    </select>
-                                                    @error('course')
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="email" class="col-12 col-form-label text-md-right">{{ __('Email') }}</label>
+                    
+                                            <div class="col-12">
+                                                <input id="email" name="email" type="text" class="form-control @error('email') is-invalid @enderror"  placeholder="Enter Your Email" value="{{ old('email') }}" >
+        
+                                                @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
-                                                    @enderror
-                                                </div>
+                                                @enderror
                                             </div>
+                                        </div>
 
-                                            <div class="form-group row mt-3">
-                                                <div class="col-12 text-end">
-                                                    <button type="submit" class="btn btn-primary">Submit Your Details</button>
-                                                </div>
+                                        <div class="form-group row">
+                                            <label for="contact" class="col-12 col-form-label text-md-right">{{ __('Contact Number') }}</label>
+                    
+                                            <div class="col-12">
+                                                <input id="contact" name="contact" type="text" class="form-control @error('contact') is-invalid @enderror"  placeholder="Enter Your Contact Number" value="{{ old('contact') }}" required>
+        
+                                                @error('contact')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="provience" class="col-12 col-form-label text-md-right">{{ __('Provience') }}</label>
+                    
+                                            <div class="col-12">
+                                                <select name="provience" id="provience" class="form-control @error('provience') is-invalid @enderror" onchange="getCities()">
+                                                    <option value="">Select your Provience</option>
+                                                    @foreach($proviences as $pro)
+                                                        <option value="{{$pro->name}}">{{$pro->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('provience')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row">
+                                            <label for="district" class="col-12 col-form-label text-md-right">{{ __('District') }}</label>
+                    
+                                            <div class="col-12">
+                                                <select name="district" id="district" class="form-control @error('district') is-invalid @enderror">
+                                                    <option value="">Select an District</option>
+                                                </select>
+                                                @error('course')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="course" class="col-12 col-form-label text-md-right">{{ __('Preparation Course') }}</label>
+                    
+                                            <div class="col-12">
+                                                <input id="course" name="course" type="text" class="form-control @error('course') is-invalid @enderror"  placeholder="Enter Your Preparation Course" value="{{ old('course') }}" required>
+        
+                                                @error('course')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mt-3">
+                                            <div class="col-12 text-end">
+                                                <button type="submit" class="btn btn-primary">Submit and Check Your Luck!</button>
+                                            </div>
+                                        </div>
 
 
-                                        </form>
-                                    </div>                               
-                                @else 
-                                    <h3 class="text-center text-primary">This Book Has Been Reserved By {{$qrbook->name}}.</h3>
-                                    <div class="mt-3 text-center text-success h5">
-                                        Thank You for Joining.
-                                    </div>
-                                @endif
+                                    </form>
+                                </div>                              
+                                
                             </div>
                         </div>
                     </div>                    
@@ -195,14 +190,6 @@
 
         </div>
     </div>    
-
-    <script>
-        function handleShare(event){
-            let pageURL = getPageURLWithoutProtocol();
-            const postData = { type: 'share', page: 'Single Book Details',pageurl: pageURL };
-            postDataWithFetch('/page-counter-increment', postData);
-        }
-    </script>
 
     <script>
         var proviences = {

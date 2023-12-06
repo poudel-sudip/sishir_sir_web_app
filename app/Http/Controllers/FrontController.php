@@ -973,43 +973,34 @@ class FrontController extends Controller
 
     public function qrBookScanForm($bslug,$bsn)
     {
-        $book = QRBook::where('slug',$bslug)->first();
-        if(!$book)
+        $qrbook = QRBook::with('book')->whereHas('book')->where('slug',$bslug)->first();
+        if(!$qrbook)
         {
             abort(404,'Book Not Found');
         }
-
-        $furl = $book->slug.'/'.$bsn;
+        
+        $furl = $qrbook->slug.'/'.$bsn;
         $furl = url('/qr-book-scans/'.$furl);
 
-        $qrbook = $book->scanMembers()->where('book_link','=',$furl)->first();
+        $main_book = $qrbook->scanMembers()->where('book_link','=',$furl)->where('is_main','=',true)->first(['id','book_link','book_id','is_main']);
 
-        if(!$qrbook)
+        if(!$main_book)
         {
             abort(404,'Book Serial Not Found');
         }
 
-        $formshow = false;
-
-        if(!$qrbook->name && !$qrbook->contact)
-        {
-            $formshow = true;
-        }
-
-        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        // $counterData = Helper::pageCounterCounts('QR Scan For Book',$pgurl);
-
-        $data['formshow'] = $formshow;
-        $data['qrbook'] = $qrbook;
-        $data['book'] = $book;
         $data['proviences'] = Provience::all();
-        // $data['counterData'] = $counterData;
+        $data['book'] = $qrbook->book;
+        $data['qrbook'] = $qrbook;
+        $data['main_book'] = $main_book;
+
         // dd($data);
         return view('front.books.qr_book_scan',$data);
     }
     
     public function qrBookScanMemberStore($book, $member, Request $request)
     {
+        // dd($request->all());
         $book = QRBook::find($book);
         if(!$book)
         {
@@ -1026,19 +1017,114 @@ class FrontController extends Controller
                 'contact' => 'numeric|required|digits:10',
                 'provience' => 'required|string',
                 'district' => 'nullable|string',
+                'course' => 'nullable|string',
             ]);
+            
+            $data['status'] = 'lost';
+            if(!$member->name && !$member->contact)
+            {
+                $member->update([
+                    'name' => $request->full_name,
+                    'email' => $request->email,
+                    'contact' => $request->contact,
+                    'provience' => $request->provience,
+                    'district' => $request->district,
+                    'course' => $request->course,
+                    'scan_date' => date('Y-m-d G:i:s'),
+                ]);
 
-            $member->update([
-                'name' => $request->full_name,
-                'email' => $request->email,
-                'contact' => $request->contact,
-                'provience' => $request->provience,
-                'district' => $request->district,
-                'scan_date' => date('Y-m-d G:i:s'),
-            ]);
+                if($member->is_winner)
+                {
+                    $data['status'] = 'won';
 
-            return redirect($member->book_link)->with('successMessage','Your Data Has Been Submitted Successfully.');
+                    if(strtolower($member->winner_remarks) == 'book-winner')
+                    {
+                        $data['message'] = "<h3>Congratulations!</h3>
+                        <div> Dear <strong>".ucwords($member->name)."</strong> jee,</div> 
+                        <div><strong>You Won The Book.</strong></div>  
+                        <div>We're delighted for you and hope you thoroughly enjoy your prize.  
+                        To get a prize please reach out to us at info@shisiradhikari.com. </div> 
+                        <div>Thank You!</div>";
+                    }
+                    elseif(strtolower($member->winner_remarks) == 'full-course-winner')
+                    {
+                        $data['message'] = "<h3>Congratulations!</h3>
+                        <div> Dear <strong>".ucwords($member->name)."</strong> jee,</div> 
+                        <div><strong>You Won a Full Scholarship (Online Course of 'AHW' Loksewa) at Etutor Class.</strong></div> 
+                        <div>For more details, please reach out to us at info@shisiradhikari.com.  </div>
+                        <div>Thank You! </div>";
+                    }
+                    elseif(strtolower($member->winner_remarks) == 'half-course-winner')
+                    {
+                        $data['message'] = "<h3>Congratulations!</h3>
+                        <div> Dear <strong>".ucwords($member->name)."</strong> jee, </div> 
+                        <div><strong> You Won a 50% Scholarship (Online Course of 'AHW' Loksewa) at Etutor Class.</strong></div> 
+                        <div>For more details, please reach out to us at info@shisiradhikari.com </div>.  
+                        <div>Thank You!</div>";
+                    }
+                    else
+                    {
+                        $data['status'] = 'lost';   
+                    }
+                }
 
+                $data['member'] = $member;
+            }
+            else
+            {
+                $find = $book->scanMembers()->where('email','=',$request->email)->orWhere('contact','=',$request->contact)->first();
+
+                if($find)
+                {
+                    $data['member'] = $find;
+                    $data['message'] = "<h3>Sorry!</h3> 
+                    <div> Dear <strong>".ucwords($data['member']->name)."</strong> jee,</div>  
+                    <div>Your details for this book lucky draw is already registered. </div> 
+                    <div> Unfortunately, you were not selected as a winner in the lucky draw. 
+                    We acknowledge that this situation may be frustrating,  
+                    but we still encourage you to persist in reading the book.  
+                    Additionally, you have the option to scan and submit another request for the Lucky Draw.  </div>
+                    <div>Thank You!</div>
+                    ";
+                }
+                else
+                {
+                    $new_member = $book->scanMembers()->create([
+                        'book_link' => $member->book_link,
+                        'name' => $request->full_name,
+                        'email' => $request->email,
+                        'contact' => $request->contact,
+                        'provience' => $request->provience,
+                        'district' => $request->district,
+                        'course' => $request->course,
+                        'scan_date' => date('Y-m-d G:i:s'),
+                    ]);
+            
+                    $data['member'] = $new_member;
+                }
+                
+            }
+
+            $data['book'] = $book->book;
+
+            if($data['status'] == 'lost')
+            {
+                if(!isset($data['message']))
+                {
+                    $data['message'] = "<h3>Sorry!</h3> 
+                    <div>Dear <strong>".ucwords($data['member']->name)."</strong> jee, </div> 
+                    <div> Unfortunately, you were not selected as a winner in the lucky draw.
+                    We acknowledge that this situation may be frustrating,  
+                    but we still encourage you to persist in reading the book.  
+                    Additionally, you have the option to scan and submit another request for the Lucky Draw.</div>  
+                    <div>Thank You!</div>
+                    ";
+                }
+            }
+            
+            // dd($data);
+            return view('front.books.qr_book_scan_result',$data);
+            
         }
 
         abort(403,'Book QR Link Not Found');

@@ -562,6 +562,9 @@ Route::delete('/admin/qr-books/{book}','App\Http\Controllers\Admin\Books\QRBookC
 Route::get('/admin/qr-books/{book}/scans','App\Http\Controllers\Admin\Books\QRBookController@scanMembers')->middleware('role:Admin');
 Route::get('/admin/qr-books/{book}/scans/export','App\Http\Controllers\Admin\Books\QRBookController@scanMembersExport')->middleware('role:Admin');
 
+Route::get('/admin/qr-books/{book}/winners','App\Http\Controllers\Admin\Books\QRBookController@winnerMembers')->middleware('role:Admin');
+Route::get('/admin/qr-books/{book}/winners/create','App\Http\Controllers\Admin\Books\QRBookController@winnerCreate')->middleware('role:Admin');
+Route::post('/admin/qr-books/{book}/winners','App\Http\Controllers\Admin\Books\QRBookController@winnerStore')->middleware('role:Admin');
 
 
 

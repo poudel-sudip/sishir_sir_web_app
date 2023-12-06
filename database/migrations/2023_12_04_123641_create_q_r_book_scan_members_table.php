@@ -22,6 +22,10 @@ class CreateQRBookScanMembersTable extends Migration
             $table->string('contact')->nullable();
             $table->string('provience', 100)->nullable();
             $table->string('district', 100)->nullable();
+            $table->string('course')->nullable();
+            $table->tinyInteger('is_main')->default(0);
+            $table->tinyInteger('is_winner')->default(0);
+            $table->text('winner_remarks')->nullable();
             $table->timestamps();
         });
     }
