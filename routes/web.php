@@ -833,6 +833,7 @@ Route::get('/enquiry/{courseslug}', 'App\Http\Controllers\FrontController@showCo
 Route::get('/free-videos', 'App\Http\Controllers\FrontController@allFreeVideos');
 Route::get('/free-videos/{video}', 'App\Http\Controllers\FrontController@playFreeVideo');
 Route::get('/page-counter-increment', 'App\Http\Controllers\FrontController@pageCounterIncrement');
+Route::get('/bmi-calculator', 'App\Http\Controllers\FrontController@bmiCalculator');
 
 // front blogs
 Route::get('/blogs','App\Http\Controllers\Blog\BlogController@index');
