@@ -33,7 +33,12 @@
                     <div class="main-slider owl-carousel">
                         @foreach($sliders as $slider)
                             <div class="single-item">
-                                <img src="/storage/{{$slider->image}}" alt="{{$slider->title}}" width="100%">
+                                <div>
+                                    <img src="/storage/{{$slider->image}}" alt="{{$slider->title}}" width="100%" style="max-height:420px;">
+                                </div>
+                                <div class="text-center mt-1" >
+                                   <h5>{{$slider->description}}</h5> 
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -346,8 +351,8 @@
                         @foreach($books as $book)
                             <div class="card-course border-primary">
                                 <div class="header">
-                                    <div class="post-thumb" style="height:200px">
-                                        <img src="/storage/{{$book->thumbnail}}" alt="" >
+                                    <div class="post-thumb" >
+                                        <img src="/storage/{{$book->thumbnail}}" alt="" class="img img-fluid" style="max-height:190px">
                                     </div>
                                 </div>
                                 <div class="body ebook-footer mt-2">

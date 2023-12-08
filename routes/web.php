@@ -834,6 +834,7 @@ Route::get('/free-videos', 'App\Http\Controllers\FrontController@allFreeVideos')
 Route::get('/free-videos/{video}', 'App\Http\Controllers\FrontController@playFreeVideo');
 Route::get('/page-counter-increment', 'App\Http\Controllers\FrontController@pageCounterIncrement');
 Route::get('/bmi-calculator', 'App\Http\Controllers\FrontController@bmiCalculator');
+Route::get('/health-ingos', 'App\Http\Controllers\FrontController@healthIngo');
 
 // front blogs
 Route::get('/blogs','App\Http\Controllers\Blog\BlogController@index');

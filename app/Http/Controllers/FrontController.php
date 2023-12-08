@@ -1137,4 +1137,11 @@ class FrontController extends Controller
 
         return view('front.bmi_calculator',$data);
     }
+
+    
+    public function healthIngo()
+    {
+        $data = [];
+        return view('front.health_ingo',$data);
+    }
 }

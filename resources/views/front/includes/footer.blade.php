@@ -64,6 +64,8 @@
           <li><a href="/blogs">Blogs</a></li>
           <li><a href="/results">Results</a></li>
           <li><a href="/bmi-calculator">BMI Calculator</a></li>
+          <li><a href="/health-ingos">Health INGOs in Nepal</a></li>
+          <li><a href="//gorkhapatraonline.com/categories/loksewa" target="_blank">Gorkhapatra Loksewa</a></li>
           {{-- <li><a href="/privacy">Terms & Condition</a></li> --}}
           {{-- <li><a href="/privacy">Privacy</a></li> --}}
           {{-- <li><a href="/contact">Contact Us</a></li> --}}
