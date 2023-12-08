@@ -49,7 +49,7 @@ class FrontController extends Controller
         $data['exams'] = OpenExam::where('result_status','=','Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('id')->first();
         $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->take(5)->get(['id','title','slug','image','author','created_at']);
-        $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->take(9)->get(['id','title','slug','price','discount','thumbnail']);
+        $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->take(9)->get(['id','title','slug','price','discount','thumbnail','published_year']);
         $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->take(9)->get();
         $data['ads'] = Advertisement::all();
         // $data['homepopup'] = HomePopup::where('status','=','Active')->first();

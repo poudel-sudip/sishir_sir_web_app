@@ -338,7 +338,7 @@
     </section>
     @endif
 
-    @if(count($books))
+    {{-- @if(count($books))
         <section class="course-section">
             <div class="container-fluid px-md-5">
                 <div class="row">
@@ -368,6 +368,41 @@
                 </div>
             </div>
         </section>
+    @endif --}}
+
+    @if(count($books))
+        <div class="container-fluid px-md-5 eb-seller my-5">
+            <div class="row">
+                <div class="col-md-12 text-center relative">
+                    <h2 class="home-section-heading mb-3 wow fadeInUp">My Books</h2>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="owl-carousel eb-seller-carousel">
+                        @foreach($books as $book)
+                            <div class="seller-item bg-light p-3 border border-primary rounded">
+                                <div class="seller-header">
+                                    <a href="/books/{{$book->slug}}">
+                                        <img src="/storage/{{$book->thumbnail}}" alt="" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
+                                    </a>
+                                </div>
+                                <div class="seller-footer">
+                                    <h4 title="{{strtoupper($book->title)}}"> <a href="/books/{{$book->slug}}"> {{strtoupper($book->title)}} </a></h4>
+                                    {{-- <div>Published On: <strong> {{ucwords($book->published_year)}} </strong></div> --}}
+                                    <div>Price : <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ ($book->price - (($book->price*$book->discount)/100)) }}</strong></div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                
+            </div>
+            <div class="text-end mt-2">
+                <a href="/books" class="btn" style="background:#1375b9;color:#fff">View all...</a>
+            </div>
+        </div>
+
     @endif
 
     @if(count($videos))

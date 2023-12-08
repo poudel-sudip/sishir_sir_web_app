@@ -56,3 +56,35 @@ function postDataWithFetch(url = '', data = {}) {
         console.error('There was a problem with the fetch operation:', error);
     });
 }
+
+
+$('.eb-seller-carousel').owlCarousel({
+    items: 5,
+    smartSpeed: 500,
+    margin:20,
+    nav: true,
+    loop: true,
+    lazyLoad: true,
+    autoplayTimeout: 5000,
+    autoplayHoverPause: false,
+    autoplay: true,
+    navText: ['<i class="fas fa-caret-left"></i>', '<i class="fas fa-caret-right"></i>'],
+    responsive: {
+      0: {
+        items: 1,
+        nav: false
+      },
+      540: {
+        items: 2
+      },
+      768: {
+        items: 3
+      },
+      1000: {
+        items: 4
+      }
+    }
+  });
+
+
+
