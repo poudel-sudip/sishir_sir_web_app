@@ -44,9 +44,9 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="homepage-side-update">
+                    <div class="homepage-side-update border border-primary border-2 rounded">
                         <div class="update-header"><h5><i class="fas fa-clock"></i> अपडेट</h5></div>
-                        <div class="update-body">
+                        <div class="update-body ">
                             <ul>
                                 @forelse($updates as $update)                            
                                     <li><a href="{{$update->link}}"><i class="far fa-check-circle"></i>{{ucwords($update->title)}}</a></li>
@@ -272,7 +272,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="blog-section">
+                    <div class="blog-section border border-primary">
                         <div class="blog-header">
                             <a href="/blogs/{{$last_blog->slug}}"><img src="/storage/{{$last_blog->image}}" alt=""></a>
                         </div>
@@ -382,13 +382,13 @@
                     <div class="owl-carousel eb-seller-carousel">
                         @foreach($books as $book)
                             <div class="seller-item bg-light p-3 border border-primary rounded">
-                                <div class="seller-header">
+                                <div class="seller-header text-center">
                                     <a href="/books/{{$book->slug}}">
                                         <img src="/storage/{{$book->thumbnail}}" alt="" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
                                     </a>
                                 </div>
                                 <div class="seller-footer">
-                                    <h4 title="{{strtoupper($book->title)}}"> <a href="/books/{{$book->slug}}"> {{strtoupper($book->title)}} </a></h4>
+                                    <h4 class="text-center" title="{{strtoupper($book->title)}}"> <a href="/books/{{$book->slug}}"> {{strtoupper($book->title)}} </a></h4>
                                     {{-- <div>Published On: <strong> {{ucwords($book->published_year)}} </strong></div> --}}
                                     <div>Price : <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ ($book->price - (($book->price*$book->discount)/100)) }}</strong></div>
                                 </div>
@@ -415,9 +415,9 @@
                     </div>
                 </div>
                 <div class="course-container">
-                    <div class="owl-carousel course-carousel">
+                    <div class="owl-carousel eb-seller-carousel">
                         @foreach($videos as $video)
-                            <div class="card-course">
+                            <div class="card-course border border-primary border-2">
                                 <a href="/free-videos/{{$video->id}}">
                                     <div class="single-video w-100" style="position: relative;">
                                         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; cursor: pointer;z-index:99" ></div>
@@ -466,9 +466,9 @@
             </div>
             <div class="review-container">
             <div class="row">
-                <div class="review-slider owl-carousel">
+                <div class=" owl-carousel review-slider">
                     @foreach($testimonials as $testimonial)
-                        <div class="reviw-item">
+                        <div class="reviw-item border border-primary" style="overflow: hidden">
                             <div class="reviewer">
                                 <div class="profile-image">
                                     <img src="/storage/{{$testimonial->image}}" alt="Feedback Review">
@@ -479,8 +479,8 @@
                                 </div>
                             </div>
                             <div class="review-content">
-                                <div class="review">
-                                    <p>{{$testimonial->message}}</p>
+                                <div class="review text-justify">
+                                    <p class="text-justify">{{$testimonial->message}}</p>
                                 </div>
                             </div>
                         </div>

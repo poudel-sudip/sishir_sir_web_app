@@ -47,11 +47,11 @@
                             <div class="col-md-4 my-3">
                                 <a href="/books/{{$book->slug}}">
                                     <div class="single-blog pt-3 border border-primary border-2">
-                                        <div class="blog-image">
+                                        <div class="blog-image text-center">
                                             <img src="/storage/{{$book->thumbnail}}">
                                         </div>
                                         <div class="blog-details">
-                                            <h4><a href="/books/{{$book->slug}}">{{$book->title}}</a></h4>
+                                            <h4 class="text-center"><a href="/books/{{$book->slug}}">{{$book->title}}</a></h4>
                                             {{-- <div class="">{!! $book->description !!}</div> --}}
                                             <div class="mx-2">
                                                 <span>Price: <strong class="text-success">Rs. {{($book->price - (($book->price*$book->discount)/100))}}</strong></span>
