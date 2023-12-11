@@ -60,12 +60,17 @@
 
                 @foreach($library_materials as $material)
                 <div class="col-md-4 mb-2">
-                    <div class="single-blog text-center py-3 border border-primary border-2">
-                        <div class="">
-                            <a href="/library/{{$library_category->slug}}/{{$material->slug}}"><img src="/storage/{{$material->thumbnail}}" onerror="this.src='{{asset('images/default-post.png')}}'" class="img img-fluid" style="max-height:150px"></a>
+                    <div class="py-3 px-2 border border-primary border-2">
+                        <div class="text-center">
+                            {{-- <img src="/storage/{{$material->thumbnail}}" onerror="this.src='{{asset('images/default-post.png')}}'" class="img img-fluid" style="max-height:150px"> --}}
+                            <h1><a href="/library/{{$library_category->slug}}/{{$material->slug}}"><i class="fa fa-file-pdf text-danger"></i></a></h1>
+                            <h5><strong><a href="/library/{{$library_category->slug}}/{{$material->slug}}">{{ucwords($material->name)}}</a> </strong></h5>
                         </div>
-                        <div class="blog-details">
-                            <h4><a href="/library/{{$library_category->slug}}/{{$material->slug}}">{{ucwords($material->name)}}</a></h4>
+                        <div class="text-justify">
+                            <div><strong>Author(s):</strong> {{$material->author}}</div>
+                            <div><strong>Published On:</strong> {{$material->published_year}}</div>
+                            <div><strong>Pages:</strong> {{$material->pages}}</div>
+                            <div>{{$material->description}}</div>
                         </div>
                     </div>
                 </div>

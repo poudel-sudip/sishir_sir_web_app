@@ -356,7 +356,7 @@ class FrontController extends Controller
             abort(404);
         }
         $directories = $library_category->childs;
-        $library_materials = $library_category->materials()->where('status','=','Active')->orderByDesc('id')->get(['id','name','slug','created_at','thumbnail']);
+        $library_materials = $library_category->materials()->where('status','=','Active')->orderByDesc('id')->get(['id','name','slug','published_year','author','pages','description']);
         // dd($directories);
         return view('front.librarycontents',compact('library_category','directories','library_materials'));
     }

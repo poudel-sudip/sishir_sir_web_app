@@ -38,6 +38,10 @@ class MaterialController extends Controller
             'type' => 'string|required',
             'thumbnail' => 'image|nullable',
             'search_tags' => 'nullable|string',
+            'description' => 'nullable|string',
+            'author' => 'nullable|string',
+            'published_year' => 'nullable|string',
+            'pages' => 'nullable|string',
         ]);
 
         if($data['type'] == 'text' || $data['type'] == 'Text')
@@ -98,9 +102,13 @@ class MaterialController extends Controller
             'old_thumbnail' => 'string|nullable',
             'can_download' => 'required|boolean',
             'search_tags' => 'nullable|string',
+            'description' => 'nullable|string',
+            'author' => 'nullable|string',
+            'published_year' => 'nullable|string',
+            'pages' => 'nullable|string',
         ]);
         
-        $data = $request->only(['name','order','status','type','search_tags']);
+        $data = $request->only(['name','order','status','type','search_tags','description','author','published_year','pages']);
 
         if($data['type'] == 'text' || $data['type'] == 'Text')
         {
@@ -111,7 +119,6 @@ class MaterialController extends Controller
         }
         elseif($data['type'] == 'file' || $data['type'] == 'File')
         {
-            $data['description'] = '';
             $data['download'] = $request->can_download;
             if($request->old_file == '' && !isset($request->file))
             {

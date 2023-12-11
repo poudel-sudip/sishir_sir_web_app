@@ -28,11 +28,14 @@
 
         <div class="blog-container ">
             <h3 class="text-primary">{{strtoupper($material->name)}}</h3>
-            <div class="px-5">
-                <span class="mx-2"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($material->created_at))}}</span>
-                <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
-                <span class="mx-2"><i class="fa fa-download"></i> {{$counterData->page_download_count}}</span>
-                <span class="mx-2"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
+            <div class="px-5 text-primary">
+                <span class="mx-2 text-nowrap"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($material->created_at))}}</span>
+                <span class="mx-2 text-nowrap"><i class="fa fa-users"></i> {{$material->author}}</span>
+                <span class="mx-2 text-nowrap"><i class="fa fa-calendar"></i> {{$material->published_year}}</span>
+                <span class="mx-2 text-nowrap"><i class="fa fa-file"></i> {{$material->pages}}</span>
+                <span class="mx-2 text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
+                <span class="mx-2 text-nowrap"><i class="fa fa-download"></i> {{$counterData->page_download_count}}</span>
+                <span class="mx-2 text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
             </div>
             <div class="my-4 row align-items-center">
                 <div class="col-md-4">
@@ -41,11 +44,7 @@
                     @endif
                 </div>
                 <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
-            </div>
-
-            <div>
-                {!! $material->description !!}
-            </div>
+            </div>          
 
             @if($material->type == 'file')
                 <div class="mt-4">                    
@@ -62,11 +61,20 @@
                     </iframe>  --}}
                 </div>
             @endif
+
+            <div class="mt-5 text-justify">
+                {!! $material->description !!}
+            </div>
+
+            <div class="mt-3">
+                <div><strong>Published On: </strong> {{$material->published_year}} </div>
+                <div><strong>Author(s): </strong> {{$material->author}} </div>
+                <div><strong>No of Pages: </strong> {{$material->pages}} </div>
+
+            </div>
+
             <div class="my-4 row">
-                <div class="col-md-4">&nbsp;</div>
-                <div class="col-md-8">
-                    <div class="sharethis-inline-share-buttons" onclick="handleShare(event)" ></div>
-                </div>
+                <div class="sharethis-inline-share-buttons" onclick="handleShare(event)" ></div>
             </div>
         </div>
         

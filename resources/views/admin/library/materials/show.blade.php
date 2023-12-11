@@ -62,6 +62,18 @@
                             <div>{{$material->search_tags}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Authors:</div>
+                            <div>{{$material->author}}</div>
+                        </div>
+                        <div class="course-row">
+                            <div>Number of Pages:</div>
+                            <div>{{$material->pages}}</div>
+                        </div>
+                        <div class="course-row">
+                            <div>Published Year:</div>
+                            <div>{{$material->published_year}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Thumbnail:</div>
                             <div><img src="/storage/{{$material->thumbnail}}" alt="" class="img img-fluid" style="max-height:200px"></div>
                         </div>

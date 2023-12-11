@@ -27,6 +27,10 @@ class CreateLibraryMaterialsTable extends Migration
             $table->string('thumbnail')->nullable();
             $table->longText('search_tags')->nullable();
             $table->string('status')->nullable()->default('Inactive');
+            $table->string('author')->nullable();
+            $table->string('pages')->nullable();
+            $table->string('published_year')->nullable();
+
             $table->timestamps();
         });
     }
