@@ -54,7 +54,8 @@ function loadDocument(url) {
         const viewport = page.getViewport({ scale, rotation });
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
-        canvas.width = viewport.width * 0.8;
+        // canvas.width = viewport.width * 0.8;
+        canvas.width = viewport.width;
         canvas.height = viewport.height;
         canvas.className = "pdf-page";
         canvas.dataset.pageNumber = pageNumber;

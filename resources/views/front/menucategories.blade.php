@@ -42,12 +42,8 @@
                         @endif
                     </div>
                     <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
-                </div>
-                
-                <div>
-                    {!! $subMenu->description !!}
-                </div>
-               
+                </div>               
+                             
 
                 @if($subMenu->type == 'file')
                     <div class="mt-4">
@@ -60,11 +56,12 @@
                     </div>
                 @endif
 
-                <div class="my-4 row">
-                    <div class="col-md-4">&nbsp;</div>
-                    <div class="col-md-8">
-                        <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
-                    </div>
+                <div class="my-4">
+                    {!! $subMenu->description !!}
+                </div>
+
+                <div class="my-4 ">
+                    <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
                 </div>
 
             </div>

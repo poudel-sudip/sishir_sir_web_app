@@ -46,11 +46,6 @@
                     <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
                 </div>
 
-
-                <div>
-                    {!! $menuCategory->description !!}
-                </div>
-
                 @if($menuCategory->type == 'file')
                     <div class="mt-4">
                         <div class="pdf-container" id="pdf-container" style="max-height:800px;overflow-y: scroll;"></div>
@@ -62,11 +57,12 @@
                     </div>
                 @endif
 
-                <div class="my-4 row">
-                    <div class="col-md-4">&nbsp;</div>
-                    <div class="col-md-8">
-                        <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
-                    </div>
+                <div class="my-4">
+                    {!! $menuCategory->description !!}
+                </div>
+
+                <div class="my-4">
+                    <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
                 </div>
             </div>
         @else
