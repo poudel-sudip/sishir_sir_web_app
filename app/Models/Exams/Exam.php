@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\OpenExams\OpenExam;
 use App\Models\Exams\ExamCategory;
+use App\Models\User;
 
 class Exam extends Model
 {
@@ -44,4 +45,8 @@ class Exam extends Model
         return $this->belongsTo(ExamCategory::class, 'category_id');
     }
     
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

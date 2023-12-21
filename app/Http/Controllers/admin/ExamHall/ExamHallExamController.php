@@ -38,6 +38,13 @@ class ExamHallExamController extends Controller
             'title'=>'string|required',
             'exam_name'=>'required|numeric|min:1',
         ]);
+
+        $search = $category->category_exams()->where('exam_id','=',$request->exam_name)->first();
+        if($search)
+        {
+            return back()->withInput()->withErrors(['exam_name'=>'This Exam is already present in the given Exam Category Set.']);
+        }
+        
         $category->category_exams()->create(['exam_id'=>$request->exam_name]);
         return redirect('/admin/exam-hall/'.$category->id.'/exams');
     }

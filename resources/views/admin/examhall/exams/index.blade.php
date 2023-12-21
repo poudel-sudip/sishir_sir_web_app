@@ -34,6 +34,7 @@
                             <th>Date</th>
                             <th>Time(HH:MM:SS)</th>
                             <th>Questions</th>
+                            <th>Creator</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -46,7 +47,7 @@
                             <td>{{ $exam->exam->exam_date ?? '' }}</td>
                             <td>{{ $exam->exam->exam_time.':00' ?? '' }} </td>
                             <td>{{ $exam->exam->questions->count() }} </td>
-                           
+                            <td>{{ $exam->exam->creator->name ?? '-' }}</td>
                             <td class="classroom-btn" width="160">
                              
                                 <form id="delete-form-{{$exam->id}}" action="/admin/exam-hall/{{$category->id}}/exams/{{$exam->id}}" method="POST" style="display: inline">

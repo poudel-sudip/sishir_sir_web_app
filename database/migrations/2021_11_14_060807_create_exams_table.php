@@ -15,6 +15,7 @@ class CreateExamsTable extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->nullable();
             $table->bigInteger('category_id')->nullable();
             $table->string('name');
             $table->text('description')->nullable();

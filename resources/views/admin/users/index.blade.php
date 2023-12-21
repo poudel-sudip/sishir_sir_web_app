@@ -47,6 +47,8 @@
                                         <td>
                                             @if($user->role == 'Admin')
                                             <span class="text-primary">{{$user->role}}</span>
+                                            @elseif($user->role == 'Moderator')
+                                            <span class="text-danger">{{$user->role}}</span>
                                             @else
                                             <span class="text-success">{{$user->role}}</span>
                                             @endif

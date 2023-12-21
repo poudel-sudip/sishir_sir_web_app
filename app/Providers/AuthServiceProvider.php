@@ -33,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('classroom',function (User $user,Batch $batch)
         {
             $user=Auth::user();
-            if($user->role == 'Admin')
+            if($user->role == 'Admin' || $user->role == 'Moderator')
             {
                 return true;
             }

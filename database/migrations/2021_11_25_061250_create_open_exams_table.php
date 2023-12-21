@@ -15,6 +15,7 @@ class CreateOpenExamsTable extends Migration
     {
         Schema::create('open_exams', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->nullable();
             $table->bigInteger('exam_id');
             $table->string('name');
             $table->string('slug')->nullable();

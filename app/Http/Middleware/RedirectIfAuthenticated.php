@@ -33,6 +33,9 @@ class RedirectIfAuthenticated
                     case 'Student':
                         return redirect('/student/home');
                         break;
+                    case 'Moderator':
+                        return redirect('/moderator/home');
+                        break;
                     default:
                         return redirect('/');
                         break;

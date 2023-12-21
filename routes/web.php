@@ -579,6 +579,134 @@ Route::post('/admin/qr-books/{book}/winners','App\Http\Controllers\Admin\Books\Q
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------all moderator panel section routes---------------------------*/
+
+//final routes for moderator panel section
+Route::get('/moderator/home', 'App\Http\Controllers\Moderator\HomeController@index')->middleware('role:Moderator');
+
+//blogs managing by moderator
+Route::get('/moderator/blogs','App\Http\Controllers\Moderator\BlogController@index')->middleware('role:Moderator');
+Route::get('/moderator/blogs/create','App\Http\Controllers\Moderator\BlogController@create')->middleware('role:Moderator');
+Route::post('/moderator/blogs','App\Http\Controllers\Moderator\BlogController@store')->middleware('role:Moderator');
+Route::get('/moderator/blogs/{blog}','App\Http\Controllers\Moderator\BlogController@show')->middleware('role:Moderator');
+Route::get('/moderator/blogs/{blog}/edit','App\Http\Controllers\Moderator\BlogController@edit')->middleware('role:Moderator');
+Route::patch('/moderator/blogs/{blog}','App\Http\Controllers\Moderator\BlogController@update')->middleware('role:Moderator');
+Route::delete('/moderator/blogs/{blog}','App\Http\Controllers\Moderator\BlogController@destroy')->middleware('role:Moderator');
+Route::get('/moderator/blogs/{blog}/comments','App\Http\Controllers\Moderator\BlogController@indexComment')->middleware('role:Moderator');
+Route::patch('/moderator/blogs/{blog}/comment/{comment}/{status}','App\Http\Controllers\Moderator\BlogController@updateComment')->middleware('role:Moderator');
+Route::put('/moderator/blogs/{blog}/comment/{comment}/{status}','App\Http\Controllers\Moderator\BlogController@updateComment')->middleware('role:Moderator');
+Route::delete('/moderator/blogs/{blog}/comment/{comment}/delete','App\Http\Controllers\Moderator\BlogController@destroyComment')->middleware('role:Moderator');
+
+//moderator mcq exam category
+Route::get('/moderator/exam-category','App\Http\Controllers\Moderator\ExamController@categoryIndex')->middleware('role:Moderator');
+Route::get('/moderator/exam-category/create','App\Http\Controllers\Moderator\ExamController@categoryCreate')->middleware('role:Moderator');
+Route::post('/moderator/exam-category','App\Http\Controllers\Moderator\ExamController@categoryStore')->middleware('role:Moderator');
+Route::delete('/moderator/exam-category/{category}','App\Http\Controllers\Moderator\ExamController@categoryDestroy')->middleware('role:Moderator');
+Route::get('/moderator/exam-category/{category}/exams','App\Http\Controllers\Moderator\ExamController@categoryExams')->middleware('role:Moderator');
+Route::get('/moderator/exam-category/{category}/getexams','App\Http\Controllers\Moderator\ExamController@categoryGetExams')->middleware('role:Moderator');
+
+//moderator mcq exam mgmt
+Route::get('/moderator/exams','App\Http\Controllers\Moderator\ExamController@examIndex')->middleware('role:Moderator');
+Route::get('/moderator/exams/create','App\Http\Controllers\Moderator\ExamController@examCreate')->middleware('role:Moderator');
+Route::post('/moderator/exams','App\Http\Controllers\Moderator\ExamController@examStore')->middleware('role:Moderator');
+Route::get('/moderator/exams/{exam}','App\Http\Controllers\Moderator\ExamController@examShow')->middleware('role:Moderator');
+Route::get('/moderator/exams/{exam}/edit','App\Http\Controllers\Moderator\ExamController@examEdit')->middleware('role:Moderator');
+Route::patch('/moderator/exams/{exam}','App\Http\Controllers\Moderator\ExamController@examUpdate')->middleware('role:Moderator');
+Route::delete('/moderator/exams/{exam}','App\Http\Controllers\Moderator\ExamController@examDestroy')->middleware('role:Moderator');
+
+// moderator mcq exam questions
+Route::get('/moderator/exams/{exam}/questions','App\Http\Controllers\Moderator\ExamController@questionIndex')->middleware('role:Moderator');
+Route::get('/moderator/exams/{exam}/questions/create','App\Http\Controllers\Moderator\ExamController@questionCreate')->middleware('role:Moderator');
+Route::get('/moderator/exams/{exam}/questions/upload','App\Http\Controllers\Moderator\ExamController@questionUpload')->middleware('role:Moderator');
+Route::post('/moderator/exams/{exam}/questions/import','App\Http\Controllers\Moderator\ExamController@questionImport')->middleware('role:Moderator');
+Route::get('/moderator/exams/{exam}/questions/download','App\Http\Controllers\Moderator\ExamController@questionDownload')->middleware('role:Moderator');
+Route::post('/moderator/exams/{exam}/questions','App\Http\Controllers\Moderator\ExamController@questionStore')->middleware('role:Moderator');
+Route::get('/moderator/exams/{exam}/questions/{question}/edit','App\Http\Controllers\Moderator\ExamController@questionEdit')->middleware('role:Moderator');
+Route::get('/moderator/exams/{exam}/questions/{question}','App\Http\Controllers\Moderator\ExamController@questionShow')->middleware('role:Moderator');
+Route::patch('/moderator/exams/{exam}/questions/{question}','App\Http\Controllers\Moderator\ExamController@questionUpdate')->middleware('role:Moderator');
+Route::delete('/moderator/exams/{exam}/questions/{question}','App\Http\Controllers\Moderator\ExamController@questionDestroy')->middleware('role:Moderator');
+
+//open mcq exams moderator
+Route::get('/moderator/open-exams','App\Http\Controllers\Moderator\ExamController@openExamIndex')->middleware('role:Moderator');
+Route::get('/moderator/open-exams/create','App\Http\Controllers\Moderator\ExamController@openExamCreate')->middleware('role:Moderator');
+Route::post('/moderator/open-exams','App\Http\Controllers\Moderator\ExamController@openExamStore')->middleware('role:Moderator');
+Route::get('/moderator/open-exams/{exam}','App\Http\Controllers\Moderator\ExamController@openExamShow')->middleware('role:Moderator');
+Route::get('/moderator/open-exams/{exam}/edit','App\Http\Controllers\Moderator\ExamController@openExamEdit')->middleware('role:Moderator');
+Route::patch('/moderator/open-exams/{exam}','App\Http\Controllers\Moderator\ExamController@openExamUpdate')->middleware('role:Moderator');
+Route::delete('/moderator/open-exams/{exam}','App\Http\Controllers\Moderator\ExamController@openExamDestroy')->middleware('role:Moderator');
+
+//open mcq exams results moderator
+Route::get('/moderator/open-exams/{exam}/results','App\Http\Controllers\Moderator\ExamController@openExamResults')->middleware('role:Moderator');
+Route::get('/moderator/open-exams/{exam}/results/export','App\Http\Controllers\Moderator\ExamController@openExamExport')->middleware('role:Moderator');
+
+//routes for exam hall moderator section
+Route::get('/moderator/exam-hall','App\Http\Controllers\Moderator\ExamHallController@index')->middleware('role:Moderator');
+Route::get('/moderator/exam-hall/create','App\Http\Controllers\Moderator\ExamHallController@create')->middleware('role:Moderator');
+Route::post('/moderator/exam-hall','App\Http\Controllers\Moderator\ExamHallController@store')->middleware('role:Moderator');
+Route::get('/moderator/exam-hall/{category}/edit','App\Http\Controllers\Moderator\ExamHallController@edit')->middleware('role:Moderator');
+Route::patch('/moderator/exam-hall/{category}','App\Http\Controllers\Moderator\ExamHallController@update')->middleware('role:Moderator');
+Route::delete('/moderator/exam-hall/{category}','App\Http\Controllers\Moderator\ExamHallController@destroy')->middleware('role:Moderator');
+
+Route::get('/moderator/exam-hall/{category}/exams','App\Http\Controllers\Moderator\ExamHallController@examindex')->middleware('role:Moderator');
+Route::get('/moderator/exam-hall/{category}/exams/create','App\Http\Controllers\Moderator\ExamHallController@examcreate')->middleware('role:Moderator');
+Route::post('/moderator/exam-hall/{category}/exams','App\Http\Controllers\Moderator\ExamHallController@examstore')->middleware('role:Moderator');
+Route::delete('/moderator/exam-hall/{category}/exams/{exam}','App\Http\Controllers\Moderator\ExamHallController@examdestroy')->middleware('role:Moderator');
+Route::get('/moderator/exam-hall/{category}/exams/{exam}/results','App\Http\Controllers\Moderator\ExamHallController@examresults')->middleware('role:Moderator');
+
+//exam hall cqc moderator section
+Route::get('/moderator/exam-hall/{category}/cqc','App\Http\Controllers\Moderator\ExamHallController@cqcindex')->middleware('role:Moderator');
+Route::post('/moderator/exam-hall/{category}/cqc','App\Http\Controllers\Moderator\ExamHallController@cqcstore')->middleware('role:Moderator');
+Route::delete('/moderator/exam-hall/{category}/cqc/{cqc}','App\Http\Controllers\Moderator\ExamHallController@cqcdestroy')->middleware('role:Moderator');
+
+//moderator section exam hall booking
+Route::get('/moderator/exam-hall/bookings','App\Http\Controllers\Moderator\ExamHallController@bookingindex')->middleware('role:Moderator');
+Route::get('/moderator/exam-hall/bookings/all','App\Http\Controllers\Moderator\ExamHallController@allBookings')->middleware('role:Moderator');
+Route::get('/moderator/exam-hall/bookings/create','App\Http\Controllers\Moderator\ExamHallController@bookingcreate')->middleware('role:Moderator');
+Route::get('/moderator/exam-hall/{category}/bookings','App\Http\Controllers\Moderator\ExamHallController@setBookings')->middleware('role:Moderator');
+Route::post('/moderator/exam-hall/bookings','App\Http\Controllers\Moderator\ExamHallController@bookingstore')->middleware('role:Moderator');
+Route::get('/moderator/exam-hall/bookings/{booking}/edit','App\Http\Controllers\Moderator\ExamHallController@bookingedit')->middleware('role:Moderator');
+Route::get('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingshow')->middleware('role:Moderator');
+Route::patch('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingupdate')->middleware('role:Moderator');
+Route::delete('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingdestroy')->middleware('role:Moderator');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*------------------------------------all student section routes---------------------------*/
 
 //final routes for students panel section

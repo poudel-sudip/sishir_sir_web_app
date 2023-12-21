@@ -33,6 +33,7 @@
                                     <th>Exams Count</th>
                                     <th>Price (Rs)</th>
                                     <th>Discount (Rs)</th>
+                                    <th>Creator</th>
                                     <th>CQC</th>
                                     <th class="text-wrap">Bookings (Unverified/Total)</th>
                                     <th>Status</th>
@@ -49,7 +50,7 @@
                                         <td> <a href="/admin/exam-hall/{{$cat->id}}/exams">Count({{$cat->category_exams->count()}})</a> </td>
                                         <td>{{$cat->price}}</td>
                                         <td>{{$cat->discount}}</td>
-                                        
+                                        <td>{{$cat->creator->name ?? '-'}}</td>
                                         <td> <a href="/admin/exam-hall/{{$cat->id}}/cqc">CQCs({{$cat->cqcs->count()}})</a> </td>
                                         <td> <a href="/admin/exam-hall/{{$cat->id}}/bookings">Bookings( {{$cat->bookings()->where('status','!=','Verified')->count()}}/{{$cat->bookings->count()}} )</a> </td>
                                         <td>

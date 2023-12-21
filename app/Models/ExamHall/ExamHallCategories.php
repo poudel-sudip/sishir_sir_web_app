@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\ExamHall\ExamHallExams;
 use App\Models\ExamHall\ExamHallBookings;
+use App\Models\User;
 
 class ExamHallCategories extends Model
 {
@@ -41,6 +43,11 @@ class ExamHallCategories extends Model
     public function cqcs(): HasMany
     {
         return $this->hasMany(ExamHallCQC::class, 'category_id')->orderByDesc('id');
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
     
 }

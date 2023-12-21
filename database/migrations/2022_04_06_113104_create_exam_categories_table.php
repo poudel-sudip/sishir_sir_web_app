@@ -15,6 +15,7 @@ class CreateExamCategoriesTable extends Migration
     {
         Schema::create('exam_categories', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->nullable();
             $table->string('title');
             $table->string('slug')->nullable();
             $table->timestamps();

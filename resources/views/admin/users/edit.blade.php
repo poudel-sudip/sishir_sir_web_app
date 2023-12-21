@@ -112,6 +112,7 @@
                                         <option value="{{$user->role}}">{{$user->role}}</option>
                                         <option value="">---------</option>
                                         <option value="Admin">Admin</option>
+                                        <option value="Moderator">Moderator</option>
                                         <option value="Student">Student</option>
                                     </select>
                                     @error('role')

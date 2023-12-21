@@ -18,7 +18,7 @@ class UsersController extends Controller
     public function index()
     {
         return view('admin.users.index',[
-            'users'=>User::whereIn('role',['Admin','Student'])->get(),
+            'users'=>User::whereIn('role',['Admin','Student','Moderator'])->get(['id','name','email','contact','role','created_at']),
         ]);
     }
 

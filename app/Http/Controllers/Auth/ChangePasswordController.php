@@ -22,6 +22,8 @@ class ChangePasswordController extends Controller
             $header='admin.layouts.app';
         }elseif (auth()->user()->role=='Student'){
             $header='student.layouts.app';
+        }elseif (auth()->user()->role=='Moderator'){
+            $header='moderator.layouts.app';
         }else{
             $header='layouts.app';
         }

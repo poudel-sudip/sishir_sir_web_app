@@ -49,6 +49,9 @@ class LoginController extends Controller
             case 'Student':
                 return '/student/home';
                 break;
+            case 'Moderator':
+                return '/moderator/home';
+                break;
             default:
                 return '/';
                 break;

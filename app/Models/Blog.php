@@ -36,7 +36,7 @@ class Blog extends Model
         return $this->hasMany(Comment::class)->orderByDesc('created_at');
     }
 
-    public function user(): BelongsTo
+    public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }

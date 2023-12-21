@@ -5,8 +5,10 @@ namespace App\Models\Exams;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 use App\Models\Exams\Exam;
+use App\Models\User;
 
 class ExamCategory extends Model
 {
@@ -28,5 +30,10 @@ class ExamCategory extends Model
     public function exams(): HasMany
     {
         return $this->hasMany(Exam::class, 'category_id');
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

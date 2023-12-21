@@ -117,6 +117,7 @@
                                     <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" required>
                                         <option value="Student">Student</option>
                                         <option value="Admin">Admin</option>
+                                        <option value="Moderator">Moderator</option>
                                     </select>
                                     @error('role')
                                     <span class="invalid-feedback" role="alert">

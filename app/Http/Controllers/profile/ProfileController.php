@@ -22,8 +22,8 @@ class ProfileController extends Controller
             $header='admin.layouts.app';
         }elseif (auth()->user()->role=='Student'){
             $header='student.layouts.app';
-        }elseif (auth()->user()->role=='Tutor'){
-            $header='tutors.layouts.app';
+        }elseif (auth()->user()->role=='Moderator'){
+            $header='moderator.layouts.app';
         }elseif (auth()->user()->role=='Vendor'){
             $header='vendors.layouts.app';
         }elseif (auth()->user()->role=='Branch'){
@@ -45,8 +45,8 @@ class ProfileController extends Controller
             $header='admin.layouts.app';
         }elseif (auth()->user()->role=='Student'){
             $header='student.layouts.app';
-        }elseif (auth()->user()->role=='Tutor'){
-            $header='tutors.layouts.app';
+        }elseif (auth()->user()->role=='Moderator'){
+            $header='moderator.layouts.app';
         }elseif (auth()->user()->role=='Vendor'){
             $header='vendors.layouts.app';
         }elseif (auth()->user()->role=='Branch'){

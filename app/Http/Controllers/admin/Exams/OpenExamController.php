@@ -37,6 +37,12 @@ class OpenExamController extends Controller
         $exam = Exam::find($request->exam_name);
         $slug = Str::slug($exam->name);
 
+        $search = OpenExam::where('exam_id','=',$exam->id)->first(['id','name']);
+        if($search)
+        {
+            return back()->withInput()->withErrors(['exam_name'=>'This Exam is already included in the Open Exams.']);
+        }
+        
         OpenExam::create([
             'exam_id' => $exam->id,
             'name'=>$exam->name,

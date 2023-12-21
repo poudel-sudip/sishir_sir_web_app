@@ -15,6 +15,7 @@ class CreateExamHallCategoriesTable extends Migration
     {
         Schema::create('exam_hall_categories', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->nullable();
             $table->string('title');
             $table->string('slug')->nullable();
             $table->string('isPinned')->nullable()->default('No');

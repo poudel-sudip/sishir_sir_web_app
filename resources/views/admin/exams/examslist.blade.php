@@ -34,6 +34,7 @@
                             {{-- <th>Date</th> --}}
                             <th>Time(HH:MM:SS)</th>
                             <th>Questions</th>
+                            <th>Creator</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
@@ -48,6 +49,7 @@
                             {{-- <td>{{ $exam->exam_date }}</td> --}}
                             <td>{{ $exam->exam_time.':00' }} </td>
                             <td> <a href="/admin/exams/{{$exam->id}}/questions"> Count({{ $exam->questions->count() }}) </a></td>
+                            <td> {{$exam->creator->name ?? '-'}} </td>
                             <td>
                               @if($exam->status == 'Inactive')
                               <span class="text-danger">{{$exam->status}}</span>
