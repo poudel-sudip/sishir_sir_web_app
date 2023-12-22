@@ -68,7 +68,7 @@
                         <h5 class="text-center"><u>Free Exams</u></h5>
                         <ul class="course-nav">
                             @foreach($exams as $exam)
-                                <li><a href="/public-exams/{{$exam->slug}}"><i class="fas fa-star pr-2 text-success"></i> {{$exam->name}} </a></li>
+                                <li><a href="/public-exams/{{$exam->slug}}"><i class="fas fa-star pr-2 text-success"></i> {{$exam->name}} ({{ $exam->exam ? ($exam->exam->questions ? $exam->exam->questions->count() : '-') : '-' }} Questions)</a></li>
                             @endforeach
                         </ul>
                     </div>

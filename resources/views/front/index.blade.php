@@ -226,7 +226,8 @@
                         <div class="row">
                             @foreach ($premiumExams as $exam)
                             <div class="col-md-6 mb-5">
-                                <h3 class="mb-3 mock-heading">{{$exam->title}}</h3>
+                                <h3 class="mock-heading">{{$exam->title}}</h3>
+                                <div class="mb-3">({{$exam->category_exams()->count() ?? '-'}} Sets)</div>
                                 <a href="/exam-hall/premium/{{$exam->slug}}" class="mock-btn mock-btn1">Book Now</a>
                                 {{-- <a href="" class="mock-btn mock-btn2">Book Now</a> --}}
                             </div>
@@ -237,7 +238,8 @@
                         <div class="row">
                             @foreach ($exams as $exam)
                             <div class="col-md-6 mb-5">
-                                <h3 class="mb-3 mock-heading">{{$exam->name}}</h3>
+                                <h3 class="mock-heading">{{$exam->name}}</h3>
+                                <div class="mb-3">({{ $exam->exam ? ($exam->exam->questions ? $exam->exam->questions->count() : '-') : '-' }} Questions)</div>
                                 <a href="/public-exams/{{$exam->slug}}" class="mock-btn mock-btn1">Exam</a>
                                 {{-- <a href="" class="mock-btn mock-btn2">Book Now</a> --}}
                             </div>

@@ -24,6 +24,12 @@
                             <form method="POST" action="/public-exams/{{$exam->slug}}/attempt">
                                 @csrf
         
+                                @if($exam->exam && $exam->exam->questions)
+                                    <div class="form-group row">
+                                        <label for="name" class="col-md-12 col-form-label text-end">Questions: {{$exam->exam->questions->count()}} </label>                                   
+                                    </div>
+                                @endif
+                                
                                 <div class="form-group row">
                                     <label for="name" class="col-md-6 col-form-label">{{ __('Name') }}</label>
         
