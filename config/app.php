@@ -176,7 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -234,6 +234,7 @@ return [
         'Share' => Jorenvh\Share\ShareFacade::class,
         
         'Helper' =>  App\Helpers\Helper::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

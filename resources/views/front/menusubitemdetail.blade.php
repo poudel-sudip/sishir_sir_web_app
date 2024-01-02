@@ -62,9 +62,7 @@
                 {!! $menuSubItem->description !!}
             </div>
 
-            <div class="my-4">
-                <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
-            </div>
+            
         </div>
 
     </div>

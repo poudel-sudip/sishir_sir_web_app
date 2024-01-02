@@ -566,7 +566,19 @@ Route::get('/admin/qr-books/{book}/winners','App\Http\Controllers\Admin\Books\QR
 Route::get('/admin/qr-books/{book}/winners/create','App\Http\Controllers\Admin\Books\QRBookController@winnerCreate')->middleware('role:Admin');
 Route::post('/admin/qr-books/{book}/winners','App\Http\Controllers\Admin\Books\QRBookController@winnerStore')->middleware('role:Admin');
 
+// admin dsaily mcq questions
+Route::get('/admin/daily-mcq-questions','App\Http\Controllers\Admin\Exams\DailyQuestionController@index')->middleware('role:Admin');
+Route::get('/admin/daily-mcq-questions/create','App\Http\Controllers\Admin\Exams\DailyQuestionController@create')->middleware('role:Admin');
+Route::get('/admin/daily-mcq-questions/upload','App\Http\Controllers\Admin\Exams\DailyQuestionController@upload')->middleware('role:Admin');
+Route::post('/admin/daily-mcq-questions/import','App\Http\Controllers\Admin\Exams\DailyQuestionController@import')->middleware('role:Admin');
+// Route::get('/admin/daily-mcq-questions/download','App\Http\Controllers\Admin\Exams\DailyQuestionController@download')->middleware('role:Admin');
+Route::post('/admin/daily-mcq-questions','App\Http\Controllers\Admin\Exams\DailyQuestionController@store')->middleware('role:Admin');
+Route::get('/admin/daily-mcq-questions/{question}/edit','App\Http\Controllers\Admin\Exams\DailyQuestionController@edit')->middleware('role:Admin');
 
+Route::get('/admin/daily-mcq-questions/{question}/comments','App\Http\Controllers\Admin\Exams\DailyQuestionController@comments')->middleware('role:Admin');
+Route::get('/admin/daily-mcq-questions/{question}','App\Http\Controllers\Admin\Exams\DailyQuestionController@show')->middleware('role:Admin');
+Route::patch('/admin/daily-mcq-questions/{question}','App\Http\Controllers\Admin\Exams\DailyQuestionController@update')->middleware('role:Admin');
+Route::delete('/admin/daily-mcq-questions/{question}','App\Http\Controllers\Admin\Exams\DailyQuestionController@destroy')->middleware('role:Admin');
 
 
 
@@ -1009,6 +1021,8 @@ Route::post('/testimonials/add','App\Http\Controllers\FrontController@addTestimo
 Route::get('/dynamic-forms/{slug}','App\Http\Controllers\FrontDynamicFormController@showDynamicForm');
 Route::post('/dynamic-forms/{slug}','App\Http\Controllers\FrontDynamicFormController@saveDynamicFormApplicant');
 
+Route::get('/question-of-the-day/{qdate}','App\Http\Controllers\FrontController@getQuestionOfDay');
+Route::post('/question-of-the-day/{qdate}/comment/add','App\Http\Controllers\FrontController@addCommentToQuestionOfDay');
 
 //front menu details
 Route::get('/{groupslug}/{menuslug}','App\Http\Controllers\FrontController@getMenuCategories');

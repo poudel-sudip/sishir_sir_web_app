@@ -94,6 +94,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/open-exams') }}">Open Exams</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/daily-mcq-questions') }}">Daily Questions</a>
+            </li>
           </ul>
         </div>
       </li>

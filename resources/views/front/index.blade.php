@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="homepage-side-update border border-primary border-2 rounded">
-                        <div class="update-header"><h5><i class="fas fa-clock"></i> अपडेट</h5></div>
+                        <div class="update-header"><h5><i class="fas fa-clock"></i> UPDATES</h5></div>
                         <div class="update-body ">
                             <ul>
                                 @forelse($updates as $update)                            
@@ -88,6 +88,14 @@
         </div>
     </section>
     
+    @if($today_question)
+        <section class="my-2 p-2 text-center">
+            <a href="/question-of-the-day/{{$today_question->show_date}}">
+                <img src="{{$today_question->image}}" alt="" class="img img-fluid">            
+            </a>
+        </section>
+    @endif
+
     @if(count($dynamic_forms))
     <section class="home-slider my-5">
         <div class="container-fluid px-md-5">

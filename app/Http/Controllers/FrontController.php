@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image as QuestionImage;
+
 use App\Models\Batch;
 use App\Models\Categories;
 use App\Models\Course;
@@ -13,8 +17,6 @@ use App\Models\TutorReview;
 use App\Models\StudyMaterial;
 use App\Models\Syllabus;
 use App\Models\HomePopup;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Provience\Provience;
 use App\Models\Orientation;
 use App\Models\OpenExams\OpenExam;
@@ -33,6 +35,8 @@ use App\Models\Library\LibraryCategory;
 use App\Models\Forms\DynamicForm;
 use App\Models\PostViewCounter;
 use App\Models\Books\QRBook;
+use App\Models\Exams\DailyMCQQuestion;
+
 
 class FrontController extends Controller
 {
@@ -57,8 +61,17 @@ class FrontController extends Controller
         $data['libraries'] = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->take(8)->get();
 
         $data['dynamic_forms'] = DynamicForm::where('banner','!=','')->where('status','=','Active')->orderByDesc('id')->take(5)->get();
-        
         $data['videos'] = FreeVideo::orderByDesc('id')->take(9)->get();
+
+        $today_question = DailyMCQQuestion::where('show_date','=',date('Y-m-d'))->first();
+        if($today_question)
+        {
+            $today_question->image = $this->generateQuestionImage($today_question);
+            $today_question = (object)$today_question->only(['id','show_date','image']);
+        }
+
+        $data['today_question'] = $today_question;
+
         $data['updates'] = [];
 
         $menu_sub_items = MenuSubItem::where('status','=','Active')
@@ -1143,5 +1156,116 @@ class FrontController extends Controller
     {
         $data = [];
         return view('front.health_ingo',$data);
+    }
+
+    public function getQuestionOfDay($qdate)
+    {
+        $qdate = date('Y-m-d',strtotime($qdate));
+        $today_question = DailyMCQQuestion::where('show_date','=',$qdate)->first();
+        if(!$today_question)
+        {
+            abort(404);
+            
+        }
+
+        $today_question->image = $this->generateQuestionImage($today_question);
+        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $counterData = Helper::pageCounterCounts('Question Of The Day',$pgurl);
+
+        return view('front.question_of_day',compact('today_question','counterData'));
+    }
+
+    public function addCommentToQuestionOfDay($qdate, Request $request)
+    {
+        $qdate = date('Y-m-d',strtotime($qdate));
+        $today_question = DailyMCQQuestion::where('show_date','=',$qdate)->first();
+        if(!$today_question)
+        {
+            abort(404);
+            
+        }
+
+        // dd($request->all());
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'nullable|string',
+            'contact' => 'required|numeric',
+            'contents' => 'required|string',
+        ]);
+
+        $today_question->comments()->create([
+            'post_type' => 'daily_mcq_question',
+            'name' => $request->name,
+            'email' => $request->email,
+            'contact' => $request->contact,
+            'message' => $request->contents,
+            'status' => 'Published',
+        ]);
+
+        return redirect('/question-of-the-day/'.$today_question->show_date);
+    }
+
+    private function generateQuestionImage($question)
+    {
+        $question_image = "question_images/question_".date('Y_m_d_',strtotime($question->show_date)).$question->id.".png";
+
+        if(!file_exists(public_path($question_image)))
+        {
+            try 
+            {
+                $qtext = wordwrap(trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags('Question: '.$question->question)))),65,"\n",false);   
+                $qtextline = substr_count( $qtext, "\n" );
+                $qoptions = [
+                    'A' => trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($question->opt_a)))),
+                    'B' => trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($question->opt_b)))),
+                    'C' => trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($question->opt_c)))),
+                    'D' => trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($question->opt_d)))),
+                ];
+
+                $image = QuestionImage::make(public_path('question_images/question_bg.png'));
+
+                $optionY = 150;
+                $image->text($qtext, 75, $optionY, function ($font) {
+                    $font->file(public_path('fonts/arial-bold.ttf')); 
+                    $font->size(34);
+                    $font->color('#02074e');
+                    $font->align('left');
+                    $font->valign('top');
+                });
+
+                $optionY = $optionY + 50 + ($qtextline*50);
+
+                foreach ($qoptions as $key => $option) {
+
+                    $optionText = wordwrap($option,70,"\n",false); 
+                    $image->text(($key).'.', 120, $optionY, function ($font) {
+                        $font->file(public_path('fonts/arial.ttf')); 
+                        $font->size(32);
+                        $font->color('#144389');
+                        $font->align('left');
+                        $font->valign('top');
+                    });
+
+                    $image->text($optionText, 160, $optionY, function ($font) {
+                        $font->file(public_path('fonts/arial.ttf')); 
+                        $font->size(32);
+                        $font->color('#144389');
+                        $font->align('left');
+                        $font->valign('top');
+                    });
+
+                    $optonline = substr_count( $optionText, "\n" );
+                    $optionY = $optionY + 45*($optonline+1); // Adjust vertical spacing between options
+                }
+
+                $image->save(public_path($question_image));
+            } 
+            catch (\Throwable $th) {
+                return null;
+            }
+            
+        }
+
+        return url($question_image);
     }
 }

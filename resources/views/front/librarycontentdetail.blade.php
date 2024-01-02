@@ -40,6 +40,15 @@
             <div class="my-4 row align-items-center">
                 <div class="col-md-4">
                     @if($material->type == 'file' && $material->download)
+                        {{-- @if(auth()->check())
+                            <a href="/storage/{{$material->fileurl}}" onclick="handleDownload(event)" class="text-primary">
+                                <i class="fa fa-download"></i>  Download
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="text-primary">
+                                <i class="fa fa-download"></i> Login to Download
+                            </a>
+                        @endif --}}
                     <a href="/storage/{{$material->fileurl}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
                     @endif
                 </div>
@@ -73,9 +82,7 @@
 
             </div>
 
-            <div class="my-4 row">
-                <div class="sharethis-inline-share-buttons" onclick="handleShare(event)" ></div>
-            </div>
+            
         </div>
         
     </div>
