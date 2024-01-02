@@ -87,7 +87,7 @@ class DailyQuestionController extends Controller
                 $optionY = 150;
                 $image->text($qtext, 75, $optionY, function ($font) {
                     $font->file(public_path('fonts/arial-bold.ttf')); 
-                    $font->size(34);
+                    $font->size(32);
                     $font->color('#02074e');
                     $font->align('left');
                     $font->valign('top');

@@ -88,13 +88,7 @@
         </div>
     </section>
     
-    @if($today_question)
-        <section class="my-2 p-2 text-center">
-            <a href="/question-of-the-day/{{$today_question->show_date}}">
-                <img src="{{$today_question->image}}" alt="" class="img img-fluid">            
-            </a>
-        </section>
-    @endif
+
 
     @if(count($dynamic_forms))
     <section class="home-slider my-5">
@@ -228,46 +222,55 @@
                       <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Free</button>
                       <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-result" type="button" role="tab" aria-controls="nav-result" aria-selected="false">Results</button>
                     </div>
-                  </nav>
-                  <div class="tab-content pt-4" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                        <div class="row">
-                            @foreach ($premiumExams as $exam)
-                            <div class="col-md-6 mb-5">
-                                <h3 class="mock-heading">{{$exam->title}}</h3>
-                                <div class="mb-3">({{$exam->category_exams()->count() ?? '-'}} Sets)</div>
-                                <a href="/exam-hall/premium/{{$exam->slug}}" class="mock-btn mock-btn1">Book Now</a>
-                                {{-- <a href="" class="mock-btn mock-btn2">Book Now</a> --}}
+                </nav>
+                <div class="row">
+                    <div class="{{$today_question ? 'col-md-6' : 'col-md-12'}}">
+                        <div class="tab-content pt-4" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                <div class="row">
+                                    @foreach ($premiumExams as $exam)
+                                        <div class="col-12 mb-5">
+                                            <h3 class="mock-heading">{{$exam->title}}</h3>
+                                            <div class="mb-3">({{$exam->category_exams()->count() ?? '-'}} Sets)</div>
+                                            <a href="/exam-hall/premium/{{$exam->slug}}" class="mock-btn mock-btn1">Book Now</a>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
-                            @endforeach
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                                <div class="row">
+                                    @foreach ($exams as $exam)
+                                        <div class="col-12 mb-5">
+                                            <h3 class="mock-heading">{{$exam->name}}</h3>
+                                            <div class="mb-3">({{ $exam->exam ? ($exam->exam->questions ? $exam->exam->questions->count() : '-') : '-' }} Questions)</div>
+                                            <a href="/public-exams/{{$exam->slug}}" class="mock-btn mock-btn1">Exam</a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-result" role="tabpanel" aria-labelledby="nav-result-tab" tabindex="0">
+                                <div class="row">
+                                    <div class="col-12 mb-5">
+                                        <a href="/results" class="mock-btn mock-btn1">View Exam Results...</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-end">
+                                <a href="/public-exams" class="btn" style="background:#1375b9; color:#fff;">View all exams...</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                        <div class="row">
-                            @foreach ($exams as $exam)
-                            <div class="col-md-6 mb-5">
-                                <h3 class="mock-heading">{{$exam->name}}</h3>
-                                <div class="mb-3">({{ $exam->exam ? ($exam->exam->questions ? $exam->exam->questions->count() : '-') : '-' }} Questions)</div>
-                                <a href="/public-exams/{{$exam->slug}}" class="mock-btn mock-btn1">Exam</a>
-                                {{-- <a href="" class="mock-btn mock-btn2">Book Now</a> --}}
-                            </div>
-                            @endforeach
+                    @if($today_question)
+                        <div class="col-md-6 text-center my-3">
+                            <a href="/question-of-the-day/{{$today_question->show_date}}">
+                                <img src="{{$today_question->image}}" alt="" class="img img-fluid">            
+                            </a>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="nav-result" role="tabpanel" aria-labelledby="nav-result-tab" tabindex="0">
-                        <div class="row">
-                            <div class="col-md-6 mb-5">
-                               {{-- <h3 class="mb-3 mock-heading">Results</h3> --}}
-                                <a href="/results" class="mock-btn mock-btn1">View Exam Results...</a>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12 text-end">
-                        <a href="/public-exams" class="btn" style="background:#1375b9; color:#fff;">View all exams...</a>
-                    </div>
+                    @endif
                 </div>
+                
             </div>
             
         </div>

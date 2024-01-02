@@ -9,7 +9,6 @@ use App\Models\Exams\Question;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ExamQuestionsImport;
 use App\Exports\Exams\ExamQuestionExport;
-use Intervention\Image\Facades\Image as QuestionImage;
 
 class QuestionController extends Controller
 {

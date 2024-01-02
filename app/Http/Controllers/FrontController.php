@@ -1213,7 +1213,7 @@ class FrontController extends Controller
         {
             try 
             {
-                $qtext = wordwrap(trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags('Question: '.$question->question)))),65,"\n",false);   
+                $qtext = wordwrap(trim(htmlspecialchars_decode(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags('Question: '.$question->question))))),65,"\n",false);   
                 $qtextline = substr_count( $qtext, "\n" );
                 $qoptions = [
                     'A' => trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($question->opt_a)))),
@@ -1227,7 +1227,7 @@ class FrontController extends Controller
                 $optionY = 150;
                 $image->text($qtext, 75, $optionY, function ($font) {
                     $font->file(public_path('fonts/arial-bold.ttf')); 
-                    $font->size(34);
+                    $font->size(32);
                     $font->color('#02074e');
                     $font->align('left');
                     $font->valign('top');
