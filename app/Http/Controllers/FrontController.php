@@ -49,8 +49,8 @@ class FrontController extends Controller
 
         $data = [];
         $data['sliders'] = Slider::all()->sortBy('order');
-        $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(4)->get(['id','title','slug']);
-        $data['exams'] = OpenExam::where('result_status','=','Unpublished')->orderByDesc('id')->take(4)->get();
+        $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(3)->get(['id','title','slug']);
+        $data['exams'] = OpenExam::where('result_status','=','Unpublished')->orderByDesc('id')->take(3)->get();
         $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('id')->first();
         $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->take(5)->get(['id','title','slug','image','author','created_at']);
         $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->take(9)->get(['id','title','slug','price','discount','thumbnail','published_year']);
@@ -1257,6 +1257,14 @@ class FrontController extends Controller
                     $optonline = substr_count( $optionText, "\n" );
                     $optionY = $optionY + 45*($optonline+1); // Adjust vertical spacing between options
                 }
+
+                $image->text(('Date: '.date('Y/m/d')), 775, 500, function ($font) {
+                    $font->file(public_path('fonts/arial-bold.ttf')); 
+                    $font->size(28);
+                    $font->color('#c50027');
+                    $font->align('left');
+                    $font->valign('top');
+                });
 
                 $image->save(public_path($question_image));
             } 

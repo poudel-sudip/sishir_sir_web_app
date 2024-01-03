@@ -59,14 +59,14 @@
     $view_count = Helper::viewCount($page_title,$page_url);
   ?>
 
-  <!-- Back to top button -->
-  <div class="back-to-top"></div>
-
   @include('front.includes.header')
 
   @yield('content')
 
   @include('front.includes.footer')
+
+  <!-- Back to top button -->
+  <div class="back-to-top" id="back_to_top"> <i class="fa fa-angle-up"></i></div>
 
   <script src="{{ asset('js/libraries/bootstrap.min.js') }}"></script>
   <script src="{{ asset('js/libraries/owl.carousel.min.js') }}"></script>
