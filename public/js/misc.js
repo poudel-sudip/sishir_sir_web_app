@@ -19,6 +19,27 @@
 
 // });
 
+$( document ).ready(function() {
+  new WOW().init();
+
+  // Attach a handler to the 'wow' animation end event
+  $('.wow').on('animationstart', function() {
+    // Start the counter animation after the 'wow' animation ends
+    $('.counter-count').each(function() {
+      $(this).prop('Counter', 0).animate({
+        Counter: $(this).text()
+      }, {
+        duration: 2500,
+        easing: 'swing',
+        step: function(now) {
+          $(this).text(Math.ceil(now));
+        }
+      });
+    });
+  });
+})
+
+
 function getPageURLWithoutProtocol() {
     let pageURL = window.location.href;
     const protocol = window.location.protocol;

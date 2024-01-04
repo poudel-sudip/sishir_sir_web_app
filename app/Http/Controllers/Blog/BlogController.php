@@ -21,7 +21,7 @@ class BlogController extends Controller
 
     public function show($slug)
     {
-        $lateat_blogs=Blog::all()->where('status','=','Published')->sortByDesc('created_at')->take(10);
+        $lateat_blogs=Blog::where('status','=','Published')->orderByDesc('id')->take(10)->get();
         $blog=Blog::where('slug',$slug)->first();
         if(!$blog)
         {

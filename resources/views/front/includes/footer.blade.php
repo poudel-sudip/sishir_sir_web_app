@@ -29,27 +29,7 @@
   </div>
 </section>
 @endif
-{{-- 
-<div class="col-sm-5 col-lg-5 footer-imp-link">
-  <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'imp_link'])->whereHas('imp_links')->take(3)->get() as $c)
-      <button class="nav-link {{ $c->id == 4 ? 'active' : '' }}" id="nav-{{ $c->id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ $c->id }}" type="button" role="tab" aria-controls="nav-{{ $c->id }}" aria-selected="true">{{ucwords($c->name)}}</button>
-      @endforeach
-    </div>
-  </nav>
-  <div class="tab-content" id="nav-tabContent">
-    @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'imp_link'])->whereHas('imp_links')->take(3)->get() as $c)
-    <div class="tab-pane fade show {{ $c->id == 4 ? 'active' : '' }}" id="nav-{{ $c->id }}" role="tabpanel" aria-labelledby="nav-{{ $c->id }}-tab" tabindex="0">
-      <ul>
-      @foreach($c->imp_links->sortBy('order') as $l)
-      <li><a href="{{$l->link_url}}" target="_blank" style="color:inherit;font:inherit;"><i class="fas fa-link text-danger"></i>{{ucwords($l->link_title)}}</a></li>
-      @endforeach
-    </ul>
-    </div>
-    @endforeach
-  </div>
-</div> --}}
+
 
 <footer class="page-footer">
   <div class="container-fluid px-md-4"> 
@@ -99,10 +79,18 @@
           <a class="linkedin" href="https://np.linkedin.com/in/shisirkumaradhikari" target="_blank"><i class="fab fa-linkedin"></i></a>
         </div>
         <hr>
-        <div class="visitor-tracker mt-3">
-          
+        <div class="visitor-tracker mt-3 wow fadeInUp">
+          <?php 
+           $web_counter = Helper::websiteCounter();  
+          ?>          
           <div><span>Last Updated Date: </span><span id="last_date"></span></div>
-          <div><span>Website Visit Counter: </span><strong> {{$view_count->web_view_count}} </strong></div>
+          <div><span>Total Blogs: </span><strong class="counter-count"> {{$web_counter->blog ?? '0'}} </strong></div>
+          <div><span>Total Books: </span><strong class="counter-count"> {{$web_counter->book ?? '0'}} </strong></div>
+          <div><span>Total MCQs: </span><strong class="counter-count"> {{$web_counter->mcq ?? '0'}} </strong></div>
+          <div><span>Total PDF: </span><strong class="counter-count"> {{$web_counter->pdf ?? '0'}} </strong></div>
+          <div><span>Total Downloads: </span><strong class="counter-count"> {{$web_counter->download ?? '0'}} </strong></div>
+          <div><span>Website Visit Counter: </span><strong class="counter-count"> {{$web_counter->website ?? '0'}} </strong></div>
+
         </div>
       </div>         
 

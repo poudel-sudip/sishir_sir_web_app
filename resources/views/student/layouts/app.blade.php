@@ -62,9 +62,7 @@
 
 </head>
 <body>
-  <?php 
-    $view_count = Helper::viewCount('','');
-  ?>
+  
   <!-- Back to top button -->
   <div class="back-to-top"></div>
 
@@ -179,7 +177,7 @@
     </div>
   </section>  
 
-  @include('front.includes.footer')
+  {{-- @include('front.includes.footer') --}}
 <script src="//npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 
 <script>

@@ -88,6 +88,13 @@
         </div>
     </section>
     
+    @if($today_question)
+        <section class="my-3 text-center">
+            <a href="/question-of-the-day/{{$today_question->show_date}}">
+                <img src="{{$today_question->image}}" alt="" class="img img-fluid">            
+            </a>
+        </section>
+    @endif
 
 
     @if(count($dynamic_forms))
@@ -212,7 +219,7 @@
         <div class="container-fluid px-md-5">
             <div class="row">
                 <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3 wow fadeInUp">Mock Tests</h2>
+                    <h2 class="home-section-heading mb-3">Mock Tests</h2>
                 </div>
             </div>
             <div class="mocktest-container">
@@ -224,12 +231,12 @@
                     </div>
                 </nav>
                 <div class="row">
-                    <div class="{{$today_question ? 'col-md-6' : 'col-md-12'}}">
+                    <div class="col-md-12">
                         <div class="tab-content pt-4" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                 <div class="row">
                                     @foreach ($premiumExams as $exam)
-                                        <div class="col-12 mb-5">
+                                        <div class="col-md-6 mb-5">
                                             <h3 class="mock-heading">{{$exam->title}}</h3>
                                             <div class="mb-3">({{$exam->category_exams()->count() ?? '-'}} Sets)</div>
                                             <a href="/exam-hall/premium/{{$exam->slug}}" class="mock-btn mock-btn1">Book Now</a>
@@ -240,7 +247,7 @@
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                                 <div class="row">
                                     @foreach ($exams as $exam)
-                                        <div class="col-12 mb-5">
+                                        <div class="col-md-6 mb-5">
                                             <h3 class="mock-heading">{{$exam->name}}</h3>
                                             <div class="mb-3">({{ $exam->exam ? ($exam->exam->questions ? $exam->exam->questions->count() : '-') : '-' }} Questions)</div>
                                             <a href="/public-exams/{{$exam->slug}}" class="mock-btn mock-btn1">Exam</a>
@@ -262,13 +269,7 @@
                             </div>
                         </div>
                     </div>
-                    @if($today_question)
-                        <div class="col-md-6 text-center my-3">
-                            <a href="/question-of-the-day/{{$today_question->show_date}}">
-                                <img src="{{$today_question->image}}" alt="" class="img img-fluid">            
-                            </a>
-                        </div>
-                    @endif
+                    
                 </div>
                 
             </div>
@@ -280,7 +281,7 @@
         <div class="container-fluid px-md-5">
             <div class="row mb-3">
                 <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3 wow fadeInUp">Blogs</h2>
+                    <h2 class="home-section-heading mb-3">Blogs</h2>
                 </div>
             </div>
             <div class="row">
@@ -326,7 +327,7 @@
         <div class="container-fluid px-md-5">
             <div class="row mb-3">
                 <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3 wow fadeInUp">Library</h2>
+                    <h2 class="home-section-heading mb-3 ">Library</h2>
                 </div>
             </div>
             <div class="row">
@@ -387,7 +388,7 @@
         <div class="container-fluid px-md-5 eb-seller my-5">
             <div class="row">
                 <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3 wow fadeInUp">My Books</h2>
+                    <h2 class="home-section-heading mb-3">My Books</h2>
                 </div>
             </div>
             <div class="row mt-4">
@@ -423,7 +424,7 @@
             <div class="container-fluid px-md-5">
                 <div class="row">
                     <div class="col-md-12 text-center relative">
-                        <h2 class="home-section-heading mb-3 wow fadeInUp">Videos</h2>
+                        <h2 class="home-section-heading mb-3 ">Videos</h2>
                         {{-- <div class="header-view-more"><a href="{{ url('/free-videos') }}">View More</a></div> --}}
                     </div>
                 </div>
@@ -474,7 +475,7 @@
         <div class="container-fluid px-md-5">
             <div class="row mb-3">
                 <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3 wow fadeInUp">Testimonial</h2>
+                    <h2 class="home-section-heading mb-3">Testimonial</h2>
                 </div>
             </div>
             <div class="review-container">

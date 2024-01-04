@@ -118,7 +118,7 @@ class DailyQuestionController extends Controller
                     $optionY = $optionY + 45*($optonline+1); // Adjust vertical spacing between options
                 }
 
-                $image->text(('Date: '.date('Y/m/d',strtotime($question->show_date))), 775, 500, function ($font) {
+                $image->text((date('Y/m/d',strtotime($question->show_date))), 875, 530, function ($font) {
                     $font->file(public_path('fonts/arial-bold.ttf')); 
                     $font->size(28);
                     $font->color('#c50027');

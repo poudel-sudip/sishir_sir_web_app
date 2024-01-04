@@ -4,19 +4,26 @@ namespace App\Helpers;
 
 use Illuminate\Container\Container;
 use Illuminate\Support\Collection;
-use App\Models\PostViewCounter;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use App\Models\PostViewCounter;
+
+use App\Models\Blog;
+use App\Models\Books\Book;
+use App\Models\Exams\Question;
+use App\Models\Library\LibraryMaterial;
+use App\Models\Menu\MenuSubGroup;
+use App\Models\Menu\MenuItemCategory;
+use App\Models\Menu\MenuItem;
+use App\Models\Menu\MenuSubItem;
+
 
 class Helper
 {
 
-    public static function viewCount($title = '', $url = '')
+    public static function addViewCount($title = '', $url = '')
     {        
-        $data['page']            = '';
-        // $data['page_view_count'] = '0';
-        $data['web_view_count']  = '0';
-        
+        $data['page']            = '';        
         if($title && $url)
         {
             $postViewCounter = PostViewCounter::firstOrCreate([
@@ -25,39 +32,12 @@ class Helper
             ]);
 
             $postViewCounter->increment('view_count');
-            // $currentViewCount = $postViewCounter->view_count;
-            $totalViewCount = PostViewCounter::getTotalViewCount();
             
-            $data['page']            = $title;
-            // $data['page_view_count'] = $currentViewCount;
-            $data['web_view_count']  = $totalViewCount;
+            $data['page'] = $title;
 
         }
         
-        return (object)$data;       
-        
-        
-        
-        // $agent                   =  request()->header('User-Agent');
-        // $data['page']            = '';
-        // $data['page_view_count'] = '0';
-        // $data['web_view_count']  = '0';
-
-        // if($page)
-        // {
-        //     $page = ucfirst($page);
-        //     PostViewCounter::create([
-        //         'title'      => $page,
-        //         'user_agent' => $agent,
-        //     ]);
-
-        //     $data['page']            = $page;
-        //     // $data['page_view_count'] = PostViewCounter::where('title','=',$page)->count();
-        //     // $data['web_view_count']  = PostViewCounter::count();
-        //     $data['page_view_count'] = DB::table('post_view_counters')->where('title','=',$page)->count();
-        //     $data['web_view_count']  = DB::table('post_view_counters')->count();
-        // }
-                
+        return (object)$data;            
         
     }
 
@@ -161,4 +141,24 @@ class Helper
 
         return $content;
     }
+
+    public static function websiteCounter()
+    {
+        $lib_pdf = LibraryMaterial::where('type','=','file')->count();
+        $m_sg_pdf = MenuSubGroup::where('type','=','file')->count();
+        $m_cat_pdf = MenuItemCategory::where('type','=','file')->count();
+        $m_itm_pdf = MenuItem::where('type','=','file')->count();
+        $m_sitm_pdf = MenuSubItem::where('type','=','file')->count();
+        
+        $data['pdf'] = $lib_pdf + $m_sg_pdf + $m_cat_pdf + $m_itm_pdf + $m_sitm_pdf;        
+        $data['blog'] = Blog::count();
+        $data['book'] = Book::count();
+        $data['mcq'] = Question::count();
+        $data['download'] = PostViewCounter::getTotalDownloadCount();
+        $data['website'] = PostViewCounter::getTotalViewCount();
+
+        return (object)($data);
+
+    }
+
 }

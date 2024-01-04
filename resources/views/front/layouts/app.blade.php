@@ -56,7 +56,7 @@
   <?php 
     $page_title = View::getSection('page_title', '');
     $page_url = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-    $view_count = Helper::viewCount($page_title,$page_url);
+    $view_count = Helper::addViewCount($page_title,$page_url);
   ?>
 
   @include('front.includes.header')
