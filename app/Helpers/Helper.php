@@ -168,19 +168,19 @@ class Helper
 
     public static function mostViewPosts()
     {
-        $posts = PostViewCounter::where('title','!=',null)->orderByDesc('view_count')->take(3)->get(['title','url','view_count as count']);
+        $posts = PostViewCounter::where('title','!=',null)->orderByDesc('view_count')->take(4)->get(['title','url','view_count as count']);
         return $posts;
     }
 
     public static function mostSharePosts()
     {
-        $posts = PostViewCounter::where('title','!=',null)->orderByDesc('share_count')->take(3)->get(['title','url','share_count as count']);
+        $posts = PostViewCounter::where('title','!=',null)->orderByDesc('share_count')->take(4)->get(['title','url','share_count as count']);
         return $posts;
     }
 
     public static function mostDownloadPosts()
     {
-        $posts = PostViewCounter::where('title','!=',null)->orderByDesc('download_count')->take(3)->get(['title','url','download_count as count']);
+        $posts = PostViewCounter::where('title','!=',null)->orderByDesc('download_count')->take(4)->get(['title','url','download_count as count']);
         return $posts;
     }
     

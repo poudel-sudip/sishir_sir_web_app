@@ -150,7 +150,7 @@
       </div>
 
       <div class="col-md-5">
-        <h5 class="mt-3">Most Viewed Contents :</h5>
+        <h5 class="mt-3">Most Popular :</h5>
         <div class="row">
           @foreach(Helper::mostViewPosts() as $post)
             <div class="col-12 footer-most-viewed">

@@ -1600,7 +1600,7 @@ p {
     margin-bottom: 16px;
     /* color: #d4d5d6; */
     color: #ffffff;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 .page-footer hr {
@@ -1744,7 +1744,7 @@ p {
     color: rgba(255, 255, 255, 1);
     transition: all .2s ease;
     /* font-weight: 600; */
-    font-size: 16px!important;
+    font-size: 14px!important;
     text-decoration: none;
 }
 
