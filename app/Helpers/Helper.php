@@ -85,7 +85,7 @@ class Helper
         
     }
 
-    public static function pageCounterCounts($title = '', $url = '')
+    public static function pageCounterCounts($title = '', $url = '',$type='')
     {        
         $data['page']            = '';
         $data['page_view_count'] = '0';
@@ -97,6 +97,11 @@ class Helper
             $postViewCounter = PostViewCounter::firstOrCreate([
                 'url' => $url,
             ]);
+
+            if($type == 'article' && !$postViewCounter->title)
+            {
+              $postViewCounter->update(['title'=>$title]);  
+            }
             
             $data['page']            = $title;
             $data['page_view_count'] = $postViewCounter->view_count;
@@ -161,4 +166,22 @@ class Helper
 
     }
 
+    public static function mostViewPosts()
+    {
+        $posts = PostViewCounter::where('title','!=',null)->orderByDesc('view_count')->take(3)->get(['title','url','view_count as count']);
+        return $posts;
+    }
+
+    public static function mostSharePosts()
+    {
+        $posts = PostViewCounter::where('title','!=',null)->orderByDesc('share_count')->take(3)->get(['title','url','share_count as count']);
+        return $posts;
+    }
+
+    public static function mostDownloadPosts()
+    {
+        $posts = PostViewCounter::where('title','!=',null)->orderByDesc('download_count')->take(3)->get(['title','url','download_count as count']);
+        return $posts;
+    }
+    
 }

@@ -29,7 +29,8 @@ class BlogController extends Controller
         }
         //    $headercategories=Categories::all()->where('status','=','Active');
         $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        $counterData = Helper::pageCounterCounts('Blog Show',$pgurl);
+        $pgtype = 'article';
+        $counterData = Helper::pageCounterCounts($blog->title,$pgurl,$pgtype);
         return view('front.blogs.show',compact('blog', 'lateat_blogs','counterData'));
     }
 

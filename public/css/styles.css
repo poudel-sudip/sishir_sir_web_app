@@ -1771,6 +1771,7 @@ p {
     color: #ffff;
     transition: all .2s ease;
     text-decoration: none;
+    margin: 5px 2px;
 }
 
 .footer-sosmed a:hover {
@@ -1805,6 +1806,24 @@ p {
 .footer-sosmed a.linkedin {
     background-color: #0077b5;
 }
+
+.footer-most-viewed a {
+    display: inline-block;
+    /* line-height: 30px; */
+    font-size: 15px;
+    color: #ffff;
+    transition: all .2s ease;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+.footer-most-viewed a small {
+    color: #ded4b3;
+    text-wrap: nowrap;
+}
+
+/* .footer-most-viewed a .fa {
+    color: #ded4b3;
+} */
 
 .footer-card-section {
     border-top: 1px solid #3b3b3b;
@@ -5638,7 +5657,7 @@ label.star:before {
     font-size: 13px;
 }
 .visitor-tracker strong{
-    font-size: 18px;
+    font-size: 14px;
     color: #ded4b3;
     padding-left: 10px;
 }

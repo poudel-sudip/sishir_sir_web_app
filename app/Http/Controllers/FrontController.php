@@ -222,10 +222,11 @@ class FrontController extends Controller
         $data['subMenu'] = $subMenu;
 
         $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        $counterData = Helper::pageCounterCounts('Menu Sub Group',$pgurl);
+        $pgtype = $subMenu->type == 'heading' ? null : 'article';
+        $counterData = Helper::pageCounterCounts($subMenu->name,$pgurl,$pgtype);
 
         $data['counterData'] = $counterData;
-        // dd($data);
+        // dd($data,$pgtype);
         return view('front.menucategories',$data);
     }
 
@@ -256,7 +257,8 @@ class FrontController extends Controller
         $data['menuItems'] = $menuCategory->items()->where('status','=','Active')->orderByDesc('id')->get();
 
         $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        $counterData = Helper::pageCounterCounts('Menu Category',$pgurl);
+        $pgtype = $menuCategory->type == 'heading' ? null : 'article';
+        $counterData = Helper::pageCounterCounts($menuCategory->name,$pgurl,$pgtype);
 
         $data['counterData'] = $counterData;
 
@@ -296,7 +298,8 @@ class FrontController extends Controller
         $data['menuItem'] = $menuItem;
 
         $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        $counterData = Helper::pageCounterCounts('Menu Item',$pgurl);
+        $pgtype = $menuItem->type == 'heading' ? null : 'article';
+        $counterData = Helper::pageCounterCounts($menuItem->name,$pgurl,$pgtype);
 
         $data['counterData'] = $counterData;
 
@@ -343,7 +346,8 @@ class FrontController extends Controller
         $data['menuSubItem'] = $menuSubItem;
 
         $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        $counterData = Helper::pageCounterCounts('Menu Sub Item',$pgurl);
+        $pgtype = $menuSubItem->type == 'heading' ? null : 'article';
+        $counterData = Helper::pageCounterCounts($menuSubItem->name,$pgurl,$pgtype);
 
         $data['counterData'] = $counterData;
         // dd($data);
@@ -389,7 +393,8 @@ class FrontController extends Controller
         }
 
         $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        $counterData = Helper::pageCounterCounts('Library Materials',$pgurl);
+        $pgtype = $material->type == 'heading' ? null : 'article';
+        $counterData = Helper::pageCounterCounts($material->name,$pgurl,$pgtype);
 
         return view('front.librarycontentdetail',compact('library_category','material','counterData'));
     }
@@ -1170,7 +1175,7 @@ class FrontController extends Controller
 
         $today_question->image = $this->generateQuestionImage($today_question);
         $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        $counterData = Helper::pageCounterCounts('Question Of The Day',$pgurl);
+        $counterData = Helper::pageCounterCounts('Question Of The Day '.$qdate,$pgurl,'article');
 
         return view('front.question_of_day',compact('today_question','counterData'));
     }

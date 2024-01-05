@@ -31,7 +31,7 @@
 @endif
 
 
-<footer class="page-footer">
+{{-- <footer class="page-footer">
   <div class="container-fluid px-md-4"> 
     <div class="row">
       <div class="col-md-4">
@@ -41,19 +41,13 @@
         <hr>
         <ul class="footer-menu">
           <li><a href="/about-us">About Us</a></li>
-          {{-- <li><a href="/blogs">Blogs</a></li> --}}
-          {{-- <li><a href="/results">Results</a></li> --}}
           <li><a href="/bmi-calculator">BMI Calculator</a></li>
           <li><a href="/health-ingos">Health INGOs in Nepal</a></li>
           <li><a href="//gorkhapatraonline.com/categories/loksewa" target="_blank">Gorkhapatra Loksewa</a></li>
           <li><a href="//drive.google.com/drive/folders/1ixtmm2DxJD7vhjCrAmy29-ID3RUxAsBf" target="_blank">IEC Materials</a></li>
           <li><a href="//drive.google.com/drive/folders/1aRMa-Zzow1NTHkrbP218PVQoL7g_lK27" target="_blank">Health Days</a></li>
-          {{-- <li><a href="/privacy">Terms & Condition</a></li> --}}
-          {{-- <li><a href="/privacy">Privacy</a></li> --}}
-          {{-- <li><a href="/contact">Contact Us</a></li> --}}
           <li><a href="/enquiry">Enquiries</a></li>
           <li><a href="/testimonials">Testimonials</a></li>
-          {{-- <li><a href="/careers">Careers</a></li> --}}
         </ul>
       </div>
       <div class="col-md-4">
@@ -70,7 +64,6 @@
         <h5 class="mt-5">Connect with us :</h5>
         <div class="footer-sosmed">
           <a class="facebook" href="https://www.facebook.com/groups/Healthandloksewa" target="_blank"><i class="fab fa-facebook-f"></i></a>
-          {{-- <a class="whatsapp" href="https://wa.me/9779857084806" target="_blank"><i class="icon-whatsapp"></i></a> --}}
           <a class="whatsapp" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" target="_blank"><i class="icon-whatsapp"></i></a>
           <a class="youtube" href="https://www.youtube.com/channel/UCSFeHpNoMSF-BBgsDtro0zw" target="_blank"><i class="icon-youtube"></i></a>
           <a class="twitter" href="https://twitter.com/ShisirAdhikari" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -80,6 +73,7 @@
         </div>
         <hr>
         <div class="visitor-tracker mt-3 wow fadeInUp">
+          <h5 class="">Web Counter :</h5>
           <?php 
            $web_counter = Helper::websiteCounter();  
           ?>          
@@ -95,6 +89,96 @@
       </div>         
 
       <div class="col-md-4">
+        <div class="fb-continer">
+          <div class="fb-page" data-href="https://www.facebook.com/Shisirkumaradhikari/" data-tabs="timeline"  data-small-header="false" data-container-width="100%" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+            <blockquote cite="https://www.facebook.com/Shisirkumaradhikari/" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/Shisirkumaradhikari/">Shisir Kumar Adhikari</a>
+            </blockquote>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</footer> --}}
+
+<footer class="page-footer">
+  <div class="container-fluid px-md-4"> 
+    <div class="row">
+      <div class="col-md-4">
+        <div class="footer-logo text-md-center">
+          <img src="{{ asset('images/logo.png') }}" alt="footer-logo" height="80">
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="footer-menu">
+              <li><a href="/about-us">About Us</a></li>
+              <li><a href="/bmi-calculator">BMI Calculator</a></li>
+              <li><a href="/health-ingos">Health INGOs in Nepal</a></li>
+              <li><a href="//gorkhapatraonline.com/categories/loksewa" target="_blank">Gorkhapatra Loksewa</a></li>
+              <li><a href="//drive.google.com/drive/folders/1ixtmm2DxJD7vhjCrAmy29-ID3RUxAsBf" target="_blank">IEC Materials</a></li>
+              <li><a href="//drive.google.com/drive/folders/1aRMa-Zzow1NTHkrbP218PVQoL7g_lK27" target="_blank">Health Days</a></li>
+              <li><a href="/enquiry">Enquiries</a></li>
+              <li><a href="/testimonials">Testimonials</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h5 class="mt-3">Info & Support :</h5>
+            <div class="row">
+              <div class="col-12">
+                <div class="info-phone"><a href="mailto:info@shisiradhikari.com" style="color:#fff"><span class="icon-mail2"></span>  info@shisiradhikari.com</a></div>
+              </div>
+              <div class="col-12">
+                <div class="info-phone"><a target="_blank" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" style="color:#fff"><span class="icon-whatsapp"></span>  +977 - 981-2417639</a></div>
+              </div>    
+            </div>
+            <hr>
+            <h5 class="">Connect with us :</h5>
+            <div class="footer-sosmed">
+              <a class="facebook" href="https://www.facebook.com/groups/Healthandloksewa" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a class="whatsapp" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" target="_blank"><i class="icon-whatsapp"></i></a>
+              <a class="youtube" href="https://www.youtube.com/channel/UCSFeHpNoMSF-BBgsDtro0zw" target="_blank"><i class="icon-youtube"></i></a>
+              <a class="twitter" href="https://twitter.com/ShisirAdhikari" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a class="tiktok" href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+              <a class="instagram" href="https://www.instagram.com/shisirkumaradhikari" target="_blank"><i class="fab fa-instagram"></i></a>
+              <a class="linkedin" href="https://np.linkedin.com/in/shisirkumaradhikari" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="col-md-5">
+        <h5 class="mt-3">Most Viewed Contents :</h5>
+        <div class="row">
+          @foreach(Helper::mostViewPosts() as $post)
+            <div class="col-12 footer-most-viewed">
+              <a href="{{$post->url}}">
+                <div><i class="fa fa-pen-nib me-1"></i> {{$post->title}}  <small class="ms-2">({{$post->count}} views)</small> </div>
+              </a>
+            </div>
+          @endforeach
+        </div>
+        
+        <hr>
+        <div class="visitor-tracker mt-3 wow fadeInUp">
+          <h5 class="">Web Counter :</h5>
+          <?php 
+           $web_counter = Helper::websiteCounter();  
+          ?>          
+          <div><span>Last Updated Date: </span><span id="last_date"></span></div>
+          <div><span>Total Blogs: </span><strong class="counter-count"> {{$web_counter->blog ?? '0'}} </strong></div>
+          <div><span>Total Books: </span><strong class="counter-count"> {{$web_counter->book ?? '0'}} </strong></div>
+          <div><span>Total MCQs: </span><strong class="counter-count"> {{$web_counter->mcq ?? '0'}} </strong></div>
+          <div><span>Total PDF: </span><strong class="counter-count"> {{$web_counter->pdf ?? '0'}} </strong></div>
+          <div><span>Total Downloads: </span><strong class="counter-count"> {{$web_counter->download ?? '0'}} </strong></div>
+          <div><span>Website Visit Counter: </span><strong class="counter-count"> {{$web_counter->website ?? '0'}} </strong></div>
+
+        </div>
+      </div>         
+
+      <div class="col-md-3">
         <div class="fb-continer">
           <div class="fb-page" data-href="https://www.facebook.com/Shisirkumaradhikari/" data-tabs="timeline"  data-small-header="false" data-container-width="100%" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
             <blockquote cite="https://www.facebook.com/Shisirkumaradhikari/" class="fb-xfbml-parse-ignore">
