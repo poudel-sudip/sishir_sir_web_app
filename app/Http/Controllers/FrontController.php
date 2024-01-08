@@ -192,6 +192,15 @@ class FrontController extends Controller
         })
         ->toArray();
 
+        $blog_updates = $data['blogs']->map(function($b){
+            return (object)[
+                'title' => $b->title,
+                'created_at' => $b->created_at,
+                'link' => '/blogs/'.$b->slug,
+            ];
+        })->toArray();
+
+        $data['updates'] = array_merge($data['updates'], $blog_updates);
         $data['updates'] = array_merge($data['updates'], $menu_submenus);
         $data['updates'] = array_merge($data['updates'], $menu_categories);
         $data['updates'] = array_merge($data['updates'], $menu_items);

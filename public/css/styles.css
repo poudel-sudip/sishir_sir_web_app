@@ -38,7 +38,7 @@ p {
 }
 
 .topbar {
-    background: #1d1d1d;
+    background: #012a49;
     padding: 5px 0;
 }
 
@@ -1583,7 +1583,7 @@ p {
     display: block;
     padding-top: 30px;
     padding-bottom: 16px;
-    background-color: #1c252e;
+    background-color: #023358;
     color: #fff;
 }
 
@@ -1846,7 +1846,7 @@ p {
 }
 
 .lower-footer {
-    background: #000000;
+    background: #031e35;
     padding: 10px 0;
 }
 

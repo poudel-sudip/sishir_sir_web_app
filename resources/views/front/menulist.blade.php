@@ -40,7 +40,7 @@
                 <div class="my-4 row align-items-center">
                     <div class="col-md-4">
                         @if($menuCategory->type == 'file' && $menuCategory->download)
-                        <a href="/storage/{{$menuCategory->fileurl}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                        <a href="/storage/{{$menuCategory->fileurl}}" filename="{{ucwords($menuCategory->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
                         @endif
                     </div>
                     <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
@@ -116,10 +116,11 @@
             event.preventDefault(); // Prevent the default behavior of the link
 
             var downloadUrl = event.target.getAttribute("href");
+            var filename = event.target.getAttribute("filename");
 
             var link = document.createElement("a");
             link.href = downloadUrl;
-            link.download = ""; // Set an empty value for the download attribute to preserve the original filename
+            link.download = filename +" || shisiradhikari.com.pdf"; // Set an empty value for the download attribute to preserve the original filename
 
             document.body.appendChild(link);
 
