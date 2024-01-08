@@ -58,7 +58,7 @@ class FrontController extends Controller
         $data['ads'] = Advertisement::all();
         // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
         // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
-        $data['libraries'] = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->take(8)->get();
+        // $data['libraries'] = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->take(8)->get();
 
         $data['dynamic_forms'] = DynamicForm::where('banner','!=','')->where('status','=','Active')->orderByDesc('id')->take(5)->get();
         $data['videos'] = FreeVideo::orderByDesc('id')->take(9)->get();
@@ -363,14 +363,20 @@ class FrontController extends Controller
         return view('front.menusubitemdetail',$data);
     }
 
-    public function getLibrary()
+    public function getLibrary(Request $request)
     {
-        $library_categories = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->get();
-        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        // $counterData = Helper::pageCounterCounts('Library',$pgurl);
+        $filterchar = 'all';
+        if(isset($request->filter) && trim($request->filter))
+        {
+            $filterchar = trim($request->filter);
+        }
 
-        $data['library_categories'] = $library_categories;
-        // $data['counterData'] = $counterData;
+        $library_categories = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->get(['name','slug'])->toArray();
+
+        $data['filterchar'] = $filterchar;
+        $data['js_lib_categories'] = json_encode($library_categories);
+
+        // dd($data);
         return view('front.libraries',$data);
     }
 
@@ -381,10 +387,14 @@ class FrontController extends Controller
         {
             abort(404);
         }
-        $directories = $library_category->childs;
-        $library_materials = $library_category->materials()->where('status','=','Active')->orderByDesc('id')->get(['id','name','slug','published_year','author','pages','description']);
-        // dd($directories);
-        return view('front.librarycontents',compact('library_category','directories','library_materials'));
+
+        $data['library_category'] = $library_category;
+        $data['directories'] = $library_category->childs()->get(['name','slug']);
+        $data['library_materials'] = $library_category->materials()->where('status','=','Active')->orderByDesc('id')->get(['id','name','slug','published_year','author','pages','description']);
+        $data['js_lib_categories'] = json_encode($data['directories']);
+        
+        // dd($data);
+        return view('front.librarycontents',$data);
     }
 
     public function getLibraryContentDetail($catslug, $matslug)

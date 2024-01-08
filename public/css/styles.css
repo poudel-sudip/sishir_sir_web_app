@@ -1816,6 +1816,11 @@ p {
     text-decoration: none;
     margin: 5px 2px;
 }
+
+.footer-most-viewed a:hover {
+    color: #ded4b3;
+}
+
 .footer-most-viewed a small {
     color: #ded4b3;
     text-wrap: nowrap;
@@ -6056,3 +6061,28 @@ label.star:before {
     z-index: 900;
   }
   
+.lib-filter-alphabets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.lib-filter-alphabets span,
+.lib-filter-alphabets a {
+    background:#0077b5;
+    color:#ffffff;
+    padding: 2px 10px;
+    margin:5px;
+    cursor:pointer;
+}
+
+.lib-filter-alphabets span.active,
+.lib-filter-alphabets a.active {
+    background: #f91611;
+}
+
+.lib-filter-alphabets span:hover,
+.lib-filter-alphabets a:hover {
+    background: #f91611;
+}

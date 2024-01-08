@@ -322,7 +322,6 @@
         </div>
     </section>
 
-    @if(count($libraries))
     <section class="home-ebook mt-3 mb-5">
         <div class="container-fluid px-md-5">
             <div class="row mb-3">
@@ -330,7 +329,15 @@
                     <h2 class="home-section-heading mb-3 ">Library</h2>
                 </div>
             </div>
-            <div class="row">
+            <div class="lib-filter-alphabets">
+                <a href="/library" class="lib-filter-character active" > All </a>
+                @for($i='A';$i<'Z';$i++)
+                    <a href="/library?filter={{$i}}" class="lib-filter-character" > {{$i}} </a>
+                @endfor
+                <a href="/library?filter=Z" class="lib-filter-character" > Z </a>
+            </div>    
+
+            {{-- <div class="row">
                 @foreach ($libraries as $cat)
                 <div class="col-sm-6 col-md-3 mb-3">
                     <div class="ebook-section library-item border border-primary text-center">
@@ -347,10 +354,9 @@
                 <div class="col-12 text-end mt-2">
                     <a href="/library" class="btn" style="background:#1375b9;color:#fff">View all...</a>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
-    @endif
 
     {{-- @if(count($books))
         <section class="course-section">

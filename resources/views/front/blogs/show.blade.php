@@ -36,9 +36,9 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12">
+                        {{-- <div class="col-md-12">
                             <img src="/storage/{{$blog->image}}" style="width: 100%">
-                        </div>
+                        </div> --}}
                         <div class="col-md-12 mt-3">
                             <div class="blog-full-description">{!! $blog->description !!}</div>
                         </div>

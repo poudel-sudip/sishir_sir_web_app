@@ -21,7 +21,7 @@
                     <div class="card-header">{{$blog->title}} </div>
                     <div class="card-body">
                         <div class="course-row">
-                            <div>Image: </div>
+                            <div>Thumbnail Image: </div>
                             <div><img src="/storage/{{$blog->image}}" width="200"></div>
                         </div>
 
