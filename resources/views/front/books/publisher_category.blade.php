@@ -30,11 +30,13 @@
                 <div class="row">
                     @forelse($categories as $cat)
                         <div class="col-md-3 mb-3">
-                            <div class="single-blog text-center py-3 library-item border border-primary">
-                                <div class="">
-                                    <a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}"><i class="h1 fa fa-book"></i></a>
+                            <div class="seller-item border border-primary rounded border-2">
+                                <div class="seller-header text-center">
+                                    <a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">
+                                        <img src="/storage/{{$cat->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
+                                    </a>
+                                    <h5 class="mt-3"><a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">{{ucwords($cat->name)}}</a></h5>
                                 </div>
-                                <h5><a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">{{ucwords($cat->name)}}</a></h5>
                             </div>
                         </div>
                     @empty                  

@@ -450,8 +450,16 @@ class FrontController extends Controller
         }
 
         $data['publisher'] = $publisher;
-        $data['categories'] = $publisher->pub_categories()->where('status','=','Active')->get();
+        $data['categories'] = $publisher->pub_categories()
+        ->where('status','=','Active')
+        ->get()
+        ->map(function($cat){
+            $bookimg = $cat->cat_books()->where('status','=','Active')->orderByDesc('id')->first(['thumbnail']);
+            $cat->image = $bookimg->thumbnail ?? null;
+            return $cat;
+        });
         
+        // dd($data);
         return view('front.books.publisher_category',$data);
     }
 
