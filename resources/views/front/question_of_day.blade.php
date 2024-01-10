@@ -21,39 +21,88 @@
                 </div>
             </div>
         </div>
-        <div class="blogs-details-container ebook-section" style="background:transparent">            
-            <div class="ebook-page-details">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="text-end mb-2">
-                            <span class="mx-2"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($today_question->show_date))}}</span>
-                            <span class="mx-2"><i class="fa fa-comments"></i> {{$today_question->comments()->count()}}</span>
-                            <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
-                            <span class="mx-2"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
-                        </div>
-                        <div class="text-center">
-                            <img src="{{$today_question->image}}" alt="" class="img img-fluid">
-                        </div>   
-                        <div class="text-center mt-4">
-                            <div class="sharethis-inline-share-buttons" onclick="handleShare(event)" ></div>
-                        </div>    
-                    </div>                    
-                </div>      
-            </div>     
+
+        <div class="ebook-section" style="background:transparent">      
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="ebook-page-details border-primary">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="text-end mb-2">
+                                    <span class="mx-2"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($today_question->show_date))}}</span>
+                                    <span class="mx-2"><i class="fa fa-comments"></i> {{$today_question->comments()->count()}}</span>
+                                    <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
+                                    <span class="mx-2"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
+                                </div>
+                                <div class="text-center">
+                                    <img src="{{$today_question->image}}" alt="" class="img img-fluid">
+                                </div>   
+                                <div class="text-center mt-4">
+                                    <div class="sharethis-inline-share-buttons" onclick="handleShare(event)" ></div>
+                                </div>    
+                            </div>                    
+                        </div>      
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ebook-page-details border-primary">
+                        <h4 class="text-center text-primary"><u>Last Day Question</u></h4>
+                        @foreach($previous_questions as $question)
+                            <div class="text-center my-3">
+                                <a href="/question-of-the-day/{{$question->show_date}}">
+                                    <img src="{{$question->image}}" alt="" class="img img-fluid">
+                                </a>
+                            </div>  
+                        @endforeach                            
+                    </div> 
+                </div>
+            </div>
+                    
             
             <div class="ebook-page-details">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <h4>Comments ({{$today_question->comments()->count()}}) </h4>
                     </div>
-                    <div class="col-6 text-end">
+                    <div class="col-4 text-center">
+                        <button type="button" class="btn btn-primary btn-sm" id="show_answer_btn" >
+                            <i class="fa fa-eye"></i> Show The Correct Answer
+                        </button>
+                    </div>
+                    <div class="col-4 text-end">
                         <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal">
                             Add Comment
                         </button>
                     </div>
                 </div>
                 
-                <div class="tutor-review-container">                    
+                <div class="tutor-review-container">   
+                    <div class="quesetion-correct-answer hidden" id="correct_answer_section">
+                        <div class="alert alert-success">
+                            <div>The Correct Answer is: </div>
+                            <div>
+                                <strong> 
+                                    @if(strtolower($today_question->opt_correct) == 'a')
+                                        A) {{$today_question->opt_a}}
+                                    @elseif(strtolower($today_question->opt_correct) == 'b')
+                                        B) {{$today_question->opt_b}}
+                                    @elseif(strtolower($today_question->opt_correct) == 'c')
+                                        C) {{$today_question->opt_c}}
+                                    @elseif(strtolower($today_question->opt_correct) == 'd')
+                                        D) {{$today_question->opt_d}}
+                                    @else
+                                    @endif
+                                </strong>
+                            </div>
+                            <div class="mt-3">
+                                <h6>Rationale / Justification:</h6>
+                                <div>
+                                    {!!$today_question->rationale!!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+
                     @if($today_question->comments()->count())
                         <div class="tutor-rev-whole-container" id="content">
                             @foreach($today_question->comments()->orderByDesc('id')->take(20)->get() as $review)
@@ -117,6 +166,7 @@
             </div>
 
         </div>
+                    
     </div>    
 
     <script>
@@ -125,5 +175,11 @@
             const postData = { type: 'share', page: 'Question Of The Day',pageurl: pageURL };
             postDataWithFetch('/page-counter-increment', postData);
         }
+    </script>
+
+    <script>
+        $('#show_answer_btn').on('click',function(e){
+            $('#correct_answer_section').toggleClass('hidden');
+        });
     </script>
 @endsection 

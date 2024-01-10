@@ -1,11 +1,3 @@
-	
-// var cssNode2 = document.createElement('style'); 
-// cssNode2.type = 'text/css'; 
-// cssNode2.media = 'screen'; 
-// cssNode2.innerHTML ='div{-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}';
-// document.head.appendChild(cssNode2);
-// document.body.style.cssText="-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;";
- 	
 
 var allow_print = false;
 var allow_copy = false;
@@ -56,20 +48,19 @@ if (!allow_screenshot)
 			navigator.clipboard.writeText('');		
 		}
 	});
-
 }
 
 function toBlur()
 {
-	if (!allow_screenshot)
-	{
-		document.body.style.cssText="-webkit-filter: blur(0.25px);-moz-filter: blur(0.25px);-ms-filter: blur(0.25px);-o-filter: blur(0.25px);filter: blur(0.25px);"
-	}
+	// if (!allow_screenshot)
+	// {
+	// 	document.body.style.cssText="-webkit-filter: blur(0.25px);-moz-filter: blur(0.25px);-ms-filter: blur(0.25px);-o-filter: blur(0.25px);filter: blur(0.25px);"
+	// }
 }
 
 function toClear()
 {
-	document.body.style.cssText="-webkit-filter: blur(0px);-moz-filter: blur(0px);-ms-filter: blur(0px);-o-filter: blur(0px);filter: blur(0px);"
+	// document.body.style.cssText="-webkit-filter: blur(0px);-moz-filter: blur(0px);-ms-filter: blur(0px);-o-filter: blur(0px);filter: blur(0px);"
 }
 
 

@@ -1,6 +1,7 @@
 @extends('front.layouts.app')
 @section('page_title','Home')
 @section('content')
+{{-- @include('front.includes.call-us') --}}
     <style>
         body{
             overflow-x: hidden;

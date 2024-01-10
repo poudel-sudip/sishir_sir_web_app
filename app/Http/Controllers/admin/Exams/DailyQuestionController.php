@@ -36,7 +36,7 @@ class DailyQuestionController extends Controller
             'optionC'=>'string|nullable',
             'optionD'=>'string|nullable',
             'optionCorrect'=>'required|string|max:1',
-            // 'rationale'=>'string|nullable',
+            'rationale'=>'string|nullable',
         ]);
 
         $max = DailyMCQQuestion::max('show_date') ?? date('Y-m-d');
@@ -53,7 +53,7 @@ class DailyQuestionController extends Controller
                 'opt_d'=>$request->optionD,
                 'opt_correct'=>strtoupper($request->optionCorrect),
                 'show_date'=>$next,
-                // 'rationale'=>$request->rationale,
+                'rationale'=>$request->rationale,
             ]);
     
             return redirect('/admin/daily-mcq-questions')->with('success','Data Saved Successfully');    
@@ -157,7 +157,7 @@ class DailyQuestionController extends Controller
             'optionC'=>'string|nullable',
             'optionD'=>'string|nullable',
             'optionCorrect'=>'required|string|max:1',
-            // 'rationale'=>'string|nullable',
+            'rationale'=>'string|nullable',
         ]);
 
         // dd($request->all());
@@ -169,6 +169,7 @@ class DailyQuestionController extends Controller
             'opt_c'=>$request->optionC,
             'opt_d'=>$request->optionD,
             'opt_correct'=>strtoupper($request->optionCorrect),
+            'rationale'=>$request->rationale,
         ]);
 
         return redirect('/admin/daily-mcq-questions')->with('success','Data Updated Successfully');

@@ -4107,12 +4107,12 @@ select.inquiry-input {
 
 .call-us-section {
     position: fixed;
-    top: 120px;
-    right: 0;
-    right: -180px;
+    top: 170px;
+    /* right: 0; */
+    /* right: -180px; */
     overflow: hidden;
     display: grid;
-    grid-template-columns: 37px 180px;
+    grid-template-columns: 180px 37px;
     z-index: 999;
 }
 

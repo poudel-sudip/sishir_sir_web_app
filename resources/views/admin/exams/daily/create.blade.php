@@ -112,11 +112,11 @@
                                 </div>
                             </div>
                            
-                            {{-- <div class="form-group row align-items-center">
+                            <div class="form-group row align-items-center">
                                 <label for="rationale" class="col-md-4 col-form-label"><strong>{{ __('Rationale / Justification') }}</strong></label>
 
                                 <div class="col-md-8">
-                                    <input id="rationale" type="text" class="form-control @error('rationale') is-invalid @enderror" name="rationale" value="{{ old('rationale') }}"  >
+                                    {{-- <input id="rationale" type="text" class="form-control @error('rationale') is-invalid @enderror" name="rationale" value="{{ old('rationale') }}"  > --}}
                                     <textarea id="rationale" class="form-control summernote @error('rationale') is-invalid @enderror" name="rationale" >{{ old('rationale') }}</textarea>
 
                                     @error('rationale')
@@ -125,7 +125,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div>
     
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

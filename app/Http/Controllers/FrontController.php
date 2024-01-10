@@ -1204,7 +1204,17 @@ class FrontController extends Controller
         $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
         $counterData = Helper::pageCounterCounts('Question Of The Day '.$qdate,$pgurl,'article');
 
-        return view('front.question_of_day',compact('today_question','counterData'));
+        $previous_questions = DailyMCQQuestion::where('show_date','<',$qdate)
+        ->orderByDesc('id')
+        ->take(2)
+        ->get()
+        ->map(function($q){
+            $q->image = $this->generateQuestionImage($q);
+            return (object)$q->only('id','show_date','image');
+        });
+
+        // dd($previous_questions);
+        return view('front.question_of_day',compact('today_question','counterData','previous_questions'));
     }
 
     public function addCommentToQuestionOfDay($qdate, Request $request)
