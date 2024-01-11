@@ -1,5 +1,10 @@
 @extends('front.layouts.app')
+
 @section('page_title', 'Library: '.ucwords($library_category->name))
+@section('og-title', ucwords($library_category->name))
+@section('og-url', url('/library/'.$library_category->slug))
+@section('og-description', strip_tags($library_category->name) ? strip_tags(str_replace('<', '  <', $library_category->name)) : $library_category->name )
+
 @section('content')
 <style>
     .single-blog p, .single-blog .blog-description span {

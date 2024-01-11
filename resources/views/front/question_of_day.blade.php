@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-4 text-center">
                         <button type="button" class="btn btn-primary btn-sm" id="show_answer_btn" >
-                            <i class="fa fa-eye"></i> Show The Correct Answer
+                            <i class="fa fa-eye"></i> See The Correct Answer
                         </button>
                     </div>
                     <div class="col-4 text-end">
