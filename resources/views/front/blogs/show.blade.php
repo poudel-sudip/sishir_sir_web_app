@@ -28,11 +28,12 @@
                         <div class="col-md-12">
                             <h3 class="text-primary">{{strtoupper($blog->title)}}</h3>
                         </div>
-                        <div class="">
-                            <span class="mx-2"><i class="fa fa-user"></i> {{$blog->author}}</span>
-                            <span class="mx-2"><i class="fa fa-pen"></i> {{$blog->created_at}}</span>
-                            <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
-                            <span class="mx-2"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
+                        <div class="d-flex align-items-center flex-wrap">
+                            <span class="mx-3 h5 text-success text-nowrap"> <img src="/storage/{{$blog->creator->photo ?? ''}}" onerror="this.src='/images/student.jpg'" style="height:30px; width:30px; border-radius:50%"> {{$blog->author}}</span>
+                            {{-- <span class="mx-2"><i class="fa fa-user"></i> {{$blog->author}}</span> --}}
+                            <span class="mx-3 h6 text-primary text-nowrap"><i class="fa fa-pen"></i> {{$blog->created_at}}</span>
+                            <span class="mx-3 h6 text-info text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
+                            <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
                         </div>
                     </div>
                     <div class="row mt-3">

@@ -79,7 +79,6 @@ class ProfileController extends Controller
             'contact'=>'required | numeric | digits:10',
             'district_city'=>'required | string |min:1 ',
             'provience'=>'required | string | min:1',
-            'interests'=>'string|nullable',
             'old-photo'=>'',
             'photo'=>'',
         ]);
@@ -92,7 +91,6 @@ class ProfileController extends Controller
             'name'=>$data['name'],
             'email'=>$data['email'],
             'contact'=>$data['contact'],
-            'interests'=>$data['interests'] ?? '',
             'photo'=>$img,
             'district_city'=>ucwords($data['district_city']),
             'provience'=>ucwords($data['provience']),

@@ -48,6 +48,7 @@ class BlogController extends Controller
             'image'=>$img,
             'author'=>$request->author ?? auth()->user()->name,
             'search_tags' => $request->search_tags,
+            'user_id' => auth()->user()->id,
         ]);
         return redirect('/admin/blogs');
     }

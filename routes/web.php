@@ -976,6 +976,11 @@ Route::get('/page-counter-increment', 'App\Http\Controllers\FrontController@page
 Route::get('/bmi-calculator', 'App\Http\Controllers\FrontController@bmiCalculator');
 Route::get('/health-ingos', 'App\Http\Controllers\FrontController@healthIngo');
 
+//discussion forum
+Route::get('/discussion-forum', 'App\Http\Controllers\FrontController@discussionForum')->middleware('auth');
+Route::post('/discussion-forum', 'App\Http\Controllers\FrontController@discussionForumStore')->middleware('auth');
+
+
 // front blogs
 Route::get('/blogs','App\Http\Controllers\Blog\BlogController@index');
 Route::get('/blogs/{slug}','App\Http\Controllers\Blog\BlogController@show');

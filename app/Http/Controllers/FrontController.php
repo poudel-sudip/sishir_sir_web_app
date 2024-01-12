@@ -36,7 +36,7 @@ use App\Models\Forms\DynamicForm;
 use App\Models\PostViewCounter;
 use App\Models\Books\QRBook;
 use App\Models\Exams\DailyMCQQuestion;
-
+use App\Models\DiscussionForum;
 
 class FrontController extends Controller
 {
@@ -1318,4 +1318,34 @@ class FrontController extends Controller
 
         return url($question_image);
     }
+
+    public function discussionForum()
+    {
+        $data['messages'] = DiscussionForum::with('user:id,name')->orderByDesc('id')->take(150)->get()->sortBy('id');
+        // dd($data);
+        return view('front.forms.forum',$data);
+    }
+
+    public function discussionForumStore(Request $request)
+    {
+        $request->validate([
+            'message'=> 'required|string',
+            'post_image' => 'image|nullable|max:5000',
+        ]);
+
+        $msg = strip_tags($request->message);
+        if(isset($request->post_image))
+        {
+            $img = $request->post_image->store('forum_images','public');
+            $msg = $msg.'  <img src="/storage/'.$img.'">';
+        }
+
+        DiscussionForum::create([
+            'user_id' => auth()->user()->id,
+            'message' => $msg,
+        ]);
+
+        return redirect('/discussion-forum');
+    }
+
 }
