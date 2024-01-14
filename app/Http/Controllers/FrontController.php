@@ -1321,7 +1321,21 @@ class FrontController extends Controller
 
     public function discussionForum()
     {
-        $data['messages'] = DiscussionForum::with('user:id,name,photo')->orderByDesc('id')->take(150)->get()->sortBy('id');
+        // $data['messages'] = DiscussionForum::with('user:id,name,photo')
+        // ->orderByDesc('id')
+        // ->take(150)
+        // ->get()
+        // ->sortBy('id');
+
+        $messages = DiscussionForum::with('user:id,name,photo')
+        ->orderByDesc('id')
+        ->paginate(20);
+
+        $sortedResult = $messages->getCollection()->sortBy('id')->values();
+        $messages->setCollection($sortedResult);
+
+        $data['messages'] = $messages;
+
         // dd($data);
         return view('front.forms.forum',$data);
     }
@@ -1348,4 +1362,18 @@ class FrontController extends Controller
         return redirect('/discussion-forum');
     }
 
+    public function discussionForumDestroy(Request $request)
+    {
+        $request->validate([
+            'mid'=> 'required|numeric',
+        ]);
+
+        $msg = DiscussionForum::find($request->mid);
+
+        $msg->delete();
+
+        return redirect()->back();      
+
+        // return redirect('/discussion-forum');
+    }
 }

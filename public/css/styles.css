@@ -6109,9 +6109,9 @@ label.star:before {
 }
 
 .forum-chat .chat-header .chat-about {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
 }
 
 .forum-chat .chat-header .chat-with {
@@ -6177,6 +6177,10 @@ label.star:before {
     display: block;
     width: 275px;
     height: auto;
+}
+
+.forum-chat .chat-history .message .fa {
+    cursor: pointer;
 }
 
 .forum-chat .chat-history .my-message {

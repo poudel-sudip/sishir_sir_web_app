@@ -14,8 +14,9 @@
     <div class="container clearfix">    
       <div class="forum-chat">
         <div class="chat-header">  
-          <div class="chat-about">
+          <div class="chat-about text-center">
             <div class="chat-with">Discussion Forum</div>
+            <div class="">Greetings, everyone! Thank you for joining our discussion forum. Should you have any questions or concerns regarding health loksewa, please don't hesitate to leave a comment and share images if necessary. We will be conducting live chats daily from 10:00 to 10:15 PM (15 minutes). Looking forward to engaging with you!</div>
           </div>
         </div> <!-- end chat-header -->
         
@@ -31,6 +32,9 @@
                   </div>
                   <div class="message float-right other-message">
                     {!! $row->message !!}
+                    <div class="align-right">
+                      <i class="fa fa-trash text-danger" title="Delete Message" onclick="deleteMessage({{$row->id}});"></i>
+                    </div>
                   </div>
                 </li>
               @else
@@ -42,6 +46,11 @@
                   </div>
                   <div class="message float-left my-message">
                     {!! $row->message !!}
+                    @if(auth()->user()->role == 'Admin')
+                      <div class="align-right">
+                        <i class="fa fa-trash text-danger" title="Delete Message" onclick="deleteMessage({{$row->id}});"></i>
+                      </div>
+                    @endif
                   </div>
                 </li>   
               @endif
@@ -54,7 +63,9 @@
           </ul>
           
         </div> <!-- end chat-history -->
-        
+        <div class="">
+          {{$messages->onEachSide(1)->links('paginator.bootstrap')}}
+        </div>
         <div class="chat-message clearfix">
           <form action="/discussion-forum" method="POST" enctype="multipart/form-data">
             @csrf()
@@ -80,6 +91,31 @@
     </div> <!-- end container -->
                 
   </div>
+
+  <script>
+    function deleteMessage(id)
+    {
+      if(confirm('Are You Sure You Want To Delete This Message?')){
+        var params= {
+          _token: "{{csrf_token()}}",
+          _method: 'DELETE',
+          mid: id,
+        };
+        var form = document.createElement("form");
+        form.setAttribute("method", "POST");
+        form.setAttribute("action", "/discussion-forum");
+        for(var key in params) {
+          var hiddenField = document.createElement("input");
+          hiddenField.setAttribute("type", "hidden");
+          hiddenField.setAttribute("name", key);
+          hiddenField.setAttribute("value", params[key]);
+          form.appendChild(hiddenField);
+        }
+        document.body.appendChild(form);
+        form.submit();
+      }
+    }
+  </script>
 
   <script>
     var chatHistory = document.getElementById("chat_history_block");

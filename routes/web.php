@@ -979,6 +979,7 @@ Route::get('/health-ingos', 'App\Http\Controllers\FrontController@healthIngo');
 //discussion forum
 Route::get('/discussion-forum', 'App\Http\Controllers\FrontController@discussionForum')->middleware('auth');
 Route::post('/discussion-forum', 'App\Http\Controllers\FrontController@discussionForumStore')->middleware('auth');
+Route::delete('/discussion-forum', 'App\Http\Controllers\FrontController@discussionForumDestroy')->middleware('auth');
 
 
 // front blogs
