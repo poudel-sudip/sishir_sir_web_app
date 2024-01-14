@@ -6,27 +6,17 @@
 
 @section('content')
   <div class="container-fluid px-md-5">
-    <div class="row">
-        <div class="col-md-12 etutor-breadcrumb text-center">
-            <h2>Discussion Forum</h2>
-            <div aria-label="breadcrumb">
-                <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Discussion Forum</li>
-                </ol>
-            </div>
-        </div>
+
+    <div class="container text-center">
+      <img src="/images/logo.png" alt="" class="img img-fluid" style="max-height: 80px;" />
     </div>
 
     <div class="container clearfix">    
       <div class="forum-chat">
         <div class="chat-header">  
-          {{-- <img src="/images/logo.png" alt="" />               --}}
           <div class="chat-about">
-            <img src="/images/logo.png" alt="" />
             <div class="chat-with">Discussion Forum</div>
           </div>
-          {{-- <i class="fa fa-star d-none d-md-block"></i> --}}
         </div> <!-- end chat-header -->
         
         <div class="chat-history" id="chat_history_block">
@@ -96,4 +86,11 @@
     chatHistory.scrollTop = chatHistory.scrollHeight + 120;
   </script>
 
+@endsection
+
+
+@section('page-footer-content')
+  <script>
+    document.body.oncontextmenu = null;
+  </script>
 @endsection
