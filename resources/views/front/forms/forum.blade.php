@@ -21,11 +21,12 @@
     <div class="container clearfix">    
       <div class="forum-chat">
         <div class="chat-header">  
-          <img src="/images/logo.png" alt="" />              
+          {{-- <img src="/images/logo.png" alt="" />               --}}
           <div class="chat-about">
+            <img src="/images/logo.png" alt="" />
             <div class="chat-with">Discussion Forum</div>
           </div>
-          <i class="fa fa-star d-none d-md-block"></i>
+          {{-- <i class="fa fa-star d-none d-md-block"></i> --}}
         </div> <!-- end chat-header -->
         
         <div class="chat-history" id="chat_history_block">
@@ -34,21 +35,22 @@
               @if($row->user_id == auth()->user()->id)
                 <li class="clearfix">
                   <div class="message-data align-right mb-2">
-                    <span class="message-data-time" >{{date('g:i A, M j, Y',strtotime($row->created_at))}}</span>
-                    <span class="ms-2 message-data-name" ><strong>{{$row->user->name ?? 'Anomyus'}}</strong></span>
-                    
+                    <span class="message-data-name" ><strong>{{$row->user->name ?? 'Anomyus'}}</strong></span>
+                    <span class="message-data-time" >{{date('M j, Y, g:i A',strtotime($row->created_at))}}</span>
+                    <span class="message-data-img" > <img src="/storage/{{$row->user->photo ?? ''}}" onerror="this.src='/images/student.jpg'"> </span>
                   </div>
-                  <div class="message other-message float-right">
+                  <div class="message float-right other-message">
                     {!! $row->message !!}
                   </div>
                 </li>
               @else
-                <li>
+                <li class="clearfix">
                   <div class="message-data mb-2">
+                    <span class="message-data-img"><img src="/storage/{{$row->user->photo ?? ''}}" onerror="this.src='/images/student.jpg'"></span>
                     <span class="message-data-name"><strong>{{$row->user->name ?? 'Anomyus'}}</strong></span>
-                    <span class="message-data-time">{{date('g:i A, M j, Y',strtotime($row->created_at))}}</span>
+                    <span class="message-data-time">{{date('M j, Y, g:i A',strtotime($row->created_at))}}</span>
                   </div>
-                  <div class="message my-message">
+                  <div class="message float-left my-message">
                     {!! $row->message !!}
                   </div>
                 </li>   

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="auth-container auth-register">
-                <div class="text-center" style="margin: auto;">
+                <div class="user-welcome text-center">
                     <div class="mb-4 justify-content-center">
                         <a href="/"><img class="img-1" src="{{ asset('images/logo-w.png') }}" alt=""></a>
                     </div>
@@ -115,129 +115,6 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="form-group row">
-                                <div class="col-md-6">
-                                <label for="district" class="col-form-label">{{ __('District') }}</label>
-                                    <select name="district" id="district" class="form-control @error('district') is-invalid @enderror" required>
-                                        <option value='Bhojpur'>Bhojpur</option>
-                                        <option value='Dhankuta'>Dhankuta</option>
-                                        <option value='Ilam'>Ilam</option>
-                                        <option value='Jhapa'>Jhapa</option>
-                                        <option value='Khotang'>Khotang</option>
-                                        <option value='Morang'>Morang</option>
-                                        <option value='Okhaldhunga'>Okhaldhunga</option>
-                                        <option value='Panchthar'>Panchthar</option>
-                                        <option value='Sankhuwasabha'>Sankhuwasabha</option>
-                                        <option value='Solukhumbu'>Solukhumbu</option>
-                                        <option value='Sunsari'>Sunsari</option>
-                                        <option value='Taplejung'>Taplejung</option>
-                                        <option value='Terhathum'>Terhathum</option>
-                                        <option value='Udayapur'>Udayapur</option>
-                                        <option value='Bara'>Bara</option>
-                                        <option value='Dhanusa'>Dhanusa</option>
-                                        <option value='Mahottari'>Mahottari</option>
-                                        <option value='Parsa'>Parsa</option>
-                                        <option value='Rautahat'>Rautahat</option>
-                                        <option value='Saptari'>Saptari</option>
-                                        <option value='Sarlahi'>Sarlahi</option>
-                                        <option value='Siraha'>Siraha</option>
-                                        <option value='Bhaktapur'>Bhaktapur</option>
-                                        <option value='Chitwan'>Chitwan</option>
-                                        <option value='Dhading'>Dhading</option>
-                                        <option value='Dolakha'>Dolakha</option>
-                                        <option value='Kathmandu'>Kathmandu</option>
-                                        <option value='Kavrepalanchok'>Kavrepalanchok</option>
-                                        <option value='Lalitpur'>Lalitpur</option>
-                                        <option value='Makawanpur'>Makawanpur</option>
-                                        <option value='Nuwakot'>Nuwakot</option>
-                                        <option value='Ramechhap'>Ramechhap</option>
-                                        <option value='Rasuwa'>Rasuwa</option>
-                                        <option value='Sindhuli'>Sindhuli</option>
-                                        <option value='Sindhupalchok'>Sindhupalchok</option>
-                                        <option value='Baglung'>Baglung</option>
-                                        <option value='Gorkha'>Gorkha</option>
-                                        <option value='Kaski'>Kaski</option>
-                                        <option value='Lamjung'>Lamjung</option>
-                                        <option value='Manang'>Manang</option>
-                                        <option value='Mustang'>Mustang</option>
-                                        <option value='Myagdi'>Myagdi</option>
-                                        <option value='Nawalpur'>Nawalpur</option>
-                                        <option value='Parbat'>Parbat</option>
-                                        <option value='Syangja'>Syangja</option>
-                                        <option value='Tanahu'>Tanahu</option>
-                                        <option value='Arghakhanchi'>Arghakhanchi</option>
-                                        <option value='Banke'>Banke</option>
-                                        <option value='Bardiya'>Bardiya</option>
-                                        <option value='Dang'>Dang</option>
-                                        <option value='Gulmi'>Gulmi</option>
-                                        <option value='Kapilvastu'>Kapilvastu</option>
-                                        <option value='Parasi'>Parasi</option>
-                                        <option value='Palpa'>Palpa</option>
-                                        <option value='Pyuthan'>Pyuthan</option>
-                                        <option value='Rolpa'>Rolpa</option>
-                                        <option value='Rukum'>Rukum</option>
-                                        <option value='Rupandehi'>Rupandehi</option>
-                                        <option value='Dailekh'>Dailekh</option>
-                                        <option value='Dolpa'>Dolpa</option>
-                                        <option value='Humla'>Humla</option>
-                                        <option value='Jajarkot'>Jajarkot</option>
-                                        <option value='Jumla'>Jumla</option>
-                                        <option value='Kalikot'>Kalikot</option>
-                                        <option value='Mugu '>Mugu </option>
-                                        <option value='Rukum Paschim'>Rukum Paschim</option>
-                                        <option value='Salyan'>Salyan</option>
-                                        <option value='Surkhet'>Surkhet</option>
-                                        <option value='Achham'>Achham</option>
-                                        <option value='Baitadi'>Baitadi</option>
-                                        <option value='Bajhang'>Bajhang</option>
-                                        <option value='Bajura'>Bajura</option>
-                                        <option value='Dadeldhura'>Dadeldhura</option>
-                                        <option value='Darchula'>Darchula</option>
-                                        <option value='Doti'>Doti</option>
-                                        <option value='Kailali'>Kailali</option>
-                                        <option value='Kanchanpur'>Kanchanpur</option>
-                                    </select>
-
-                                    @error('district')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6">
-                                <label for="city" class="col-md-6 col-form-label">{{ __('City') }}</label>
-                                    <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city">
-
-                                    @error('city')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div> --}}
-
-                            {{-- <div class="form-group row">
-                                <label for="interests" class="col-md-6 col-form-label">{{ __('Select your Courses') }}</label>
-
-                                <div class="col-md-12">
-                                    <input id="interests" type="text" class="col-12 form-control @error('interests') is-invalid @enderror" name="interests" value=" " readonly>
-                                    <div class="interest-form-group">
-                                        <select class="form-control" id="courses">
-
-                                            @foreach($courses as $course)
-                                                <option value="{{$course->name}}">{{$course->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        <button class="ml-3 btn btn-primary btn-sm" onclick="javascript:courseadd()" ><span class="icon-plus"></span></button>
-                                    </div>
-                                    @error('interests')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div> --}}
-
 
                             <div class="form-group row">
                                 <label for="password" class="col-md-6 col-form-label col-6">{{ __('Create Password') }}</label>
@@ -270,6 +147,11 @@
                                 </div>
                             </div>
                         </form>
+
+                        <div class="mt-3 text-right text-primary h6 d-md-none">
+                            <a class="text-info" href="{{ route('login') }}"> Already have an account ? <strong> Log In </strong></a> 
+                        </div>
+
                     </div>
                 </div>
             </div>

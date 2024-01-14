@@ -21,6 +21,7 @@ class CreateBlogsTable extends Migration
             $table->longText('description')->nullable();
             $table->string('image')->nullable();
             $table->string('author')->nullable();
+            $table->string('authorimage')->nullable();
             $table->longText('search_tags')->nullable();
             $table->string('status')->default('UnPublished');
             $table->timestamps();

@@ -29,13 +29,13 @@
         <div class="blog-container ">
             <h3 class="text-primary">{{strtoupper($material->name)}}</h3>
             <div class="px-5 text-primary">
-                <span class="mx-2 text-nowrap"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($material->created_at))}}</span>
-                <span class="mx-2 text-nowrap"><i class="fa fa-users"></i> {{$material->author}}</span>
-                <span class="mx-2 text-nowrap"><i class="fa fa-calendar"></i> {{$material->published_year}}</span>
-                <span class="mx-2 text-nowrap"><i class="fa fa-file"></i> {{$material->pages}}</span>
-                <span class="mx-2 text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
-                <span class="mx-2 text-nowrap"><i class="fa fa-download"></i> {{$counterData->page_download_count}}</span>
-                <span class="mx-2 text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
+                <span class="mx-2 text-nowrap text-primary"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($material->created_at))}}</span>
+                <span class="mx-2 text-nowrap text-success"><i class="fa fa-users"></i> {{$material->author}}</span>
+                <span class="mx-2 text-nowrap text-primary"><i class="fa fa-calendar"></i> {{$material->published_year}}</span>
+                <span class="mx-2 text-nowrap text-danger"><i class="fa fa-file"></i> {{$material->pages}}</span>
+                <span class="mx-2 text-nowrap text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
+                <span class="mx-2 text-nowrap text-primary"><i class="fa fa-download"></i> {{$counterData->page_download_count}}</span>
+                <span class="mx-2 text-nowrap text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
             </div>
             <div class="my-4 row align-items-center">
                 <div class="col-md-4">

@@ -77,6 +77,18 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="author_image" class="col-md-4 col-form-label">{{ __('Author Image') }}</label>
+                                <div class="col-md-8">
+                                    <input id="author_image" type="file" class="form-control @error('author_image') is-invalid @enderror" name="author_image" value="{{ old('author_image') }}"  >
+
+                                    @error('author_image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="search_tags" class="col-md-4 col-form-label">{{ __('Search Tags') }}</label>

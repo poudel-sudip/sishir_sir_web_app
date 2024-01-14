@@ -39,14 +39,21 @@ class BlogController extends Controller
             'image'=>['image'],
             'author'=>['nullable'],
             'search_tags'=>['nullable'],
+            'author_image' => ['image','nullable'],
         ]);
         $img=$request->image->store('uploads','public');
+        $authimg = null;
+        if(isset($request->author_image))
+        {
+            $authimg = $request->author_image->store('uploads','public');
+        }
         Blog::create([
             'title'=>$request->title,
             'description'=>$request->description,
             'status'=>$request->status,
             'image'=>$img,
             'author'=>$request->author ?? auth()->user()->name,
+            'authorimage' => $authimg,
             'search_tags' => $request->search_tags,
             'user_id' => auth()->user()->id,
         ]);
@@ -70,14 +77,21 @@ class BlogController extends Controller
             'description' => ['required','string'],
             'old_image' => '',
             'status' => 'min:1',
-            'image'=>'',
+            'image'=>'image|nullable',
             'author' => '',
             'search_tags' => '',
+            'author_image' => 'image|nullable',
+            'old_author_image' => 'string|nullable',
         ]);
         $img=$request->old_image;
         if(isset($request->image))
         {
             $img=$request->image->store('uploads','public');
+        }
+        $authimg=$request->old_author_image;
+        if(isset($request->author_image))
+        {
+            $authimg=$request->author_image->store('uploads','public');
         }
         $blog->update([
             'title'=>$request->title,
@@ -85,6 +99,7 @@ class BlogController extends Controller
             'image'=>$img,
             'status'=>$request->status,
             'author'=>$request->author ?? auth()->user()->name,
+            'authorimage' => $authimg,
             'search_tags'=>$request->search_tags,
         ]);
         return redirect('/admin/blogs');

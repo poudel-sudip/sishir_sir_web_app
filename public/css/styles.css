@@ -6100,19 +6100,26 @@ label.star:before {
     border-bottom: 2px solid #1375b9;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: center;
 }
 .forum-chat .chat-header img {
     width: auto;
     height:60px;
 }
 
+.forum-chat .chat-header .chat-about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .forum-chat .chat-header .chat-with {
     font-weight: bold;
     font-size: 22px;
     color: #1375b9;
-    text-align: center;
-    width: auto;
+    /* text-align: center; */
+    /* width: auto; */
 }
 
 .forum-chat .chat-header .fa-star {
@@ -6127,14 +6134,20 @@ label.star:before {
     height: 575px;
 }
 .forum-chat .chat-history ul {
-    list-style: none
+    list-style: none;
 }
+
 .chat .chat-history .message-data {
     margin-bottom: 15px;
 }
 .forum-chat .chat-history .message-data-time {
     color: #a8aab1;
     padding-left: 6px;
+}
+.forum-chat .chat-history .message-data-img img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
 }
 .forum-chat .chat-history .message {
     color: white;
@@ -6143,27 +6156,27 @@ label.star:before {
     font-size: 16px;
     border-radius: 7px;
     margin-bottom: 30px;
-    width: 90%;
+    /* width: 90%; */
+    min-width: 275px;
+    width: auto;
     position: relative;
 }
 .forum-chat .chat-history .message:after {
-    bottom: 100%;
-    left: 7%;
+    bottom: 100%;    
     border: solid transparent;
     content: " ";
     height: 0;
     width: 0;
     position: absolute;
-    pointer-events: none;
-    border-bottom-color: #94c2ed;
+    pointer-events: none;    
     border-width: 10px;
-    margin-left: -10px;
+    /* margin-left: -10px; */
 }
 
 .forum-chat .chat-history .message img {
     display: block;
-    width: auto;
-    height: 200px;
+    width: 275px;
+    height: auto;
 }
 
 .forum-chat .chat-history .my-message {
@@ -6172,9 +6185,13 @@ label.star:before {
 .forum-chat .chat-history .other-message {
     background: #86bb71;
 }
+.forum-chat .chat-history .my-message:after {
+    left: 20px;
+    border-bottom-color: #94c2ed;
+}
 .forum-chat .chat-history .other-message:after {
     border-bottom-color: #86bb71;
-    left: 93%;
+    right: 20px;
 }
 .forum-chat .chat-message {
     padding: 30px;
@@ -6236,6 +6253,9 @@ label.star:before {
     float: right;
 }
 
+.forum-chat .float-left {
+    float: left;
+}
 .forum-chat .clearfix:after {
     visibility: hidden;
     display: block;

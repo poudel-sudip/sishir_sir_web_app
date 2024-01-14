@@ -22,7 +22,7 @@
         <div class="container-fluid  ebook-section " style="background: transparent;">     
                   
             <div class="ebook-page-details " style="height: 100%">
-                <div class="text-end mx-5 mb-3"><span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span></div> 
+                <div class="text-end mx-5 mb-3"><span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span></div> 
                 <div class="w-100">
                     <iframe
                         id="video_iframe"

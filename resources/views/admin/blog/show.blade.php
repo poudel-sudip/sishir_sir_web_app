@@ -27,7 +27,7 @@
 
                         <div class="course-row">
                             <div>Author Name:</div>
-                            <div>{{$blog->author}}</div>
+                            <div>{{$blog->author}} <img class="ml-2 img img-fluid" src="/storage/{{$blog->authorimage ?? $blog->creator->photo ?? ''}}" onerror="this.src='/images/student.jpg'" style="height: 30px; width:30px; border-radius:50%;"></div>
                         </div>
 
                         <div class="course-row">

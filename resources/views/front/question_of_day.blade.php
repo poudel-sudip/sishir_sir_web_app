@@ -29,10 +29,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="text-end mb-2">
-                                    <span class="mx-2"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($today_question->show_date))}}</span>
-                                    <span class="mx-2"><i class="fa fa-comments"></i> {{$today_question->comments()->count()}}</span>
-                                    <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
-                                    <span class="mx-2"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
+                                    <span class="mx-2 text-primary"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($today_question->show_date))}}</span>
+                                    <span class="mx-2 text-success"><i class="fa fa-comments"></i> {{$today_question->comments()->count()}}</span>
+                                    <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
+                                    <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
                                 </div>
                                 <div class="text-center">
                                     <img src="{{$today_question->image}}" alt="" class="img img-fluid">

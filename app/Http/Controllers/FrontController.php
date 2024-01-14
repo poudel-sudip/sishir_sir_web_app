@@ -1321,7 +1321,7 @@ class FrontController extends Controller
 
     public function discussionForum()
     {
-        $data['messages'] = DiscussionForum::with('user:id,name')->orderByDesc('id')->take(150)->get()->sortBy('id');
+        $data['messages'] = DiscussionForum::with('user:id,name,photo')->orderByDesc('id')->take(150)->get()->sortBy('id');
         // dd($data);
         return view('front.forms.forum',$data);
     }
