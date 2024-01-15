@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('page_title','Home')
 @section('content')
-{{-- @include('front.includes.call-us') --}}
+@include('front.includes.call-us')
     <style>
         body{
             overflow-x: hidden;
@@ -62,20 +62,6 @@
         </div>
         
     </section>
-
-    {{-- <section class="video-course mt-4">
-        <div class="container-fluid px-md-5">
-            <div class="row">
-                <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3 wow fadeInUp">Videos Courses</h2>
-                </div>
-            </div>
-            <div class="course-container position-relative">
-                <div class="elfsight-app-f553e3a0-98b2-48e2-906a-70b290b09fe1"></div>
-                <div class="video-gallery-hide"></div>
-            </div>
-        </div>
-    </section> --}}
 
     <section class="home-banner">
         <div class="container-fluid px-md-5">
@@ -359,38 +345,6 @@
         </div>
     </section>
 
-    {{-- @if(count($books))
-        <section class="course-section">
-            <div class="container-fluid px-md-5">
-                <div class="row">
-                    <div class="col-md-12 text-center relative">
-                        <h2 class="home-section-heading mb-3 wow fadeInUp">My Books</h2>
-                    </div>
-                </div>
-                <div class="course-container">
-                    <div class="owl-carousel course-carousel">
-                        @foreach($books as $book)
-                            <div class="card-course border-primary">
-                                <div class="header">
-                                    <div class="post-thumb" >
-                                        <img src="/storage/{{$book->thumbnail}}" alt="" class="img img-fluid" style="max-height:190px">
-                                    </div>
-                                </div>
-                                <div class="body ebook-footer mt-2">
-                                    <a href="/books/{{$book->slug}}"><h4 title="{{ $book->title }}">{{ $book->title }}</h4></a>
-                                    <p>Price: <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ ($book->price - (($book->price*$book->discount)/100)) }}</strong></p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="text-end mt-2">
-                        <a href="/books" class="btn" style="background:#1375b9;color:#fff">View all...</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif --}}
-
     @if(count($books))
         <div class="container-fluid px-md-5 eb-seller my-5">
             <div class="row">
@@ -513,33 +467,6 @@
     </section>
     @endif
    
-
-    {{-- 
-        <div class="enquiry-popup ">
-            <a href="/enquiry"><i class="fas fa-comment-alt"></i><span>Enquiry</span></a> 
-        </div>
-        <div id="home-call-poup">
-            <i class="fas fa-mobile-alt"></i><span>Call Us</span>
-            <div class="popupdiv">
-                <a href="tel:+977-9812417639"><span class="icon-phone"></span>+977 9812417639</a>
-            </div>
-        </div> 
-    --}}
-
-    {{-- youtube video palylist --}}
-    {{-- <script src="https://apps.elfsight.com/p/platform.js" defer></script> --}}
-    {{-- <script>
-        $(document).ready(function(){
-            $('.play_video_btn').click(function(){
-                console.log('hello');
-                $('#video_iframe').attr('src','');
-                let videoID = $(this).attr('video-id');
-                let src= "https://www.youtube.com/embed/HvfVgnEipDw?autohide=1&controls=1&showinfo=1";
-                $('#video_iframe').attr('src',src);
-            });
-        });
-    
-    </script> --}}
 
     <!-- Messenger Chat Plugin Code -->
     <div id="fb-root"></div>

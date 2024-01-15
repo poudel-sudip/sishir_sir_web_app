@@ -4007,9 +4007,9 @@ p {
 
 .inquiry-section {
     position: fixed;
-    top: 243px;
-    right: 0;
-    right: -300px;
+    top: 300px;
+    /* left: 0; */
+    /* left: -300px; */
     overflow: hidden;
     display: grid;
     grid-template-columns: 37px 300px;
@@ -4017,10 +4017,10 @@ p {
 }
 
 .inquiry-section .inquiry-seen-btn {
-    background: #1375b9;
+    background: #ff5100;
     padding: 10px 8px;
     cursor: pointer;
-    height: 120px;
+    height: 130px;
 }
 
 .inquiry-section .inquiry-seen-btn img {
@@ -4028,7 +4028,7 @@ p {
 }
 
 .inquiry-section .inquiry-seen-btn span {
-    writing-mode: vertical-rl;
+    writing-mode: vertical-lr;
     text-orientation: mixed;
     display: block;
     padding-top: 5px;
@@ -4089,16 +4089,20 @@ select.inquiry-input {
         padding-top: 1px !important;
     }
     .inquiry-section {
-        grid-template-columns: 25px 300px !important;
-        top: 210px !important;
+        grid-template-columns: 25px 300px  !important;
+        top: 285px !important;
     }
     .call-us-section {
-        grid-template-columns: 25px 180px !important;
+        grid-template-columns: 205px 25px !important;
+        top: 175px !important;
     }
-    .inquiry-section .inquiry-seen-btn,
+    .inquiry-section .inquiry-seen-btn {
+        padding: 1px 3px !important;
+        height: 93px !important;
+    }
     .call-us-section .call-us-seen-btn {
         padding: 1px 3px !important;
-        height: 85px !important;
+        height: 102px !important;
     }
 }
 
@@ -4109,10 +4113,10 @@ select.inquiry-input {
     position: fixed;
     top: 170px;
     /* right: 0; */
-    /* right: -180px; */
+    /* right: -205px; */
     overflow: hidden;
     display: grid;
-    grid-template-columns: 180px 37px;
+    grid-template-columns: 205px 37px;
     z-index: 999;
 }
 
@@ -4120,7 +4124,7 @@ select.inquiry-input {
     background: #1375b9;
     padding: 10px 8px;
     cursor: pointer;
-    height: 120px;
+    height: 115px;
 }
 
 .call-us-section .call-us-seen-btn img {
@@ -4138,7 +4142,7 @@ select.inquiry-input {
 }
 
 .call-us-section .call-us-details {
-    width: 180px;
+    width: 205px;
     background: #f0efef;
     padding: 5px;
     border: 1px solid #1375b9;
