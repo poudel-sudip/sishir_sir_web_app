@@ -2,7 +2,7 @@
 
 let currentScale = 2;
 let currentRotation = 0;
-let currentPage = 1;
+let currentPage = 0;
 let totalPages = 0;
 let pages = []; // Array to store the rendered pages
 
@@ -11,9 +11,9 @@ function load_pdf_reader(documentUrl) {
   loadDocument(documentUrl);
   
   //Disable the context menu
-  window.addEventListener("contextmenu", function (e) {
-    e.preventDefault();
-  });
+  // window.addEventListener("contextmenu", function (e) {
+  //   e.preventDefault();
+  // });
 
 }
 
@@ -37,8 +37,11 @@ function loadDocument(url) {
     //   renderPage(pdf, container, pageNumber, currentScale, currentRotation);
     // }
 
-    //default render 1 page
-    renderPage(pdf, container, 1 , currentScale, currentRotation);
+    //default render 2 page
+    for (let pageNumber = 1; pageNumber <= 2; pageNumber++) {
+      renderPage(pdf, container, pageNumber, currentScale, currentRotation);
+      currentPage++;
+    }
 
     function adjustPageHeight() {
       const pageHeight = 600 * currentScale; // Adjust the page height as needed
