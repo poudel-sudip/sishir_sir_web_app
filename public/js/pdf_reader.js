@@ -10,11 +10,13 @@ function load_pdf_reader(documentUrl) {
 
   loadDocument(documentUrl);
   
-  // Disable the context menu
+  //Disable the context menu
   window.addEventListener("contextmenu", function (e) {
     e.preventDefault();
   });
+
 }
+
 
 function loadDocument(url) {
   pdfjsLib.getDocument(url).promise.then(function (pdf) {
@@ -28,10 +30,15 @@ function loadDocument(url) {
     container.id = "pdf-pages";
 
     totalPages = pdf.numPages;
+    pdfdoc = pdf;
+    
     // Render all pages
-    for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
-      renderPage(pdf, container, pageNumber, currentScale, currentRotation);
-    }
+    // for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+    //   renderPage(pdf, container, pageNumber, currentScale, currentRotation);
+    // }
+
+    //default render 1 page
+    renderPage(pdf, container, 1 , currentScale, currentRotation);
 
     function adjustPageHeight() {
       const pageHeight = 600 * currentScale; // Adjust the page height as needed
@@ -59,7 +66,7 @@ function loadDocument(url) {
         canvas.height = viewport.height;
         canvas.className = "pdf-page";
         canvas.dataset.pageNumber = pageNumber;
-        pages.push(canvas); // Store the rendered page in the array
+        // pages.push(canvas); // Store the rendered page in the array
 
         // Render the page contents in the canvas
         page.render({
@@ -77,6 +84,28 @@ function loadDocument(url) {
 
     innerContainer.appendChild(container);
     pdfContainer.appendChild(innerContainer);
+
+    // Add an event listener to the pdf-container for scroll events
+    document.getElementById("pdf-container").addEventListener("scroll", function() {
+      const pdfContainer = this;
+      const scrollHeight = pdfContainer.scrollHeight;
+      const scrollTop = pdfContainer.scrollTop;
+      const clientHeight = pdfContainer.clientHeight;
+
+      // Check if the scroll position is near the bottom (adjust the threshold as needed)
+      if (scrollHeight - scrollTop - clientHeight < 100) {
+        // Load the next set of pages (e.g., the next 2 pages)
+        const nextPageStart = currentPage + 1;
+        const nextPageEnd = Math.min(currentPage + 2, totalPages);
+
+        for (let pageNumber = nextPageStart; pageNumber <= nextPageEnd; pageNumber++) {
+          renderPage(pdf, pdfContainer.querySelector(".pdf-pages"), pageNumber, currentScale, currentRotation);
+        }
+
+        // Update the current page
+        currentPage = nextPageEnd;
+      }
+    });
     
   })
   .catch(function (error){
