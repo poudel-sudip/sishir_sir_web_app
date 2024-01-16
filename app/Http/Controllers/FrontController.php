@@ -230,7 +230,8 @@ class FrontController extends Controller
         }
         $data['subMenu'] = $subMenu;
 
-        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
         $pgtype = $subMenu->type == 'heading' ? null : 'article';
         $counterData = Helper::pageCounterCounts($subMenu->name,$pgurl,$pgtype);
 
@@ -265,7 +266,8 @@ class FrontController extends Controller
 
         $data['menuItems'] = $menuCategory->items()->where('status','=','Active')->orderByDesc('id')->get();
 
-        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
         $pgtype = $menuCategory->type == 'heading' ? null : 'article';
         $counterData = Helper::pageCounterCounts($menuCategory->name,$pgurl,$pgtype);
 
@@ -306,7 +308,8 @@ class FrontController extends Controller
         }
         $data['menuItem'] = $menuItem;
 
-        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
         $pgtype = $menuItem->type == 'heading' ? null : 'article';
         $counterData = Helper::pageCounterCounts($menuItem->name,$pgurl,$pgtype);
 
@@ -354,7 +357,8 @@ class FrontController extends Controller
         }
         $data['menuSubItem'] = $menuSubItem;
 
-        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
         $pgtype = $menuSubItem->type == 'heading' ? null : 'article';
         $counterData = Helper::pageCounterCounts($menuSubItem->name,$pgurl,$pgtype);
 
@@ -411,7 +415,8 @@ class FrontController extends Controller
             abort(404);
         }
 
-        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
         $pgtype = $material->type == 'heading' ? null : 'article';
         $counterData = Helper::pageCounterCounts($material->name,$pgurl,$pgtype);
 
@@ -534,7 +539,8 @@ class FrontController extends Controller
         }
         $book_reviews = $book->reviews()->orderByDesc('id')->take(30)->get();
 
-        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
         $counterData = Helper::pageCounterCounts('Single Book Detail',$pgurl);
 
         return view('front.books.single_book',compact('book','book_reviews','counterData'));
@@ -964,7 +970,8 @@ class FrontController extends Controller
 
     public function playFreeVideo(FreeVideo $video)
     {
-        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
         $counterData = Helper::pageCounterCounts('Play Free Video',$pgurl);
         return view('front.play_free_video',compact('video','counterData'));
     }
@@ -1201,7 +1208,8 @@ class FrontController extends Controller
         }
 
         $today_question->image = $this->generateQuestionImage($today_question);
-        $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
         $counterData = Helper::pageCounterCounts('Question Of The Day '.$qdate,$pgurl,'article');
 
         $previous_questions = DailyMCQQuestion::where('show_date','<',$qdate)
