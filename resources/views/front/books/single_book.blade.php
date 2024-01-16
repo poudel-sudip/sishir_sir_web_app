@@ -68,8 +68,8 @@
                                     </h5>
                                 @endif
                                 <h6 class="text-end">
-                                    <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
-                                    <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
+                                    <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
+                                    <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                                 </h6>
                                 <h6>
                                     Publisher: <strong class="text-primary"> {{ucwords($book->publisher->name ?? ' ')}} </strong>

@@ -88,7 +88,7 @@ class Helper
     public static function pageCounterCounts($title = '', $url = '',$type='')
     {        
         $data['page']            = '';
-        $data['page_view_count'] = '0';
+        $data['page_view_count'] = '1';
         $data['page_share_count'] = '0';
         $data['page_download_count'] = '0';
         

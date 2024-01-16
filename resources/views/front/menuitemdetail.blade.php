@@ -34,9 +34,9 @@
                     <h3 class="text-primary">{{strtoupper($menuItem->name)}}</h3>
                     <div class="px-5">
                         <span class="mx-2 text-primary"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($menuItem->created_at))}}</span>
-                        <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span>
-                        <span class="mx-2 text-primary"><i class="fa fa-download"></i> {{$counterData->page_download_count}}</span>
-                        <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count}}</span>
+                        <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
+                        <span class="mx-2 text-primary"><i class="fa fa-download"></i> {{$counterData->page_download_count ?? '0'}}</span>
+                        <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                     </div>
 
                     <div class="my-4 row align-items-center">
