@@ -63,6 +63,9 @@
                         {!! $menuItem->description !!}
                     </div>  
 
+                    <div class="mt-3">
+                        <div><strong>Author(s)/Publisher(s): </strong>  {{$menuItem->author ? (html_entity_decode('&copy;')."  ".$menuItem->author) : ""}} </div>    
+                    </div>
                     
                 </div>
             @else

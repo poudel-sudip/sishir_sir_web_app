@@ -60,7 +60,10 @@
                     {!! $subMenu->description !!}
                 </div>
 
-                
+                <div class="mt-3">
+                    <div><strong>Author(s)/Publisher(s): </strong>  {{$subMenu->author ? (html_entity_decode('&copy;')."  ".$subMenu->author) : ""}} </div>    
+                </div>
+
             </div>
         @else
             <div class="table-responsive table-responsive-md ">

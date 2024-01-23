@@ -52,6 +52,10 @@
                             <div>{{$subitem->type}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Authors:</div>
+                            <div>{{ucwords($subitem->author)}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Can Download:</div>
                             <div>{{$subitem->download ? 'Yes' : 'No'}}</div>
                         </div>

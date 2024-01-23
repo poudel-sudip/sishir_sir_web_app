@@ -77,7 +77,7 @@
 
             <div class="mt-3">
                 <div><strong>Published On: </strong> {{$material->published_year}} </div>
-                <div><strong>Author(s): </strong> {{$material->author}} </div>
+                <div><strong>Author(s)/Publisher(s): </strong>  {{$material->author ? (html_entity_decode('&copy;')."  ".$material->author) : ""}} </div>
                 <div><strong>No of Pages: </strong> {{$material->pages}} </div>
 
             </div>

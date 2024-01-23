@@ -38,6 +38,10 @@
                             <div>{{ucwords($subgroup->type)}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Authors:</div>
+                            <div>{{ucwords($subgroup->author)}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Can Download:</div>
                             <div>{{$subgroup->download ? 'Yes' : 'No'}}</div>
                         </div>

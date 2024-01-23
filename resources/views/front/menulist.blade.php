@@ -61,7 +61,10 @@
                     {!! $menuCategory->description !!}
                 </div>
 
-                
+                <div class="mt-3">
+                    <div><strong>Author(s)/Publisher(s): </strong>  {{$menuCategory->author ? (html_entity_decode('&copy;')."  ".$menuCategory->author) : ""}} </div>    
+                </div>
+
             </div>
         @else
             <div class="table-responsive table-responsive-md ">

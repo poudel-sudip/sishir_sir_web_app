@@ -47,6 +47,10 @@
                             <div>{{$item->type}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Authors:</div>
+                            <div>{{ucwords($item->author)}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Can Download:</div>
                             <div>{{$item->download ? 'Yes' : 'No'}}</div>
                         </div>
