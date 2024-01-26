@@ -25,8 +25,10 @@ class CreateMenuSubGroupsTable extends Migration
             $table->tinyInteger('download')->default(0);
             $table->longText('description')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->string('author')->nullable();
             $table->longText('search_tags')->nullable();
             $table->string('status')->nullable()->default('Inactive');
+            // $table->tinyInteger('notified')->nullable()->default(0);
             $table->timestamps();
         });
     }

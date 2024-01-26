@@ -18,7 +18,7 @@ class DailyQuestionController extends Controller
 
     public function index()
     {
-        $data['questions'] = DailyMCQQuestion::orderByDesc('id')->take(500)->get();
+        $data['questions'] = DailyMCQQuestion::orderByDesc('id')->take(400)->get();
         return view('admin.exams.daily.index',$data);
     }
 
@@ -158,11 +158,18 @@ class DailyQuestionController extends Controller
             'optionD'=>'string|nullable',
             'optionCorrect'=>'required|string|max:1',
             'rationale'=>'string|nullable',
+            'show_date' => 'date|required',
         ]);
 
-        // dd($request->all());
+        $find = DailyMCQQuestion::where('show_date','=',date('Y-m-d',strtotime($request->show_date)))->where('id','!=',$question->id)->count();
+        if($find)
+        {
+            return back()->withInput()->withErrors(['show_date'=>'There is already a question in this date. Please choose another date.']);
+        }
+        // dd($request->all(),$find);
 
         $question->update([
+            'show_date' => date('Y-m-d',strtotime($request->show_date)),
             'question'=>$request->question,
             'opt_a'=>$request->optionA,
             'opt_b'=>$request->optionB,

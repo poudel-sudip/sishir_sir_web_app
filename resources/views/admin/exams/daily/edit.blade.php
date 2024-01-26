@@ -28,7 +28,7 @@
                                 <label for="show_date" class="col-md-4 col-form-label "><strong>{{ __('Show On Date') }}</strong></label>
 
                                 <div class="col-md-8">
-                                    <input id="show_date" type="text" class="form-control @error('show_date') is-invalid @enderror" name="show_date" value="{{ old('show_date') ?? $question->show_date }}" readonly autocomplete="show_date" >
+                                    <input id="show_date" type="date" class="form-control @error('show_date') is-invalid @enderror" name="show_date" value="{{ old('show_date') ?? $question->show_date }}" required autocomplete="show_date" >
 
                                     @error('show_date')
                                     <span class="invalid-feedback" role="alert">
