@@ -52,6 +52,7 @@
               <li><a href="/testimonials">Testimonials</a></li>
               <li><a href="/discussion-forum">Discussion Forum</a></li>
             </ul>
+            <hr>
           </div>
           <div class="col-md-6">
             <h5 class="mt-3">Info & Support :</h5>
@@ -64,8 +65,8 @@
               </div>    
             </div>
             <hr>
-            <h5 class="">Connect with us :</h5>
-            <div class="footer-sosmed">
+            <h5 class="footer-toggle-section-handeler" style="cursor: pointer;">Connect with us :</h5>
+            <div class="footer-sosmed d-none d-md-block">
               <a class="facebook" href="https://www.facebook.com/groups/Healthandloksewa" target="_blank"><i class="fab fa-facebook-f"></i></a>
               <a class="whatsapp" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" target="_blank"><i class="icon-whatsapp"></i></a>
               <a class="youtube" href="https://www.youtube.com/channel/UCSFeHpNoMSF-BBgsDtro0zw" target="_blank"><i class="icon-youtube"></i></a>
@@ -74,14 +75,14 @@
               <a class="instagram" href="https://www.instagram.com/shisirkumaradhikari" target="_blank"><i class="fab fa-instagram"></i></a>
               <a class="linkedin" href="https://np.linkedin.com/in/shisirkumaradhikari" target="_blank"><i class="fab fa-linkedin"></i></a>
             </div>
+            <hr>
           </div>
-        </div>
-        
+        </div>        
       </div>
 
       <div class="col-md-5">
-        <h5 class="mt-3">Most Popular :</h5>
-        <div class="row">
+        <h5 class="mt-3 footer-toggle-section-handeler" style="cursor: pointer;">Most Popular :</h5>
+        <div class="row d-none d-md-block">
           @foreach(Helper::mostViewPosts() as $post)
             <div class="col-12 footer-most-viewed">
               <a href="{{$post->url}}">
@@ -93,19 +94,21 @@
         
         <hr>
         <div class="visitor-tracker mt-3 wow fadeInUp">
-          <h5 class="">Web Counter :</h5>
+          <h5 class="footer-toggle-section-handeler"  style="cursor: pointer;">Web Counter :</h5>
           <?php 
            $web_counter = Helper::websiteCounter();  
-          ?>          
-          <div><span>Last Updated Date: </span><span id="last_date"></span></div>
-          <div><span>Total Blogs: </span><strong class="counter-count"> {{$web_counter->blog ?? '0'}} </strong></div>
-          <div><span>Total Books: </span><strong class="counter-count"> {{$web_counter->book ?? '0'}} </strong></div>
-          <div><span>Total MCQs: </span><strong class="counter-count"> {{$web_counter->mcq ?? '0'}} </strong></div>
-          <div><span>Total PDF: </span><strong class="counter-count"> {{$web_counter->pdf ?? '0'}} </strong></div>
-          <div><span>Total Downloads: </span><strong class="counter-count"> {{$web_counter->download ?? '0'}} </strong></div>
-          <div><span>Website Visit Counter: </span><strong class="counter-count"> {{$web_counter->website ?? '0'}} </strong></div>
-
+          ?> 
+          <div class="d-none d-md-block">
+            <div><span>Last Updated Date: </span><span id="last_date"></span></div>
+            <div><span>Total Blogs: </span><strong class="counter-count"> {{$web_counter->blog ?? '0'}} </strong></div>
+            <div><span>Total Books: </span><strong class="counter-count"> {{$web_counter->book ?? '0'}} </strong></div>
+            <div><span>Total MCQs: </span><strong class="counter-count"> {{$web_counter->mcq ?? '0'}} </strong></div>
+            <div><span>Total PDF: </span><strong class="counter-count"> {{$web_counter->pdf ?? '0'}} </strong></div>
+            <div><span>Total Downloads: </span><strong class="counter-count"> {{$web_counter->download ?? '0'}} </strong></div>
+            <div><span>Website Visit Counter: </span><strong class="counter-count"> {{$web_counter->website ?? '0'}} </strong></div>
+          </div>       
         </div>
+        <hr>
       </div>         
 
       <div class="col-md-3">
@@ -140,4 +143,11 @@
   const d = new Date();
   d.setMinutes(d.getMinutes() - 10);
   document.getElementById("last_date").innerHTML = d;
+</script>
+
+<script>
+  $('.footer-toggle-section-handeler').on('click',function(){
+    $(this).next().toggleClass("d-none");
+    // $(this).next().toggleClass("d-md-block");
+  });
 </script>
