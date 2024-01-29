@@ -55,7 +55,7 @@
             <hr>
           </div>
           <div class="col-md-6">
-            <h5 class="mt-3">Info & Support :</h5>
+            <h5 class="mt-3">Info & Support </h5>
             <div class="row">
               <div class="col-12">
                 <div class="info-phone"><a href="mailto:info@shisiradhikari.com" style="color:#fff"><span class="icon-mail2"></span>  info@shisiradhikari.com</a></div>
@@ -65,7 +65,7 @@
               </div>    
             </div>
             <hr>
-            <h5 class="footer-toggle-section-handeler" style="cursor: pointer;">Connect with us :</h5>
+            <h5 class="footer-toggle-section-handeler" style="cursor: pointer;">Connect with us </h5>
             <div class="footer-sosmed d-none d-md-block">
               <a class="facebook" href="https://www.facebook.com/groups/Healthandloksewa" target="_blank"><i class="fab fa-facebook-f"></i></a>
               <a class="whatsapp" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" target="_blank"><i class="icon-whatsapp"></i></a>
@@ -81,7 +81,7 @@
       </div>
 
       <div class="col-md-5">
-        <h5 class="mt-3 footer-toggle-section-handeler" style="cursor: pointer;">Most Popular :</h5>
+        <h5 class="mt-3 footer-toggle-section-handeler" style="cursor: pointer;">Most Popular </h5>
         <div class="row d-none d-md-block">
           @foreach(Helper::mostViewPosts() as $post)
             <div class="col-12 footer-most-viewed">
@@ -94,7 +94,7 @@
         
         <hr>
         <div class="visitor-tracker mt-3 wow fadeInUp">
-          <h5 class="footer-toggle-section-handeler"  style="cursor: pointer;">Web Counter :</h5>
+          <h5 class="footer-toggle-section-handeler"  style="cursor: pointer;">Web Counter </h5>
           <?php 
            $web_counter = Helper::websiteCounter();  
           ?> 
@@ -148,6 +148,5 @@
 <script>
   $('.footer-toggle-section-handeler').on('click',function(){
     $(this).next().toggleClass("d-none");
-    // $(this).next().toggleClass("d-md-block");
   });
 </script>
