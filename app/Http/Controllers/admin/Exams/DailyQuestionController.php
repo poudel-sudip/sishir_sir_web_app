@@ -73,7 +73,7 @@ class DailyQuestionController extends Controller
         {
             try 
             {
-                $qtext = wordwrap(trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags('Question: '.$question->question)))),65,"\n",false);   
+                $qtext = wordwrap(trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags('Question: '.$question->question)))),60,"\n",false);   
                 $qtextline = substr_count( $qtext, "\n" );
                 $qoptions = [
                     'A' => trim(preg_replace('/\s+/', ' ', html_entity_decode(strip_tags($question->opt_a)))),
@@ -97,7 +97,7 @@ class DailyQuestionController extends Controller
 
                 foreach ($qoptions as $key => $option) {
 
-                    $optionText = wordwrap($option,70,"\n",false); 
+                    $optionText = wordwrap($option,65,"\n",false); 
                     $image->text(($key).'.', 120, $optionY, function ($font) {
                         $font->file(public_path('fonts/arial.ttf')); 
                         $font->size(32);
