@@ -53,6 +53,22 @@
                             </div>
                            
                             <div class="form-group row">
+                                <label for="image" class="col-md-4 col-form-label">{{ __('Thumbnail Image') }}</label>
+                                <div class="col-md-2 pt-2">
+                                    <img src="/storage/{{$exam->image}}" height="40">
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" >
+                                    <input type="hidden" name="oldImage" value="{{$exam->image}}">
+                                    @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="status" class="col-md-5 col-form-label">{{ __('Result Status') }}</label>
 
                                 <div class="col-md-7">

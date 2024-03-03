@@ -223,23 +223,53 @@
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                                 <div class="row">
                                     @foreach ($premiumExams as $exam)
+                                        <div class="col-sm-6 col-md-3 mb-3">
+                                            <div class="seller-item border border-primary rounded border-2">
+                                                <div class="seller-header text-center">
+                                                    <a href="/exam-hall/premium/{{$exam->slug}}">
+                                                        <img src="/storage/{{$exam->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
+                                                    </a>
+                                                    <h5 class="mt-3"><a href="/exam-hall/premium/{{$exam->slug}}">{{ucwords($exam->title)}}</a></h5>
+                                                    <h6>{{$exam->category_exams->count()}} Sets </h6>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                    {{-- @foreach ($premiumExams as $exam)
                                         <div class="col-md-6 mb-5">
                                             <h3 class="mock-heading">{{$exam->title}}</h3>
                                             <div class="mb-3">({{$exam->category_exams()->count() ?? '-'}} Sets)</div>
                                             <a href="/exam-hall/premium/{{$exam->slug}}" class="mock-btn mock-btn1">Book Now</a>
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                                 <div class="row">
                                     @foreach ($exams as $exam)
+                                        <div class="col-sm-6 col-md-3 mb-3">
+                                            <div class="seller-item border border-primary rounded border-2">
+                                                <div class="seller-header text-center">
+                                                    <a href="/public-exams/{{$exam->slug}}">
+                                                        <img src="/storage/{{$exam->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
+                                                    </a>
+                                                    <h5 class="mt-3"><a href="/public-exams/{{$exam->slug}}">{{ucwords($exam->name)}}</a></h5>
+                                                    <h6>{{ $exam->exam ? ($exam->exam->questions ? $exam->exam->questions->count() : '-') : '-' }} Questions </h6>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                    {{-- @foreach ($exams as $exam)
                                         <div class="col-md-6 mb-5">
                                             <h3 class="mock-heading">{{$exam->name}}</h3>
                                             <div class="mb-3">({{ $exam->exam ? ($exam->exam->questions ? $exam->exam->questions->count() : '-') : '-' }} Questions)</div>
                                             <a href="/public-exams/{{$exam->slug}}" class="mock-btn mock-btn1">Exam</a>
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="nav-result" role="tabpanel" aria-labelledby="nav-result-tab" tabindex="0">

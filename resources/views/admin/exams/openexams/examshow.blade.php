@@ -50,6 +50,13 @@
                             <div>{{$exam->exam->negative_marks ?? '0'}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Thumbnail Image: </div>
+                            <div>
+                                <img src="/storage/{{$exam->image}}" alt="" class="img img-fluid" style="max-height:300px;">
+                            </div>
+                        </div>
+
+                        <div class="course-row">
                             <div>Result Status: </div>
                             <div>{{$exam->result_status}}</div>
                         </div>

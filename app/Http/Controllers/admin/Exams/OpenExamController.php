@@ -32,6 +32,7 @@ class OpenExamController extends Controller
         $request->validate([
             'exam_name'=>'required|numeric',
             'status'=>'string|required',
+            'image' => 'nullable|image',
         ]);
 
         $exam = Exam::find($request->exam_name);
@@ -42,12 +43,19 @@ class OpenExamController extends Controller
         {
             return back()->withInput()->withErrors(['exam_name'=>'This Exam is already included in the Open Exams.']);
         }
+
+        $thumbnail = null;
+        if(isset($request->image))
+        {
+            $thumbnail = $request->image->store('uploads','public');
+        }
         
         OpenExam::create([
             'exam_id' => $exam->id,
             'name'=>$exam->name,
             'slug'=>$slug,
             'result_status'=>$request->status ?? 'Unpublished',
+            'image' => $thumbnail,
         ]);
 
         return redirect('/admin/open-exams')->with('success','Data add successfully');
@@ -70,9 +78,20 @@ class OpenExamController extends Controller
         $request->validate([
             'exam'=>'required|string',
             'status'=>'string|required',
+            'image' => 'nullable|image',
+            'oldImage' =>'string|nullable',
         ]);
 
-        $exam->update(['result_status'=>$request->status]);
+        $thumbnail = $request->oldImage;
+        if(isset($request->image))
+        {
+            $thumbnail = $request->image->store('uploads','public');
+        }
+
+        $exam->update([
+            'result_status'=>$request->status,
+            'image' => $thumbnail,
+        ]);
 
         return redirect('/admin/open-exams')->with('success','Data Updated Successfully');
   

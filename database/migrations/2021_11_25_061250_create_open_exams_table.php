@@ -19,6 +19,7 @@ class CreateOpenExamsTable extends Migration
             $table->bigInteger('exam_id');
             $table->string('name');
             $table->string('slug')->nullable();
+            $table->string('image')->nullable();
             $table->string('result_status')->nullable()->default('Unpublished');
             $table->timestamps();
         });

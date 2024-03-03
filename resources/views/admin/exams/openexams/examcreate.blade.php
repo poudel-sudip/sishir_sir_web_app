@@ -56,6 +56,19 @@
                             </div>
                            
                             <div class="form-group row">
+                                <label for="image" class="col-md-5 col-form-label">{{ __('Thumbnail Image') }}</label>
+                                <div class="col-md-7">
+                                    <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required >
+
+                                    @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
                                 <label for="status" class="col-md-5 col-form-label">{{ __('Result Status') }}</label>
 
                                 <div class="col-md-7">
