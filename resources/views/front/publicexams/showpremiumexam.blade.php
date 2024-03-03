@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="image image-fluid img img-fluid">
-                            <img src="/storage/{{$exam->image}}" alt="">
+                            <img src="/storage/{{$exam->image}}" alt="" class="img img-fluid">
                         </div> 
                         <div class="text-justify mt-2">
                             {!! $exam->description !!}
