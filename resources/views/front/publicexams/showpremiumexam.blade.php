@@ -18,16 +18,16 @@
 
     <section class="course-details-page mb-5">
         <div class="container-fluid px-md-5">
-            <div class="card p-3">
+            <div class="card p-3 border-success">
                 <div class="card-title">
                     <div class="h3 text-center">{{$exam->title}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
-                        <div class="image image-fluid img img-fluid">
-                            <img src="/storage/{{$exam->image}}" alt="" class="img img-fluid">
+                    <div class="col-md-8 seller-item  ">
+                        <div class="d-inline-block seller-header p-4 border rounded border-2 border-primary">
+                            <img src="/storage/{{$exam->image}}" onerror="this.src='/images/default-post.png'" class="img img-fluid" style="max-height:200px; width:auto;">
                         </div> 
-                        <div class="text-justify mt-2">
+                        <div class="d-block text-justify mt-2">
                             {!! $exam->description !!}
                         </div>
                     </div>
