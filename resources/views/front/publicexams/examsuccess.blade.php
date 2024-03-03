@@ -47,9 +47,9 @@
                                 @php($solutions = json_decode($result->remarks))
                                 @if(count((array)$solutions))
                                     <div class="mt-4 d-flex justify-content-start align-items-center flex-wrap">
-                                        <span class="m-1 btn btn-sm btn-success">Correct</span>
-                                        <span class="m-1 btn btn-sm btn-danger">Wrong</span>
-                                        <span class="m-1 btn btn-sm btn-info">Leaved</span>
+                                        <span class="m-1 btn btn-sm btn-success">Correct({{ $result->correct_questions ?? '' }})</span>
+                                        <span class="m-1 btn btn-sm btn-danger">Wrong({{ $result->wrong_questions ?? '' }})</span>
+                                        <span class="m-1 btn btn-sm btn-info">Leaved({{ $result->leaved_questions ?? '' }})</span>
                                     </div>
                                     <div class="mt-4 d-flex justify-content-center align-items-center flex-wrap">
                                         @foreach($solutions as $key=>$value)

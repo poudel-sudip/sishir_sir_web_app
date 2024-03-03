@@ -57,8 +57,29 @@
                             <div>Exam Status: </div>
                             <div>{{$exam->status}}</div>
                         </div>
-                        
+                        <div class="course-row">
+                            <div>Solution Video URL: </div>
+                            <div>
+                                {{$exam->answer_video ?? ''}}  <br>
+                                <a class="view-video btn btn-info" href="#videoModal" video-title="{{$exam->name}}" video-url="{{$exam->answer_video}}" data-bs-toggle="modal" data-bs-target="#videoModal" data-toggle="modal" data-target="#videoModal">Play <span class="fas fa-video mdi mdi-video"></span></a>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal HTML -->
+    <div id="videoModal" class="modal fade">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header text-white align-items-center">
+                    <h5 class="modal-title" id="playingTitle"> </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="videoPlayer" class="embed-responsive embed-responsive-16by9"> </div>
                 </div>
             </div>
         </div>

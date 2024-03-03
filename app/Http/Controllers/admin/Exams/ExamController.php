@@ -49,6 +49,7 @@ class ExamController extends Controller
             'negativeMarks'=>'string|nullable',
             'status'=>'string|nullable',
             'category'=>'numeric|required',
+            'answer_video' => 'string|nullable',
         ]);
 
         $exam= Exam::create([
@@ -60,6 +61,7 @@ class ExamController extends Controller
             'negative_marks'=>$request->negativeMarks ?? '0',
             'status'=>$request->status,
             'category_id'=>$request->category,
+            'answer_video' => $request->answer_video,
         ]);
 
         return redirect('/admin/exam-category/'.$exam->category_id.'/exams')->with('success','Data add successfully');
@@ -108,6 +110,7 @@ class ExamController extends Controller
             'negativeMarks'=>'string|nullable',
             'status'=>'string|nullable',
             'category'=>'numeric|required',
+            'answer_video' => 'string|nullable',
         ]);
 
         $exam->update([
@@ -119,6 +122,7 @@ class ExamController extends Controller
             'negative_marks'=>$request->negativeMarks ?? '0',
             'status'=>$request->status,
             'category_id'=>$request->category,
+            'answer_video' => $request->answer_video,
         ]);
 
         return redirect('/admin/exam-category/'.$exam->category->id.'/exams')->with('success','Data Updated Successfully');

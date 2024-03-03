@@ -23,6 +23,7 @@ class CreateExamsTable extends Migration
             $table->string('exam_time')->nullable();
             $table->string('marks_per_question')->nullable()->default('1');
             $table->string('negative_marks')->nullable()->default('0');
+            $table->string('answer_video')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

@@ -36,9 +36,9 @@
                     @php($solutions = json_decode($result->remarks))
                     @if(count((array)$solutions))
                         <div class="d-flex justify-content-start align-items-center flex-wrap">
-                            <span class="m-1 btn btn-sm btn-success">Correct</span>
-                            <span class="m-1 btn btn-sm btn-danger">Wrong</span>
-                            <span class="m-1 btn btn-sm btn-info">Leaved</span>
+                            <span class="m-1 btn btn-sm btn-success">Correct({{ $result->correct_questions ?? '' }})</span>
+                            <span class="m-1 btn btn-sm btn-danger">Wrong({{ $result->wrong_questions ?? '' }})</span>
+                            <span class="m-1 btn btn-sm btn-info">Leaved({{ $result->leaved_questions ?? '' }})</span>
                         </div>
                         <div class="d-flex justify-content-center align-items-center flex-wrap">
                             @foreach($solutions as $key=>$value)
@@ -48,7 +48,16 @@
                     @endif
                 </div>
                 <div class="answer-details">
-                    <h6>Question & Answer</h6>
+                    <div class="row mb-2 align-items-center">
+                        <div class="col-9">
+                            <h6>Question & Answer</h6>
+                        </div>
+                        <div class="col-3 text-end">
+                            @if($exam->answer_video)
+                            <a class="view-video btn btn-primary" href="#videoModal" video-title="{{'Video Answer Solution for '.$exam->name}}" video-url="{{$exam->answer_video}}" data-bs-toggle="modal" data-bs-target="#videoModal" data-toggle="modal" data-target="#videoModal">Play Solution Video <span class="fas fa-video mdi mdi-video"></span></a>
+                            @endif
+                        </div>
+                    </div>
                     @php($i=1)
                     @foreach ($answers as $ans)
                     <div class="mcq-solution-sheet"> 
@@ -86,4 +95,20 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal HTML -->
+    <div id="videoModal" class="modal fade">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header text-white align-items-center">
+                    <h5 class="modal-title" id="playingTitle"> </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="videoPlayer" class="embed-responsive embed-responsive-16by9"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection

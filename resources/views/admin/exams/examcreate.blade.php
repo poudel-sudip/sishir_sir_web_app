@@ -127,6 +127,20 @@
                             </div>
                            
                             <div class="form-group row">
+                                <label for="answer_video" class="col-md-5 col-form-label">{{ __('Solution Video') }} </label>
+
+                                <div class="col-md-7">
+                                    <input id="answer_video" type="text" class="form-control @error('answer_video') is-invalid @enderror" name="answer_video" value="{{ old('answer_video') }}" >
+
+                                    @error('answer_video')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="status" class="col-md-5 col-form-label">{{ __('Exam Status') }}</label>
 
                                 <div class="col-md-7">
