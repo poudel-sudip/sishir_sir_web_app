@@ -34,7 +34,7 @@
 <footer class="page-footer">
   <div class="container-fluid px-md-4"> 
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-12 col-md-6 col-lg-4">
         <div class="footer-logo text-md-center">
           <img src="{{ asset('images/logo.png') }}" alt="footer-logo" height="80">
         </div>
@@ -80,7 +80,7 @@
         </div>        
       </div>
 
-      <div class="col-md-5">
+      <div class="col-12 col-md-6 col-lg-5">
         <h5 class="mt-3 footer-toggle-section-handeler" style="cursor: pointer;">Most Popular </h5>
         <div class="row d-none d-md-block">
           @foreach(Helper::mostViewPosts() as $post)
@@ -111,13 +111,11 @@
         <hr>
       </div>         
 
-      <div class="col-md-3">
+      <div class="col-12 col-md-12 col-lg-3">
         <div class="fb-continer">
-          <div class="fb-page" data-href="https://www.facebook.com/Shisirkumaradhikari/" data-tabs="timeline"  data-small-header="false" data-container-width="100%" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-            <blockquote cite="https://www.facebook.com/Shisirkumaradhikari/" class="fb-xfbml-parse-ignore">
-              <a href="https://www.facebook.com/Shisirkumaradhikari/">Shisir Kumar Adhikari</a>
-            </blockquote>
-          </div>
+          <div class="fb-page" data-href="https://www.facebook.com/Shisirkumaradhikari" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+            <blockquote cite="https://www.facebook.com/Shisirkumaradhikari" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Shisirkumaradhikari">Shisir Kumar Adhikari</a></blockquote>
+          </div>          
         </div>
         
       </div>
@@ -137,7 +135,7 @@
 </div>
 
 <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0" nonce="KN2MLonG"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0" nonce="Onct6Opa"></script>
 
 <script>
   const d = new Date();

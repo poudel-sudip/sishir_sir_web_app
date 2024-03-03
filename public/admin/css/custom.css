@@ -492,3 +492,12 @@
 .content-wrapper .dropdown .dropdown-menu .dropdown-item {
     font-size: 13px;
 }
+
+.note-editor .note-toolbar .note-btn-group button{
+    list-style: 0;
+    font-size: 12px;
+}
+
+.note-editor .note-toolbar .note-btn-group button i{
+    font-size: 12px;
+}

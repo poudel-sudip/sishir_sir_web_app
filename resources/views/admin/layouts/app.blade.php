@@ -120,11 +120,12 @@
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
     <script src="{{ asset('admin/js/summernote-audio.js') }}"></script>
     <script>
+      
       $('.summernote').summernote({
           toolbar:[
-            ['style', ['style']],
-            ['font', ['bold', 'italic' , 'underline', 'clear']],
-            ['fontname', ['fontname']],
+            ['style', ['style','bold','italic','underline','clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontname', ['fontname','fontsize']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['table', ['table']],

@@ -64,6 +64,8 @@ class ExamController extends Controller
         $wrong_questions=0;
         $data=$request->all();
 
+        $remarks = [];
+
         for ($i=1; $i <= $total_questions; $i++) { 
             if(isset($data['question-'.$i]))
             {                  
@@ -77,12 +79,15 @@ class ExamController extends Controller
                     if($question->opt_correct==$ans[0])
                     {
                         $correct_questions++;
+                        $remarks['q-'.$i] = 'c';
                     }else{
                         $wrong_questions++;
+                        $remarks['q-'.$i] = 'w';
                     }
                     $my_answer=$ans[0];
                 }else{
                     $leaved_questions++;
+                    $remarks['q-'.$i] = 'l';
                 }
                 
                 ExamHallEvaluation::create([
@@ -98,6 +103,8 @@ class ExamController extends Controller
 
         }
 
+        $remarks = json_encode($remarks);
+
         ExamHallResults::create([
             'user_id'=>$user->id,
             'category_id'=>$category->id,
@@ -106,6 +113,7 @@ class ExamController extends Controller
             'leaved_questions'=>$leaved_questions,
             'correct_questions'=>$correct_questions,
             'wrong_questions'=>$wrong_questions,
+            'remarks' => $remarks,
         ]);
 
         return redirect('/student/exam-bookings/'.$category->id.'/exams');

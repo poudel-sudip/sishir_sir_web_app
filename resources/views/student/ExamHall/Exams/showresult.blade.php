@@ -31,7 +31,22 @@
                         </div>
                     </div>
                 </div>
-               
+                <div class="view-evaluation">
+                    <h6 class="my-2">Solution Status</h6>
+                    @php($solutions = json_decode($result->remarks))
+                    @if(count((array)$solutions))
+                        <div class="d-flex justify-content-start align-items-center flex-wrap">
+                            <span class="m-1 btn btn-sm btn-success">Correct</span>
+                            <span class="m-1 btn btn-sm btn-danger">Wrong</span>
+                            <span class="m-1 btn btn-sm btn-info">Leaved</span>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center flex-wrap">
+                            @foreach($solutions as $key=>$value)
+                                <span class="m-1 btn btn-sm {{$value == 'c' ? 'btn-success' : ($value == 'w' ? 'btn-danger' : 'btn-info') }} ">{{ucwords($key)}}</span>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
                 <div class="answer-details">
                     <h6>Question & Answer</h6>
                     @php($i=1)
