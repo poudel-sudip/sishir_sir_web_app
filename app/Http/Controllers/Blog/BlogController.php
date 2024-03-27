@@ -33,7 +33,7 @@ class BlogController extends Controller
         $pgtype = 'article';
         $counterData = Helper::pageCounterCounts($blog->title,$pgurl,$pgtype);
 
-        dd($pgurl,$counterData);
+        // dd($pgurl,$counterData);
         return view('front.blogs.show',compact('blog', 'lateat_blogs','counterData'));
     }
 

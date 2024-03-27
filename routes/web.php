@@ -975,6 +975,8 @@ Route::get('/free-videos/{video}', 'App\Http\Controllers\FrontController@playFre
 Route::get('/page-counter-increment', 'App\Http\Controllers\FrontController@pageCounterIncrement');
 Route::get('/bmi-calculator', 'App\Http\Controllers\FrontController@bmiCalculator');
 Route::get('/health-ingos', 'App\Http\Controllers\FrontController@healthIngo');
+Route::get('/palika-bibaran', 'App\Http\Controllers\FrontController@palikaBibaran');
+Route::get('/web-policy', 'App\Http\Controllers\FrontController@webPolicy');
 
 //discussion forum
 Route::get('/discussion-forum', 'App\Http\Controllers\FrontController@discussionForum')->middleware('auth');

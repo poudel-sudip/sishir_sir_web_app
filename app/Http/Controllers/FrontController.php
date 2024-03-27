@@ -440,7 +440,7 @@ class FrontController extends Controller
 
     public function books()
     {
-        $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->get();
+        $data['books'] = Book::where('status','=','Active')->orderByDesc('order')->get();
         $data['categories'] = Categories::where(['status'=>'Active','type'=>'book_category'])->whereHas('cat_books')->get();
         // dd($data);
         return view('front.books.index',$data);
@@ -459,7 +459,7 @@ class FrontController extends Controller
         ->where('status','=','Active')
         ->get()
         ->map(function($cat){
-            $bookimg = $cat->cat_books()->where('status','=','Active')->orderByDesc('id')->first(['thumbnail']);
+            $bookimg = $cat->cat_books()->where('status','=','Active')->orderByDesc('order')->first(['thumbnail']);
             $cat->image = $bookimg->thumbnail ?? null;
             return $cat;
         });
@@ -479,7 +479,7 @@ class FrontController extends Controller
         $data['publisher'] = $publisher;
         $data['category'] = null;
         $data['categories'] = $publisher->pub_categories()->where('status','=','Active')->get();
-        $data['books'] = $publisher->pub_books()->where('status','=','Active')->orderByDesc('id')->get();
+        $data['books'] = $publisher->pub_books()->where('status','=','Active')->orderByDesc('order')->get();
 
         return view('front.books.publisher_category_books',$data);
     }
@@ -501,7 +501,7 @@ class FrontController extends Controller
         $data['publisher'] = $publisher;
         $data['category'] = $category;
         $data['categories'] = $publisher->pub_categories()->where('status','=','Active')->get();
-        $data['books'] = $category->cat_books()->where('status','=','Active')->orderByDesc('id')->get();
+        $data['books'] = $category->cat_books()->where('status','=','Active')->orderByDesc('order')->get();
 
         return view('front.books.publisher_category_books',$data);
     }
@@ -1384,4 +1384,17 @@ class FrontController extends Controller
 
         // return redirect('/discussion-forum');
     }
+
+    public function palikaBibaran()
+    {
+        $data = [];
+        return view('front.palika_bibaran',$data);
+    }
+
+    public function webPolicy()
+    {
+        $data = [];
+        return view('front.policy',$data);
+    }
+
 }

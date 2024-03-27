@@ -45,12 +45,15 @@
               <li><a href="/about-us">About Us</a></li>
               <li><a href="/bmi-calculator">BMI Calculator</a></li>
               <li><a href="/health-ingos">Health INGOs in Nepal</a></li>
+              <li><a href="/palika-bibaran">Palika Bibaran in Nepal</a></li>
+              <li><a href="//drive.google.com/drive/u/2/folders/1XP8xzmVw51RiRfooHMZf1vAdyydnvmY4">Barmabar Chahine Dastabej</a></li>
               <li><a href="//gorkhapatraonline.com/categories/loksewa" target="_blank">Gorkhapatra Loksewa</a></li>
               <li><a href="//drive.google.com/drive/folders/1ixtmm2DxJD7vhjCrAmy29-ID3RUxAsBf" target="_blank">IEC Materials</a></li>
               <li><a href="//drive.google.com/drive/folders/1aRMa-Zzow1NTHkrbP218PVQoL7g_lK27" target="_blank">Health Days</a></li>
               <li><a href="/enquiry">Enquiries</a></li>
               <li><a href="/testimonials">Testimonials</a></li>
               <li><a href="/discussion-forum">Discussion Forum</a></li>
+              <li><a href="/web-policy">Web Policy</a></li>
             </ul>
             <hr>
           </div>
@@ -61,7 +64,8 @@
                 <div class="info-phone"><a href="mailto:info@shisiradhikari.com" style="color:#fff"><span class="icon-mail2"></span>  info@shisiradhikari.com</a></div>
               </div>
               <div class="col-12">
-                <div class="info-phone"><a target="_blank" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" style="color:#fff"><span class="icon-whatsapp"></span>  +977 - 981-2417639</a></div>
+                {{-- <div class="info-phone"><a target="_blank" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" style="color:#fff"><span class="icon-whatsapp"></span>  +977 - 981-2417639</a></div> --}}
+                <div class="info-phone"><a target="_blank" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" style="color:#fff"><span class="icon-whatsapp"></span>  +977 - 970-2844270</a></div>
               </div>    
             </div>
             <hr>
@@ -99,6 +103,29 @@
            $web_counter = Helper::websiteCounter();  
           ?> 
           <div class="d-none d-md-block">
+            <div class="row">
+              <div class="col">
+                <div><span>Last Updated Date: </span><span id="last_date"></span></div>
+                <div><span>Total Blogs: </span><strong class="counter-count"> {{$web_counter->blog ?? '0'}} </strong></div>
+                <div><span>Total Books: </span><strong class="counter-count"> {{$web_counter->book ?? '0'}} </strong></div>
+                <div><span>Total MCQs: </span><strong class="counter-count"> {{$web_counter->mcq ?? '0'}} </strong></div>
+                <div><span>Total PDF: </span><strong class="counter-count"> {{$web_counter->pdf ?? '0'}} </strong></div>
+                <div><span>Total Downloads: </span><strong class="counter-count"> {{$web_counter->download ?? '0'}} </strong></div>
+                <div><span>Website Visit Counter: </span><strong class="counter-count"> {{$web_counter->website ?? '0'}} </strong></div>
+              </div>
+              <div class="col">
+                <div id="youtube-channel-details" class="">                  
+                  <a target="_blank" href="https://www.youtube.com/channel/UCSFeHpNoMSF-BBgsDtro0zw" style="color: inherit"><img id="youtube-channel-thumbnail" src="/images/youtube_thumb.png" alt="" class="img img-fluid mb-1" style="width: 120px"></a>
+                  <a target="_blank" href="https://www.youtube.com/channel/UCSFeHpNoMSF-BBgsDtro0zw" style="color: inherit"><h5 id="youtube-channel-title"></h5></a>
+                  <div><span id="youtube-subscriber-count"></span></div>
+                  <div><span id="youtube-video-count"></span></div>
+                  <div><span id="youtube-view-count"></span></div>
+                </div>
+              </div>
+            </div>           
+          </div>
+
+          {{-- <div class="d-none d-md-block">
             <div><span>Last Updated Date: </span><span id="last_date"></span></div>
             <div><span>Total Blogs: </span><strong class="counter-count"> {{$web_counter->blog ?? '0'}} </strong></div>
             <div><span>Total Books: </span><strong class="counter-count"> {{$web_counter->book ?? '0'}} </strong></div>
@@ -106,7 +133,8 @@
             <div><span>Total PDF: </span><strong class="counter-count"> {{$web_counter->pdf ?? '0'}} </strong></div>
             <div><span>Total Downloads: </span><strong class="counter-count"> {{$web_counter->download ?? '0'}} </strong></div>
             <div><span>Website Visit Counter: </span><strong class="counter-count"> {{$web_counter->website ?? '0'}} </strong></div>
-          </div>       
+          </div>        --}}
+
         </div>
         <hr>
       </div>         
@@ -126,6 +154,7 @@
 <div class="lower-footer">
   <div class="container">
     <div class="row">
+      
       <div class="col-12 text-center">
         <div id="copyright" style="font-size: 14px">Copyright &copy; <script> document.write(new Date().getFullYear()); </script> All right reserved <a href="#">Shisir Adhikari.</a> By <a target="_blank" href="//etutorclass.com">E-Tutor Class Pvt. Ltd.</a></div>
       </div>

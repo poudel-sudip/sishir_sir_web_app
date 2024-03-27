@@ -115,5 +115,36 @@ back_to_top_btn.on('click', function(e) {
   $('html, body').animate({scrollTop:0}, '300');
 });
 
+function formatYoutubeCount(count) {
+  if (count < 1000) {
+      return count.toString();
+  } else if (count < 1000000) {
+      return (count / 1000).toFixed(2) + 'K';
+  } else if (count < 1000000000) {
+      return (count / 1000000).toFixed(2) + 'M';
+  } else {
+      return (count / 1000000000).toFixed(2) + 'B';
+  }
+}
 
+// Function to fetch channel details
+function fetchChannelDetails(channelId, apiKey) {
+  fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`)
+  .then(response => response.json())
+  .then(data => {
+      const channel = data.items[0];
+      const snippet = channel.snippet;
+      const statistics = channel.statistics;
 
+      // document.getElementById('youtube-channel-thumbnail').src = snippet.thumbnails.default.url;
+      document.getElementById('youtube-channel-title').textContent = snippet.title;
+      document.getElementById('youtube-subscriber-count').textContent = `Subscribers: ${formatYoutubeCount(statistics.subscriberCount)}`;
+      document.getElementById('youtube-video-count').textContent = `Videos: ${formatYoutubeCount(statistics.videoCount)}`;
+      document.getElementById('youtube-view-count').textContent = `Views: ${formatYoutubeCount(statistics.viewCount)}`;
+
+  })
+  .catch(error => console.error('Error fetching channel details:', error));
+}
+
+// Call the function with your channel ID and API key
+fetchChannelDetails('UCSFeHpNoMSF-BBgsDtro0zw', 'AIzaSyAgv1YEefBZl7LIqQOve5GW-5WpG6n7MEw');
