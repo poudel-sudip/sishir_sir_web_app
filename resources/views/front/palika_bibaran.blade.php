@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="blogs-details-container bg-white">
+        <div class="blogs-details-container " style="background:#1375b9;">
             <div class="text-justify">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe src="//sthaniya.gov.np/gis/website/" 
@@ -25,7 +25,7 @@
                         frameborder="0" 
                         style="width: 100% !important;"
                         class="embed-responsive embed-responsive-16by9"
-                        height="2000"
+                        height="1150"
                         allowfullscreen>
                     </iframe>
                 </div>             

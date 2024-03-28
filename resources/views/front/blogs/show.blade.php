@@ -81,7 +81,7 @@
                             </div>
                             @foreach ($blog->comments->where('status','Published') as $comment)
                             <div class="single-comment">
-                                <img src="{{ asset('images/comment.png') }}" alt="" height="50" width="50" class="border border-primary" style="border-radius: 50%">
+                                <img src="{{ asset('images/comment.png') }}" alt="" height="40" width="40" class="border border-primary" style="border-radius: 50%">
                                 <div class="commentter">
                                     <h5>{{$comment->name}} </h5><span> {{$comment->created_at}}</span>
                                     <div class="message">{!! $comment->message !!}</div>
