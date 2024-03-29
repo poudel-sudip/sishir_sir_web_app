@@ -46,7 +46,7 @@
                                         <td>{{$blog->title}}</td>
                                         <td>{{date('Y-m-d',strtotime($blog->created_at))}}</td>
                                         <td>{{$blog->author}}</td>
-                                        <td><a href="/admin/blogs/{{$blog->id}}/comments">Comments({{$blog->comments->count()}})</a></td>
+                                        <td><a href="/admin/blogs/{{$blog->id}}/comments">Comments {!! $blog->comments()->where('status','=','Unpublished')->count() > 0 ? '<span style="background:#fc3200; color:#fff; border-radius:50%; height:15px; padding:2px; text-align:center; display:inline-block;">'.($blog->comments()->where('status','=','Unpublished')->count()).'</span>' : '' !!} </a></td>
                                         <td>
                                             @if($blog->status == 'Unpublished')
                                                 <span class="text-danger">{{$blog->status}}</span>

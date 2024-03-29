@@ -580,6 +580,11 @@ Route::get('/admin/daily-mcq-questions/{question}','App\Http\Controllers\Admin\E
 Route::patch('/admin/daily-mcq-questions/{question}','App\Http\Controllers\Admin\Exams\DailyQuestionController@update')->middleware('role:Admin');
 Route::delete('/admin/daily-mcq-questions/{question}','App\Http\Controllers\Admin\Exams\DailyQuestionController@destroy')->middleware('role:Admin');
 
+//admin image gallery mgmt
+Route::get('/admin/image-gallery','App\Http\Controllers\Admin\ImageGalleryController@index')->middleware('role:Admin');
+Route::post('/admin/image-gallery','App\Http\Controllers\Admin\ImageGalleryController@store')->middleware('role:Admin');
+Route::patch('/admin/image-gallery','App\Http\Controllers\Admin\ImageGalleryController@update')->middleware('role:Admin');
+Route::delete('/admin/image-gallery/{img}','App\Http\Controllers\Admin\ImageGalleryController@destroy')->middleware('role:Admin');
 
 
 
@@ -982,6 +987,8 @@ Route::get('/web-policy', 'App\Http\Controllers\FrontController@webPolicy');
 Route::get('/discussion-forum', 'App\Http\Controllers\FrontController@discussionForum')->middleware('auth');
 Route::post('/discussion-forum', 'App\Http\Controllers\FrontController@discussionForumStore')->middleware('auth');
 Route::delete('/discussion-forum', 'App\Http\Controllers\FrontController@discussionForumDestroy')->middleware('auth');
+
+Route::get('/image-gallery', 'App\Http\Controllers\FrontController@imageGallery');
 
 
 // front blogs

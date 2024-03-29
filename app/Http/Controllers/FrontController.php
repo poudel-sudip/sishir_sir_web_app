@@ -37,6 +37,8 @@ use App\Models\PostViewCounter;
 use App\Models\Books\QRBook;
 use App\Models\Exams\DailyMCQQuestion;
 use App\Models\DiscussionForum;
+use App\Models\ImageGallery;
+
 
 class FrontController extends Controller
 {
@@ -71,6 +73,7 @@ class FrontController extends Controller
         }
 
         $data['today_question'] = $today_question;
+        $data['img_gallery'] = ImageGallery::orderByDesc('id')->take(9)->get();
 
         $data['updates'] = [];
 
@@ -1395,6 +1398,12 @@ class FrontController extends Controller
     {
         $data = [];
         return view('front.policy',$data);
+    }
+
+    public function imageGallery()
+    {
+        $data['images']=ImageGallery::orderByDesc('id')->paginate(20);
+        return view('front.img_gallery',$data);
     }
 
 }

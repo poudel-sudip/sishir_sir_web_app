@@ -460,6 +460,33 @@
         </section>
     @endif
 
+    @if(count($img_gallery))
+        <section class="course-section">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    <div class="col-md-12 text-center relative">
+                        <h2 class="home-section-heading mb-3 ">Image Gallery</h2>
+                    </div>
+                </div>
+                <div class="course-container">
+                    <div class="owl-carousel eb-seller-carousel">
+                        @foreach($img_gallery as $row)
+                            <div class="card-course border border-primary border-2">
+                                <a target="_blank" href="/storage/{{$row->image}}"><img src="/storage/{{$row->image}}" class="img img-fluid" alt="img_error" style="width: 100%; max-height:220px"></a>
+                                <div class="course-info text-center">
+                                   {{$row->caption}}
+                                </div>                               
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="text-end mt-2">
+                        <a href="/image-gallery" class="btn" style="background:#1375b9;color:#fff">View all...</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
     {{-- review section start --}}
     @if(count($testimonials))
     <section class="review-section mt-5">

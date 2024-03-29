@@ -267,6 +267,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/free-videos') }}">Videos</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/image-gallery') }}">Image Gallery</a>
+            </li>
             {{-- <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/audios') }}">Audios</a>
             </li>
