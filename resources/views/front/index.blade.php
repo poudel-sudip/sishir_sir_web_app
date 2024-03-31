@@ -11,7 +11,7 @@
     <section class="mt-4">
         <div class="container-fluidb px-md-5">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="marquee-text">
                         <marquee width="100%" direction="left" height="25px">
                             @foreach ($updates as $update)
@@ -20,14 +20,64 @@
                         </marquee>
                     </div>
                 </div>
-                <div class="col-md-4 text-end">
+                <div class="col-md-3 text-end">
                     <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=1375b9&aj_time=yes&font_size=18&line_brake=0&bikram_sambat=0&nst=no&api=500122n569" width="307" height="22"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="home-slider mt-2">
+    <section class="mt-3">
+        <div class="container-fluid px-md-5">
+            <div class="row align-items-stretch">
+                <div class="my-1 col-md-3 ">
+                    <div class="updates border border-primary border-2" style="height: 100%">
+                        <div class="update-header">
+                            <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fa-chart-bar"></i> Trending </h5></div>
+                        </div>
+                        <div class="update-body" style="max-height:375px; overflow-y:scroll">
+                            <ul class="p-0">
+                                @forelse(Helper::mostViewPosts() as $row)                         
+                                    <li><a href="{{$row->url}}"><i class="fa fa-pen-nib"></i>{{ucwords($row->title)}} <small class="ms-2 text-primary text-nowrap">({{$row->count}} views)</small> </a></li>
+                                @empty
+                                    <li>No Trendings Available</li>
+                                @endforelse
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="my-1 col-md-6 text-center">
+                    @if($today_question)
+                        <div class="" >
+                            <a href="/question-of-the-day/{{$today_question->show_date}}">
+                                <img src="{{$today_question->image}}" alt="{{$today_question->show_date}}"  style="max-height:400px;" class="img img-fluid border border-3 border-danger">                                   
+                            </a>
+                        </div>
+                    @endif
+                </div>
+                <div class="my-1 col-md-3 ">
+                    <div class="updates border border-primary border-2" style="height: 100%">
+                        <div class="update-header">
+                            <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fas fa-clock"></i> Updates </h5></div>
+                        </div>
+                        <div class="update-body" style="max-height:375px; overflow-y:scroll">
+                            <ul class="p-0">
+                                @forelse($updates as $row)                         
+                                    <li><a href="{{$row->link}}"><i class="far fa-check-circle"></i>{{ucwords($row->title)}}</a></li>
+                                @empty
+                                    <li>No Trendings Available</li>
+                                @endforelse
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- <section class="home-slider mt-2">
         <div class="container-fluid px-md-5">
             <div class="row">
                 <div class="col-md-8">
@@ -38,23 +88,12 @@
                             </a>
                         </div>
                     @endif
-                    {{-- <div class="main-slider owl-carousel">
-                        @foreach($sliders as $slider)
-                            <div class="single-item">
-                                <div>
-                                    <img src="/storage/{{$slider->image}}" alt="{{$slider->title}}" width="100%" style="max-height:420px;">
-                                </div>
-                                <div class="text-center mt-1" >
-                                   <h5>{{$slider->description}}</h5> 
-                                </div>
-                            </div>
-                        @endforeach
-                    </div> --}}
+                  
                 </div>
                 <div class="col-md-4 border border-primary border-2 rounded p-0" style=" ">
-                    <div class="homepage-side-update " style="box-shadow: none; height:500px; overflow-y:scroll;">
+                    <div class="homepage-side-update " style="box-shadow: none; height:auto; ">
                         <div class="update-header"><h5><i class="fas fa-clock"></i> UPDATES</h5></div>
-                        <div class="update-body " style="height: auto;">
+                        <div class="update-body " style="height: 475px; overflow-y:scroll;">
                             <ul>
                                 @forelse($updates as $update)                            
                                     <li><a href="{{$update->link}}"><i class="far fa-check-circle"></i>{{ucwords($update->title)}}</a></li>
@@ -68,7 +107,7 @@
             </div>
         </div>
         
-    </section>
+    </section> --}}
 
     <section class="home-banner">
         <div class="container-fluid px-md-5">

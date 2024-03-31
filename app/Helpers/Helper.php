@@ -168,7 +168,7 @@ class Helper
 
     public static function mostViewPosts()
     {
-        $posts = PostViewCounter::where('title','!=',null)->orderByDesc('view_count')->take(4)->get(['title','url','view_count as count']);
+        $posts = PostViewCounter::where('title','!=',null)->orderByDesc('view_count')->take(7)->get(['title','url','view_count as count']);
         return $posts;
     }
 

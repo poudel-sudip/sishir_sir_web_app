@@ -79,7 +79,7 @@ class FrontController extends Controller
 
         $menu_sub_items = MenuSubItem::where('status','=','Active')
         ->orderByDesc('id')
-        ->take(8)
+        ->take(6)
         ->get(['id','item_id','name','slug','created_at'])
         ->map(function($update)
         {
@@ -108,7 +108,7 @@ class FrontController extends Controller
 
         $menu_items = MenuItem::where('status','=','Active')
         ->orderByDesc('id')
-        ->take(8)
+        ->take(6)
         ->get(['id','category_id','name','slug','created_at'])
         ->map(function($update)
         {
@@ -133,7 +133,7 @@ class FrontController extends Controller
 
         $menu_categories = MenuItemCategory::where([['status','=','Active'],['type','!=','heading']])
         ->orderByDesc('id')
-        ->take(8)
+        ->take(6)
         ->get(['id','subgroup_id','name','slug','created_at'])
         ->map(function($cat)
         {
@@ -155,7 +155,7 @@ class FrontController extends Controller
 
         $menu_submenus = MenuSubGroup::where([['status','=','Active'],['type','!=','heading']])
         ->orderByDesc('id')
-        ->take(8)
+        ->take(6)
         ->get(['id','group_id','name','slug','created_at'])
         ->map(function($cat)
         {
@@ -176,7 +176,7 @@ class FrontController extends Controller
 
         $library_materials = LibraryMaterial::where('status','=','Active')
         ->orderByDesc('id')
-        ->take(8)
+        ->take(6)
         ->get(['id','name','slug','created_at','category_id'])
         ->map(function($cat)
         {
@@ -211,7 +211,7 @@ class FrontController extends Controller
         $data['updates'] = array_merge($data['updates'], $library_materials);
 
         usort($data['updates'], function($a, $b) {return strcmp($b->created_at,$a->created_at);});
-        $data['updates'] = array_slice($data['updates'], 0, 10, true);
+        $data['updates'] = array_slice($data['updates'], 0, 7, true);
         // dd($data);
         return view('front.index',$data);
     }

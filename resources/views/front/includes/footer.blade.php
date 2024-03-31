@@ -85,7 +85,7 @@
       </div>
 
       <div class="col-12 col-md-6 col-lg-5">
-        <h5 class="mt-3 footer-toggle-section-handeler" style="cursor: pointer;">Most Popular </h5>
+        {{-- <h5 class="mt-3 footer-toggle-section-handeler" style="cursor: pointer;">Most Popular </h5>
         <div class="row d-none d-md-block">
           @foreach(Helper::mostViewPosts() as $post)
             <div class="col-12 footer-most-viewed">
@@ -96,7 +96,7 @@
           @endforeach
         </div>
         
-        <hr>
+        <hr> --}}
         <div class="visitor-tracker mt-3 wow fadeInUp">
           <h5 class="footer-toggle-section-handeler"  style="cursor: pointer;">Web Counter </h5>
           <?php 
