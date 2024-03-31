@@ -50,7 +50,7 @@ class FrontController extends Controller
         // $orientations = Orientation::whereDate('date','>=',date("Y-m-d"))->where('status','=','Active')->get();
 
         $data = [];
-        $data['sliders'] = Slider::all()->sortBy('order');
+        // $data['sliders'] = Slider::all()->sortBy('order');
         $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(4)->get(['id','title','slug','image']);
         $data['exams'] = OpenExam::where('result_status','=','Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('id')->first();

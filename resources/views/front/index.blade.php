@@ -31,7 +31,14 @@
         <div class="container-fluid px-md-5">
             <div class="row">
                 <div class="col-md-8">
-                    <div class="main-slider owl-carousel">
+                    @if($today_question)
+                        <div class="border border-2 border-danger" >
+                            <a href="/question-of-the-day/{{$today_question->show_date}}">
+                                <img src="{{$today_question->image}}" alt="{{$today_question->show_date}}" width="100%" style="max-height:500px;" class="img img-fluid">                                   
+                            </a>
+                        </div>
+                    @endif
+                    {{-- <div class="main-slider owl-carousel">
                         @foreach($sliders as $slider)
                             <div class="single-item">
                                 <div>
@@ -42,12 +49,12 @@
                                 </div>
                             </div>
                         @endforeach
-                    </div>
+                    </div> --}}
                 </div>
-                <div class="col-md-4">
-                    <div class="homepage-side-update border border-primary border-2 rounded">
+                <div class="col-md-4 border border-primary border-2 rounded p-0" style=" ">
+                    <div class="homepage-side-update " style="box-shadow: none; height:500px; overflow-y:scroll;">
                         <div class="update-header"><h5><i class="fas fa-clock"></i> UPDATES</h5></div>
-                        <div class="update-body ">
+                        <div class="update-body " style="height: auto;">
                             <ul>
                                 @forelse($updates as $update)                            
                                     <li><a href="{{$update->link}}"><i class="far fa-check-circle"></i>{{ucwords($update->title)}}</a></li>
@@ -75,13 +82,13 @@
         </div>
     </section>
     
-    @if($today_question)
+    {{-- @if($today_question)
         <section class="my-3 text-center">
             <a href="/question-of-the-day/{{$today_question->show_date}}">
                 <img src="{{$today_question->image}}" alt="" class="img img-fluid">            
             </a>
         </section>
-    @endif
+    @endif --}}
 
 
     @if(count($dynamic_forms))
@@ -294,6 +301,42 @@
         </div>
     </section>
 
+    <section class="home-ebook mt-3 mb-5">
+        <div class="container-fluid px-md-5">
+            <div class="row mb-3">
+                <div class="col-md-12 text-center relative">
+                    <h2 class="home-section-heading mb-3 ">Library</h2>
+                </div>
+            </div>
+            <div class="lib-filter-alphabets">
+                <a href="/library" class="lib-filter-character active" > All </a>
+                @for($i='A';$i<'Z';$i++)
+                    <a href="/library?filter={{$i}}" class="lib-filter-character" > {{$i}} </a>
+                @endfor
+                <a href="/library?filter=Z" class="lib-filter-character" > Z </a>
+            </div>    
+
+            {{-- <div class="row">
+                @foreach ($libraries as $cat)
+                <div class="col-sm-6 col-md-3 mb-3">
+                    <div class="ebook-section library-item border border-primary text-center">
+                        <div>
+                            <a href="/library/{{$cat->slug}}"><i class="h1 fa fa-folder"></i></a>
+                        </div>
+                        <div class="ebook-footer h5">
+                            <a href="/library/{{$cat->slug}}">{{ucwords($cat->name)}}</a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+                <div class="col-12 text-end mt-2">
+                    <a href="/library" class="btn" style="background:#1375b9;color:#fff">View all...</a>
+                </div>
+            </div> --}}
+        </div>
+    </section>
+
     <section class="home-blog mt-3 mb-5">
         <div class="container-fluid px-md-5">
             <div class="row mb-3">
@@ -336,42 +379,6 @@
                     
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section class="home-ebook mt-3 mb-5">
-        <div class="container-fluid px-md-5">
-            <div class="row mb-3">
-                <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3 ">Library</h2>
-                </div>
-            </div>
-            <div class="lib-filter-alphabets">
-                <a href="/library" class="lib-filter-character active" > All </a>
-                @for($i='A';$i<'Z';$i++)
-                    <a href="/library?filter={{$i}}" class="lib-filter-character" > {{$i}} </a>
-                @endfor
-                <a href="/library?filter=Z" class="lib-filter-character" > Z </a>
-            </div>    
-
-            {{-- <div class="row">
-                @foreach ($libraries as $cat)
-                <div class="col-sm-6 col-md-3 mb-3">
-                    <div class="ebook-section library-item border border-primary text-center">
-                        <div>
-                            <a href="/library/{{$cat->slug}}"><i class="h1 fa fa-folder"></i></a>
-                        </div>
-                        <div class="ebook-footer h5">
-                            <a href="/library/{{$cat->slug}}">{{ucwords($cat->name)}}</a>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-
-                <div class="col-12 text-end mt-2">
-                    <a href="/library" class="btn" style="background:#1375b9;color:#fff">View all...</a>
-                </div>
-            </div> --}}
         </div>
     </section>
 
@@ -420,7 +427,7 @@
                     </div>
                 </div>
                 <div class="course-container">
-                    <div class="owl-carousel eb-seller-carousel">
+                    <div class="owl-carousel review-slider">
                         @foreach($videos as $video)
                             <div class="card-course border border-primary border-2">
                                 <a href="/free-videos/{{$video->id}}">
@@ -469,11 +476,11 @@
                     </div>
                 </div>
                 <div class="course-container">
-                    <div class="owl-carousel eb-seller-carousel">
+                    <div class="owl-carousel review-slider">
                         @foreach($img_gallery as $row)
-                            <div class="card-course border border-primary border-2">
-                                <a target="_blank" href="/storage/{{$row->image}}"><img src="/storage/{{$row->image}}" class="img img-fluid" alt="img_error" style="width: 100%; max-height:220px"></a>
-                                <div class="course-info text-center">
+                            <div class="card-course border border-primary border-2" title="{{$row->caption}}">
+                                <a target="_blank" href="/storage/{{$row->image}}"><img src="/storage/{{$row->image}}" class="img img-fluid" alt="img_error" style="width: 100%; max-height:300px"></a>
+                                <div  class="ps-1 text-center text-nowrap" style="overflow-x: hidden; text-overflow: ellipsis;">
                                    {{$row->caption}}
                                 </div>                               
                             </div>
@@ -498,7 +505,7 @@
             </div>
             <div class="review-container">
             <div class="row">
-                <div class=" owl-carousel review-slider">
+                {{-- <div class=" owl-carousel review-slider">
                     @foreach($testimonials as $testimonial)
                         <div class="reviw-item border border-primary" style="overflow: hidden">
                             <div class="reviewer">
@@ -517,7 +524,36 @@
                             </div>
                         </div>
                     @endforeach
+                </div> --}}
+
+                <div class="owl-carousel review-slider" style="align-items: stretch;">
+                    @foreach($testimonials as $row)
+                        <div class=" reviw-item border border-primary" style="height:100%; align-items:stretch; align-self:stretch">
+                            <div class="text-center">
+                                <div class="profile-image d-inline-block">
+                                    <img src="/storage/{{$row->image}}" alt="{{$row->name}}">
+                                </div>
+
+                                <div class="mt-2">
+                                    <p >{{$row->message}}</p>
+                                </div>
+
+                                <div class="mt-2">
+                                    <h6 class="text-primary">{{$row->name}}, <em> {{$row->role}} </em> </h6>
+                                </div>
+
+                            </div>
+                            
+                            {{-- <div>
+                                <img src="/storage/{{$row->image}}" alt="{{$row->name}}" width="100%" style="max-height:420px;">
+                            </div>
+                            <div class="text-center mt-1" >
+                                <h5>{{$row->message}}</h5> 
+                            </div> --}}
+                        </div>
+                    @endforeach
                 </div>
+
             </div>
             </div>
         </div>
