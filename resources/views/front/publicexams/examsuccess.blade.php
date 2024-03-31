@@ -58,6 +58,14 @@
                                     </div>
                                 @endif
                             </div>
+                            <div class="col-12 mt-2">
+                                <h6>Correct Answers</h6>
+                                <div class="d-flex justify-content-center align-items-center flex-wrap">
+                                    @foreach($question_solutions as $key=>$value)
+                                        <span class="m-1 btn btn-sm border-primary ">{{$key}}:{{ucwords($value)}}</span>
+                                    @endforeach
+                                </div>
+                            </div>
                             <div class="col-12 text-end mt-3"><a href="/public-exams" class="btn btn-primary btn-sm">View Other Exams</a></div>
                         </div>
                     </div>

@@ -69,12 +69,13 @@ class PublicExamController extends Controller
         $exam=OpenExam::findOrFail($data['exam_id']);
 
         $remarks = [];
+        $question_solutions = [];
 
         for ($i=1; $i <= $total_questions; $i++) 
         { 
             if(isset($data['question-'.$i]))
             {                  
-                $question=Question::where('id',$data['question-'.$i])->first();
+                $question=Question::where('id',$data['question-'.$i])->first(['id','opt_correct']);
                 if(isset($data['ans-'.$i])){
                     if($question->opt_correct==$data['ans-'.$i])
                     {
@@ -88,12 +89,16 @@ class PublicExamController extends Controller
                     $leaved_questions++;
                     $remarks['q-'.$i] = 'l';
                 }
+
+                $question_solutions[$i.''] = $question->opt_correct;
             }
         }
 
+        // $question_solutions = json_encode($question_solutions);
+
         $remarks = json_encode($remarks);
 
-        // dd($request->all(),$remarks);
+        // dd($request->all(),$remarks,$question_solutions);
 
         $result=OpenExamResult::create([
             'exam_id'=>$exam->id,
@@ -111,6 +116,7 @@ class PublicExamController extends Controller
         return view('front.publicexams.examsuccess',[
             'result'=>$result,
             'exam' => $exam,
+            'question_solutions' => $question_solutions,
             'status'=>'1',
         ]);
     }

@@ -22,6 +22,7 @@
                     <div class="custon-table-header">
                       <h4 class="card-title">{{$exam->name}} : Results</h4>
                       <div class="text-right">
+                        <a href="/admin/open-exams/{{$exam->id}}/results/delete-dublicates"><button type="button" class="btn btn-sm ml-3 btn-danger"> Delete Dublicate </button></a>
                         <a href="/admin/open-exams/{{$exam->id}}/results/export"><button type="button" class="btn btn-sm ml-3 btn-info"> Excel Export </button></a>
                       </div>
                     </div>

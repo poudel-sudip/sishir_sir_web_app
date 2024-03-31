@@ -116,4 +116,31 @@ class OpenExamController extends Controller
         $fileName = $exam->slug.'-applications.xlsx';
         return Excel::download(new OpenExamResultExport($exam), $fileName);
     }
+
+    public function deleteDublicate(OpenExam $exam)
+    {       
+        $duplicate_contact = $exam->results()->select('contact')->groupBy('contact')
+        ->havingRaw('COUNT(*) > 1')
+        ->pluck('contact')
+        ->toArray();
+
+        $duplicates = [];
+        foreach ($duplicate_contact as $contact) {
+            $duplicates[] = $exam->results()
+            ->where('contact', $contact)
+            ->orderByDesc('id')            
+            ->get(['id','contact'])
+            ->slice(1)
+            ->pluck('id')
+            ->toArray();
+        }
+        
+        $duplicates = array_merge(...$duplicates);
+        $dublicateEntry = $exam->results()->whereIn('id',$duplicates)->delete();
+
+        // dd($dublicateEntry);
+
+        return redirect('/admin/open-exams/'.$exam->id.'/results');
+
+    }
 }

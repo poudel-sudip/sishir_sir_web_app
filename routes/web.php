@@ -202,6 +202,7 @@ Route::delete('/admin/open-exams/{exam}','App\Http\Controllers\Admin\Exams\OpenE
 //open mcq exams results admin
 Route::get('/admin/open-exams/{exam}/results','App\Http\Controllers\Admin\Exams\OpenExamController@results')->middleware('role:Admin');
 Route::get('/admin/open-exams/{exam}/results/export','App\Http\Controllers\Admin\Exams\OpenExamController@export')->middleware('role:Admin');
+Route::get('/admin/open-exams/{exam}/results/delete-dublicates','App\Http\Controllers\Admin\Exams\OpenExamController@deleteDublicate')->middleware('role:Admin');
 
 //routes for exam hall admin section
 Route::get('/admin/exam-hall','App\Http\Controllers\Admin\ExamHall\ExamHallController@index')->middleware('role:Admin');
