@@ -29,33 +29,8 @@
 
     <section class="mt-3">
         <div class="container-fluid px-md-5">
-            <div class="row align-items-stretch">
-                <div class="my-1 col-md-3 ">
-                    <div class="updates border border-primary border-2" style="height: 100%">
-                        <div class="update-header">
-                            <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fa-chart-bar"></i> Trending </h5></div>
-                        </div>
-                        <div class="update-body" style="max-height:375px; overflow-y:scroll">
-                            <ul class="p-0">
-                                @forelse(Helper::mostViewPosts() as $row)                         
-                                    <li><a href="{{$row->url}}"><i class="fa fa-pen-nib"></i>{{ucwords($row->title)}} <small class="ms-2 text-primary text-nowrap">({{$row->count}} views)</small> </a></li>
-                                @empty
-                                    <li>No Trendings Available</li>
-                                @endforelse
-                            </ul>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="my-1 col-md-6 text-center">
-                    @if($today_question)
-                        <div class="" >
-                            <a href="/question-of-the-day/{{$today_question->show_date}}">
-                                <img src="{{$today_question->image}}" alt="{{$today_question->show_date}}"  style="max-height:400px;" class="img img-fluid border border-3 border-danger">                                   
-                            </a>
-                        </div>
-                    @endif
-                </div>
+            <div class="row align-items-stretch flex-row-reverse">
+                
                 <div class="my-1 col-md-3 ">
                     <div class="updates border border-primary border-2" style="height: 100%">
                         <div class="update-header">
@@ -73,6 +48,35 @@
                     </div>
                     
                 </div>
+
+                <div class="my-1 col-md-6 text-center">
+                    @if($today_question)
+                        <div class="" >
+                            <a href="/question-of-the-day/{{$today_question->show_date}}">
+                                <img src="{{$today_question->image}}" alt="{{$today_question->show_date}}"  style="max-height:400px;" class="img img-fluid border border-3 border-danger">                                   
+                            </a>
+                        </div>
+                    @endif
+                </div>
+                
+                <div class="my-1 col-md-3 ">
+                    <div class="updates border border-primary border-2" style="height: 100%">
+                        <div class="update-header">
+                            <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fa-chart-bar"></i> Trending </h5></div>
+                        </div>
+                        <div class="update-body" style="max-height:375px; overflow-y:scroll">
+                            <ul class="p-0">
+                                @forelse(Helper::mostViewPosts() as $row)                         
+                                    <li><a href="{{$row->url}}"><i class="fa fa-pen-nib"></i>{{ucwords($row->title)}} <small class="ms-2 text-primary text-nowrap">({{$row->count}} views)</small> </a></li>
+                                @empty
+                                    <li>No Trendings Available</li>
+                                @endforelse
+                            </ul>
+                        </div>
+                    </div>
+                    
+                </div>
+                
             </div>
         </div>
     </section>

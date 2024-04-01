@@ -1,5 +1,14 @@
 @extends('front.layouts.app')
 @section('page_title', 'Attempt: '.ucwords($exam->name))
+
+@section('og-title', ucwords($exam->name))
+@section('og-url', url('public-exams/'.$exam->slug))
+@if($exam->image)
+@section('og-image', asset('/storage/'.$exam->image))
+@endif
+@section('og-description', strip_tags(str_replace('<', '  <', ('Attempt: '.$exam->name))))
+
+
 @section('content')
     <div class="container-fluid px-md-5">
         <div class="row">
@@ -23,7 +32,7 @@
                         <div class="card-body enroll_form">
                             <form method="POST" action="/public-exams/{{$exam->slug}}/attempt">
                                 @csrf
-        
+
                                 @if($exam->exam && $exam->exam->questions)
                                     <div class="form-group row">
                                         <label for="name" class="col-md-12 col-form-label text-end">Questions: {{$exam->exam->questions->count()}} </label>                                   

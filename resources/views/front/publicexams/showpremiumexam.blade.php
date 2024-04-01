@@ -1,5 +1,14 @@
 @extends('front.layouts.app')
 @section('page_title', ucwords($exam->title))
+
+@section('og-title', ucwords($exam->title))
+@section('og-url', url('exam-hall/premium/'.$exam->slug))
+@if($exam->image)
+@section('og-image', asset('/storage/'.$exam->image))
+@endif
+@section('og-description', strip_tags(str_replace('<', '  <', $exam->description)))
+
+
 @section('content')
     <div class="container-fluid px-md-5">
         <div class="row">
