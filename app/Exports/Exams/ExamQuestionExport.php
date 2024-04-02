@@ -31,7 +31,8 @@ class ExamQuestionExport implements FromCollection, WithHeadings
                 'opt_b' => strip_tags(str_replace('<', '  <', html_entity_decode($que->opt_b))),
                 'opt_c' => strip_tags(str_replace('<', '  <', html_entity_decode($que->opt_c))),
                 'opt_d' => strip_tags(str_replace('<', '  <', html_entity_decode($que->opt_d))),
-                'opt_correct' =>$que->opt_correct,                
+                'opt_correct' =>$que->opt_correct,  
+                'rationale' => strip_tags(str_replace('<', '  <', html_entity_decode($que->rationale))),              
             ];
         });
         // dd($questions);
@@ -41,6 +42,6 @@ class ExamQuestionExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ["SN", "Question", "Option A","Option B","Option C","Option D","Correct Option"];
+        return ["SN", "Question", "Option A","Option B","Option C","Option D","Correct Option",'Rationale'];
     }
 }
