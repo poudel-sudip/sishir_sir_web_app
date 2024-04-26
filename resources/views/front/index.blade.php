@@ -444,7 +444,7 @@
                                 </div>
                                 <div class="seller-footer">
                                     <h4 class="text-center" title="{{strtoupper($book->title)}}"> <a href="/books/{{$book->slug}}"> {{strtoupper($book->title)}} </a></h4>
-                                    {{-- <div>Published On: <strong> {{ucwords($book->published_year)}} </strong></div> --}}
+                                    <div class="text-center text-primary" >{{$book->edition ? ('(Edition: '.$book->edition.')') : ''}}</div>
                                     <div>Price : <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ ($book->price - (($book->price*$book->discount)/100)) }}</strong></div>
                                 </div>
                             </div>
