@@ -64,7 +64,9 @@
                 <div class="info-phone"><a href="mailto:info@shisiradhikari.com" style="color:#fff"><span class="icon-mail2"></span>  info@shisiradhikari.com</a></div>
               </div>
               <div class="col-12">
-                {{-- <div class="info-phone"><a target="_blank" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" style="color:#fff"><span class="icon-whatsapp"></span>  +977 - 981-2417639</a></div> --}}
+                <div class="info-phone"><a href="mailto: ehealthehn@gmail.com" style="color:#fff"><span class="icon-mail2"></span> ehealthehn@gmail.com</a></div>
+              </div>
+              <div class="col-12">
                 <div class="info-phone"><a target="_blank" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" style="color:#fff"><span class="icon-whatsapp"></span>  +977 - 970-2844270</a></div>
               </div>    
             </div>

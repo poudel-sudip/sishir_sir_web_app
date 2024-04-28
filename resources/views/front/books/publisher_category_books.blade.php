@@ -52,7 +52,7 @@
                                         </div>
                                         <div class="blog-details">
                                             <h4 class="text-center"><a href="/books/{{$book->slug}}">{{$book->title}}</a></h4>
-                                            <div class="text-center text-primary" style="margin-top: -0.5rem;">{{$book->edition ? ('(Edition: '.$book->edition.')') : ''}}</div>
+                                            <div class="text-center text-danger" style="margin-top: -0.5rem;"> (Edition: <span class="text-primary">{{ $book->edition ?? '' }}</span>) </div>
                                             <div class="mx-2">
                                                 <span>Price: <strong class="text-success">Rs. {{($book->price - (($book->price*$book->discount)/100))}}</strong></span>
                                                 <span class="text-danger" style="float: right"><s>Rs. {{ $book->price }}</s></span>
