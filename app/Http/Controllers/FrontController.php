@@ -58,7 +58,7 @@ class FrontController extends Controller
         $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->take(9)->get(['id','title','slug','price','discount','thumbnail','published_year','edition']);
         $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->take(9)->get();
         $data['ads'] = Advertisement::all();
-        // $data['homepopup'] = HomePopup::where('status','=','Active')->first();
+        $data['homepopup'] = HomePopup::where('status','=','Active')->orderByDesc('id')->first();
         // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
         // $data['libraries'] = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->take(8)->get();
 

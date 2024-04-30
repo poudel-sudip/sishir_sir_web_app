@@ -603,13 +603,61 @@
     </section>
     @endif
    
-
     <!-- Messenger Chat Plugin Code -->
     <div id="fb-root"></div>
 
     <!-- Your Chat Plugin code -->
     <div id="fb-customer-chat" class="fb-customerchat">
     </div>
+
+    @if($homepopup)
+        <div id="pup-up-container" class="mt-5">
+            <div id="pop-up" class="mt-3 border border-3 border-primary">
+                <button id='close-btn'>X</button>
+                <a href="{{$homepopup->link ?? 'javascript:void(0);'}}">
+                    <img src="/storage/{{$homepopup->image}}" alt="{{ $homepopup->title }}" class="img img-fluid">
+                </a>
+            </div>
+        </div>
+
+        <script>
+            //homepage popup
+            $(document).ready(function(){
+    
+                var stopAutohide;
+        
+                function showWindow(){
+                    $('#pup-up-container').show();
+                    // stop scroll
+                    $('html body').css('overflow','hidden');
+                    // auto hide fter 5s
+                    stopAutohide = setTimeout(hideWindow,8000);
+        
+                }
+                //showWindow()
+    
+                function hideWindow(){
+                    $('#pup-up-container').hide();
+                    // on scroll
+                    $('html body').css('overflow','scroll');
+                }
+                //hideWindow()
+    
+                // now call function automatically after some time    
+    
+                // auto open after 2s
+                setTimeout(showWindow,2000);
+        
+                // close after click 
+        
+                $("#close-btn").click(function(){
+        
+                    hideWindow();
+                    celarTimeout(stopAutohide);    
+                })    
+            })
+        </script>
+    @endif
 
     <script>
       var chatbox = document.getElementById('fb-customer-chat');
