@@ -690,10 +690,10 @@
     </div>
 
     @if($homepopup)
-        <div id="pup-up-container" class="mt-5">
-            <div id="pop-up" class="mt-3 border border-3 border-primary bg-light">
+        <div id="pup-up-container" class="mt-5" style="">
+            <div id="pop-up" class="mt-3 p-3 border border-3 border-primary bg-light" style="">
                 <button id='close-btn'>X</button>
-                <div class="p-2 text-center">
+                <div class="text-center">
                     <img src="/storage/{{$homepopup->image}}" alt="" class="img img-fluid" style="max-height:320px; width:auto;">
                     <div class=" h5">{{$homepopup->title}}</div>
                 </div>                
@@ -710,8 +710,8 @@
                     $('#pup-up-container').show();
                     // stop scroll
                     $('html body').css('overflow','hidden');
-                    // auto hide fter 5s
-                    stopAutohide = setTimeout(hideWindow,8000);
+                    // auto hide fter 15s
+                    stopAutohide = setTimeout(hideWindow,15000);
         
                 }
                 //showWindow()
