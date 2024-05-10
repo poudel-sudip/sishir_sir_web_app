@@ -17,13 +17,32 @@
             </nav>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">Edit Exam: {{$exam->name}}</div>
                     <div class="card-body">
                         <form method="POST" action="/admin/exams/{{$exam->id}}" enctype="multipart/form-data" class="forms-sample">
                             @csrf
                             @method('PATCH')
+
+                            <div class="form-group row">
+                                <label for="creator" class="col-md-5 col-form-label">{{ __('Creator') }}</label>
+
+                                <div class="col-md-7">
+                                    <select id="creator" class="form-control @error('creator') is-invalid @enderror" name="creator" required>
+                                        <option value="{{$exam->creator->id ?? ''}}">{{ucwords($exam->creator->name ?? '')}}</option>
+                                        <option value="">---------</option>
+                                        @foreach($creators as $cat)
+                                            <option value="{{$cat->id}}">{{ucwords($cat->name)}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('creator')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <label for="category" class="col-md-5 col-form-label">{{ __('Exam Category') }}</label>

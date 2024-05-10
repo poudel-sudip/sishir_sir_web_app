@@ -42,6 +42,7 @@
                             <th>WQ</th>
                             <th>MO</th>
                             <th>Date</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -58,7 +59,14 @@
                             <td>{{ $result->correct_questions ?? '' }} </td>
                             <td>{{ $result->wrong_questions ?? '' }} </td>
                             <td>{{ ($result->correct_questions * ($exam->exam->marks_per_question ?? 1))-($result->wrong_questions * ($exam->exam->negative_marks ?? 0))}} </td>
-                            <td>{{ date('Y-m-d',strtotime($result->created_at))}} </td>                           
+                            <td>{{ date('Y-m-d',strtotime($result->created_at))}} </td>   
+                            <td>
+                              <form id="delete-form-{{$result->id}}" action="/admin/open-exams/{{$exam->id}}/results/{{$result->id}}" method="POST" style="display: inline">
+                                @csrf
+                                @method('DELETE')
+                                <a href="javascript:{}" onclick="javascript:deleteData({{$result->id}});" class="text-danger">Delete</a>
+                              </form>
+                            </td>                        
                           </tr>
                           @php($i++)
                           @endforeach
@@ -71,5 +79,30 @@
               </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+      function deleteData(id)
+      {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            document.getElementById('delete-form-'+id).submit();
+            Swal.fire(
+              'Deleted!',
+              'Your data has been deleted.',
+              'success'
+            )
+          }
+        })
+      }
+  </script>
+
     
 @endsection

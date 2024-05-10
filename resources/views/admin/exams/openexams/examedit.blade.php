@@ -69,6 +69,30 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="show_answer" class="col-md-5 col-form-label">{{ __('Show Answer') }}</label>
+
+                                <div class="col-md-7 row">
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="show_answer_1" type="radio" class="form-check-input" name="show_answer" value="1" @if($exam->show_answer) checked @endif >Yes</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="show_answer_2" type="radio" class="form-check-input" name="show_answer" value="0" @if(!$exam->show_answer) checked @endif>No</label>
+                                        </div>
+                                    </div>
+                                    @error('show_answer')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="status" class="col-md-5 col-form-label">{{ __('Result Status') }}</label>
 
                                 <div class="col-md-7">

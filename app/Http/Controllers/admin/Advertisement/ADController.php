@@ -29,18 +29,58 @@ class ADController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'banner' => 'image|required',
-            'link' => 'string|nullable',
+            'info'=>'string|nullable|max:250',
+            'banner'=>'image | required',
+            'status'=>'required|string',
+            'position'=>'required|string',
         ]);
+        
         $img = '';
         if(isset($request->banner))
         {
             $img = $request->banner->store('uploads','public');
         }
+
         Advertisement::create([
             'banner' => $img,
-            'link' => $request->link,
+            'info' => $request->info,
+            'position' => $request->position,
+            'status' => $request->status,
         ]);
+
+        return redirect('/admin/advertisement');
+    }
+
+    public function edit(Advertisement $ad)
+    {
+        return view('admin.advertisement.edit',compact('ad'));
+    }
+
+    public function update(Advertisement $ad, Request $request)
+    {
+        $request->validate([
+            'info'=>'string|nullable|max:250',
+            'banner'=>'image | nullable',
+            'old_banner'=>'string | nullable',
+            'status'=>'required|string',
+            'position'=>'required|string',
+            
+        ]);
+
+        $img = $request->old_banner;
+        if(isset($request->banner))
+        {
+            $img=$request->banner->store('uploads','public');
+
+        }
+               
+        $ad->update([
+            'banner' => $img,
+            'info' => $request->info,
+            'position' => $request->position,
+            'status' => $request->status,
+        ]);
+
         return redirect('/admin/advertisement');
     }
 

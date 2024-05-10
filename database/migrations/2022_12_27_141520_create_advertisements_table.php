@@ -17,6 +17,8 @@ class CreateAdvertisementsTable extends Migration
             $table->id();
             $table->string('banner');
             $table->string('link')->nullable();
+            $table->string('info')->nullable();
+            $table->string('position')->nullable()->default('after_landing_section');
             $table->string('status')->nullable()->default('Active');
             $table->timestamps();
         });

@@ -318,6 +318,14 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/physical-book-orders') }}">
+          <i class="mdi mdi-alpha-b-box menu-icon"></i>
+          <span class="menu-title">Physical Book Orders</span>
+        </a>
+      </li>
+
+
       <li class="nav-item sidebar-actions">
         <a class="nav-link" href="{{ url('/change-password') }}">
           <i class="mdi mdi-key-variant menu-icon"></i>

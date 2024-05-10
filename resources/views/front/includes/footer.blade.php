@@ -59,27 +59,15 @@
           </div>
           <div class="col-md-6">
             <h5 class="mt-3">Info & Support </h5>
-            <div class="row">
-              <div class="col-12">
-                <div class="info-phone"><a href="mailto:info@shisiradhikari.com" style="color:#fff"><span class="icon-mail2"></span>  info@shisiradhikari.com</a></div>
-              </div>
-              <div class="col-12">
-                <div class="info-phone"><a href="mailto: ehealthehn@gmail.com" style="color:#fff"><span class="icon-mail2"></span> ehealthehn@gmail.com</a></div>
-              </div>
-              <div class="col-12">
-                <div class="info-phone"><a target="_blank" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" style="color:#fff"><span class="icon-whatsapp"></span>  +977 - 970-2844270</a></div>
-              </div>    
-            </div>
-            <hr>
-            <div class="mt-3">
-              <h5 class="">Company Info </h5>
-              <ul class="footer-menu">
-                <li><a>ई. हेल्थ नेटवर्क (प्रा. लि.)</a></li>
-                <li><a>E. Health Network (Pvt. Ltd.)</a></li>
-                <li><a>Reg. No. 334903</a></li>
-                <li><a>Birendranagar - 3 Surkhet, Nepal</a></li>
-              </ul>
-            </div>
+            <ul class="footer-menu">
+              {{-- <li><a>ई. हेल्थ नेटवर्क (प्रा. लि.)</a></li> --}}
+              <li><a>E. Health Network (Pvt. Ltd.)</a></li>
+              <li><a>Reg. No. 334903</a></li>
+              <li><div class="info-phone"><a href="javascript:void(0);" style="color:#fff"><span class="fa fa-map-marker-alt"></span>  Birendranagar - 3 Surkhet, Nepal </a></div></li>
+              <li><div class="info-phone"><a href="mailto:info@shisiradhikari.com" style="color:#fff"><span class="icon-mail2"></span>  info@shisiradhikari.com</a></div></li>
+              <li><div class="info-phone"><a href="mailto: ehealthehn@gmail.com" style="color:#fff"><span class="icon-mail2"></span> ehealthehn@gmail.com</a></div></li>
+              <li><div class="info-phone"><a target="_blank" href="https://whatsapp.com/channel/0029VaFMBIfLCoX9GMsJJ03w" style="color:#fff"><span class="icon-whatsapp"></span>  +977 - 970-2844270</a></div></li>
+            </ul>           
             <hr>
             <h5 class="footer-toggle-section-handeler" style="cursor: pointer;">Connect with us </h5>
             <div class="footer-sosmed d-none d-md-block">

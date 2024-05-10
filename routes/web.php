@@ -203,6 +203,7 @@ Route::delete('/admin/open-exams/{exam}','App\Http\Controllers\Admin\Exams\OpenE
 Route::get('/admin/open-exams/{exam}/results','App\Http\Controllers\Admin\Exams\OpenExamController@results')->middleware('role:Admin');
 Route::get('/admin/open-exams/{exam}/results/export','App\Http\Controllers\Admin\Exams\OpenExamController@export')->middleware('role:Admin');
 Route::get('/admin/open-exams/{exam}/results/delete-dublicates','App\Http\Controllers\Admin\Exams\OpenExamController@deleteDublicate')->middleware('role:Admin');
+Route::delete('/admin/open-exams/{exam}/results/{result}','App\Http\Controllers\Admin\Exams\OpenExamController@resultDelete')->middleware('role:Admin');
 
 //routes for exam hall admin section
 Route::get('/admin/exam-hall','App\Http\Controllers\Admin\ExamHall\ExamHallController@index')->middleware('role:Admin');
@@ -484,6 +485,8 @@ Route::delete('/admin/books/{book}/reviews/{review}','App\Http\Controllers\Admin
 Route::get('/admin/advertisement','App\Http\Controllers\Admin\Advertisement\ADController@index')->middleware('role:Admin');
 Route::get('/admin/advertisement/create','App\Http\Controllers\Admin\Advertisement\ADController@create')->middleware('role:Admin');
 Route::post('/admin/advertisement','App\Http\Controllers\Admin\Advertisement\ADController@store')->middleware('role:Admin');
+Route::get('/admin/advertisement/{ad}/edit','App\Http\Controllers\Admin\Advertisement\ADController@edit')->middleware('role:Admin');
+Route::patch('/admin/advertisement/{ad}','App\Http\Controllers\Admin\Advertisement\ADController@update')->middleware('role:Admin');
 Route::delete('/admin/advertisement/{ad}','App\Http\Controllers\Admin\Advertisement\ADController@destroy')->middleware('role:Admin');
 
 // admin material library Category management
@@ -587,7 +590,9 @@ Route::post('/admin/image-gallery','App\Http\Controllers\Admin\ImageGalleryContr
 Route::patch('/admin/image-gallery','App\Http\Controllers\Admin\ImageGalleryController@update')->middleware('role:Admin');
 Route::delete('/admin/image-gallery/{img}','App\Http\Controllers\Admin\ImageGalleryController@destroy')->middleware('role:Admin');
 
-
+Route::get('/admin/physical-book-orders','App\Http\Controllers\Admin\Books\PhysicalBookOrderController@index')->middleware('role:Admin');
+Route::delete('/admin/physical-book-orders/{order}','App\Http\Controllers\Admin\Books\PhysicalBookOrderController@destroy')->middleware('role:Admin');
+Route::get('/admin/physical-book-orders/{order}/show','App\Http\Controllers\Admin\Books\PhysicalBookOrderController@show')->middleware('role:Admin');
 
 
 
@@ -1012,6 +1017,7 @@ Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamControll
 
 //front ebooks
 Route::get('/books','App\Http\Controllers\FrontController@books');
+Route::post('/books/{slug}/physical-order/add','App\Http\Controllers\FrontController@addPhysicalBookOrder');
 Route::post('/books/{slug}/review/add','App\Http\Controllers\FrontController@addBookReview');
 Route::get('/books/{slug}','App\Http\Controllers\FrontController@singleBook');
 Route::get('/book-publishers/{slug}/all-books','App\Http\Controllers\FrontController@publisherAllBooks');

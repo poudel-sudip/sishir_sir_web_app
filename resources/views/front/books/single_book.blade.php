@@ -9,6 +9,12 @@
 @endif
 
 @section('content')
+    <style>
+        .book-description img{
+            padding: 1rem 2rem !important;
+        }
+    </style>
+
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
@@ -105,16 +111,27 @@
                                 </h6>                                
                                 <h6>
                                     Availability: <strong class="text-primary"> {{ucwords($book->availability ?? ' ')}} </strong>
-                                </h6>
-                               
+                                </h6>                              
+                                
+                            </div>
+                            <div class="col-12 book-details">
                                 <div class="book-description text-secondary">
                                     {!! $book->description !!}
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 my-2">
-                                        @if(trim($book->purchase_link))
+                                        {{-- @if(trim($book->purchase_link))
                                         <a href="{{$book->purchase_link}}" target="_blank" class="btn btn-primary">Purchase Online</a>
+                                        @endif --}}
+
+                                        @if(session('success_message'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('success_message') }}
+                                            </div>
                                         @endif
+
+                                        <a href="javascript:void(0)"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookOrderModal">Purchase Online</a>
+
                                     </div>
                                     <div class="col-md-6 my-2">
                                         <div class="sharethis-inline-share-buttons" onclick="handleShare(event)" ></div>
@@ -214,6 +231,55 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="modal fade" id="bookOrderModal" tabindex="-1" aria-labelledby="bookOrderModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header justify-content-center">
+                            <h6 class="modal-title" id="bookOrderModalLabel">Raise Book Order Request</h6>
+                        </div>
+                        <div class="modal-body">
+                            <div class="leave-review">
+                                <form action="/books/{{$book->slug}}/physical-order/add" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        
+                                        <div class="col-md-6">
+                                            <input type="text" name="name" placeholder="Full Name" class="comment-input" required>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <input type="text" name="contact" placeholder="+977 9876543210" class="comment-input" required>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <input type="text" name="location" placeholder="Your Delivery Location" class="comment-input" >
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <input type="number" name="quantity" placeholder="Book Order Quantity" class="comment-input"  >
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <input type="number" name="unit_price" placeholder="Affordable Book Unit Price" class="comment-input"  >
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <textarea name="message" class="comment-input" rows="2" placeholder="write your message"></textarea>
+                                        </div>
+                                        <div class="col-md-12 mt-3 text-end">
+                                            <button type="button" class="order-submit btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <input type="submit" name="submit" value="Post" id="order-post" class="order-submit btn-primary">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
     </div>    

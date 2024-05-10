@@ -58,14 +58,16 @@
                                     </div>
                                 @endif
                             </div>
-                            <div class="col-12 mt-2">
-                                <h6>Correct Answers</h6>
-                                <div class="d-flex justify-content-center align-items-center flex-wrap">
-                                    @foreach($question_solutions as $key=>$value)
-                                        <span class="m-1 btn btn-sm border-primary ">{{$key}}:{{ucwords($value)}}</span>
-                                    @endforeach
+                            @if($exam->show_answer)
+                                <div class="col-12 mt-2">
+                                    <h6 class="btn border border-success correct-answer-btn"><span>Show</span> The Correct Answers</h6>
+                                    <div class="hidden d-flex justify-content-center align-items-center flex-wrap">
+                                        @foreach($question_solutions as $key=>$value)
+                                            <span class="m-1 btn btn-sm border-primary ">{{$key}}:{{ucwords($value)}}</span>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             <div class="col-12 text-end mt-3"><a href="/public-exams" class="btn btn-primary btn-sm">View Other Exams</a></div>
                         </div>
                     </div>
@@ -73,4 +75,15 @@
             </div>
         </div>
     </section>
+
+    <script>
+        $('.correct-answer-btn').on('click',function(){
+            $(this).next().toggleClass("hidden");
+            $(this).find('span').text(function(_, oldText) {
+                return oldText.trim() === 'Show' ? 'Hide' : 'Show';
+            });
+        
+        });
+    </script>
+
 @endsection

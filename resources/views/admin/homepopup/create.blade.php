@@ -25,12 +25,12 @@
                             @csrf
 
                             <div class="form-group row">
-                                <label for="title" class="col-md-4 col-form-label">{{ __('Popup Title') }}</label>
+                                <label for="description" class="col-md-4 col-form-label">{{ __('Popup Description') }}</label>
 
                                 <div class="col-md-8">
-                                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" autocomplete="title" >
+                                    <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" autocomplete="description" >
 
-                                    @error('title')
+                                    @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="link" class="col-md-4 col-form-label">{{ __('Page Link') }}</label>
 
                                 <div class="col-md-8">
@@ -50,14 +50,14 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group row">
-                                <label for="image" class="col-md-4 col-form-label">{{ __('Image') }}</label>
+                                <label for="image" class="col-md-4 col-form-label">{{ __('Popup Image') }}</label>
 
                                 <div class="col-md-8">
                                     <label class="text-info">Note: Image Dimensions 1200 * 700</label>
-                                    <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required >
+                                    <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}"  >
 
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">

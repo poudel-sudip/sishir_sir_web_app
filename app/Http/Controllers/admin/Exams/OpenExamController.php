@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Exams;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\OpenExams\OpenExam;
+use App\Models\OpenExams\OpenExamResult;
 use Illuminate\Support\Str;
 use App\Models\Exams\Exam;
 use App\Models\Exams\ExamCategory;
@@ -80,6 +81,7 @@ class OpenExamController extends Controller
             'status'=>'string|required',
             'image' => 'nullable|image',
             'oldImage' =>'string|nullable',
+            'show_answer' =>'numeric|required|gte:0|lte:1',
         ]);
 
         $thumbnail = $request->oldImage;
@@ -90,6 +92,7 @@ class OpenExamController extends Controller
 
         $exam->update([
             'result_status'=>$request->status,
+            'show_answer'=>$request->show_answer,
             'image' => $thumbnail,
         ]);
 
@@ -143,4 +146,13 @@ class OpenExamController extends Controller
         return redirect('/admin/open-exams/'.$exam->id.'/results');
 
     }
+
+    public function resultDelete(OpenExam $exam, OpenExamResult $result)
+    {
+        // dd($result);
+        $result->delete();
+        return redirect('/admin/open-exams/'.$exam->id.'/results');
+    }
+
+
 }

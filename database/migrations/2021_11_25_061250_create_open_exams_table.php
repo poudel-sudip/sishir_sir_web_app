@@ -21,6 +21,7 @@ class CreateOpenExamsTable extends Migration
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
             $table->string('result_status')->nullable()->default('Unpublished');
+            $table->tinyInteger('show_answer')->nullable()->default(1);
             $table->timestamps();
         });
     }

@@ -26,12 +26,12 @@
                             @method('PATCH')
 
                             <div class="form-group row">
-                                <label for="title" class="col-md-4 col-form-label">{{ __('Title') }}</label>
+                                <label for="description" class="col-md-4 col-form-label">{{ __('Popup Description') }}</label>
 
                                 <div class="col-md-8">
-                                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') ?? $popup->title }}" >
+                                    <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') ?? $popup->title }}" >
 
-                                    @error('title')
+                                    @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="image" class="col-md-4 col-form-label">{{ __('Image') }}</label>
+                                <label for="image" class="col-md-4 col-form-label">{{ __('Popup Image') }}</label>
 
                                 <div class="col-md-8">
                                     <img src="/storage/{{$popup->image}}" height="50">
@@ -54,7 +54,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="link" class="col-md-4 col-form-label">{{ __('Link') }}</label>
 
                                 <div class="col-md-8">
@@ -66,7 +66,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('Status') }}</label>

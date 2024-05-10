@@ -113,17 +113,20 @@
         
     </section> --}}
 
-    <section class="home-banner">
-        <div class="container-fluid px-md-5">
-            <div class="row">
-                @foreach ($ads as $ads)
-                <div class="col-md-12 mb-2 text-center">
-                    <img class="img img-fluid" src="/storage/{{$ads->banner}}" alt="">
+    @if($ads->where('position','=','after_landing_section')->count())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    @foreach ($ads->where('position','=','after_landing_section')->values() as $ad)
+                    <div class="col-md-12 my-2 text-center">
+                        <img class="img img-fluid" src="/storage/{{$ad->banner}}" alt="" style="max-height:350px;">
+                        <div>{{$ad->info}}</div>
+                    </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
     
     {{-- @if($today_question)
         <section class="my-3 text-center">
@@ -344,6 +347,21 @@
         </div>
     </section>
 
+    @if($ads->where('position','=','after_mock_test')->count())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    @foreach ($ads->where('position','=','after_mock_test')->values() as $ad)
+                    <div class="col-md-12 my-2 text-center">
+                        <img class="img img-fluid" src="/storage/{{$ad->banner}}" alt="" style="max-height:350px;">
+                        <div>{{$ad->info}}</div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
     <section class="home-ebook mt-3 mb-5">
         <div class="container-fluid px-md-5">
             <div class="row mb-3">
@@ -379,6 +397,21 @@
             </div> --}}
         </div>
     </section>
+
+    @if($ads->where('position','=','after_library')->count())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    @foreach ($ads->where('position','=','after_library')->values() as $ad)
+                    <div class="col-md-12 my-2 text-center">
+                        <img class="img img-fluid" src="/storage/{{$ad->banner}}" alt="" style="max-height:350px;">
+                        <div>{{$ad->info}}</div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
 
     <section class="home-blog mt-3 mb-5">
         <div class="container-fluid px-md-5">
@@ -425,6 +458,21 @@
         </div>
     </section>
 
+    @if($ads->where('position','=','after_blogs')->count())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    @foreach ($ads->where('position','=','after_blogs')->values() as $ad)
+                    <div class="col-md-12 my-2 text-center">
+                        <img class="img img-fluid" src="/storage/{{$ad->banner}}" alt="" style="max-height:350px;">
+                        <div>{{$ad->info}}</div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
     @if(count($books))
         <div class="container-fluid px-md-5 eb-seller my-5">
             <div class="row">
@@ -458,6 +506,21 @@
             </div>
         </div>
 
+    @endif
+
+    @if($ads->where('position','=','after_books')->count())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    @foreach ($ads->where('position','=','after_books')->values() as $ad)
+                    <div class="col-md-12 my-2 text-center">
+                        <img class="img img-fluid" src="/storage/{{$ad->banner}}" alt="" style="max-height:350px;">
+                        <div>{{$ad->info}}</div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
     @endif
 
     @if(count($videos))
@@ -509,6 +572,22 @@
             </div>
         </section>
     @endif
+
+    @if($ads->where('position','=','after_videos')->count())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    @foreach ($ads->where('position','=','after_videos')->values() as $ad)
+                    <div class="col-md-12 my-2 text-center">
+                        <img class="img img-fluid" src="/storage/{{$ad->banner}}" alt="" style="max-height:350px;">
+                        <div>{{$ad->info}}</div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
 
     @if(count($img_gallery))
         <section class="course-section">
@@ -612,11 +691,12 @@
 
     @if($homepopup)
         <div id="pup-up-container" class="mt-5">
-            <div id="pop-up" class="mt-3 border border-3 border-primary">
+            <div id="pop-up" class="mt-3 border border-3 border-primary bg-light">
                 <button id='close-btn'>X</button>
-                <a href="{{$homepopup->link ?? 'javascript:void(0);'}}">
-                    <img src="/storage/{{$homepopup->image}}" alt="{{ $homepopup->title }}" class="img img-fluid">
-                </a>
+                <div class="p-2 text-center">
+                    <img src="/storage/{{$homepopup->image}}" alt="" class="img img-fluid" style="max-height:320px; width:auto;">
+                    <div class=" h5">{{$homepopup->title}}</div>
+                </div>                
             </div>
         </div>
 
@@ -639,7 +719,7 @@
                 function hideWindow(){
                     $('#pup-up-container').hide();
                     // on scroll
-                    $('html body').css('overflow','scroll');
+                    $('html body').css('overflow-y','scroll');
                 }
                 //hideWindow()
     

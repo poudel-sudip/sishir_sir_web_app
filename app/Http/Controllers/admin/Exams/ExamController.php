@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Exams\Exam;
 use App\Models\Exams\ExamCategory;
+use App\Models\User;
 
 class ExamController extends Controller
 {
@@ -87,8 +88,13 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
-        $categories = ExamCategory::all();
-        return view('admin.exams.examedit',compact('exam','categories'));
+        $data['exam'] = $exam;
+        $data['categories'] = ExamCategory::all();
+        $data['creators'] = User::where('role','=','Moderator')->where('status','=','Active')->get(['id','name']);
+
+        
+        // dd($data);
+        return view('admin.exams.examedit',$data);
     }
 
     /**
@@ -111,6 +117,8 @@ class ExamController extends Controller
             'status'=>'string|nullable',
             'category'=>'numeric|required',
             'answer_video' => 'string|nullable',
+            'creator'=>'numeric|nullable',
+
         ]);
 
         $exam->update([
@@ -123,6 +131,8 @@ class ExamController extends Controller
             'status'=>$request->status,
             'category_id'=>$request->category,
             'answer_video' => $request->answer_video,
+            'user_id'=>$request->creator,
+
         ]);
 
         return redirect('/admin/exam-category/'.$exam->category->id.'/exams')->with('success','Data Updated Successfully');

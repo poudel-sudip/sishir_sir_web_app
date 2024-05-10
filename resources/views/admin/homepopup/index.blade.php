@@ -29,9 +29,9 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Popup Title</th>
+                                        <th>Popup Description</th>
                                         <th>Popup Image</th>
-                                        <th>Popup Link</th>
+                                        {{-- <th>Popup Link</th> --}}
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -42,7 +42,7 @@
                                             <td>{{$popup->id}}</td>
                                             <td>{{$popup->title}}</td>
                                             <td> <img src="/storage/{{$popup->image}}"> </td>
-                                            <td>{{$popup->link}}</td>
+                                            {{-- <td>{{$popup->link}}</td> --}}
                                             <td>
                                                 @if($popup->status == 'Inactive')
                                                 <span class="text-danger">{{$popup->status}}</span>

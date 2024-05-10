@@ -16,7 +16,7 @@ class CreateHomePopupsTable extends Migration
         Schema::create('home_popups', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('link')->nullable();
             $table->string('status')->default('Inactive');
             $table->timestamps();

@@ -64,44 +64,79 @@
     </div>
     </div>
 
+    <script src="{{ asset('admin/js/sweetalert2@11.js') }}"></script>
+
     <script type="text/javascript">
-    var interval;
-    function countdown() {
-      clearInterval(interval);
-      interval = setInterval( function() {
-            var timer = $('.js-timeout').html();
-            timer = timer.split(':');
-            var hours = parseInt(timer[0]);
-            var minutes = parseInt(timer[1]);
-            var seconds = parseInt(timer[2]);
-            seconds -= 1;
-            if(seconds < 0 )
-            {
-                minutes -= 1;
-                seconds = 59; 
-                if(minutes < 0 && hours != 0) 
+        var interval;
+        function countdown() {
+            clearInterval(interval);
+            interval = setInterval( function() {
+                var timer = $('.js-timeout').html();
+                timer = timer.split(':');
+                var hours = parseInt(timer[0]);
+                var minutes = parseInt(timer[1]);
+                var seconds = parseInt(timer[2]);
+                seconds -= 1;
+                if(seconds < 0 )
                 {
-                    hours -=1;
-                    minutes =59;
+                    minutes -= 1;
+                    seconds = 59; 
+                    if(minutes < 0 && hours != 0) 
+                    {
+                        hours -=1;
+                        minutes =59;
+                    }
                 }
-            }
 
-            if (hours < 10 && length.hours != 2) hours = '0' + hours;
-            if (minutes < 10 && length.minutes != 2) minutes = '0' + minutes;
-            if (seconds < 10 && length.seconds != 2)seconds = '0' + seconds;
-            
-            $('.js-timeout').html(hours + ':' + minutes + ':' + seconds);
+                if (hours < 10 && length.hours != 2) hours = '0' + hours;
+                if (minutes < 10 && length.minutes != 2) minutes = '0' + minutes;
+                if (seconds < 10 && length.seconds != 2)seconds = '0' + seconds;
+                
+                $('.js-timeout').html(hours + ':' + minutes + ':' + seconds);
 
-            if (hours== 0 && minutes == 0 && seconds == 0) { 
-                clearInterval(interval);  
-                alert("Time Over Please Click Ok Button"); 
-                $('#exam-form').submit(); 
-            }
-      }, 1000);
-    }
+                if (hours== 0 && minutes == 0 && seconds == 0) { 
+                    clearInterval(interval);  
+                    examSubmitAction('Time Over. Do You Want To Submit Your Exam?');
+                }
+            }, 1000);
+        }
+        
+        $('.js-timeout').text("{{ $exam->exam_time.':00' }}");
+        countdown();
+
+        $('#exam-form').on("submit",function(event){
+            event.preventDefault();
+
+            examSubmitAction('Do You Want To Submit Your Exam?');
+
+            return false;
+        });
+
+        function examSubmitAction(title)
+        {
+
+            Swal.fire({
+                title: title,
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Submit It',
+                cancelButtonText: 'No, Cancel It'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#exam-form').submit();
+                }
+                else
+                {
+                    // alert('cancncelled');
+                    window.location.href = '/public-exams';
+                }
+            });
+
+        }
     
-    $('.js-timeout').text("{{ $exam->exam_time.':00' }}");
-    countdown();
-</script>
+    </script>
 
 @endsection

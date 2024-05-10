@@ -38,7 +38,7 @@ use App\Models\Books\QRBook;
 use App\Models\Exams\DailyMCQQuestion;
 use App\Models\DiscussionForum;
 use App\Models\ImageGallery;
-
+use App\Models\Books\PhysicalBookOrder;
 
 class FrontController extends Controller
 {
@@ -57,7 +57,7 @@ class FrontController extends Controller
         $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->take(5)->get(['id','title','slug','image','author','created_at']);
         $data['books'] = Book::where('status','=','Active')->orderByDesc('id')->take(9)->get(['id','title','slug','price','discount','thumbnail','published_year','edition']);
         $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->take(9)->get();
-        $data['ads'] = Advertisement::all();
+        $data['ads'] = Advertisement::where('status','=','Active')->get();
         $data['homepopup'] = HomePopup::where('status','=','Active')->orderByDesc('id')->first();
         // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
         // $data['libraries'] = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->take(8)->get();
@@ -1406,6 +1406,44 @@ class FrontController extends Controller
     {
         $data['images']=ImageGallery::orderByDesc('id')->paginate(20);
         return view('front.img_gallery',$data);
+    }
+
+    public function addPhysicalBookOrder($slug, Request $request)
+    {
+        $book = Book::where('slug',$slug)->first();
+        if(!$book)
+        {
+            abort(404);
+        }
+        
+        // dd($request->all());
+
+        $request->validate([
+            'name' => 'required|string',
+            'contact' => 'required|numeric',
+            'location' => 'nullable|string',
+            'quantity' => 'nullable|numeric',
+            'unit_price' => 'nullable|numeric',
+            'message' => 'nullable|string',
+        ]);
+
+        PhysicalBookOrder::create([
+            'book_category' => $book->category->name ?? '',
+            'book_title' => $book->title,
+            'book_author' => $book->author,
+            'book_publisher' => $book->publisher->name ?? '',
+            'book_ref_image' => $book->thumbnail,
+            'unit_price' => $request->unit_price,
+            'quantity' => $request->quantity,
+            'message' => $request->message,
+            'name' => $request->name,
+            'contact' => $request->contact,
+            'location' => $request->location,
+            'status' => 'pending',
+            
+        ]);
+
+        return redirect('/books/'.$book->slug)->with('success_message','Your Request Has Been Submitted. Our Team Will Call You For Further Enquiries. Please Wait Patiently.');
     }
 
 }
