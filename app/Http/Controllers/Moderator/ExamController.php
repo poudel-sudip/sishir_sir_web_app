@@ -339,9 +339,13 @@ class ExamController extends Controller
         $request->validate([
             'exam'=>'required|string',
             'status'=>'string|required',
+            'show_answer' =>'numeric|required|gte:0|lte:1',
         ]);
 
-        $exam->update(['result_status'=>$request->status]);
+        $exam->update([
+            'result_status'=>$request->status,
+            'show_answer'=>$request->show_answer,
+        ]);
 
         return redirect('/moderator/open-exams')->with('success','Data Updated Successfully');
     }

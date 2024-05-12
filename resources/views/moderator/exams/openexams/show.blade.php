@@ -53,7 +53,10 @@
                             <div>Result Status: </div>
                             <div>{{$exam->result_status}}</div>
                         </div>
-                        
+                        <div class="course-row">
+                            <div>Show Exam Answers: </div>
+                            <div>{{$exam->show_answer ? 'Yes' : 'No'}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
