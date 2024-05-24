@@ -60,7 +60,7 @@
                                         <option value="">Choose One....</option>
                                         <option value="Manual">Manual</option>
                                         <option value="Esewa">Esewa</option>
-                                        <option value="Khalti">Khalti</option>
+                                        {{-- <option value="Khalti">Khalti</option> --}}
                                     </select>
                                     @error('verificationMode')
                                     <span class="invalid-feedback" role="alert">
@@ -185,10 +185,10 @@
             {
                 pay_esewa();
             }
-            else if(mode=="Khalti")
-            {
-                pay_khalti();
-            }
+            // else if(mode=="Khalti")
+            // {
+            //     pay_khalti();
+            // }
             else
             {
                 alert("Please Select One Verification Mode");

@@ -60,7 +60,7 @@
                                         <option value="">Choose One....</option>
                                         <option value="Manual">Manual</option>
                                         <option value="Esewa">Esewa</option>
-                                        <option value="Khalti">Khalti</option>
+                                        {{-- <option value="Khalti">Khalti</option> --}}
                                         
                                     </select>
                                     @error('verificationMode')
@@ -141,8 +141,8 @@
             tAmt: {{$booking->category->price - $booking->category->discount}},
             pid: "{{$booking->id.'-'.time()}}",
             scd: "{{Config::get('payment.esewa_scd')}}",
-            su: '{{url("student/exam-bookings/$booking->id/esewaSuccess")}}',
-            fu: '{{url("student/exam-bookings/$booking->id/payment-failed")}}'
+            su: '{{url("/student/exam-bookings/$booking->id/esewaSuccess")}}',
+            fu: '{{url("/student/exam-bookings/$booking->id/payment-failed")}}'
         };
 
         var form = document.createElement("form");
@@ -186,10 +186,10 @@
             {
                 pay_esewa();
             }
-            else if(mode=="Khalti")
-            {
-                pay_khalti();
-            }
+            // else if(mode=="Khalti")
+            // {
+            //     pay_khalti();
+            // }
             else
             {
                 alert("Please Select One Verification Mode");

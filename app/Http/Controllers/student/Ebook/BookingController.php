@@ -119,12 +119,12 @@ class BookingController extends Controller
                     'remarks'=>'Booked by Student with Direct Esewa Payment',
                     'updatedBy'=>auth()->user()->name,
                 ]);
-                MerchantBooking::create([
-                    'type' => 'ebook',
-                    'title' => $booking->book->title ?? '',
-                    'merchant' => 'esewa',
-                    'booking_id' => $booking->id,
-                ]);
+                // MerchantBooking::create([
+                //     'type' => 'ebook',
+                //     'title' => $booking->book->title ?? '',
+                //     'merchant' => 'esewa',
+                //     'booking_id' => $booking->id,
+                // ]);
                 return redirect('/student/ebook-bookings')->with('success_message','Transction Completed Succesfully.');
             }
             
@@ -166,12 +166,12 @@ class BookingController extends Controller
                 'remarks'=>'Booked by Student with Direct Khalti Payment',
                 'updatedBy'=>auth()->user()->name,
             ]);
-            MerchantBooking::create([
-                'type' => 'ebook',
-                'title' => $booking->book->title ?? '',
-                'merchant' => 'khalti',
-                'booking_id' => $booking->id,
-            ]);
+            // MerchantBooking::create([
+            //     'type' => 'ebook',
+            //     'title' => $booking->book->title ?? '',
+            //     'merchant' => 'khalti',
+            //     'booking_id' => $booking->id,
+            // ]);
             return response()->json([
                 'success' => 1,
                 'redirecto' => url('/student/ebook-bookings')

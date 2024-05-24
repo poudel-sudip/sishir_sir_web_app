@@ -8,10 +8,13 @@ return[
 
     'khalti_public_key'    =>  "test_public_key_bc744f8267dc4775a38af37cab5591d0",
 
-    'esewa_pay_url' => "https://uat.esewa.com.np/epay/main",
+    // 'esewa_pay_url' => "https://uat.esewa.com.np/epay/main",
+    'esewa_pay_url' => "https://esewa.com.np/epay/main",
 
-    'esewa_verify_url' => "https://uat.esewa.com.np/epay/transrec",
+    // 'esewa_verify_url' => "https://uat.esewa.com.np/epay/transrec",
+    'esewa_verify_url' => "https://esewa.com.np/epay/transrec",
 
-    'esewa_scd' => "EPAYTEST",
+    // 'esewa_scd' => "EPAYTEST",
+    'esewa_scd' => "NP-ES-EHEALTH",
 
 ];

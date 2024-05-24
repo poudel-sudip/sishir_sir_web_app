@@ -125,12 +125,12 @@ class ExamBookingController extends Controller
                     'remarks'=>'Booked by Student with Direct Esewa Payment',
                     'updatedBy'=>auth()->user()->name,
                 ]);
-                MerchantBooking::create([
-                    'type' => 'exam',
-                    'title' => $booking->category->name ?? '',
-                    'merchant' => 'esewa',
-                    'booking_id' => $booking->id,
-                ]);
+                // MerchantBooking::create([
+                //     'type' => 'exam',
+                //     'title' => $booking->category->name ?? '',
+                //     'merchant' => 'esewa',
+                //     'booking_id' => $booking->id,
+                // ]);
                 return redirect('/student/exam-bookings')->with('success_message','Transction Completed Succesfully.');
             }
         }
@@ -178,12 +178,12 @@ class ExamBookingController extends Controller
                 'remarks'=>'Booked by Student with Direct Khalti Payment',
                 'updatedBy'=>auth()->user()->name,
             ]);
-            MerchantBooking::create([
-                'type' => 'exam',
-                'title' => $booking->category->name ?? '',
-                'merchant' => 'khalti',
-                'booking_id' => $booking->id,
-            ]);
+            // MerchantBooking::create([
+            //     'type' => 'exam',
+            //     'title' => $booking->category->name ?? '',
+            //     'merchant' => 'khalti',
+            //     'booking_id' => $booking->id,
+            // ]);
             return response()->json([
                 'success' => 1,
                 'redirecto' => url('/student/exam-bookings')

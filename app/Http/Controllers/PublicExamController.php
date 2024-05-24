@@ -20,7 +20,7 @@ class PublicExamController extends Controller
 
     public function examform($examslug)
     {
-        $exam=OpenExam::where('slug','=',$examslug)->where('result_status','!=','Inactive')->first();
+        $exam=OpenExam::where('slug','=',$examslug)->where('result_status','=','Unpublished')->first();
         if(!$exam)
         {
            abort(404);
@@ -37,7 +37,7 @@ class PublicExamController extends Controller
             'contact'=>'required|numeric|digits:10',
         ]);
 
-        $openexam=OpenExam::where('slug','=',$examslug)->where('result_status','!=','Inactive')->first();
+        $openexam=OpenExam::where('slug','=',$examslug)->where('result_status','=','Unpublished')->first();
         if(!$openexam)
         {
            abort(404);
@@ -129,7 +129,7 @@ class PublicExamController extends Controller
 
     public function resultshow($examslug)
     {
-        $exam=OpenExam::where('slug','=',$examslug)->where('result_status','!=','Inactive')->first();
+        $exam=OpenExam::where('slug','=',$examslug)->where('result_status','=','Published')->first();
         if(!$exam)
         {
            abort(404);
