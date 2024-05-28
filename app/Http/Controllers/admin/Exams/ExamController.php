@@ -51,7 +51,14 @@ class ExamController extends Controller
             'status'=>'string|nullable',
             'category'=>'numeric|required',
             'answer_video' => 'string|nullable',
+            "answer_pdf" => "file|nullable|mimes:pdf",
         ]);
+
+        $pdf_file = '';
+        if(isset($request['answer_pdf']))
+        {
+            $pdf_file= $request->answer_pdf->store('uploads/exam_solution_pdf','public');
+        } 
 
         $exam= Exam::create([
             'name'=>$request->name,
@@ -63,6 +70,7 @@ class ExamController extends Controller
             'status'=>$request->status,
             'category_id'=>$request->category,
             'answer_video' => $request->answer_video,
+            'answer_pdf' => $pdf_file,
         ]);
 
         return redirect('/admin/exam-category/'.$exam->category_id.'/exams')->with('success','Data add successfully');
@@ -118,8 +126,15 @@ class ExamController extends Controller
             'category'=>'numeric|required',
             'answer_video' => 'string|nullable',
             'creator'=>'numeric|nullable',
-
+            "answer_pdf" => "file|nullable|mimes:pdf",
+            "old_answer_pdf" => "string|nullable",
         ]);
+
+        $pdf_file = $request->old_answer_pdf;
+        if(isset($request['answer_pdf']))
+        {
+            $pdf_file= $request->answer_pdf->store('uploads/exam_solution_pdf','public');
+        } 
 
         $exam->update([
             'name'=>$request->name,
@@ -132,7 +147,7 @@ class ExamController extends Controller
             'category_id'=>$request->category,
             'answer_video' => $request->answer_video,
             'user_id'=>$request->creator,
-
+            'answer_pdf' => $pdf_file,
         ]);
 
         return redirect('/admin/exam-category/'.$exam->category->id.'/exams')->with('success','Data Updated Successfully');

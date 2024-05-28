@@ -64,6 +64,16 @@
                                 <a class="view-video btn btn-info" href="#videoModal" video-title="{{$exam->name}}" video-url="{{$exam->answer_video}}" data-bs-toggle="modal" data-bs-target="#videoModal" data-toggle="modal" data-target="#videoModal">Play <span class="fas fa-video mdi mdi-video"></span></a>
                             </div>
                         </div>
+
+                        <div class="course-row">
+                            <div>Solution PDF: </div>
+                            <div>
+                                @if($exam->answer_pdf)
+                                <iframe src="/storage/{{$exam->answer_pdf}}" frameBorder="0" scrolling="auto" height="600" width="100%"></iframe>
+                                @endif
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

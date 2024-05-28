@@ -34,14 +34,14 @@
                                 <td>{{$exam->exam->name ?? ''}}</td>
                                 <td>
                                     @if($exam->status)
-                                        <a href="/student/exam-bookings/{{$category->id}}/exams/{{$exam->exam->id}}/view" class="btn btn-success btn-sm">View Evaluation</a>
-                                        <form id="reset-form-{{$i}}" action="/student/exam-bookings/{{$category->id}}/exams/{{$exam->exam->id}}/reset" method="POST" style="display: inline">
+                                        <a href="/student/exam-bookings/{{$category->id}}/exams/{{$exam->exam->id ?? ''}}/view" class="btn btn-success btn-sm">View Evaluation</a>
+                                        <form id="reset-form-{{$i}}" action="/student/exam-bookings/{{$category->id}}/exams/{{$exam->exam->id ?? ''}}/reset" method="POST" style="display: inline">
                                             @csrf
                                             @method('DELETE')
                                             <a href="javascript:{}" onclick="javascript:resetData({{$i}});" class="btn btn-danger btn-sm">Reset Exam</a>
                                         </form>                                    
                                     @else
-                                        <a href="/student/exam-bookings/{{$category->id}}/exams/{{$exam->exam->id}}/attempt" class="btn btn-primary btn-sm">Attempt Exam</a>
+                                        <a href="/student/exam-bookings/{{$category->id}}/exams/{{$exam->exam->id ?? ''}}/attempt" class="btn btn-primary btn-sm">Attempt Exam</a>
                                     @endif
                                 </td>
                             </tr>

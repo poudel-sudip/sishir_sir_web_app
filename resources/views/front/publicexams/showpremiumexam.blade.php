@@ -47,7 +47,7 @@
                         <div class="h5 my-1">Discounted Price: {{$exam->price - $exam->discount}} </div>
                         <div class="h5 my-1">No of Sets: {{$exam->category_exams->count()}} </div>
                         <div>
-                            <a href="/student/exam-hall/enroll" class="btn booking-btn">Book Now</a>
+                            <a href="/student/exam-bookings/create" class="btn booking-btn">Book Now</a>
                         </div>
                     </div>
                 </div>

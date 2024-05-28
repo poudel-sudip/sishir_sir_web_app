@@ -146,6 +146,7 @@
                                     @enderror
                                 </div>
                             </div>
+                          
 
                             <div class="form-group row">
                                 <label for="answer_video" class="col-md-5 col-form-label">{{ __('Solution Video') }} </label>
@@ -161,6 +162,20 @@
                                 </div>
                             </div>
                            
+                            <div class="form-group row">
+                                <label for="answer_pdf" class="col-md-5 col-form-label">{{ __('Solution PDF') }} </label>
+
+                                <div class="col-md-7">
+                                    <input id="answer_pdf" type="file" class="form-control @error('answer_pdf') is-invalid @enderror" name="answer_pdf" value="{{ old('answer_pdf') ?? $exam->answer_pdf }}" >
+                                    <input type="hidden" name="old_answer_pdf" value="{{$exam->answer_pdf}}">
+                                    @error('answer_pdf')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="status" class="col-md-5 col-form-label">{{ __('Exam Status') }}</label>
 

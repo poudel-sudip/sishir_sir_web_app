@@ -49,12 +49,15 @@
                 </div>
                 <div class="answer-details">
                     <div class="row mb-2 align-items-center">
-                        <div class="col-9">
+                        <div class="col-6">
                             <h6>Question & Answer</h6>
                         </div>
-                        <div class="col-3 text-end">
+                        <div class="col-6 text-end">
                             @if($exam->answer_video)
-                            <a class="view-video btn btn-primary" href="#videoModal" video-title="{{'Video Answer Solution for '.$exam->name}}" video-url="{{$exam->answer_video}}" data-bs-toggle="modal" data-bs-target="#videoModal" data-toggle="modal" data-target="#videoModal">Play Solution Video <span class="fas fa-video mdi mdi-video"></span></a>
+                            <a class="view-video btn btn-primary" href="#videoModal" video-title="{{'Video Answer Solution for '.$exam->name}}" video-url="{{$exam->answer_video}}" data-bs-toggle="modal" data-bs-target="#videoModal" data-toggle="modal" data-target="#videoModal">Play Solution Video <span class="fas fa-video"></span></a>
+                            @endif
+                            @if($exam->answer_pdf)
+                            <a class="view-pdf btn btn-success" href="#pdfModal" pdf-title="{{'PDF Answer Solution for '.$exam->name}}" pdf-url="{{$exam->answer_pdf}}" data-bs-toggle="modal" data-bs-target="#pdfModal" data-toggle="modal" data-target="#pdfModal">View Solution PDF <span class="fas fa-file-pdf"></span></a>
                             @endif
                         </div>
                     </div>
@@ -110,5 +113,40 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal HTML -->
+    <div id="pdfModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="pdfViewLModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header align-items-center">
+                    <h5 class="modal-title" id="view_pdf_title"> </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="view_pdf_body" class="embed-responsive embed-responsive-16by9">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function(){
+            $('.view-pdf').click(function(){
+                const title = $(this).attr('pdf-title');
+                const path = $(this).attr('pdf-url');
+                // alert(path);
+                $('#view_pdf_title').html("");
+                $('#view_pdf_body').html("");
+                $('#view_pdf_title').html(title);                
+                $('#view_pdf_body').append(
+                    '<iframe src="/storage/'+path+'" frameBorder="0" scrolling="auto" height="600" width="100%"></iframe>'
+                );               
+                
+            })
+        })
+    </script>
 
 @endsection
