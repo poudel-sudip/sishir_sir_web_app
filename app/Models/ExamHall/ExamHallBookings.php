@@ -25,8 +25,5 @@ class ExamHallBookings extends Model
         return $this->belongsTo(ExamHallCategories::class, 'category_id');
     }
 
-    public function vendorBooking(): HasOne
-    {
-        return $this->hasOne(VendorExamBooking::class, 'booking_id');
-    }
+   
 }

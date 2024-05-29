@@ -120,7 +120,6 @@ class ExamHallBookingController extends Controller
 
     public function destroy(Request $request, ExamHallBookings $booking)
     {
-        $booking->vendorBooking()->delete();
         $booking->delete();
         return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
 

@@ -45,11 +45,11 @@
                               @foreach($bookings as $booking)
                             <tr>
                                 <td>{{$booking->id}}</td>
-                                <td>{{date('Y-m-d',strtotime($booking->created_at))}}</td>
-                                <td>{{$booking->category->title ?? '' }}</td>
-                                <td>{{$booking->user_name}}</td>
-                                <td>{{ $booking->user->email ?? '' }}</td>
-                                <td>{{ $booking->user->contact ?? '' }}</td>
+                                <td class="text-wrap">{{date('Y-m-d',strtotime($booking->created_at))}}</td>
+                                <td class="text-wrap">{{$booking->category->title ?? '' }}</td>
+                                <td class="text-wrap">{{$booking->user_name}}</td>
+                                <td class="text-wrap">{{ $booking->user->email ?? '' }}</td>
+                                <td class="text-wrap">{{ $booking->user->contact ?? '' }}</td>
                                 {{-- <td>
                                     @if($booking->status == 'Verified' && $booking->dueAmount>10)
                                         Rs. {{ $booking->dueAmount ?? '0' }}
