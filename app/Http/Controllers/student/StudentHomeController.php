@@ -20,10 +20,10 @@ class StudentHomeController extends Controller
 
         $count= (object) [
             'bookings'=> (object) [
-                'courses'=>$user->bookings()->count(),
-                'classroom'=>$user->bookings()->where([['status','=','Verified'],['suspended','=',false]])->count(),
+                // 'courses'=>$user->bookings()->count(),
+                // 'classroom'=>$user->bookings()->where([['status','=','Verified'],['suspended','=',false]])->count(),
                 'exams'=>$user->exam_bookings()->count(),
-                'ebooks'=>$user->ebook_bookings()->count(),
+                'pdf_banks'=>$user->ebook_bookings()->count(),
             ],
         ];
         

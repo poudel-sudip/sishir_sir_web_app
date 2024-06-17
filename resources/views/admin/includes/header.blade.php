@@ -123,6 +123,30 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#pdf_bank" aria-expanded="false" aria-controls="pdf_bank">
+          <i class="mdi mdi-file-pdf menu-icon"></i>
+          <span class="menu-title">PDF Bank</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="pdf_bank">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/pdf-bank/categories') }}">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/pdf-bank/pdf-groups') }}">PDF Bank Groups</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/pdf-bank-bookings') }}">Latest Bookings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/pdf-bank-bookings/all') }}">All Bookings</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      {{-- <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#ebooks" aria-expanded="false" aria-controls="ebooks">
           <i class="mdi mdi-book menu-icon"></i>
           <span class="menu-title">E-Books</span>
@@ -144,7 +168,7 @@
             </li>
           </ul>
         </div>
-      </li>
+      </li> --}}
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/menus') }}">

@@ -8,6 +8,7 @@ use App\Models\Exams\Question;
 use App\Models\OpenExams\OpenExamResult;
 use App\Models\ExamHall\ExamHallCategories;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\URL;
 
 class PublicExamController extends Controller
 {
@@ -51,6 +52,37 @@ class PublicExamController extends Controller
             'courses'=>$request->courses
         ];
         
+        try 
+        {
+            $pageurl = URL::previous();
+            $parsedurl = parse_url($pageurl);
+
+            $data = [
+                'name'=> $request->name,
+                'email'=> $request->email,
+                'contact'=> $request->contact,
+                // 'remarks'=> $request->courses,
+                'website' => $parsedurl['host'],
+                'source_url' => $parsedurl['host'].$parsedurl['path'],
+                'page_title' => $exam->name,
+            ];
+
+            $apiurl = "https://etutorclass.com/api/v1/collect-external-web-data";
+            $ch = curl_init($apiurl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 6); // Set a timeout
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4); // Set a connection timeout
+            $response = curl_exec($ch);
+            curl_close($ch);
+        
+        } 
+        catch (\Throwable $th) {
+            //throw $th;
+        }
+
+
         return view('front.publicexams.attemptexam',compact('user','exam','openexam'));
     }
 

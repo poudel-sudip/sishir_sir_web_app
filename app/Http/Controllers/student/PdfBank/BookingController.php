@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Student\ExamHall;
+namespace App\Http\Controllers\Student\PdfBank;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ExamHall\ExamHallCategories;
-use App\Models\ExamHall\ExamHallBookings;
-use App\Models\MerchantBooking;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use App\Models\Ebook\Ebook as PDFBank;
+use App\Models\Ebook\EbookBooking as Booking;
+use App\Models\MerchantBooking;
 
-class ExamBookingController extends Controller
+class BookingController extends Controller
 {
     public function __construct()
     {
@@ -19,59 +19,51 @@ class ExamBookingController extends Controller
 
     public function index()
     {
-        $bookings=auth()->user()->exam_bookings()->get();
-        return view('student.examhall.bookings.index',[
-            'bookings'=>$bookings,
-        ]);
+        $bookings = auth()->user()->ebook_bookings;
+        return view('student.pdf_bank.booking.index',compact('bookings'));
     }
 
-    public function enroll()
+    public function create()
     {
-        $categories=ExamHallCategories::where('status','Active')->get();
-        return view('student.examhall.bookings.enroll',compact('categories'));
+        $pdfbanks = PDFBank::where('status','=','Active')->get();
+        return view('student.pdf_bank.booking.create',compact('pdfbanks'));
     }
 
     public function store(Request $request)
     {
         // dd($request->all());
         $request->validate([
-            'exam_category'=>'required|numeric|min:1',
+            'pdf_bank'=>'required|numeric|min:1',
             'remarks'=>'string|nullable',
         ]);
-
-        $search=ExamHallBookings::where([
-            ['category_id','=',$request->exam_category],
+        $search=Booking::where([
+            ['book_id','=',$request->pdf_bank],
             ['user_id','=',auth()->user()->id],
-            ])->count();
+        ])->count();
             
         if($search){
-            return back()->withInput()->with('alreadybooked', 'You Have Already Booked This Exam Set!');
+            return back()->withInput()->with('alreadybooked', 'You Have Already Enrolled This PDF Bank !!!');
         }
 
-        $booking= ExamHallBookings::create([
+        $booking = Booking::create([
             'user_id'=>auth()->user()->id,
-            'category_id'=>$request->exam_category,
+            'book_id'=>$request->pdf_bank,
             'user_name'=>auth()->user()->name,
             'status'=>'Unverified',
             'updatedBy'=>auth()->user()->name,
             'remarks'=>$request->remarks,
         ]);
 
-        return redirect('/student/exam-bookings/'.$booking->id.'/edit');
-
+        return redirect('/student/pdf-bank-bookings/'.$booking->id.'/edit');
     }
 
-    public function destroy(Request $request, ExamHallBookings $booking)
-    {
-        // dd($booking);
-        $booking->delete();
-        return redirect('/student/exam-bookings');
-    }
 
-    public function edit(ExamHallBookings $booking)
+    public function edit(Booking $booking)
     {
-        $booking->booking_price = (($booking->category->price ?? 0) - ($booking->category->discount ?? 0));
-        $trans_id = 'exam-'.$booking->id.'-'.time();
+        $data = [];
+
+        $booking->booking_price = (($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
+        $trans_id = 'pdfbank-'.$booking->id.'-'.time();
         $esewa_pay_data = null;
         $fonepay_pay_data = null;
 
@@ -89,8 +81,8 @@ class ExamBookingController extends Controller
                     "product_code" => config('payment.esewa_scd'),
                     "signed_field_names" => "total_amount,transaction_uuid,product_code",
                     "signature" => base64_encode(hash_hmac('sha256', ('total_amount='.$booking->booking_price.',transaction_uuid='.$trans_id.',product_code='.config('payment.esewa_scd')), config('payment.esewa_secret_key'), true)),
-                    "failure_url" => url("/student/exam-bookings/".$booking->id."/payment-failed"),
-                    "success_url" => url("/student/exam-bookings/".$booking->id."/esewaSuccess"),
+                    "failure_url" => url("/student/pdf-bank-bookings/".$booking->id."/payment-failed"),
+                    "success_url" => url("/student/pdf-bank-bookings/".$booking->id."/esewaSuccess"),
                     
                 ];
             }
@@ -100,7 +92,6 @@ class ExamBookingController extends Controller
             //throw $th;
         }
         
-
         try 
         {
             if(config('payment.fonepay_pid') && config('payment.fonepay_secret_key'))
@@ -109,9 +100,9 @@ class ExamBookingController extends Controller
                 $AMT = $booking->booking_price; 
                 $CRN = 'NPR'; 
                 $DT = date('m/d/Y'); 
-                $R1 = 'Exam Booking Payment For '.ucwords($booking->category->title ?? ''); 
+                $R1 = 'PDF Booking Payment For '.ucwords($booking->book->title ?? ''); 
                 $R2 = 'N/A'; 
-                $RU = url("/student/exam-bookings/".$booking->id."/fonepaySuccess"); 
+                $RU = url("/student/pdf-bank-bookings/".$booking->id."/fonepaySuccess"); 
                 $PRN = $trans_id; 
                 $PID = config('payment.fonepay_pid'); 
                 $sharedSecretKey = config('payment.fonepay_secret_key'); 
@@ -134,38 +125,52 @@ class ExamBookingController extends Controller
         catch (\Throwable $th) {
             //throw $th;
         }
-       
-       $data['booking'] = $booking;
-       $data['esewa_pay_data'] = $esewa_pay_data; 
-       $data['fonepay_pay_data'] = $fonepay_pay_data; 
 
-        // dd($data);
-        return view('student.examhall.bookings.verify',$data);
+        $data['booking'] = $booking;
+        $data['esewa_pay_data'] = $esewa_pay_data; 
+        $data['fonepay_pay_data'] = $fonepay_pay_data; 
+
+
+        return view('student.pdf_bank.booking.edit',$data);
     }
 
-    public function manualVerify(Request $request, ExamHallBookings $booking)
+    public function update(Request $request, Booking $booking)
     {
         // dd($request->all(),$booking);
         $request->validate([
-            'bookingid'=>'required|numeric',
-            'exam_category'=>'required|string|min:1',
-            'verificationMode'=>'required|string|min:1',
-            'verificationDocument'=>'required|image',
-            'paymentAmount'=>'required|numeric',
+            "verificationMode" => "string|required|min:1",
+            "paymentAmount" => "numeric|required",
+            "verificationDocument" => "image|required",
         ]);
-        $imagePath=request('verificationDocument')->store('uploads','public');
+        $img = request('verificationDocument')->store('uploads/pdf_bank_bookings','public');
         $booking->update([
-            'verificationMode'=>$request->verificationMode,
-            'verificationDocument'=>$imagePath,
-            'paymentAmount'=>$request->paymentAmount,
-            'status'=>'Processing',
+            'verificationMode' => $request->verificationMode,
+            'paymentAmount' => $request->paymentAmount,
+            'verificationDocument' => $img,
+            'status' => 'Processing',
         ]);
 
-        return redirect('/student/exam-bookings');
+        return redirect('/student/pdf-bank-bookings');
     }
 
-    public function esewaSuccess(ExamHallBookings $booking, Request $request)
+    public function destroy(Booking $booking)
     {
+        if($booking->status == 'Verified')
+        {
+            abort(403,'Please Contact Admin To Delete Verified Booking.');
+        }
+        $booking->delete();
+        return redirect('/student/pdf-bank-bookings');
+    }
+
+    public function paymentFailed(Booking $booking)
+    {
+        return redirect("/student/pdf-bank-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+    }
+
+    public function esewaSuccess(Booking $booking, Request $request)
+    {
+        // dd($request->all());
         if(isset($request->data))
         {
             $decoded_b64 = base64_decode($request->data);
@@ -185,7 +190,7 @@ class ExamBookingController extends Controller
                 {
                     $url = config('payment.esewa_verify_url');
                     $data = http_build_query(array(
-                        'total_amount'=> (($booking->category->price ?? 0) - ($booking->category->discount ?? 0)),
+                        'total_amount'=> (($booking->book->price ?? 0) - ($booking->book->discount ?? 0)),
                         'transaction_uuid'=> $json_data['transaction_uuid'],
                         'product_code'=> config('payment.esewa_scd'),
                     ));
@@ -204,7 +209,7 @@ class ExamBookingController extends Controller
                             'updatedBy'=>auth()->user()->name,
                         ]);
 
-                        return redirect('/student/exam-bookings')->with('success_message','Transction Completed Succesfully.');
+                        return redirect('/student/pdf-bank-bookings')->with('success_message','Transction Completed Succesfully.');
                     }
 
                 }
@@ -213,11 +218,11 @@ class ExamBookingController extends Controller
 
         }
 
-        return redirect("/student/exam-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+        return redirect("/student/pdf-bank-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
 
     }
 
-    public function fonepaySuccess(ExamHallBookings $booking, Request $request)
+    public function fonepaySuccess(Booking $booking, Request $request)
     {
         // dd($request->all());
 
@@ -231,7 +236,7 @@ class ExamBookingController extends Controller
                 $uid = $request->UID;
                 $prn = $request->PRN;
                 $bid = $request->BID ?? '';
-                $amt = (($booking->category->price ?? 0) - ($booking->category->discount ?? 0));
+                $amt = (($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
 
                 $data = http_build_query(array(
                     'PRN' => $prn,    
@@ -262,95 +267,20 @@ class ExamBookingController extends Controller
                             'updatedBy'=>auth()->user()->name,
                         ]);
 
-                        return redirect('/student/exam-bookings')->with('success_message','Transction Completed Succesfully.');
+                        return redirect('/student/pdf-bank-bookings')->with('success_message','Transction Completed Succesfully.');
                     }
                 }
                 
             } 
             catch (\Throwable $th) {
                 //throw $th;
-                return redirect("/student/exam-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+                return redirect("/student/pdf-bank-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
             }
 
         }       
 
-        return redirect("/student/exam-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+        return redirect("/student/pdf-bank-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
 
     }
-
-    public function paymentFailed(ExamHallBookings $booking, Request $request)
-    {
-        return redirect("/student/exam-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
-    }
-
-    public function khaltiSuccess(ExamHallBookings $booking, Request $request)
-    {
-        $args = http_build_query(array(
-            'token' => $request->token,
-            'amount'  => ($booking->category->price - $booking->category->discount) * 100
-        ));
-        
-        $url = config('payment.khalti_verify_url');
-        
-        # Make the call using API.
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,$args);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        
-        $headers = ['Authorization: Key '.config('payment.khalti_secret_key')];
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        
-        // Response
-        $response = curl_exec($ch);
-        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-        
-        if($status_code == 200)
-        {
-            $booking->update([
-                'status'=>'Verified',
-                'verificationMode'=>'Khalti',
-                'paymentAmount'=>($booking->category->price - $booking->category->discount),
-                'remarks'=>'Booked by Student with Direct Khalti Payment',
-                'updatedBy'=>auth()->user()->name,
-            ]);
-            // MerchantBooking::create([
-            //     'type' => 'exam',
-            //     'title' => $booking->category->name ?? '',
-            //     'merchant' => 'khalti',
-            //     'booking_id' => $booking->id,
-            // ]);
-            return response()->json([
-                'success' => 1,
-                'redirecto' => url('/student/exam-bookings')
-            ], 200);
-        }
-        else
-        {
-            return response()->json([
-                'error' => 1,
-                'message' => 'Payment Failed. Please try again later.'
-            ]);
-        }
-        
-    }
-
-    public function get_xml_node_value($node, $xml)
-    {
-        if($xml==false)
-        {
-            return false;
-        }
-
-        $found=preg_match('#<'.$node.'(?:\s+[^>]+)?>(.*?)'.'</'.$node.'>#s',$xml,$matches);
-
-        if($found!=false)
-        {
-            return $matches[1];
-        }
-
-        return false;
-    }
+    
 }

@@ -45,7 +45,7 @@
                               @foreach($bookings as $booking)
                             <tr>
                                 <td>{{$booking->id}}</td>
-                                <td class="text-wrap">{{date('Y-m-d',strtotime($booking->created_at))}}</td>
+                                <td class="text-wrap">{{date('Y-m-d G:i',strtotime($booking->created_at))}}</td>
                                 <td class="text-wrap">{{$booking->category->title ?? '' }}</td>
                                 <td class="text-wrap">{{$booking->user_name}}</td>
                                 <td class="text-wrap">{{ $booking->user->email ?? '' }}</td>

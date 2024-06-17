@@ -212,7 +212,8 @@ class FrontController extends Controller
 
         usort($data['updates'], function($a, $b) {return strcmp($b->created_at,$a->created_at);});
         $data['updates'] = array_slice($data['updates'], 0, 7, true);
-        // dd($data);
+
+        // dd($data['homepopup'],storage_path($data['homepopup']->image));
         return view('front.index',$data);
     }
 

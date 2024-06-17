@@ -21,9 +21,9 @@
         </span>
       </h3>
       <div class="d-flex">
-        <a href="{{ ('/admin/notifications/create') }}"><button type="button" class="btn btn-sm ml-3 btn-primary">
+        {{-- <a href="{{ ('/admin/notifications/create') }}"><button type="button" class="btn btn-sm ml-3 btn-primary">
            Create Notification </button>
-        </a>
+        </a> --}}
         <a href="{{ ('/admin/users/create') }}">
           <button type="button" class="btn btn-sm ml-3 btn-success">Add User</button>
         </a>
@@ -57,25 +57,48 @@
                   <div class="card-body px-3 py-4">
                     <div class="d-flex justify-content-between align-items-start">
                       <div class="color-card">
-                        <p class="mb-0 color-card-head">Total Bookings</p>
-                        <h2 class="text-white mt-3 text-center">{{ $data->booking->count }}</h2>
+                        <p class="mb-0 color-card-head">Total PDF Bank Bookings</p>
+                        <h2 class="text-white mt-3 text-center">{{ $data->pdf_booking->count }}</h2>
                       </div>
                       <i class="card-icon-indicator mdi mdi-calendar-multiple bg-inverse-icon-danger"></i>
                     </div>
                     <div class="row">
                       <div class="col-8 booking-un-verified">
-                        <p class="text-success">Verified<span class="booking-badge">{{ $data->booking->verified }}</p>
-                          <p class="text-warning">Unverified<span class="booking-badge-un">{{ $data->booking->unverified }}</p>
-                            <p class="text-warning">Processing<span class="booking-badge-un">{{ $data->booking->processing }}</p>
+                        <p class="text-success">Verified<span class="booking-badge">{{ $data->pdf_booking->verified }}</p>
+                          <p class="text-warning">Unverified<span class="booking-badge-un">{{ $data->pdf_booking->unverified }}</p>
+                            <p class="text-warning">Processing<span class="booking-badge-un">{{ $data->pdf_booking->processing }}</p>
                             </div>
                       <div class="text-right col-4">
-                        <a class="view-from-dashboard-button" href="{{ $data->booking->link }}">View</a>
+                        <a class="view-from-dashboard-button" href="{{ $data->pdf_booking->link }}">View</a>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="col-xl-4 col-md-4 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+                <div class="card bg-primary">
+                  <div class="card-body px-3 py-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="color-card">
+                        <p class="mb-0 color-card-head">Total Exam Bookings</p>
+                        <h2 class="text-white mt-3 text-center">{{ $data->exam_booking->count }}</h2>
+                      </div>
+                      <i class="card-icon-indicator mdi mdi-calendar-multiple bg-inverse-icon-primary"></i>
+                    </div>
+                    <div class="row">
+                      <div class="col-8 booking-un-verified">
+                        <p class="text-success">Verified<span class="booking-badge">{{ $data->exam_booking->verified }}</p>
+                          <p class="text-warning">Unverified<span class="booking-badge-un">{{ $data->exam_booking->unverified }}</p>
+                            <p class="text-warning">Processing<span class="booking-badge-un">{{ $data->exam_booking->processing }}</p>
+                            </div>
+                      <div class="text-right col-4">
+                        <a class="view-from-dashboard-button" href="{{ $data->exam_booking->link }}">View</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {{-- <div class="col-xl-4 col-md-4 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
                 <div class="card bg-success">
                   <div class="card-body px-3 py-4">
                     <div class="d-flex justify-content-between align-items-start">
@@ -90,7 +113,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
             </div>
 
             @if(count($batches))

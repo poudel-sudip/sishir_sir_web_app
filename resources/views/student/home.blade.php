@@ -57,12 +57,12 @@
 
                 <div class="student-dashboard-card block-fourth">
                     <div class="first-row">
-                        <span>E-Book Bookings</span>
-                        <i class="fas fa-book"></i>
+                        <span>PDF Bank Bookings</span>
+                        <i class="fas fa-file-pdf"></i>
                     </div>
                     <div class="second-row">
-                        <a class="btn" href="/student/ebook-bookings">View Bookings</a>
-                        <span>{{$count->bookings->ebooks ?? '-'}}</span>
+                        <a class="btn" href="/student/pdf-bank-bookings">View Bookings</a>
+                        <span>{{$count->bookings->pdf_banks ?? '-'}}</span>
                     </div>
                 </div>
                 

@@ -13,9 +13,11 @@ use App\Models\Accounts\AccountIncome;
 use App\Models\Accounts\AccountExpense;
 use App\Models\StudentEnquiry;
 use App\Models\ExamHall\ExamHallCategories;
+use App\Models\ExamHall\ExamHallBookings;
 use App\Models\Vendors\Vendor;
 use App\Models\VideoCourse\VideoCourse;
 use App\Models\Ebook\Ebook;
+use App\Models\Ebook\EbookBooking;
 
 class AdminHomeController extends Controller
 {
@@ -31,12 +33,19 @@ class AdminHomeController extends Controller
                 'count' => User::all()->count(),
                 'link' => '/admin/users',
             ],
-            'booking' => (object)[
-                'count' => Booking::all()->count(),
-                'verified' => Booking::where('status','=','Verified')->count(),
-                'unverified' => Booking::where('status','=','Unverified')->count(),
-                'processing' => Booking::where('status','=','Processing')->count(),
-                'link' => '/admin/bookings/all',
+            'exam_booking' => (object)[
+                'count' => ExamHallBookings::all()->count(),
+                'verified' => ExamHallBookings::where('status','=','Verified')->count(),
+                'unverified' => ExamHallBookings::where('status','=','Unverified')->count(),
+                'processing' => ExamHallBookings::where('status','=','Processing')->count(),
+                'link' => '/admin/exam-hall/bookings',
+            ],
+            'pdf_booking' => (object)[
+                'count' => EbookBooking::all()->count(),
+                'verified' => EbookBooking::where('status','=','Verified')->count(),
+                'unverified' => EbookBooking::where('status','=','Unverified')->count(),
+                'processing' => EbookBooking::where('status','=','Processing')->count(),
+                'link' => '/admin/pdf-bank-bookings',
             ],
             'enquiry' => (object)[
                 'count' => StudentEnquiry::all()->count(),

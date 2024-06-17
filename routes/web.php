@@ -236,50 +236,89 @@ Route::get('/admin/exam-hall/{category}/cqc','App\Http\Controllers\Admin\ExamHal
 Route::post('/admin/exam-hall/{category}/cqc','App\Http\Controllers\Admin\ExamHall\ExamHallController@cqcstore')->middleware('role:Admin');
 Route::delete('/admin/exam-hall/{category}/cqc/{cqc}','App\Http\Controllers\Admin\ExamHall\ExamHallController@cqcdestroy')->middleware('role:Admin');
 
-//admin ebooks categories
-Route::get('/admin/ebook/categories','App\Http\Controllers\Admin\Ebook\CategoryController@index')->middleware('role:Admin');
-Route::get('/admin/ebook/categories/create','App\Http\Controllers\Admin\Ebook\CategoryController@create')->middleware('role:Admin');
-Route::post('/admin/ebook/categories','App\Http\Controllers\Admin\Ebook\CategoryController@store')->middleware('role:Admin');
-Route::get('/admin/ebook/categories/{category}/edit','App\Http\Controllers\Admin\Ebook\CategoryController@edit')->middleware('role:Admin');
-Route::patch('/admin/ebook/categories/{category}','App\Http\Controllers\Admin\Ebook\CategoryController@update')->middleware('role:Admin');
-Route::delete('/admin/ebook/categories/{category}','App\Http\Controllers\Admin\Ebook\CategoryController@destroy')->middleware('role:Admin');
-Route::get('/admin/ebook/categories/{category}/books','App\Http\Controllers\Admin\Ebook\CategoryController@ebooks')->middleware('role:Admin');
+// admin pdf bank categories
+Route::get('/admin/pdf-bank/categories','App\Http\Controllers\Admin\PdfBank\CategoryController@index')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/categories/create','App\Http\Controllers\Admin\PdfBank\CategoryController@create')->middleware('role:Admin');
+Route::post('/admin/pdf-bank/categories','App\Http\Controllers\Admin\PdfBank\CategoryController@store')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/categories/{category}/edit','App\Http\Controllers\Admin\PdfBank\CategoryController@edit')->middleware('role:Admin');
+Route::patch('/admin/pdf-bank/categories/{category}','App\Http\Controllers\Admin\PdfBank\CategoryController@update')->middleware('role:Admin');
+Route::delete('/admin/pdf-bank/categories/{category}','App\Http\Controllers\Admin\PdfBank\CategoryController@destroy')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/categories/{category}/groups','App\Http\Controllers\Admin\PdfBank\CategoryController@groups')->middleware('role:Admin');
 
-//admin ebooks 
-Route::get('/admin/ebook/books','App\Http\Controllers\Admin\Ebook\BookController@index')->middleware('role:Admin');
-Route::get('/admin/ebook/books/create','App\Http\Controllers\Admin\Ebook\BookController@create')->middleware('role:Admin');
-Route::post('/admin/ebook/books','App\Http\Controllers\Admin\Ebook\BookController@store')->middleware('role:Admin');
-Route::get('/admin/ebook/books/{book}','App\Http\Controllers\Admin\Ebook\BookController@show')->middleware('role:Admin');
-Route::get('/admin/ebook/books/{book}/edit','App\Http\Controllers\Admin\Ebook\BookController@edit')->middleware('role:Admin');
-Route::patch('/admin/ebook/books/{book}','App\Http\Controllers\Admin\Ebook\BookController@update')->middleware('role:Admin');
-Route::delete('/admin/ebook/books/{book}','App\Http\Controllers\Admin\Ebook\BookController@destroy')->middleware('role:Admin');
+//admin pf bank groups 
+Route::get('/admin/pdf-bank/pdf-groups','App\Http\Controllers\Admin\PdfBank\GroupController@index')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-groups/create','App\Http\Controllers\Admin\PdfBank\GroupController@create')->middleware('role:Admin');
+Route::post('/admin/pdf-bank/pdf-groups','App\Http\Controllers\Admin\PdfBank\GroupController@store')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-groups/{group}','App\Http\Controllers\Admin\PdfBank\GroupController@show')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-groups/{group}/edit','App\Http\Controllers\Admin\PdfBank\GroupController@edit')->middleware('role:Admin');
+Route::patch('/admin/pdf-bank/pdf-groups/{group}','App\Http\Controllers\Admin\PdfBank\GroupController@update')->middleware('role:Admin');
+Route::delete('/admin/pdf-bank/pdf-groups/{group}','App\Http\Controllers\Admin\PdfBank\GroupController@destroy')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-groups/{group}/bookings','App\Http\Controllers\Admin\PdfBank\GroupController@bookings')->middleware('role:Admin');
 
-Route::get('/admin/ebook/books/{book}/bookings','App\Http\Controllers\Admin\Ebook\BookController@bookings')->middleware('role:Admin');
+// admin pdf bank contents
+Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files','App\Http\Controllers\Admin\PdfBank\ContentFileController@index')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/create','App\Http\Controllers\Admin\PdfBank\ContentFileController@create')->middleware('role:Admin');
+Route::post('/admin/pdf-bank/pdf-groups/{group}/pdf-files','App\Http\Controllers\Admin\PdfBank\ContentFileController@store')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/{content}','App\Http\Controllers\Admin\PdfBank\ContentFileController@show')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/{content}/edit','App\Http\Controllers\Admin\PdfBank\ContentFileController@edit')->middleware('role:Admin');
+Route::patch('/admin/pdf-bank/pdf-groups/{group}/pdf-files/{content}','App\Http\Controllers\Admin\PdfBank\ContentFileController@update')->middleware('role:Admin');
+Route::delete('/admin/pdf-bank/pdf-groups/{group}/pdf-files/{content}','App\Http\Controllers\Admin\PdfBank\ContentFileController@destroy')->middleware('role:Admin');
 
-//admin ebooks chapters
-Route::get('/admin/ebook/books/{book}/chapters','App\Http\Controllers\Admin\Ebook\ChapterController@index')->middleware('role:Admin');
-Route::get('/admin/ebook/books/{book}/chapters/create','App\Http\Controllers\Admin\Ebook\ChapterController@create')->middleware('role:Admin');
-Route::post('/admin/ebook/books/{book}/chapters','App\Http\Controllers\Admin\Ebook\ChapterController@store')->middleware('role:Admin');
-Route::get('/admin/ebook/books/{book}/chapters/{chapter}','App\Http\Controllers\Admin\Ebook\ChapterController@show')->middleware('role:Admin');
-Route::get('/admin/ebook/books/{book}/chapters/{chapter}/edit','App\Http\Controllers\Admin\Ebook\ChapterController@edit')->middleware('role:Admin');
-Route::patch('/admin/ebook/books/{book}/chapters/{chapter}','App\Http\Controllers\Admin\Ebook\ChapterController@update')->middleware('role:Admin');
-Route::delete('/admin/ebook/books/{book}/chapters/{chapter}','App\Http\Controllers\Admin\Ebook\ChapterController@destroy')->middleware('role:Admin');
+//admin pdf bank bookings
+Route::get('/admin/pdf-bank-bookings','App\Http\Controllers\Admin\PdfBank\BookingController@index')->middleware('role:Admin');
+Route::get('/admin/pdf-bank-bookings/all','App\Http\Controllers\Admin\PdfBank\BookingController@allBookings')->middleware('role:Admin');
+Route::get('/admin/pdf-bank-bookings/create','App\Http\Controllers\Admin\PdfBank\BookingController@create')->middleware('role:Admin');
+Route::post('/admin/pdf-bank-bookings','App\Http\Controllers\Admin\PdfBank\BookingController@store')->middleware('role:Admin');
+Route::get('/admin/pdf-bank-bookings/{booking}','App\Http\Controllers\Admin\PdfBank\BookingController@show')->middleware('role:Admin');
+Route::get('/admin/pdf-bank-bookings/{booking}/edit','App\Http\Controllers\Admin\PdfBank\BookingController@edit')->middleware('role:Admin');
+Route::patch('/admin/pdf-bank-bookings/{booking}','App\Http\Controllers\Admin\PdfBank\BookingController@update')->middleware('role:Admin');
+Route::delete('/admin/pdf-bank-bookings/{booking}','App\Http\Controllers\Admin\PdfBank\BookingController@destroy')->middleware('role:Admin');
 
-//admin ebooks chapters files
-Route::get('/admin/ebook/books/{book}/chapters/{chapter}/files','App\Http\Controllers\Admin\Ebook\ChapterController@fileindex')->middleware('role:Admin');
-Route::get('/admin/ebook/books/{book}/chapters/{chapter}/files/create','App\Http\Controllers\Admin\Ebook\ChapterController@filecreate')->middleware('role:Admin');
-Route::post('/admin/ebook/books/{book}/chapters/{chapter}/files','App\Http\Controllers\Admin\Ebook\ChapterController@filestore')->middleware('role:Admin');
-Route::delete('/admin/ebook/books/{book}/chapters/{chapter}/files/{chapterfiles}','App\Http\Controllers\Admin\Ebook\ChapterController@filedestroy')->middleware('role:Admin');
 
-//admin ebooks bookings
-Route::get('/admin/ebook-bookings','App\Http\Controllers\Admin\Ebook\BookingController@index')->middleware('role:Admin');
-Route::get('/admin/ebook-bookings/all','App\Http\Controllers\Admin\Ebook\BookingController@allBookings')->middleware('role:Admin');
-Route::get('/admin/ebook-bookings/create','App\Http\Controllers\Admin\Ebook\BookingController@create')->middleware('role:Admin');
-Route::post('/admin/ebook-bookings','App\Http\Controllers\Admin\Ebook\BookingController@store')->middleware('role:Admin');
-Route::get('/admin/ebook-bookings/{booking}','App\Http\Controllers\Admin\Ebook\BookingController@show')->middleware('role:Admin');
-Route::get('/admin/ebook-bookings/{booking}/edit','App\Http\Controllers\Admin\Ebook\BookingController@edit')->middleware('role:Admin');
-Route::patch('/admin/ebook-bookings/{booking}','App\Http\Controllers\Admin\Ebook\BookingController@update')->middleware('role:Admin');
-Route::delete('/admin/ebook-bookings/{booking}','App\Http\Controllers\Admin\Ebook\BookingController@destroy')->middleware('role:Admin');
+// //admin ebooks categories
+// Route::get('/admin/ebook/categories','App\Http\Controllers\Admin\Ebook\CategoryController@index')->middleware('role:Admin');
+// Route::get('/admin/ebook/categories/create','App\Http\Controllers\Admin\Ebook\CategoryController@create')->middleware('role:Admin');
+// Route::post('/admin/ebook/categories','App\Http\Controllers\Admin\Ebook\CategoryController@store')->middleware('role:Admin');
+// Route::get('/admin/ebook/categories/{category}/edit','App\Http\Controllers\Admin\Ebook\CategoryController@edit')->middleware('role:Admin');
+// Route::patch('/admin/ebook/categories/{category}','App\Http\Controllers\Admin\Ebook\CategoryController@update')->middleware('role:Admin');
+// Route::delete('/admin/ebook/categories/{category}','App\Http\Controllers\Admin\Ebook\CategoryController@destroy')->middleware('role:Admin');
+// Route::get('/admin/ebook/categories/{category}/books','App\Http\Controllers\Admin\Ebook\CategoryController@ebooks')->middleware('role:Admin');
+
+// //admin ebooks 
+// Route::get('/admin/ebook/books','App\Http\Controllers\Admin\Ebook\BookController@index')->middleware('role:Admin');
+// Route::get('/admin/ebook/books/create','App\Http\Controllers\Admin\Ebook\BookController@create')->middleware('role:Admin');
+// Route::post('/admin/ebook/books','App\Http\Controllers\Admin\Ebook\BookController@store')->middleware('role:Admin');
+// Route::get('/admin/ebook/books/{book}','App\Http\Controllers\Admin\Ebook\BookController@show')->middleware('role:Admin');
+// Route::get('/admin/ebook/books/{book}/edit','App\Http\Controllers\Admin\Ebook\BookController@edit')->middleware('role:Admin');
+// Route::patch('/admin/ebook/books/{book}','App\Http\Controllers\Admin\Ebook\BookController@update')->middleware('role:Admin');
+// Route::delete('/admin/ebook/books/{book}','App\Http\Controllers\Admin\Ebook\BookController@destroy')->middleware('role:Admin');
+
+// Route::get('/admin/ebook/books/{book}/bookings','App\Http\Controllers\Admin\Ebook\BookController@bookings')->middleware('role:Admin');
+
+// //admin ebooks chapters
+// Route::get('/admin/ebook/books/{book}/chapters','App\Http\Controllers\Admin\Ebook\ChapterController@index')->middleware('role:Admin');
+// Route::get('/admin/ebook/books/{book}/chapters/create','App\Http\Controllers\Admin\Ebook\ChapterController@create')->middleware('role:Admin');
+// Route::post('/admin/ebook/books/{book}/chapters','App\Http\Controllers\Admin\Ebook\ChapterController@store')->middleware('role:Admin');
+// Route::get('/admin/ebook/books/{book}/chapters/{chapter}','App\Http\Controllers\Admin\Ebook\ChapterController@show')->middleware('role:Admin');
+// Route::get('/admin/ebook/books/{book}/chapters/{chapter}/edit','App\Http\Controllers\Admin\Ebook\ChapterController@edit')->middleware('role:Admin');
+// Route::patch('/admin/ebook/books/{book}/chapters/{chapter}','App\Http\Controllers\Admin\Ebook\ChapterController@update')->middleware('role:Admin');
+// Route::delete('/admin/ebook/books/{book}/chapters/{chapter}','App\Http\Controllers\Admin\Ebook\ChapterController@destroy')->middleware('role:Admin');
+
+// //admin ebooks chapters files
+// Route::get('/admin/ebook/books/{book}/chapters/{chapter}/files','App\Http\Controllers\Admin\Ebook\ChapterController@fileindex')->middleware('role:Admin');
+// Route::get('/admin/ebook/books/{book}/chapters/{chapter}/files/create','App\Http\Controllers\Admin\Ebook\ChapterController@filecreate')->middleware('role:Admin');
+// Route::post('/admin/ebook/books/{book}/chapters/{chapter}/files','App\Http\Controllers\Admin\Ebook\ChapterController@filestore')->middleware('role:Admin');
+// Route::delete('/admin/ebook/books/{book}/chapters/{chapter}/files/{chapterfiles}','App\Http\Controllers\Admin\Ebook\ChapterController@filedestroy')->middleware('role:Admin');
+
+// //admin ebooks bookings
+// Route::get('/admin/ebook-bookings','App\Http\Controllers\Admin\Ebook\BookingController@index')->middleware('role:Admin');
+// Route::get('/admin/ebook-bookings/all','App\Http\Controllers\Admin\Ebook\BookingController@allBookings')->middleware('role:Admin');
+// Route::get('/admin/ebook-bookings/create','App\Http\Controllers\Admin\Ebook\BookingController@create')->middleware('role:Admin');
+// Route::post('/admin/ebook-bookings','App\Http\Controllers\Admin\Ebook\BookingController@store')->middleware('role:Admin');
+// Route::get('/admin/ebook-bookings/{booking}','App\Http\Controllers\Admin\Ebook\BookingController@show')->middleware('role:Admin');
+// Route::get('/admin/ebook-bookings/{booking}/edit','App\Http\Controllers\Admin\Ebook\BookingController@edit')->middleware('role:Admin');
+// Route::patch('/admin/ebook-bookings/{booking}','App\Http\Controllers\Admin\Ebook\BookingController@update')->middleware('role:Admin');
+// Route::delete('/admin/ebook-bookings/{booking}','App\Http\Controllers\Admin\Ebook\BookingController@destroy')->middleware('role:Admin');
 
 //admin merchant wise bookings
 Route::get('/admin/booking-through-merchant','App\Http\Controllers\Admin\MerchantBookingController@index')->middleware('role:Admin');
@@ -761,19 +800,19 @@ Route::get('/student/home', 'App\Http\Controllers\Student\StudentHomeController@
 // Route::delete('/student/classroom/exams/{batch}/mcq-exams/{exam}/reset','App\Http\Controllers\Student\Course\ExamController@reset')->middleware('role:Student');
 
 //student ebook booking
-Route::get('/student/ebook-bookings','App\Http\Controllers\Student\Ebook\BookingController@index')->middleware('role:Student');
-Route::get('/student/ebook-bookings/create','App\Http\Controllers\Student\Ebook\BookingController@create')->middleware('role:Student');
-Route::post('/student/ebook-bookings','App\Http\Controllers\Student\Ebook\BookingController@store')->middleware('role:Student');
-Route::get('/student/ebook-bookings/{booking}/edit','App\Http\Controllers\Student\Ebook\BookingController@edit')->middleware('role:Student');
-Route::get('/student/ebook-bookings/{booking}/esewaSuccess','App\Http\Controllers\Student\Ebook\BookingController@esewaSuccess')->middleware('role:Student');
-Route::post('/student/ebook-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\Ebook\BookingController@khaltiSuccess')->middleware('role:Student');
-Route::get('/student/ebook-bookings/{booking}/payment-failed','App\Http\Controllers\Student\Ebook\BookingController@paymentFailed')->middleware('role:Student');
-Route::patch('/student/ebook-bookings/{booking}','App\Http\Controllers\Student\Ebook\BookingController@update')->middleware('role:Student');
-Route::delete('/student/ebook-bookings/{booking}','App\Http\Controllers\Student\Ebook\BookingController@destroy')->middleware('role:Student');
+// Route::get('/student/ebook-bookings','App\Http\Controllers\Student\Ebook\BookingController@index')->middleware('role:Student');
+// Route::get('/student/ebook-bookings/create','App\Http\Controllers\Student\Ebook\BookingController@create')->middleware('role:Student');
+// Route::post('/student/ebook-bookings','App\Http\Controllers\Student\Ebook\BookingController@store')->middleware('role:Student');
+// Route::get('/student/ebook-bookings/{booking}/edit','App\Http\Controllers\Student\Ebook\BookingController@edit')->middleware('role:Student');
+// Route::get('/student/ebook-bookings/{booking}/esewaSuccess','App\Http\Controllers\Student\Ebook\BookingController@esewaSuccess')->middleware('role:Student');
+// Route::post('/student/ebook-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\Ebook\BookingController@khaltiSuccess')->middleware('role:Student');
+// Route::get('/student/ebook-bookings/{booking}/payment-failed','App\Http\Controllers\Student\Ebook\BookingController@paymentFailed')->middleware('role:Student');
+// Route::patch('/student/ebook-bookings/{booking}','App\Http\Controllers\Student\Ebook\BookingController@update')->middleware('role:Student');
+// Route::delete('/student/ebook-bookings/{booking}','App\Http\Controllers\Student\Ebook\BookingController@destroy')->middleware('role:Student');
 
-//student ebook chapters
-Route::get('/student/ebook-bookings/{booking}/chapters','App\Http\Controllers\Student\Ebook\ChapterController@index')->middleware('role:Student');
-Route::get('/student/ebook-bookings/{booking}/chapters/{chapter}','App\Http\Controllers\Student\Ebook\ChapterController@show')->middleware('role:Student');
+// //student ebook chapters
+// Route::get('/student/ebook-bookings/{booking}/chapters','App\Http\Controllers\Student\Ebook\ChapterController@index')->middleware('role:Student');
+// Route::get('/student/ebook-bookings/{booking}/chapters/{chapter}','App\Http\Controllers\Student\Ebook\ChapterController@show')->middleware('role:Student');
 
 //student section exam set booking section
 Route::get('/student/exam-bookings','App\Http\Controllers\Student\ExamHall\ExamBookingController@index')->middleware('role:Student');
@@ -784,7 +823,8 @@ Route::patch('/student/exam-bookings/{booking}','App\Http\Controllers\Student\Ex
 Route::delete('/student/exam-bookings/{booking}','App\Http\Controllers\Student\ExamHall\ExamBookingController@destroy')->middleware('role:Student');
 
 Route::get('/student/exam-bookings/{booking}/esewaSuccess','App\Http\Controllers\Student\ExamHall\ExamBookingController@esewaSuccess')->middleware('role:Student');
-Route::post('/student/exam-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\ExamHall\ExamBookingController@khaltiSuccess')->middleware('role:Student');
+Route::get('/student/exam-bookings/{booking}/fonepaySuccess','App\Http\Controllers\Student\ExamHall\ExamBookingController@fonepaySuccess')->middleware('role:Student');
+// Route::post('/student/exam-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\ExamHall\ExamBookingController@khaltiSuccess')->middleware('role:Student');
 Route::get('/student/exam-bookings/{booking}/payment-failed','App\Http\Controllers\Student\ExamHall\ExamBookingController@paymentFailed')->middleware('role:Student');
 
 Route::get('/student/exam-bookings/{category}/exams','App\Http\Controllers\Student\ExamHall\ExamController@index')->middleware('role:Student');
@@ -797,6 +837,21 @@ Route::delete('/student/exam-bookings/{category}/exams/{exam}/reset','App\Http\C
 Route::get('/student/exam-bookings/{category}/cqc','App\Http\Controllers\Student\ExamHall\CQCController@index');
 Route::post('/student/exam-bookings/{category}/cqc','App\Http\Controllers\Student\ExamHall\CQCController@store');
 
+//student pdf bank bookings
+Route::get('/student/pdf-bank-bookings','App\Http\Controllers\Student\PdfBank\BookingController@index')->middleware('role:Student');
+Route::get('/student/pdf-bank-bookings/create','App\Http\Controllers\Student\PdfBank\BookingController@create')->middleware('role:Student');
+Route::post('/student/pdf-bank-bookings','App\Http\Controllers\Student\PdfBank\BookingController@store')->middleware('role:Student');
+Route::get('/student/pdf-bank-bookings/{booking}/edit','App\Http\Controllers\Student\PdfBank\BookingController@edit')->middleware('role:Student');
+Route::get('/student/pdf-bank-bookings/{booking}/esewaSuccess','App\Http\Controllers\Student\PdfBank\BookingController@esewaSuccess')->middleware('role:Student');
+// Route::post('/student/pdf-bank-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\PdfBank\BookingController@khaltiSuccess')->middleware('role:Student');
+Route::get('/student/pdf-bank-bookings/{booking}/fonepaySuccess','App\Http\Controllers\Student\PdfBank\BookingController@fonepaySuccess')->middleware('role:Student');
+Route::get('/student/pdf-bank-bookings/{booking}/payment-failed','App\Http\Controllers\Student\PdfBank\BookingController@paymentFailed')->middleware('role:Student');
+Route::patch('/student/pdf-bank-bookings/{booking}','App\Http\Controllers\Student\PdfBank\BookingController@update')->middleware('role:Student');
+Route::delete('/student/pdf-bank-bookings/{booking}','App\Http\Controllers\Student\PdfBank\BookingController@destroy')->middleware('role:Student');
+
+//student pdf bank contents
+Route::get('/student/pdf-bank-bookings/{booking}/pdf-contents','App\Http\Controllers\Student\PdfBank\PdfContentController@index')->middleware('role:Student');
+Route::get('/student/pdf-bank-bookings/{booking}/pdf-contents/{content}','App\Http\Controllers\Student\PdfBank\PdfContentController@show')->middleware('role:Student');
 
 
 

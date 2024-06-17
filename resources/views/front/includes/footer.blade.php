@@ -129,6 +129,14 @@
 
         </div>
         <hr>
+
+        <ul class="footer-card-list">
+          <li class="my-1"><img src="{{ asset('images/card1.jpg') }}" alt="card esewa"></li>
+          {{-- <li class="my-1"><img src="{{ asset('images/card2.jpg') }}" alt="card"></li> --}}
+          {{-- <li class="my-1"><img src="{{ asset('images/card3.jpg') }}" alt="card"></li> --}}
+          {{-- <li class="my-1"><img src="{{ asset('images/card4.jpg') }}" alt="card"></li> --}}
+          <li class="my-1"><img src="{{ asset('images/card5.jpg') }}" alt="card phone pay"></li>
+        </ul>
         
       </div>         
 
@@ -170,3 +178,4 @@
     $(this).next().toggleClass("d-none");
   });
 </script>
+

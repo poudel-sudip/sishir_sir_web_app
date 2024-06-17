@@ -149,8 +149,9 @@
             </li> --}}
             
             <li class="nav-item">
-              <a class="nav-link" href="/student/ebook-bookings"><i class="fas fa-book-open text-black"></i>E-Book Bookings</a>
+              <a class="nav-link" href="/student/pdf-bank-bookings"><i class="fas fa-file-pdf text-pink"></i>PDF Bank Bookings</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="/student/exam-bookings"><i class="fas fa-laptop-house text-info"></i>Exam Set Bookings</a>
             </li>
