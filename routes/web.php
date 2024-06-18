@@ -1101,6 +1101,12 @@ Route::post('/dynamic-forms/{slug}','App\Http\Controllers\FrontDynamicFormContro
 Route::get('/question-of-the-day/{qdate}','App\Http\Controllers\FrontController@getQuestionOfDay');
 Route::post('/question-of-the-day/{qdate}/comment/add','App\Http\Controllers\FrontController@addCommentToQuestionOfDay');
 
+//front pdf banks
+Route::get('/pdf-banks','App\Http\Controllers\FrontPdfBankController@index');
+Route::get('/pdf-banks/category/{slug}','App\Http\Controllers\FrontPdfBankController@categoryPdfBanks');
+Route::get('/pdf-banks/bank/{slug}','App\Http\Controllers\FrontPdfBankController@singlePdfBankDetails');
+
+
 //front menu details
 Route::get('/{groupslug}/{menuslug}','App\Http\Controllers\FrontController@getMenuCategories');
 Route::get('/{groupslug}/{menuslug}/{catslug}','App\Http\Controllers\FrontController@getMenuItems');

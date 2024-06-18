@@ -39,6 +39,7 @@ use App\Models\Exams\DailyMCQQuestion;
 use App\Models\DiscussionForum;
 use App\Models\ImageGallery;
 use App\Models\Books\PhysicalBookOrder;
+use App\Models\Ebook\Ebook as PDFBank;
 
 class FrontController extends Controller
 {
@@ -74,7 +75,14 @@ class FrontController extends Controller
 
         $data['today_question'] = $today_question;
         $data['img_gallery'] = ImageGallery::orderByDesc('id')->take(9)->get();
-
+        $data['pdf_banks'] = PDFBank::where('status','=','Active')
+        ->orderByDesc('id')->take(9)
+        ->withCount(['chapters as pdf_count' => function($ch){
+            $ch->where('status','=','Active');
+        }])
+        ->get()
+        ->values();
+        
         $data['updates'] = [];
 
         $menu_sub_items = MenuSubItem::where('status','=','Active')

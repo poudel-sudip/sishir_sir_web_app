@@ -362,6 +362,41 @@
         </section>
     @endif
 
+    @if(count($pdf_banks))
+        <div class="container-fluid px-md-5 eb-seller my-5">
+            <div class="row">
+                <div class="col-md-12 text-center relative">
+                    <h2 class="home-section-heading mb-3">PDF Banks</h2>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="owl-carousel eb-seller-carousel">
+                        @foreach($pdf_banks as $row)
+                            <div class="seller-item bg-light p-3 border border-primary rounded">
+                                <div class="seller-header text-center">
+                                    <a href="/pdf-banks/bank/{{$row->slug}}">
+                                        <img src="/storage/{{$row->thumbnail}}" alt="" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
+                                    </a>
+                                </div>
+                                <div class="seller-footer">
+                                    <h4 class="text-center" title="{{strtoupper($row->title)}}"> <a href="/pdf-banks/bank/{{$row->slug}}"> {{strtoupper($row->title)}} </a></h4>
+                                    <div class="text-center text-danger" style="margin-top: -0.5rem">(PDF Sets: <span class="text-primary">{{ $row->pdf_count ?? '' }}</span>)</div>
+                                    <div>Price : @if($row->discount > 0) <s class="text-danger">Rs. {{ $row->price }}</s> @endif <strong class="text-success"> Rs. {{ ($row->price - $row->discount) }}</strong></div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                
+            </div>
+            <div class="text-end mt-2">
+                <a href="/pdf-banks" class="btn" style="background:#1375b9;color:#fff">View all...</a>
+            </div>
+        </div>
+
+    @endif
+
     <section class="home-ebook mt-3 mb-5">
         <div class="container-fluid px-md-5">
             <div class="row mb-3">
@@ -493,7 +528,7 @@
                                 <div class="seller-footer">
                                     <h4 class="text-center" title="{{strtoupper($book->title)}}"> <a href="/books/{{$book->slug}}"> {{strtoupper($book->title)}} </a></h4>
                                     <div class="text-center text-danger" style="margin-top: -0.5rem">(Edition: <span class="text-primary">{{ $book->edition ?? '' }}</span>)</div>
-                                    <div>Price : <s class="text-danger">Rs. {{ $book->price }}</s> <strong class="text-success"> Rs. {{ ($book->price - (($book->price*$book->discount)/100)) }}</strong></div>
+                                    <div>Price : @if($book->discount > 0) <s class="text-danger">Rs. {{ $book->price }}</s> @endif <strong class="text-success"> Rs. {{ ($book->price - (($book->price*$book->discount)/100)) }}</strong></div>
                                 </div>
                             </div>
                         @endforeach
