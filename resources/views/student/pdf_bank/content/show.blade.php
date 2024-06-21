@@ -16,27 +16,45 @@
                 <div class="h3 text-center">{{$pdfbank->title}}</div>
                 <div class="h4 text-center text-success">{{$content->title}}</div>
             </div>
+            <div class="col-12">
+                <div class="text-end">
+                    @if($content->download)                        
+                        <a href="/storage/{{$content->pdf_file}}" filename="{{ucwords($pdfbank->title.'__'.$content->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                    @endif
+                </div>
+            </div>
         </div>
-        <div class="container" id="pdfcontainer">    
+        <div class="container">    
 
-            <iframe id="pdfiframe" src="/storage/{{$content->pdf_file}}#toolbar=0&navpanes=0" frameBorder="0" scrolling="auto" height="600" width="100%"> </iframe>
+            <div class="pdf-container" id="pdf-container" style="max-height:800px;overflow-y: scroll;"></div>
+            {{-- <iframe id="pdfiframe" src="/storage/{{$content->pdf_file}}#toolbar=0&navpanes=0" frameBorder="0" scrolling="auto" height="600" width="100%"> </iframe> --}}
         
         </div>
     </div>
+   
+    <script src="{{asset('/js/pdf.min.js') }}"></script>
+    <script src="{{asset('/js/pdf.worker.min.js') }}"></script>
+    <script src="{{asset('/js/pdf_reader.js') }}"></script>
+    <script>
+        load_pdf_reader("/storage/{{$content->pdf_file}}");
 
-    <script type="text/javascript">
-        document.oncontextmenu = new Function("return false");
+        function handleDownload(event) {
+            event.preventDefault(); // Prevent the default behavior of the link
 
-        $('#pdfiframe').on('load', function(){
-            var title = this.contentDocument.title;
-            if(title.includes("404"))
-            {
-                $('#pdfiframe').hide();
-                $('#pdfcontainer').html('<h1 class="text-center mt-5 text-danger"> PDF File Not Found !! </h1>');
-            }
-        });
+            var downloadUrl = event.target.getAttribute("href");
+            var filename = event.target.getAttribute("filename");
 
-                
+            var link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = filename +" || shisiradhikari.com.pdf"; // Set an empty value for the download attribute to preserve the original filename
+
+            document.body.appendChild(link);
+
+            link.click(); // Simulate a click event to initiate the download
+
+            document.body.removeChild(link); // Remove the dynamically created link element
+        }
+        
     </script>
 
 @endsection

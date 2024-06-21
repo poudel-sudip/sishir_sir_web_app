@@ -23,6 +23,56 @@ class CategoryController extends Controller
         return view('admin.library.category.index',$data);
     }
 
+    private function getSubChildCategories($categories,$parentID = null)
+    {
+        $subChildCategories = collect();
+
+        foreach ($categories as $category) {
+
+            if (!$category->childs()->count()) {
+                // Include immediate child if no further children
+                if($category->parent_id == $parentID)
+                {
+                    $category->name = $category->parent->name.' :: '.$category->name;
+                    unset($category->parent);
+                }
+
+                $subChildCategories->push($category);
+                
+
+            } else {
+                // Recursively fetch sub-child categories of these children
+                $subChildCategories = $subChildCategories->merge($this->getSubChildCategories($category->childs()->get(['id','parent_id','name']),$category->id));
+            }
+           
+        }
+
+        return $subChildCategories;
+    }
+
+    public function getSubMaterialsJson(LibraryCategory $category)
+    {      
+        $sub_lib = [];
+        $pdf_files = [];
+        if(!$category->childs()->count())  
+        {
+            $pdf_files = $category->materials()->get(['id','name','filename','status']);
+
+        }
+        else
+        {
+            $sub_lib = $this->getSubChildCategories($category->childs()->get(['id','parent_id','name']));
+        }
+
+        
+        return response()->json(
+            [
+                'sub_libraries' => $sub_lib,
+                'pdf_files' => $pdf_files,
+            ]
+        , 200);
+    }
+
     public function getChilds(LibraryCategory $category)
     {
         $data = [];

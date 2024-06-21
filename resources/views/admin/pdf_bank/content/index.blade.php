@@ -22,7 +22,8 @@
                     <div class="custon-table-header">
                         <h4 class="card-title">PDF Files | {{$group->title}}</h4>
                         <div class="text-right">
-                            <a href="/admin/pdf-bank/pdf-groups/{{$group->id}}/pdf-files/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add PDF File </button></a>
+                          <a href="/admin/pdf-bank/pdf-groups/{{$group->id}}/pdf-files/import"><button type="button" class="btn btn-sm ml-3 btn-info"> Import PDF From Material Library </button></a>
+                          <a href="/admin/pdf-bank/pdf-groups/{{$group->id}}/pdf-files/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add PDF File </button></a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">

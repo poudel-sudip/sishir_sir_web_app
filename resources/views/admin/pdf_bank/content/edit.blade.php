@@ -66,6 +66,72 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="can_download" class="col-md-4 col-form-label">{{ __('Can Download') }}</label>
+    
+                                <div class="col-md-8 row">
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="membershipRadios1" type="radio" class="form-check-input" name="can_download" value="1" @if($content->download) checked @endif >Yes</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="membershipRadios2" type="radio" class="form-check-input" name="can_download" value="0" @if(!$content->download) checked @endif>No</label>
+                                        </div>
+                                    </div>
+                                    @error('can_download')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="author" class="col-md-4 col-form-label">{{ __('Authors') }}</label>
+    
+                                <div class="col-md-8">
+                                    <input id="author" type="text" class="form-control @error('author') is-invalid @enderror" name="author" value="{{ old('author') ?? $content->author ?? auth()->user()->name }}" autocomplete="author">
+    
+                                    @error('author')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <label for="published_year" class="col-md-4 col-form-label">{{ __('Published Year') }}</label>
+    
+                                <div class="col-md-8">
+                                    <input id="published_year" type="text" class="form-control @error('published_year') is-invalid @enderror" name="published_year" value="{{ old('published_year') ?? $content->published_year  }}" autocomplete="published_year">
+    
+                                    @error('published_year')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <label for="pages" class="col-md-4 col-form-label">{{ __('No of Pages') }}</label>
+    
+                                <div class="col-md-8">
+                                    <input id="pages" type="text" class="form-control @error('pages') is-invalid @enderror" name="pages" value="{{ old('pages') ?? $content->pages  }}" autocomplete="pages">
+    
+                                    @error('pages')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('Status') }}</label>
 
                                 <div class="col-md-8">

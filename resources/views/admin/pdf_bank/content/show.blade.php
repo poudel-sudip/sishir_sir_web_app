@@ -38,6 +38,22 @@
                             <div>{{$content->status}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Can Download:</div>
+                            <div>{{$content->download ? 'Yes' : 'No'}}</div>
+                        </div>
+                        <div class="course-row">
+                            <div>Authors:</div>
+                            <div>{{$content->author}}</div>
+                        </div>
+                        <div class="course-row">
+                            <div>Number of Pages:</div>
+                            <div>{{$content->pages}}</div>
+                        </div>
+                        <div class="course-row">
+                            <div>Published Year:</div>
+                            <div>{{$content->published_year}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>PDF File: </div>
                             <div>
                                 <iframe src="/storage/{{$content->pdf_file}}" frameBorder="0" scrolling="auto" height="600" width="100%"></iframe>

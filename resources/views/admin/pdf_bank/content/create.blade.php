@@ -66,6 +66,49 @@
                                 </div>
                             </div>
 
+                            
+                            <div class="form-group row">
+                                <label for="author" class="col-md-4 col-form-label">{{ __('Authors') }}</label>
+    
+                                <div class="col-md-8">
+                                    <input id="author" type="text" class="form-control @error('author') is-invalid @enderror" name="author" value="{{ old('author') ?? auth()->user()->name }}" autocomplete="author">
+    
+                                    @error('author')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="published_year" class="col-md-4 col-form-label">{{ __('Published Year') }}</label>
+    
+                                <div class="col-md-8">
+                                    <input id="published_year" type="text" class="form-control @error('published_year') is-invalid @enderror" name="published_year" value="{{ old('published_year')  }}" autocomplete="published_year">
+    
+                                    @error('published_year')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+    
+                            <div class="form-group row">
+                                <label for="pages" class="col-md-4 col-form-label">{{ __('No of Pages') }}</label>
+    
+                                <div class="col-md-8">
+                                    <input id="pages" type="text" class="form-control @error('pages') is-invalid @enderror" name="pages" value="{{ old('pages')  }}" autocomplete="pages">
+    
+                                    @error('pages')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
                             <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('File Status') }}</label>
 

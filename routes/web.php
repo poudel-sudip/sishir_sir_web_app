@@ -259,6 +259,8 @@ Route::get('/admin/pdf-bank/pdf-groups/{group}/bookings','App\Http\Controllers\A
 Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files','App\Http\Controllers\Admin\PdfBank\ContentFileController@index')->middleware('role:Admin');
 Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/create','App\Http\Controllers\Admin\PdfBank\ContentFileController@create')->middleware('role:Admin');
 Route::post('/admin/pdf-bank/pdf-groups/{group}/pdf-files','App\Http\Controllers\Admin\PdfBank\ContentFileController@store')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/import','App\Http\Controllers\Admin\PdfBank\ContentFileController@importForm')->middleware('role:Admin');
+Route::post('/admin/pdf-bank/pdf-groups/{group}/pdf-files/copy','App\Http\Controllers\Admin\PdfBank\ContentFileController@copyPdfFromLibrary')->middleware('role:Admin');
 Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/{content}','App\Http\Controllers\Admin\PdfBank\ContentFileController@show')->middleware('role:Admin');
 Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/{content}/edit','App\Http\Controllers\Admin\PdfBank\ContentFileController@edit')->middleware('role:Admin');
 Route::patch('/admin/pdf-bank/pdf-groups/{group}/pdf-files/{content}','App\Http\Controllers\Admin\PdfBank\ContentFileController@update')->middleware('role:Admin');
@@ -533,6 +535,7 @@ Route::get('/admin/library','App\Http\Controllers\Admin\Library\CategoryControll
 // Route::get('/admin/library/create','App\Http\Controllers\Admin\Library\CategoryController@create')->middleware('role:Admin');
 Route::post('/admin/library','App\Http\Controllers\Admin\Library\CategoryController@store')->middleware('role:Admin');
 // Route::get('/admin/library/{category}/edit','App\Http\Controllers\Admin\Library\CategoryController@edit')->middleware('role:Admin');
+Route::get('/admin/library/{category}/get-sub-materials','App\Http\Controllers\Admin\Library\CategoryController@getSubMaterialsJson')->middleware('role:Admin');
 Route::get('/admin/library/{category}/directories','App\Http\Controllers\Admin\Library\CategoryController@getChilds')->middleware('role:Admin');
 Route::patch('/admin/library','App\Http\Controllers\Admin\Library\CategoryController@update')->middleware('role:Admin');
 Route::delete('/admin/library/{category}','App\Http\Controllers\Admin\Library\CategoryController@destroy')->middleware('role:Admin');

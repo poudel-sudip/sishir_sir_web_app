@@ -88,12 +88,15 @@
 
                                 <div class="col-md-8">
                                     <select name="verificationMode" id="verificationMode" class="form-control @error('verificationMode') is-invalid @enderror" required>
-                                        <option value="Self">Self</option>
-                                        <option value="Connect IPS">Connect IPS</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Esewa">Esewa</option>
+                                        <option value="Fonepay">Fonepay</option>
+                                        <option value="Bank">Bank</option>
+                                        {{-- <option value="Connect IPS">Connect IPS</option>
                                         <option value="IME Pay">IME Pay</option>
                                         <option value="Esewa">Esewa</option>
                                         <option value="Khalti">Khalti</option>
-                                        <option value="Bank">Bank</option>
+                                        <option value="Bank">Bank</option> --}}
                                     </select>
                                     @error('verificationMode')
                                     <span class="invalid-feedback" role="alert">

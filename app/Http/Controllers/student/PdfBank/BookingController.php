@@ -130,7 +130,6 @@ class BookingController extends Controller
         $data['esewa_pay_data'] = $esewa_pay_data; 
         $data['fonepay_pay_data'] = $fonepay_pay_data; 
 
-
         return view('student.pdf_bank.booking.edit',$data);
     }
 
@@ -223,62 +222,48 @@ class BookingController extends Controller
     }
 
     public function fonepaySuccess(Booking $booking, Request $request)
-    {
+    {        
         // dd($request->all());
-
-        if(isset($request->PRN) && isset($request->UID) && isset($request->P_AMT))
+        if(isset($request->PRN) && isset($request->UID) && isset($request->PS) && isset($request->RC) && isset($request->DV) && isset($request->UID))
         {
+
             try 
             {
                 $sharedSecretKey = config('payment.fonepay_secret_key');
-                $url = config('payment.fonepay_verify_url');
                 $pid = config('payment.fonepay_pid'); 
-                $uid = $request->UID;
-                $prn = $request->PRN;
-                $bid = $request->BID ?? '';
-                $amt = (($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
-
-                $data = http_build_query(array(
-                    'PRN' => $prn,    
-                    'PID' => $pid,    
-                    'BID' => $bid,    
-                    'AMT' => $amt, // original payment amount    
-                    'UID' => $uid,    
-                    'DV' => hash_hmac('sha512', $pid . ',' . $amt . ',' . $prn . ',' . $bid . ',' . $uid, $sharedSecretKey),
-
-                ));           
-                                    
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url . '?' . $data);
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                $responseXML = curl_exec($ch);
-                $response = simplexml_load_string($responseXML);
-
-                if($response->success == 'true')
+                $prn = $request->PRN ?? '';
+                $ps = $request->PS ?? '';
+                $rc = $request->RC ?? '';
+                $uid = $request->UID ?? '';
+                $bc = $request->BC ?? '';
+                $ini = $request->INI ?? '';
+                $dv = $request->DV ?? '';
+                $pamt = $request->P_AMT ?? '0';
+                $ramt = $request->R_AMT ?? '0';
+                $generatedDv = hash_hmac('sha512', ($prn.','.$pid.','.$ps.','.$rc.','.$uid.','.$bc.','.$ini.','.$pamt.','.$ramt), $sharedSecretKey);
+                if(strtolower($generatedDv) === strtolower($dv))
                 {
-                    if($response->response_code == 'successful' && $response->statusCode == 0)
+                    if ($ps === 'true' && $rc === 'successful')
                     {
                         $booking->update([
                             'status'=>'Verified',
                             'verificationMode'=>'Fonepay',
-                            'paymentAmount'=> $response->txnAmount,
-                            'remarks'=>'Booked by Student with Direct Fonepay Payment with Unique Code: '.$response->uniqueId,
+                            'paymentAmount'=> $pamt,
+                            'remarks'=>'Booked by Student with Direct Fonepay Payment with Unique Retrival Reference Number: '.$uid,
                             'updatedBy'=>auth()->user()->name,
                         ]);
 
                         return redirect('/student/pdf-bank-bookings')->with('success_message','Transction Completed Succesfully.');
                     }
                 }
-                
+                 
             } 
             catch (\Throwable $th) {
-                //throw $th;
+                // throw $th;
                 return redirect("/student/pdf-bank-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
             }
 
         }       
-
         return redirect("/student/pdf-bank-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
 
     }

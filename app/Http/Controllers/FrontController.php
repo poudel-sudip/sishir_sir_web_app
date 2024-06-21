@@ -40,6 +40,7 @@ use App\Models\DiscussionForum;
 use App\Models\ImageGallery;
 use App\Models\Books\PhysicalBookOrder;
 use App\Models\Ebook\Ebook as PDFBank;
+use App\Models\Ebook\EbookCategory as PDFBankCategory;
 
 class FrontController extends Controller
 {
@@ -82,6 +83,15 @@ class FrontController extends Controller
         }])
         ->get()
         ->values();
+
+        // $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')
+        // ->orderByDesc('id')->take(9)
+        // ->withCount(['chapters as pdf_count' => function($ch){
+        //     $ch->where('status','=','Active');
+        // }])
+        // ->get()
+        // ->values();
+
         
         $data['updates'] = [];
 
