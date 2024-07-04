@@ -28,7 +28,7 @@ class BlogController extends Controller
             abort(404);
         }
         //    $headercategories=Categories::all()->where('status','=','Active');
-        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
+        $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
         $pgtype = 'article';
         $counterData = Helper::pageCounterCounts($blog->title,$pgurl,$pgtype);

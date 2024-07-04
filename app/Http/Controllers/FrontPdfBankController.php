@@ -67,7 +67,7 @@ class FrontPdfBankController extends Controller
         // dd($pdf_bank);
         $data['pdf_bank'] = $pdf_bank;
 
-        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
+        $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
         $pgtype = 'article';
         $data['counterData'] = Helper::pageCounterCounts($pdf_bank->title,$pgurl,$pgtype);
 

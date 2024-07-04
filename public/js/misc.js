@@ -41,14 +41,25 @@ $( document ).ready(function() {
 
 
 function getPageURLWithoutProtocol() {
-    let pageURL = window.location.href;
-    const protocol = window.location.protocol;
+  // Use the window.location object to get the path without query parameters
+  let path = window.location.pathname; // This gives the path part of the URL
     
-    if (pageURL.startsWith(protocol + '//')) {
-        pageURL = pageURL.slice(protocol.length); // Remove protocol
-    }
+  // If there are any hash fragments, remove them
+  const hashIndex = path.indexOf('#');
+  if (hashIndex !== -1) {
+      path = path.substring(0, hashIndex);
+  }
+  
+  return path;
 
-    return pageURL;
+  // let pageURL = window.location.href;
+  // const protocol = window.location.protocol;
+  
+  // if (pageURL.startsWith(protocol + '//')) {
+  //     pageURL = pageURL.slice(protocol.length); // Remove protocol
+  // }
+
+  // return pageURL;
 }
 
 function postDataWithFetch(url = '', data = {}) {

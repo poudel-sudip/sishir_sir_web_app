@@ -26,7 +26,8 @@
         </div>
         <div class="container">    
 
-            <div class="pdf-container" id="pdf-container" style="max-height:800px;overflow-y: scroll;"></div>
+            {{-- <div class="pdf-container" id="pdf-container" style="max-height:800px;overflow-y: scroll;"></div> --}}
+            <div class="pdf-container" id="pdf-container"></div>
             {{-- <iframe id="pdfiframe" src="/storage/{{$content->pdf_file}}#toolbar=0&navpanes=0" frameBorder="0" scrolling="auto" height="600" width="100%"> </iframe> --}}
         
         </div>
@@ -56,5 +57,5 @@
         }
         
     </script>
-
+    <script type="text/javascript" src="{{asset('js/noprint.js')}}"></script>
 @endsection

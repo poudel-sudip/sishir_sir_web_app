@@ -64,9 +64,24 @@ class BookingController extends Controller
 
         $booking->booking_price = (($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
         $trans_id = 'pdfbank-'.$booking->id.'-'.time();
+        $booking->trans_id = $trans_id;
+
         $esewa_pay_data = null;
         $fonepay_pay_data = null;
+        $nepalpay_pay_data = null;
+        
+        // try 
+        // {
+        //     $nepalpay_pay_data = (object)config('payment.nepal_pay');
+        // } 
+        // catch (\Throwable $th) {
+        //     //throw $th;
+        // }
 
+
+        // $data = hash_hmac()
+
+        // dd($data);
         try 
         {
             if(config('payment.esewa_scd') && config('payment.esewa_secret_key'))
@@ -129,7 +144,9 @@ class BookingController extends Controller
         $data['booking'] = $booking;
         $data['esewa_pay_data'] = $esewa_pay_data; 
         $data['fonepay_pay_data'] = $fonepay_pay_data; 
+        $data['nepalpay_pay_data'] = $nepalpay_pay_data; 
 
+        // dd($data);
         return view('student.pdf_bank.booking.edit',$data);
     }
 

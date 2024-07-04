@@ -65,7 +65,9 @@
                                         @if($fonepay_pay_data)
                                         <option value="FonePay">FonePay</option>
                                         @endif
-
+                                        @if($nepalpay_pay_data)
+                                        <option value="NepalPay">Nepal Pay / Hamro Pay</option>
+                                        @endif
                                     </select>
                                     @error('verificationMode')
                                     <span class="invalid-feedback" role="alert">
@@ -114,9 +116,12 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="button" class="btn btn-primary" id="submitbtn">
+                                    {{-- <button type="button" class="btn btn-primary d-none" id="submitbtn" disabled>
                                         {{ __('Verify') }}
-                                    </button>
+                                    </button> --}}
+
+                                    <div id="getPaymentBtn" class="d-inline"></div>
+                                    
                                     <a href="{{ url('/student/pdf-bank-bookings') }}" class="btn btn-secondary">Verify Later</a>
                                 </div>
                             </div>
@@ -133,52 +138,53 @@
     </div>
 
     <script>
-        
-        $(document).on('change', '#verificationMode', function() {
-            var mode = $(this).val();
-            if(mode=="Manual")
-            {
-                $("#manualForm").removeClass("d-none");
-            }
-            else{
-                $("#manualForm").addClass("d-none");
-            }
-        }); 
 
-        $(document).on('click', '#submitbtn', function() {
-            var mode = $('#verificationMode').val();
+        $(document).on('change', '#verificationMode', function() {
+            $("#manualForm").addClass("d-none");
+            $('#getPaymentBtn').html('');
+
+            var mode = $(this).val();
+
             if(mode=="Manual")
             {
-                $( "#verifyCourseForm" ).submit(); 
+                getManualPayment(); 
             }
             else if(mode=="Esewa")
             {
-                pay_esewa();
+                getEsewaPayment();
             }
             else if(mode=="FonePay")
             {
-                pay_fonepay();
+                getFonePayPayment();
             }
-            // else if(mode=="Khalti")
-            // {
-            //     pay_khalti();
-            // }
-            else
+            else if(mode=="NepalPay")
             {
-                alert("Please Select One Verification Mode");
+                getNepalPayPayment();
             }
-        });
+            else{}
+          
+        }); 
+        
+        function getManualPayment() 
+        {
+            $("#manualForm").removeClass("d-none");
+            var btn = `
+            <button type="submit" class="btn btn-primary"> Verify Manually </button>
+            `;
+            $('#getPaymentBtn').html(btn);
+        }
+
     </script>
 
     @if($esewa_pay_data)
         <script>
-
-            function pay_esewa()
+            function getEsewaPayment() 
             {
                 var path = "{{Config::get('payment.esewa_pay_url')}}";
                 var form = document.createElement("form");
                 form.setAttribute("method", "POST");
                 form.setAttribute("action", path);
+                form.setAttribute("class", 'd-inline');
 
                 @foreach($esewa_pay_data as $key=>$value) 
                     var hiddenField = document.createElement("input");
@@ -188,21 +194,27 @@
                     form.appendChild(hiddenField);
                 @endforeach
 
-                document.body.appendChild(form);
-                form.submit();
-            }
+                var submit = document.createElement("input");
+                submit.setAttribute("type", "submit");
+                submit.setAttribute("name", "submit");
+                submit.setAttribute("value", "Pay With Esewa");
+                submit.setAttribute("class", "btn btn-primary");
+                form.appendChild(submit);
 
+                $('#getPaymentBtn').html(form);
+            }
         </script>
     @endif
 
     @if($fonepay_pay_data)
         <script>
-            function pay_fonepay()
+            function getFonePayPayment() 
             {
                 var path = "{{Config::get('payment.fonepay_pay_url')}}";
                 var form = document.createElement("form");
                 form.setAttribute("method", "POST");
                 form.setAttribute("action", path);
+                form.setAttribute("class", 'd-inline');
 
                 @foreach($fonepay_pay_data as $key=>$value) 
                     var hiddenField = document.createElement("input");
@@ -212,10 +224,53 @@
                     form.appendChild(hiddenField);
                 @endforeach
 
-                document.body.appendChild(form);
-                form.submit();
+                var submit = document.createElement("input");
+                submit.setAttribute("type", "submit");
+                submit.setAttribute("name", "submit");
+                submit.setAttribute("value", "Pay With FonePay");
+                submit.setAttribute("class", "btn btn-primary");
+                form.appendChild(submit);
+
+                $('#getPaymentBtn').html(form);
             }
         </script>
     @endif
+
+    {{-- @if($nepalpay_pay_data)
+        <script>
+            function getNepalPayPayment()
+            {
+                $.ajaxSetup({
+                    headers: {
+                        // 'X-CSRF-TOKEN' : '{{ csrf_token() }}',
+                        'Authorization' : 'Basic {{$nepalpay_pay_data->api_auth}}',
+                    }
+                });
+
+                $.ajax({
+                    method: 'POST',
+                    url: '{{$nepalpay_pay_data->inst_url}}',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        'MerchantId' : '{{$nepalpay_pay_data->merchantId}}',
+                        'MerchantName' : '{{$nepalpay_pay_data->mercahntName}}',
+                        'Signature' : "{{ hash_hmac('sha512', $nepalpay_pay_data->merchantId.$nepalpay_pay_data->mercahntName, $nepalpay_pay_data->secret) }}",
+                    }),
+                    success: function(response) {
+                        console.log(response);
+                       
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error Status:', status);
+                        console.log('Error Details:', error);
+                        console.log('Response Text:', xhr.responseText);
+                    },
+                    // error: function(data) {
+                    //     console.log('Error:',data);
+                    // },
+                });
+            }
+        </script>
+    @endif --}}
 
 @endsection

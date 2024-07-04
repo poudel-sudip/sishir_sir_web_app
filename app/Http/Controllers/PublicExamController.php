@@ -168,7 +168,7 @@ class PublicExamController extends Controller
         }
         $results=$exam->results;
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
+        $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
         $counterData = Helper::pageCounterCounts('Premium Exam Show',$pgurl);
         return view('front.publicexams.resultshow',compact('exam','results','counterData'));
     }
@@ -182,7 +182,7 @@ class PublicExamController extends Controller
         }
 
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        $pgurl = '//' . $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?');
+        $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
         $counterData = Helper::pageCounterCounts('Premium Exam Show',$pgurl);
 
         return view('front.publicexams.showpremiumexam',compact('exam','counterData'));

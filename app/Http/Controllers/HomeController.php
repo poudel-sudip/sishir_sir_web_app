@@ -25,4 +25,16 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+
+    public function counterFix()
+    {
+        $duplicateUrls = \App\Models\PostViewCounter::select('url')
+        ->groupBy('url')
+        ->havingRaw('COUNT(*) > 1')
+        ->pluck('url');
+
+        $posts = \App\Models\PostViewCounter::whereIn('url', $duplicateUrls)->get();
+        dd('counter fix',$posts);
+    }
 }
