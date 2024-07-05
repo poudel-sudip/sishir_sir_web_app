@@ -76,15 +76,7 @@ class FrontController extends Controller
 
         $data['today_question'] = $today_question;
         $data['img_gallery'] = ImageGallery::orderByDesc('id')->take(9)->get();
-        $data['pdf_banks'] = PDFBank::where('status','=','Active')
-        ->orderByDesc('id')->take(9)
-        ->withCount(['chapters as pdf_count' => function($ch){
-            $ch->where('status','=','Active');
-        }])
-        ->get()
-        ->values();
-
-        // $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')
+        // $data['pdf_banks'] = PDFBank::where('status','=','Active')
         // ->orderByDesc('id')->take(9)
         // ->withCount(['chapters as pdf_count' => function($ch){
         //     $ch->where('status','=','Active');
@@ -92,6 +84,26 @@ class FrontController extends Controller
         // ->get()
         // ->values();
 
+        $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')
+        ->orderByDesc('id')
+        ->whereHas('ebooks',function($b){
+            $b->where('status','=','Active');
+        })
+        // ->take(6)
+        ->get()
+        ->values();
+
+        foreach ($data['pdf_bank_categories'] as $cat) 
+        {
+           $cat->pdf_banks = $cat->ebooks()
+           ->where('status','=','Active')
+           ->whereHas('chapters',function($ch){ $ch->where('status','=','Active'); })
+           ->withCount(['chapters as pdf_count' => function($ch){
+                $ch->where('status','=','Active');
+            }])
+           ->take(4)
+           ->get(['id','category_id','title','slug','author','price','discount','status','thumbnail']);
+        }
         
         $data['updates'] = [];
 
@@ -231,7 +243,7 @@ class FrontController extends Controller
         usort($data['updates'], function($a, $b) {return strcmp($b->created_at,$a->created_at);});
         $data['updates'] = array_slice($data['updates'], 0, 7, true);
 
-        // dd($data['homepopup'],storage_path($data['homepopup']->image));
+        // dd($data);
         return view('front.index',$data);
     }
 

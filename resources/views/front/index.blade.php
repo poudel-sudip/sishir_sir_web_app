@@ -362,7 +362,7 @@
         </section>
     @endif
 
-    @if(count($pdf_banks))
+    {{-- @if(count($pdf_banks))
         <div class="container-fluid px-md-5 eb-seller my-5">
             <div class="row">
                 <div class="col-md-12 text-center relative">
@@ -395,85 +395,58 @@
             </div>
         </div>
 
-    @endif
+    @endif --}}
 
-    {{-- <section class="mock-test mb-5 mt-5">
-        <div class="container-fluid px-md-5">
-            <div class="row">
-                <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3"> Premium PDF Bank</h2>
-                </div>
-            </div>
-            <div class="mocktest-container">
+    @if(count($pdf_bank_categories))
+        
+        <section class="footer-imp-link mt-5 mb-5">
+            <div class="container-fluid px-md-5">
+                <h4 class="m-4 text-center">Premium PDF Bank</h4>
                 <nav>
-                    <div class="nav nav-tabs mock-premium" id="nav-pdf-bank-tab" role="tablist">
-                      <button class="nav-link active" id="nav-pdf-bank-premium-tab" data-bs-toggle="tab" data-bs-target="#nav-pdf-bank-premium" type="button" role="tab" aria-controls="nav-pdf-bank-premium" aria-selected="true">Premium</button>
-                      <button class="nav-link" id="nav-pdf-bank-free-tab" data-bs-toggle="tab" data-bs-target="#nav-pdf-bank-free" type="button" role="tab" aria-controls="nav-pdf-bank-free" aria-selected="false">Free</button>
-                      <button class="nav-link" id="nav-pdf-bank-result-tab" data-bs-toggle="tab" data-bs-target="#nav-pdf-bank-result" type="button" role="tab" aria-controls="nav-pdf-bank-result" aria-selected="false">Results</button>
+                    <div class="nav nav-tabs" id="nav-pdf-bank-tab" role="tablist">
+                        @php($isFirstElement = true)
+                        @foreach($pdf_bank_categories as $cat)
+                            <button class="border nav-link {{$isFirstElement ? 'active' : ''}}" id="nav-pdf-bank-{{ $cat->id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-pdf-bank-{{ $cat->id }}" type="button" role="tab" aria-controls="nav-pdf-bank-{{ $cat->id }}" aria-selected="true">{{ucwords($cat->name)}}</button>
+                            @php($isFirstElement = false)
+                        @endforeach
                     </div>
                 </nav>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tab-content pt-4" id="nav-pdf-bank-tabContent">
-                            <div class="tab-pane fade show active" id="nav-pdf-bank-premium" role="tabpanel" aria-labelledby="nav-pdf-bank-premium-tab" tabindex="0">
-                                <div class="row">
-                                    @foreach ($premiumExams as $exam)
-                                        <div class="col-sm-6 col-md-3 mb-3">
-                                            <div class="seller-item border border-primary rounded border-2">
-                                                <div class="seller-header text-center">
-                                                    <a href="/exam-hall/premium/{{$exam->slug}}">
-                                                        <img src="/storage/{{$exam->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
-                                                    </a>
-                                                    <h5 class="mt-3"><a href="/exam-hall/premium/{{$exam->slug}}">{{ucwords($exam->title)}}</a></h5>
-                                                    <h6>{{$exam->category_exams->count()}} Sets </h6>
+                <div class="tab-content shadow border border-danger border-2 p-1" id="nav-pdf-bank-tabContent" style="border-top:0px !important;">
+                    @php($isFirstElement = true)
+                    @foreach($pdf_bank_categories as $cat)
+                        <div class="tab-pane fade  {{$isFirstElement ? 'active show' : ''}} " id="nav-pdf-bank-{{ $cat->id }}" role="tabpanel" aria-labelledby="nav-pdf-bank-{{ $cat->id }}-tab" tabindex="0">
+                            @php($isFirstElement = false)
+                            <div class="row">
+                                @foreach ($cat->pdf_banks as $row)
+                                    <div class="col-sm-6 col-md-3 mb-3">
+                                        <div class="seller-item border border-primary rounded border-2">
+                                            <div class="seller-header text-center">
+                                                <a href="/pdf-banks/bank/{{$row->slug}}">
+                                                    <img src="/storage/{{$row->thumbnail}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
+                                                </a>
+                                                <h6 class="mt-3"><a href="/pdf-banks/bank/{{$row->slug}}">{{ucwords($row->title)}}</a></h6>
+                                                <h6 class="small">{{$row->pdf_count}} PDF Sets </h6>
 
-                                                </div>
                                             </div>
                                         </div>
-                                    @endforeach
-                                    
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="nav-pdf-bank-free" role="tabpanel" aria-labelledby="nav-pdf-bank-free-tab" tabindex="0">
-                                <div class="row">
-                                    @foreach ($exams as $exam)
-                                        <div class="col-sm-6 col-md-3 mb-3">
-                                            <div class="seller-item border border-primary rounded border-2">
-                                                <div class="seller-header text-center">
-                                                    <a href="/public-exams/{{$exam->slug}}">
-                                                        <img src="/storage/{{$exam->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
-                                                    </a>
-                                                    <h5 class="mt-3"><a href="/public-exams/{{$exam->slug}}">{{ucwords($exam->name)}}</a></h5>
-                                                    <h6>{{ $exam->exam ? ($exam->exam->questions ? $exam->exam->questions->count() : '-') : '-' }} Questions </h6>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                 
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="nav-pdf-bank-result" role="tabpanel" aria-labelledby="nav-pdf-bank-result-tab" tabindex="0">
-                                <div class="row">
-                                    <div class="col-12 mb-5">
-                                        <a href="/results" class="mock-btn mock-btn1">View Exam Results...</a>
                                     </div>
-                                </div>
+                                @endforeach
+                                
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 text-end">
-                                <a href="/public-exams" class="btn" style="background:#1375b9; color:#fff;">View all exams...</a>
-                            </div>
-                        </div>
+                    @endforeach
+
+                    <div class="text-end">
+                        <a href="/pdf-banks" class="btn" style="background:#1375b9; color:#fff;">View all PDF Banks...</a>
                     </div>
-                    
                 </div>
                 
+                
+                
             </div>
-            
-        </div>
-    </section> --}}
+        </section>
+
+    @endif
 
     <section class="home-ebook mt-3 mb-5">
         <div class="container-fluid px-md-5">

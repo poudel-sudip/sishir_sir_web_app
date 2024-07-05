@@ -1,25 +1,27 @@
 <header class="shishir-header sticky-sm-top">
-  <div class="topbar">
+  <div class="topbar" style="background: #fff;">
     <div class="container">
       <div class="row">
-        <div class="col-md-2 text-sm">
-          <div class="site-logo">
-            <a href="{{ url('/') }}"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a>
-          </div>
-        </div>
-        <div class="col-md-5">
+        <div class="col-md-3">
           <div class="search-area">
             <form action="/search/" method="GET">
               <div class="input-group">
-                <input type="text" class="form-control text-light" placeholder="Search Here"  name="query" required>
+                <input type="text" class="form-control text-light border border-primary" placeholder="Search Here"  name="query" required>
                 <button class="btn btn-outline-primary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
               </div>
             </form>
           </div>
         </div>
-        <div class="col-sm-5 col-12 auth-nav">
+
+        <div class="col-md-6 ">
+          <div class="text-center" >
+            <a href="{{ url('/') }}"><img src="{{ asset('images/logo.png') }}" alt="Logo" class="img img-fluid" style="max-height:55px;"></a>
+          </div>
+        </div>
+        
+        <div class="col-sm-3 col-12 auth-nav">
           <nav class="navbar navbar-expand justify-content-center justify-content-lg-end" style="float: none;">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav align-items-center">
               @guest
                 @if (Route::has('login'))
                   <li class="nav-item">
@@ -34,7 +36,7 @@
                 @endif
               @else
                 <li class="nav-item login-username-home">
-                  <a class="nav-link login-user" href="#" role="button">
+                  <a class="nav-link login-user text-nowrap" href="#" role="button" style="color:#1375b9 !important; " >
                     <i class="fa fa-user"></i>
                     {{ Auth::user()->name }}
                   </a>
