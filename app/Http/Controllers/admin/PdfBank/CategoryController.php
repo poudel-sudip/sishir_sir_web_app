@@ -28,13 +28,13 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'string | required',
-            // 'order' => 'numeric | required',
+            'order' => 'numeric | required | gte:0',
             'status' => 'string | required | min:1',
         ]);
 
         Category::create([
             'name' => $request->name,
-            // 'order' => $request->order,
+            'order' => $request->order,
             'status' => $request->status,
         ]);
 
@@ -50,13 +50,13 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'string | required',
-            // 'order' => 'numeric | required',
+            'order' => 'numeric | required | gte:0',
             'status' => 'string | required | min:1',
         ]);
 
         $category->update([
             'name' => $request->name,
-            // 'order' => $request->order,
+            'order' => $request->order,
             'status' => $request->status,
         ]);
         return redirect('/admin/pdf-bank/categories');

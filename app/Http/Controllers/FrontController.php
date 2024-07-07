@@ -85,7 +85,8 @@ class FrontController extends Controller
         // ->values();
 
         $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')
-        ->orderByDesc('id')
+        // ->orderByDesc('id')
+        ->orderBy('order')
         ->whereHas('ebooks',function($b){
             $b->where('status','=','Active');
         })

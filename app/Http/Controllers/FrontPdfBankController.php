@@ -21,7 +21,7 @@ class FrontPdfBankController extends Controller
         ->get()
         ->values();
 
-        $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')->orderByDesc('id')->get();
+        $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')->orderBy('order')->get();
 
         return view('front.pdf_bank.index',$data);
     }

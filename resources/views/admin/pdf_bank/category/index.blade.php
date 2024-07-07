@@ -31,7 +31,7 @@
                           <tr>
                             <th>SN</th>
                             <th>Category Name</th>
-                            {{-- <th>Order</th> --}}
+                            <th>Order</th>
                             <th>Status</th>
                             <th>PDF Groups</th>
                             <th>Action</th>
@@ -43,7 +43,7 @@
                           <tr>
                             <td>{{$i}}</td>
                             <td>{{$cat->name}}</td>
-                            {{-- <td>{{$cat->order}}</td> --}}
+                            <td>{{$cat->order}}</td>
                             <td><span class='text-{{$cat->status == "Active" ? "success" : "danger"}}'>{{$cat->status}}</span></td>
                             <td class="classroom-btn"> <a href="/admin/pdf-bank/categories/{{$cat->id}}/groups" class="btn btn-primary">PDf Groups ({{$cat->ebooks()->count()}}) </a> </td>
                             <td class="classroom-btn" width="50">

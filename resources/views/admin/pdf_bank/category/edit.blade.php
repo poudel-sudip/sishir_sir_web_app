@@ -35,7 +35,7 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group row">
+                        <div class="form-group row">
                             <label for="order" class="col-sm-3 col-form-label">{{ __('Category Order') }}</label>
                             <div class="col-md-9">
                                 <input id="order" type="number" class="form-control @error('order') is-invalid @enderror" name="order" value="{{ old('order') ?? $category->order }}" required autocomplete="order" >
@@ -45,7 +45,7 @@
                                 </span>
                                 @enderror
                             </div>
-                        </div> --}}
+                        </div>
 
                         <div class="form-group row">
                             <label for="status" class="col-sm-3 col-form-label">{{ __('Category Status') }}</label>

@@ -32,7 +32,6 @@
                                     <th>Merchant</th>
                                     <th>Booking ID</th>
                                     <th>Name</th>
-                                    <th>Email</th>
                                     <th>Contact</th>
                                     <th>Amount</th>
                                     <th>Date</th>
@@ -52,11 +51,9 @@
                                             @case('course')
                                                 @if($data->courseBooking)
                                                     <td class="text-wrap"> {{$data->courseBooking->user->name}} </td>
-                                                    <td class="text-wrap"> {{$data->courseBooking->user->email}} </td>
                                                     <td class="text-wrap"> {{$data->courseBooking->user->contact}} </td>
                                                     <td class="text-wrap"> Rs. {{$data->courseBooking->paymentAmount}} </td>
                                                 @else
-                                                    <td></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
@@ -65,11 +62,9 @@
                                             @case('exam')
                                                 @if($data->examBooking)
                                                     <td class="text-wrap"> {{$data->examBooking->user->name}} </td>
-                                                    <td class="text-wrap"> {{$data->examBooking->user->email}} </td>
                                                     <td class="text-wrap"> {{$data->examBooking->user->contact}} </td>
                                                     <td class="text-wrap"> Rs. {{$data->examBooking->paidAmount}} </td>
                                                 @else
-                                                    <td></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
@@ -78,18 +73,15 @@
                                             @case('ebook')
                                                 @if($data->ebookBooking)
                                                     <td class="text-wrap"> {{$data->ebookBooking->user->name}} </td>
-                                                    <td class="text-wrap"> {{$data->ebookBooking->user->email}} </td>
                                                     <td class="text-wrap"> {{$data->ebookBooking->user->contact}} </td>
                                                     <td class="text-wrap"> Rs. {{$data->ebookBooking->paymentAmount}} </td>
                                                 @else
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td></td>
                                                 @endif
                                                 @break
                                             @default
-                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
