@@ -25,7 +25,8 @@ class BookingController extends Controller
 
     public function create()
     {
-        $pdfbanks = PDFBank::where('status','=','Active')->get();
+        $bookedBookIds=auth()->user()->ebook_bookings()->pluck('book_id')->values()->toArray();
+        $pdfbanks = PDFBank::where('status','=','Active')->whereNotIn('id',$bookedBookIds)->get();
         return view('student.pdf_bank.booking.create',compact('pdfbanks'));
     }
 

@@ -27,7 +27,8 @@ class ExamBookingController extends Controller
 
     public function enroll()
     {
-        $categories=ExamHallCategories::where('status','Active')->get();
+        $bookedCatIds=auth()->user()->exam_bookings()->pluck('category_id')->values()->toArray();
+        $categories = ExamHallCategories::where('status','Active')->whereNotIn('id',$bookedCatIds)->get();
         return view('student.examhall.bookings.enroll',compact('categories'));
     }
 

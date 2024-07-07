@@ -6,7 +6,7 @@
           <div class="search-area">
             <form action="/search/" method="GET">
               <div class="input-group">
-                <input type="text" class="form-control text-light border border-primary" placeholder="Search Here"  name="query" required>
+                <input type="text" class="form-control border border-primary" placeholder="Search Here"  name="query" required>
                 <button class="btn btn-outline-primary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
               </div>
             </form>

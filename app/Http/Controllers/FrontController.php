@@ -53,7 +53,7 @@ class FrontController extends Controller
 
         $data = [];
         // $data['sliders'] = Slider::all()->sortBy('order');
-        $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(4)->get(['id','title','slug','image']);
+        $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(4)->get(['id','title','slug','image','created_at']);
         $data['exams'] = OpenExam::where('result_status','=','Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('id')->first();
         $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->take(5)->get(['id','title','slug','image','author','created_at']);
@@ -101,6 +101,7 @@ class FrontController extends Controller
            ->withCount(['chapters as pdf_count' => function($ch){
                 $ch->where('status','=','Active');
             }])
+            ->orderByDesc('id')
            ->take(4)
            ->get(['id','category_id','title','slug','author','price','discount','status','thumbnail']);
         }
@@ -233,6 +234,29 @@ class FrontController extends Controller
             ];
         })->toArray();
 
+        $premium_exam_updates = $data['premiumExams']->map(function($b){
+            return (object)[
+                'title' => $b->title,
+                'created_at' => $b->created_at,
+                'link' => '/exam-hall/premium/'.$b->slug,
+            ];
+        })->toArray();
+
+        $pdf_bank_updates = PDFBank::where('status','=','Active')
+        ->orderByDesc('id')
+        ->take(6)        
+        ->get(['id','title','slug','created_at'])
+        ->map(function($b){
+            return (object)[
+                'title' => $b->title,
+                'created_at' => $b->created_at,
+                'link' => '/pdf-banks/bank/'.$b->slug,
+            ];
+        })
+        ->toArray();
+
+        $data['updates'] = array_merge($data['updates'], $pdf_bank_updates);
+        $data['updates'] = array_merge($data['updates'], $premium_exam_updates);
         $data['updates'] = array_merge($data['updates'], $blog_updates);
         $data['updates'] = array_merge($data['updates'], $menu_submenus);
         $data['updates'] = array_merge($data['updates'], $menu_categories);

@@ -48,7 +48,7 @@
                             <td class="text-wrap"><span class="text-{{$cat->status == 'Active' ? 'success' : 'danger'}}">{{$cat->status}}</span></td>
                             <td class="classroom-btn" width="50">
                               <a href="/admin/imp-links/{{$cat->id}}/edit" class="btn btn-warning">Edit</a>
-                              <form id="delete-form-{{$cat->id}}" action="/admin/im-links/{{$cat->id}}" method="POST" style="display: inline">
+                              <form id="delete-form-{{$cat->id}}" action="/admin/imp-links/{{$cat->id}}" method="POST" style="display: inline">
                                   @csrf
                                   @method('DELETE')
                                   <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
