@@ -18,7 +18,7 @@ class CreateMenuItemCategoriesTable extends Migration
             $table->bigInteger('subgroup_id')->nullable();
             $table->string('name');
             $table->string('slug')->nullable();
-            $table->string('order')->nullable()->default(1);
+            $table->integer('order')->nullable()->default(1);
             $table->string('type', 100)->nullable()->default('heading');
             $table->string('filename')->nullable();
             $table->string('fileurl')->nullable();

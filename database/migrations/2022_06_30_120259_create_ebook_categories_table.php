@@ -17,7 +17,7 @@ class CreateEbookCategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->nullable();
-            $table->string('order', 10)->nullable()->default('0');
+            $table->integer('order', 10)->nullable()->default(0);
             $table->string('status', 100)->nullable()->default('Inactive');
             $table->timestamps();
         });

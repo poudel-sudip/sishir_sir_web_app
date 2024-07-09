@@ -636,6 +636,12 @@ Route::get('/admin/physical-book-orders','App\Http\Controllers\Admin\Books\Physi
 Route::delete('/admin/physical-book-orders/{order}','App\Http\Controllers\Admin\Books\PhysicalBookOrderController@destroy')->middleware('role:Admin');
 Route::get('/admin/physical-book-orders/{order}/show','App\Http\Controllers\Admin\Books\PhysicalBookOrderController@show')->middleware('role:Admin');
 
+//admin wallet collection mgmt
+Route::get('/admin/wallet-collection','App\Http\Controllers\Admin\WalletCollectionController@index')->middleware('role:Admin');
+Route::get('/admin/wallet-collection/booking-type/exam','App\Http\Controllers\Admin\WalletCollectionController@bookingTypeExamCollection')->middleware('role:Admin');
+Route::get('/admin/wallet-collection/booking-type/exam/filter','App\Http\Controllers\Admin\WalletCollectionController@bookingTypeExamCollectionFilter')->middleware('role:Admin');
+Route::get('/admin/wallet-collection/booking-type/pdf-bank','App\Http\Controllers\Admin\WalletCollectionController@bookingTypePdfBankCollection')->middleware('role:Admin');
+Route::get('/admin/wallet-collection/booking-type/pdf-bank/filter','App\Http\Controllers\Admin\WalletCollectionController@bookingTypePdfBankCollectionFilter')->middleware('role:Admin');
 
 
 

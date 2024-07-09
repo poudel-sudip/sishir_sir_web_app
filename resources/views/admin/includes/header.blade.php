@@ -227,9 +227,9 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/booking-through-merchant') }}">
-          <i class="mdi mdi-alpha-m-box menu-icon"></i>
-          <span class="menu-title">Wallet Bookings</span>
+        <a class="nav-link" href="{{ url('/admin/wallet-collection') }}">
+          <i class="mdi mdi-currency-usd menu-icon"></i>
+          <span class="menu-title">Wallet Collection</span>
         </a>
       </li>
       

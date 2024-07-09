@@ -18,7 +18,7 @@ class CreateLibraryCategoriesTable extends Migration
             $table->bigInteger('parent_id')->nullable();
             $table->string('name');
             $table->string('slug')->nullable();
-            $table->string('order')->nullable()->default(1);
+            $table->integer('order')->nullable()->default(1);
             $table->string('status')->nullable()->default('Inactive');
             $table->timestamps();
         });

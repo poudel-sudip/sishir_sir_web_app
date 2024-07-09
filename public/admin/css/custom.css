@@ -501,3 +501,45 @@
 .note-editor .note-toolbar .note-btn-group button i{
     font-size: 12px;
 }
+
+.card-bg-1,
+.card-bg-1:hover{
+    background-color: #3490dc;
+    color: #fff;
+    text-decoration: none;
+}
+
+.card-bg-2,
+.card-bg-2:hover{
+    background-color: #158355;
+    color: #fff;
+    text-decoration: none;
+}
+
+.card-bg-3,
+.card-bg-3:hover{
+    background-color: #b87f04;
+    color: #fff;
+    text-decoration: none;
+}
+
+.card-bg-4,
+.card-bg-4:hover{
+    background-color: #e73e62;
+    color: #fff;
+    text-decoration: none;
+}
+
+.card-bg-5,
+.card-bg-5:hover{
+    background-color: #c834dc;
+    color: #fff;
+    text-decoration: none;
+}
+
+.card-bg-6,
+.card-bg-6:hover{
+    background-color: #11c4ca;
+    color: #fff;
+    text-decoration: none;
+}
