@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="table-responsive table-responsive-md">
-                            <table class="table table-bordered" >
+                            <table class="table table-bordered advanced-asc-table" >
                                 <thead>
                                     <tr>
                                         <th width="40">SN</th>
@@ -70,7 +70,7 @@
                             <h4 class="card-title">PDF Banks:</h4>
                         </div>
                         <div class="table-responsive table-responsive-md">
-                            <table class="table table-bordered" id="advanced-asc-table">
+                            <table class="table table-bordered advanced-asc-table" >
                                 <thead>
                                     <tr>
                                         <th width="40">SN</th>

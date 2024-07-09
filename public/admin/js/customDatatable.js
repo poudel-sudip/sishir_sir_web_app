@@ -78,7 +78,27 @@
         ]
     });
 
+    $('.advanced-asc-table').DataTable({
+        "order": [
+            [0, "asc"]
+        ],
+        "lengthMenu": [
+            [50, 100, 500, 1000, -1],
+            [50, 100, 500, 1000, 'All']
+        ]
+    });
+
     $('#advanced-desc-table').DataTable({
+        "order": [
+            [0, "desc"]
+        ],
+        "lengthMenu": [
+            [50, 100, 500, 1000, -1],
+            [50, 100, 500, 1000, 'All']
+        ]
+    });
+
+    $('.advanced-desc-table').DataTable({
         "order": [
             [0, "desc"]
         ],
