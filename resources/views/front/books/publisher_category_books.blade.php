@@ -65,6 +65,9 @@
                                 <div>No Books Published</div>
                             @endforelse
                         </div>
+                        <div class="">
+                            {{$books->onEachSide(1)->links('paginator.bootstrap')}}
+                        </div>
                     </div>
                 </div>
             </div>            

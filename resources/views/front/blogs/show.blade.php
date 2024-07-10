@@ -79,7 +79,7 @@
                                 <span>{{$blog->comments->where('status','Published')->count()}} Comments</span>
                                 @endif
                             </div>
-                            @foreach ($blog->comments->where('status','Published') as $comment)
+                            @foreach ($blog->comments()->where('status','Published')->orderByDesc('id')->take(10)->get() as $comment)
                             <div class="single-comment">
                                 <img src="{{ asset('images/comment.png') }}" alt="" height="40" width="40" class="border border-primary" style="border-radius: 50%">
                                 <div class="commentter">

@@ -498,7 +498,7 @@ class FrontController extends Controller
 
     public function books()
     {
-        $data['books'] = Book::where('status','=','Active')->orderByDesc('order')->get();
+        $data['books'] = Book::where('status','=','Active')->orderByDesc('order')->paginate(15);
         $data['categories'] = Categories::where(['status'=>'Active','type'=>'book_category'])->whereHas('cat_books')->get();
         // dd($data);
         return view('front.books.index',$data);
@@ -537,7 +537,7 @@ class FrontController extends Controller
         $data['publisher'] = $publisher;
         $data['category'] = null;
         $data['categories'] = $publisher->pub_categories()->where('status','=','Active')->get();
-        $data['books'] = $publisher->pub_books()->where('status','=','Active')->orderByDesc('order')->get();
+        $data['books'] = $publisher->pub_books()->where('status','=','Active')->orderByDesc('order')->paginate(15);
 
         // dd($data);
         return view('front.books.publisher_category_books',$data);
@@ -560,7 +560,7 @@ class FrontController extends Controller
         $data['publisher'] = $publisher;
         $data['category'] = $category;
         $data['categories'] = $publisher->pub_categories()->where('status','=','Active')->get();
-        $data['books'] = $category->cat_books()->where('status','=','Active')->orderByDesc('order')->get();
+        $data['books'] = $category->cat_books()->where('status','=','Active')->orderByDesc('order')->paginate(15);
 
         // dd($data);
         return view('front.books.publisher_category_books',$data);
@@ -1024,7 +1024,7 @@ class FrontController extends Controller
 
     public function allFreeVideos()
     {
-        $videos = FreeVideo::orderByDesc('id')->get();
+        $videos = FreeVideo::orderByDesc('id')->paginate(15);
         return view('front.all_free_video',compact('videos'));
     }
 

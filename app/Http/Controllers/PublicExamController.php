@@ -14,7 +14,7 @@ class PublicExamController extends Controller
 {
     public function examlist()
     {
-        $premiumExams=ExamHallCategories::where('status','Active')->get();
+        $premiumExams=ExamHallCategories::where('status','Active')->orderByDesc('id')->paginate(10);
         $exams=OpenExam::where('result_status','=','Unpublished')->get()->sortByDesc('id');
         return view('front.publicexams.examslist',compact('exams','premiumExams'));
     }

@@ -18,8 +18,7 @@ class FrontPdfBankController extends Controller
         ->withCount(['chapters as pdf_count' => function($ch){
             $ch->where('status','=','Active');
         }])
-        ->get()
-        ->values();
+        ->paginate(10);
 
         $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')->orderBy('order')->get();
 
@@ -41,8 +40,7 @@ class FrontPdfBankController extends Controller
         ->withCount(['chapters as pdf_count' => function($ch){
             $ch->where('status','=','Active');
         }])
-        ->get()
-        ->values();
+        ->paginate(10);
 
         $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')->orderByDesc('id')->get();
 

@@ -39,11 +39,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                @empty
-              
+                </div>                
+                @empty              
                     <div>No Blogs Published</div>
                 @endforelse
+            </div>
+            <div class="">
+                {{$blogs->onEachSide(1)->links('paginator.bootstrap')}}
             </div>
         </div>
     </div>

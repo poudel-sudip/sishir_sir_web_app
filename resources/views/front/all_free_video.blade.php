@@ -49,6 +49,9 @@
                         <div>No Videos Published</div>
                     @endforelse
                 </div>
+                <div class="">
+                    {{$videos->onEachSide(1)->links('paginator.bootstrap')}}
+                </div>
             </div>
         </div>
     </section>

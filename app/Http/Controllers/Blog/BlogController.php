@@ -13,10 +13,10 @@ class BlogController extends Controller
 {
    public function index()
    {
-    $headercategories=Categories::all()->where('status','=','Active');
-    $last_blog=Blog::where('status','=','Published')->orderByDesc('created_at')->first();
-    $blogs=Blog::where('status','=','Published')->orderByDesc('created_at')->get();
-       return view('front.blogs.index',compact('headercategories','blogs','last_blog',));
+        // $headercategories=Categories::all()->where('status','=','Active');
+        // $last_blog=Blog::where('status','=','Published')->orderByDesc('created_at')->first();
+        $blogs = Blog::where('status','=','Published')->orderByDesc('id')->paginate(10);
+       return view('front.blogs.index',compact('blogs'));
    }
 
     public function show($slug)

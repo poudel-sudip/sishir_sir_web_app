@@ -62,6 +62,9 @@
                                     <div>No Exam Published</div>
                                 @endforelse
                             </div>
+                            <div class="">
+                                {{$premiumExams->onEachSide(1)->links('paginator.bootstrap')}}
+                            </div>
                         </div>
                         {{-- <div class="row">
                             @foreach($premiumExams as $exam)

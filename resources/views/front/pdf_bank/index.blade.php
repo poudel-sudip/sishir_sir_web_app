@@ -63,6 +63,9 @@
                                 <div>No PDF Banks Published</div>
                             @endforelse
                         </div>
+                        <div class="">
+                            {{$pdf_banks->onEachSide(1)->links('paginator.bootstrap')}}
+                        </div>
                     </div>
                 </div>
             </div>            
