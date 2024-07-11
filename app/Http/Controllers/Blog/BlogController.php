@@ -15,7 +15,7 @@ class BlogController extends Controller
    {
         // $headercategories=Categories::all()->where('status','=','Active');
         // $last_blog=Blog::where('status','=','Published')->orderByDesc('created_at')->first();
-        $blogs = Blog::where('status','=','Published')->orderByDesc('id')->paginate(10);
+        $blogs = Blog::where('status','=','Published')->orderByDesc('id')->paginate(12);
        return view('front.blogs.index',compact('blogs'));
    }
 
