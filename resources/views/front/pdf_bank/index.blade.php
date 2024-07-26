@@ -32,7 +32,7 @@
         <div class="container-fluid px-md-5">
             <div class="row course-details">
                 <div class="col-md-3">
-                    <div class="side-navbar">
+                    <div class="side-navbar border border-2 border-primary">
                         <h5><a href="{{ url('/pdf-banks') }}">All PDF Banks</a></h5>
                         <ul class="course-nav" style="height:auto; min-height: 370px; ">
                             @foreach($pdf_bank_categories as $cat)

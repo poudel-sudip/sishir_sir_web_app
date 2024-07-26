@@ -43,15 +43,19 @@ class ImageGalleryController extends Controller
         $request->validate([
             'image_id'=>'numeric|required',
             'image_caption'=>'string|required|max:250',
+            'image_status'=>'numeric|required|gte:0|lte:1',
         ]);
 
         $img = ImageGallery::find($request->image_id);
         if($img)
         {
-            $img->update(['caption' => $request->image_caption]);
+            $img->update([
+                'caption' => $request->image_caption,
+                'status' => $request->image_status,
+            ]);
         }
         
-        
+        return redirect('/admin/image-gallery');
 
     }
 

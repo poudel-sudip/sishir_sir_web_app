@@ -21,6 +21,8 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:description" content="@yield('og-description','')" />
 
+  <meta name="google-adsense-account" content="ca-pub-1675260624457509">
+  
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
 
 

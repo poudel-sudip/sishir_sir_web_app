@@ -17,7 +17,7 @@
           </nav>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">Verify  {{$booking->category->title ?? ''}} Exams of {{$booking->user->name ?? ''}}</div>
                     <div class="card-body">
@@ -100,6 +100,7 @@
                                         <option value="Cash">Cash</option>
                                         <option value="Esewa">Esewa</option>
                                         <option value="Fonepay">Fonepay</option>
+                                        <option value="NepalPayment">NepalPayment</option>
                                         <option value="Bank">Bank</option>
 
                                         {{-- <option value="Self">Self</option>

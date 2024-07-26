@@ -1119,6 +1119,8 @@ Route::get('/pdf-banks/bank/{slug}','App\Http\Controllers\FrontPdfBankController
 Route::post('/nepal-pay/get-payment-instrument-details','App\Http\Controllers\NepalPayProxyController@getPaymentInstrumentDetails');
 Route::post('/nepal-pay/get-service-charge','App\Http\Controllers\NepalPayProxyController@getServiceCharge');
 Route::post('/nepal-pay/get-process-id','App\Http\Controllers\NepalPayProxyController@getProcessId');
+Route::get('/nepal-pay/return-payment-response','App\Http\Controllers\NepalPayProxyController@returnPaymentResponse');
+Route::get('/nepal-pay/return-payment-notification','App\Http\Controllers\NepalPayProxyController@returnPaymentNotification');
 
 
 //front menu details

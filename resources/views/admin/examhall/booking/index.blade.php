@@ -36,6 +36,7 @@
                                 <th>Booked By</th>
                                 <th>Email</th>
                                 <th>Contact</th>
+                                <th>Amount</th>
                                 <th>Status</th>
                                 <th>Remarks</th>
                                 <th>Action</th>
@@ -47,14 +48,10 @@
                                 <td>{{$booking->id}}</td>
                                 <td class="text-wrap">{{date('Y-m-d G:i',strtotime($booking->created_at))}}</td>
                                 <td class="text-wrap">{{$booking->category->title ?? '' }}</td>
-                                <td class="text-wrap">{{$booking->user_name}}</td>
+                                <td class="text-wrap">{{$booking->user->name ?? ''}}</td>
                                 <td class="text-wrap">{{ $booking->user->email ?? '' }}</td>
                                 <td class="text-wrap">{{ $booking->user->contact ?? '' }}</td>
-                                {{-- <td>
-                                    @if($booking->status == 'Verified' && $booking->dueAmount>10)
-                                        Rs. {{ $booking->dueAmount ?? '0' }}
-                                    @endif
-                                </td> --}}
+                                <td class="text-wrap"> Rs. {{ $booking->paymentAmount ?? '0' }} </td>
                                 <td>
                                     @if($booking->status == 'Verified')
                                     <span class="text-success">{{$booking->status}}</span>

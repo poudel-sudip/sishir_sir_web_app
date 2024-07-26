@@ -37,7 +37,18 @@ return[
     /*--------------fonepay data end-----------------*/
 
 
+    'nepal_pay' => [
+        'inst_url' => 'https://apisandbox.nepalpayment.com/GetPaymentInstrumentDetails',
+        'process_url' => 'https://apisandbox.nepalpayment.com/GetProcessId',
+        'redirect_url' => 'https://gatewaysandbox.nepalpayment.com/Payment/Index',
+        'status_url' => 'https://apisandbox.nepalpayment.com/CheckTransactionStatus',
+        'merchantId' => '7386',
+        'mercahntName' => 'ehealthapi',
+        'apiUser' => 'ehealthapi',
+        'apiPass' => 'D_@#R278332a8',
+        'secret' => 'key27dbsab928eqodmc7',
 
+    ],
 
     /*--------------khalti data start-----------------*/
 

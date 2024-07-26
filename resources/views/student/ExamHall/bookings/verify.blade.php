@@ -65,6 +65,9 @@
                                         @if($fonepay_pay_data)
                                         <option value="FonePay">FonePay</option>
                                         @endif
+                                        @if($nepalpay_pay_data)
+                                        <option value="NepalPay">Nepal Pay Wallet</option>
+                                        @endif
                                         {{-- <option value="Khalti">Khalti</option> --}}
                                         
                                     </select>
@@ -74,6 +77,10 @@
                                     </span>
                                     @enderror
                                 </div>
+                            </div>
+
+                            <div id="otherFormFields" class="d-none">
+
                             </div>
 
                             <div id="manualForm" class="d-none">
@@ -112,15 +119,19 @@
                                     
                                 </div>
                             </div>
-                            
+                                                        
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="button" class="btn btn-primary" id="submitbtn">
+                                    {{-- <button type="button" class="btn btn-primary d-none" id="submitbtn" disabled>
                                         {{ __('Verify') }}
-                                    </button>
+                                    </button> --}}
+
+                                    <div id="getPaymentBtn" class="d-inline"></div>
+                                    
                                     <a href="{{ url('/student/exam-bookings') }}" class="btn btn-secondary">Verify Later</a>
                                 </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
@@ -134,52 +145,56 @@
     </div>
 
     <script>
-        
-        $(document).on('change', '#verificationMode', function() {
-            var mode = $(this).val();
-            if(mode=="Manual")
-            {
-                $("#manualForm").removeClass("d-none");
-            }
-            else{
-                $("#manualForm").addClass("d-none");
-            }
-        }); 
 
-        $(document).on('click', '#submitbtn', function() {
-            var mode = $('#verificationMode').val();
+        $(document).on('change', '#verificationMode', function() {
+            $("#manualForm").addClass("d-none");
+            $('#getPaymentBtn').html('');
+            $('#alert_message').html('');
+            $('#alert_message').parent().addClass('d-none');
+            $('#otherFormFields').html('');
+
+            var mode = $(this).val();
+
             if(mode=="Manual")
             {
-                $( "#verifyCourseForm" ).submit(); 
+                getManualPayment(); 
             }
             else if(mode=="Esewa")
             {
-                pay_esewa();
+                getEsewaPayment();
             }
             else if(mode=="FonePay")
             {
-                pay_fonepay();
+                getFonePayPayment();
             }
-            // else if(mode=="Khalti")
-            // {
-            //     pay_khalti();
-            // }
-            else
+            else if(mode=="NepalPay")
             {
-                alert("Please Select One Verification Mode");
+                getNepalPayPayment();
             }
-        });
+            else{}
+          
+        }); 
+        
+        function getManualPayment() 
+        {
+            $("#manualForm").removeClass("d-none");
+            var btn = `
+            <button type="submit" class="btn btn-primary"> Verify Manually </button>
+            `;
+            $('#getPaymentBtn').html(btn);
+        }
+
     </script>
 
     @if($esewa_pay_data)
         <script>
-
-            function pay_esewa()
+            function getEsewaPayment() 
             {
                 var path = "{{Config::get('payment.esewa_pay_url')}}";
                 var form = document.createElement("form");
                 form.setAttribute("method", "POST");
                 form.setAttribute("action", path);
+                form.setAttribute("class", 'd-inline');
 
                 @foreach($esewa_pay_data as $key=>$value) 
                     var hiddenField = document.createElement("input");
@@ -189,21 +204,27 @@
                     form.appendChild(hiddenField);
                 @endforeach
 
-                document.body.appendChild(form);
-                form.submit();
-            }
+                var submit = document.createElement("input");
+                submit.setAttribute("type", "submit");
+                submit.setAttribute("name", "submit");
+                submit.setAttribute("value", "Pay With Esewa");
+                submit.setAttribute("class", "btn btn-primary");
+                form.appendChild(submit);
 
+                $('#getPaymentBtn').html(form);
+            }
         </script>
     @endif
 
     @if($fonepay_pay_data)
         <script>
-            function pay_fonepay()
+            function getFonePayPayment() 
             {
                 var path = "{{Config::get('payment.fonepay_pay_url')}}";
                 var form = document.createElement("form");
                 form.setAttribute("method", "POST");
                 form.setAttribute("action", path);
+                form.setAttribute("class", 'd-inline');
 
                 @foreach($fonepay_pay_data as $key=>$value) 
                     var hiddenField = document.createElement("input");
@@ -213,85 +234,100 @@
                     form.appendChild(hiddenField);
                 @endforeach
 
-                document.body.appendChild(form);
-                form.submit();
+                var submit = document.createElement("input");
+                submit.setAttribute("type", "submit");
+                submit.setAttribute("name", "submit");
+                submit.setAttribute("value", "Pay With FonePay");
+                submit.setAttribute("class", "btn btn-primary");
+                form.appendChild(submit);
+
+                $('#getPaymentBtn').html(form);
             }
         </script>
     @endif
 
-    {{-- 
-    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
-    <script>
-        function pay_khalti()
-        {
-            var config = {
-                // replace the publicKey with yours
-                "publicKey": "{{Config::get('payment.khalti_public_key')}}",
-                "productIdentity": "{{$booking->id.'-'.time()}}",
-                "productName": "{{$booking->category->title}}",
-                "productUrl": "{{url('student/exam-bookings')}}",
-                "paymentPreference": [
-                    "KHALTI",
-                    "EBANKING",
-                    "MOBILE_BANKING",
-                    "CONNECT_IPS",
-                ],
-                "eventHandler": {
-                    onSuccess (payload) {
-                        // console.log(payload);
-                        checkout.hide();
-                        $('#submitbtn').addClass('disabled btn-warning').html('Please Wait').val('Please Wait');
-                        $('#alert_message').parent().removeClass('d-none');
-                        $('#alert_message').addClass('alert-info').html('<strong> Please Wait a Minute Patiently.</strong>');
-                        
-                        if(payload.idx)
-                        {
-                            $.ajaxSetup({
-                                headers: {
-                                    'X-CSRF-TOKEN' : '{{ csrf_token() }}'
-                                }
-                            });
+    @if($nepalpay_pay_data && count($nepalpay_pay_wallets))
+        <script>
+            function getNepalPayPayment()
+            {
+                $('#alert_message').parent().addClass('d-none');
+                $('#alert_message').html('');
 
-                            $.ajax({
-                                method: 'POST',
-                                url: '{{url("student/exam-bookings/$booking->id/khaltiSuccess")}}',
-                                data: payload,
+                var op =`<option value="" BankType="" BankUrl="" InstitutionName="" InstrumentCode="" InstrumentName="" InstrumentValue="" > Please Choose One Nepal Pay Wallet Options... </option>`;
+                @foreach($nepalpay_pay_wallets as $row)
+                op += `<option value="" BankType="{{$row['BankType']}}" BankUrl="{{$row['BankUrl']}}" InstitutionName="{{$row['InstitutionName']}}" InstrumentCode="{{$row['InstrumentCode']}}" InstrumentName="{{$row['InstrumentName']}}" InstrumentValue="{{$row['InstrumentValue']}}" > {{$row['InstitutionName']}} </option>`;
+                @endforeach
+                
+                var extrahtml = `
+                <div class="form-group row">
+                    <label for="nepalPayWallet" class="col-md-4 col-form-label text-md-right">{{ __('Nepal Pay Wallet Type') }}</label>
 
-                                success: function(response) {
-                                    // console.log(response);
-                                    if(response.success == 1)
-                                    {
-                                        window.location = response.redirecto;
-                                    }
-                                    else
-                                    {
-                                        checkout.hide();
-                                        window.location = '{{url("student/exam-bookings/$booking->id/payment-failed")}}';
-                                    }
-                                },
+                    <div class="col-md-8">
+                        <select name="nepalPayWallet" id="nepalPayWallet" class="form-control @error('nepalPayWallet') is-invalid @enderror" value="{{ old('nepalPayWallet') }}" >
+                            ${op}
+                        </select>
+                        @error('nepalPayWallet')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                `;
 
-                                error: function(data) {
-                                    // console.log('Error:',data);
-                                    window.location = '{{url("student/exam-bookings/$booking->id/payment-failed")}}';
-                                },
-                            });
-                        }
-                    },
-                    onError (error) {
-                        // console.log(error);
-                        window.location = '{{url("student/exam-bookings/$booking->id/payment-failed")}}';
-                    },
-                    onClose () {
-                        console.log('widget is closing');
-                    }
+                $('#otherFormFields').removeClass('d-none');
+                $('#otherFormFields').html(extrahtml);
+                
+            }
+
+            $(document).on('change', '#nepalPayWallet', function() {
+                var BankType = $(this).find(":selected").attr('BankType');
+                var BankUrl = $(this).find(":selected").attr('BankUrl');
+                var InstitutionName = $(this).find(":selected").attr('InstitutionName');
+                var InstrumentCode = $(this).find(":selected").attr('InstrumentCode');
+                var InstrumentName = $(this).find(":selected").attr('InstrumentName');
+                var InstrumentValue = $(this).find(":selected").attr('InstrumentValue');
+                var processId = "{{$nepalpay_pay_data->process_id}}";
+                var transRem = 'PDF Booking Payment For {{ucwords($booking->book->title ?? "")}}' ; 
+                var hash_data = '{{$booking->booking_price}}' + InstrumentCode + '{{$nepalpay_pay_data->merchantId}}' + '{{$nepalpay_pay_data->mercahntName}}' + '{{$booking->trans_id}}' + processId + transRem;
+                var hash_sign = '{{ hash_hmac("sha512", "' + hash_data + '" , $nepalpay_pay_data->secret) }}';
+
+                var path = "{{$nepalpay_pay_data->redirect_url}}";
+                var form = document.createElement("form");
+                form.setAttribute("method", "POST");
+                form.setAttribute("action", path);
+                form.setAttribute("class", 'd-inline');
+
+                function appendInput(name, value) {
+                    var input = document.createElement("input");
+                    input.setAttribute("type", "hidden");
+                    input.setAttribute("name", name);
+                    input.setAttribute("value", value);
+                    form.appendChild(input);
                 }
-            };
 
-            var amt = {{ $booking->category->price - $booking->category->discount}};
-            var checkout = new KhaltiCheckout(config);
+                appendInput("MerchantId", "{{ $nepalpay_pay_data->merchantId }}");
+                appendInput("MerchantName", "{{ $nepalpay_pay_data->mercahntName }}");
+                appendInput("MerchantTxnId", "{{ $booking->trans_id }}");
+                appendInput("Amount", "{{ $booking->booking_price }}");
+                appendInput("ProcessId", processId);
+                appendInput("InstrumentCode", InstrumentCode);
+                appendInput("TransactionRemarks", transRem);
+                appendInput("Signature", hash_sign);
 
-            checkout.show({amount: amt * 100});
-        }
-    </script> --}}
+                var submit = document.createElement("input");
+                submit.setAttribute("type", "submit");
+                submit.setAttribute("name", "submit");
+                submit.setAttribute("value", "Pay With "+InstitutionName);
+                submit.setAttribute("class", "btn btn-primary");
+                form.appendChild(submit);
+
+                $('#getPaymentBtn').html(form);                
+
+            });
+
+        </script>
+    @endif
+
 
 @endsection

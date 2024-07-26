@@ -48,7 +48,27 @@
                         <div class="h5 my-1">Price: {{$pdf_bank->price - $pdf_bank->discount}} </div>
                         <div class="h5 my-1">No of PDF Sets: {{$pdf_bank->pdf_count}} </div>
                         <div>
-                            <a href="/student/pdf-bank-bookings/create" class="btn booking-btn">Book Now</a>
+                            <form action="/student/pdf-bank-bookings" method="POST" class="d-inline">
+                                @csrf
+                                <input type="hidden" name="pdf_bank" value="{{$pdf_bank->id}}" class="@error('pdf_bank') is-invalid @enderror">
+                                @error('pdf_bank')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                
+                                <input type="hidden" name="remarks" value="">
+                                <button type="submit" class="btn booking-btn">Book Now</button>
+
+                                @if (session('alreadybooked'))
+                                    <div class="alert alert-danger">
+                                        {{ session('alreadybooked') }}
+                                    </div>
+                                @endif
+                            </form>
+
+                            {{-- <a href="/student/pdf-bank-bookings/create" class="btn booking-btn">Book Now</a> --}}
+                        
                         </div>
                     </div>
                     <div class="col-12">

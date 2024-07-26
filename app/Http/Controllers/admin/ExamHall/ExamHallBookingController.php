@@ -80,7 +80,8 @@ class ExamHallBookingController extends Controller
             'remarks' => $request->remarks,
         ]);
 
-        return redirect('/admin/exam-hall/'.$category->id.'/bookings');
+        // return redirect('/admin/exam-hall/'.$category->id.'/bookings');
+        return redirect('/admin/exam-hall/bookings');
     }
 
     public function update(Request $request, ExamHallBookings $booking)
@@ -115,13 +116,15 @@ class ExamHallBookingController extends Controller
             "remarks" => $request->remarks,
         ]);
 
-        return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
+        // return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
+        return redirect('/admin/exam-hall/bookings');
     }
 
     public function destroy(Request $request, ExamHallBookings $booking)
     {
         $booking->delete();
-        return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
+        // return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
+        return redirect('/admin/exam-hall/bookings');
 
     }
 

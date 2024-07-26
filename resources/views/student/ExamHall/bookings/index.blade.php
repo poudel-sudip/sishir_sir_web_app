@@ -55,6 +55,9 @@
                     </table>
                 </div>
             </div>
+            <div class="col-12">
+                {{$bookings->onEachSide(1)->links('paginator.bootstrap')}}
+            </div>
         </div>
     </div>
 

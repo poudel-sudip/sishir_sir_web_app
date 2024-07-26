@@ -53,6 +53,9 @@
                 </div>
             @endforeach
         </div>
+        <div class="">
+            {{$bookings->onEachSide(1)->links('paginator.bootstrap')}}
+        </div>
     </div>
 
     <script type="text/javascript">

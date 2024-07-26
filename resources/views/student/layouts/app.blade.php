@@ -77,7 +77,7 @@
         <div class="col-md-6 col-4">
           <div class="student-top-right">
             <div class="student-notification-icon">
-              <div class="dropdown student-user-setting">
+              {{-- <div class="dropdown student-user-setting">
                 <a href="" title="setting" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user-cog"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
                   <li><a class="dropdown-item" href="/profile"><i class="fas fa-user-tie"></i> Profile</a></li>
@@ -90,14 +90,14 @@
                       </form>
                   </li>
                 </ul>
-              </div>
-              <a href="/student/notifications" class="dashboard-notification position-relative" title="notification">
+              </div> --}}
+              {{-- <a href="/student/notifications" class="dashboard-notification position-relative" title="notification">
                 <i class="fa fa-bell" aria-hidden="true"></i>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     {{auth()->user()->userNotifications()->where('read','=','No')->count()}}
                     <span class="visually-hidden">unread messages</span>
                   </span>
-              </a>
+              </a> --}}
             </div>
             <div class="student-details">
               <h5>{{ Auth::user()->name }}</h5>
@@ -113,13 +113,13 @@
             </div>
           </div>
           <div class="justify-content-end student-notification-mobile">
-            <a href="/student/notifications" class="position-relative" title="notification">
+            {{-- <a href="/student/notifications" class="position-relative" title="notification">
               <i class="fa fa-bell" aria-hidden="true"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                   {{auth()->user()->userNotifications()->where('read','=','No')->count()}}
                   <span class="visually-hidden">unread messages</span>
                 </span>
-            </a>
+            </a> --}}
             <button class="mobile-view-student-btn" onclick="myNavbar()">
             @if(auth()->user()->photo)
               <img src="/storage/{{auth()->user()->photo }}" alt="">

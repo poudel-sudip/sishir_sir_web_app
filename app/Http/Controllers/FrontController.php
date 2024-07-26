@@ -75,7 +75,7 @@ class FrontController extends Controller
         }
 
         $data['today_question'] = $today_question;
-        $data['img_gallery'] = ImageGallery::orderByDesc('id')->take(9)->get();
+        $data['img_gallery'] = ImageGallery::where('status','=',1)->orderByDesc('id')->take(9)->get();
         // $data['pdf_banks'] = PDFBank::where('status','=','Active')
         // ->orderByDesc('id')->take(9)
         // ->withCount(['chapters as pdf_count' => function($ch){
@@ -1459,7 +1459,7 @@ class FrontController extends Controller
 
     public function imageGallery()
     {
-        $data['images']=ImageGallery::orderByDesc('id')->paginate(12);
+        $data['images']=ImageGallery::where('status','=',1)->orderByDesc('id')->paginate(12);
         return view('front.img_gallery',$data);
     }
 

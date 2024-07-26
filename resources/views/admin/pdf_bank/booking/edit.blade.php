@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ url('/admin/ebook-bookings') }}">PDF Bank Bookings</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank-bookings') }}">PDF Bank Bookings</a></li>
               <li class="breadcrumb-item active" aria-current="page">Edit</li>
               </ol>
           </nav>
@@ -103,6 +103,7 @@
                                         <option value="Cash">Cash</option>
                                         <option value="Esewa">Esewa</option>
                                         <option value="Fonepay">Fonepay</option>
+                                        <option value="NepalPayment">NepalPayment</option>
                                         <option value="Bank">Bank</option>
 
                                         {{-- <option value="Cash">Cash</option>

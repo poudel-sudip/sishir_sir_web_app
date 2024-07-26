@@ -33,11 +33,12 @@
                         <div class="m-2 text-center border border-primary rounded p-2" style="max-width: 300px;">
                           <a target="_blank" href="/storage/{{$row->image}}"><img src="/storage/{{$row->image}}" class="img img-fluid" alt="img_error" style="max-height: 200px;"></a>
                           <div class="mt-2 h6 text-wrap">{{$row->caption}}</div>
+                          <div class="text-{{$row->status ? 'success' : 'danger'}} text-small">  ({{$row->status ? 'Active' : 'Inactive' }})</div>
                           <div class="text-primary text-small">  {{$row->created_at}}</div>
 
                           <div class="text-center text-small mt-1">
                             <strong>
-                              <a class="edit_image" href="javascript:{}" data-toggle="modal" data-target="#edit_image" data-image-id="{{$row->id}}" data-image-caption="{{$row->caption}}">Edit</a>
+                              <a class="edit_image" href="javascript:{}" data-toggle="modal" data-target="#edit_image" data-image-id="{{$row->id}}" data-image-caption="{{$row->caption}}" data-image-status="{{$row->status}}" >Edit</a>
                               <form class="d-inline" id="delete-form-{{$row->id}}" action="/admin/image-gallery/{{$row->id}}" method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -155,6 +156,22 @@
                           @enderror
                         </div>
                       </div>
+
+                      <div class="form-group row">
+                        <label for="image_status" class="col-md-3 col-form-label">{{ __(' Image Status') }}</label>
+  
+                        <div class="col-md-9">
+                          <select name="image_status" id="image_status" class="form-control @error('image_status') is-invalid @enderror" value="{{ old('image_status') }}" required>
+
+                          </select>
+  
+                          @error('image_status')
+                            <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                            </span>
+                          @enderror
+                        </div>
+                      </div>
   
                       <div class="form-group row mb-0">
                           <div class="col-md-6 offset-md-4">
@@ -175,11 +192,19 @@
     $(document).on('click', '.edit_image', function(){
       const id=$(this).attr('data-image-id');
       const caption=$(this).attr('data-image-caption');
+      const status=$(this).attr('data-image-status');
       $('#image_id').val("");
       $('#image_caption').val("");
       
+      var statushtml = `
+      <option value="${status}"> ${status == 1 ? 'Active':'Inactive'}  </option>
+      <option value="">------------</option>
+      <option value="1"> Active </option>
+      <option value="0"> Inactive </option>
+      `;
       $('#image_id').val(id);
       $('#image_caption').val(caption);
+      $('#image_status').html(statushtml);
 
     })
   </script> 

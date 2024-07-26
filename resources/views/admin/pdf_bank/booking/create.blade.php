@@ -61,6 +61,7 @@
                                         <option value="Cash">Cash</option>
                                         <option value="Esewa">Esewa</option>
                                         <option value="Fonepay">Fonepay</option>
+                                        <option value="NepalPayment">NepalPayment</option>
                                         <option value="Bank">Bank</option>
 
                                         {{-- <option value="Cash">Cash</option>

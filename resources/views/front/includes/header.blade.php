@@ -80,7 +80,7 @@
 
           @foreach($parent_menus as $parent)
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">{{ucwords($parent->name)}}</a>
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{ucwords($parent->name)}}</a>
               <?php
                 $child_menus = $parent->subGroups()->where('status','=','Active')->orderBy('order')->take(10)->get(['id','name','slug','type']);
               ?>
@@ -114,7 +114,7 @@
           </li> --}}
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/books" role="button" aria-expanded="false">My Books</a>
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="/books" role="button" aria-expanded="false">My Books</a>
             <ul class="dropdown-menu">
               @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'book_publisher'])->whereHas('pub_categories')->orderBy('order')->take(5)->get() as $b)
               <li class="parent-dropdown">
@@ -125,7 +125,7 @@
           </li>
           
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Mock Test</a>
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Mock Test</a>
             <ul class="dropdown-menu">
               <li class="parent-dropdown">
                 <a class="dropdown-item" aria-current="page" href="/public-exams">Exams</a>

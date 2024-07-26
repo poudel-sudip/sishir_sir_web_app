@@ -128,14 +128,6 @@
         </section>
     @endif
     
-    {{-- @if($today_question)
-        <section class="my-3 text-center">
-            <a href="/question-of-the-day/{{$today_question->show_date}}">
-                <img src="{{$today_question->image}}" alt="" class="img img-fluid">            
-            </a>
-        </section>
-    @endif --}}
-
 
     @if(count($dynamic_forms))
     <section class="home-slider my-5">
@@ -254,94 +246,68 @@
         </div> 
     </section>
     @endif
-
-    <section class="mock-test mb-5 mt-5">
+    
+    <section class="footer-imp-link mt-5 mb-5">
         <div class="container-fluid px-md-5">
-            <div class="row">
-                <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3">Mock Tests</h2>
+            <h4 class="m-4 text-center">Mock Tests</h4>
+            <nav>
+                <div class="nav nav-tabs justify-content-center align-items-center" id="nav-mock-test-tab" role="tablist">
+                    <button class="border nav-link active " id="nav-mock-test-premium-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-premium" type="button" role="tab" aria-controls="nav-mock-test-premium" aria-selected="true">Premium</button>
+                    <button class="border nav-link" id="nav-mock-test-free-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-free" type="button" role="tab" aria-controls="nav-mock-test-free" aria-selected="false">Free</button>
+                    <button class="border nav-link" id="nav-mock-test-results-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-results" type="button" role="tab" aria-controls="nav-mock-test-results" aria-selected="false">Results</button>
                 </div>
-            </div>
-            <div class="mocktest-container">
-                <nav>
-                    <div class="nav nav-tabs mock-premium" id="nav-tab" role="tablist">
-                      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Premium</button>
-                      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Free</button>
-                      <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-result" type="button" role="tab" aria-controls="nav-result" aria-selected="false">Results</button>
-                    </div>
-                </nav>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tab-content pt-4" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                                <div class="row">
-                                    @foreach ($premiumExams as $exam)
-                                        <div class="col-sm-6 col-md-3 mb-3">
-                                            <div class="seller-item border border-primary rounded border-2">
-                                                <div class="seller-header text-center">
-                                                    <a href="/exam-hall/premium/{{$exam->slug}}">
-                                                        <img src="/storage/{{$exam->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
-                                                    </a>
-                                                    <h5 class="mt-3"><a href="/exam-hall/premium/{{$exam->slug}}">{{ucwords($exam->title)}}</a></h5>
-                                                    <h6>{{$exam->category_exams->count()}} Sets </h6>
+            </nav>
+            <div class="tab-content shadow border border-danger border-2 p-1" id="nav-mock-test-tabContent" style="border-top:0px !important;">
+                
+                <div class="tab-pane fade active show" id="nav-mock-test-premium" role="tabpanel" aria-labelledby="nav-mock-test-premium-tab" tabindex="0">
+                    <div class="row">
+                        @foreach ($premiumExams as $row)
+                            <div class="col-sm-6 col-md-3 mb-3">
+                                <div class="seller-item border border-primary rounded border-2">
+                                    <div class="seller-header text-center">
+                                        <a href="/exam-hall/premium/{{$row->slug}}">
+                                            <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
+                                        </a>
+                                        <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->slug}}">{{ucwords($row->title)}}</a></h6>
+                                        <h6 class="small">{{$row->category_exams()->count()}} MCQ Sets </h6>
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-
-                                    {{-- @foreach ($premiumExams as $exam)
-                                        <div class="col-md-6 mb-5">
-                                            <h3 class="mock-heading">{{$exam->title}}</h3>
-                                            <div class="mb-3">({{$exam->category_exams()->count() ?? '-'}} Sets)</div>
-                                            <a href="/exam-hall/premium/{{$exam->slug}}" class="mock-btn mock-btn1">Book Now</a>
-                                        </div>
-                                    @endforeach --}}
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                                <div class="row">
-                                    @foreach ($exams as $exam)
-                                        <div class="col-sm-6 col-md-3 mb-3">
-                                            <div class="seller-item border border-primary rounded border-2">
-                                                <div class="seller-header text-center">
-                                                    <a href="/public-exams/{{$exam->slug}}">
-                                                        <img src="/storage/{{$exam->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
-                                                    </a>
-                                                    <h5 class="mt-3"><a href="/public-exams/{{$exam->slug}}">{{ucwords($exam->name)}}</a></h5>
-                                                    <h6>{{ $exam->exam ? ($exam->exam->questions ? $exam->exam->questions->count() : '-') : '-' }} Questions </h6>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-
-                                    {{-- @foreach ($exams as $exam)
-                                        <div class="col-md-6 mb-5">
-                                            <h3 class="mock-heading">{{$exam->name}}</h3>
-                                            <div class="mb-3">({{ $exam->exam ? ($exam->exam->questions ? $exam->exam->questions->count() : '-') : '-' }} Questions)</div>
-                                            <a href="/public-exams/{{$exam->slug}}" class="mock-btn mock-btn1">Exam</a>
-                                        </div>
-                                    @endforeach --}}
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="nav-result" role="tabpanel" aria-labelledby="nav-result-tab" tabindex="0">
-                                <div class="row">
-                                    <div class="col-12 mb-5">
-                                        <a href="/results" class="mock-btn mock-btn1">View Exam Results...</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 text-end">
-                                <a href="/public-exams" class="btn" style="background:#1375b9; color:#fff;">View all exams...</a>
-                            </div>
-                        </div>
+                        @endforeach                        
                     </div>
-                    
                 </div>
-                
+
+                <div class="tab-pane fade" id="nav-mock-test-free" role="tabpanel" aria-labelledby="nav-mock-test-free-tab" tabindex="0">
+                    <div class="row">
+                        @foreach ($exams as $row)
+                            <div class="col-sm-6 col-md-3 mb-3">
+                                <div class="seller-item border border-primary rounded border-2">
+                                    <div class="seller-header text-center">
+                                        <a href="/public-exams/{{$row->slug}}">
+                                            <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
+                                        </a>
+                                        <h6 class="mt-3"><a href="/public-exams/{{$row->slug}}">{{ucwords($row->name)}}</a></h6>
+                                        <h6 class="small">{{ $row->exam ? ($row->exam->questions ? $row->exam->questions()->count() : '-') : '-' }} Questions </h6>
+
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach                        
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="nav-mock-test-results" role="tabpanel" aria-labelledby="nav-mock-test-results-tab" tabindex="0">
+                    <div class="row">
+                        <div class="col-12 m-5 text-center">
+                            <a href="/results" class="btn px-4" style="background:#1375b9; color:#fff;">View Exam Results...</a>
+                        </div>                       
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <a href="/public-exams" class="btn" style="background:#1375b9; color:#fff;">View All Exams...</a>
+                </div>
             </div>
             
         </div>
@@ -362,48 +328,13 @@
         </section>
     @endif
 
-    {{-- @if(count($pdf_banks))
-        <div class="container-fluid px-md-5 eb-seller my-5">
-            <div class="row">
-                <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3">PDF Banks</h2>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="owl-carousel eb-seller-carousel">
-                        @foreach($pdf_banks as $row)
-                            <div class="seller-item bg-light p-3 border border-primary rounded">
-                                <div class="seller-header text-center">
-                                    <a href="/pdf-banks/bank/{{$row->slug}}">
-                                        <img src="/storage/{{$row->thumbnail}}" alt="" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
-                                    </a>
-                                </div>
-                                <div class="seller-footer">
-                                    <h4 class="text-center" title="{{strtoupper($row->title)}}"> <a href="/pdf-banks/bank/{{$row->slug}}"> {{strtoupper($row->title)}} </a></h4>
-                                    <div class="text-center text-danger" style="margin-top: -0.5rem">(PDF Sets: <span class="text-primary">{{ $row->pdf_count ?? '' }}</span>)</div>
-                                    <div>Price : @if($row->discount > 0) <s class="text-danger">Rs. {{ $row->price }}</s> @endif <strong class="text-success"> Rs. {{ ($row->price - $row->discount) }}</strong></div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-                
-            </div>
-            <div class="text-end mt-2">
-                <a href="/pdf-banks" class="btn" style="background:#1375b9;color:#fff">View all...</a>
-            </div>
-        </div>
-
-    @endif --}}
 
     @if(count($pdf_bank_categories))
-        
         <section class="footer-imp-link mt-5 mb-5">
             <div class="container-fluid px-md-5">
                 <h4 class="m-4 text-center">Premium PDF Bank</h4>
                 <nav>
-                    <div class="nav nav-tabs" id="nav-pdf-bank-tab" role="tablist">
+                    <div class="nav nav-tabs justify-content-center align-items-center" id="nav-pdf-bank-tab" role="tablist">
                         @php($isFirstElement = true)
                         @foreach($pdf_bank_categories as $cat)
                             <button class="border nav-link {{$isFirstElement ? 'active' : ''}}" id="nav-pdf-bank-{{ $cat->id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-pdf-bank-{{ $cat->id }}" type="button" role="tab" aria-controls="nav-pdf-bank-{{ $cat->id }}" aria-selected="true">{{ucwords($cat->name)}}</button>
@@ -441,11 +372,8 @@
                     </div>
                 </div>
                 
-                
-                
             </div>
         </section>
-
     @endif
 
     <section class="home-ebook mt-3 mb-5">
@@ -462,25 +390,7 @@
                 @endfor
                 <a href="/library?filter=Z" class="lib-filter-character" > Z </a>
             </div>    
-
-            {{-- <div class="row">
-                @foreach ($libraries as $cat)
-                <div class="col-sm-6 col-md-3 mb-3">
-                    <div class="ebook-section library-item border border-primary text-center">
-                        <div>
-                            <a href="/library/{{$cat->slug}}"><i class="h1 fa fa-folder"></i></a>
-                        </div>
-                        <div class="ebook-footer h5">
-                            <a href="/library/{{$cat->slug}}">{{ucwords($cat->name)}}</a>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-
-                <div class="col-12 text-end mt-2">
-                    <a href="/library" class="btn" style="background:#1375b9;color:#fff">View all...</a>
-                </div>
-            </div> --}}
+           
         </div>
     </section>
 
@@ -636,18 +546,7 @@
                                         </iframe>                                        
                                     </div>
                                 </a>
-                                {{-- <div class="header">
-                                    <div class="post-thumb" style="height:200px">
-                                        <img src="https://img.youtube.com/vi/{{$video->video_id}}/hqdefault.jpg" alt="" >
-                                    </div>
-
-                                </div>
-                                <div class="body">
-                                    <h5 class="post-title text-center" style="font-size: 16px">{{$video->title}}</h5>
-                                    <div class="course-info text-center">
-                                        <a class="btn-sm btn-primary" href="/free-videos/{{$video->id}}" >Play Video</a>
-                                    </div>
-                                </div> --}}
+                                
                             </div>
                         @endforeach
                     </div>
@@ -704,68 +603,42 @@
 
     {{-- review section start --}}
     @if(count($testimonials))
-    <section class="review-section mt-5">
-        <div class="container-fluid px-md-5">
-            <div class="row mb-3">
-                <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3">Testimonial</h2>
+        <section class="review-section mt-5">
+            <div class="container-fluid px-md-5">
+                <div class="row mb-3">
+                    <div class="col-md-12 text-center relative">
+                        <h2 class="home-section-heading mb-3">Testimonial</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="review-container">
-            <div class="row">
-                {{-- <div class=" owl-carousel review-slider">
-                    @foreach($testimonials as $testimonial)
-                        <div class="reviw-item border border-primary" style="overflow: hidden">
-                            <div class="reviewer">
-                                <div class="profile-image">
-                                    <img src="/storage/{{$testimonial->image}}" alt="Feedback Review">
-                                </div>
-                                <div class="profile-details">
-                                    <h5>{{$testimonial->name}}</h5>
-                                    <p>{{$testimonial->role}}</p>
-                                </div>
-                            </div>
-                            <div class="review-content">
-                                <div class="review text-justify">
-                                    <p class="text-justify">{{$testimonial->message}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div> --}}
+                <div class="review-container">
+                <div class="row">
+                    
+                    <div class="owl-carousel review-slider" style="align-items: stretch;">
+                        @foreach($testimonials as $row)
+                            <div class=" reviw-item border border-primary" style="height:100%; align-items:stretch; align-self:stretch">
+                                <div class="text-center">
+                                    <div class="profile-image d-inline-block">
+                                        <img src="/storage/{{$row->image}}" alt="{{$row->name}}">
+                                    </div>
 
-                <div class="owl-carousel review-slider" style="align-items: stretch;">
-                    @foreach($testimonials as $row)
-                        <div class=" reviw-item border border-primary" style="height:100%; align-items:stretch; align-self:stretch">
-                            <div class="text-center">
-                                <div class="profile-image d-inline-block">
-                                    <img src="/storage/{{$row->image}}" alt="{{$row->name}}">
-                                </div>
+                                    <div class="mt-2">
+                                        <p >{{$row->message}}</p>
+                                    </div>
 
-                                <div class="mt-2">
-                                    <p >{{$row->message}}</p>
-                                </div>
+                                    <div class="mt-2">
+                                        <h6 class="text-primary">{{$row->name}}, <em> {{$row->role}} </em> </h6>
+                                    </div>
 
-                                <div class="mt-2">
-                                    <h6 class="text-primary">{{$row->name}}, <em> {{$row->role}} </em> </h6>
                                 </div>
-
-                            </div>
                             
-                            {{-- <div>
-                                <img src="/storage/{{$row->image}}" alt="{{$row->name}}" width="100%" style="max-height:420px;">
                             </div>
-                            <div class="text-center mt-1" >
-                                <h5>{{$row->message}}</h5> 
-                            </div> --}}
-                        </div>
-                    @endforeach
-                </div>
+                        @endforeach
+                    </div>
 
+                </div>
+                </div>
             </div>
-            </div>
-        </div>
-    </section>
+        </section>
     @endif
    
     <!-- Messenger Chat Plugin Code -->

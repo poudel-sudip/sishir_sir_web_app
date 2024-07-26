@@ -66,7 +66,7 @@
                                         <option value="FonePay">FonePay</option>
                                         @endif
                                         @if($nepalpay_pay_data)
-                                        <option value="NepalPay">Nepal Pay / Hamro Pay</option>
+                                        <option value="NepalPay">Nepal Pay Wallet</option>
                                         @endif
                                     </select>
                                     @error('verificationMode')
@@ -75,6 +75,10 @@
                                     </span>
                                     @enderror
                                 </div>
+                            </div>                           
+
+                            <div id="otherFormFields" class="d-none">
+
                             </div>
 
                             <div id="manualForm" class="d-none">
@@ -142,6 +146,9 @@
         $(document).on('change', '#verificationMode', function() {
             $("#manualForm").addClass("d-none");
             $('#getPaymentBtn').html('');
+            $('#alert_message').html('');
+            $('#alert_message').parent().addClass('d-none');
+            $('#otherFormFields').html('');
 
             var mode = $(this).val();
 
@@ -236,41 +243,87 @@
         </script>
     @endif
 
-    {{-- @if($nepalpay_pay_data)
+    @if($nepalpay_pay_data && count($nepalpay_pay_wallets))
         <script>
             function getNepalPayPayment()
             {
-                $.ajaxSetup({
-                    headers: {
-                        // 'X-CSRF-TOKEN' : '{{ csrf_token() }}',
-                        'Authorization' : 'Basic {{$nepalpay_pay_data->api_auth}}',
-                    }
-                });
+                $('#alert_message').parent().addClass('d-none');
+                $('#alert_message').html('');
 
-                $.ajax({
-                    method: 'POST',
-                    url: '{{$nepalpay_pay_data->inst_url}}',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        'MerchantId' : '{{$nepalpay_pay_data->merchantId}}',
-                        'MerchantName' : '{{$nepalpay_pay_data->mercahntName}}',
-                        'Signature' : "{{ hash_hmac('sha512', $nepalpay_pay_data->merchantId.$nepalpay_pay_data->mercahntName, $nepalpay_pay_data->secret) }}",
-                    }),
-                    success: function(response) {
-                        console.log(response);
-                       
-                    },
-                    error: function(xhr, status, error) {
-                        console.log('Error Status:', status);
-                        console.log('Error Details:', error);
-                        console.log('Response Text:', xhr.responseText);
-                    },
-                    // error: function(data) {
-                    //     console.log('Error:',data);
-                    // },
-                });
+                var op =`<option value="" BankType="" BankUrl="" InstitutionName="" InstrumentCode="" InstrumentName="" InstrumentValue="" > Please Choose One Nepal Pay Wallet Options... </option>`;
+                @foreach($nepalpay_pay_wallets as $row)
+                op += `<option value="" BankType="{{$row['BankType']}}" BankUrl="{{$row['BankUrl']}}" InstitutionName="{{$row['InstitutionName']}}" InstrumentCode="{{$row['InstrumentCode']}}" InstrumentName="{{$row['InstrumentName']}}" InstrumentValue="{{$row['InstrumentValue']}}" > {{$row['InstitutionName']}} </option>`;
+                @endforeach
+                
+                var extrahtml = `
+                <div class="form-group row">
+                    <label for="nepalPayWallet" class="col-md-4 col-form-label text-md-right">{{ __('Nepal Pay Wallet Type') }}</label>
+
+                    <div class="col-md-8">
+                        <select name="nepalPayWallet" id="nepalPayWallet" class="form-control @error('nepalPayWallet') is-invalid @enderror" value="{{ old('nepalPayWallet') }}" >
+                            ${op}
+                        </select>
+                        @error('nepalPayWallet')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                `;
+
+                $('#otherFormFields').removeClass('d-none');
+                $('#otherFormFields').html(extrahtml);
+                
             }
+
+            $(document).on('change', '#nepalPayWallet', function() {
+                var BankType = $(this).find(":selected").attr('BankType');
+                var BankUrl = $(this).find(":selected").attr('BankUrl');
+                var InstitutionName = $(this).find(":selected").attr('InstitutionName');
+                var InstrumentCode = $(this).find(":selected").attr('InstrumentCode');
+                var InstrumentName = $(this).find(":selected").attr('InstrumentName');
+                var InstrumentValue = $(this).find(":selected").attr('InstrumentValue');
+                var processId = "{{$nepalpay_pay_data->process_id}}";
+                var transRem = 'PDF Booking Payment For {{ucwords($booking->book->title ?? "")}}' ; 
+                var hash_data = '{{$booking->booking_price}}' + InstrumentCode + '{{$nepalpay_pay_data->merchantId}}' + '{{$nepalpay_pay_data->mercahntName}}' + '{{$booking->trans_id}}' + processId + transRem;
+                var hash_sign = '{{ hash_hmac("sha512", "' + hash_data + '" , $nepalpay_pay_data->secret) }}';
+
+                var path = "{{$nepalpay_pay_data->redirect_url}}";
+                var form = document.createElement("form");
+                form.setAttribute("method", "POST");
+                form.setAttribute("action", path);
+                form.setAttribute("class", 'd-inline');
+
+                function appendInput(name, value) {
+                    var input = document.createElement("input");
+                    input.setAttribute("type", "hidden");
+                    input.setAttribute("name", name);
+                    input.setAttribute("value", value);
+                    form.appendChild(input);
+                }
+
+                appendInput("MerchantId", "{{ $nepalpay_pay_data->merchantId }}");
+                appendInput("MerchantName", "{{ $nepalpay_pay_data->mercahntName }}");
+                appendInput("MerchantTxnId", "{{ $booking->trans_id }}");
+                appendInput("Amount", "{{ $booking->booking_price }}");
+                appendInput("ProcessId", processId);
+                appendInput("InstrumentCode", InstrumentCode);
+                appendInput("TransactionRemarks", transRem);
+                appendInput("Signature", hash_sign);
+
+                var submit = document.createElement("input");
+                submit.setAttribute("type", "submit");
+                submit.setAttribute("name", "submit");
+                submit.setAttribute("value", "Pay With "+InstitutionName);
+                submit.setAttribute("class", "btn btn-primary");
+                form.appendChild(submit);
+
+                $('#getPaymentBtn').html(form);                
+
+            });
+
         </script>
-    @endif --}}
+    @endif
 
 @endsection

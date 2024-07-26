@@ -10,6 +10,8 @@ use App\Models\MerchantBooking;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 
+use App\Http\Controllers\NepalPayProxyController;
+
 class ExamBookingController extends Controller
 {
     public function __construct()
@@ -19,7 +21,7 @@ class ExamBookingController extends Controller
 
     public function index()
     {
-        $bookings=auth()->user()->exam_bookings()->get();
+        $bookings=auth()->user()->exam_bookings()->orderByDesc('id')->paginate(21);
         return view('student.examhall.bookings.index',[
             'bookings'=>$bookings,
         ]);
@@ -69,12 +71,60 @@ class ExamBookingController extends Controller
         return redirect('/student/exam-bookings');
     }
 
-    public function edit(ExamHallBookings $booking)
+    public function edit(ExamHallBookings $booking, Request $request)
     {
+        $data = [];
+
         $booking->booking_price = (($booking->category->price ?? 0) - ($booking->category->discount ?? 0));
         $trans_id = 'exam-'.$booking->id.'-'.time();
+        $booking->trans_id = $trans_id;
+
         $esewa_pay_data = null;
         $fonepay_pay_data = null;
+        $nepalpay_pay_data = null;
+
+        try 
+        {
+            if(auth()->user()->id == '2')
+            {
+                if($_SERVER['HTTP_HOST'] == '127.0.0.1:8000')
+                {
+                    
+                    $data['nepalpay_pay_wallets'] = [];
+                    $processID = null;
+                    $npay = new NepalPayProxyController;
+                    try 
+                    {
+                        $data['nepalpay_pay_wallets'] = $npay->getPaymentInstrumentDetails($request);
+                        $processID = $npay->getProcessId($booking->booking_price,$booking->trans_id);
+                    } 
+                    catch (\Throwable $th) {
+                        // throw $th;
+                    }
+
+                    if(count($data['nepalpay_pay_wallets']) && $processID)
+                    {
+                        try 
+                        {
+                            $nepalpay_pay_data = (object)config('payment.nepal_pay');
+                            if($nepalpay_pay_data)
+                            {
+                                $nepalpay_pay_data->process_id = $processID;
+                            }
+                        } 
+                        catch (\Throwable $th) {
+                            // throw $th;
+                        }
+                    }
+
+                }
+
+            }
+            
+        } 
+        catch (\Throwable $th) {
+            // throw $th;
+        }
 
         try 
         {
@@ -139,6 +189,7 @@ class ExamBookingController extends Controller
        $data['booking'] = $booking;
        $data['esewa_pay_data'] = $esewa_pay_data; 
        $data['fonepay_pay_data'] = $fonepay_pay_data; 
+       $data['nepalpay_pay_data'] = $nepalpay_pay_data; 
 
         // dd($data);
         return view('student.examhall.bookings.verify',$data);

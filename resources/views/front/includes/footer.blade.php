@@ -5,7 +5,7 @@
   <div class="container-fluid">
     <h4 class="m-4 text-center">Important Links</h4>
     <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <div class="nav nav-tabs justify-content-center align-items-center" id="nav-tab" role="tablist">
         @php($isFirstElement = true)
         @foreach($important_footer_links as $c)
           <button class="border nav-link {{$isFirstElement ? 'active' : ''}}" id="nav-{{ $c->id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ $c->id }}" type="button" role="tab" aria-controls="nav-{{ $c->id }}" aria-selected="true">{{ucwords($c->name)}}</button>
@@ -132,10 +132,8 @@
 
         <ul class="footer-card-list">
           <li class="my-1"><img src="{{ asset('images/card1.jpg') }}" alt="card esewa"></li>
-          {{-- <li class="my-1"><img src="{{ asset('images/card2.jpg') }}" alt="card"></li> --}}
-          {{-- <li class="my-1"><img src="{{ asset('images/card3.jpg') }}" alt="card"></li> --}}
-          {{-- <li class="my-1"><img src="{{ asset('images/card4.jpg') }}" alt="card"></li> --}}
-          <li class="my-1"><img src="{{ asset('images/card5.jpg') }}" alt="card phone pay"></li>
+          <li class="my-1"><img src="{{ asset('images/card5.jpg') }}" alt="card fone pay"></li>
+          <li class="my-1"><img src="{{ asset('images/card8.jpg') }}" alt="card nepal pay"></li>
         </ul>
         
       </div>         

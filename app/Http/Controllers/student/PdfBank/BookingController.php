@@ -10,6 +10,8 @@ use App\Models\Ebook\Ebook as PDFBank;
 use App\Models\Ebook\EbookBooking as Booking;
 use App\Models\MerchantBooking;
 
+use App\Http\Controllers\NepalPayProxyController;
+
 class BookingController extends Controller
 {
     public function __construct()
@@ -19,7 +21,7 @@ class BookingController extends Controller
 
     public function index()
     {
-        $bookings = auth()->user()->ebook_bookings;
+        $bookings = auth()->user()->ebook_bookings()->orderByDesc('id')->paginate(21);
         return view('student.pdf_bank.booking.index',compact('bookings'));
     }
 
@@ -59,7 +61,7 @@ class BookingController extends Controller
     }
 
 
-    public function edit(Booking $booking)
+    public function edit(Booking $booking, Request $request)
     {
         $data = [];
 
@@ -71,18 +73,50 @@ class BookingController extends Controller
         $fonepay_pay_data = null;
         $nepalpay_pay_data = null;
         
-        // try 
-        // {
-        //     $nepalpay_pay_data = (object)config('payment.nepal_pay');
-        // } 
-        // catch (\Throwable $th) {
-        //     //throw $th;
-        // }
+        try 
+        {
+            if(auth()->user()->id == '2')
+            {
+                if($_SERVER['HTTP_HOST'] == '127.0.0.1:8000')
+                {
+                    
+                    $data['nepalpay_pay_wallets'] = [];
+                    $processID = null;
+                    $npay = new NepalPayProxyController;
+                    try 
+                    {
+                        $data['nepalpay_pay_wallets'] = $npay->getPaymentInstrumentDetails($request);
+                        $processID = $npay->getProcessId($booking->booking_price,$booking->trans_id);
+                    } 
+                    catch (\Throwable $th) {
+                        // throw $th;
+                    }
+
+                    if(count($data['nepalpay_pay_wallets']) && $processID)
+                    {
+                        try 
+                        {
+                            $nepalpay_pay_data = (object)config('payment.nepal_pay');
+                            if($nepalpay_pay_data)
+                            {
+                                $nepalpay_pay_data->process_id = $processID;
+                            }
+                        } 
+                        catch (\Throwable $th) {
+                            //throw $th;
+                        }
+                    }
+
+                }
+
+            }
+            
+        } 
+        catch (\Throwable $th) {
+            // throw $th;
+        }
 
 
-        // $data = hash_hmac()
-
-        // dd($data);
         try 
         {
             if(config('payment.esewa_scd') && config('payment.esewa_secret_key'))

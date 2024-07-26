@@ -47,7 +47,25 @@
                         <div class="h5 my-1">Discounted Price: {{$exam->price - $exam->discount}} </div>
                         <div class="h5 my-1">No of Sets: {{$exam->category_exams->count()}} </div>
                         <div>
-                            <a href="/student/exam-bookings/create" class="btn booking-btn">Book Now</a>
+                            <form action="/student/exam-bookings" method="POST" class="d-inline">
+                                @csrf
+                                <input type="hidden" name="exam_category" value="{{$exam->id}}" class="@error('exam_category') is-invalid @enderror">
+                                @error('exam_category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                
+                                <input type="hidden" name="remarks" value="">
+                                <button type="submit" class="btn booking-btn">Book Now</button>
+
+                                @if (session('alreadybooked'))
+                                    <div class="alert alert-danger">
+                                        {{ session('alreadybooked') }}
+                                    </div>
+                                @endif
+                            </form>
+                            {{-- <a href="/student/exam-bookings/create" class="btn booking-btn">Book Now</a> --}}
                         </div>
                     </div>
                 </div>
