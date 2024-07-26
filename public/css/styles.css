@@ -1078,7 +1078,8 @@ p {
 }
 
 .course-page .side-navbar .course-nav li:hover {
-    background: #eff0f1;
+    /* background: #eff0f1; */
+    background: #fa0101;
 }
 
 .course-page .side-navbar .course-nav a {
@@ -1087,7 +1088,8 @@ p {
 }
 
 .course-page .side-navbar .course-nav li:hover a {
-    color: #1375b9;
+    /* color: #1375b9; */
+    color: #fff;
 }
 
 .course-page .side-navbar .course-nav a::after {
@@ -6288,3 +6290,10 @@ label.star:before {
     height: 0;
 }
 
+.course-details .side-navbar{
+    background-color: #1375b9;
+}
+
+.course-details .side-navbar a{
+    color: #fff;
+}

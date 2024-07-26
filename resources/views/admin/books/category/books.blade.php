@@ -50,7 +50,7 @@
                             <td class="text-wrap">{{ucwords($row->category->name ?? '')}}</td>
                             <td class="text-wrap">{{ucwords($row->title ?? '')}}</td>
                             <td class="text-wrap">{{ucwords($row->publisher->name ?? '')}}</td>
-                            <td><s class="text-danger mr-2">{{$row->price ?? ''}} </s> <span class="ml-2 text-primary">{{$row->price - $row->discount}}</span> </td>
+                            <td><s class="text-danger mr-2">{{$row->price ?? ''}} </s> <span class="ml-2 text-primary">{{($row->price - (($row->price*$row->discount)/100))}}</span> </td>
                             <td>{{$row->edition}} </td>
                             <td>{{$row->published_year}} </td>
                             <td><span class='text-{{$row->status == "Active" ? "success" : "danger"}}'>{{$row->status}}</span></td>

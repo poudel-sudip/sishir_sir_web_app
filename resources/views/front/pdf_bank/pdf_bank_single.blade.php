@@ -44,9 +44,9 @@
                             <span class="mx-2 text-nowrap text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '0'}}</span> 
                             <span class="mx-2 text-nowrap text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                         </div>
-                        <div class="h5 my-1">Author(s): {{$pdf_bank->author}} </div>
-                        <div class="h5 my-1">Price: {{$pdf_bank->price - $pdf_bank->discount}} </div>
-                        <div class="h5 my-1">No of PDF Sets: {{$pdf_bank->pdf_count}} </div>
+                        <div class="h5 my-1"><span class="text-info">Author(s):</span> {{$pdf_bank->author}} </div>
+                        <div class="h5 my-1"><span class="text-primary">Price:</span> @if($pdf_bank->discount >0)  <s class="text-danger mx-2"> Rs. {{$pdf_bank->price}} </s> @endif <span class="text-success mx-2"> Rs. {{$pdf_bank->price - $pdf_bank->discount}} </span> </div>
+                        <div class="h5 my-1"><span class="text-success">No of PDF Sets:</span> {{$pdf_bank->pdf_count}} </div>
                         <div>
                             <form action="/student/pdf-bank-bookings" method="POST" class="d-inline">
                                 @csrf
