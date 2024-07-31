@@ -56,6 +56,14 @@
                             <div>{{$group->status}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Number of Pages:</div>
+                            <div>{{$group->pages}}</div>
+                        </div>
+                        <div class="course-row">
+                            <div>Paper:</div>
+                            <div>{{$group->paper}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>PDF Bank Thumbnail Image: </div>
                             <div><img src="/storage/{{$group->thumbnail}}" width="200" alt=""></div>
                         </div>

@@ -110,6 +110,20 @@
                             </div>
                             
                             <div class="form-group row">
+                                <label for="video_file" class="col-md-4 col-form-label">{{ __('Youtube Video Link') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="video_file" type="text" class="form-control @error('video_file') is-invalid @enderror" name="video_file" value="{{ old('video_file') }}" >
+
+                                    @error('video_file')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('File Status') }}</label>
 
                                 <div class="col-md-8">

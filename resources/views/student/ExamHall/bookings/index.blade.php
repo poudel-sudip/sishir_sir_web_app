@@ -12,7 +12,8 @@
     <div class="student-content-wrapper student-enroll-section">
         <div class="row mb-2">
             <div class="col-md-12 text-end">
-                <a class="student-enroll-btn" href="{{ url('/student/exam-bookings/create') }}">Book an Exam Set</a>
+                {{-- <a class="student-enroll-btn" href="{{ url('/student/exam-bookings/create') }}">Book an Exam Set</a> --}}
+                <a class="student-enroll-btn" href="/public-exams">Book an Exam Set</a>
             </div>
         </div>
         <div class="row">

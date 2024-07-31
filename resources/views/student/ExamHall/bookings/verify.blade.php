@@ -16,7 +16,7 @@
                     <div class="card-header">{{ __('Booking. ID: ') }} {{$booking->id}} {{$booking->category->title ?? ''}}</div>
 
                     <div class="card-body enroll_form">
-                        <form id="verifyCourseForm" method="POST" action="/student/exam-bookings/{{$booking->id}}" enctype="multipart/form-data">
+                        <form id="verifyCourseForm" method="POST" action="#" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             @if(session('error_message'))
@@ -59,6 +59,7 @@
                                     <select name="verificationMode" id="verificationMode" class="form-control @error('verificationMode') is-invalid @enderror" value="{{ old('verificationMode') ?? $booking->verificationMode }}" required>
                                         <option value="">Choose One....</option>
                                         <option value="Manual">Manual</option>
+                                        <option value="Coupon">Coupon</option>
                                         @if($esewa_pay_data)
                                         <option value="Esewa">Esewa</option>
                                         @endif
@@ -83,37 +84,6 @@
 
                             </div>
 
-                            <div id="manualForm" class="d-none">
-
-                                <div class="form-group row">
-                                    <label for="paymentAmount" class="col-md-4 col-form-label text-md-right">{{ __('Payment Amount') }}</label>
-
-                                    <div class="col-md-8">
-                                        <input id="paymentAmount" type="text" class="form-control @error('paymentAmount') is-invalid @enderror" name="paymentAmount" value="{{ old('paymentAmount') ?? $booking->paidAmount ?? ($booking->category->price - $booking->category->discount) }}" >
-
-                                        @error('paymentAmount')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="verificationDocument" class="col-md-4 col-form-label text-md-right">{{ __('Verification Document') }} </label>
-
-                                    <div class="col-md-8">
-                                        <input id="verificationDocument" type="file" class="form-control @error('verificationDocument') is-invalid @enderror" name="verificationDocument" value="{{ old('verificationDocument') ?? $booking->verificationDocument }}" required>
-
-                                        @error('verificationDocument')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                           
                             <div class="form-group row d-none">
                                 <div class="col-12 text-center alert " id="alert_message">
                                     
@@ -147,7 +117,7 @@
     <script>
 
         $(document).on('change', '#verificationMode', function() {
-            $("#manualForm").addClass("d-none");
+            $("#verifyCourseForm").attr('action','#');
             $('#getPaymentBtn').html('');
             $('#alert_message').html('');
             $('#alert_message').parent().addClass('d-none');
@@ -158,6 +128,10 @@
             if(mode=="Manual")
             {
                 getManualPayment(); 
+            }
+            else if(mode=="Coupon")
+            {
+                getCouponPayment();
             }
             else if(mode=="Esewa")
             {
@@ -177,10 +151,75 @@
         
         function getManualPayment() 
         {
-            $("#manualForm").removeClass("d-none");
+            $("#verifyCourseForm").attr('action','/student/exam-bookings/{{$booking->id}}/manual-pay');
+
+            var extrahtml = `
+            <div class="form-group row">
+                <label for="paymentAmount" class="col-md-4 col-form-label text-md-right">{{ __('Payment Amount') }}</label>
+
+                <div class="col-md-8">
+                    <input id="paymentAmount" type="text" class="form-control @error('paymentAmount') is-invalid @enderror" name="paymentAmount" value="{{ old('paymentAmount') ?? $booking->paidAmount ?? ($booking->category->price - $booking->category->discount) }}" >
+
+                    @error('paymentAmount')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="verificationDocument" class="col-md-4 col-form-label text-md-right">{{ __('Verification Document') }} </label>
+
+                <div class="col-md-8">
+                    <input id="verificationDocument" type="file" class="form-control @error('verificationDocument') is-invalid @enderror" name="verificationDocument" value="{{ old('verificationDocument') ?? $booking->verificationDocument }}" required>
+
+                    @error('verificationDocument')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+            </div>
+            
+            `;
+
+            $('#otherFormFields').removeClass('d-none');
+            $('#otherFormFields').html(extrahtml);
+
             var btn = `
             <button type="submit" class="btn btn-primary"> Verify Manually </button>
             `;
+            $('#getPaymentBtn').html(btn);
+        }
+
+        function getCouponPayment()
+        {
+            $("#verifyCourseForm").attr('action','/student/exam-bookings/{{$booking->id}}/coupon-pay');
+            
+            var extrahtml = `
+            <div class="form-group row">
+                <label for="coupon_code" class="col-md-4 col-form-label text-md-right">{{ __('Coupon Code') }}</label>
+
+                <div class="col-md-8">
+                    <input id="coupon_code" type="text" class="form-control @error('coupon_code') is-invalid @enderror" name="coupon_code" value="{{ old('coupon_code') }}" required>
+                    
+                    @error('coupon_code')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+            `;
+
+            $('#otherFormFields').removeClass('d-none');
+            $('#otherFormFields').html(extrahtml);
+
+            var btn = `
+            <button type="submit" class="btn btn-primary"> Verify Using Coupon Code</button>
+            `;
+
             $('#getPaymentBtn').html(btn);
         }
 

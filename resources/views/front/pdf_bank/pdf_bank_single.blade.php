@@ -46,7 +46,11 @@
                         </div>
                         <div class="h5 my-1"><span class="text-info">Author(s):</span> {{$pdf_bank->author}} </div>
                         <div class="h5 my-1"><span class="text-primary">Price:</span> @if($pdf_bank->discount >0)  <s class="text-danger mx-2"> Rs. {{$pdf_bank->price}} </s> @endif <span class="text-success mx-2"> Rs. {{$pdf_bank->price - $pdf_bank->discount}} </span> </div>
-                        <div class="h5 my-1"><span class="text-success">No of PDF Sets:</span> {{$pdf_bank->pdf_count}} </div>
+                        <div class="h5 my-1"><span class="text-success">No of PDF Sets:</span> {{$pdf_bank->type == 'set' ? $pdf_bank->pdf_count : '1'}} </div>
+                        <div class="h5 my-1"><span class="text-primary">Paper:</span> {{ucwords($pdf_bank->paper)}} </div>
+                        <div class="h5 my-1"><span class="text-warning">No of Pages:</span> {{ucwords($pdf_bank->pages)}} </div>
+                        <div class="h5 my-1"><span class="text-info">Available Videos:</span> {{$pdf_bank->type == 'set' ? $pdf_bank->video_count : (trim($pdf_bank->video_file) ? '1' : '0') }} </div>
+                        <div class="h5 my-1"><span class="text-danger">* Bookings Are Non-Refundable</span> </div>
                         <div>
                             <form action="/student/pdf-bank-bookings" method="POST" class="d-inline">
                                 @csrf

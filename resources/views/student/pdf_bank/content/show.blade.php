@@ -18,6 +18,10 @@
             </div>
             <div class="col-12">
                 <div class="text-end">
+                    @if(trim($content->video_file))
+                    <a class="view-video btn btn-primary" href="#videoModal" video-title="{{'Video Solution for '.$content->title}}" video-url="{{$content->video_file}}" data-bs-toggle="modal" data-bs-target="#videoModal" data-toggle="modal" data-target="#videoModal">Play Solution Video <span class="fas fa-video"></span></a>
+                    @endif
+
                     @if($content->download)                        
                         <a href="/storage/{{$content->pdf_file}}" filename="{{ucwords($pdfbank->title.'__'.$content->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
                     @endif
@@ -33,6 +37,21 @@
         </div>
     </div>
    
+    <!-- Modal HTML -->
+    <div id="videoModal" class="modal fade">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header text-white align-items-center">
+                    <h5 class="modal-title" id="playingTitle"> </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="videoPlayer" class="embed-responsive embed-responsive-16by9"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script src="{{asset('/js/pdf.min.js') }}"></script>
     <script src="{{asset('/js/pdf.worker.min.js') }}"></script>
     <script src="{{asset('/js/pdf_reader.js') }}"></script>

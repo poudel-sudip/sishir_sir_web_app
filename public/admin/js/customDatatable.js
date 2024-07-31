@@ -108,4 +108,32 @@
         ]
     });
 
+    $('.all-entries-table').DataTable({
+        searching: true, // Enable search feature
+        ordering: true,  // Enable ordering feature
+        paging: false,   // Disable pagination
+        info: false,     // Disable showing information
+        lengthChange: false, // Disable showing entries length
+        bFilter: true,   // Enable search input field
+        bInfo: false,    // Disable "Showing X to Y of Z entries" information
+        bPaginate: false, // Disable pagination
+        "order": [
+            [0, "desc"]
+        ],
+    });
+
+    $('.all-entries-asc-table').DataTable({
+        searching: true, // Enable search feature
+        ordering: true,  // Enable ordering feature
+        paging: false,   // Disable pagination
+        info: false,     // Disable showing information
+        lengthChange: false, // Disable showing entries length
+        bFilter: true,   // Enable search input field
+        bInfo: false,    // Disable "Showing X to Y of Z entries" information
+        bPaginate: false, // Disable pagination
+        "order": [
+            [0, "asc"]
+        ],
+    });
+
 })(jQuery);

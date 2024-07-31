@@ -26,7 +26,7 @@
                                 <label for="group_name" class="col-md-5 col-form-label">{{ __('PDF Bank Group') }}</label>
                                 <div class="col-md-7">
                                         <select name="group_name" id="group_name" class="form-control @error('group_name') is-invalid @enderror" value="{{ old('group_name') }}" autofocus required>
-                                           <option value="">Choose a PDF Bank Group...</option>
+                                           <option value="">Choose a PDF Bank ...</option>
                                             @foreach($groups as $row)
                                                 <option value="{{$row->id}}"> {{$row->title}} @ Rs. {{$row->price - $row->discount}} </option>
                                             @endforeach

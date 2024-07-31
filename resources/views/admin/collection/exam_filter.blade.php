@@ -48,6 +48,7 @@
                                 <label for="wallet" class="col-12">Wallet: </label>
                                 <select name="wallet" id="wallet" class="col-12 p-1 rounded d-inline-block border-primary">
                                     <option value=""></option>
+                                    <option value="Coupon">Coupon</option>
                                     <option value="Cash">Cash</option>
                                     <option value="Esewa">Esewa</option>
                                     <option value="Fonepay">Fonepay</option>

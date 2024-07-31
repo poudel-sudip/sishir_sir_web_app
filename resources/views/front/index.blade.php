@@ -356,7 +356,7 @@
                                                     <img src="/storage/{{$row->thumbnail}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                                 </a>
                                                 <h6 class="mt-3"><a href="/pdf-banks/bank/{{$row->slug}}">{{ucwords($row->title)}}</a></h6>
-                                                <h6 class="small">{{$row->pdf_count}} PDF Sets </h6>
+                                                <h6 class="small">{{$row->type == 'set' ? $row->pdf_count : '1'}} PDF Sets </h6>
 
                                             </div>
                                         </div>

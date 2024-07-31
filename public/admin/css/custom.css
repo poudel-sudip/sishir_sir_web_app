@@ -543,3 +543,10 @@
     color: #fff;
     text-decoration: none;
 }
+
+.card-bg-7,
+.card-bg-7:hover{
+    background-color: #11ca30;
+    color: #fff;
+    text-decoration: none;
+}

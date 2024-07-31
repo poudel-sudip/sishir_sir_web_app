@@ -16,6 +16,7 @@ class CreateEbooksTable extends Migration
         Schema::create('ebooks', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('category_id')->nullable();
+            $table->string('type')->default('set');
             $table->string('title');
             $table->string('slug')->nullable();
             $table->string('author')->nullable();
@@ -24,6 +25,11 @@ class CreateEbooksTable extends Migration
             $table->string('discount')->nullable();
             $table->longText('description')->nullable();
             $table->string('isPinned')->nullable()->default('No');
+            $table->longText('pdf_file')->nullable();
+            $table->string('video_file')->nullable();
+            $table->tinyInteger('download')->default(0);
+            $table->string('pages')->nullable();
+            $table->string('paper')->nullable();
             $table->string('status')->nullable()->default('Inactive');
             $table->timestamps();
         });

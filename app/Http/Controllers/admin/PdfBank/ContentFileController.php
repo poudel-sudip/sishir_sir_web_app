@@ -39,6 +39,7 @@ class ContentFileController extends Controller
             'author' => 'nullable|string',
             'published_year' => 'nullable|string',
             'pages' => 'nullable|string',
+            "video_file" => "string|nullable",
         ]);
 
         $pdf="";
@@ -55,6 +56,7 @@ class ContentFileController extends Controller
             'author' => $request->author,
             'published_year' => $request->published_year,
             'pages' => $request->pages,
+            'video_file' => $request->video_file,
         ]);
 
         return redirect('/admin/pdf-bank/pdf-groups/'.$group->id.'/pdf-files');
@@ -84,6 +86,7 @@ class ContentFileController extends Controller
             'author' => 'nullable|string',
             'published_year' => 'nullable|string',
             'pages' => 'nullable|string',
+            "video_file" => "string|nullable",
         ]);
 
         $pdf = $request->old_file;
@@ -101,6 +104,7 @@ class ContentFileController extends Controller
             'author' => $request->author,
             'published_year' => $request->published_year,
             'pages' => $request->pages,
+            'video_file' => $request->video_file,
         ]);
 
         return redirect('/admin/pdf-bank/pdf-groups/'.$group->id.'/pdf-files');

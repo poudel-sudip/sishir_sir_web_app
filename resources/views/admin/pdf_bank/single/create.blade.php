@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/pdf-groups') }}">PDF Banks</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/pdf-singles') }}">PDF Banks</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Add PDF Bank </li>
                 </ol>
             </nav>
@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header">Add PDF Bank</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ ('/admin/pdf-bank/pdf-groups') }}" enctype="multipart/form-data" class="forms-sample">
+                        <form method="POST" action="{{ ('/admin/pdf-bank/pdf-singles') }}" enctype="multipart/form-data" class="forms-sample">
                             @csrf
                             
                             <div class="form-group row">
@@ -126,12 +126,63 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="pdf_file" class="col-md-4 col-form-label">{{ __('PDF File') }}</label>
+                                <div class="col-md-8">
+                                    <input id="pdf_file" type="file" class="form-control @error('pdf_file') is-invalid @enderror" name="pdf_file" value="{{ old('pdf_file') }}" required >
+
+                                    @error('pdf_file')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="video_file" class="col-md-4 col-form-label">{{ __('Youtube Video Link') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="video_file" type="text" class="form-control @error('video_file') is-invalid @enderror" name="video_file" value="{{ old('video_file') }}" >
+
+                                    @error('video_file')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="description" class="col-md-12 col-form-label">{{ __('Description') }}</label>
 
                                 <div class="col-md-12">
                                     <textarea id="description" class="form-control summernote @error('description') is-invalid @enderror" name="description" required autocomplete="description" >{!! old('description') !!}</textarea>
 
                                     @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="can_download" class="col-md-4 col-form-label">{{ __('Can Download') }}</label>
+    
+                                <div class="col-md-8 row">
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="membershipRadios1" type="radio" class="form-check-input" name="can_download" value="1"  >Yes</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="membershipRadios2" type="radio" class="form-check-input" name="can_download" value="0"  checked  >No</label>
+                                        </div>
+                                    </div>
+                                    @error('can_download')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

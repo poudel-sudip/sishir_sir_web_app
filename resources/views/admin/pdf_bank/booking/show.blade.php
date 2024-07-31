@@ -37,7 +37,7 @@
                             <div>{{$booking->status}}</div>
                         </div>
                         <div class="course-row">
-                            <div>PDF Bank Group Name:</div>
+                            <div>PDF Bank Name:</div>
                             <div>{{$booking->book->title ?? ''}}</div>
                         </div>
                         <div class="course-row">

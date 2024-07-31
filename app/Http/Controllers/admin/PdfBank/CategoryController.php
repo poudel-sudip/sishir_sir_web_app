@@ -70,8 +70,15 @@ class CategoryController extends Controller
 
     public function groups(Category $category)
     {
-        $groups = $category->ebooks;
+        $groups = $category->ebooks()->where('type','=','set')->orderByDesc('id')->get();
         // dd($books);
         return view('admin.pdf_bank.category.groups',compact('category','groups'));
+    }
+
+    public function singles(Category $category)
+    {
+        $singles = $category->ebooks()->where('type','=','single')->orderByDesc('id')->get();
+        // dd($books);
+        return view('admin.pdf_bank.category.singles',compact('category','singles'));
     }
 }

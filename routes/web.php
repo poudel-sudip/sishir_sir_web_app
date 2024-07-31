@@ -244,8 +244,9 @@ Route::get('/admin/pdf-bank/categories/{category}/edit','App\Http\Controllers\Ad
 Route::patch('/admin/pdf-bank/categories/{category}','App\Http\Controllers\Admin\PdfBank\CategoryController@update')->middleware('role:Admin');
 Route::delete('/admin/pdf-bank/categories/{category}','App\Http\Controllers\Admin\PdfBank\CategoryController@destroy')->middleware('role:Admin');
 Route::get('/admin/pdf-bank/categories/{category}/groups','App\Http\Controllers\Admin\PdfBank\CategoryController@groups')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/categories/{category}/singles','App\Http\Controllers\Admin\PdfBank\CategoryController@singles')->middleware('role:Admin');
 
-//admin pf bank groups 
+//admin pdf bank groups 
 Route::get('/admin/pdf-bank/pdf-groups','App\Http\Controllers\Admin\PdfBank\GroupController@index')->middleware('role:Admin');
 Route::get('/admin/pdf-bank/pdf-groups/create','App\Http\Controllers\Admin\PdfBank\GroupController@create')->middleware('role:Admin');
 Route::post('/admin/pdf-bank/pdf-groups','App\Http\Controllers\Admin\PdfBank\GroupController@store')->middleware('role:Admin');
@@ -254,6 +255,19 @@ Route::get('/admin/pdf-bank/pdf-groups/{group}/edit','App\Http\Controllers\Admin
 Route::patch('/admin/pdf-bank/pdf-groups/{group}','App\Http\Controllers\Admin\PdfBank\GroupController@update')->middleware('role:Admin');
 Route::delete('/admin/pdf-bank/pdf-groups/{group}','App\Http\Controllers\Admin\PdfBank\GroupController@destroy')->middleware('role:Admin');
 Route::get('/admin/pdf-bank/pdf-groups/{group}/bookings','App\Http\Controllers\Admin\PdfBank\GroupController@bookings')->middleware('role:Admin');
+
+//admin pdf bank singles 
+Route::get('/admin/pdf-bank/pdf-singles','App\Http\Controllers\Admin\PdfBank\SingleController@index')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-singles/import','App\Http\Controllers\Admin\PdfBank\SingleController@importForm')->middleware('role:Admin');
+Route::post('/admin/pdf-bank/pdf-singles/copy','App\Http\Controllers\Admin\PdfBank\SingleController@copyPdfFromLibrary')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-singles/create','App\Http\Controllers\Admin\PdfBank\SingleController@create')->middleware('role:Admin');
+Route::post('/admin/pdf-bank/pdf-singles','App\Http\Controllers\Admin\PdfBank\SingleController@store')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-singles/{single}','App\Http\Controllers\Admin\PdfBank\SingleController@show')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-singles/{single}/edit','App\Http\Controllers\Admin\PdfBank\SingleController@edit')->middleware('role:Admin');
+Route::patch('/admin/pdf-bank/pdf-singles/{single}','App\Http\Controllers\Admin\PdfBank\SingleController@update')->middleware('role:Admin');
+Route::delete('/admin/pdf-bank/pdf-singles/{single}','App\Http\Controllers\Admin\PdfBank\SingleController@destroy')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-singles/{single}/bookings','App\Http\Controllers\Admin\PdfBank\SingleController@bookings')->middleware('role:Admin');
+
 
 // admin pdf bank contents
 Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files','App\Http\Controllers\Admin\PdfBank\ContentFileController@index')->middleware('role:Admin');
@@ -643,7 +657,11 @@ Route::get('/admin/wallet-collection/booking-type/exam/filter','App\Http\Control
 Route::get('/admin/wallet-collection/booking-type/pdf-bank','App\Http\Controllers\Admin\WalletCollectionController@bookingTypePdfBankCollection')->middleware('role:Admin');
 Route::get('/admin/wallet-collection/booking-type/pdf-bank/filter','App\Http\Controllers\Admin\WalletCollectionController@bookingTypePdfBankCollectionFilter')->middleware('role:Admin');
 
-
+// admin booking coupons management
+Route::get('/admin/booking-coupons','App\Http\Controllers\Admin\BookingCouponController@index')->middleware('role:Admin');
+Route::post('/admin/booking-coupons','App\Http\Controllers\Admin\BookingCouponController@store')->middleware('role:Admin');
+Route::get('/admin/booking-coupons/used','App\Http\Controllers\Admin\BookingCouponController@usedCoupons')->middleware('role:Admin');
+Route::delete('/admin/booking-coupons/{coupon}','App\Http\Controllers\Admin\BookingCouponController@destroy')->middleware('role:Admin');
 
 
 
@@ -828,9 +846,10 @@ Route::get('/student/exam-bookings','App\Http\Controllers\Student\ExamHall\ExamB
 Route::get('/student/exam-bookings/create','App\Http\Controllers\Student\ExamHall\ExamBookingController@enroll')->middleware('role:Student');
 Route::post('/student/exam-bookings','App\Http\Controllers\Student\ExamHall\ExamBookingController@store')->middleware('role:Student');
 Route::get('/student/exam-bookings/{booking}/edit','App\Http\Controllers\Student\ExamHall\ExamBookingController@edit')->middleware('role:Student');
-Route::patch('/student/exam-bookings/{booking}','App\Http\Controllers\Student\ExamHall\ExamBookingController@manualVerify')->middleware('role:Student');
 Route::delete('/student/exam-bookings/{booking}','App\Http\Controllers\Student\ExamHall\ExamBookingController@destroy')->middleware('role:Student');
 
+Route::patch('/student/exam-bookings/{booking}/manual-pay','App\Http\Controllers\Student\ExamHall\ExamBookingController@manualVerify')->middleware('role:Student');
+Route::patch('/student/exam-bookings/{booking}/coupon-pay','App\Http\Controllers\Student\ExamHall\ExamBookingController@couponVerify')->middleware('role:Student');
 Route::get('/student/exam-bookings/{booking}/esewaSuccess','App\Http\Controllers\Student\ExamHall\ExamBookingController@esewaSuccess')->middleware('role:Student');
 Route::get('/student/exam-bookings/{booking}/fonepaySuccess','App\Http\Controllers\Student\ExamHall\ExamBookingController@fonepaySuccess')->middleware('role:Student');
 // Route::post('/student/exam-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\ExamHall\ExamBookingController@khaltiSuccess')->middleware('role:Student');
@@ -855,7 +874,8 @@ Route::get('/student/pdf-bank-bookings/{booking}/esewaSuccess','App\Http\Control
 // Route::post('/student/pdf-bank-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\PdfBank\BookingController@khaltiSuccess')->middleware('role:Student');
 Route::get('/student/pdf-bank-bookings/{booking}/fonepaySuccess','App\Http\Controllers\Student\PdfBank\BookingController@fonepaySuccess')->middleware('role:Student');
 Route::get('/student/pdf-bank-bookings/{booking}/payment-failed','App\Http\Controllers\Student\PdfBank\BookingController@paymentFailed')->middleware('role:Student');
-Route::patch('/student/pdf-bank-bookings/{booking}','App\Http\Controllers\Student\PdfBank\BookingController@update')->middleware('role:Student');
+Route::patch('/student/pdf-bank-bookings/{booking}/manual-pay','App\Http\Controllers\Student\PdfBank\BookingController@manualPay')->middleware('role:Student');
+Route::patch('/student/pdf-bank-bookings/{booking}/coupon-pay','App\Http\Controllers\Student\PdfBank\BookingController@couponPay')->middleware('role:Student');
 Route::delete('/student/pdf-bank-bookings/{booking}','App\Http\Controllers\Student\PdfBank\BookingController@destroy')->middleware('role:Student');
 
 //student pdf bank contents

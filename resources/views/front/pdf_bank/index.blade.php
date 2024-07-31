@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="blog-details">
                                             <h4 class="text-center"><a href="/pdf-banks/bank/{{$row->slug}}">{{$row->title}}</a></h4>
-                                            <div class="text-center text-danger" style="margin-top: -0.5rem">(PDF Sets: <span class="text-primary">{{ $row->pdf_count ?? '' }}</span>)</div>
+                                            <div class="text-center text-danger" style="margin-top: -0.5rem">(PDF Sets: <span class="text-primary">{{ $row->type == 'set' ? $row->pdf_count : '1' }}</span>)</div>
                                             <div class="mx-2">Price : @if($row->discount > 0) <s class="text-danger">Rs. {{ $row->price }}</s> @endif <strong class="text-success"> Rs. {{ ($row->price - $row->discount) }}</strong></div>
                                         </div>
                                     </div>

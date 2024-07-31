@@ -137,6 +137,9 @@
               <a class="nav-link" href="{{ url('/admin/pdf-bank/pdf-groups') }}">PDF Bank Groups</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/pdf-bank/pdf-singles') }}">PDF Bank Singles</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/pdf-bank-bookings') }}">Latest Bookings</a>
             </li>
             <li class="nav-item">
@@ -349,6 +352,24 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#coupons-basic" aria-expanded="false" aria-controls="coupons-basic">
+          <i class="mdi mdi-gift menu-icon"></i>
+          <span class="menu-title">Booking Coupons</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="coupons-basic">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/booking-coupons') }}">Available Coupons</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/booking-coupons/used') }}">Used Coupons</a>
+            </li>
+            
+          </ul>
+        </div>
+      </li>
 
       <li class="nav-item sidebar-actions">
         <a class="nav-link" href="{{ url('/change-password') }}">

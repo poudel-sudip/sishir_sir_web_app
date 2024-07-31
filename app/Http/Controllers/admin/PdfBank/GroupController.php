@@ -16,7 +16,7 @@ class GroupController extends Controller
 
     public function index()
     {
-        $groups = PDFGroup::all();
+        $groups = PDFGroup::where('type','=','set')->orderByDesc('id')->paginate(50);
         return view('admin.pdf_bank.group.index',compact('groups'));
     }
 
@@ -38,6 +38,9 @@ class GroupController extends Controller
             "description" => "string|required",
             "status" => "string|required",
             "thumbnail" => "image|required",
+            "pages" => "string|nullable",
+            "paper" => "string|nullable",
+
         ]);
         $img = request('thumbnail')->store('uploads','public');
         $group = PDFGroup::create([
@@ -49,9 +52,13 @@ class GroupController extends Controller
             'discount' => $request->discount ?? 0,
             'description' => $request->description,
             'status' => $request->status,
+            'pages' => $request->pages,
+            'paper' => $request->paper,
+            'type' => 'set',
         ]);
 
-        return redirect('/admin/pdf-bank/categories/'.$group->category_id.'/groups');
+        // return redirect('/admin/pdf-bank/categories/'.$group->category_id.'/groups');
+        return redirect('/admin/pdf-bank/pdf-groups');
     }
 
     public function show(PDFGroup $group)
@@ -79,6 +86,8 @@ class GroupController extends Controller
             "thumbnail" => "image|nullable",
             "oldThumbnail" => "string|nullable",
             "isPinned" => "string|required",
+            "pages" => "string|nullable",
+            "paper" => "string|nullable",
         ]);
         $img = $request->oldThumbnail;
         if(isset($request->thumbnail))
@@ -96,9 +105,12 @@ class GroupController extends Controller
             'description' => $request->description,
             'status' => $request->status,
             'isPinned' => $request->isPinned, 
+            'pages' => $request->pages,
+            'paper' => $request->paper,
         ]);
         
-        return redirect('/admin/pdf-bank/categories/'.$group->category_id.'/groups');
+        // return redirect('/admin/pdf-bank/categories/'.$group->category_id.'/groups');
+        return redirect('/admin/pdf-bank/pdf-groups');
     }
 
     public function destroy(PDFGroup $group)

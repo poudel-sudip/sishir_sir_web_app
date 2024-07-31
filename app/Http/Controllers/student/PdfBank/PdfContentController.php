@@ -19,10 +19,29 @@ class PdfContentController extends Controller
     {
         $data = [];
         $pdfbank = $booking->book;
-        $contents = $pdfbank->chapters()->where('status','=','Active')->get();
-
+        if(!$pdfbank)
+        {
+            abort(403,'This Booking PDF Bank Has Been Deleted.');
+        }
+        
         $data['booking'] = $booking;
         $data['pdfbank'] = $pdfbank;
+        
+        if($pdfbank->type == 'single')
+        {
+            $data['content'] = (object)[
+                'id' => $pdfbank->id,
+                'title' => $pdfbank->title,
+                'download' => $pdfbank->download,
+                'pdf_file' => $pdfbank->pdf_file,
+                'video_file' => $pdfbank->video_file,
+                
+            ];
+            return view('student.pdf_bank.content.show',$data);
+        }
+
+        $contents = $pdfbank->chapters()->where('status','=','Active')->get();
+
         $data['contents'] = $contents;
         
         return view('student.pdf_bank.content.index',$data);

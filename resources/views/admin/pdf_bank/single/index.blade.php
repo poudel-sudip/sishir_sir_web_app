@@ -6,7 +6,7 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">All PDF Banks</h3>
+            <h3 class="page-title">All PDF Single Banks</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
@@ -19,9 +19,10 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">PDF Bank Groups</h4>
+                        <h4 class="card-title">PDF Bank Singles</h4>
                         <div class="text-right">
-                            <a href="{{ ('/admin/pdf-bank/pdf-groups/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add PDF Bank Group</button></a>
+                          <a href="/admin/pdf-bank/pdf-singles/import"><button type="button" class="btn btn-sm ml-3 btn-info"> Import PDF From Material Library </button></a>
+                          <a href="{{ ('/admin/pdf-bank/pdf-singles/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add PDF Bank</button></a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">
@@ -33,27 +34,25 @@
                             <th>Category</th>
                             <th>Author</th>
                             <th>Price</th>
-                            <th>PDF Files</th>
                             <th>Purchases</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach($groups as $row)
+                            @foreach($singles as $row)
                           <tr>
                             <td class="text-wrap">{{$row->id}}</td>
                             <td class="text-wrap">{{$row->title}}</td>
                             <td class="text-wrap">{{$row->category->name ?? ''}}</td>
                             <td class="text-wrap">{{$row->author}}</td>
                             <td class="text-wrap">{{$row->price ?? 0}} - {{$row->discount ?? 0}} = {{$row->price - $row->discount}}</td>
-                            <td class="classroom-btn"> <a href="/admin/pdf-bank/pdf-groups/{{$row->id}}/pdf-files" class="btn btn-primary">PDF Files ({{$row->chapters()->count()}}) </a> </td>
-                            <td class="classroom-btn"> <a href="/admin/pdf-bank/pdf-groups/{{$row->id}}/bookings" class="btn btn-info">Purchases ({{$row->bookings()->count()}}) </a> </td>
+                            <td class="classroom-btn"> <a href="/admin/pdf-bank/pdf-singles/{{$row->id}}/bookings" class="btn btn-info">Purchases ({{$row->bookings()->count()}}) </a> </td>
                             <td><span class='text-{{$row->status == "Active" ? "success" : "danger"}}'>{{$row->status}}</span></td>
                             <td class="classroom-btn" width="50">
-                              <a href="/admin/pdf-bank/pdf-groups/{{$row->id}}" class="btn btn-info">Show</a>
-                              <a href="/admin/pdf-bank/pdf-groups/{{$row->id}}/edit" class="btn btn-warning">Edit</a>
-                              <form id="delete-form-{{$row->id}}" action="/admin/pdf-bank/pdf-groups/{{$row->id}}" method="POST" class="d-inline">
+                              <a href="/admin/pdf-bank/pdf-singles/{{$row->id}}" class="btn btn-info">Show</a>
+                              <a href="/admin/pdf-bank/pdf-singles/{{$row->id}}/edit" class="btn btn-warning">Edit</a>
+                              <form id="delete-form-{{$row->id}}" action="/admin/pdf-bank/pdf-singles/{{$row->id}}" method="POST" class="d-inline">
                                   @csrf
                                   @method('DELETE')
                                   <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="btn btn-danger">Delete</a>
@@ -67,7 +66,7 @@
                    
                     </div>
                     <div>
-                      {{$groups->onEachSide(1)->links('paginator.bootstrap')}}
+                      {{$singles->onEachSide(1)->links('paginator.bootstrap')}}
                     </div>
                   </div>
                 </div>

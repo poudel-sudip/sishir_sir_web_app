@@ -12,7 +12,8 @@
     <div class="student-content-wrapper student-enroll-section">
         <div class="row">
             <div class="col-md-12 mb-2 text-end">
-                <a class="student-enroll-btn" href="{{ url('/student/pdf-bank-bookings/create') }}">Book PDF Bank</a>
+                {{-- <a class="student-enroll-btn" href="{{ url('/student/pdf-bank-bookings/create') }}">Book PDF Bank</a> --}}
+                <a class="student-enroll-btn" href="/pdf-banks">Book PDF Bank</a>
             </div>
         </div>
         <div class="row">
@@ -29,7 +30,9 @@
                     </div>
                     <div class="student-vid-dec">
                         <h6>{{($booking->book->title ?? '')}}</h6>
-                        <div>{{ $booking->book ? $booking->book->chapters()->where('status','=','Active')->count() : 0 }} pdf sets</div>
+                        @if($booking->book)
+                            <div>{{ $booking->book->type == 'set' ? $booking->book->chapters()->where('status','=','Active')->count() : 1 }} pdf sets</div>
+                        @endif
                         <div class="student-vid-status">                            
                             @if ($booking->status == "Verified")
                             <div class="text-success">{{$booking->status}}</div>

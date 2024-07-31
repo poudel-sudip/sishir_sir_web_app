@@ -54,6 +54,10 @@ class FrontPdfBankController extends Controller
         ->withCount(['chapters as pdf_count' => function($ch){
             $ch->where('status','=','Active');
         }])
+        ->withCount(['chapters as video_count' => function($ch){
+            $ch->where('status','=','Active')
+            ->where('video_file','!=','');
+        }])
         ->first();
         if(!$pdf_bank)
         {

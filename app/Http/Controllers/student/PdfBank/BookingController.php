@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use App\Models\Ebook\Ebook as PDFBank;
 use App\Models\Ebook\EbookBooking as Booking;
 use App\Models\MerchantBooking;
+use App\Models\BookingCoupon as Coupon;
 
 use App\Http\Controllers\NepalPayProxyController;
 
@@ -185,7 +186,7 @@ class BookingController extends Controller
         return view('student.pdf_bank.booking.edit',$data);
     }
 
-    public function update(Request $request, Booking $booking)
+    public function manualPay(Request $request, Booking $booking)
     {
         // dd($request->all(),$booking);
         $request->validate([
@@ -199,6 +200,45 @@ class BookingController extends Controller
             'paymentAmount' => $request->paymentAmount,
             'verificationDocument' => $img,
             'status' => 'Processing',
+        ]);
+
+        return redirect('/student/pdf-bank-bookings');
+    }
+
+    public function couponPay(Request $request, Booking $booking)
+    {
+        // dd($request->all(),$booking);
+        $request->validate([
+            "verificationMode" => "string|required|min:1",
+            "coupon_code" => "string|required|min:1",
+        ]);
+
+        $coupon = Coupon::where('source','=','pdfbank')
+        ->where('used','=',false)
+        ->where('coupon','=',strtolower(trim($request->coupon_code)))
+        ->first();
+
+        if(!$coupon)
+        {
+            return redirect("/student/pdf-bank-bookings/$booking->id/edit")->with('error_message','Invalid Coupon Code or Coupon Code is Already Used.'); 
+        }
+        // dd($coupon);
+        
+        $booking->update([
+            'verificationMode' => 'Coupon',
+            'paymentAmount' => '0',
+            'discount' => (($booking->book->price ?? 0) - ($booking->book->discount ?? 0)),
+            'status' => 'Verified',
+            'remarks'=>'Booked by Student with Coupon Code: '.$coupon->coupon,
+            'updatedBy'=>auth()->user()->name,
+        ]);
+
+        $coupon->update([
+            'used' => true,
+            'use_date' => date('Y-m-d G:i:s'),
+            'booking_id' => $booking->id,
+            'user_id' => auth()->user()->id,
+            'remarks' => $booking->book->title.'',
         ]);
 
         return redirect('/student/pdf-bank-bookings');

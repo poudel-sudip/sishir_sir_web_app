@@ -9,6 +9,7 @@ use App\Models\ExamHall\ExamHallBookings;
 use App\Models\MerchantBooking;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use App\Models\BookingCoupon as Coupon;
 
 use App\Http\Controllers\NepalPayProxyController;
 
@@ -211,6 +212,45 @@ class ExamBookingController extends Controller
             'verificationDocument'=>$imagePath,
             'paymentAmount'=>$request->paymentAmount,
             'status'=>'Processing',
+        ]);
+
+        return redirect('/student/exam-bookings');
+    }
+
+    public function couponVerify(Request $request, ExamHallBookings $booking)
+    {
+        // dd($request->all(),$booking);
+        $request->validate([
+            "verificationMode" => "string|required|min:1",
+            "coupon_code" => "string|required|min:1",
+        ]);
+
+        $coupon = Coupon::where('source','=','exam')
+        ->where('used','=',false)
+        ->where('coupon','=',strtolower(trim($request->coupon_code)))
+        ->first();
+
+        if(!$coupon)
+        {
+            return redirect("/student/exam-bookings/$booking->id/edit")->with('error_message','Invalid Coupon Code or Coupon Code is Already Used.'); 
+        }
+        // dd($coupon);
+        
+        $booking->update([
+            'verificationMode' => 'Coupon',
+            'paymentAmount' => '0',
+            'discount' => (($booking->category->price ?? 0) - ($booking->category->discount ?? 0)),
+            'status' => 'Verified',
+            'remarks'=>'Booked by Student with Coupon Code: '.$coupon->coupon,
+            'updatedBy'=>auth()->user()->name,
+        ]);
+
+        $coupon->update([
+            'used' => true,
+            'use_date' => date('Y-m-d G:i:s'),
+            'booking_id' => $booking->id,
+            'user_id' => auth()->user()->id,
+            'remarks' => $booking->category->title.'',
         ]);
 
         return redirect('/student/exam-bookings');

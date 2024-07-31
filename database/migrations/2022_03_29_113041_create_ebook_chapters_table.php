@@ -20,6 +20,7 @@ class CreateEbookChaptersTable extends Migration
             $table->string('title');
             $table->string('slug')->nullable();
             $table->longText('pdf_file')->nullable();
+            $table->string('video_file')->nullable();
             $table->string('status', 100)->nullable()->default('Active');
             $table->tinyInteger('download')->default(0);
             $table->longText('description')->nullable();

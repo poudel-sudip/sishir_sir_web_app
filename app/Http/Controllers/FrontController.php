@@ -96,15 +96,22 @@ class FrontController extends Controller
 
         foreach ($data['pdf_bank_categories'] as $cat) 
         {
-           $cat->pdf_banks = $cat->ebooks()
-           ->where('status','=','Active')
-           ->whereHas('chapters',function($ch){ $ch->where('status','=','Active'); })
-           ->withCount(['chapters as pdf_count' => function($ch){
+            $cat->pdf_banks = $cat->ebooks()
+            ->where('status','=','Active')
+            ->where(function($q){
+                $q->where('type','=','single')
+                ->orWhere(function($sq){
+                    $sq->whereHas('chapters',function($ch){ $ch->where('status','=','Active'); });
+                });
+                
+            })
+            // ->whereHas('chapters',function($ch){ $ch->where('status','=','Active'); })
+            ->withCount(['chapters as pdf_count' => function($ch){
                 $ch->where('status','=','Active');
             }])
             ->orderByDesc('id')
-           ->take(4)
-           ->get(['id','category_id','title','slug','author','price','discount','status','thumbnail']);
+            ->take(4)
+            ->get(['id','category_id','type','title','slug','author','price','discount','status','thumbnail']);
         }
         
         $data['updates'] = [];
