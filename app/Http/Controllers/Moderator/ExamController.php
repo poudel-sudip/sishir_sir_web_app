@@ -25,7 +25,8 @@ class ExamController extends Controller
     public function categoryIndex()
     {
         $user = auth()->user();
-        $data['categories'] = ExamCategory::where('user_id','=',$user->id)->get();
+        // $data['categories'] = ExamCategory::where('user_id','=',$user->id)->get();
+        $data['categories'] = ExamCategory::get();
         return view('moderator.exams.category.index',$data);
     }
 
@@ -46,6 +47,7 @@ class ExamController extends Controller
 
     public function categoryDestroy(ExamCategory $category)
     {
+        abort(403,'Access Denied. Please Contact Admin.');
         $category->delete();
         return redirect('/moderator/exam-category');
     }
@@ -66,14 +68,16 @@ class ExamController extends Controller
     public function examIndex()
     {
         $user = auth()->user();
-        $data['exams'] = Exam::where('user_id','=',$user->id)->get(['id','category_id','name','exam_time','status']);
+        // $data['exams'] = Exam::where('user_id','=',$user->id)->get(['id','category_id','name','exam_time','status']);
+        $data['exams'] = Exam::get(['id','user_id','category_id','name','exam_time','status']);
         return view('moderator.exams.exam.index',$data);
     }
 
     public function examCreate()
     {
         $user = auth()->user();
-        $data['categories'] = ExamCategory::where('user_id','=',$user->id)->get(['id','title']);
+        // $data['categories'] = ExamCategory::where('user_id','=',$user->id)->get(['id','title']);
+        $data['categories'] = ExamCategory::get(['id','title']);
         return view('moderator.exams.exam.create',$data);
     }
 
@@ -89,7 +93,15 @@ class ExamController extends Controller
             'negativeMarks'=>'string|nullable',
             'status'=>'string|nullable',
             'category'=>'numeric|required',
+            'answer_video' => 'string|nullable',
+            "answer_pdf" => "file|nullable|mimes:pdf",
         ]);
+
+        $pdf_file = '';
+        if(isset($request['answer_pdf']))
+        {
+            $pdf_file= $request->answer_pdf->store('uploads/exam_solution_pdf','public');
+        }
 
         $exam= Exam::create([
             'name'=>$request->name,
@@ -101,6 +113,8 @@ class ExamController extends Controller
             'status'=>$request->status,
             'category_id'=>$request->category,
             'user_id'=>auth()->user()->id,
+            'answer_video' => $request->answer_video,
+            'answer_pdf' => $pdf_file,
         ]);
 
         return redirect('/moderator/exam-category/'.$exam->category_id.'/exams')->with('success','Data Added successfully');
@@ -116,7 +130,8 @@ class ExamController extends Controller
     public function examEdit(Exam $exam)
     {
         $user = auth()->user();
-        $data['categories'] = ExamCategory::where('user_id','=',$user->id)->get(['id','title']);
+        // $data['categories'] = ExamCategory::where('user_id','=',$user->id)->get(['id','title']);
+        $data['categories'] = ExamCategory::get(['id','title']);
         $data['exam'] = $exam;
         return view('moderator.exams.exam.edit',$data);
     }
@@ -133,7 +148,16 @@ class ExamController extends Controller
             'negativeMarks'=>'string|nullable',
             'status'=>'string|nullable',
             'category'=>'numeric|required',
+            'answer_video' => 'string|nullable',
+            "answer_pdf" => "file|nullable|mimes:pdf",
+            "old_answer_pdf" => "string|nullable",
         ]);
+
+        $pdf_file = $request->old_answer_pdf;
+        if(isset($request['answer_pdf']))
+        {
+            $pdf_file= $request->answer_pdf->store('uploads/exam_solution_pdf','public');
+        }
 
         $exam->update([
             'name'=>$request->name,
@@ -144,6 +168,8 @@ class ExamController extends Controller
             'negative_marks'=>$request->negativeMarks ?? '0',
             'status'=>$request->status,
             'category_id'=>$request->category,
+            'answer_video' => $request->answer_video,
+            'answer_pdf' => $pdf_file,
         ]);
 
         return redirect('/moderator/exam-category/'.$exam->category->id.'/exams')->with('success','Data Updated Successfully');
@@ -152,6 +178,7 @@ class ExamController extends Controller
 
     public function examDestroy(Exam $exam)
     {
+        abort(403,'Access Denied. Please Contact Admin');
         $exam->openExams()->delete();
         $exam->batchExams()->delete();
         $exam->questions()->delete();
@@ -281,14 +308,16 @@ class ExamController extends Controller
     public function openExamIndex()
     {
         $user = auth()->user();
-        $data['exams'] = OpenExam::where('user_id','=',$user->id)->get();
+        // $data['exams'] = OpenExam::where('user_id','=',$user->id)->get();
+        $data['exams'] = OpenExam::get();
         return view('moderator.exams.openexams.index',$data);
     }
 
     public function openExamCreate()
     {
         $user = auth()->user();
-        $data['categories'] = ExamCategory::where('user_id','=',$user->id)->get();
+        // $data['categories'] = ExamCategory::where('user_id','=',$user->id)->get();
+        $data['categories'] = ExamCategory::get();
         return view('moderator.exams.openexams.create',$data);
     }
 
@@ -352,6 +381,7 @@ class ExamController extends Controller
 
     public function openExamDestroy(OpenExam $exam)
     {
+        abort(403,'Access Denied. Please Contact Admin');
         $exam->results()->delete();
         $exam->delete();
         return redirect('/moderator/open-exams')->with('success','Data Deleted Successfuly');

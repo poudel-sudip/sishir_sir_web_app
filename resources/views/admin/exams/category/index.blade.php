@@ -44,7 +44,7 @@
                               <td>{{ucwords($cat->title)}}</td>
                               <td> <a href="/admin/exam-category/{{$cat->id}}/exams" class="btn-sm btn-info">Exams ( {{$cat->exams->count()}} ) </a> </td>
                               <td> {{$cat->creator->name ?? '-'}} </td>
-                              <td class="classroom-btn" width="160">
+                              <td class="classroom-btn" width="50">
                                 <form id="delete-form-{{$cat->id}}" action="/admin/exam-category/{{$cat->id}}" method="POST" style="display: inline">
                                     @csrf
                                     @method('DELETE')

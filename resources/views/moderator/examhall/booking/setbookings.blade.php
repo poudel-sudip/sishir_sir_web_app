@@ -22,9 +22,9 @@
                     <div class="card-body">
                         <div class="custon-table-header">
                           <h4 class="card-title">Bookings | {{$category->title}} </h4>
-                          <div class="text-right">
+                          {{-- <div class="text-right">
                             <a href="{{ ('/moderator/exam-hall/bookings/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Create Exam Booking </button></a>
-                           </div>
+                           </div> --}}
                         </div>
                         <div class="table-responsive table-responsive-md">
                         <table class="table table-bordered" id="advanced-desc-table">
@@ -66,20 +66,20 @@
                                     @endif
                                 </td>
                                 <td class="text-wrap" max-width="150px">{{ $booking->remarks }}</td>
-                                <td class="classroom-btn" width="150">
+                                <td class="classroom-btn" width="50">
                                     <a href="/moderator/exam-hall/bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                    <a href="/moderator/exam-hall/bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
+                                    {{-- <a href="/moderator/exam-hall/bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
                                     <form id="delete-form-{{$booking->id}}" action="/moderator/exam-hall/bookings/{{$booking->id}}" method="POST" style="display: inline">
                                         @csrf
                                         @method('DELETE')
                                         <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
-                                    </form>
+                                    </form> --}}
                                 </td>
                             </tr>
                             @endforeach
                           </tbody>
                         </table>
-                        <script type="text/javascript">
+                        {{-- <script type="text/javascript">
                             function deleteData(id)
                             {
                                 Swal.fire({
@@ -101,7 +101,7 @@
                                 }
                             })
                             }
-                        </script>
+                        </script> --}}
                       </div>
                     </div>
                 </div>

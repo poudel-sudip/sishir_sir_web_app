@@ -86,38 +86,34 @@ class ExamBookingController extends Controller
 
         try 
         {
-            if(auth()->user()->id == '2')
+            if($_SERVER['HTTP_HOST'] == 'shisiradhikari.com.np')
             {
-                if($_SERVER['HTTP_HOST'] == '127.0.0.1:8000')
+                
+                $data['nepalpay_pay_wallets'] = [];
+                $processID = null;
+                $npay = new NepalPayProxyController;
+                try 
                 {
-                    
-                    $data['nepalpay_pay_wallets'] = [];
-                    $processID = null;
-                    $npay = new NepalPayProxyController;
+                    $data['nepalpay_pay_wallets'] = $npay->getPaymentInstrumentDetails($request);
+                    $processID = $npay->getProcessId($booking->booking_price,$booking->trans_id);
+                } 
+                catch (\Throwable $th) {
+                    // throw $th;
+                }
+
+                if(count($data['nepalpay_pay_wallets']) && $processID)
+                {
                     try 
                     {
-                        $data['nepalpay_pay_wallets'] = $npay->getPaymentInstrumentDetails($request);
-                        $processID = $npay->getProcessId($booking->booking_price,$booking->trans_id);
+                        $nepalpay_pay_data = (object)config('payment.nepal_pay');
+                        if($nepalpay_pay_data)
+                        {
+                            $nepalpay_pay_data->process_id = $processID;
+                        }
                     } 
                     catch (\Throwable $th) {
                         // throw $th;
                     }
-
-                    if(count($data['nepalpay_pay_wallets']) && $processID)
-                    {
-                        try 
-                        {
-                            $nepalpay_pay_data = (object)config('payment.nepal_pay');
-                            if($nepalpay_pay_data)
-                            {
-                                $nepalpay_pay_data->process_id = $processID;
-                            }
-                        } 
-                        catch (\Throwable $th) {
-                            // throw $th;
-                        }
-                    }
-
                 }
 
             }

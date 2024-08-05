@@ -31,6 +31,7 @@
                             <th>SN</th>
                             <th>Exam Name</th>
                             <th>Created Date</th>
+                            <th>Creator</th>
                             <th>Time(HH:MM:SS)</th>
                             <th>Questions</th>
                             <th>Results</th>
@@ -44,25 +45,26 @@
                             <td>{{ $i }}</td>
                             <td>{{ $exam->exam->name ?? '' }}</td>
                             <td>{{ date('Y-m-d',strtotime($exam->created_at)) }}</td>
+                            <td> {{$exam->creator->name ?? '-'}} </td>
                             <td>{{ ($exam->exam->exam_time ?? '00:00').':00'  }} </td>
                             <td> Count({{ $exam->exam->questions->count() ?? 0 }}) </td>
                             <td> <a href="/moderator/open-exams/{{$exam->id}}/results">{{$exam->result_status}} / Count({{ $exam->results->count() }}) </a></td>
                             
-                            <td class="classroom-btn" width="160">
+                            <td class="classroom-btn" width="100">
                                 <a href="/moderator/open-exams/{{$exam->id}}" class="btn btn-primary">Show</a>
                                 <a href="/moderator/open-exams/{{$exam->id}}/edit" class="btn btn-danger">Edit</a>
-                                <form id="delete-form-{{$exam->id}}" action="/moderator/open-exams/{{$exam->id}}" method="POST" style="display: inline">
+                                {{-- <form id="delete-form-{{$exam->id}}" action="/moderator/open-exams/{{$exam->id}}" method="POST" style="display: inline">
                                     @csrf
                                     @method('DELETE')
                                     <a href="javascript:{}" onclick="javascript:deleteData({{$exam->id}});" class="btn btn-warning">Delete</a>
-                                </form>
+                                </form> --}}
                             </td>
                           </tr>
                           @php($i++)
                           @endforeach
                         </tbody>
                       </table>
-                      <script type="text/javascript">
+                      {{-- <script type="text/javascript">
                         function deleteData(id)
                         {
                           Swal.fire({
@@ -84,7 +86,7 @@
                             }
                           })
                         }
-                    </script>
+                    </script> --}}
                     </div>
                   </div>
                 </div>

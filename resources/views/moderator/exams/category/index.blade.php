@@ -25,14 +25,14 @@
                             <a href="/moderator/exam-category/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Category </button></a>
                         </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive table-responsive-md">
                       <table class="table table-bordered" id="advanced-desc-table">
                         <thead>
                           <tr>
                             <th>SN</th>
                             <th>Category Title</th>
                             <th>MCQ Exams</th>
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                           </tr>
                         </thead>
                         <tbody>
@@ -42,19 +42,19 @@
                               <td>{{$i}}</td>
                               <td>{{ucwords($cat->title)}}</td>
                               <td class="classroom-btn"> <a href="/moderator/exam-category/{{$cat->id}}/exams" class=" btn btn-info">Exams ( {{$cat->exams->count()}} ) </a> </td>
-                              <td class="classroom-btn" width="50">
+                              {{-- <td class="classroom-btn" width="50">
                                 <form id="delete-form-{{$cat->id}}" action="/moderator/exam-category/{{$cat->id}}" method="POST" style="display: inline">
                                     @csrf
                                     @method('DELETE')
                                     <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
                                 </form>
-                              </td>
+                              </td> --}}
                             </tr>
                             @php($i++)
                           @endforeach
                         </tbody>
                       </table>
-                      <script type="text/javascript">
+                      {{-- <script type="text/javascript">
                         function deleteData(id)
                         {
                             Swal.fire({
@@ -76,7 +76,7 @@
                             }
                           })
                         }
-                    </script>
+                    </script> --}}
                     </div>
                   </div>
                 </div>

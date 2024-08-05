@@ -46,9 +46,12 @@
                         {{-- <div class="h5 my-1">Exam Price: {{$exam->price}} </div> --}}
                         {{-- <div class="h5 my-1">Discounted Price: {{$exam->price - $exam->discount}} </div> --}}
                         <div class="h5 my-1"><span class="text-primary">Price:</span> @if($exam->discount > 0)  <s class="text-danger mx-2"> Rs. {{$exam->price}} </s> @endif <span class="text-success mx-2"> Rs. {{$exam->price - $exam->discount}} </span> </div>
+                        <div class="h5 my-1"><span class="text-primary">Total MCQ Sets:</span><span class="text-success"> {{ $exam->mcq_count}} </span></div>
+                        <div class="h5 my-1"><span class="text-primary">Available Videos:</span><span class="text-success"> {{ $exam->video_count}} </span></div>
+                        <div class="h5 my-1"><span class="text-primary">Available PDF :</span><span class="text-success"> {{ $exam->pdf_count}} </span></div>
 
-                        <div class="h5 my-1"><span class="text-success">No of Sets:</span> {{$exam->category_exams->count()}} </div>
                         <div class="h5 my-1"><span class="text-danger">* Bookings Are Non-Refundable</span> </div>
+                        
                         <div>
                             <form action="/student/exam-bookings" method="POST" class="d-inline">
                                 @csrf

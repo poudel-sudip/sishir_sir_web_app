@@ -52,21 +52,21 @@
                               <span class="text-success">{{$exam->status}}</span>
                               @endif
                             </td>
-                            <td class="classroom-btn" width="160">
+                            <td class="classroom-btn" width="100">
                                 <a href="/moderator/exams/{{$exam->id}}" class="btn btn-primary">Show</a>
                                 <a href="/moderator/exams/{{$exam->id}}/edit" class="btn btn-danger">Edit</a>
-                                <form id="delete-form-{{$exam->id}}" action="/moderator/exams/{{$exam->id}}" method="POST" style="display: inline">
+                                {{-- <form id="delete-form-{{$exam->id}}" action="/moderator/exams/{{$exam->id}}" method="POST" style="display: inline">
                                     @csrf
                                     @method('DELETE')
                                     <a href="javascript:{}" onclick="javascript:deleteData({{$exam->id}});" class="btn btn-warning">Delete</a>
-                                </form>
+                                </form> --}}
                             </td>
                           </tr>
                           @php($i++)
                           @endforeach
                         </tbody>
                       </table>
-                      <script type="text/javascript">
+                      {{-- <script type="text/javascript">
                         function deleteData(id)
                         {
                           Swal.fire({
@@ -88,7 +88,7 @@
                             }
                           })
                         }
-                    </script>
+                    </script> --}}
                     </div>
                   </div>
                 </div>

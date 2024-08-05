@@ -175,7 +175,28 @@ class PublicExamController extends Controller
 
     public function premiumExamShow($slug)
     {
-        $exam=ExamHallCategories::where('slug','=',$slug)->first();
+        $exam = ExamHallCategories::where('slug','=',$slug)
+        ->where('status','=','Active')
+        ->withCount(['category_exams as mcq_count' => function($ch){
+            $ch->whereHas('exam',function($e){
+                $e->where('status','=','Active');
+            });            
+        }])
+        ->withCount(['category_exams as video_count' => function($ch){
+            $ch->whereHas('exam',function($e){
+                $e->where('status','=','Active')
+                ->where('answer_video','!=','');
+            });             
+        }])
+        ->withCount(['category_exams as pdf_count' => function($ch){
+            $ch->whereHas('exam',function($e){
+                $e->where('status','=','Active')
+                ->where('answer_pdf','!=','');
+            });            
+        }])
+        ->first();
+
+        // $exam=ExamHallCategories::where('slug','=',$slug)->first();
         if(!$exam)
         {
            abort(404);

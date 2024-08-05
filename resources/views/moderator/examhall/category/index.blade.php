@@ -33,6 +33,7 @@
                                     <th>Exams Count</th>
                                     <th>Price (Rs)</th>
                                     <th>Discount (Rs)</th>
+                                    <th>Creator</th>
                                     <th>CQC</th>
                                     <th class="text-wrap">Bookings (Unverified/Total)</th>
                                     <th>Status</th>
@@ -49,7 +50,7 @@
                                         <td> <a href="/moderator/exam-hall/{{$cat->id}}/exams">Count({{$cat->category_exams->count()}})</a> </td>
                                         <td>{{$cat->price}}</td>
                                         <td>{{$cat->discount}}</td>
-                                        
+                                        <td>{{$cat->creator->name ?? '-'}}</td>
                                         <td> <a href="/moderator/exam-hall/{{$cat->id}}/cqc">CQCs({{$cat->cqcs->count()}})</a> </td>
                                         <td> <a href="/moderator/exam-hall/{{$cat->id}}/bookings">Bookings( {{$cat->bookings()->where('status','!=','Verified')->count()}}/{{$cat->bookings->count()}} )</a> </td>
                                         <td>
@@ -59,20 +60,20 @@
                                                 <span class="text-warning">{{$cat->status}}</span>
                                             @endif
                                         </td>
-                                        <td class="classroom-btn" width="100">
+                                        <td class="classroom-btn" width="50">
                                             <a href="/moderator/exam-hall/{{$cat->id}}/edit" class="btn btn-success">Edit</a>
-                                            <form id="delete-form-{{$cat->id}}" action="/moderator/exam-hall/{{$cat->id}}" method="POST" style="display: inline">
+                                            {{-- <form id="delete-form-{{$cat->id}}" action="/moderator/exam-hall/{{$cat->id}}" method="POST" style="display: inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
-                                            </form>
+                                            </form> --}}
                                         </td>
                                     </tr>
                                     @php($i++)
                                 @endforeach
                                 </tbody>
                             </table>
-                            <script type="text/javascript">
+                            {{-- <script type="text/javascript">
                                 function deleteData(id)
                                 {
                                     Swal.fire({
@@ -94,7 +95,7 @@
                                         }
                                     })
                                 }
-                            </script>
+                            </script> --}}
                         </div>
                     </div>
                 </div>

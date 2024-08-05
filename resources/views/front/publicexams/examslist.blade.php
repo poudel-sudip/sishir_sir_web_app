@@ -38,7 +38,7 @@
   
     <section class="course-page">
         <div class="container-fluid px-md-5">
-            <div class="row">
+            <div class="row course-details">
                 <div class="col-md-9">
                     <div class="all-course-list">
                         <h3 class="mb-4">Premium Exams</h3>
@@ -65,36 +65,34 @@
                             <div class="">
                                 {{$premiumExams->onEachSide(1)->links('paginator.bootstrap')}}
                             </div>
-                        </div>
-                        {{-- <div class="row">
-                            @foreach($premiumExams as $exam)
-                                <div class="col-md-4 col-6">
-                                    <div class="card-course">
-                                        <div class="header">
-                                            <a href="/exam-hall/premium/{{$exam->slug}}" class="post-thumb">
-                                                <img src="/storage/{{$exam->image}}" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="body">
-                                            <h4><a href="/exam-hall/premium/{{$exam->slug}}">{{$exam->title}}</a></h4>
-                                            <h6>{{$exam->category_exams->count()}} Sets </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div> --}}
+                        </div>                        
                     </div>
                 </div>
                 
                 <div class="col-md-3" id="free-exam">
-                    <div class="">
+                    <div class="side-navbar border border-2 border-primary">
+                        <h5 class="text-center text-light">Free Exams</h5>
+                        <ul class="course-nav" style="height:auto; min-height: 370px; ">
+                            @foreach($exams as $row)
+                                <li>
+                                    <a href="/public-exams/{{$row->slug}}">
+                                        <i class="fas fa-star pr-2 text-light"></i>
+                                        {{$row->name}}
+                                        ({{ $row->exam ? ($row->exam->questions ? $row->exam->questions->count() : '-') : '-' }} Questions)
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    {{-- <div class="">
                         <h5 class="text-center"><u>Free Exams</u></h5>
                         <ul class="course-nav">
                             @foreach($exams as $exam)
                                 <li><a href="/public-exams/{{$exam->slug}}"><i class="fas fa-star pr-2 text-success"></i> {{$exam->name}} ({{ $exam->exam ? ($exam->exam->questions ? $exam->exam->questions->count() : '-') : '-' }} Questions)</a></li>
                             @endforeach
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

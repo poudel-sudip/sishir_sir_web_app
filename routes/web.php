@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 //Route::get('/uploads', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/artisancalls', function () {
+    // Artisan::call('clear-compiled');
+    // Artisan::call('auth:clear-resets');
+    // Artisan::call('cache:clear');
+    // Artisan::call('config:clear');
+    // Artisan::call('event:clear');
+    // Artisan::call('route:clear');
+    // Artisan::call('view:clear');
+
     // Artisan::call('storage:link');
     // Artisan::call('migrate:fresh');
     // Artisan::call('db:seed');
@@ -176,6 +184,7 @@ Route::get('/admin/exams/{exam}/questions','App\Http\Controllers\Admin\Exams\Que
 Route::get('/admin/exams/{exam}/questions/create','App\Http\Controllers\Admin\Exams\QuestionController@create')->middleware('role:Admin');
 Route::get('/admin/exams/{exam}/questions/upload','App\Http\Controllers\Admin\Exams\QuestionController@upload')->middleware('role:Admin');
 Route::post('/admin/exams/{exam}/questions/import','App\Http\Controllers\Admin\Exams\QuestionController@import')->middleware('role:Admin');
+Route::get('/admin/exams/{exam}/questions/pdf-download','App\Http\Controllers\Admin\Exams\QuestionController@pdfDownload')->middleware('role:Admin');
 Route::get('/admin/exams/{exam}/questions/download','App\Http\Controllers\Admin\Exams\QuestionController@download')->middleware('role:Admin');
 Route::post('/admin/exams/{exam}/questions','App\Http\Controllers\Admin\Exams\QuestionController@store')->middleware('role:Admin');
 Route::get('/admin/exams/{exam}/questions/{question}/edit','App\Http\Controllers\Admin\Exams\QuestionController@edit')->middleware('role:Admin');
@@ -766,13 +775,13 @@ Route::delete('/moderator/exam-hall/{category}/cqc/{cqc}','App\Http\Controllers\
 //moderator section exam hall booking
 Route::get('/moderator/exam-hall/bookings','App\Http\Controllers\Moderator\ExamHallController@bookingindex')->middleware('role:Moderator');
 Route::get('/moderator/exam-hall/bookings/all','App\Http\Controllers\Moderator\ExamHallController@allBookings')->middleware('role:Moderator');
-Route::get('/moderator/exam-hall/bookings/create','App\Http\Controllers\Moderator\ExamHallController@bookingcreate')->middleware('role:Moderator');
+// Route::get('/moderator/exam-hall/bookings/create','App\Http\Controllers\Moderator\ExamHallController@bookingcreate')->middleware('role:Moderator');
 Route::get('/moderator/exam-hall/{category}/bookings','App\Http\Controllers\Moderator\ExamHallController@setBookings')->middleware('role:Moderator');
-Route::post('/moderator/exam-hall/bookings','App\Http\Controllers\Moderator\ExamHallController@bookingstore')->middleware('role:Moderator');
-Route::get('/moderator/exam-hall/bookings/{booking}/edit','App\Http\Controllers\Moderator\ExamHallController@bookingedit')->middleware('role:Moderator');
+// Route::post('/moderator/exam-hall/bookings','App\Http\Controllers\Moderator\ExamHallController@bookingstore')->middleware('role:Moderator');
+// Route::get('/moderator/exam-hall/bookings/{booking}/edit','App\Http\Controllers\Moderator\ExamHallController@bookingedit')->middleware('role:Moderator');
 Route::get('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingshow')->middleware('role:Moderator');
-Route::patch('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingupdate')->middleware('role:Moderator');
-Route::delete('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingdestroy')->middleware('role:Moderator');
+// Route::patch('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingupdate')->middleware('role:Moderator');
+// Route::delete('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingdestroy')->middleware('role:Moderator');
 
 
 

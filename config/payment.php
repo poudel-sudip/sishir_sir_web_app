@@ -37,16 +37,29 @@ return[
     /*--------------fonepay data end-----------------*/
 
 
+    // 'nepal_pay' => [
+    //     'inst_url' => 'https://apisandbox.nepalpayment.com/GetPaymentInstrumentDetails',
+    //     'process_url' => 'https://apisandbox.nepalpayment.com/GetProcessId',
+    //     'redirect_url' => 'https://gatewaysandbox.nepalpayment.com/Payment/Index',
+    //     'status_url' => 'https://apisandbox.nepalpayment.com/CheckTransactionStatus',
+    //     'merchantId' => '7386',
+    //     'mercahntName' => 'ehealthapi',
+    //     'apiUser' => 'ehealthapi',
+    //     'apiPass' => 'D_@#R278332a8',
+    //     'secret' => 'key27dbsab928eqodmc7',
+
+    // ],
+
     'nepal_pay' => [
-        'inst_url' => 'https://apisandbox.nepalpayment.com/GetPaymentInstrumentDetails',
-        'process_url' => 'https://apisandbox.nepalpayment.com/GetProcessId',
-        'redirect_url' => 'https://gatewaysandbox.nepalpayment.com/Payment/Index',
-        'status_url' => 'https://apisandbox.nepalpayment.com/CheckTransactionStatus',
-        'merchantId' => '7386',
+        'inst_url' => 'https://apigateway.nepalpayment.com/GetPaymentInstrumentDetails',
+        'process_url' => 'https://apigateway.nepalpayment.com/GetProcessId',
+        'redirect_url' => 'https://gateway.nepalpayment.com/payment/index',
+        'status_url' => 'https://apigateway.nepalpayment.com/CheckTransactionStatus',
+        'merchantId' => '327',
         'mercahntName' => 'ehealthapi',
         'apiUser' => 'ehealthapi',
-        'apiPass' => 'D_@#R278332a8',
-        'secret' => 'key27dbsab928eqodmc7',
+        'apiPass' => 'EhE@!Th4169',
+        'secret' => '#hE@lth87912',
 
     ],
 

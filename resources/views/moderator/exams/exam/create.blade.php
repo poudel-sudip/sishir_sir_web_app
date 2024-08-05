@@ -127,6 +127,34 @@
                             </div>
                            
                             <div class="form-group row">
+                                <label for="answer_video" class="col-md-4 col-form-label">{{ __('Solution Video') }} </label>
+
+                                <div class="col-md-8">
+                                    <input id="answer_video" type="text" class="form-control @error('answer_video') is-invalid @enderror" name="answer_video" value="{{ old('answer_video') }}" >
+
+                                    @error('answer_video')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="answer_pdf" class="col-md-4 col-form-label">{{ __('Solution PDF') }} </label>
+
+                                <div class="col-md-8">
+                                    <input id="answer_pdf" type="file" class="form-control @error('answer_pdf') is-invalid @enderror" name="answer_pdf" value="{{ old('answer_pdf') }}" >
+
+                                    @error('answer_pdf')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('Exam Status') }}</label>
 
                                 <div class="col-md-8">

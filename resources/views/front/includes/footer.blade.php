@@ -129,13 +129,13 @@
 
         </div>
         <hr>
-
-        <ul class="footer-card-list">
-          <li class="my-1"><img src="{{ asset('images/card1.jpg') }}" alt="card esewa"></li>
-          <li class="my-1"><img src="{{ asset('images/card5.jpg') }}" alt="card fone pay"></li>
-          <li class="my-1"><img src="{{ asset('images/card8.jpg') }}" alt="card nepal pay"></li>
+        <h5 class="footer-toggle-section-handeler"  style="cursor: pointer;">Payment Partners </h5>
+        <ul class="footer-card-list d-none d-md-block">
+          <li class="my-1"><a href="//esewa.com.np" target="_blank"><img src="{{ asset('images/card1.jpg') }}" alt="card esewa"></a></li>
+          <li class="my-1"><a href="//fonepay.com" target="_blank"><img src="{{ asset('images/card5.jpg') }}" alt="card fone pay"></a></li>
+          <li class="my-1"><a href="//nchl.com.np/" target="_blank"><img src="{{ asset('images/card8.jpg') }}" alt="card nepal pay"></a></li>
         </ul>
-        
+        <hr>
       </div>         
 
       <div class="col-12 col-md-12 col-lg-3">

@@ -24,7 +24,8 @@ class ExamHallController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $data['categories'] = ExamHallCategories::where('user_id','=',$user->id)->get();
+        // $data['categories'] = ExamHallCategories::where('user_id','=',$user->id)->get();
+        $data['categories'] = ExamHallCategories::get();
         return view('moderator.examhall.category.index',$data);
     }
 
@@ -103,6 +104,7 @@ class ExamHallController extends Controller
 
     public function destroy(ExamHallCategories $category)
     {
+        abort(403,'Please Contact Admin To Delete it.');
         ExamHallBookings::where('category_id',$category->id)->delete();
         ExamHallEvaluation::where('category_id',$category->id)->delete();
         ExamHallResults::where('category_id',$category->id)->delete();
@@ -149,7 +151,8 @@ class ExamHallController extends Controller
     {
         $user = auth()->user();
         $data['category'] = $category;
-        $data['categories'] = ExamCategory::where('user_id','=',$user->id)->get();
+        // $data['categories'] = ExamCategory::where('user_id','=',$user->id)->get();
+        $data['categories'] = ExamCategory::get();
         return view('moderator.examhall.exams.create',$data);
     }
 
@@ -173,6 +176,7 @@ class ExamHallController extends Controller
 
     public function examdestroy(Request $request, ExamHallCategories $category, ExamHallExams $exam)
     {
+        abort(403,'Please Contact Admin To Delete it.');
         // dd($request->all(),$category,$exam);
         ExamHallEvaluation::where('category_id',$category->id)->where('exam_id',$exam->exam_id)->delete();
         ExamHallResults::where('category_id',$category->id)->where('exam_id',$exam->exam_id)->delete();
@@ -197,6 +201,7 @@ class ExamHallController extends Controller
 
     public function bookingcreate()
     {
+        abort(403,'Access Denied. Please Contact Admin.');
         $user = auth()->user();
         $data['categories'] = ExamHallCategories::where('user_id','=',$user->id)->where('status','Active')->get();
         return view('moderator.examhall.booking.create',$data);
@@ -204,6 +209,7 @@ class ExamHallController extends Controller
 
     public function bookingstore(Request $request)
     {
+        abort(403,'Access Denied. Please Contact Admin.');
         // dd($request->all());
         $request->validate([
             "userID" => "required|numeric",
@@ -256,12 +262,14 @@ class ExamHallController extends Controller
 
     public function bookingedit(ExamHallBookings $booking)
     {
+        abort(403,'Access Denied. Please Contact Admin.');
         $data['booking'] = $booking;
         return view('moderator.examhall.booking.edit',$data);
     }
 
     public function bookingupdate(Request $request, ExamHallBookings $booking)
     {
+        abort(403,'Access Denied. Please Contact Admin.');
         // dd($request->all(),$booking);
         $request->validate([
             "bookingid" => "required|numeric",
@@ -298,6 +306,7 @@ class ExamHallController extends Controller
 
     public function bookingdestroy(Request $request, ExamHallBookings $booking)
     {
+        abort(403,'Access Denied. Please Contact Admin.');
         $booking->delete();
         return redirect('/moderator/exam-hall/'.$booking->category_id.'/bookings');
 

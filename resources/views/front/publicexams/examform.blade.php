@@ -28,7 +28,7 @@
         <div class="container-fluid px-md-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="card mb-5 shadow border-0" style="border-radius: 8px; padding: 10px 50px">
+                    <div class="card mb-5 shadow border border-primary border-2" style="border-radius: 8px; padding: 10px 50px">
                         <div class="card-body enroll_form">
                             <form method="POST" action="/public-exams/{{$exam->slug}}/attempt">
                                 @csrf

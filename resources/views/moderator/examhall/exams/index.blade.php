@@ -47,13 +47,13 @@
                             <td>{{ $exam->exam->exam_time.':00' ?? '' }} </td>
                             <td>{{ $exam->exam->questions->count() }} </td>
                            
-                            <td class="classroom-btn" width="160">
+                            <td class="classroom-btn" width="50">
                              
-                                <form id="delete-form-{{$exam->id}}" action="/moderator/exam-hall/{{$category->id}}/exams/{{$exam->id}}" method="POST" style="display: inline">
+                                {{-- <form id="delete-form-{{$exam->id}}" action="/moderator/exam-hall/{{$category->id}}/exams/{{$exam->id}}" method="POST" style="display: inline">
                                     @csrf
                                     @method('DELETE')
                                     <a href="javascript:{}" onclick="javascript:deleteData({{$exam->id}});" class="btn btn-warning">Delete</a>
-                                </form>
+                                </form> --}}
                                 <a href="/moderator/exam-hall/{{$category->id}}/exams/{{$exam->exam_id}}/results" class="btn btn-primary">Results</a>
 
                             </td>
@@ -63,7 +63,7 @@
                           @endforeach
                         </tbody>
                       </table>
-                      <script type="text/javascript">
+                      {{-- <script type="text/javascript">
                         function deleteData(id)
                         {
                           Swal.fire({
@@ -85,7 +85,7 @@
                             }
                           })
                         }
-                    </script>
+                    </script> --}}
                     </div>
                   </div>
                 </div>
