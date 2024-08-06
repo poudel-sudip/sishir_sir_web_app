@@ -21,45 +21,31 @@
                 <div class="card">
                     <div class="card-header">Import Library Material PDF File | {{$group->title}} </div>
                     <div class="card-body">
-                        <form method="POST" action="/admin/pdf-bank/pdf-groups/{{$group->id}}/pdf-files/copy" enctype="multipart/form-data" class="forms-sample">
+                        <form method="POST" action="/admin/pdf-bank/pdf-groups/{{$group->id}}/pdf-files/copy-singles" enctype="multipart/form-data" class="forms-sample">
                             @csrf
+            
+                            <div class="form-group row">
+                                <label for="pdf_bank_set" class="col-md-4 col-form-label">{{ __('PDF Bank Set') }}</label>
 
-                            <div class="form-group row">
-                                <label for="main_library" class="col-md-4 col-form-label">{{ __('Material Library') }}</label>
                                 <div class="col-md-8">
-                                    <select name="main_library" id="main_library" class="form-control @error('main_library') is-invalid @enderror" value="{{ old('main_library') }}" autofocus required>
-                                        <option value="">Select A File Library</option>
-                                        @foreach($libraries as $cat)
-                                            <option value="{{$cat->id}}"> {{$cat->name}} </option>
-                                        @endforeach
-                                    </select>
-                                    @error('main_library')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-            
-                            <div class="form-group row">
-                                <label for="sub_library" class="col-md-4 col-form-label">{{ __('Material Sub Library') }}</label>
-            
-                                <div class="col-md-8">
-                                        <select name="sub_library" id="sub_library" class="form-control @error('sub_library') is-invalid @enderror" value="{{ old('sub_library') }}"  >
-                                    </select>
-                                    @error('sub_library')
+                                    <input id="pdf_bank_set" type="text" class="form-control @error('pdf_bank_set') is-invalid @enderror" name="pdf_bank_set" value="{{ old('pdf_bank_set') ?? $group->title }}" readonly>
+
+                                    @error('pdf_bank_set')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
-            
+
                             <div class="form-group row">
                                 <label for="pdf_files" class="col-md-4 col-form-label">{{ __('PDF Files') }}</label>
             
                                 <div class="col-md-8">
-                                        <select name="pdf_files[]" id="pdf_files" class="form-control @error('pdf_files') is-invalid @enderror" value="{{ old('pdf_files') }}" required multiple size="10" >
+                                    <select name="pdf_files[]" id="pdf_files" class="form-control @error('pdf_files') is-invalid @enderror" value="{{ old('pdf_files') }}" required multiple size="10" >
+                                        @foreach($singles as $row)
+                                            <option value="{{$row->id}}">{{$row->title}}</option>
+                                        @endforeach
                                     </select>
                                     @error('pdf_files')
                                     <span class="invalid-feedback" role="alert">

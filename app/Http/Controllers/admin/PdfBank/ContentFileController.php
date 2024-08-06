@@ -116,7 +116,7 @@ class ContentFileController extends Controller
         return redirect('/admin/pdf-bank/pdf-groups/'.$group->id.'/pdf-files');
     }
 
-    public function importForm(PDFGroup $group)
+    public function importLibraryForm(PDFGroup $group)
     {        
         $libraries = LibraryCategory::where('parent_id','=',null)->orderBy('name')->get();
 
@@ -124,7 +124,7 @@ class ContentFileController extends Controller
         $data = [];
         $data['group'] = $group;
         $data['libraries'] = $libraries;
-        return view('admin.pdf_bank.content.import',$data);
+        return view('admin.pdf_bank.content.import_library',$data);
     }
 
     public function copyPdfFromLibrary(PDFGroup $group, Request $request)
@@ -149,6 +149,49 @@ class ContentFileController extends Controller
                 'pages'=>$pdf->pages,
                 'published_year'=>$pdf->published_year,
 
+            ]);
+        }
+
+        return redirect('/admin/pdf-bank/pdf-groups/'.$group->id.'/pdf-files');
+    }
+
+    public function importSinglesForm(PDFGroup $group)
+    {        
+        $singles = PDFGroup::where('type','=','single')
+        ->where('status','=','Active')
+        ->orderByDesc('id')
+        ->get(['id','type','title','status'])
+        ->values();
+
+        // dd($singles);
+        $data = [];
+        $data['group'] = $group;
+        $data['singles'] = $singles;
+        return view('admin.pdf_bank.content.import_singles',$data);
+    }
+
+    public function copyPdfFromSingles(PDFGroup $group, Request $request)
+    {    
+        // dd($request->all());
+        $request->validate([
+            'pdf_bank_set' => 'required|string',
+            'pdf_files' => 'required|array',
+        ]);
+        
+        $pdf_files = PDFGroup::where('type','=','single')
+        ->where('status','=','Active')
+        ->find($request->pdf_files,['id','title as name','pdf_file as fileurl','download','author','pages']);
+        
+
+        foreach ($pdf_files as $pdf) 
+        {
+            $group->chapters()->create([
+                'name' => $pdf->name,
+                'title' => $pdf->name,
+                'pdf_file' => $pdf->fileurl,
+                'author'=>$pdf->author,
+                'download'=>$pdf->download,
+                'pages'=>$pdf->pages,
             ]);
         }
 

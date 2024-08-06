@@ -19,11 +19,12 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <div class="custon-table-header">
-                        <h4 class="card-title">PDF Files | {{$group->title}}</h4>
+                    <div class="custon-table-header align-items-center">
+                        <h4 class="card-title">PDF Files :: {{$group->title}}</h4>
                         <div class="text-right">
-                          <a href="/admin/pdf-bank/pdf-groups/{{$group->id}}/pdf-files/import"><button type="button" class="btn btn-sm ml-3 btn-info"> Import PDF From Material Library </button></a>
-                          <a href="/admin/pdf-bank/pdf-groups/{{$group->id}}/pdf-files/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add PDF File </button></a>
+                          <a href="/admin/pdf-bank/pdf-groups/{{$group->id}}/pdf-files/import-library"><button type="button" class="btn btn-sm m-1 btn-info"> Import PDF From Material Library </button></a>
+                          <a href="/admin/pdf-bank/pdf-groups/{{$group->id}}/pdf-files/import-singles"><button type="button" class="btn btn-sm m-1 btn-primary"> Import From PDF Singles </button></a>
+                          <a href="/admin/pdf-bank/pdf-groups/{{$group->id}}/pdf-files/create"><button type="button" class="btn btn-sm m-1 btn-success"> Add PDF File </button></a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">

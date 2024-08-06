@@ -282,8 +282,10 @@ Route::get('/admin/pdf-bank/pdf-singles/{single}/bookings','App\Http\Controllers
 Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files','App\Http\Controllers\Admin\PdfBank\ContentFileController@index')->middleware('role:Admin');
 Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/create','App\Http\Controllers\Admin\PdfBank\ContentFileController@create')->middleware('role:Admin');
 Route::post('/admin/pdf-bank/pdf-groups/{group}/pdf-files','App\Http\Controllers\Admin\PdfBank\ContentFileController@store')->middleware('role:Admin');
-Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/import','App\Http\Controllers\Admin\PdfBank\ContentFileController@importForm')->middleware('role:Admin');
-Route::post('/admin/pdf-bank/pdf-groups/{group}/pdf-files/copy','App\Http\Controllers\Admin\PdfBank\ContentFileController@copyPdfFromLibrary')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/import-library','App\Http\Controllers\Admin\PdfBank\ContentFileController@importLibraryForm')->middleware('role:Admin');
+Route::post('/admin/pdf-bank/pdf-groups/{group}/pdf-files/copy-library','App\Http\Controllers\Admin\PdfBank\ContentFileController@copyPdfFromLibrary')->middleware('role:Admin');
+Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/import-singles','App\Http\Controllers\Admin\PdfBank\ContentFileController@importSinglesForm')->middleware('role:Admin');
+Route::post('/admin/pdf-bank/pdf-groups/{group}/pdf-files/copy-singles','App\Http\Controllers\Admin\PdfBank\ContentFileController@copyPdfFromSingles')->middleware('role:Admin');
 Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/{content}','App\Http\Controllers\Admin\PdfBank\ContentFileController@show')->middleware('role:Admin');
 Route::get('/admin/pdf-bank/pdf-groups/{group}/pdf-files/{content}/edit','App\Http\Controllers\Admin\PdfBank\ContentFileController@edit')->middleware('role:Admin');
 Route::patch('/admin/pdf-bank/pdf-groups/{group}/pdf-files/{content}','App\Http\Controllers\Admin\PdfBank\ContentFileController@update')->middleware('role:Admin');
