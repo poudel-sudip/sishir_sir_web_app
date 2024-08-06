@@ -119,10 +119,12 @@
 
             var downloadUrl = event.target.getAttribute("href");
             var filename = event.target.getAttribute("filename");
+            var fileExtension = downloadUrl.split('.').pop().toLowerCase();
 
             var link = document.createElement("a");
             link.href = downloadUrl;
-            link.download = filename +" || shisiradhikari.com.pdf"; // Set an empty value for the download attribute to preserve the original filename
+            // link.download = filename +" || shisiradhikari.com.pdf"; // Set an empty value for the download attribute to preserve the original filename
+            link.download = filename +" || shisiradhikari.com."+fileExtension;
 
             document.body.appendChild(link);
 

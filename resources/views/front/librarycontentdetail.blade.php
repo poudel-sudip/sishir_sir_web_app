@@ -30,8 +30,8 @@
             <h3 class="text-primary">{{strtoupper($material->name)}}</h3>
             <div class="px-5 text-primary">
                 <span class="mx-2 text-nowrap text-primary"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($material->created_at))}}</span>
-                <span class="mx-2 text-nowrap text-success"><i class="fa fa-users"></i> {{$material->author}}</span>
                 <span class="mx-2 text-nowrap text-primary"><i class="fa fa-calendar"></i> {{$material->published_year}}</span>
+                <span class="mx-2 text-nowrap text-success"><i class="fa fa-users"></i> {{$material->author}}</span>
                 <span class="mx-2 text-nowrap text-danger"><i class="fa fa-file"></i> {{$material->pages}}</span>
                 <span class="mx-2 text-nowrap text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
                 <span class="mx-2 text-nowrap text-primary"><i class="fa fa-download"></i> {{$counterData->page_download_count ?? '0'}}</span>
@@ -49,7 +49,7 @@
                                 <i class="fa fa-download"></i> Login to Download
                             </a>
                         @endif --}}
-                    <a href="/storage/{{$material->fileurl}}" filename="{{ucwords($material->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                    <a href="{{url('/storage/'.$material->fileurl)}}" filename="{{ucwords($material->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
                     @endif
                 </div>
                 <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
@@ -98,10 +98,11 @@
 
             var downloadUrl = event.target.getAttribute("href");
             var filename = event.target.getAttribute("filename");
+            var fileExtension = downloadUrl.split('.').pop().toLowerCase();
 
             var link = document.createElement("a");
             link.href = downloadUrl;
-            link.download = filename +" || shisiradhikari.com.pdf"; // Set an empty value for the download attribute to preserve the original filename
+            link.download = filename +" || shisiradhikari.com."+fileExtension; // Set an empty value for the download attribute to preserve the original filename
 
             document.body.appendChild(link);
 

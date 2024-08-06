@@ -84,7 +84,22 @@
                         @if($material->fileurl)
                         <div class="course-row">
                             <div>Material File:</div>
-                            <div><iframe src="/storage/{{$material->fileurl}}" frameborder="0" style="width: 100%; min-height:500px" target="_parent"></iframe></div>
+                            <div>
+                                @php
+                                    $fileExtension = pathinfo(url('/storage/'.$material->fileurl), PATHINFO_EXTENSION);
+                                @endphp
+
+                                @if($fileExtension === 'pdf')
+                                    <iframe src="/storage/{{$material->fileurl}}" frameborder="0" style="width: 100%; min-height:500px" target="_parent"></iframe>
+                                @else
+                                    <div style="width: 100%; min-height:100px; ">
+                                        <p><a href="/storage/{{$material->fileurl}}" target="_blank">{{$material->filename}}</a></p>
+                                        <p>File type <strong>{{$fileExtension}}</strong> cannot be shown in integrated web page.</p>
+                                    </div>
+                                @endif
+
+                                {{-- <iframe src="/storage/{{$material->fileurl}}" frameborder="0" style="width: 100%; min-height:500px" target="_parent"></iframe> --}}
+                            </div>
                         </div>
                         @endif
                     </div>

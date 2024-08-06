@@ -52,7 +52,8 @@ class MaterialController extends Controller
         elseif($data['type'] == 'file' || $data['type'] == 'File')
         {
             $request->validate([ 
-                'file' => 'required|file|mimes:pdf',
+                // 'file' => 'required|file|mimes:pdf',
+                'file' => 'required|file',
                 'can_download' => 'required|boolean',
             ]);
             $data['download'] = $request->can_download;
@@ -93,7 +94,8 @@ class MaterialController extends Controller
             'name' => 'string|required',
             // 'order' => 'numeric|required',
             'status' => 'string|required',
-            'file' => 'nullable|file|mimes:pdf',
+            // 'file' => 'nullable|file|mimes:pdf',
+            'file' => 'nullable|file',
             'old_file' => 'nullable|string',
             'filename' => 'nullable|string',
             // 'description' => 'string|nullable',
@@ -122,7 +124,8 @@ class MaterialController extends Controller
             $data['download'] = $request->can_download;
             if($request->old_file == '' && !isset($request->file))
             {
-                return back()->withInput()->withErrors(['file' => 'Please select a pdf file']);
+                // return back()->withInput()->withErrors(['file' => 'Please select a pdf file']);
+                return back()->withInput()->withErrors(['file' => 'Please select a file']);
             }
             elseif(isset($request->file))
             {
