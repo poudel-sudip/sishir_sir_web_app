@@ -107,12 +107,12 @@
             <div class="row">
               <div class="col">
                 <div><span>Last Updated Date: </span><span id="last_date"></span></div>
-                <div><span>Total Blogs: </span><strong class="counter-count"> {{$web_counter->blog ?? '0'}} </strong></div>
-                <div><span>Total Books: </span><strong class="counter-count"> {{$web_counter->book ?? '0'}} </strong></div>
-                <div><span>Total MCQs: </span><strong class="counter-count"> {{$web_counter->mcq ?? '0'}} </strong></div>
-                <div><span>Total PDF: </span><strong class="counter-count"> {{$web_counter->pdf ?? '0'}} </strong></div>
-                <div><span>Total Downloads: </span><strong class="counter-count"> {{$web_counter->download ?? '0'}} </strong></div>
-                <div><span>Website Visit Counter: </span><strong class="counter-count"> {{$web_counter->website ?? '0'}} </strong></div>
+                <div><span>Total Blogs: </span><strong class="counter-count-"> {{$web_counter->blog ?? '0'}} </strong></div>
+                <div><span>Total Books: </span><strong class="counter-count-"> {{$web_counter->book ?? '0'}} </strong></div>
+                <div><span>Total MCQs: </span><strong class="counter-count-"> {{$web_counter->mcq ?? '0'}} </strong></div>
+                <div><span>Total PDF: </span><strong class="counter-count-"> {{$web_counter->pdf ?? '0'}} </strong></div>
+                <div><span>Total Downloads: </span><strong class="counter-count-"> {{$web_counter->download ?? '0'}} </strong></div>
+                <div><span>Website Visit Counter: </span><strong class="counter-count-"> {{$web_counter->website ?? '0'}} </strong></div>
               </div>
               <div class="col">
                 <div id="youtube-channel-details" class="">                  

@@ -16,7 +16,8 @@ use App\Models\Menu\MenuSubGroup;
 use App\Models\Menu\MenuItemCategory;
 use App\Models\Menu\MenuItem;
 use App\Models\Menu\MenuSubItem;
-
+use App\Models\Ebook\EbookChapter as PdfBankContent;
+use App\Models\Ebook\Ebook as PdfBank;
 
 class Helper
 {
@@ -154,8 +155,10 @@ class Helper
         $m_cat_pdf = MenuItemCategory::where('type','=','file')->count();
         $m_itm_pdf = MenuItem::where('type','=','file')->count();
         $m_sitm_pdf = MenuSubItem::where('type','=','file')->count();
+        $pdf_bank_pdf = PdfBank::where('type','=','single')->count();
+        $pdf_bank_contentpdf = PdfBankContent::count();
         
-        $data['pdf'] = $lib_pdf + $m_sg_pdf + $m_cat_pdf + $m_itm_pdf + $m_sitm_pdf;        
+        $data['pdf'] = $lib_pdf + $m_sg_pdf + $m_cat_pdf + $m_itm_pdf + $m_sitm_pdf + $pdf_bank_pdf + $pdf_bank_contentpdf;        
         $data['blog'] = Blog::count();
         $data['book'] = Book::count();
         $data['mcq'] = Question::count();
