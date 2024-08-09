@@ -30,13 +30,18 @@
         <div class="container-fluid px-md-5">
             <div class="card p-3 border-success">
                 <div class="card-title">
-                    <div class="h3 text-center">{{$pdf_bank->title}}</div>
+                    <div class="h3 text-center" style="color:#1375b9 !important; letter-spacing: -1px;">{{$pdf_bank->title}}</div>
                 </div>
                 <div class="row">
                     <div class="col-md-8 seller-item  ">
                         <div class="d-inline-block seller-header p-4 border rounded border-2 border-primary">
                             <img src="/storage/{{$pdf_bank->thumbnail}}" onerror="this.src='/images/default-post.png'" class="img img-fluid" style="max-height:200px; width:auto;">
-                        </div>                        
+                        </div> 
+                        <div class="">
+                            @if($pdf_bank->bookings()->count()>=1)
+                            <div class="text- text-danger">{{$pdf_bank->bookings()->count()}} Users Already Enrolled This PDF Bank.</div>
+                            @endif
+                        </div>                       
                     </div>
 
                     <div class="col-md-4">
@@ -74,13 +79,18 @@
                             {{-- <a href="/student/pdf-bank-bookings/create" class="btn booking-btn">Book Now</a> --}}
                         
                         </div>
+
+                        <div class="mt-4">
+                            <a class="text-primary" href="//www.youtube.com/watch?v=5Uo_lHUtoHs" target="_blank">Watch Video To Learn About Booking Process</a>
+                        </div>
+                        
                     </div>
                     <div class="col-12">
                         <div class="d-block text-justify mt-2" >
                             {!! $pdf_bank->description !!}
                         </div>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-8" style="color:#1375b9 !important;">
                                 @if($pdf_bank->pdf_count)
                                 <h5>Available PDF Sets:</h5>
                                 <ol>

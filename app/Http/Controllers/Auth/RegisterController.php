@@ -85,6 +85,7 @@ class RegisterController extends Controller
     {
         return view('auth.register',[
             'proviences' => Provience::all()->sortBy('name'),
+            'user_count' => User::count(),
         ]);
     }
 

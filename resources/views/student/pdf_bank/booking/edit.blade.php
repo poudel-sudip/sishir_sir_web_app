@@ -58,15 +58,16 @@
                                 <div class="col-md-8">
                                     <select name="verificationMode" id="verificationMode" class="form-control @error('verificationMode') is-invalid @enderror" value="{{ old('verificationMode') ?? $booking->verificationMode }}" required>
                                         <option value="">Choose One....</option>
+                                        @if($nepalpay_pay_data)
+                                        <option value="NepalPay">Nepal Pay Wallet</option>
+                                        @endif
                                         @if($esewa_pay_data)
                                         <option value="Esewa">Esewa</option>
                                         @endif
                                         @if($fonepay_pay_data)
                                         <option value="FonePay">FonePay</option>
                                         @endif
-                                        @if($nepalpay_pay_data)
-                                        <option value="NepalPay">Nepal Pay Wallet</option>
-                                        @endif
+                                        
                                         <option value="Coupon">Coupon</option>
                                         <option value="Manual">Manual</option>
 

@@ -64,7 +64,7 @@ class FrontPdfBankController extends Controller
             abort(404,'PDF Bank Not Found');
         }
 
-        $pdf_bank->pdf_sets = $pdf_bank->chapters()->where('status','=','Active')->get()->values();
+        $pdf_bank->pdf_sets = $pdf_bank->chapters()->where('status','=','Active')->get()->sortByDesc('id')->values();
         
         // dd($pdf_bank);
         $data['pdf_bank'] = $pdf_bank;

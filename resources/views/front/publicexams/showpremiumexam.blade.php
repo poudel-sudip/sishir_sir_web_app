@@ -36,6 +36,11 @@
                         <div class="d-inline-block seller-header p-4 border rounded border-2 border-primary">
                             <img src="/storage/{{$exam->image}}" onerror="this.src='/images/default-post.png'" class="img img-fluid" style="max-height:200px; width:auto;">
                         </div> 
+                        <div class="mt-2">
+                            @if($exam->bookings()->count()>=1)
+                            <div class="text- text-danger">{{$exam->bookings()->count()}} Users Already Enrolled This Exam Set.</div>
+                            @endif
+                        </div> 
                         <div class="d-block text-justify mt-2">
                             {!! $exam->description !!}
                         </div>
@@ -72,6 +77,10 @@
                                 @endif
                             </form>
                             {{-- <a href="/student/exam-bookings/create" class="btn booking-btn">Book Now</a> --}}
+                        </div>
+
+                        <div class="mt-4">
+                            <a class="text-primary" href="//www.youtube.com/watch?v=5Uo_lHUtoHs" target="_blank">Watch Video To Learn About Booking Process</a>
                         </div>
                     </div>
                 </div>

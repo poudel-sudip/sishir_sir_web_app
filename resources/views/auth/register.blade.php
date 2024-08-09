@@ -12,6 +12,10 @@
                     <div class="dont-have-account">
                         <p>Already have an account ?</p>
                         <a href="{{ route('login') }}">Log In</a>
+                        
+                    </div>
+                    <div class="mt-4">
+                        <div class="text-light"><strong><span class="h4">{{$user_count}}</span> Users Already Registered</strong></div>
                     </div>
                 </div>
                 <div class="card">
