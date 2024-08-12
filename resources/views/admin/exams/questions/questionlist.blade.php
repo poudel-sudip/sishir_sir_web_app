@@ -22,7 +22,7 @@
                     <div class="custon-table-header">
                       <h4 class="card-title">Questions | {{$exam->name}} </h4>
                       <div class="text-right">
-                        {{-- <a href="/admin/exams/{{$exam->id}}/questions/pdf-download" >PDF</a> --}}
+                        <a href="/admin/exams/{{$exam->id}}/questions/pdf-download" target="_blank" class="btn btn-sm ml-3 btn-warning">PDF Export</a>
 
                         <a href="/admin/exams/{{$exam->id}}/questions/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Question </button></a>
                         <a href="/admin/exams/{{$exam->id}}/questions/upload"><button type="button" class="btn btn-sm ml-3 btn-primary"> Upload Questions </button></a>               

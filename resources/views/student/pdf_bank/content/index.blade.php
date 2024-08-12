@@ -24,6 +24,16 @@
             @endforeach
                         
         </div>
+
+        <div class="mt-3">
+            <h4>Disclaimer:</h4>
+            <p>
+                If you print or copy any material placed here physically or with the help of electronic devices without permission, or if you use it or reproduce it unauthorized or share it on social media, action will be taken according to copyright Act.
+            </p>
+            <p>
+                हजुरहरुले यहाँ राखिएको कुनैपनि सामग्री अनुमती नलिई अरु कसैलाई भौतिक रुपमा प्रिन्ट गरी वा इलेक्ट्रोनिक डिभाइसको मद्धतले कपि गरी अनाधिकृत रुपमा प्रयोग वा पुर्नउत्थान गरेमा वा सामाजिक सञ्जालमा शेयर गरेको पाइएमा प्रतिलिपि अधिकार ऐन अनुसार कारबाही गरिने  छ ।
+            </p>
+        </div>
     </div>
 
 @endsection

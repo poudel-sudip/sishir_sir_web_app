@@ -10,34 +10,21 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ExamQuestionsImport;
 use App\Exports\Exams\ExamQuestionExport;
 
+use App\Helpers\CustomPdfHelper;
+
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Exam $exam)
     {
         return view('admin.exams.questions.questionlist',compact('exam'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Exam $exam)
     {
         return view('admin.exams.questions.questioncreate',compact('exam'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request, Exam $exam)
     {
         $request->validate([
@@ -71,35 +58,16 @@ class QuestionController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Exam $exam, Question $question)
     {
         return view('admin.exams.questions.questionshow',compact('exam','question'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Exam $exam, Question $question)
     {
         return view('admin.exams.questions.questionedit',compact('exam','question'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Exam $exam, Question $question)
     {
         $request->validate([
@@ -127,12 +95,6 @@ class QuestionController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Exam $exam, Question $question)
     {
         $question->delete();
@@ -163,4 +125,23 @@ class QuestionController extends Controller
         return Excel::download(new ExamQuestionExport($exam), $filename);
     }
 
+    public function pdfDownload(Request $request, Exam $exam)
+    {
+
+        $etime = explode(':',$exam->exam_time);
+        $etimestr = trim(($etime[0] > 0 ? ((int)$etime[0].' Hour') : '').' '.((int)$etime[1].' Minutes'))  ;
+        $exam->exam_solve_time = $etimestr;
+        $exam->question_count = $exam->questions()->count();
+        
+        // return view('exports.pdf.mcq_exam_questions',compact('exam'));
+        $html = view('exports.pdf.mcq_exam_questions', compact('exam'))->render();
+
+        $symbols = array("\"", "/", "|");
+        $title = str_replace($symbols,'-',$exam->name).' MCQ Questions';
+
+        return CustomPdfHelper::createPdf($title,$html);        
+        
+    }
+
 }
+
