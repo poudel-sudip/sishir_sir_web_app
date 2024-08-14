@@ -61,11 +61,17 @@
                             @if($exam->show_answer)
                                 <div class="col-12 mt-2">
                                     <h6 class="btn border border-success correct-answer-btn"><span>Show</span> The Correct Answers</h6>
-                                    <div class="hidden d-flex justify-content-center align-items-center flex-wrap">
-                                        @foreach($question_solutions as $key=>$value)
-                                            <span class="m-1 btn btn-sm border-primary ">{{$key}}:{{ucwords($value)}}</span>
-                                        @endforeach
+                                    <div class="hidden">
+                                        <div class="d-flex justify-content-center align-items-center flex-wrap">
+                                            @foreach($question_solutions as $key=>$value)
+                                                <span class="m-1 btn btn-sm border-primary ">{{$key}}:{{ucwords($value)}}</span>
+                                            @endforeach
+                                        </div>
+                                        <div class="">
+                                            <a href="/public-exams/{{$exam->slug}}/download-questions" target="_blank" class="mt-1 btn border border-danger text-danger">View Question PDF <i class="fas fa-file-pdf "></i></a>
+                                        </div>
                                     </div>
+                                    
                                 </div>
                             @endif
                             <div class="col-12 text-end mt-3"><a href="/public-exams" class="btn btn-primary btn-sm">View Other Exams</a></div>

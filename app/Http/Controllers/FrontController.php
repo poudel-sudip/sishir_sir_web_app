@@ -815,6 +815,8 @@ class FrontController extends Controller
             $req->where('name','Like','%'.$query.'%')
             ->orWhere('search_tags','Like','%'.$query.'%');
         })
+        ->orderByDesc('id')
+        ->take(20)
         ->get()
         ->map(function($update)
         {
@@ -841,6 +843,7 @@ class FrontController extends Controller
                 'link' => $link,
             ];
         })
+        ->values()
         ->toArray();
 
         $menu_items = MenuItem::where('status','=','Active')
@@ -848,6 +851,8 @@ class FrontController extends Controller
             $req->where('name','Like','%'.$query.'%')
             ->orWhere('search_tags','Like','%'.$query.'%');
         })
+        ->orderByDesc('id')
+        ->take(20)
         ->get()
         ->map(function($update)
         {
@@ -870,6 +875,7 @@ class FrontController extends Controller
                 'link' => $link,
             ];
         })
+        ->values()
         ->toArray();
 
         $menu_categories = MenuItemCategory::where('status','=','Active')
@@ -878,6 +884,8 @@ class FrontController extends Controller
             $req->where('name','Like','%'.$query.'%')
             ->orWhere('search_tags','Like','%'.$query.'%');
         })
+        ->orderByDesc('id')
+        ->take(20)
         ->get()
         ->map(function($cat)
         {
@@ -897,6 +905,7 @@ class FrontController extends Controller
                 'link' => $link,
             ];
         })
+        ->values()
         ->toArray();
 
         $menu_submenus = MenuSubGroup::where('status','=','Active')
@@ -905,6 +914,8 @@ class FrontController extends Controller
             $req->where('name','Like','%'.$query.'%')
             ->orWhere('search_tags','Like','%'.$query.'%');
         })
+        ->orderByDesc('id')
+        ->take(20)
         ->get()
         ->map(function($cat)
         {
@@ -923,6 +934,7 @@ class FrontController extends Controller
                 'link' => $link,
             ];
         })
+        ->values()
         ->toArray();
 
         
@@ -937,11 +949,14 @@ class FrontController extends Controller
             $req->where('title','Like','%'.$query.'%')
             ->orWhere('search_tags','Like','%'.$query.'%');
         })
+        ->orderByDesc('id')
+        ->take(20)
         ->get(['id','title','slug','created_at'])
         ->map(function($b){
             $b['link'] = '/blogs/'.$b->slug;
             return $b;
         })
+        ->values()
         ->toArray();
 
         $data['books'] = Book::where('status','=','Active')
@@ -949,11 +964,14 @@ class FrontController extends Controller
             $req->where('title','Like','%'.$query.'%')
             ->orWhere('search_tags','Like','%'.$query.'%');
         })
+        ->orderByDesc('id')
+        ->take(20)
         ->get(['id','title','slug','created_at'])
         ->map(function($b){
             $b['link'] = '/books/'.$b->slug;
             return $b;
         })
+        ->values()
         ->toArray();
 
         $data['premium_exams'] = ExamHallCategories::where('status','=','Active')
@@ -961,11 +979,14 @@ class FrontController extends Controller
             $req->where('title','Like','%'.$query.'%')
             ->orWhere('search_tags','Like','%'.$query.'%');
         })
+        ->orderByDesc('id')
+        ->take(20)
         ->get(['id','title','slug','created_at'])
         ->map(function($e){
             $e['link'] = '/exam-hall/premium/'.$e->slug;
             return $e;
         })
+        ->values()
         ->toArray();
 
         $data['library_materials'] = LibraryMaterial::where('status','=','Active')
@@ -973,6 +994,8 @@ class FrontController extends Controller
             $req->where('name','Like','%'.$query.'%')
             ->orWhere('search_tags','Like','%'.$query.'%');
         })
+        ->orderByDesc('id')
+        ->take(20)
         ->get(['id','name','slug','created_at','category_id'])
         ->map(function($cat)
         {
@@ -991,6 +1014,31 @@ class FrontController extends Controller
                 'link' => $link,
             ];
         })
+        ->values()
+        ->toArray();
+
+        $data['pdf_banks'] = PDFBank::where('status','=','Active')
+        ->where(function($req) use($query) {
+            $req->where('title','Like','%'.$query.'%')
+            ->orWhere('slug','Like','%'.$query.'%');
+            // ->orWhere('search_tags','Like','%'.$query.'%');
+        })
+        ->orderByDesc('id')
+        ->take(20)
+        ->get(['id','title','slug','created_at'])
+        ->map(function($cat)
+        {
+            $link = "/pdf-banks/bank/".$cat->slug;
+                      
+            return [
+                'id' => $cat->id,
+                'title' => $cat->title,
+                'slug' => $cat->slug,
+                'created_at' => $cat->created_at,
+                'link' => $link,
+            ];
+        })
+        ->values()
         ->toArray();
 
         // dd($data);

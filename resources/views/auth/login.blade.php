@@ -13,6 +13,9 @@
                         <p>Don't have an account ? <br> </p>
                         <a href="{{ route('register') }}">Register Now</a>
                     </div>
+                    <div class="mt-4">
+                        <div class="text-light"><strong><span class="h4">{{$user_count}}</span> Users Already Registered</strong></div>
+                    </div>
                 </div>
                 <div class="card">
                     <div class="card-header bg-transparent">{{ __('Login') }}</div>

@@ -27,8 +27,8 @@ class CustomPdfHelper
         $pdf->AddPage();
         $pdf->writeHTML($html);
 
-        // return $pdf->Output($title.'.pdf', 'I'); //show only in browser   
-        return $pdf->Output($title.'.pdf', 'D');  //force download
+        return $pdf->Output($title.'.pdf', 'I'); //show only in browser   
+        // return $pdf->Output($title.'.pdf', 'D');  //force download
     }
     
 }

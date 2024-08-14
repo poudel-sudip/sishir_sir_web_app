@@ -14,8 +14,8 @@
     <hr style="color:red; height:3px;">   
     @php($i=1)
     @foreach($exam->questions as $row)
-        <span style="page-break-inside: avoid;">
-            <h5>{{$i}}. {!! strip_tags($row->name) !!}</h5>
+        <span style="page-break-inside: avoid; ">
+            <h5 style="color:#1375b9;font-size: 14px;">{{$i}}. {!! strip_tags($row->name) !!}</h5>
             <ol type="A" style="font-size: 14px;">
                 <li style="@if(strtolower($row->opt_correct) == 'a') color:red; @endif " >{!! trim(strip_tags($row->opt_a)) !!}</li>
                 <li style="@if(strtolower($row->opt_correct) == 'b') color:red; @endif " >{!! trim(strip_tags($row->opt_b)) !!}</li>
@@ -24,7 +24,7 @@
                 @if(trim(strip_tags($row->rationale)))    
                     <br>  
                     <h5 style="color: #008afc;" >Rationale:</h5>
-                    <div style="font-size: 12px;">{!! strip_tags($row->rationale) !!}</div>
+                    <div style="font-size: 12px; text-align:justify;">{!! strip_tags($row->rationale) !!}</div>
                 @endif         
             </ol>           
         </span>       

@@ -1103,6 +1103,7 @@ Route::get('/public-exams', 'App\Http\Controllers\PublicExamController@examlist'
 Route::get('/public-exams/{examslug}', 'App\Http\Controllers\PublicExamController@examform');
 Route::post('/public-exams/{examslug}/attempt', 'App\Http\Controllers\PublicExamController@examshow');
 Route::post('/public-exams/{examslug}/save', 'App\Http\Controllers\PublicExamController@examsave');
+Route::get('/public-exams/{examslug}/download-questions', 'App\Http\Controllers\PublicExamController@examQuestionsPdfDownload')->middleware('auth');
 
 //front public exams results
 Route::get('/results', 'App\Http\Controllers\PublicExamController@resultlist');

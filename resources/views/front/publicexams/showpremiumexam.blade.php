@@ -80,8 +80,8 @@
                             {{-- <a href="/student/exam-bookings/create" class="btn booking-btn">Book Now</a> --}}
                         </div>
 
-                        <div class="mt-4">
-                            <a class="btn btn-danger" href="//www.youtube.com/watch?v=5Uo_lHUtoHs" target="_blank">Watch Video To Learn About Booking Process <i class="fa fa-video"></i> </a>
+                        <div class="mt-1">
+                            <a class="btn btn-danger d-block" href="//www.youtube.com/watch?v=5Uo_lHUtoHs" target="_blank">Watch Video To Learn About Booking Process <i class="fa fa-video"></i> </a>
                         </div>
                     </div>
                 </div>

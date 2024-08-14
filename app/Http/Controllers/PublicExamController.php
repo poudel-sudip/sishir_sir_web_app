@@ -10,6 +10,8 @@ use App\Models\ExamHall\ExamHallCategories;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\URL;
 
+use App\Helpers\CustomPdfHelper;
+
 class PublicExamController extends Controller
 {
     public function examlist()
@@ -207,6 +209,36 @@ class PublicExamController extends Controller
         $counterData = Helper::pageCounterCounts('Premium Exam Show',$pgurl);
 
         return view('front.publicexams.showpremiumexam',compact('exam','counterData'));
+    }
+
+
+    public function examQuestionsPdfDownload($examslug, Request $request)
+    {
+        $openexam=OpenExam::where('slug','=',$examslug)->where('result_status','=','Unpublished')->first();
+        if(!$openexam)
+        {
+           abort(404);
+        }
+
+        $exam = $openexam->exam;
+        if(!$exam)
+        {
+           abort(404);
+        }
+
+        $etime = explode(':',$exam->exam_time);
+        $etimestr = trim(($etime[0] > 0 ? ((int)$etime[0].' Hour') : '').' '.((int)$etime[1].' Minutes'))  ;
+        $exam->exam_solve_time = $etimestr;
+        $exam->question_count = $exam->questions()->count();
+        
+        // return view('exports.pdf.mcq_exam_questions',compact('exam'));
+        $html = view('exports.pdf.mcq_exam_questions', compact('exam'))->render();
+
+        $symbols = array("\"", "/", "|");
+        $title = str_replace($symbols,'-',$exam->name).' MCQ Questions';
+
+        return CustomPdfHelper::createPdf($title,$html);
+                
     }
 
 }
