@@ -11,6 +11,7 @@ use App\Models\ExamHall\ExamHallResults;
 use App\Models\ExamHall\ExamHallEvaluation;
 use App\Models\Exams\Exam;
 use App\Models\Exams\Question;
+use App\Helpers\CustomPdfHelper;
 
 class ExamController extends Controller
 {
@@ -161,4 +162,20 @@ class ExamController extends Controller
         return redirect('/student/exam-bookings/'.$category->id.'/exams');
     }
 
+    public function downloadQuestionPdf(ExamHallCategories $category, Exam $exam)
+    {
+        // dd($category,$exam);
+
+        $etime = explode(':',$exam->exam_time);
+        $etimestr = trim(($etime[0] > 0 ? ((int)$etime[0].' Hour') : '').' '.((int)$etime[1].' Minutes'))  ;
+        $exam->exam_solve_time = $etimestr;
+        $exam->question_count = $exam->questions()->count();
+
+        $html = view('exports.pdf.mcq_exam_questions', compact('exam'))->render();
+        $symbols = array("\"", "/", "|");
+        $title = str_replace($symbols,'-',$exam->name).' MCQ Questions';
+
+        return CustomPdfHelper::createPdf($title,$html);  
+        
+    }
 }

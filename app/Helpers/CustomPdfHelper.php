@@ -43,7 +43,8 @@ class CustomPDF extends TCPDF
 
     public function Header()
     {
-        $watermarkImage = './images/watermark.webp';
+        // $watermarkImage = './images/watermark.webp';
+        $watermarkImage = url('images/watermark.webp');
 
         $this->SetAlpha(0.2);
         $this->Image($watermarkImage, $this->getPageWidth() / 4, $this->getPageHeight() / 4, $this->getPageWidth() / 2, '', '', '', '', false, 300, '', false, false, 0);
@@ -58,8 +59,8 @@ class CustomPDF extends TCPDF
         // Page number
         $html = '
         <table width="100%" style="background-color: antiquewhite; vertical-align:middle;">
-            <tr style="vertical-align: middle;font-weight:bold; font-size:16px; text-align:center;">
-                <td style="width:30%; color:#00a2ff">'.$this->getAliasNumPage().' | PAGE </td>
+            <tr style="vertical-align: middle;font-weight:bold; font-size:16px;">
+                <td style="width:30%; color:#00a2ff; text-align:center;">'.$this->getAliasNumPage().' | PAGE </td>
                 <td style="width:70%;"> <span style="color: #f74444;"> E. Health Network </span><span style="color: #017dc5">(shisiradhikari.com.np)</span> </td>
             </tr>
         </table>';

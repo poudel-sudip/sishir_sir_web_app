@@ -17,10 +17,10 @@
         <span style="page-break-inside: avoid;">
             <h5>{{$i}}. {!! strip_tags($row->name) !!}</h5>
             <ol type="A" style="font-size: 14px;">
-                <li style="@if(strtolower($row->opt_correct) == 'a') color:red; @endif " >{!! strip_tags($row->opt_a) !!}</li>
-                <li style="@if(strtolower($row->opt_correct) == 'b') color:red; @endif " >{!! strip_tags($row->opt_b) !!}</li>
-                <li style="@if(strtolower($row->opt_correct) == 'c') color:red; @endif " >{!! strip_tags($row->opt_c) !!}</li>
-                <li style="@if(strtolower($row->opt_correct) == 'd') color:red; @endif " >{!! strip_tags($row->opt_d) !!}</li>
+                <li style="@if(strtolower($row->opt_correct) == 'a') color:red; @endif " >{!! trim(strip_tags($row->opt_a)) !!}</li>
+                <li style="@if(strtolower($row->opt_correct) == 'b') color:red; @endif " >{!! trim(strip_tags($row->opt_b)) !!}</li>
+                <li style="@if(strtolower($row->opt_correct) == 'c') color:red; @endif " >{!! trim(strip_tags($row->opt_c)) !!}</li>
+                <li style="@if(strtolower($row->opt_correct) == 'd') color:red; @endif " >{!! trim(strip_tags($row->opt_d)) !!}</li>
                 @if(trim(strip_tags($row->rationale)))    
                     <br>  
                     <h5 style="color: #008afc;" >Rationale:</h5>

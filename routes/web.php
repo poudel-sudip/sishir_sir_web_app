@@ -870,6 +870,7 @@ Route::get('/student/exam-bookings/{category}/exams','App\Http\Controllers\Stude
 Route::get('/student/exam-bookings/{category}/exams/{exam}/attempt','App\Http\Controllers\Student\ExamHall\ExamController@takeExam')->middleware('role:Student');
 Route::post('/student/exam-bookings/{category}/exams/{exam}/save','App\Http\Controllers\Student\ExamHall\ExamController@store')->middleware('role:Student');
 Route::get('/student/exam-bookings/{category}/exams/{exam}/view','App\Http\Controllers\Student\ExamHall\ExamController@show')->middleware('role:Student');
+Route::get('/student/exam-bookings/{category}/exams/{exam}/download','App\Http\Controllers\Student\ExamHall\ExamController@downloadQuestionPdf')->middleware('role:Student');
 Route::delete('/student/exam-bookings/{category}/exams/{exam}/reset','App\Http\Controllers\Student\ExamHall\ExamController@resetExam')->middleware('role:Student');
 
 //exam hall cqc student section
