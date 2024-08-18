@@ -157,6 +157,10 @@
             </li>
             
             <li class="nav-item">
+              <a class="nav-link" href="/student/tickets"><i class="fas fa-address-card text-danger"></i>Message Tickets</a>
+            </li>
+
+            <li class="nav-item">
               <a class="nav-link" href="/profile"><i class="fas fa-user text-primary" aria-hidden="true"></i>Profile</a>
             </li>
             <li class="nav-item">

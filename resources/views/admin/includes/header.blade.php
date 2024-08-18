@@ -371,6 +371,24 @@
         </div>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#user-ticket-section" aria-expanded="false" aria-controls="user-ticket-section">
+          <i class="mdi mdi-alpha-t-box menu-icon"></i>
+          <span class="menu-title">User Tickets</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="user-ticket-section">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/user-tickets/open') }}">Open Tickets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/user-tickets/closed') }}">Closed Tickets</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
       <li class="nav-item sidebar-actions">
         <a class="nav-link" href="{{ url('/change-password') }}">
           <i class="mdi mdi-key-variant menu-icon"></i>

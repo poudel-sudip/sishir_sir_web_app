@@ -23,6 +23,7 @@ class DailyQuestionsImport implements ToModel, WithHeadingRow
                 'opt_c'=>$row['c'],
                 'opt_d'=>$row['d'],
                 'opt_correct'=>strtoupper($row['correct']),
+                'rationale'=>$row['correct'] ?? '',
                 'show_date'=>$next,
             ]);
         }

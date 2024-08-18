@@ -53,7 +53,7 @@
                         <div class="h5 my-1"><span class="text-primary">Price:</span> @if($exam->discount > 0)  <s class="text-danger mx-2"> Rs. {{$exam->price}} </s> @endif <span class="text-success mx-2"> Rs. {{$exam->price - $exam->discount}} </span> </div>
                         <div class="h5 my-1"><span class="text-primary">Total MCQ Sets:</span><span class="text-success"> {{ $exam->mcq_count}} </span></div>
                         <div class="h5 my-1"><span class="text-primary">Available Videos:</span><span class="text-success"> {{ $exam->video_count}} </span></div>
-                        <div class="h5 my-1"><span class="text-primary">Available PDF :</span><span class="text-success"> {{ $exam->pdf_count}} </span></div>
+                        <div class="h5 my-1"><span class="text-primary">Available PDF :</span><span class="text-success"> {{ $exam->pdf_count > 0 ? $exam->pdf_count : 1}} </span></div>
                         <div class="h5 my-1"><span class="text-primary">Validity:</span><span class="text-success"> 1 Year From The Date of Purchase </span></div>
 
                         <div class="h5 my-1"><span class="text-danger">* Bookings Are Non-Refundable</span> </div>

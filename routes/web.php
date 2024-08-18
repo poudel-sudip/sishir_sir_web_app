@@ -674,7 +674,14 @@ Route::post('/admin/booking-coupons','App\Http\Controllers\Admin\BookingCouponCo
 Route::get('/admin/booking-coupons/used','App\Http\Controllers\Admin\BookingCouponController@usedCoupons')->middleware('role:Admin');
 Route::delete('/admin/booking-coupons/{coupon}','App\Http\Controllers\Admin\BookingCouponController@destroy')->middleware('role:Admin');
 
-
+// admin user ticket management
+Route::get('/admin/user-tickets/open','App\Http\Controllers\Admin\UserTicketController@openTicketList')->middleware('role:Admin');
+Route::get('/admin/user-tickets/closed','App\Http\Controllers\Admin\UserTicketController@closedTicketList')->middleware('role:Admin');
+Route::get('/admin/user-tickets/{ticket}/mark-closed','App\Http\Controllers\Admin\UserTicketController@closeTicket')->middleware('role:Admin');
+Route::delete('/admin/user-tickets/{ticket}','App\Http\Controllers\Admin\UserTicketController@destroyTicket')->middleware('role:Admin');
+Route::get('/admin/user-tickets/{ticket}/contents','App\Http\Controllers\Admin\UserTicketController@ticketMessageList')->middleware('role:Admin');
+Route::post('/admin/user-tickets/{ticket}/contents','App\Http\Controllers\Admin\UserTicketController@ticketMessageStore')->middleware('role:Admin');
+Route::delete('/admin/user-tickets/{ticket}/contents','App\Http\Controllers\Admin\UserTicketController@ticketMessageDestroy')->middleware('role:Admin');
 
 
 
@@ -895,6 +902,14 @@ Route::get('/student/pdf-bank-bookings/{booking}/pdf-contents','App\Http\Control
 Route::get('/student/pdf-bank-bookings/{booking}/pdf-contents/{content}','App\Http\Controllers\Student\PdfBank\PdfContentController@show')->middleware('role:Student');
 
 
+Route::get('/student/tickets','App\Http\Controllers\Student\TicketController@index')->middleware('role:Student');
+Route::get('/student/tickets/create','App\Http\Controllers\Student\TicketController@create')->middleware('role:Student');
+Route::post('/student/tickets','App\Http\Controllers\Student\TicketController@store')->middleware('role:Student');
+Route::get('/student/tickets/{ticket}/mark-closed','App\Http\Controllers\Student\TicketController@closeTicket')->middleware('role:Student');
+Route::delete('/student/tickets/{ticket}','App\Http\Controllers\Student\TicketController@destroyTicket')->middleware('role:Student');
+Route::get('/student/tickets/{ticket}/contents','App\Http\Controllers\Student\TicketController@ticketMessageList')->middleware('role:Student');
+Route::post('/student/tickets/{ticket}/contents','App\Http\Controllers\Student\TicketController@ticketMessageStore')->middleware('role:Student');
+Route::delete('/student/tickets/{ticket}/contents','App\Http\Controllers\Student\TicketController@ticketMessageDestroy')->middleware('role:Student');
 
 
 

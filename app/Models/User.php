@@ -50,6 +50,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Notification::class)->withTimestamps();
     }
 
+    public function userTickets(): HasMany
+    {
+        return $this->hasMany(UserTicket::class,'user_id');
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

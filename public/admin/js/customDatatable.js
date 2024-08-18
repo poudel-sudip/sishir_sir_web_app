@@ -108,6 +108,26 @@
         ]
     });
 
+    $('.all-asc-table').DataTable({
+        "order": [
+            [0, "asc"]
+        ],
+        "lengthMenu": [
+            [-1],
+            ['All']
+        ]
+    });
+
+    $('.all-desc-table').DataTable({
+        "order": [
+            [0, "desc"]
+        ],
+        "lengthMenu": [
+            [-1],
+            ['All']
+        ]
+    });
+
     $('.all-entries-table').DataTable({
         searching: true, // Enable search feature
         ordering: true,  // Enable ordering feature

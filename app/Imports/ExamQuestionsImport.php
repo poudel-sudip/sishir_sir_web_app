@@ -28,6 +28,7 @@ class ExamQuestionsImport implements ToModel, WithHeadingRow
                 'opt_c'=>$row['c'],
                 'opt_d'=>$row['d'],
                 'opt_correct'=>$row['correct'],
+                'rationale'=>$row['rationale'] ?? '',
             ]);
         }
         else
