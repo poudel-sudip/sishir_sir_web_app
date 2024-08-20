@@ -7,7 +7,7 @@
                 <h2>Public Exams</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item"><a href="/public-exams">Public Exams</a></li>
                       <li class="breadcrumb-item active" aria-current="page">Success</li>
                     </ol>

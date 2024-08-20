@@ -4,21 +4,41 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\OpenExams\OpenExam;
+use Illuminate\Support\Facades\URL;
 use App\Models\Exams\Question;
 use App\Models\OpenExams\OpenExamResult;
 use App\Models\ExamHall\ExamHallCategories;
 use App\Helpers\Helper;
-use Illuminate\Support\Facades\URL;
-
+use App\Models\Categories;
 use App\Helpers\CustomPdfHelper;
 
 class PublicExamController extends Controller
 {
-    public function examlist()
+    public function examlist(Request $request)
     {
-        $premiumExams=ExamHallCategories::where('status','Active')->orderByDesc('id')->paginate(12);
-        $exams=OpenExam::where('result_status','=','Unpublished')->get()->sortByDesc('id');
-        return view('front.publicexams.examslist',compact('exams','premiumExams'));
+        $data = [];
+        
+        $data['premium_exams'] = ExamHallCategories::where('status','Active')
+        ->orderByDesc('id')
+        ->paginate(12);
+
+        $data['free_exams'] = OpenExam::where('result_status','=','Unpublished')
+        ->get()
+        ->sortByDesc('id')
+        ->values();
+
+        $data['exam_categories'] = Categories::where('status','=','Active')
+        ->where('type','=','exam_hall')
+        ->orderBy('order')
+        ->whereHas('premium_exams',function($b){
+            $b->where('status','=','Active');
+        })
+        ->get(['id','name','slug','order','status'])
+        ->values();
+
+
+        // dd($data);
+        return view('front.publicexams.examslist',$data);
     }
 
     public function examform($examslug)
@@ -211,6 +231,46 @@ class PublicExamController extends Controller
         return view('front.publicexams.showpremiumexam',compact('exam','counterData'));
     }
 
+    public function categoryPremiumExamList($slug, Request $request)
+    {
+        $exam_group = Categories::where('status','=','Active')
+        ->where('type','=','exam_hall')
+        ->where('slug','=',$slug)
+        ->first();
+
+        if(!$exam_group)
+        {
+            abort(404);
+        }
+
+        $data = [];
+        
+        $data['exam_group'] = $exam_group;
+
+        $data['premium_exams'] = $exam_group->premium_exams()
+        ->where('status','Active')
+        ->orderByDesc('id')
+        ->paginate(12);
+
+        $data['free_exams'] = OpenExam::where('result_status','=','Unpublished')
+        ->get()
+        ->sortByDesc('id')
+        ->values();
+
+        $data['exam_categories'] = Categories::where('status','=','Active')
+        ->where('type','=','exam_hall')
+        ->orderBy('order')
+        ->whereHas('premium_exams',function($b){
+            $b->where('status','=','Active');
+        })
+        ->get(['id','name','slug','order','status'])
+        ->values();
+
+
+        // dd($data);
+        return view('front.publicexams.category_examslist',$data);
+        
+    }
 
     public function examQuestionsPdfDownload($examslug, Request $request)
     {

@@ -9,6 +9,7 @@ use App\Models\ExamHall\ExamHallEvaluation;
 use App\Models\ExamHall\ExamHallResults;
 use App\Models\ExamHall\ExamHallBookings;
 use App\Models\ExamHall\ExamHallCQC;
+use App\Models\Categories as ExamGroup;
 
 class ExamHallController extends Controller
 {
@@ -25,13 +26,15 @@ class ExamHallController extends Controller
 
     public function create()
     {
-        return view('admin.examhall.create');
+        $data['groups'] = ExamGroup::where('type','=','exam_hall')->where('status','=','Active')->get();
+        return view('admin.examhall.create',$data);
     }
 
     public function store(Request $request)
     {
         // dd($request->all());
         $request->validate([
+            "exam_group" => "nullable|numeric",
             'title'=>'string|required|min:5',
             'price'=>'required|numeric',
             'discount'=>'required|numeric',
@@ -44,6 +47,7 @@ class ExamHallController extends Controller
         $image=request('image')->store('uploads','public');
 
         ExamHallCategories::create([
+            'group_id'=>$request->exam_group ?? null,
             'title'=>$request->title,
             'price'=>$request->price,
             'discount'=>$request->discount ?? 0,
@@ -58,13 +62,16 @@ class ExamHallController extends Controller
 
     public function edit(ExamHallCategories $category)
     {
-        return view('admin.examhall.edit',compact('category'));
+        $data['groups'] = ExamGroup::where('type','=','exam_hall')->where('status','=','Active')->get();
+        $data['category'] = $category;
+        return view('admin.examhall.edit',$data);
     }
 
     public function update(Request $request, ExamHallCategories $category)
     {
         // dd($category,$request->all());
         $request->validate([
+            "exam_group" => "nullable|numeric",
             "categoryID" => "required|numeric",
             "title" => "required|string|min:5",
             "price" => "required|numeric",
@@ -84,6 +91,7 @@ class ExamHallController extends Controller
         }
 
         $category->update([
+            'group_id'=>$request->exam_group ?? null,
             'title'=>$request->title,
             'price'=>$request->price,
             'discount'=>$request->discount ?? 0,

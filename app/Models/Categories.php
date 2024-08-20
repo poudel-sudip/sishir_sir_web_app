@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 use App\Models\Books\Book;
+use App\Models\ExamHall\ExamHallCategories;
 
 class Categories extends Model
 {
@@ -57,6 +58,11 @@ class Categories extends Model
     public function imp_links(): HasMany
     {
         return$this->hasMany(ImportantLink::class,'category_id');
+    }
+
+    public function premium_exams(): HasMany
+    {
+        return$this->hasMany(ExamHallCategories::class,'group_id');
     }
 
     public function courses(): HasMany

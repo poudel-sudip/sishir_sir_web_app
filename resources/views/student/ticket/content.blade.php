@@ -21,7 +21,7 @@
                 <div class="chat-history" id="chat_history_block">
                     <ul>
                     @forelse($messages as $row)
-                        @if($ticket->user_id == auth()->user()->id)
+                        @if($ticket->user_id == $row->user_id)
                         <li class="clearfix">
                             <div class="message-data align-right mb-2">
                             <span class="message-data-name" ><strong>{{$row->user->name ?? 'Anomyus'}}</strong></span>

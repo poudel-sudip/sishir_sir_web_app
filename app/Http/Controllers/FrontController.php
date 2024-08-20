@@ -46,14 +46,9 @@ class FrontController extends Controller
 {
     public function index()
     {
-        // $categories=Categories::all()->where('status','=','Active')->sortBy('order');
-        // $popularCourses=Course::where('isPopular','=','Yes')->where('status','=','Active')->orderBy('order')->take(10)->get();
-        // $runningBatches=Batch::all()->where('status','=','Running')->take(8)->sortByDesc('created_at');
-        // $orientations = Orientation::whereDate('date','>=',date("Y-m-d"))->where('status','=','Active')->get();
 
         $data = [];
-        // $data['sliders'] = Slider::all()->sortBy('order');
-        $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(4)->get(['id','title','slug','image','created_at']);
+        // $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(4)->get(['id','title','slug','image','created_at']);
         $data['exams'] = OpenExam::where('result_status','=','Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('id')->first();
         $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->take(5)->get(['id','title','slug','image','author','created_at']);
@@ -61,8 +56,6 @@ class FrontController extends Controller
         $data['testimonials'] = Testimonial::where('status','=','Active')->orderByDesc('id')->take(9)->get();
         $data['ads'] = Advertisement::where('status','=','Active')->get();
         $data['homepopup'] = HomePopup::where('status','=','Active')->orderByDesc('id')->first();
-        // $data['updates'] = MenuItem::where('status','=','Active')->orderByDesc('id')->take(10)->get(['id','category_id','name','slug']);
-        // $data['libraries'] = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->take(8)->get();
 
         $data['dynamic_forms'] = DynamicForm::where('banner','!=','')->where('status','=','Active')->orderByDesc('id')->take(5)->get();
         $data['videos'] = FreeVideo::orderByDesc('id')->take(9)->get();
@@ -76,21 +69,13 @@ class FrontController extends Controller
 
         $data['today_question'] = $today_question;
         $data['img_gallery'] = ImageGallery::where('status','=',1)->orderByDesc('id')->take(9)->get();
-        // $data['pdf_banks'] = PDFBank::where('status','=','Active')
-        // ->orderByDesc('id')->take(9)
-        // ->withCount(['chapters as pdf_count' => function($ch){
-        //     $ch->where('status','=','Active');
-        // }])
-        // ->get()
-        // ->values();
-
+        
         $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')
-        // ->orderByDesc('id')
         ->orderBy('order')
         ->whereHas('ebooks',function($b){
             $b->where('status','=','Active');
         })
-        // ->take(6)
+        ->take(6)
         ->get()
         ->values();
 
@@ -105,15 +90,59 @@ class FrontController extends Controller
                 });
                 
             })
-            // ->whereHas('chapters',function($ch){ $ch->where('status','=','Active'); })
+            ->select(['id','category_id','type','title','slug','author','price','discount','status','thumbnail'])
             ->withCount(['chapters as pdf_count' => function($ch){
                 $ch->where('status','=','Active');
             }])
             ->orderByDesc('id')
             ->take(4)
-            ->get(['id','category_id','type','title','slug','author','price','discount','status','thumbnail']);
+            ->get();
         }
         
+        $premium_exams = ExamHallCategories::where('status','Active')
+        ->orderByDesc('id')
+        ->take(4)
+        ->get(['id','title','slug','image','created_at'])
+        ->map(function($b){
+            $b->mcq_count = $b->category_exams()->count();
+            return $b;            
+        })
+        ->values();
+
+        $data['examhall_categories'] = Categories::where('status','=','Active')
+        ->where('type','=','exam_hall')
+        ->orderBy('order')
+        ->whereHas('premium_exams',function($b){
+            $b->where('status','=','Active');
+        })
+        // ->take(10)
+        ->get()
+        ->values();
+
+        foreach ($data['examhall_categories'] as $cat) 
+        {
+            $cat->exam_sets = $cat->premium_exams()
+            ->where('status','=','Active')
+            ->select(['id','group_id','title','slug','image','created_at'])
+            ->withCount(['category_exams as mcq_count'])
+            ->orderByDesc('id')
+            ->take(4)
+            ->get();
+        }
+
+        if(!$data['examhall_categories']->count())
+        {
+            $data['examhall_categories'] = collect([
+                (object)[
+                    'id' => 'premium',
+                    'name' => 'Premium',
+                    'slug' => 'premium',
+                    "order" => 1,
+                    "exam_sets" => $premium_exams,
+                ],
+            ]);
+        }
+
         $data['updates'] = [];
 
         $menu_sub_items = MenuSubItem::where('status','=','Active')
@@ -242,13 +271,24 @@ class FrontController extends Controller
             ];
         })->toArray();
 
-        $premium_exam_updates = $data['premiumExams']->map(function($b){
+        // $premium_exam_updates = $data['premiumExams']->map(function($b){
+        //     return (object)[
+        //         'title' => $b->title,
+        //         'created_at' => $b->created_at,
+        //         'link' => '/exam-hall/premium/'.$b->slug,
+        //     ];
+        // })->toArray();
+
+        $premium_exam_updates = $premium_exams
+        ->map(function($b){
             return (object)[
                 'title' => $b->title,
                 'created_at' => $b->created_at,
                 'link' => '/exam-hall/premium/'.$b->slug,
             ];
-        })->toArray();
+        })
+        ->values()
+        ->toArray();
 
         $pdf_bank_updates = PDFBank::where('status','=','Active')
         ->orderByDesc('id')

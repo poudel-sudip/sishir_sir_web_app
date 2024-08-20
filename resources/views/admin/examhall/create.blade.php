@@ -16,13 +16,31 @@
             </nav>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">Add Exam Set</div>
                     <div class="card-body">
                         <form method="POST" action="{{ ('/admin/exam-hall') }}" enctype="multipart/form-data" class="forms-sample">
                             @csrf
                             
+                            <div class="form-group row">
+                                <label for="exam_group" class="col-md-5 col-form-label">{{ __('Exam Set Group') }}</label>
+
+                                <div class="col-md-7">
+                                    <select id="exam_group" class="form-control @error('exam_group') is-invalid @enderror" name="exam_group" value="{{ old('exam_group') }}" >
+                                        <option value="">Select a Exam Group</option>
+                                        @foreach($groups as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('exam_group')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="title" class="col-md-5 col-form-label">{{ __('Exam Set Name') }}</label>
 

@@ -16,13 +16,14 @@
             </nav>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">Edit Exam Sets : {{$category->title}} </div>
                     <div class="card-body">
                         <form method="POST" action="/admin/exam-hall/{{$category->id }}" enctype="multipart/form-data" class="forms-sample">
                             @csrf
                             @method('PATCH')
+
                             <div class="form-group row">
                                 <label for="categoryID" class="col-md-5 col-form-label">{{ __('Exam Set ID') }}</label>
 
@@ -30,6 +31,25 @@
                                     <input id="categoryID" type="text" class="form-control @error('categoryID') is-invalid @enderror" name="categoryID" value="{{ old('categoryID') ?? $category->id }}" required readonly>
 
                                     @error('categoryID')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="exam_group" class="col-md-5 col-form-label">{{ __('Exam Set Group') }}</label>
+
+                                <div class="col-md-7">
+                                    <select id="exam_group" class="form-control @error('exam_group') is-invalid @enderror" name="exam_group" value="{{ old('exam_group') ?? $category->examGroup->id ?? '' }}" >
+                                        <option value="{{$category->examGroup->id ?? ''}}">{{$category->examGroup->name ?? ''}}</option>
+                                        <option value="">----------------</option>
+                                        @foreach($groups as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('exam_group')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

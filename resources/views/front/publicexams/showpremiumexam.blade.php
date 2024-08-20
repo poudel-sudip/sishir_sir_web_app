@@ -47,7 +47,11 @@
                     </div>
 
                     <div class="col-md-4">
-                        <div class="h5 my-1 text-end"> <span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span> </div>
+                        <div class="h5 my-1 text-end"> 
+                            <span class="mx-2 text-nowrap text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '0'}}</span> 
+                            <span class="mx-2 text-nowrap text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
+                        </div>
+
                         {{-- <div class="h5 my-1">Exam Price: {{$exam->price}} </div> --}}
                         {{-- <div class="h5 my-1">Discounted Price: {{$exam->price - $exam->discount}} </div> --}}
                         <div class="h5 my-1"><span class="text-primary">Price:</span> @if($exam->discount > 0)  <s class="text-danger mx-2"> Rs. {{$exam->price}} </s> @endif <span class="text-success mx-2"> Rs. {{$exam->price - $exam->discount}} </span> </div>
@@ -83,10 +87,23 @@
                         <div class="mt-1">
                             <a class="btn btn-danger d-block" href="//www.youtube.com/watch?v=5Uo_lHUtoHs" target="_blank">Watch Video To Learn About Booking Process <i class="fa fa-video"></i> </a>
                         </div>
+
+                        <div class="mt-5">
+                            <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <script>
+        function handleShare(event)
+        {
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'share', page: 'Premium Exam Detail Show',pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
+        }
+    </script>
 
 @endsection

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\ExamHall\ExamHallExams;
 use App\Models\ExamHall\ExamHallBookings;
 use App\Models\User;
+use App\Models\Categories;
 
 class ExamHallCategories extends Model
 {
@@ -48,6 +49,11 @@ class ExamHallCategories extends Model
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function examGroup(): BelongsTo
+    {
+        return $this->belongsTo(Categories::class, 'group_id');
     }
     
 }

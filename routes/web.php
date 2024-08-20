@@ -214,6 +214,15 @@ Route::get('/admin/open-exams/{exam}/results/export','App\Http\Controllers\Admin
 Route::get('/admin/open-exams/{exam}/results/delete-dublicates','App\Http\Controllers\Admin\Exams\OpenExamController@deleteDublicate')->middleware('role:Admin');
 Route::delete('/admin/open-exams/{exam}/results/{result}','App\Http\Controllers\Admin\Exams\OpenExamController@resultDelete')->middleware('role:Admin');
 
+// admin exam hall exam groups management
+Route::get('/admin/exam-hall/groups','App\Http\Controllers\Admin\ExamHall\ExamGroupController@groupIndex')->middleware('role:Admin');
+Route::get('/admin/exam-hall/groups/create','App\Http\Controllers\Admin\ExamHall\ExamGroupController@groupCreate')->middleware('role:Admin');
+Route::post('/admin/exam-hall/groups','App\Http\Controllers\Admin\ExamHall\ExamGroupController@groupStore')->middleware('role:Admin');
+Route::get('/admin/exam-hall/groups/{group}/edit','App\Http\Controllers\Admin\ExamHall\ExamGroupController@groupEdit')->middleware('role:Admin');
+Route::patch('/admin/exam-hall/groups/{group}','App\Http\Controllers\Admin\ExamHall\ExamGroupController@groupUpdate')->middleware('role:Admin');
+Route::delete('/admin/exam-hall/groups/{group}','App\Http\Controllers\Admin\ExamHall\ExamGroupController@groupDestroy')->middleware('role:Admin');
+Route::get('/admin/exam-hall/groups/{group}/exam-sets','App\Http\Controllers\Admin\ExamHall\ExamGroupController@groupExamSets')->middleware('role:Admin');
+
 //routes for exam hall admin section
 Route::get('/admin/exam-hall','App\Http\Controllers\Admin\ExamHall\ExamHallController@index')->middleware('role:Admin');
 Route::get('/admin/exam-hall/create','App\Http\Controllers\Admin\ExamHall\ExamHallController@create')->middleware('role:Admin');
@@ -1126,6 +1135,7 @@ Route::get('/results/{examslug}', 'App\Http\Controllers\PublicExamController@res
 
 //front premium exams section
 Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamController@premiumExamShow');
+Route::get('/exam-hall/category/{slug}', 'App\Http\Controllers\PublicExamController@categoryPremiumExamList');
 
 //front ebooks
 Route::get('/books','App\Http\Controllers\FrontController@books');

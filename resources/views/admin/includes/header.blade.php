@@ -110,6 +110,9 @@
         <div class="collapse" id="examhall-basic">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/exam-hall/groups') }}">Exam Groups</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/exam-hall') }}">Exam Sets</a>
             </li>
             <li class="nav-item">
