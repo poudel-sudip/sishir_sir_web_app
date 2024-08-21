@@ -166,6 +166,7 @@ Route::delete('/admin/users/{user}','App\Http\Controllers\Admin\Users\UsersContr
 Route::get('/admin/exam-category','App\Http\Controllers\Admin\Exams\ExamCategoryController@index')->middleware('role:Admin');
 Route::get('/admin/exam-category/create','App\Http\Controllers\Admin\Exams\ExamCategoryController@create')->middleware('role:Admin');
 Route::post('/admin/exam-category','App\Http\Controllers\Admin\Exams\ExamCategoryController@store')->middleware('role:Admin');
+Route::patch('/admin/exam-category','App\Http\Controllers\Admin\Exams\ExamCategoryController@update')->middleware('role:Admin');
 Route::delete('/admin/exam-category/{category}','App\Http\Controllers\Admin\Exams\ExamCategoryController@destroy')->middleware('role:Admin');
 Route::get('/admin/exam-category/{category}/exams','App\Http\Controllers\Admin\Exams\ExamCategoryController@exams')->middleware('role:Admin');
 Route::get('/admin/exam-category/{category}/getexams','App\Http\Controllers\Admin\Exams\ExamCategoryController@catExams')->middleware('role:Admin');

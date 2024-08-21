@@ -31,6 +31,23 @@ class ExamCategoryController extends Controller
         return redirect('/admin/exam-category');
     }
 
+    public function update(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'category_id'=>'numeric|required',
+            'category_name'=>'string|required'
+        ]);
+
+        $category = ExamCategory::find($request->category_id);
+        if($category)
+        {
+            $category->update(['title'=>ucwords($request->category_name)]);
+        }
+
+        return redirect('/admin/exam-category');
+    }
+
     public function destroy(ExamCategory $category)
     {
         $category->delete();

@@ -9,21 +9,6 @@
 
 
 @section('content')
-
-    <style>
-        .payment-images span img {
-            cursor: pointer;
-            border-radius: 5px;
-            max-height: 60px;
-        }
-
-        .payment-images span img.active{
-            border-color: #027a20 !important;
-            border-width: 2px !important;
-        }
-
-    </style>
-
     <div class="student-content-wrapper">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -71,23 +56,27 @@
                                 <label for="verificationMode" class="col-md-4 col-form-label text-md-right">{{ __('Verification Mode') }}</label>
 
                                 <div class="col-md-8">
-
-                                    <div class="d-flex payment-images">
+                                    <select name="verificationMode" id="verificationMode" class="form-control @error('verificationMode') is-invalid @enderror" value="{{ old('verificationMode') ?? $booking->verificationMode }}" required>
+                                        <option value="">Choose One....</option>
                                         @if($nepalpay_pay_data)
-                                        <span class="p-1"><img src="/images/card8.jpg" alt="NepalPay" class="border img img-fluid"  ></span>
+                                        <option value="NepalPay">Nepal Pay Wallet</option>
                                         @endif
                                         @if($esewa_pay_data)
-                                        <span class="p-1"><img src="/images/card1.jpg" alt="Esewa" class="border img img-fluid"  ></span>
+                                        <option value="Esewa">Esewa</option>
                                         @endif
                                         @if($fonepay_pay_data)
-                                        <span class="p-1"><img src="/images/card5.jpg" alt="FonePay" class="border img img-fluid"  ></span>
+                                        <option value="FonePay">FonePay</option>
                                         @endif
-
-                                        <span class="p-1"><img src="/images/card9.jpg" alt="Coupon" class="border img img-fluid"  ></span>
-                                        <span class="p-1"><img src="/images/card10.jpg" alt="Manual" class="border img img-fluid"  ></span>                                     
                                         
-                                    </div>
-                                    
+                                        <option value="Coupon">Coupon</option>
+                                        <option value="Manual">Manual</option>
+
+                                    </select>
+                                    @error('verificationMode')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>                           
                             
@@ -103,7 +92,10 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                   
+                                    {{-- <button type="button" class="btn btn-primary d-none" id="submitbtn" disabled>
+                                        {{ __('Verify') }}
+                                    </button> --}}
+
                                     <div id="getPaymentBtn" class="d-inline"></div>
                                     
                                     <a href="{{ url('/student/pdf-bank-bookings') }}" class="btn btn-secondary">Verify Later</a>
@@ -113,56 +105,49 @@
                     </div>
                 </div>
             </div>
-            
+            {{-- <div class="col-md-4 row">
+                <div class="col-12">
+                    <img src="{{ asset('images/payment-details.png') }}" alt="" class="w-100">
+                </div> 
+            </div> --}}
         </div>
     </div>
 
-
     <script>
 
-        $(document).ready(function() {
-            $('.payment-images span img').click(function() {
+        $(document).on('change', '#verificationMode', function() {
+            $("#verifyCourseForm").attr('action','#');
+            $('#getPaymentBtn').html('');
+            $('#alert_message').html('');
+            $('#alert_message').parent().addClass('d-none');
+            $('#otherFormFields').html('');
 
-                $('.payment-images span img').removeClass('active');
-                $(this).addClass('active');
-                
-                $("#verifyCourseForm").attr('action','#');
-                $('#getPaymentBtn').html('');
-                $('#alert_message').html('');
-                $('#alert_message').parent().addClass('d-none');
-                $('#otherFormFields').html('');
-                
-                var mode = $(this).attr('alt');
+            var mode = $(this).val();
 
-                if(mode=="Manual")
-                {
-                    getManualPayment(); 
-                }
-                else if(mode=="Coupon")
-                {
-                    getCouponPayment();
-                }
-                else if(mode=="Esewa")
-                {
-                    getEsewaPayment();
-                }
-                else if(mode=="FonePay")
-                {
-                    getFonePayPayment();
-                }
-                else if(mode=="NepalPay")
-                {
-                    getNepalPayPayment();
-                }
-                else{}
-
-            });
-        });
-       
-    </script>
-
-    <script>
-                
+            if(mode=="Manual")
+            {
+                getManualPayment(); 
+            }
+            else if(mode=="Coupon")
+            {
+                getCouponPayment();
+            }
+            else if(mode=="Esewa")
+            {
+                getEsewaPayment();
+            }
+            else if(mode=="FonePay")
+            {
+                getFonePayPayment();
+            }
+            else if(mode=="NepalPay")
+            {
+                getNepalPayPayment();
+            }
+            else{}
+          
+        }); 
+        
         function getManualPayment() 
         {
             $("#verifyCourseForm").attr('action','/student/pdf-bank-bookings/{{$booking->id}}/manual-pay');
@@ -195,9 +180,7 @@
                     @enderror
                 </div>
             </div>
-
-            <input type="hidden" name="verificationMode" value="Manual">
-
+            
             `;
 
             $('#otherFormFields').removeClass('d-none');
@@ -227,8 +210,6 @@
                     @enderror
                 </div>
             </div>
-
-            <input type="hidden" name="verificationMode" value="Coupon">
             `;
 
             $('#otherFormFields').removeClass('d-none');

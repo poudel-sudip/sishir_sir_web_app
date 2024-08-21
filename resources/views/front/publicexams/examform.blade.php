@@ -33,11 +33,12 @@
                             <form method="POST" action="/public-exams/{{$exam->slug}}/attempt">
                                 @csrf
 
-                                @if($exam->exam && $exam->exam->questions)
-                                    <div class="form-group row">
-                                        <label for="name" class="col-md-12 col-form-label text-end">Questions: {{$exam->exam->questions->count()}} </label>                                   
-                                    </div>
-                                @endif
+                                <div class="form-group row">
+                                    <label for="exam_time" class="col col-form-label text-start">Time: {{$exam->exam_time}} </label>                                   
+                                    <label for="exam_questions" class="col col-form-label text-center">Questions: {{$exam->exam_questions}} </label>                                   
+                                    <label for="exam_attempts" class="col col-form-label text-end">Total Attempts: {{$exam->exam_attempts}} </label>                                   
+                                </div>
+                                <hr>
                                 
                                 <div class="form-group row">
                                     <label for="name" class="col-md-6 col-form-label">{{ __('Name') }}</label>

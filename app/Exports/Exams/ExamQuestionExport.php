@@ -42,6 +42,7 @@ class ExamQuestionExport implements FromCollection, WithHeadings
 
     public function headings(): array
     {
-        return ["SN", "Question", "Option A","Option B","Option C","Option D","Correct Option",'Rationale'];
+        return ["SN", "question", "a","b","c","d","correct",'rationale'];
+        // return ["SN", "Question", "Option A","Option B","Option C","Option D","Correct Option",'Rationale'];
     }
 }

@@ -9,6 +9,21 @@
 
 
 @section('content')
+
+    <style>
+        .payment-images span img {
+            cursor: pointer;
+            border-radius: 5px;
+            max-height: 60px;
+        }
+
+        .payment-images span img.active{
+            border-color: #027a20 !important;
+            border-width: 2px !important;
+        }
+
+    </style>
+
     <div class="student-content-wrapper">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -56,31 +71,25 @@
                                 <label for="verificationMode" class="col-md-4 col-form-label text-md-right">{{ __('Verification Mode') }}</label>
 
                                 <div class="col-md-8">
-                                    <select name="verificationMode" id="verificationMode" class="form-control @error('verificationMode') is-invalid @enderror" value="{{ old('verificationMode') ?? $booking->verificationMode }}" required>
-                                        <option value="">Choose One....</option>
+
+                                    <div class="d-flex payment-images">
                                         @if($nepalpay_pay_data)
-                                        <option value="NepalPay">Nepal Pay Wallet</option>
+                                        <span class="p-1"><img src="/images/card8.jpg" alt="NepalPay" class="border img img-fluid"  ></span>
                                         @endif
                                         @if($esewa_pay_data)
-                                        <option value="Esewa">Esewa</option>
+                                        <span class="p-1"><img src="/images/card1.jpg" alt="Esewa" class="border img img-fluid"  ></span>
                                         @endif
                                         @if($fonepay_pay_data)
-                                        <option value="FonePay">FonePay</option>
+                                        <span class="p-1"><img src="/images/card5.jpg" alt="FonePay" class="border img img-fluid"  ></span>
                                         @endif
-                                        
-                                        <option value="Coupon">Coupon</option>
-                                        <option value="Manual">Manual</option>
 
-                                        {{-- <option value="Khalti">Khalti</option> --}}
+                                        <span class="p-1"><img src="/images/card9.jpg" alt="Coupon" class="border img img-fluid"  ></span>
+                                        <span class="p-1"><img src="/images/card10.jpg" alt="Manual" class="border img img-fluid"  ></span>                                     
                                         
-                                    </select>
-                                    @error('verificationMode')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    </div>
+                                    
                                 </div>
-                            </div>
+                            </div>  
 
                             <div id="otherFormFields" class="d-none">
 
@@ -116,40 +125,51 @@
         </div>
     </div>
 
+
     <script>
 
-        $(document).on('change', '#verificationMode', function() {
-            $("#verifyCourseForm").attr('action','#');
-            $('#getPaymentBtn').html('');
-            $('#alert_message').html('');
-            $('#alert_message').parent().addClass('d-none');
-            $('#otherFormFields').html('');
+        $(document).ready(function() {
+            $('.payment-images span img').click(function() {
 
-            var mode = $(this).val();
+                $('.payment-images span img').removeClass('active');
+                $(this).addClass('active');
+                
+                $("#verifyCourseForm").attr('action','#');
+                $('#getPaymentBtn').html('');
+                $('#alert_message').html('');
+                $('#alert_message').parent().addClass('d-none');
+                $('#otherFormFields').html('');
+                
+                var mode = $(this).attr('alt');
 
-            if(mode=="Manual")
-            {
-                getManualPayment(); 
-            }
-            else if(mode=="Coupon")
-            {
-                getCouponPayment();
-            }
-            else if(mode=="Esewa")
-            {
-                getEsewaPayment();
-            }
-            else if(mode=="FonePay")
-            {
-                getFonePayPayment();
-            }
-            else if(mode=="NepalPay")
-            {
-                getNepalPayPayment();
-            }
-            else{}
-          
-        }); 
+                if(mode=="Manual")
+                {
+                    getManualPayment(); 
+                }
+                else if(mode=="Coupon")
+                {
+                    getCouponPayment();
+                }
+                else if(mode=="Esewa")
+                {
+                    getEsewaPayment();
+                }
+                else if(mode=="FonePay")
+                {
+                    getFonePayPayment();
+                }
+                else if(mode=="NepalPay")
+                {
+                    getNepalPayPayment();
+                }
+                else{}
+
+            });
+        });
+       
+    </script>
+
+    <script>       
         
         function getManualPayment() 
         {
@@ -183,7 +203,8 @@
                     @enderror
                 </div>
             </div>
-            
+
+            <input type="hidden" name="verificationMode" value="Manual">
             `;
 
             $('#otherFormFields').removeClass('d-none');
@@ -213,6 +234,8 @@
                     @enderror
                 </div>
             </div>
+
+            <input type="hidden" name="verificationMode" value="Coupon">
             `;
 
             $('#otherFormFields').removeClass('d-none');

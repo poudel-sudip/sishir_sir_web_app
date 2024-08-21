@@ -44,6 +44,17 @@
                         <div class="d-block text-justify mt-2">
                             {!! $exam->description !!}
                         </div>
+
+                        <div class="mt-2" style="color:#1375b9 !important;">
+                            @if($exam->mcq_count)
+                                <h5>Available MCQ Sets:</h5>
+                                <ol>
+                                    @foreach($exam->mcq_sets as $row)
+                                    <li>{{$row->exam->name ?? ''}}</li>
+                                    @endforeach
+                                </ol>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="col-md-4">

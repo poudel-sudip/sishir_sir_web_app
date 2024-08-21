@@ -75,7 +75,7 @@ class FrontController extends Controller
         ->whereHas('ebooks',function($b){
             $b->where('status','=','Active');
         })
-        ->take(6)
+        // ->take(6)
         ->get()
         ->values();
 

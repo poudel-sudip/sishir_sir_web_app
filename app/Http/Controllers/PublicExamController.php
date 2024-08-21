@@ -49,6 +49,15 @@ class PublicExamController extends Controller
            abort(404);
         }
 
+        $exam->exam_attempts = $exam->results()->count();
+        $exam->exam_questions = $exam->exam->questions()->count() ?? 0;
+        $etime = explode(':',$exam->exam->exam_time ?? '00:00');
+        $etimestr = trim(($etime[0] > 0 ? ((int)$etime[0].' Hour') : '').' '.((int)$etime[1].' Minutes'))  ;
+        $exam->exam_time = $etimestr;
+
+        unset($exam->exam);
+
+        // dd($exam);
         return view('front.publicexams.examform',compact('exam'));
     }
 
@@ -224,6 +233,17 @@ class PublicExamController extends Controller
            abort(404);
         }
 
+
+        $exam->mcq_sets = $exam->category_exams()
+        ->with('exam:id,name,status')
+        ->whereHas('exam',function($e){
+            $e->where('status','=','Active');
+        })
+        ->get()
+        ->sortByDesc('id')
+        ->values();
+
+        // dd($exam);
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
         $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
         $counterData = Helper::pageCounterCounts('Premium Exam Show',$pgurl);
