@@ -752,7 +752,8 @@ Route::get('/moderator/exams/{exam}/questions','App\Http\Controllers\Moderator\E
 Route::get('/moderator/exams/{exam}/questions/create','App\Http\Controllers\Moderator\ExamController@questionCreate')->middleware('role:Moderator');
 Route::get('/moderator/exams/{exam}/questions/upload','App\Http\Controllers\Moderator\ExamController@questionUpload')->middleware('role:Moderator');
 Route::post('/moderator/exams/{exam}/questions/import','App\Http\Controllers\Moderator\ExamController@questionImport')->middleware('role:Moderator');
-Route::get('/moderator/exams/{exam}/questions/download','App\Http\Controllers\Moderator\ExamController@questionDownload')->middleware('role:Moderator');
+Route::get('/moderator/exams/{exam}/questions/download-excel','App\Http\Controllers\Moderator\ExamController@questionDownloadExcel')->middleware('role:Moderator');
+Route::get('/moderator/exams/{exam}/questions/download-pdf','App\Http\Controllers\Moderator\ExamController@questionDownloadPdf')->middleware('role:Moderator');
 Route::post('/moderator/exams/{exam}/questions','App\Http\Controllers\Moderator\ExamController@questionStore')->middleware('role:Moderator');
 Route::get('/moderator/exams/{exam}/questions/{question}/edit','App\Http\Controllers\Moderator\ExamController@questionEdit')->middleware('role:Moderator');
 Route::get('/moderator/exams/{exam}/questions/{question}','App\Http\Controllers\Moderator\ExamController@questionShow')->middleware('role:Moderator');

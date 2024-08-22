@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    Add New Message Ticket
+    Add New Ask/Complain Message
 @endsection
 @section('student-title-icon')
     <i class="fas fa-address-card"></i>
@@ -12,7 +12,7 @@
         <div class="row justify-content-center">
             <div class="col-md-11">
                 <div class="card">
-                    <div class="card-header">{{ __('Add New Message Ticket') }}</div>
+                    <div class="card-header">{{ __('Add New Ask/Complain Message ') }}</div>
 
                     <div class="card-body enroll_form">
 
@@ -21,7 +21,7 @@
                             @csrf
                             
                             <div class="form-group row">
-                                <label for="ticket_title" class="col-md-4 col-form-label text-md-right">{{ __('Ticket Title') }}</label>
+                                <label for="ticket_title" class="col-md-4 col-form-label text-md-right">{{ __(' Message Title') }}</label>
 
                                 <div class="col-md-8">
                                     <input id="ticket_title" type="text" class="form-control @error('ticket_title') is-invalid @enderror" name="ticket_title" value="{{ old('ticket_title') }}" required >
@@ -35,10 +35,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="ticket_message" class="col-md-4 col-form-label text-md-right">{{ __('Ticket Message') }}</label>
+                                <label for="ticket_message" class="col-md-4 col-form-label text-md-right">{{ __(' Message Body') }}</label>
 
                                 <div class="col-md-8">
-                                    {{-- <input id="ticket_message" type="text" class="form-control @error('ticket_message') is-invalid @enderror" name="ticket_message" value="{{ old('ticket_message') }}" required > --}}
                                     <textarea name="ticket_message" id="ticket_message" class="summernote form-control @error('ticket_message') is-invalid @enderror" required>{{ old('ticket_message') }}</textarea>
 
                                     @error('ticket_message')

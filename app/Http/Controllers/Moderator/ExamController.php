@@ -15,6 +15,8 @@ use App\Models\Exams\Exam;
 use App\Models\Exams\Question;
 use App\Models\OpenExams\OpenExam;
 
+use App\Helpers\CustomPdfHelper;
+
 class ExamController extends Controller
 {
     public function __construct()
@@ -297,12 +299,28 @@ class ExamController extends Controller
 
     }
 
-    public function questionDownload(Request $request, Exam $exam)
+    public function questionDownloadExcel(Request $request, Exam $exam)
     {
         $symbols = array("~"," ", "!", "@", "#", "$", "%", "^", "&", "*", "+", "=", ";", "\"", "<", ">", "/", "|", "`");
 
         $filename = str_replace($symbols,'_',$exam->name).'_questions.xlsx';
         return Excel::download(new ExamQuestionExport($exam), $filename);
+    }
+
+    public function questionDownloadPdf(Request $request, Exam $exam)
+    {
+        $etime = explode(':',$exam->exam_time);
+        $etimestr = trim(($etime[0] > 0 ? ((int)$etime[0].' Hour') : '').' '.((int)$etime[1].' Minutes'))  ;
+        $exam->exam_solve_time = $etimestr;
+        $exam->question_count = $exam->questions()->count();
+        
+        // return view('exports.pdf.mcq_exam_questions',compact('exam'));
+        $html = view('exports.pdf.mcq_exam_questions', compact('exam'))->render();
+
+        $symbols = array("\"", "/", "|");
+        $title = str_replace($symbols,'-',$exam->name).' MCQ Questions';
+
+        return CustomPdfHelper::createPdf($title,$html);
     }
 
     public function openExamIndex()

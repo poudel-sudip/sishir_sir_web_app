@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    User Tickets
+    User Tickets to Ask/Complain Admin
 @endsection
 
 @section('student-title-icon')
@@ -12,7 +12,7 @@
     <div class="student-content-wrapper student-enroll-section">
         <div class="row mb-2">
             <div class="col-md-12 text-end">
-                <a class="student-enroll-btn" href="/student/tickets/create">Add New Ticket</a>
+                <a class="student-enroll-btn" href="/student/tickets/create">Ask/Complain Admin</a>
             </div>
         </div>
         <div class="row">

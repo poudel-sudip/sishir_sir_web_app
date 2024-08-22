@@ -6297,3 +6297,19 @@ label.star:before {
 .course-details .side-navbar a{
     color: #fff;
 }
+
+.page-link {
+    border-color: #1375b9;
+}
+
+.page-link:hover {
+    color: #fff;
+    background-color: #f73a00;
+    border-color: #1375b9
+}
+
+.page-item.active .page-link {
+    color: #fff;
+    background-color: #e3342f;
+    border-color: #e3342f
+}

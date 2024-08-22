@@ -734,3 +734,19 @@
     clear: both;
     height: 0;
 }
+
+.page-link {
+    border-color: #1375b9;
+}
+
+.page-link:hover {
+    color: #fff;
+    background-color: #f73a00;
+    border-color: #1375b9
+}
+
+.page-item.active .page-link {
+    color: #fff;
+    background-color: #e3342f;
+    border-color: #e3342f
+}

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Exams\Exam;
 use App\Models\Exams\ExamCategory;
 use App\Models\User;
+use App\Models\ExamHall\ExamHallExams;
 
 class ExamController extends Controller
 {
@@ -162,13 +163,17 @@ class ExamController extends Controller
      */
     public function destroy(Exam $exam)
     {
+
+        ExamHallExams::where('exam_id','=',$exam->id)->delete();
         $exam->openExams()->delete();
         $exam->batchExams()->delete();
         $exam->questions()->delete();
         $exam->results()->delete();
         $exam->evaluations()->delete();
         $exam->delete();
-        return redirect('/admin/exams')->with('success','Data Deleted Successfuly');
+
+        // return redirect('/admin/exams')->with('success','Data Deleted Successfuly');
+        return redirect()->back()->with('success','Data Deleted Successfuly');
    
     }
 }

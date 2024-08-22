@@ -92,7 +92,10 @@
                     </div>
                     <div class="description small d-flex justify-content-between">
                       <a href="{{ asset('admin/files/questionupload.xlsx') }}" target="_blank">Download Bulk Question Upload Sample</a>
-                      <a href="/moderator/exams/{{$exam->id}}/questions/download" target="_blank">Download Exam Questions</a>
+                      @if($exam->user_id == auth()->user()->id)
+                      <a href="/moderator/exams/{{$exam->id}}/questions/download-pdf" target="_blank">View Questions in PDF</a>
+                      <a href="/moderator/exams/{{$exam->id}}/questions/download-excel" target="_blank">Download Questions in Excel</a>
+                      @endif
                     </div>
                   </div>
                 </div>

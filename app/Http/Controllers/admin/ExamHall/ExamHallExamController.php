@@ -20,7 +20,7 @@ class ExamHallExamController extends Controller
 
     public function index(ExamHallCategories $category)
     {
-        $catexams=$category->category_exams;
+        $catexams=$category->category_exams()->whereHas('exam')->get();
         // dd($category,$catexams);
         return view('admin.examhall.exams.index',compact('category','catexams'));
     }

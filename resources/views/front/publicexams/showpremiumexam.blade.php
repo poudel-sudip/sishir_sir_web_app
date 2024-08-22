@@ -41,20 +41,7 @@
                             <div class="text- text-danger">{{$exam->bookings()->count()}} Users Already Enrolled This Exam Set.</div>
                             @endif
                         </div> 
-                        <div class="d-block text-justify mt-2">
-                            {!! $exam->description !!}
-                        </div>
-
-                        <div class="mt-2" style="color:#1375b9 !important;">
-                            @if($exam->mcq_count)
-                                <h5>Available MCQ Sets:</h5>
-                                <ol>
-                                    @foreach($exam->mcq_sets as $row)
-                                    <li>{{$row->exam->name ?? ''}}</li>
-                                    @endforeach
-                                </ol>
-                            @endif
-                        </div>
+                        
                     </div>
 
                     <div class="col-md-4">
@@ -63,15 +50,16 @@
                             <span class="mx-2 text-nowrap text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                         </div>
 
-                        {{-- <div class="h5 my-1">Exam Price: {{$exam->price}} </div> --}}
-                        {{-- <div class="h5 my-1">Discounted Price: {{$exam->price - $exam->discount}} </div> --}}
-                        <div class="h5 my-1"><span class="text-primary">Price:</span> @if($exam->discount > 0)  <s class="text-danger mx-2"> Rs. {{$exam->price}} </s> @endif <span class="text-success mx-2"> Rs. {{$exam->price - $exam->discount}} </span> </div>
-                        <div class="h5 my-1"><span class="text-primary">Total MCQ Sets:</span><span class="text-success"> {{ $exam->mcq_count}} </span></div>
-                        <div class="h5 my-1"><span class="text-primary">Available Videos:</span><span class="text-success"> {{ $exam->video_count}} </span></div>
-                        <div class="h5 my-1"><span class="text-primary">Available PDF :</span><span class="text-success"> {{ $exam->pdf_count > 0 ? $exam->pdf_count : 1}} </span></div>
-                        <div class="h5 my-1"><span class="text-primary">Validity:</span><span class="text-success"> 1 Year From The Date of Purchase </span></div>
-
-                        <div class="h5 my-1"><span class="text-danger">* Bookings Are Non-Refundable</span> </div>
+                        <div style="font-size:16px !important; font-weight:bold;">
+                            <div class="my-1"><span class="text-primary">Price:</span> @if($exam->discount > 0)  <s class="text-danger mx-2"> Rs. {{$exam->price}} </s> @endif <span class="text-success mx-2"> Rs. {{$exam->price - $exam->discount}} </span> </div>
+                            <div class="my-1"><span class="text-primary">Total MCQ Sets:</span><span class="text-success"> {{ $exam->mcq_count}} </span></div>
+                            <div class="my-1"><span class="text-primary">Available Videos:</span><span class="text-success"> {{ $exam->video_count}} </span></div>
+                            <div class="my-1"><span class="text-primary">Available PDF :</span><span class="text-success"> {{ $exam->pdf_count > $exam->mcq_count ? $exam->pdf_count : $exam->mcq_count}} </span></div>
+                            <div class="my-1"><span class="text-primary">Validity:</span><span class="text-success"> 1 Year From The Date of Purchase </span></div>
+    
+                            <div class="my-1"><span class="text-danger">* Bookings Are Non-Refundable</span> </div>
+                            
+                        </div>
                         
                         <div>
                             <form action="/student/exam-bookings" method="POST" class="d-inline">
@@ -97,11 +85,32 @@
 
                         <div class="mt-1">
                             <a class="btn btn-danger d-block" href="//www.youtube.com/watch?v=5Uo_lHUtoHs" target="_blank">Watch Video To Learn About Booking Process <i class="fa fa-video"></i> </a>
+                        </div>                        
+                    </div>
+
+                    <div class="col-12">
+                        <div class="d-block text-justify mt-2">
+                            {!! $exam->description !!}
                         </div>
 
-                        <div class="mt-5">
-                            <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
+                        <div class="row">
+                            <div class="col-md-8" style="color:#1375b9 !important;">
+                                @if($exam->mcq_count)
+                                    <h5>Available MCQ Sets:</h5>
+                                    <ol>
+                                        @foreach($exam->mcq_sets as $row)
+                                        <li>{{$row->exam->name ?? ''}}</li>
+                                        @endforeach
+                                    </ol>
+                                @endif
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
+                            </div>
+
                         </div>
+                        
                     </div>
                 </div>
             </div>
