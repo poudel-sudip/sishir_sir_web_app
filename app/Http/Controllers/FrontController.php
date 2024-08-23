@@ -49,6 +49,7 @@ class FrontController extends Controller
 
         $data = [];
         // $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(4)->get(['id','title','slug','image','created_at']);
+        $data['highlight'] = Categories::where('type','=','home_highlight')->orderByDesc('id')->first(['id','type','name as title','description as link']);
         $data['exams'] = OpenExam::where('result_status','=','Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('id')->first();
         $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->take(5)->get(['id','title','slug','image','author','created_at']);

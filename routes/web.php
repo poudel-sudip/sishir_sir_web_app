@@ -693,6 +693,11 @@ Route::get('/admin/user-tickets/{ticket}/contents','App\Http\Controllers\Admin\U
 Route::post('/admin/user-tickets/{ticket}/contents','App\Http\Controllers\Admin\UserTicketController@ticketMessageStore')->middleware('role:Admin');
 Route::delete('/admin/user-tickets/{ticket}/contents','App\Http\Controllers\Admin\UserTicketController@ticketMessageDestroy')->middleware('role:Admin');
 
+//admin highlight mgmt
+Route::get('/admin/highlights','App\Http\Controllers\Admin\HighlightController@index')->middleware('role:Admin');
+Route::post('/admin/highlights','App\Http\Controllers\Admin\HighlightController@store')->middleware('role:Admin');
+Route::patch('/admin/highlights','App\Http\Controllers\Admin\HighlightController@update')->middleware('role:Admin');
+Route::delete('/admin/highlights/{highlight}','App\Http\Controllers\Admin\HighlightController@destroy')->middleware('role:Admin');
 
 
 

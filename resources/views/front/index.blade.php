@@ -8,9 +8,20 @@
         }
     </style>
     
-    <section class="mt-4">
+    <section class="mt-2">
         <div class="container-fluidb px-md-5">
             <div class="row">
+                @if($highlight)
+                <div class="col-12 mb-2">
+                    <div class="d-flex align-items-center " style="background: #ffced2; border-radius:6px; font-weight:bold;">
+                        <div class="rounded bg-danger text-light p-2" style="align-self: stretch;">Highlight</div>
+                        <marquee direction="left" >
+                            <a @if(trim($highlight->link)) href="{{$highlight->link}}" target="_blank" @endif class="text-danger"> {{strtoupper($highlight->title)}} </a>
+                        </marquee>
+                    </div>                    
+                </div>
+                @endif
+
                 <div class="col-md-9">
                     <div class="marquee-text">
                         <marquee width="100%" direction="left" height="25px">

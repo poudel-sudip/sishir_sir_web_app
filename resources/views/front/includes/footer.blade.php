@@ -75,7 +75,7 @@
               <a class="whatsapp" href="https://wa.me/9779702844270" target="_blank"><i class="icon-whatsapp"></i></a>
               <a class="youtube" href="https://www.youtube.com/channel/UCSFeHpNoMSF-BBgsDtro0zw" target="_blank"><i class="icon-youtube"></i></a>
               <a class="twitter" href="https://twitter.com/ShisirAdhikari" target="_blank"><i class="icon-twitter"></i></a>
-              <a class="tiktok" href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+              <a class="tiktok" href="https://www.tiktok.com/@shisiradhikarig?_t=8p68TinKlfj&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
               <a class="instagram" href="https://www.instagram.com/shisirkumaradhikari" target="_blank"><i class="fab fa-instagram"></i></a>
               <a class="linkedin" href="https://np.linkedin.com/in/shisirkumaradhikari" target="_blank"><i class="fab fa-linkedin"></i></a>
             </div>
