@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{$vaccancy->title}} </div>
+                    <div class="card-header">Show Vaccancy Details </div>
                     <div class="card-body">
                         
                         <div class="course-row">
@@ -30,12 +30,37 @@
                             <div>{{$vaccancy->created_at}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Author: </div>
+                            <div>{{$vaccancy->author}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Status: </div>
                             <div>{{$vaccancy->status}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Thumbnail: </div>
+                            <div><img src="/storage/{{$vaccancy->thumbnail}}" alt="" class="img img-fluid" style="max-height: 100px;"></div>
+                        </div>
+                        <div class="course-row">
                             <div>Description: </div>
                             <div>{!! $vaccancy->description !!}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>PDF File: </div>
+                            <div>
+                                @if(trim($vaccancy->pdf_file))
+                                    <iframe src="/storage/{{$vaccancy->pdf_file}}#toolbar=1" 
+                                        oncontextmenu="return false" 
+                                        onselectstart="return false" 
+                                        ondragstart="return false"
+                                        frameborder="0" 
+                                        style="width: 100%; min-height:700px" 
+                                        target="_parent"
+                                        nodownload>
+                                    </iframe> 
+                                @endif
+                            </div>
                         </div>
 
                     </div>

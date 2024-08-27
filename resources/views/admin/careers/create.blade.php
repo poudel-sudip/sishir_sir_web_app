@@ -10,13 +10,13 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/careers') }}">Careers</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Add Career </li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/careers') }}">Vaccancies</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add New </li>
                 </ol>
             </nav>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">Create Career Vaccancy Post</div>
                     <div class="card-body">
@@ -38,6 +38,20 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="author" class="col-md-4 col-form-label">{{ __('Author') }}</label>
+    
+                                <div class="col-md-8">
+                                    <input id="author" type="text" class="form-control @error('author') is-invalid @enderror" name="author" value="{{ old('author') ?? auth()->user()->name ?? '' }}" required autocomplete="author">
+    
+                                    @error('author')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
                                 <label for="description" class="col-md-12 col-form-label">{{ __('Description ') }}</label>
 
                                 <div class="col-md-12">
@@ -51,13 +65,40 @@
                                 </div>
                             </div>
 
-                            
+                            <div class="form-group row">
+                                <label for="pdf_file" class="col-md-4 col-form-label">{{ __('Vaccancy PDF File') }}</label>
+    
+                                <div class="col-md-8">
+                                    <input id="pdf_file" type="file" class="form-control @error('pdf_file') is-invalid @enderror" name="pdf_file" value="{{ old('pdf_file') }}" accept=".pdf">
+    
+                                    @error('pdf_file')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="thumbnail" class="col-md-4 col-form-label">{{ __(' Thumbnail') }}</label>
+    
+                                <div class="col-md-8">
+                                    <input id="thumbnail" type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" value="{{ old('thumbnail') }}" accept="image/png, image/jpeg" required>
+    
+                                    @error('thumbnail')
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                                                        
                             <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __(' Status') }}</label>
 
                                 <div class="col-md-8">
                                     <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required>
-                                        <option value="Closed">Closed</option>
+                                        <option value="Inactive">Inactive</option>
                                         <option value="Active">Active</option>
                                     </select>
                                     @error('status')

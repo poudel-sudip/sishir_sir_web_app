@@ -17,8 +17,9 @@
 
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
 
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link href="{{ asset('css/front.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
     <style>
       .page-footer, .lower-footer{
           display: block;

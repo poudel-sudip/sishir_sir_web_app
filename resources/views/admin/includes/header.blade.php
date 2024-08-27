@@ -329,8 +329,8 @@
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/careers') }}">
-            <i class="mdi mdi-alpha-c-box menu-icon"></i>
-            <span class="menu-title">Careers</span>
+            <i class="mdi mdi-alpha-v-box menu-icon"></i>
+            <span class="menu-title">Vaccancies</span>
         </a>
       </li>
 

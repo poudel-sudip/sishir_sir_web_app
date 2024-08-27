@@ -15,10 +15,14 @@ class CreateVaccancyPostsTable extends Migration
     {
         Schema::create('vaccancy_posts', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->nullable();
             $table->string('title');
             $table->string('slug')->nullable();
+            $table->string('thumbnail')->nullable();
+            $table->string('pdf_file')->nullable();
+            $table->string('author')->nullable();
             $table->longText('description')->nullable();
-            $table->string('status', 100)->nullable()->default('Closed');
+            $table->string('status', 100)->nullable()->default('Active');
             $table->timestamps();
         });
     }

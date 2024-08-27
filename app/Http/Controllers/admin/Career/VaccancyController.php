@@ -15,7 +15,7 @@ class VaccancyController extends Controller
 
     public function index()
     {
-        $vaccancies = VaccancyPost::all();
+        $vaccancies = VaccancyPost::orderByDesc('id')->paginate(50);
         return view('admin.careers.index',compact('vaccancies'));
     }
 
@@ -26,17 +26,40 @@ class VaccancyController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
-            'title'=>['required','string'],
-            'description'=>['required','string'],
-            'status'=>['required','string'],
+            'title' => 'required|string',
+            'author' => 'required|string',
+            'description' => 'required|string',
+            'pdf_file' => 'nullable|file',
+            'thumbnail' => 'required|image',
+            'status' => 'required|string',
         ]);
 
+        $pdf = null;
+        $thumbnail = null;
+
+        if(isset($request->pdf_file))
+        {
+            $pdf = $request->pdf_file->store('uploads/vaccancy/pdf','public');
+        }
+
+        if(isset($request->thumbnail))
+        {
+            $thumbnail = $request->thumbnail->store('uploads/vaccancy/thumbnail','public');
+        }
+
+
         VaccancyPost::create([
-            'title'=>$request->title,
-            'description'=>$request->description,
-            'status'=>$request->status,
-        ]);
+            'user_id' => auth()->user()->id ?? null,
+            'title' => ucwords($request->title),
+            'thumbnail' => $thumbnail,
+            'pdf_file' => $pdf,
+            'author' => ucwords($request->author ?? auth()->user()->name),
+            'description' => $request->description,
+            'status' => $request->status,
+        ]); 
+
         return redirect('/admin/careers');
     }
 
@@ -52,17 +75,50 @@ class VaccancyController extends Controller
 
     public function update(VaccancyPost $vaccancy,Request $request)
     {
+        // dd($request->all());
         $request->validate([
-            'title' =>['required','string'],
-            'description' => ['required','string'],
-            'status' => 'required|min:1',
+            'title' => 'required|string',
+            'author' => 'required|string',
+            'description' => 'required|string',
+            'clear_pdf_file' => 'nullable',
+            'old_pdf_file' => 'nullable|string',
+            'old_thumbnail' => 'nullable|string',
+            'status' => 'required|string',
+            'pdf_file' => 'nullable|file',
+            'thumbnail' => 'nullable|image',
+            
         ]);
         
+        $pdf = $request->old_pdf_file;
+        $thumbnail = $request->old_thumbnail;
+
+        if(isset($request->clear_pdf_file))
+        {
+            $pdf = null;
+        }
+        else
+        {
+            if(isset($request->pdf_file))
+            {
+                $pdf = $request->pdf_file->store('uploads/vaccancy/pdf','public');
+            }
+        }
+        
+
+        if(isset($request->thumbnail))
+        {
+            $thumbnail = $request->thumbnail->store('uploads/vaccancy/thumbnail','public');
+        }
+
         $vaccancy->update([
-            'title'=>$request->title,
-            'description'=>$request->description,
+            'title' => ucwords($request->title),
+            'thumbnail' => $thumbnail,
+            'pdf_file' => $pdf,
+            'author' => ucwords($request->author ?? auth()->user()->name),
+            'description' => $request->description,
             'status'=>$request->status,
         ]);
+
         return redirect('/admin/careers');
     }
 

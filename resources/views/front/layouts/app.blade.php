@@ -25,34 +25,30 @@
   
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZS3KVP4N6H"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-ZS3KVP4N6H');
+  </script>
 
   
-     <!-- Global site tag (gtag.js) - Google Analytics -->
-     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZS3KVP4N6H"></script>
-     <script>
-       window.dataLayer = window.dataLayer || [];
-       function gtag(){dataLayer.push(arguments);}
-       gtag('js', new Date());
-     
-       gtag('config', 'G-ZS3KVP4N6H');
-     </script>
 
-{{--  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">--}}
-{{--  <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">--}}
-{{--  <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">--}}
-{{--  <link rel="stylesheet" href="{{ asset('css/animate.css') }}">--}}
-{{--  <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">--}}
+  <link href="{{ asset('css/front.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+  <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
 
-   <link href="{{ asset('css/front.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/libraries/jquery-3.6.0.min.js') }}"></script>
-    {{-- <script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script> --}}
-    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=63ce36b638862e00198c0bcc&product=inline-share-buttons&source=platform" async="async"></script> 
-    <script src="{{ asset('js/app.js') }}" defer></script>   
-
+  <!-- Scripts -->
+  <script src="{{ asset('js/libraries/jquery-3.6.0.min.js') }}"></script>
+  {{-- <script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script> --}}
+  <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=63ce36b638862e00198c0bcc&product=inline-share-buttons&source=platform" async="async"></script> 
+  <script src="{{ asset('js/app.js') }}" defer></script>   
+  
+  @yield('page-header-content')
+  
 </head>
 <body>  
 

@@ -52,6 +52,7 @@
               <li><a href="//drive.google.com/drive/folders/1aRMa-Zzow1NTHkrbP218PVQoL7g_lK27" target="_blank">Health Days</a></li>
               <li><a href="/enquiry">Enquiries</a></li>
               <li><a href="/testimonials">Testimonials</a></li>
+              <li><a href="/vaccancies">Latest Vaccancies</a></li>
               <li><a href="/discussion-forum">Discussion Forum</a></li>
               <li><a href="/web-policy">Web Policy</a></li>
             </ul>
