@@ -37,7 +37,7 @@
                                 <td>{{$row->sort_date }}</td>
                                 <td>
 
-                                    <a href="/student/tickets/{{$row->id}}/contents" class="btn btn-primary btn-sm mb-1 ">View Messages</a> 
+                                    <a href="/student/tickets/{{$row->id}}/contents" class="btn btn-primary btn-sm mb-1 ">View Messages @if($row->userUnreadCount()) <span class="bg-danger rounded p-1">(New {{$row->userUnreadCount()}})</span> @endif </a> 
                                     @if($row->status)
                                     <a href="/student/tickets/{{$row->id}}/mark-closed" class="btn btn-warning btn-sm mb-1 ">Mark Closed</a> 
                                     @endif

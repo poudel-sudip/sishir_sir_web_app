@@ -21,4 +21,25 @@ class UserTicket extends Model
     {
         return $this->hasMany(UserTicketContent::class, 'ticket_id');
     }
+
+    public function unreadCount()
+    {
+        return $this->contents()->where('read','=',0)->count();
+    }
+
+    public function adminUnreadCount()
+    {
+        return $this->contents()
+        ->where('read','=',0)
+        ->where('user_id','=',$this->user_id)
+        ->count();
+    }
+
+    public function userUnreadCount()
+    {
+        return $this->contents()
+        ->where('read','=',0)
+        ->where('user_id','!=',$this->user_id)
+        ->count();
+    }
 }

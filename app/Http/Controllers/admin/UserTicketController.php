@@ -85,6 +85,11 @@ class UserTicketController extends Controller
 
     public function ticketMessageList(Ticket $ticket, Request $request)
     {
+        $unread = $ticket->contents()
+        ->where('read','=',0)
+        ->where('user_id','=',$ticket->user_id)
+        ->update(['read' => 1]);
+
         $data['ticket'] = $ticket;
         // $data['messages'] = $ticket->contents()->orderByDesc('id')->paginate(2);
         $messages = $ticket->contents()->with('user:id,name,photo')

@@ -30,6 +30,7 @@
                                         <th>Status</th>
                                         <th>ID</th>
                                         <th>Ticket By</th>
+                                        <th>Messages</th>
                                         <th>Actions</th>                                        
                                     </tr>
                                 </thead>
@@ -41,8 +42,11 @@
                                         <td class="text-{{$row->status ? 'success':'danger'}}">{{$row->status ? 'Open':'Closed'}}</td>
                                         <td>{{$row->id}}</td>
                                         <td class="test-wrap">{{$row->user->name ?? 'Unknown' }}</td>
+                                        <td>
+                                            <a href="/admin/user-tickets/{{$row->id}}/contents" class="">View Messages  @if($row->adminUnreadCount()) <span class="text-danger">(New {{$row->adminUnreadCount()}})</span> @endif </a> 
+                                        </td>
                                         <td class="classroom-btn" width="50">
-                                            <a href="/admin/user-tickets/{{$row->id}}/contents" class="btn btn-primary ">View Messages</a> 
+                                            
                                             <a href="/admin/user-tickets/{{$row->id}}/mark-closed" class="btn btn-warning ">Mark Closed</a> 
                                             <form id="delete-form-{{$row->id}}" action="/admin/user-tickets/{{$row->id}}" method="POST" style="display: inline">
                                                 @csrf

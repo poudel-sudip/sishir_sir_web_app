@@ -18,6 +18,7 @@ class CreateUserTicketContentsTable extends Migration
             $table->bigInteger('ticket_id');
             $table->bigInteger('user_id');
             $table->longText('message');
+            $table->tinyInteger('read')->default(0);
             $table->timestamps();
         });
     }
