@@ -22,32 +22,32 @@
                     <div class="card-body">
                         
                         <div class="course-row">
-                            <div>Title : </div>
+                            <div>Title  </div>
                             <div>{{$vaccancy->title}}</div>
                         </div>
                         <div class="course-row">
-                            <div>Created Date : </div>
+                            <div>Created Date  </div>
                             <div>{{$vaccancy->created_at}}</div>
                         </div>
                         <div class="course-row">
-                            <div>Author: </div>
+                            <div>Author </div>
                             <div>{{$vaccancy->author}}</div>
                         </div>
                         <div class="course-row">
-                            <div>Status: </div>
+                            <div>Status </div>
                             <div>{{$vaccancy->status}}</div>
                         </div>
                         <div class="course-row">
-                            <div>Thumbnail: </div>
+                            <div>Thumbnail </div>
                             <div><img src="/storage/{{$vaccancy->thumbnail}}" alt="" class="img img-fluid" style="max-height: 100px;"></div>
                         </div>
                         <div class="course-row">
-                            <div>Description: </div>
+                            <div>Description </div>
                             <div>{!! $vaccancy->description !!}</div>
                         </div>
 
                         <div class="course-row">
-                            <div>PDF File: </div>
+                            <div>PDF File </div>
                             <div>
                                 @if(trim($vaccancy->pdf_file))
                                     <iframe src="/storage/{{$vaccancy->pdf_file}}#toolbar=1" 

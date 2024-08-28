@@ -33,7 +33,7 @@
             @endif
 
             <div class="text-end">
-                <a href="/vaccancies/create" class="btn btn-success">Post A New Vaccancy <i class="fa fa-paint-brush"></i> </a>
+                <a href="/vaccancies/create" class="btn btn-success">Submit Your New Vacancy <i class="fa fa-paint-brush"></i> </a>
             </div>
 
             <div class="row">

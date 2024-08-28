@@ -29,8 +29,10 @@
             </div>
         </div>
         <div class="container">    
-
-            <div class="pdf-container" id="pdf-container" style="max-height:800px;overflow-y: scroll;"></div>
+            <div class="">
+                <div class="_df_book" id="pdf_book_df" source="/storage/{{$content->pdf_file}}" ></div>
+            </div>
+            {{-- <div class="pdf-container" id="pdf-container" style="max-height:800px;overflow-y: scroll;"></div> --}}
             {{-- <div class="pdf-container" id="pdf-container"></div> --}}
             {{-- <iframe id="pdfiframe" src="/storage/{{$content->pdf_file}}#toolbar=0&navpanes=0" frameBorder="0" scrolling="auto" height="600" width="100%"> </iframe> --}}
         
@@ -52,12 +54,28 @@
         </div>
     </div>
     
-    <script src="{{asset('/js/pdf.min.js') }}"></script>
-    <script src="{{asset('/js/pdf.worker.min.js') }}"></script>
-    <script src="{{asset('/js/pdf_reader.js') }}"></script>
-    <script>
-        load_pdf_reader("/storage/{{$content->pdf_file}}");
+    <link href="{{asset('dflip/css/dflip.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('dflip/css/themify-icons.min.css')}}" rel="stylesheet" type="text/css">
 
+    <script src="{{asset('dflip/js/dflip.min.js')}}" type="text/javascript"></script>
+
+    <script>
+        var option_pdf_book_df = {
+            // height:'100%',
+            webgl:true,
+            soundEnable: true,
+            enableDownload: false,
+            backgroundColor: "#1375b9",
+            scrollWheel: false,
+            pageMode: DFLIP.PAGE_MODE.SINGLE,
+            singlePageMode: DFLIP.SINGLE_PAGE_MODE.BOOKLET,
+            allControls: "startPage,altPrev,pageNumber,altNext,endPage,thumbnail,zoomIn,zoomOut,fullScreen,pageMode",
+            moreControls: "",
+            hideControls: "share,download",
+        };
+    </script>
+
+    <script>
         function handleDownload(event) {
             event.preventDefault(); // Prevent the default behavior of the link
 
@@ -74,7 +92,15 @@
 
             document.body.removeChild(link); // Remove the dynamically created link element
         }
-        
     </script>
+
+    {{-- <script src="{{asset('/js/pdf.min.js') }}"></script>
+    <script src="{{asset('/js/pdf.worker.min.js') }}"></script>
+    <script src="{{asset('/js/pdf_reader.js') }}"></script>
+    <script>
+        load_pdf_reader("/storage/{{$content->pdf_file}}");      
+    </script> --}}
+
     <script type="text/javascript" src="{{asset('js/noprint.js')}}"></script>
+
 @endsection

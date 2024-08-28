@@ -480,7 +480,7 @@
         <div class="container-fluid px-md-5">
             <div class="row mb-3">
                 <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3 ">Library</h2>
+                    <h2 class="home-section-heading mb-3 ">Digital Library</h2>
                 </div>
             </div>
             <div class="lib-filter-alphabets">

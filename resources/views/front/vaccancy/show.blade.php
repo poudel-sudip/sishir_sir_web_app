@@ -46,7 +46,9 @@
                     <div class="blog-full-description">{!! $vaccancy->description !!}</div>
                     @if(trim($vaccancy->pdf_file))
                     <div>
-                        <iframe src="/storage/{{$vaccancy->pdf_file}}#toolbar=1" 
+                        <div class="_df_book" id="pdf_book_df" source="/storage/{{$vaccancy->pdf_file}}" ></div>
+
+                        {{-- <iframe src="/storage/{{$vaccancy->pdf_file}}#toolbar=1" 
                             oncontextmenu="return false" 
                             onselectstart="return false" 
                             ondragstart="return false"
@@ -54,7 +56,7 @@
                             style="width: 100%; min-height:700px" 
                             target="_parent"
                             nodownload>
-                        </iframe> 
+                        </iframe>  --}}
                     </div>
                     @endif
                 </div>
@@ -72,4 +74,25 @@
         }
     </script>
  
+ <link href="{{asset('dflip/css/dflip.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('dflip/css/themify-icons.min.css')}}" rel="stylesheet" type="text/css">
+
+    <script src="{{asset('dflip/js/dflip.min.js')}}" type="text/javascript"></script>
+
+    <script>
+        var option_pdf_book_df = {
+            // height:'100%',
+            webgl:true,
+            soundEnable: true,
+            enableDownload: true,
+            backgroundColor: "#1375b9",
+            scrollWheel: false,
+            pageMode: DFLIP.PAGE_MODE.SINGLE,
+            singlePageMode: DFLIP.SINGLE_PAGE_MODE.BOOKLET,
+            allControls: "startPage,altPrev,pageNumber,altNext,endPage,thumbnail,zoomIn,zoomOut,fullScreen,pageMode,download",
+            moreControls: "",
+            hideControls: "share",
+        };
+    </script>
+
 @endsection

@@ -50,7 +50,10 @@
                       
                     @if($menuItem->type == 'file')
                         <div class="mt-4">
-                            <div class="pdf-container" id="pdf-container" style="max-height:800px;overflow-y: scroll;"></div>
+
+                            <div class="_df_book" id="pdf_book_df" source="/storage/{{$menuItem->fileurl}}" ></div>
+
+                            {{-- <div class="pdf-container" id="pdf-container" style="max-height:800px;overflow-y: scroll;"></div> --}}
                             {{-- <iframe src="/storage/{{$menuItem->fileurl}}" 
                                 frameborder="0" 
                                 style="width: 100%; min-height:700px" 
@@ -140,12 +143,36 @@
         </div> --}}
     </div>
 
-    <script src="{{asset('/js/pdf.min.js') }}"></script>
+
+    <link href="{{asset('dflip/css/dflip.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('dflip/css/themify-icons.min.css')}}" rel="stylesheet" type="text/css">
+
+    <script src="{{asset('dflip/js/dflip.min.js')}}" type="text/javascript"></script>
+
+    <script>
+        var option_pdf_book_df = {
+            // height:'100%',
+            webgl:true,
+            soundEnable: true,
+            enableDownload: false,
+            backgroundColor: "#1375b9",
+            scrollWheel: false,
+            pageMode: DFLIP.PAGE_MODE.SINGLE,
+            singlePageMode: DFLIP.SINGLE_PAGE_MODE.BOOKLET,
+            allControls: "startPage,altPrev,pageNumber,altNext,endPage,thumbnail,zoomIn,zoomOut,fullScreen,pageMode",
+            moreControls: "",
+            hideControls: "share,download",
+        };
+    </script>
+
+    {{-- <script src="{{asset('/js/pdf.min.js') }}"></script>
     <script src="{{asset('/js/pdf.worker.min.js') }}"></script>
     <script src="{{asset('/js/pdf_reader.js') }}"></script>
     <script>
         load_pdf_reader("/storage/{{$menuItem->fileurl}}");
-
+    </script> --}}
+    
+    <script>
         function handleDownload(event) {
             event.preventDefault(); // Prevent the default behavior of the link
 
