@@ -24,7 +24,7 @@
     </div>
 
     <div class="container-fluid px-md-5">
-        <div class="blog-container mt-5">
+        <div class="blog-container mt-3">
 
             @if(session('alert_message'))
                 <div class="alert alert-success" role="alert">
@@ -32,7 +32,7 @@
                 </div>
             @endif
 
-            <div class="text-end">
+            <div class="text-end mb-2">
                 <a href="/vaccancies/create" class="btn btn-success">Submit Your New Vacancy <i class="fa fa-paint-brush"></i> </a>
             </div>
 
