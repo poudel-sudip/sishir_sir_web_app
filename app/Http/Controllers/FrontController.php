@@ -41,6 +41,7 @@ use App\Models\ImageGallery;
 use App\Models\Books\PhysicalBookOrder;
 use App\Models\Ebook\Ebook as PDFBank;
 use App\Models\Ebook\EbookCategory as PDFBankCategory;
+use App\Models\VaccancyPost;
 
 class FrontController extends Controller
 {
@@ -304,6 +305,20 @@ class FrontController extends Controller
         })
         ->toArray();
 
+        $vaccancy_updates = VaccancyPost::where('status','=','Active')
+        ->orderByDesc('id')
+        ->take(6)        
+        ->get(['id','title','slug','created_at'])
+        ->map(function($b){
+            return (object)[
+                'title' => $b->title,
+                'created_at' => $b->created_at,
+                'link' => '/vaccancies/'.$b->slug,
+            ];
+        })
+        ->toArray();
+
+
         $data['updates'] = array_merge($data['updates'], $pdf_bank_updates);
         $data['updates'] = array_merge($data['updates'], $premium_exam_updates);
         $data['updates'] = array_merge($data['updates'], $blog_updates);
@@ -312,6 +327,7 @@ class FrontController extends Controller
         $data['updates'] = array_merge($data['updates'], $menu_items);
         $data['updates'] = array_merge($data['updates'], $menu_sub_items);
         $data['updates'] = array_merge($data['updates'], $library_materials);
+        $data['updates'] = array_merge($data['updates'], $vaccancy_updates);
 
         usort($data['updates'], function($a, $b) {return strcmp($b->created_at,$a->created_at);});
         $data['updates'] = array_slice($data['updates'], 0, 7, true);

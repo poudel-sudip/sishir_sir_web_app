@@ -60,7 +60,6 @@ return[
         'apiUser' => 'ehealthapi',
         'apiPass' => 'EhE@!Th4169',
         'secret' => '#hE@lth87912',
-
     ],
 
     /*--------------khalti data start-----------------*/
