@@ -712,6 +712,11 @@ Route::get('/student/tickets/{ticket}/contents','App\Http\Controllers\Student\Ti
 Route::post('/student/tickets/{ticket}/contents','App\Http\Controllers\Student\TicketController@ticketMessageStore')->middleware('role:Student');
 Route::delete('/student/tickets/{ticket}/contents','App\Http\Controllers\Student\TicketController@ticketMessageDestroy')->middleware('role:Student');
 
+//student vaccancy management
+Route::get('/student/vaccancies','App\Http\Controllers\Student\VaccancyController@index')->middleware('role:Student');
+Route::get('/student/vaccancies/create','App\Http\Controllers\Student\VaccancyController@create')->middleware('role:Student');
+Route::post('/student/vaccancies','App\Http\Controllers\Student\VaccancyController@store')->middleware('role:Student');
+Route::get('/student/vaccancies/{slug}','App\Http\Controllers\Student\VaccancyController@show')->middleware('role:Student');
 
 
 

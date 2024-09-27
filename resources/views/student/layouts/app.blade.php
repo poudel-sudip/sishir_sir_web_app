@@ -162,6 +162,10 @@
             </li>
 
             <li class="nav-item">
+              <a class="nav-link" href="/student/vaccancies"><i class="fas fa-graduation-cap  text-pink"></i>Latest Vaccancies</a>
+            </li>
+
+            <li class="nav-item">
               <a class="nav-link" href="/profile"><i class="fas fa-user text-primary" aria-hidden="true"></i>Profile</a>
             </li>
             <li class="nav-item">
