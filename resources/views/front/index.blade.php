@@ -86,14 +86,14 @@
                 <div class="my-1 col-md-3 ">
                     <div class="updates border border-primary border-2" style="height: 100%">
                         <div class="update-header">
-                            <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fa-chart-bar"></i> Trending </h5></div>
+                            <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fa-chart-bar"></i> Latest Vaccancies </h5></div>
                         </div>
                         <div class="update-body" style="max-height:375px; overflow-y:scroll">
                             <ul class="p-0">
-                                @forelse(Helper::mostViewPosts() as $row)                         
-                                    <li><a href="{{$row->url}}"><i class="fa fa-pen-nib"></i>{{ucwords($row->title)}} <small class="ms-2 text-primary text-nowrap">({{$row->count}} views)</small> </a></li>
+                                @forelse($vaccancies as $row)                         
+                                    <li><a href="{{$row->link}}"><i class="fa fa-pen-nib"></i>{{ucwords($row->title)}}  </a></li>
                                 @empty
-                                    <li>No Trendings Available</li>
+                                    <li>No Vaccancies Available</li>
                                 @endforelse
                             </ul>
                         </div>

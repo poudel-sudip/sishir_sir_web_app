@@ -114,6 +114,9 @@
                 </div>
             </div>
             
+            <div class="col-12 text-center mt-2 d-none" id="qr-payment-image">
+                <img src="{{ asset('images/payment-details.png') }}" alt="" class="img img-fluid" style="max-height:400px;">
+            </div>
         </div>
     </div>
 
@@ -131,11 +134,13 @@
                 $('#alert_message').html('');
                 $('#alert_message').parent().addClass('d-none');
                 $('#otherFormFields').html('');
-                
+                $('#qr-payment-image').addClass('d-none');
+
                 var mode = $(this).attr('alt');
 
                 if(mode=="Manual")
                 {
+                    $('#qr-payment-image').removeClass('d-none');
                     getManualPayment(); 
                 }
                 else if(mode=="Coupon")

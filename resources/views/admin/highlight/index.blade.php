@@ -32,6 +32,7 @@
                     <th>SN</th>
                     <th>Title</th>
                     <th>Link</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -41,9 +42,10 @@
                   <tr>
                     <td width="50">{{$i}}</td>
                     <td class="text-wrap">{{$cat->name}}</td>
-                    <td class="text-wrap">{{$cat->description}}</td>                            
+                    <td class="text-wrap">{{$cat->description}}</td>   
+                    <td class="text-wrap" width="75">{{$cat->status}}</td>                         
                     <td class="classroom-btn" width="50">
-                      <a class="edit_highlight btn btn-warning" href="javascript:{}" data-toggle="modal" data-target="#edit_highlight" data-id="{{$cat->id}}" data-title="{{$cat->name}}" data-description="{{$cat->description}}" >Edit</a>
+                      <a class="edit_highlight btn btn-warning" href="javascript:{}" data-toggle="modal" data-target="#edit_highlight" data-id="{{$cat->id}}" data-title="{{$cat->name}}" data-description="{{$cat->description}}" data-status="{{$cat->status}}">Edit</a>
                       <form id="delete-form-{{$cat->id}}" action="/admin/highlights/{{$cat->id}}" method="POST" style="display: inline">
                         @csrf
                         @method('DELETE')
@@ -172,6 +174,19 @@
                 @enderror
               </div>
             </div>
+
+            <div class="form-group row">
+              <label for="highlight_status" class="col-md-3 col-form-label">{{ __(' Highlight Status') }}</label>
+
+              <div class="col-md-9">
+                <select name="highlight_status" id="highlight_status" class="form-control @error('highlight_status') is-invalid @enderror" required></select>
+                @error('highlight_status')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
             
 
             <div class="form-group row mb-0">
@@ -195,14 +210,22 @@
       $('#highlight_id').val("");
       $('#highlight_title').val("");
       $('#highlight_link').val("");
+      $('#highlight_status').html("");
 
       const id=$(this).attr('data-id');
       const title=$(this).attr('data-title');
       const link=$(this).attr('data-description');
-      
+      const status=$(this).attr('data-status');
+      var options = `
+      <option value="${status}">${status}</option>
+      <option value="">--------------------</option>
+      <option value="Inactive">Inactive</option>
+      <option value="Active">Active</option>
+      `;
       $('#highlight_id').val(id);
       $('#highlight_title').val(title);
       $('#highlight_link').val(link);
+      $('#highlight_status').html(options);
 
     })
   </script> 

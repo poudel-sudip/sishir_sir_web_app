@@ -74,12 +74,15 @@
                                             {{ __('Forgot Your Password?') }}
                                         </a>
                                     @endif
+
+
                                 </div>
                             </div>
                         </form>
 
                         <div class="mt-3 text-right text-primary h6 d-md-none">
                             <a class="text-info" href="{{ route('register') }}"> Don't have an account ? <strong> Register Now </strong></a> 
+                            <div class="text-right text-primary mt-2"><strong><span class="h5">{{$user_count}}</span> Users Already Registered</strong></div>
                         </div>
                     </div>
                 </div>

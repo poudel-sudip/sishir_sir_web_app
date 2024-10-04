@@ -41,6 +41,7 @@ class HighlightController extends Controller
             'highlight_id'=>'numeric|required',
             'highlight_title'=>'string|required|max:250',
             'highlight_link'=>'string|nullable',
+            'highlight_status'=>'string|required',
         ]);
 
         $highlight = Categories::where('type','=','home_highlight')->find($request->highlight_id);
@@ -49,6 +50,7 @@ class HighlightController extends Controller
             $highlight->update([
                 'name' => $request->highlight_title,
                 'description' => $request->highlight_link,
+                'status' => $request->highlight_status,
             ]);
         }
         

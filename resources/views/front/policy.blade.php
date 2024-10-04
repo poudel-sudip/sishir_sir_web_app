@@ -23,7 +23,7 @@
                     Though all efforts have been made to ensure the accuracy of the content on this website, the same should not be construed as a statement of law or used for any legal purposes. Users are advised to verify/check any information, and to obtain any appropriate professional advice before acting on the information provided on this website.
                 </div>
                 <div class="my-4 text-justify">
-                    Every effort is made to keep the website up and running smoothly. However, <strong>shisiradhikari.com</strong> takes no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.
+                    Every effort is made to keep the website up and running smoothly. However, <strong>shisiradhikari.com.np</strong> takes no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.
                     
                 </div>
                                 

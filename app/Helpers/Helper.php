@@ -10,6 +10,7 @@ use App\Models\PostViewCounter;
 
 use App\Models\Blog;
 use App\Models\Books\Book;
+use App\Models\Exams\DailyMCQQuestion as DailyQuestion;
 use App\Models\Exams\Question;
 use App\Models\Library\LibraryMaterial;
 use App\Models\Menu\MenuSubGroup;
@@ -18,6 +19,9 @@ use App\Models\Menu\MenuItem;
 use App\Models\Menu\MenuSubItem;
 use App\Models\Ebook\EbookChapter as PdfBankContent;
 use App\Models\Ebook\Ebook as PdfBank;
+use App\Models\ExamHall\ExamHallCategories as PremiumExam;
+use App\Models\OpenExams\OpenExam as FreeExam;
+use App\Models\VaccancyPost;
 
 class Helper
 {
@@ -157,11 +161,14 @@ class Helper
         $m_sitm_pdf = MenuSubItem::where('type','=','file')->count();
         $pdf_bank_pdf = PdfBank::where('type','=','single')->count();
         $pdf_bank_contentpdf = PdfBankContent::count();
+        $vaccancy_pdf = VaccancyPost::where('pdf_file','!=','')->count();
         
-        $data['pdf'] = $lib_pdf + $m_sg_pdf + $m_cat_pdf + $m_itm_pdf + $m_sitm_pdf + $pdf_bank_pdf + $pdf_bank_contentpdf;        
+        $data['pdf'] = $lib_pdf + $m_sg_pdf + $m_cat_pdf + $m_itm_pdf + $m_sitm_pdf + $pdf_bank_pdf + $pdf_bank_contentpdf + $vaccancy_pdf;        
+        $data['pdf_bank'] = PdfBank::count();
         $data['blog'] = Blog::count();
         $data['book'] = Book::count();
-        $data['mcq'] = Question::count();
+        $data['exam'] = PremiumExam::count() + FreeExam::count();
+        $data['mcq'] = Question::count() + DailyQuestion::count();
         $data['download'] = PostViewCounter::getTotalDownloadCount();
         $data['website'] = PostViewCounter::getTotalViewCount();
 

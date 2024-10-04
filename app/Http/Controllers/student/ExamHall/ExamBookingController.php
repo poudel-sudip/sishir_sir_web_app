@@ -49,7 +49,8 @@ class ExamBookingController extends Controller
             ])->count();
             
         if($search){
-            return back()->withInput()->with('alreadybooked', 'You Have Already Booked This Exam Set!');
+            // return back()->withInput()->with('alreadybooked', 'You Have Already Booked This Exam Set!');
+            return back()->withInput()->with('alreadybooked', 'You Have Already Booked This Exam Set. Please visit the Dashboard to view and solve the exams.');
         }
 
         $booking= ExamHallBookings::create([

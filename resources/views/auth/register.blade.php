@@ -154,6 +154,8 @@
 
                         <div class="mt-3 text-right text-primary h6 d-md-none">
                             <a class="text-info" href="{{ route('login') }}"> Already have an account ? <strong> Log In </strong></a> 
+                            <div class="text-right text-primary mt-2"><strong><span class="h5">{{$user_count}}</span> Users Already Registered</strong></div>
+
                         </div>
 
                     </div>

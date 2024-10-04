@@ -50,7 +50,7 @@ class FrontController extends Controller
 
         $data = [];
         // $data['premiumExams'] = ExamHallCategories::where('status','Active')->orderByDesc('id')->take(4)->get(['id','title','slug','image','created_at']);
-        $data['highlights'] = Categories::where('type','=','home_highlight')->orderByDesc('id')->get(['id','type','name as title','description as link']);
+        $data['highlights'] = Categories::where('type','=','home_highlight')->where('status','=','Active')->orderByDesc('id')->get(['id','type','name as title','description as link']);
         $data['exams'] = OpenExam::where('result_status','=','Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status','=','Published')->orderByDesc('id')->first();
         $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->take(5)->get(['id','title','slug','image','author','created_at']);
@@ -61,6 +61,12 @@ class FrontController extends Controller
 
         $data['dynamic_forms'] = DynamicForm::where('banner','!=','')->where('status','=','Active')->orderByDesc('id')->take(5)->get();
         $data['videos'] = FreeVideo::orderByDesc('id')->take(9)->get();
+
+        $data['vaccancies'] = VaccancyPost::where('status','=','Active')->orderByDesc('id')->take(7)->get(['id','title','slug'])->map(function($v){
+            $v->link = url('/vaccancies/'.$v->slug);
+            return $v;
+        });
+
 
         $today_question = DailyMCQQuestion::where('show_date','=',date('Y-m-d'))->first();
         if($today_question)

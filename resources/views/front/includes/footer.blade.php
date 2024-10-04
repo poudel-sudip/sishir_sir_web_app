@@ -30,6 +30,20 @@
 </section>
 @endif
 
+<section class="">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex align-items-center " style="background: #ffced2; font-weight:bold;">
+          <div class=" bg-danger text-light p-2" style="align-self: stretch;">Trendings</div>
+          <marquee direction="left" >
+            @foreach(Helper::mostViewPosts() as $row)
+            <a @if(trim($row->url)) href="{{$row->url}}" target="_blank" @endif class="highlight-text"> {{strtoupper($row->title)}} <small class=" text-primary text-nowrap">({{$row->count}} views)</small> </a>
+            @endforeach
+          </marquee>
+      </div>                    
+    </div>
+  </div>
+</section>
 
 <footer class="page-footer">
   <div class="container-fluid px-md-4"> 
@@ -110,7 +124,9 @@
                 <div><span>Last Updated Date: </span><span id="last_date"></span></div>
                 <div><span>Total Blogs: </span><strong class="counter-count-"> {{$web_counter->blog ?? '0'}} </strong></div>
                 <div><span>Total Books: </span><strong class="counter-count-"> {{$web_counter->book ?? '0'}} </strong></div>
+                <div><span>Total Exams: </span><strong class="counter-count-"> {{$web_counter->exam ?? '0'}} </strong></div>
                 <div><span>Total MCQs: </span><strong class="counter-count-"> {{$web_counter->mcq ?? '0'}} </strong></div>
+                <div><span>Total PDF Bank: </span><strong class="counter-count-"> {{$web_counter->pdf_bank ?? '0'}} </strong></div>
                 <div><span>Total PDF: </span><strong class="counter-count-"> {{$web_counter->pdf ?? '0'}} </strong></div>
                 <div><span>Total Downloads: </span><strong class="counter-count-"> {{$web_counter->download ?? '0'}} </strong></div>
                 <div><span>Website Visit Counter: </span><strong class="counter-count-"> {{$web_counter->website ?? '0'}} </strong></div>
@@ -150,6 +166,8 @@
     </div>
   </div>
 </footer>
+
+
 
 <div class="lower-footer">
   <div class="container">
