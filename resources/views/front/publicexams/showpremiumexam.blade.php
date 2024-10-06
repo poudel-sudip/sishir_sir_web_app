@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
-@section('page_title', ucwords($exam->title))
+@section('page_title', ($exam->title))
 
-@section('og-title', ucwords($exam->title))
+@section('og-title', ($exam->title))
 @section('og-url', url('exam-hall/premium/'.$exam->slug))
 @if($exam->image)
 @section('og-image', asset('/storage/'.$exam->image))
@@ -53,6 +53,7 @@
                         <div style="font-size:16px !important; font-weight:bold;">
                             <div class="my-1"><span class="text-primary">Price:</span> @if($exam->discount > 0)  <s class="text-danger mx-2"> Rs. {{$exam->price}} </s> @endif <span class="text-success mx-2"> Rs. {{$exam->price - $exam->discount}} </span> </div>
                             <div class="my-1"><span class="text-primary">Total MCQ Sets:</span><span class="text-success"> {{ $exam->mcq_count}} </span></div>
+                            <div class="my-1"><span class="text-primary">Total MCQ Questions:</span><span class="text-success"> {{ $exam->mcq_question_count}} </span></div>
                             <div class="my-1"><span class="text-primary">Available Videos:</span><span class="text-success"> {{ $exam->video_count}} </span></div>
                             <div class="my-1"><span class="text-primary">Available PDF :</span><span class="text-success"> {{ $exam->pdf_count > $exam->mcq_count ? $exam->pdf_count : $exam->mcq_count}} </span></div>
                             <div class="my-1"><span class="text-primary">Validity:</span><span class="text-success"> 1 Year From The Date of Purchase </span></div>

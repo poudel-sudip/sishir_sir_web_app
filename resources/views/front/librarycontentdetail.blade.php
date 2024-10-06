@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
-@section('page_title', ucwords($material->name))
-@section('og-title', ucwords($material->name))
+@section('page_title', ($material->name))
+@section('og-title', ($material->name))
 @section('og-url', url('/library/'.$library_category->slug.'/'.$material->slug))
 @section('og-description', strip_tags($material->description) ? strip_tags(str_replace('<', '  <', $material->description)) : $material->name )
 @if($material->thumbnail)
@@ -12,13 +12,13 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{ucwords($material->name)}}</h2>
+                <h2>{{($material->name)}}</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ ('/library') }}">Library</a></li>
-                        <li class="breadcrumb-item"><a href="/library/{{$library_category->slug}}">{{ucwords($library_category->name)}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ucwords($material->name)}}</li>
+                        <li class="breadcrumb-item"><a href="/library/{{$library_category->slug}}">{{($library_category->name)}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{($material->name)}}</li>
                     </ol>
                 </div>
             </div>
@@ -27,7 +27,7 @@
     <div class="container-fluid px-md-5">
 
         <div class="blog-container ">
-            <h3 class="text-primary">{{strtoupper($material->name)}}</h3>
+            <h3 class="text-primary">{{($material->name)}}</h3>
             <div class="px-5 text-primary">
                 <span class="mx-2 text-nowrap text-primary"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($material->created_at))}}</span>
                 <span class="mx-2 text-nowrap text-primary"><i class="fa fa-calendar"></i> {{$material->published_year}}</span>
@@ -49,7 +49,7 @@
                                 <i class="fa fa-download"></i> Login to Download
                             </a>
                         @endif --}}
-                    <a href="{{url('/storage/'.$material->fileurl)}}" filename="{{ucwords($material->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                    <a href="{{url('/storage/'.$material->fileurl)}}" filename="{{($material->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
                     @endif
                 </div>
                 <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>

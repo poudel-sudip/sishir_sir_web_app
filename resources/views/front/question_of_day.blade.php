@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
-@section('page_title', ucwords('Question Of The Day'))
-@section('og-title', ucwords('Question Of The Day'))
+@section('page_title', ('Question Of The Day'))
+@section('og-title', ('Question Of The Day'))
 @section('og-url', url('/question-of-the-day/'.$today_question->show_date))
 @section('og-description', strip_tags($today_question->question) ? strip_tags(str_replace('<', '  <', $today_question->question)) : $today_question->question )
 @if($today_question->image)

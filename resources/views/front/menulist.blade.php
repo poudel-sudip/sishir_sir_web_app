@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
-@section('page_title', ucwords($menuCategory->name))
-@section('og-title', ucwords($menuCategory->name))
+@section('page_title', ($menuCategory->name))
+@section('og-title', ($menuCategory->name))
 @section('og-url', url('/'.$mainMenu->slug.'/'.$subMenu->slug.'/'.$menuCategory->slug))
 @section('og-description', strip_tags($menuCategory->description) ? strip_tags(str_replace('<', '  <', $menuCategory->description)) : $menuCategory->name )
 @if($menuCategory->thumbnail)
@@ -12,13 +12,13 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{ucwords($menuCategory->name)}}</h2>
+                <h2>{{($menuCategory->name)}}</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item">{{ucwords($mainMenu->name)}}</li>
-                        <li class="breadcrumb-item"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}">{{ucwords($subMenu->name)}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ucwords($menuCategory->name)}}</li>
+                        <li class="breadcrumb-item">{{($mainMenu->name)}}</li>
+                        <li class="breadcrumb-item"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}">{{($subMenu->name)}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{($menuCategory->name)}}</li>
                     </ol>
                 </div>
             </div>
@@ -29,7 +29,7 @@
         @if($menuCategory->type != 'heading')
         
             <div class="blog-container ">
-                <h3 class="text-primary">{{strtoupper($menuCategory->name)}}</h3>
+                <h3 class="text-primary">{{($menuCategory->name)}}</h3>
                 <div class="px-5">
                     <span class="mx-2 text-primary"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($menuCategory->created_at))}}</span>
                     <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
@@ -40,7 +40,7 @@
                 <div class="my-4 row align-items-center">
                     <div class="col-md-4">
                         @if($menuCategory->type == 'file' && $menuCategory->download)
-                        <a href="/storage/{{$menuCategory->fileurl}}" filename="{{ucwords($menuCategory->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                        <a href="/storage/{{$menuCategory->fileurl}}" filename="{{($menuCategory->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
                         @endif
                     </div>
                     <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>

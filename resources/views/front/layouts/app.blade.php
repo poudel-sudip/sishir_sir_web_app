@@ -48,6 +48,12 @@
   <script src="{{ asset('js/app.js') }}" defer></script>   
   
   @yield('page-header-content')
+
+  <style>
+    body{
+      overflow-x: hidden;
+    }
+  </style>
   
 </head>
 <body>  

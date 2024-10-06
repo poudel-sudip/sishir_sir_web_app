@@ -18,7 +18,7 @@
             </nav>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">Add Book</div>
                     <div class="card-body">
@@ -257,6 +257,19 @@
                                     </span>
                                     @enderror
                                 </div>
+                            </div>                           
+
+                            <div class="form-group row">
+                                <label for="content_pdf" class="col-md-4 col-form-label">{{ __('Book PDF') }}</label>
+                                <div class="col-md-8">
+                                    <input id="content_pdf" type="file" class="form-control @error('content_pdf') is-invalid @enderror" name="content_pdf" value="{{ old('content_pdf') }}"  accept=".pdf" >
+
+                                    @error('content_pdf')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="form-group row">
@@ -271,6 +284,7 @@
                                     @enderror
                                 </div>
                             </div>
+
 
                             <div class="form-group row">
                                 <label for="search_tags" class="col-md-4 col-form-label">{{ __('Search Tags') }}</label>

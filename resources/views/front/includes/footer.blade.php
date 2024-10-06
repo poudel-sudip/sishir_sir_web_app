@@ -8,7 +8,7 @@
       <div class="nav nav-tabs justify-content-center align-items-center" id="nav-tab" role="tablist">
         @php($isFirstElement = true)
         @foreach($important_footer_links as $c)
-          <button class="border nav-link {{$isFirstElement ? 'active' : ''}}" id="nav-{{ $c->id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ $c->id }}" type="button" role="tab" aria-controls="nav-{{ $c->id }}" aria-selected="true">{{ucwords($c->name)}}</button>
+          <button class="border nav-link {{$isFirstElement ? 'active' : ''}}" id="nav-{{ $c->id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ $c->id }}" type="button" role="tab" aria-controls="nav-{{ $c->id }}" aria-selected="true">{{($c->name)}}</button>
           @php($isFirstElement = false)
         @endforeach
       </div>
@@ -20,7 +20,7 @@
         @php($isFirstElement = false)
         <ul class="row">
         @foreach($c->imp_links->sortBy('order') as $l)
-        <li class="col-md-6"><a href="{{$l->link_url}}" target="_blank" style="color:inherit;font:inherit;"><i class="fas fa-link text-danger"></i>{{ucwords($l->link_title)}}</a></li>
+        <li class="col-md-6"><a href="{{$l->link_url}}" target="_blank" style="color:inherit;font:inherit;"><i class="fas fa-link text-danger"></i>{{($l->link_title)}}</a></li>
         @endforeach
       </ul>
       </div>

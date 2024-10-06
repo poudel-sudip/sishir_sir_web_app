@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
-@section('page_title', 'Attempt: '.ucwords($exam->name))
+@section('page_title', 'Attempt: '.($exam->name))
 
-@section('og-title', ucwords($exam->name))
+@section('og-title', ($exam->name))
 @section('og-url', url('public-exams/'.$exam->slug))
 @if($exam->image)
 @section('og-image', asset('/storage/'.$exam->image))

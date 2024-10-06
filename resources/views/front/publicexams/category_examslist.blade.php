@@ -83,7 +83,7 @@
 
                 <div class="@if($exam_categories->count() || $free_exams->count()) col-md-9 @else col-md-12 @endif">
                     <div class="all-course-list">
-                        <h2 class="my-4 text-center" style="color: #1375b9;"><u>{{ucwords($exam_group->name)}} Premium Exams</u></h2>
+                        <h2 class="my-4 text-center" style="color: #1375b9;"><u>{{($exam_group->name)}} Premium Exams</u></h2>
                         {{-- <div class="free-exam-btn"><a href="#free-exam" class="btn btn-success btn-sm"><i class="fas fa-tag"></i> Free Exams</a></div> --}}
                         <div class="blog-container">
                             <div class="row">
@@ -94,7 +94,7 @@
                                                 <a href="/exam-hall/premium/{{$exam->slug}}">
                                                     <img src="/storage/{{$exam->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
                                                 </a>
-                                                <h5 class="mt-3"><a href="/exam-hall/premium/{{$exam->slug}}">{{ucwords($exam->title)}}</a></h5>
+                                                <h5 class="mt-3"><a href="/exam-hall/premium/{{$exam->slug}}">{{($exam->title)}}</a></h5>
                                                 <h6>{{$exam->category_exams->count()}} Sets </h6>
 
                                             </div>

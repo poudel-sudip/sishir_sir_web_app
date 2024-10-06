@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
-@section('page_title', ucwords($book->title))
-@section('og-title', ucwords($book->title))
+@section('page_title', ($book->title))
+@section('og-title', ($book->title))
 @section('og-url', url('/books/'.$book->slug))
 @section('og-description', strip_tags($book->description) ? strip_tags(str_replace('<', '  <', $book->description)) : $book->title )
 @if($book->thumbnail)
@@ -18,17 +18,17 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{ucwords($book->title)}}</h2>
+                <h2>{{($book->title)}}</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         @if($book->publisher)
-                        <li class="breadcrumb-item"><a href="/book-publishers/{{$book->publisher->slug}}">{{ucwords($book->publisher->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/book-publishers/{{$book->publisher->slug}}">{{($book->publisher->name)}}</a></li>
                         @endif
                         @if($book->category)
-                        <li class="breadcrumb-item"><a href="/book-publishers/{{$book->publisher->slug}}/category/{{$book->category->slug}}">{{ucwords($book->category->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/book-publishers/{{$book->publisher->slug}}/category/{{$book->category->slug}}">{{($book->category->name)}}</a></li>
                         @endif
-                        <li class="breadcrumb-item active" aria-current="page">{{ucwords($book->title)}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{($book->title)}}</li>
                     </ol>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                                 {{-- <div class="addto-ebook-favorite">
                                     <button onclick="" title="Add to favorite"><i class="fas fa-heart"></i></button>
                                 </div> --}}
-                                <h2 class="mt-3 mt-md-0">{{strtoupper($book->title)}}</h2>
+                                <h2 class="mt-3 mt-md-0">{{($book->title)}}</h2>
                                 @if(($book->reviews()->avg('rating')) > 0)
                                     <h5 class="text-end d-md-none">
                                         Rating: 
@@ -78,39 +78,39 @@
                                     <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                                 </h6>
                                 <h6>
-                                    Publisher: <strong class="text-primary"> {{ucwords($book->publisher->name ?? ' ')}} </strong>
+                                    Publisher: <strong class="text-primary"> {{($book->publisher->name ?? ' ')}} </strong>
                                 </h6>
                                 <h6>
-                                    Category: <strong class="text-primary"> {{ucwords($book->category->name ?? ' ')}} </strong>
+                                    Category: <strong class="text-primary"> {{($book->category->name ?? ' ')}} </strong>
                                 </h6>
                                 <h6>
-                                    Author(s): <strong class="text-primary"> {{ucwords($book->author ?? ' ')}} </strong>
+                                    Author(s): <strong class="text-primary"> {{($book->author ?? ' ')}} </strong>
                                 </h6>
                                 <h6>
-                                    Edition: <strong class="text-primary"> {{ucwords($book->edition ?? ' ')}} </strong>
+                                    Edition: <strong class="text-primary"> {{($book->edition ?? ' ')}} </strong>
                                 </h6>
                                 <h6>
                                     ISBN: <strong class="text-primary"> {{$book->isbn ?? ' '}} </strong>
                                 </h6>
                                 <h6>
-                                    Published On: <strong class="text-primary"> {{ucwords($book->published_year ?? ' ')}} </strong>
+                                    Published On: <strong class="text-primary"> {{($book->published_year ?? ' ')}} </strong>
                                 </h6>
                                 <h6>
-                                    Pages: <strong class="text-primary"> {{ucwords($book->pages ?? ' ')}} </strong>
+                                    Pages: <strong class="text-primary"> {{($book->pages ?? ' ')}} </strong>
                                 </h6>
                                 @if($book->discount  > 0)
                                 <h6>
-                                    Book Price: <strong class="text-primary"> Rs. {{ucwords($book->price)}}/- </strong>
+                                    Book Price: <strong class="text-primary"> Rs. {{($book->price)}}/- </strong>
                                 </h6>
                                 <h6>
-                                    Book Discount: <strong class="text-primary">{{ucwords($book->discount)}}% </strong>
+                                    Book Discount: <strong class="text-primary">{{($book->discount)}}% </strong>
                                 </h6>
                                 @endif
                                 <h6>
                                     Final Price: <strong class="text-success"> Rs. {{($book->price - (($book->price*$book->discount)/100))}}/- </strong>
                                 </h6>                                
                                 <h6>
-                                    Availability: <strong class="text-primary"> {{ucwords($book->availability ?? ' ')}} </strong>
+                                    Availability: <strong class="text-primary"> {{($book->availability ?? ' ')}} </strong>
                                 </h6>                              
                                 
                             </div>
@@ -131,6 +131,11 @@
                                         @endif
 
                                         <a href="javascript:void(0)"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookOrderModal">Purchase Online</a>
+                                        @if($book->content_pdf)
+                                            <div class="_df_button border-danger" id="pdf_book_df" source="/storage/{{$book->content_pdf}}" style="background: #dc143c;"> <i class="fa fa-file-pdf"></i> View PDF</div>
+
+                                            {{-- <a href="javascript:void(0)"  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#bookOrderModal"> <i class="fa fa-file-pdf"></i> View PDF</a> --}}
+                                        @endif
 
                                     </div>
                                     <div class="col-md-6 my-2">
@@ -166,7 +171,7 @@
                                                 <i class="far fa-user reviewer-icon align-baseline"></i>
                                             </div>
                                             <div>
-                                                <h4 class="reviewr-name">{{ucwords($review->name)}}</h4>
+                                                <h4 class="reviewr-name">{{($review->name)}}</h4>
                                                 <p>{{date('Y-m-d G:i',strtotime($review->created_at))}}</p>
                                             </div>
                                         </div>
@@ -283,6 +288,29 @@
 
         </div>
     </div>    
+
+    <link href="{{asset('dflip/css/dflip.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('dflip/css/themify-icons.min.css')}}" rel="stylesheet" type="text/css">
+
+    <script src="{{asset('dflip/js/dflip.min.js')}}" type="text/javascript"></script>
+
+    <script>
+        var option_pdf_book_df = {
+            // height:'100%',
+            webgl:true,
+            soundEnable: true,
+            enableDownload: false,
+            transparent: false,
+            backgroundColor: "#1375b9",
+            scrollWheel: false,
+            pageMode: DFLIP.PAGE_MODE.SINGLE,
+            singlePageMode: DFLIP.SINGLE_PAGE_MODE.BOOKLET,
+            allControls: "startPage,altPrev,pageNumber,altNext,endPage,thumbnail,zoomIn,zoomOut,fullScreen,pageMode",
+            moreControls: "",
+            hideControls: "share,download",
+        };
+    </script>
+
 
     <script>
         function handleShare(event){

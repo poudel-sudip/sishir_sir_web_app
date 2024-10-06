@@ -12,11 +12,11 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{ucwords($publisher->name)}}</h2>
+                <h2>{{($publisher->name)}}</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                     <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ucwords($publisher->name)}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{($publisher->name)}}</li>
                     </ol>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                                     <a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">
                                         <img src="/storage/{{$cat->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
                                     </a>
-                                    <h5 class="mt-3"><a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">{{ucwords($cat->name)}}</a></h5>
+                                    <h5 class="mt-3"><a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">{{($cat->name)}}</a></h5>
                                 </div>
                             </div>
                         </div>

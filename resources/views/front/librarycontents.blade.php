@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
-@section('page_title', 'Library: '.ucwords($library_category->name))
-@section('og-title', ucwords($library_category->name))
+@section('page_title', 'Library: '.($library_category->name))
+@section('og-title', ($library_category->name))
 @section('og-url', url('/library/'.$library_category->slug))
 @section('og-description', strip_tags($library_category->name) ? strip_tags(str_replace('<', '  <', $library_category->name)) : $library_category->name )
 
@@ -16,12 +16,12 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{ucwords($library_category->name)}}</h2>
+                <h2>{{($library_category->name)}}</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ ('/library') }}">Library</a></li>
-                        {{-- <li class="breadcrumb-item active" aria-current="page">{{ucwords($library_category->name)}}</li> --}}
+                        {{-- <li class="breadcrumb-item active" aria-current="page">{{($library_category->name)}}</li> --}}
 
                         @if($library_category)
                             @php 
@@ -40,7 +40,7 @@
                             @endphp
 
                             @foreach($bcm as $b)
-                            <li class="breadcrumb-item"><a href="{{$b->link}}">{{ucwords($b->name)}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{$b->link}}">{{($b->name)}}</a></li>
                             @endforeach
 
                         @endif
@@ -71,7 +71,7 @@
                         <div class="">
                             <a href="/library/{{$dir->slug}}"><i class="h1 fa fa-folder"></i></a>
                         </div>
-                        <h5><a href="/library/{{$dir->slug}}">{{ucwords($dir->name)}}</a></h5>
+                        <h5><a href="/library/{{$dir->slug}}">{{($dir->name)}}</a></h5>
                     </div>
                 </div>
                 @endforeach
@@ -82,7 +82,7 @@
                         <div class="text-center">
                             {{-- <img src="/storage/{{$material->thumbnail}}" onerror="this.src='{{asset('images/default-post.png')}}'" class="img img-fluid" style="max-height:150px"> --}}
                             <h1><a href="/library/{{$library_category->slug}}/{{$material->slug}}"><i class="fa fa-file-pdf text-danger"></i></a></h1>
-                            <h5><strong><a href="/library/{{$library_category->slug}}/{{$material->slug}}">{{ucwords($material->name)}}</a> </strong></h5>
+                            <h5><strong><a href="/library/{{$library_category->slug}}/{{$material->slug}}">{{($material->name)}}</a> </strong></h5>
                         </div>
                         <div class="text-justify">
                             <div><strong>Author(s):</strong> {{$material->author}}</div>

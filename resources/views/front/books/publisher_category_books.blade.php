@@ -1,4 +1,5 @@
 @extends('front.layouts.app')
+
 @section('page_title', 'All Books')
 @section('content')
     <style>
@@ -8,17 +9,17 @@
         -webkit-line-clamp: unset !important;
     }
     </style>   
-
+    {{-- {{dd(Auth::check())}} --}}
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{ ucwords($category->name ?? ($publisher->name.' all')) }} Books</h2>
+                <h2>{{ ($category->name ?? ($publisher->name.' all')) }} Books</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/book-publishers/{{$publisher->slug}}">{{ucwords($publisher->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/book-publishers/{{$publisher->slug}}">{{($publisher->name)}}</a></li>
                         @if($category)
-                        <li class="breadcrumb-item"><a href="/book-publishers/{{$publisher->slug}}/category/{{$category->slug}}">{{ucwords($category->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/book-publishers/{{$publisher->slug}}/category/{{$category->slug}}">{{($category->name)}}</a></li>
                         @endif
                         <li class="breadcrumb-item active" aria-current="page">Books</li>
                     </ol>
@@ -35,7 +36,7 @@
                         <h5><a href="/book-publishers/{{$publisher->slug}}/all-books">All Books</a></h5>
                         <ul class="course-nav" style="height:auto; min-height: 370px; ">
                             @foreach($categories as $cat)
-                                <li><a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">{{ucwords($cat->name)}}</a></li>
+                                <li><a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">{{($cat->name)}}</a></li>
                             @endforeach
                         </ul>
                     </div>

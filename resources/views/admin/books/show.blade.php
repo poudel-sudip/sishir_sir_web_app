@@ -116,6 +116,15 @@
                             <div>Book Description: </div>
                             <div>{!! $book->description !!}</div>
                         </div>
+
+                        <div class="course-row">
+                            <div>Book PDF: </div>
+                            <div>
+                                @if($book->content_pdf)
+                                <iframe src="/storage/{{$book->content_pdf}}" frameborder="0" style="width: 100%;height:500px;"></iframe>
+                                @endif
+                            </div>
+                        </div>
                         
                     </div>
                 </div>

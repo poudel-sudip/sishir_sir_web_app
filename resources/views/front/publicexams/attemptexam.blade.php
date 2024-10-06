@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('page_title', 'Attempt: '.ucwords($exam->name))
+@section('page_title', 'Attempt: '.($exam->name))
 @section('content')
     <div class="container-fluid px-md-5">
         <div class="public-exam-section mt-3">
@@ -14,8 +14,13 @@
                                 <span> Contact: {{$user->contact}} </span>
                                 <span>Courses: {{ $user->courses }}</span>
                             </div>                   
-                            <div class="icon-bar mt-1 mcq-countdown">
-                               Exam Time CountDown : <span class="js-timeout"></span>
+                            <div class="icon-bar mt-1 d-flex justify-content-around">
+                                <div class="">Total Questions: {{$exam->questions()->count() ?? '0' }}</div>
+                                <div class="">Marks Per Question: {{$exam->marks_per_question}}</div>
+                                <div class="">Negative Marks: {{$exam->negative_marks}}</div>
+                                <div class="me-5">                                
+                                    Exam Time CountDown : <span class="js-timeout"></span>
+                                </div>
                             </div>
                     </div>
                     <div class="public-question-body">

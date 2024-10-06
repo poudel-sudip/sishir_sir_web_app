@@ -12,11 +12,11 @@
     <div class="container-fluid px-md-5container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{ucwords($category->name)}} | Books</h2>
+                <h2>{{($category->name)}} | Books</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/books-category/{{$category->slug}}">{{ucwords($category->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/books-category/{{$category->slug}}">{{($category->name)}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Books</li>
                     </ol>
                 </div>

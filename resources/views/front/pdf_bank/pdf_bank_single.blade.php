@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
-@section('page_title', ucwords($pdf_bank->title))
+@section('page_title', ($pdf_bank->title))
 
-@section('og-title', ucwords($pdf_bank->title))
+@section('og-title', ($pdf_bank->title))
 @section('og-url', url('pdf-banks/bank/'.$pdf_bank->slug))
 @if($pdf_bank->thumbnail)
 @section('og-image', asset('/storage/'.$pdf_bank->thumbnail))
@@ -53,8 +53,8 @@
                             <div class="my-1"><span class="text-primary">Author(s):</span> <span class="text-success">{{$pdf_bank->author}}</span> </div>
                             <div class="my-1"><span class="text-primary">Price:</span> @if($pdf_bank->discount >0)  <s class="text-danger mx-2"> Rs. {{$pdf_bank->price}} </s> @endif <span class="text-success mx-2"> Rs. {{$pdf_bank->price - $pdf_bank->discount}} </span> </div>
                             <div class="my-1"><span class="text-primary">No of PDF Sets:</span> <span class="text-success"> {{$pdf_bank->type == 'set' ? $pdf_bank->pdf_count : '1'}} </span></div>
-                            <div class="my-1"><span class="text-primary">Paper:</span> <span class="text-success"> {{ucwords($pdf_bank->paper)}} </span></div>
-                            <div class="my-1"><span class="text-primary">No of Pages:</span><span class="text-success"> {{ucwords($pdf_bank->pages)}} </span></div>
+                            <div class="my-1"><span class="text-primary">Paper:</span> <span class="text-success"> {{($pdf_bank->paper)}} </span></div>
+                            <div class="my-1"><span class="text-primary">No of Pages:</span><span class="text-success"> {{($pdf_bank->pages)}} </span></div>
                             <div class="my-1"><span class="text-primary">Available Videos:</span><span class="text-success"> {{$pdf_bank->type == 'set' ? $pdf_bank->video_count : (trim($pdf_bank->video_file) ? '1' : '0') }} </span></div>
                             <div class="my-1"><span class="text-primary">Validity:</span><span class="text-success"> 1 Year From The Date of Purchase </span></div>
                             <div class="my-1"><span class="text-danger">* Bookings Are Non-Refundable</span> </div>

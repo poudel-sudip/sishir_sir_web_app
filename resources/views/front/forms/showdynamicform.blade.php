@@ -1,9 +1,9 @@
 @extends('front.layouts.app')
 
-@section('page_title', ucwords($vform->title))
-@section('og-title', ucwords($vform->title))
+@section('page_title', ($vform->title))
+@section('og-title', ($vform->title))
 @section('og-url', url('/dynamic-forms/'.$vform->slug))
-@section('og-description', ucwords($vform->title))
+@section('og-description', ($vform->title))
 @if($vform->banner)
 @section('og-image', asset('/storage/'.$vform->banner))
 @endif
@@ -12,7 +12,7 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{ucwords($vform->title)}}</h2>
+                <h2>{{($vform->title)}}</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
@@ -29,7 +29,7 @@
                 <div class="col-12">
                     <div class="card mb-5">
                         <div class="card-header text-center">
-                            {{ucwords($vform->title)}}
+                            {{($vform->title)}}
                         </div>
                         <div class="card-body enroll_form row">
                             @if($vform->banner)
@@ -56,7 +56,7 @@
                                                 {{-- <option value="">Choose One Sub Course</option> --}}
                                                 @php($subs = array_map('trim', explode(',', $vform->sub_categories)))
                                                 @foreach($subs as $cat)
-                                                    <option value="{{ucwords($cat)}}">{{ucwords($cat)}}</option>
+                                                    <option value="{{($cat)}}">{{($cat)}}</option>
                                                 @endforeach
                                             </select>
                                             @error('sub_course')

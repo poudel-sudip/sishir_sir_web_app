@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('page_title', 'Results: '.ucwords($exam->name))
+@section('page_title', 'Results: '.($exam->name))
 @section('content')
     <div class="container-fluid px-md-5">
         <div class="row">

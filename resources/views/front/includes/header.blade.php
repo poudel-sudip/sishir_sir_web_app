@@ -80,7 +80,7 @@
 
           @foreach($parent_menus as $parent)
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{ucwords($parent->name)}}</a>
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{($parent->name)}}</a>
               <?php
                 $child_menus = $parent->subGroups()->where('status','=','Active')->orderBy('order')->take(10)->get(['id','name','slug','type']);
               ?>
@@ -91,7 +91,7 @@
                   ?>
                   
                   <li class="parent-dropdown">
-                    <a class="dropdown-item @if($child->type == 'heading') sub-drop-icon @endif" href="{{$child_link}}">{{ucwords($child->name)}}</a>
+                    <a class="dropdown-item @if($child->type == 'heading') sub-drop-icon @endif" href="{{$child_link}}">{{($child->name)}}</a>
                     @if($child->type == 'heading')
                       <?php
                         $grandchild_menus = $child->categories()->where('status','=','Active')->orderBy('order')->take(10)->get(['id','name','slug','type']);
@@ -99,7 +99,7 @@
 
                       <div class="child-dropdown">
                         @foreach($grandchild_menus as $grandchild)
-                          <a href="/{{$parent->slug}}/{{$child->slug}}/{{$grandchild->slug}}"> {{ucwords($grandchild->name)}} </a>
+                          <a href="/{{$parent->slug}}/{{$child->slug}}/{{$grandchild->slug}}"> {{($grandchild->name)}} </a>
                         @endforeach
                       </div>
                     @endif
@@ -118,7 +118,7 @@
             <ul class="dropdown-menu">
               @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'book_publisher'])->whereHas('pub_categories')->orderBy('order')->take(5)->get() as $b)
               <li class="parent-dropdown">
-                <a class="dropdown-item" aria-current="page" href="/book-publishers/{{$b->slug}}">{{ucwords($b->name)}}</a>
+                <a class="dropdown-item" aria-current="page" href="/book-publishers/{{$b->slug}}">{{($b->name)}}</a>
               </li>
               @endforeach
             </ul>

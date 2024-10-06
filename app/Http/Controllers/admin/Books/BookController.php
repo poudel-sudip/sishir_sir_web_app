@@ -204,6 +204,7 @@ class BookController extends Controller
             "description" => "string|required",
             "status" => "string|required",
             "thumbnail" => "image|required",
+            "content_pdf" => "file|mimes:pdf|nullable",
             'search_tags' => 'string|nullable',
         ]);
 
@@ -217,6 +218,11 @@ class BookController extends Controller
             $data['thumbnail'] = $request->thumbnail->store('uploads','public');
         }
       
+        if(isset($request->content_pdf))
+        {
+            $data['content_pdf'] = $request->content_pdf->store('uploads/books/pdf','public');
+        }
+
         $book = Book::create($data);
 
         if($book->category && $book->publisher)
@@ -268,6 +274,8 @@ class BookController extends Controller
             "status" => "string|required",
             "thumbnail" => "image|nullable",
             "old_thumbnail" => "string|nullable",
+            "old_content_pdf" => "string|nullable",
+            "content_pdf" => "file|mimes:pdf|nullable",
             'search_tags' => 'string|nullable',
         ]);
         $data = $request->only(['title','order','author','edition','isbn','published_year','pages','availability','price','discount','purchase_link','status','search_tags','description']);
@@ -278,6 +286,12 @@ class BookController extends Controller
             $data['thumbnail'] = $request->thumbnail->store('uploads','public');
         }
         
+        $data['content_pdf'] = $request->old_content_pdf;
+        if(isset($request->content_pdf))
+        {
+            $data['content_pdf'] = $request->content_pdf->store('uploads/books/pdf','public');
+        }
+
         $book->update($data);
 
 

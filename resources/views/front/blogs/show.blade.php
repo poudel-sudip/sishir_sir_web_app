@@ -1,6 +1,6 @@
 @extends('front.layouts.app')
-@section('page_title', ucwords($blog->title))
-@section('og-title', ucwords($blog->title))
+@section('page_title', ($blog->title))
+@section('og-title', ($blog->title))
 @section('og-url', url('blogs/'.$blog->slug))
 @if($blog->image)
 @section('og-image', asset('/storage/'.$blog->image))
@@ -16,7 +16,7 @@
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ ('/blogs') }}">Blogs</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ucwords($blog->title)}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{($blog->title)}}</li>
                     </ol>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="text-primary">{{strtoupper($blog->title)}}</h3>
+                            <h3 class="text-primary">{{($blog->title)}}</h3>
                         </div>
                         <div class="d-flex align-items-center flex-wrap">
                             <span class="mx-3 h5 text-success text-nowrap"> <img src="/storage/{{$blog->authorimage ?? $blog->creator->photo ?? ''}}" onerror="this.src='/images/student.jpg'" style="height:50px; width:50px; border-radius:50%; border:1px solid #198754;"> {{$blog->author}}</span>

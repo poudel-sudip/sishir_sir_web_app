@@ -233,7 +233,7 @@ class PublicExamController extends Controller
            abort(404);
         }
 
-
+        
         $exam->mcq_sets = $exam->category_exams()
         ->with('exam:id,name,status')
         ->whereHas('exam',function($e){
@@ -242,6 +242,22 @@ class PublicExamController extends Controller
         ->get()
         ->sortByDesc('id')
         ->values();
+
+        $mcq_question_count = 0;
+        foreach($exam->mcq_sets as $e)
+        {
+            try 
+            {
+                $que_count = $e->exam->questions()->count() ?? 0;
+                $mcq_question_count += $que_count;
+            } 
+            catch (\Throwable $th) {
+                //throw $th;
+            }
+            
+        }
+
+        $exam->mcq_question_count = $mcq_question_count;
 
         // dd($exam);
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";

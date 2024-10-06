@@ -1,6 +1,6 @@
 @extends('front.layouts.app')
-@section('page_title', ucwords($vaccancy->title))
-@section('og-title', ucwords($vaccancy->title))
+@section('page_title', ($vaccancy->title))
+@section('og-title', ($vaccancy->title))
 @section('og-url', url('vaccancies/'.$vaccancy->slug))
 @if($vaccancy->thumbnail)
 @section('og-image', asset('/storage/'.$vaccancy->thumbnail))
@@ -16,7 +16,7 @@
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ ('/vaccancies') }}">Vaccancies</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ucwords($vaccancy->title)}}</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{($vaccancy->title)}}</li>
                     </ol>
                 </div>
             </div>
@@ -24,7 +24,7 @@
         <div class="blogs-details-container bg-white">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="text-primary text-center">{{strtoupper($vaccancy->title)}}</h3>
+                    <h3 class="text-primary text-center">{{($vaccancy->title)}}</h3>
                 </div>
                 <div class="d-flex align-items-center flex-wrap">
                     <span class="mx-3 h6 text-success text-nowrap"><i class="fa fa-user"></i> {{$vaccancy->author}}</span>

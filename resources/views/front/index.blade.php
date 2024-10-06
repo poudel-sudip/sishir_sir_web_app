@@ -63,7 +63,7 @@
                         <div class="update-body" style="max-height:375px; overflow-y:scroll">
                             <ul class="p-0">
                                 @forelse($updates as $row)                         
-                                    <li><a href="{{$row->link}}"><i class="far fa-check-circle"></i>{{ucwords($row->title)}}</a></li>
+                                    <li><a href="{{$row->link}}"><i class="far fa-check-circle"></i>{{($row->title)}}</a></li>
                                 @empty
                                     <li>No Trendings Available</li>
                                 @endforelse
@@ -91,7 +91,7 @@
                         <div class="update-body" style="max-height:375px; overflow-y:scroll">
                             <ul class="p-0">
                                 @forelse($vaccancies as $row)                         
-                                    <li><a href="{{$row->link}}"><i class="fa fa-pen-nib"></i>{{ucwords($row->title)}}  </a></li>
+                                    <li><a href="{{$row->link}}"><i class="fa fa-pen-nib"></i>{{($row->title)}}  </a></li>
                                 @empty
                                     <li>No Vaccancies Available</li>
                                 @endforelse
@@ -124,7 +124,7 @@
                         <div class="update-body " style="height: 475px; overflow-y:scroll;">
                             <ul>
                                 @forelse($updates as $update)                            
-                                    <li><a href="{{$update->link}}"><i class="far fa-check-circle"></i>{{ucwords($update->title)}}</a></li>
+                                    <li><a href="{{$update->link}}"><i class="far fa-check-circle"></i>{{($update->title)}}</a></li>
                                 @empty
                                     <li>No Updates Available</li>
                                 @endforelse
@@ -179,7 +179,7 @@
                                                 <select name="sub_course" id="sub_course" class="form-control @error('sub_course') is-invalid @enderror">
                                                     @php($subs = array_map('trim', explode(',', $form->sub_categories)))
                                                     @foreach($subs as $cat)
-                                                        <option value="{{ucwords($cat)}}">{{ucwords($cat)}}</option>
+                                                        <option value="{{($cat)}}">{{($cat)}}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('sub_course')
@@ -292,7 +292,7 @@
                                         <a href="/exam-hall/premium/{{$row->slug}}">
                                             <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                         </a>
-                                        <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->slug}}">{{ucwords($row->title)}}</a></h6>
+                                        <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->slug}}">{{($row->title)}}</a></h6>
                                         <h6 class="small">{{$row->category_exams()->count()}} MCQ Sets </h6>
 
                                     </div>
@@ -311,7 +311,7 @@
                                         <a href="/public-exams/{{$row->slug}}">
                                             <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                         </a>
-                                        <h6 class="mt-3"><a href="/public-exams/{{$row->slug}}">{{ucwords($row->name)}}</a></h6>
+                                        <h6 class="mt-3"><a href="/public-exams/{{$row->slug}}">{{($row->name)}}</a></h6>
                                         <h6 class="small">{{ $row->exam ? ($row->exam->questions ? $row->exam->questions()->count() : '-') : '-' }} Questions </h6>
 
                                     </div>
@@ -345,7 +345,7 @@
                     <div class="nav nav-tabs justify-content-center align-items-center" id="nav-mock-test-tab" role="tablist">
                         @php($isFirstElement = true)
                         @foreach($examhall_categories as $cat)
-                            <button class="border nav-link {{$isFirstElement ? 'active' : ''}}" id="nav-mock-test-{{ $cat->id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-{{ $cat->id }}" type="button" role="tab" aria-controls="nav-mock-test-{{ $cat->id }}" aria-selected="true">{{ucwords($cat->name)}}</button>
+                            <button class="border nav-link {{$isFirstElement ? 'active' : ''}}" id="nav-mock-test-{{ $cat->id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-{{ $cat->id }}" type="button" role="tab" aria-controls="nav-mock-test-{{ $cat->id }}" aria-selected="true">{{($cat->name)}}</button>
                             @php($isFirstElement = false)
                         @endforeach
                         <button class="border nav-link" id="nav-mock-test-free-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-free" type="button" role="tab" aria-controls="nav-mock-test-free" aria-selected="true">Free</button>
@@ -365,7 +365,7 @@
                                                 <a href="/exam-hall/premium/{{$row->slug}}">
                                                     <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                                 </a>
-                                                <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->slug}}">{{ucwords($row->title)}}</a></h6>
+                                                <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->slug}}">{{($row->title)}}</a></h6>
                                                 <h6 class="small">{{$row->mcq_count}} MCQ Sets </h6>
 
                                             </div>
@@ -386,7 +386,7 @@
                                             <a href="/public-exams/{{$row->slug}}">
                                                 <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                             </a>
-                                            <h6 class="mt-3"><a href="/public-exams/{{$row->slug}}">{{ucwords($row->name)}}</a></h6>
+                                            <h6 class="mt-3"><a href="/public-exams/{{$row->slug}}">{{($row->name)}}</a></h6>
                                             <h6 class="small">{{ $row->exam ? ($row->exam->questions ? $row->exam->questions()->count() : '-') : '-' }} Questions </h6>
     
                                         </div>
@@ -437,7 +437,7 @@
                     <div class="nav nav-tabs justify-content-center align-items-center" id="nav-pdf-bank-tab" role="tablist">
                         @php($isFirstElement = true)
                         @foreach($pdf_bank_categories as $cat)
-                            <button class="border nav-link {{$isFirstElement ? 'active' : ''}}" id="nav-pdf-bank-{{ $cat->id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-pdf-bank-{{ $cat->id }}" type="button" role="tab" aria-controls="nav-pdf-bank-{{ $cat->id }}" aria-selected="true">{{ucwords($cat->name)}}</button>
+                            <button class="border nav-link {{$isFirstElement ? 'active' : ''}}" id="nav-pdf-bank-{{ $cat->id }}-tab" data-bs-toggle="tab" data-bs-target="#nav-pdf-bank-{{ $cat->id }}" type="button" role="tab" aria-controls="nav-pdf-bank-{{ $cat->id }}" aria-selected="true">{{($cat->name)}}</button>
                             @php($isFirstElement = false)
                         @endforeach
                     </div>
@@ -455,7 +455,7 @@
                                                 <a href="/pdf-banks/bank/{{$row->slug}}">
                                                     <img src="/storage/{{$row->thumbnail}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                                 </a>
-                                                <h6 class="mt-3"><a href="/pdf-banks/bank/{{$row->slug}}">{{ucwords($row->title)}}</a></h6>
+                                                <h6 class="mt-3"><a href="/pdf-banks/bank/{{$row->slug}}">{{($row->title)}}</a></h6>
                                                 <h6 class="small">{{$row->type == 'set' ? $row->pdf_count : '1'}} PDF Sets </h6>
 
                                             </div>
@@ -587,7 +587,7 @@
                                     </a>
                                 </div>
                                 <div class="seller-footer">
-                                    <h4 class="text-center" title="{{strtoupper($book->title)}}"> <a href="/books/{{$book->slug}}"> {{strtoupper($book->title)}} </a></h4>
+                                    <h4 class="text-center" title="{{($book->title)}}"> <a href="/books/{{$book->slug}}"> {{($book->title)}} </a></h4>
                                     <div class="text-center text-danger" style="margin-top: -0.5rem">(Edition: <span class="text-primary">{{ $book->edition ?? '' }}</span>)</div>
                                     <div>Price : @if($book->discount > 0) <s class="text-danger">Rs. {{ $book->price }}</s> @endif <strong class="text-success"> Rs. {{ ($book->price - (($book->price*$book->discount)/100)) }}</strong></div>
                                 </div>

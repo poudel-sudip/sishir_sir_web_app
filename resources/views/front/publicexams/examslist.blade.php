@@ -94,7 +94,7 @@
                                                 <a href="/exam-hall/premium/{{$exam->slug}}">
                                                     <img src="/storage/{{$exam->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
                                                 </a>
-                                                <h5 class="mt-3"><a href="/exam-hall/premium/{{$exam->slug}}">{{ucwords($exam->title)}}</a></h5>
+                                                <h5 class="mt-3"><a href="/exam-hall/premium/{{$exam->slug}}">{{($exam->title)}}</a></h5>
                                                 <h6>{{$exam->category_exams->count()}} Sets </h6>
 
                                             </div>
