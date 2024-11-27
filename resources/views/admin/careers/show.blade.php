@@ -47,6 +47,11 @@
                         </div>
 
                         <div class="course-row">
+                            <div>Image File </div>
+                            <div class="text-center"><img src="/storage/{{$vaccancy->img_file}}" alt="" class="img img-fluid" style=""></div>
+                        </div>
+
+                        <div class="course-row">
                             <div>PDF File </div>
                             <div>
                                 @if(trim($vaccancy->pdf_file))

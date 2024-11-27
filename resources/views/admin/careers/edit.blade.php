@@ -90,6 +90,30 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row align-items-center">
+                                <label for="img_file" class="col-md-4 col-form-label">{{ __('Image File') }}</label>
+                                <div class="col-6 col-md-1">
+                                    @if(trim($vaccancy->img_file))
+                                    <a href="/storage/{{$vaccancy->img_file}}" target="_blank" class="h1 text-danger"> <img src="/storage/{{$vaccancy->img_file}}" alt="" class="img img-fluid"> </a>
+                                    @endif
+                                </div>
+                                <div class="col-6 col-md-2 d-flex align-items-center"> 
+                                    @if(trim($vaccancy->img_file))                                   
+                                    <label class="" for="clear_img_file">Remove Image</label>
+                                    <input class="align-self-stretch" type="checkbox" name="clear_img_file" id="clear_img_file">
+                                    @endif
+                                </div>
+                                <div class="col-md-5">
+                                    <input id="img_file" type="file" class="form-control @error('img_file') is-invalid @enderror" name="img_file" value="{{ old('img_file') }}" accept="image/*" >
+                                    <input type="hidden" name="old_img_file" value="{{$vaccancy->img_file}}">
+                                    @error('img_file')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="thumbnail" class="col-md-4 col-form-label">{{ __('Thumbnail') }}</label>
                                 <div class="col-md-2 pt-2">

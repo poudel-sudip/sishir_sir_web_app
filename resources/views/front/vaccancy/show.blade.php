@@ -30,20 +30,26 @@
                     <span class="mx-3 h6 text-success text-nowrap"><i class="fa fa-user"></i> {{$vaccancy->author}}</span>
                     <span class="mx-3 h6 text-primary text-nowrap"><i class="fa fa-pen"></i> {{$vaccancy->created_at}}</span>
                     <span class="mx-3 h6 text-info text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
+                    <span class="mx-2 text-nowrap text-primary"><i class="fa fa-download"></i> {{$counterData->page_download_count ?? '0'}}</span>
                     <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                 </div>
             </div>
-            <div class="row mt-3">
-                {{-- <div class="col-md-12">
-                    <img src="/storage/{{$vaccancy->image}}" style="width: 100%">
-                </div> --}}
-                <div class="row justify-content-end">
-                    <div class="col-md-6">
+            <div class="row mt-3">                
+                <div class="col-12 row align-items-center">
+                    <div class="col-md-4">
+                        @if(trim($vaccancy->pdf_file))
+                        <a href="{{url('/storage/'.$vaccancy->pdf_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                        @endif
+                    </div>
+                    <div class="col-md-8">
                         <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
                     </div>
                 </div>
                 <div class="col-md-12 mt-3">
                     <div class="blog-full-description">{!! $vaccancy->description !!}</div>
+                    <div class="text-center">
+                        <img src="/storage/{{$vaccancy->img_file}}" class="img img-fluid" alt="">
+                    </div>
                     @if(trim($vaccancy->pdf_file))
                     <div>
                         <div class="_df_book" id="pdf_book_df" source="/storage/{{$vaccancy->pdf_file}}" ></div>
@@ -72,6 +78,28 @@
             const postData = { type: 'share', page: 'Vaccancy Details Show',pageurl: pageURL };
             postDataWithFetch('/page-counter-increment', postData);
         }
+
+        function handleDownload(event) {
+            event.preventDefault(); // Prevent the default behavior of the link
+
+            var downloadUrl = event.target.getAttribute("href");
+            var filename = event.target.getAttribute("filename");
+            var fileExtension = downloadUrl.split('.').pop().toLowerCase();
+
+            var link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = filename +" || shisiradhikari.com."+fileExtension; // Set an empty value for the download attribute to preserve the original filename
+
+            document.body.appendChild(link);
+
+            link.click(); // Simulate a click event to initiate the download
+
+            document.body.removeChild(link); // Remove the dynamically created link element
+            
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'download', page: 'Vaccancy Details Show', pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
+        }
     </script>
  
  <link href="{{asset('dflip/css/dflip.min.css')}}" rel="stylesheet" type="text/css">
@@ -84,12 +112,12 @@
             // height:'100%',
             webgl:true,
             soundEnable: true,
-            enableDownload: true,
+            enableDownload: false,
             backgroundColor: "#1375b9",
             scrollWheel: false,
             pageMode: DFLIP.PAGE_MODE.SINGLE,
             singlePageMode: DFLIP.SINGLE_PAGE_MODE.BOOKLET,
-            allControls: "startPage,altPrev,pageNumber,altNext,endPage,thumbnail,zoomIn,zoomOut,fullScreen,pageMode,download",
+            allControls: "startPage,altPrev,pageNumber,altNext,endPage,thumbnail,zoomIn,zoomOut,fullScreen,pageMode",
             moreControls: "",
             hideControls: "share",
         };
