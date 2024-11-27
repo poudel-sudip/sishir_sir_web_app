@@ -333,7 +333,7 @@ class FrontController extends Controller
         $data['updates'] = array_merge($data['updates'], $menu_items);
         $data['updates'] = array_merge($data['updates'], $menu_sub_items);
         $data['updates'] = array_merge($data['updates'], $library_materials);
-        $data['updates'] = array_merge($data['updates'], $vaccancy_updates);
+        // $data['updates'] = array_merge($data['updates'], $vaccancy_updates);
 
         usort($data['updates'], function($a, $b) {return strcmp($b->created_at,$a->created_at);});
         $data['updates'] = array_slice($data['updates'], 0, 7, true);

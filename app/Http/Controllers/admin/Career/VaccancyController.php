@@ -32,16 +32,23 @@ class VaccancyController extends Controller
             'author' => 'required|string',
             'description' => 'required|string',
             'pdf_file' => 'nullable|file',
+            'img_file' => 'nullable|image',
             'thumbnail' => 'required|image',
             'status' => 'required|string',
         ]);
 
         $pdf = null;
+        $img = null;
         $thumbnail = null;
 
         if(isset($request->pdf_file))
         {
             $pdf = $request->pdf_file->store('uploads/vaccancy/pdf','public');
+        }
+
+        if(isset($request->img_file))
+        {
+            $img = $request->img_file->store('uploads/vaccancy/pdf','public');
         }
 
         if(isset($request->thumbnail))
@@ -55,6 +62,7 @@ class VaccancyController extends Controller
             'title' => ucwords($request->title),
             'thumbnail' => $thumbnail,
             'pdf_file' => $pdf,
+            'img_file' => $img,
             'author' => ucwords($request->author ?? auth()->user()->name),
             'description' => $request->description,
             'status' => $request->status,
