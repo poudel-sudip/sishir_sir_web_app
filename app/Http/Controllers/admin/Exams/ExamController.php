@@ -53,6 +53,7 @@ class ExamController extends Controller
             'category'=>'numeric|required',
             'answer_video' => 'string|nullable',
             "answer_pdf" => "file|nullable|mimes:pdf",
+            "pdf_view" => "required|numeric|gte:0|lte:1",
         ]);
 
         $pdf_file = '';
@@ -72,6 +73,7 @@ class ExamController extends Controller
             'category_id'=>$request->category,
             'answer_video' => $request->answer_video,
             'answer_pdf' => $pdf_file,
+            'pdf_view' => $request->pdf_view,
         ]);
 
         return redirect('/admin/exam-category/'.$exam->category_id.'/exams')->with('success','Data add successfully');
@@ -129,6 +131,7 @@ class ExamController extends Controller
             'creator'=>'numeric|nullable',
             "answer_pdf" => "file|nullable|mimes:pdf",
             "old_answer_pdf" => "string|nullable",
+            "pdf_view" => "required|numeric|gte:0|lte:1",
         ]);
 
         $pdf_file = $request->old_answer_pdf;
@@ -149,6 +152,7 @@ class ExamController extends Controller
             'answer_video' => $request->answer_video,
             'user_id'=>$request->creator,
             'answer_pdf' => $pdf_file,
+            'pdf_view' => $request->pdf_view,
         ]);
 
         return redirect('/admin/exam-category/'.$exam->category->id.'/exams')->with('success','Data Updated Successfully');

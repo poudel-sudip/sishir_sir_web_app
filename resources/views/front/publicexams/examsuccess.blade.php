@@ -67,9 +67,11 @@
                                                 <span class="m-1 btn btn-sm border-primary ">{{$key}}:{{ucwords($value)}}</span>
                                             @endforeach
                                         </div>
+                                        @if($view_pdf)
                                         <div class="">
                                             <a href="/public-exams/{{$exam->slug}}/download-questions" target="_blank" class="mt-1 btn border border-danger text-danger">View Question PDF <i class="fas fa-file-pdf "></i></a>
                                         </div>
+                                        @endif
                                     </div>
                                     
                                 </div>

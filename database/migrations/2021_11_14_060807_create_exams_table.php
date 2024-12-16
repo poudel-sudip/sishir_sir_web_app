@@ -26,6 +26,7 @@ class CreateExamsTable extends Migration
             $table->string('answer_video')->nullable();
             $table->string('answer_pdf')->nullable();
             $table->string('status')->nullable();
+            $table->tinyInteger('pdf_view')->default(0);
             $table->timestamps();
         });
     }

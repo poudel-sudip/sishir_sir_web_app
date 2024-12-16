@@ -627,9 +627,9 @@ Route::get('/moderator/exam-hall/bookings/all','App\Http\Controllers\Moderator\E
 // Route::get('/moderator/exam-hall/bookings/create','App\Http\Controllers\Moderator\ExamHallController@bookingcreate')->middleware('role:Moderator');
 Route::get('/moderator/exam-hall/{category}/bookings','App\Http\Controllers\Moderator\ExamHallController@setBookings')->middleware('role:Moderator');
 // Route::post('/moderator/exam-hall/bookings','App\Http\Controllers\Moderator\ExamHallController@bookingstore')->middleware('role:Moderator');
-// Route::get('/moderator/exam-hall/bookings/{booking}/edit','App\Http\Controllers\Moderator\ExamHallController@bookingedit')->middleware('role:Moderator');
+Route::get('/moderator/exam-hall/bookings/{booking}/edit','App\Http\Controllers\Moderator\ExamHallController@bookingedit')->middleware('role:Moderator');
 Route::get('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingshow')->middleware('role:Moderator');
-// Route::patch('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingupdate')->middleware('role:Moderator');
+Route::patch('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingupdate')->middleware('role:Moderator');
 // Route::delete('/moderator/exam-hall/bookings/{booking}','App\Http\Controllers\Moderator\ExamHallController@bookingdestroy')->middleware('role:Moderator');
 
 

@@ -58,6 +58,10 @@
                             <div>{{$exam->status}}</div>
                         </div>
                         <div class="course-row">
+                            <div>PDF View: </div>
+                            <div>{{$exam->pdf_view ? 'Enabled' : 'Disabled'}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Solution Video URL: </div>
                             <div>
                                 {{$exam->answer_video ?? ''}}  <br>

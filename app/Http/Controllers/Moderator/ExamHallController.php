@@ -262,46 +262,57 @@ class ExamHallController extends Controller
 
     public function bookingedit(ExamHallBookings $booking)
     {
+        $user = auth()->user();
+        if($booking->category && ($booking->category->user_id == $user->id))
+        {
+            $data['booking'] = $booking;
+            return view('moderator.examhall.booking.edit',$data);
+        }
         abort(403,'Access Denied. Please Contact Admin.');
-        $data['booking'] = $booking;
-        return view('moderator.examhall.booking.edit',$data);
+        
     }
 
     public function bookingupdate(Request $request, ExamHallBookings $booking)
     {
-        abort(403,'Access Denied. Please Contact Admin.');
-        // dd($request->all(),$booking);
-        $request->validate([
-            "bookingid" => "required|numeric",
-            "exam_category" => "required|string",
-            "paymentAmount" => "required|numeric",
-            "discount" => "required|numeric",
-            "verificationMode" => "required|string|min:1",
-            'uploadDocument'=>'image|nullable',
-            'oldDocument'=>'string|nullable',
-            "status" => "required|string|min:1",
-            "remarks" => "nullable|string",
-            "examfee" => "required|numeric",
-        ]);
-
-        $due=(integer)($request->examfee - $request->paymentAmount - $request->discount);
-        $img=$request->oldDocument;
-        if(isset($request->uploadDocument))
+        $user = auth()->user();
+        if($booking->category && ($booking->category->user_id == $user->id))
         {
-            $img=request('uploadDocument')->store('uploads','public');
-        }
-        $booking->update([
-            "status" => $request->status,
-            "updatedBy" => auth()->user()->name,
-            "verificationMode" => $request->verificationMode,
-            'verificationDocument'=>$img,
-            "paymentAmount" => $request->paymentAmount,
-            "discount" => $request->discount,
-            "dueAmount" => $due,
-            "remarks" => $request->remarks,
-        ]);
+            // dd($request->all(),$booking);
+            $request->validate([
+                "bookingid" => "required|numeric",
+                "exam_category" => "required|string",
+                "paymentAmount" => "required|numeric",
+                "discount" => "required|numeric",
+                "verificationMode" => "required|string|min:1",
+                'uploadDocument'=>'image|nullable',
+                'oldDocument'=>'string|nullable',
+                "status" => "required|string|min:1",
+                "remarks" => "nullable|string",
+                "examfee" => "required|numeric",
+            ]);
 
-        return redirect('/moderator/exam-hall/'.$booking->category_id.'/bookings');
+            $due=(integer)($request->examfee - $request->paymentAmount - $request->discount);
+            $img=$request->oldDocument;
+            if(isset($request->uploadDocument))
+            {
+                $img=request('uploadDocument')->store('uploads','public');
+            }
+            $booking->update([
+                "status" => $request->status,
+                "updatedBy" => auth()->user()->name,
+                "verificationMode" => $request->verificationMode,
+                'verificationDocument'=>$img,
+                "paymentAmount" => $request->paymentAmount,
+                "discount" => $request->discount,
+                "dueAmount" => $due,
+                "remarks" => $request->remarks,
+            ]);
+
+            return redirect('/moderator/exam-hall/'.$booking->category_id.'/bookings');
+        }
+
+        abort(403,'Access Denied. Please Contact Admin.');
+        
     }
 
     public function bookingdestroy(Request $request, ExamHallBookings $booking)
@@ -324,7 +335,8 @@ class ExamHallController extends Controller
     {
         $user = auth()->user();
         $catids = ExamHallCategories::where('user_id','=',$user->id)->get(['id','user_id'])->pluck('id')->values()->toArray();
-        $data['bookings'] = ExamHallBookings::whereIn('category_id',$catids)->get()->values();
+        // $data['bookings'] = ExamHallBookings::whereIn('category_id',$catids)->get()->values();
+        $data['bookings'] = ExamHallBookings::whereIn('category_id',$catids)->paginate(100);
         return view('moderator.examhall.booking.allbookings',$data);
     }
 }

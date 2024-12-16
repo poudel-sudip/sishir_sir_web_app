@@ -181,6 +181,7 @@ class PublicExamController extends Controller
             'exam' => $exam,
             'question_solutions' => $question_solutions,
             'status'=>'1',
+            'view_pdf' => $exam->exam->view_pdf ?? 0,
         ]);
     }
 

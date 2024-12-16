@@ -27,7 +27,7 @@
                            </div> --}}
                       </div>
                       <div class="table-responsive table-responsive-md">
-                        <table class="table table-bordered" id="advanced-desc-table">
+                        <table class="table table-bordered all-desc-table" >
                           <thead>
                             <tr>
                                 <th>ID</th>
@@ -68,8 +68,8 @@
                                 <td class="text-wrap" max-width="150px">{{ $booking->remarks }}</td>
                                 <td class="classroom-btn" width="50">
                                     <a href="/moderator/exam-hall/bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                    {{-- <a href="/moderator/exam-hall/bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
-                                    <form id="delete-form-{{$booking->id}}" action="/moderator/exam-hall/bookings/{{$booking->id}}" method="POST" style="display: inline">
+                                    <a href="/moderator/exam-hall/bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
+                                    {{-- <form id="delete-form-{{$booking->id}}" action="/moderator/exam-hall/bookings/{{$booking->id}}" method="POST" style="display: inline">
                                         @csrf
                                         @method('DELETE')
                                         <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
@@ -103,6 +103,11 @@
                             }
                         </script> --}}
                       </div>
+
+                        <div class="mt-2">
+                        {{$bookings->onEachSide(1)->links('paginator.bootstrap')}}
+                        </div>
+
                     </div>
                 </div>
             </div>

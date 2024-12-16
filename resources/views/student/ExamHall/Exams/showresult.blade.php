@@ -53,8 +53,9 @@
                             <h6>Question & Answer</h6>
                         </div>
                         <div class="col-6 text-end">
+                            @if($exam->pdf_view)
                             <a class="view-video btn btn-danger" href="/student/exam-bookings/{{$category->id}}/exams/{{$exam->id}}/download" target="_blank">Download Question PDF <span class="fas fa-file-pdf"></span></a>
-
+                            @endif
                             @if($exam->answer_video)
                             <a class="view-video btn btn-primary" href="#videoModal" video-title="{{'Video Answer Solution for '.$exam->name}}" video-url="{{$exam->answer_video}}" data-bs-toggle="modal" data-bs-target="#videoModal" data-toggle="modal" data-target="#videoModal">Play Solution Video <span class="fas fa-video"></span></a>
                             @endif
