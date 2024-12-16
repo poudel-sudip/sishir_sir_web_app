@@ -24,9 +24,9 @@
                             @csrf
                             
                             <div class="form-group row">
-                                <label for="exam_category" class="col-md-5 col-form-label">{{ __('Exam Category') }}</label>
+                                <label for="exam_category" class="col-md-3 col-form-label">{{ __('Exam Category') }}</label>
 
-                                <div class="col-md-7">
+                                <div class="col-md-9">
                                     <select id="exam_category" class="form-control @error('exam_category') is-invalid @enderror" name="exam_category" value="{{ old('exam_category') }}" required>
                                         <option value="">Choose an Exam Category</option>
                                         @foreach($categories as $cat)
@@ -42,9 +42,9 @@
                             </div>
                             
                             <div class="form-group row">
-                                <label for="exam_name" class="col-md-5 col-form-label">{{ __('Exam Name') }}</label>
+                                <label for="exam_name" class="col-md-3 col-form-label">{{ __('Exam Name') }}</label>
 
-                                <div class="col-md-7">
+                                <div class="col-md-9">
                                     <select id="exam_name" class="form-control @error('exam_name') is-invalid @enderror" name="exam_name" value="{{ old('exam_name') }}" required>
                                     </select>
                                     @error('exam_name')
@@ -56,9 +56,22 @@
                             </div>
                            
                             <div class="form-group row">
-                                <label for="status" class="col-md-5 col-form-label">{{ __('Result Status') }}</label>
+                                <label for="thumbnail" class="col-md-3 col-form-label">{{ __('Thumbnail Image') }}</label>
+                                <div class="col-md-9">
+                                    <input id="thumbnail" type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" value="{{ old('thumbnail') }}" required accept="image/*">
 
-                                <div class="col-md-7">
+                                    @error('thumbnail')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="status" class="col-md-3 col-form-label">{{ __('Result Status') }}</label>
+
+                                <div class="col-md-9">
                                     <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required>
                                         <option value="Unpublished">Unpublished</option>
                                         <option value="Published">Published</option>
@@ -73,7 +86,7 @@
                             </div>
 
                             <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
+                                <div class="col-md-6 offset-md-3">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Submit') }}
                                     </button>

@@ -345,6 +345,7 @@ class ExamController extends Controller
         $request->validate([
             'exam_name'=>'required|numeric',
             'status'=>'string|required',
+            'thumbnail' => 'image|nullable',
         ]);
 
         $exam = Exam::find($request->exam_name);
@@ -356,12 +357,19 @@ class ExamController extends Controller
             return back()->withInput()->withErrors(['exam_name'=>'This Exam is already included in the Open Exams.']);
         }
 
+        $img = '';
+        if(isset($request->thumbnail))
+        {
+            $img = $request->thumbnail->store('uploads/thumbnails','public');
+        }
+
         OpenExam::create([
             'user_id' => auth()->user()->id,
             'exam_id' => $exam->id,
             'name'=>$exam->name,
             'slug'=>$slug,
             'result_status'=>$request->status ?? 'Unpublished',
+            'image' => $img,
         ]);
 
         return redirect('/moderator/open-exams')->with('success','Data add successfully');
@@ -387,11 +395,21 @@ class ExamController extends Controller
             'exam'=>'required|string',
             'status'=>'string|required',
             'show_answer' =>'numeric|required|gte:0|lte:1',
+            'thumbnail' => 'image|nullable',
+            'old_thumbnail' => 'string|nullable',
         ]);
+
+        $img = $request->old_thumbnail;
+        if(isset($request->thumbnail))
+        {
+            $img = $request->thumbnail->store('uploads/thumbnails','public');
+        }
+
 
         $exam->update([
             'result_status'=>$request->status,
             'show_answer'=>$request->show_answer,
+            'image' => $img,
         ]);
 
         return redirect('/moderator/open-exams')->with('success','Data Updated Successfully');

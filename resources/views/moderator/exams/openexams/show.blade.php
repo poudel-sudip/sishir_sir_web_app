@@ -57,6 +57,12 @@
                             <div>Show Exam Answers: </div>
                             <div>{{$exam->show_answer ? 'Yes' : 'No'}}</div>
                         </div>
+                        <div class="course-row">
+                            <div>Thumbnail Image: </div>
+                            <div>
+                                <img src="/storage/{{$exam->image}}" alt="" class="img img-fluid" style="max-height:100px;">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
