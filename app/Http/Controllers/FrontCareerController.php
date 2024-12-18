@@ -78,7 +78,7 @@ class FrontCareerController extends Controller
 
         VaccancyPost::create([
             'user_id' => auth()->user()->id ?? null,
-            'title' => ucwords($request->title),
+            'title' => ($request->title),
             'thumbnail' => $thumbnail,
             'pdf_file' => $pdf,
             'img_file' => $img,

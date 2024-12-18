@@ -71,7 +71,7 @@ class VaccancyController extends Controller
 
         VaccancyPost::create([
             'user_id' => auth()->user()->id ?? null,
-            'title' => ucwords($request->title),
+            'title' => $request->title,
             'thumbnail' => $thumbnail,
             'pdf_file' => $pdf,
             'author' => ucwords($request->author ?? auth()->user()->name),

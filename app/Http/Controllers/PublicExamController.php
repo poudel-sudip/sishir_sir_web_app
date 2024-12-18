@@ -57,8 +57,14 @@ class PublicExamController extends Controller
 
         unset($exam->exam);
 
+        $user = null;
+        if(auth()->check())
+        {
+            $user = (object) auth()->user()->only(['id','name','contact','email']);
+        }
+
         // dd($exam);
-        return view('front.publicexams.examform',compact('exam'));
+        return view('front.publicexams.examform',compact('exam','user'));
     }
 
     public function examshow(Request $request, $examslug)

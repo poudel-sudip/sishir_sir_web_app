@@ -2318,7 +2318,7 @@ p {
 
 .main-news-home .student-home-block {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
 }
 
@@ -2436,7 +2436,7 @@ p {
         overflow: hidden;
     }
     .main-news-home .student-home-block {
-        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-columns: repeat(3, 1fr) !important;
         width: 100%;
     }
     .student-home-block .student-dashboard-card {

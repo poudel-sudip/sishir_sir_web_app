@@ -155,14 +155,30 @@
 
             <li class="nav-item">
               <a class="nav-link" href="/student/exam-bookings"><i class="fas fa-laptop-house text-info"></i>Exam Set Bookings</a>
-            </li>
-            
+            </li>           
+
             <li class="nav-item">
               <a class="nav-link" href="/student/tickets"><i class="fas fa-address-card text-danger"></i>Ask/Complain  Admin</a>
             </li>
 
             <li class="nav-item">
+              <a class="nav-link" href="/student/free-exams"><i class="fas fa-stopwatch text-orange"></i>Free Exams</a>
+            </li>
+
+            <li class="nav-item">
               <a class="nav-link" href="/student/vaccancies"><i class="fas fa-graduation-cap  text-pink"></i>Latest Vaccancies</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/library"><i class="fas fa-swatchbook text-info"></i>Library</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/discussion-forum"><i class="fas fa-table text-danger"></i>Discussion Forum</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/free-videos"><i class="fas fa-video text-pink"></i>Videos</a>
             </li>
 
             <li class="nav-item">

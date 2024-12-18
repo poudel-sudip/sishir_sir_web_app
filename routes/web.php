@@ -718,6 +718,7 @@ Route::get('/student/vaccancies/create','App\Http\Controllers\Student\VaccancyCo
 Route::post('/student/vaccancies','App\Http\Controllers\Student\VaccancyController@store')->middleware('role:Student');
 Route::get('/student/vaccancies/{slug}','App\Http\Controllers\Student\VaccancyController@show')->middleware('role:Student');
 
+Route::get('/student/free-exams','App\Http\Controllers\Student\StudentHomeController@freeExamList')->middleware('role:Student');
 
 
 

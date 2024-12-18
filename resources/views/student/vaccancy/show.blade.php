@@ -23,7 +23,7 @@
         <div class="blogs-details-container bg-white pt-4">
             <div class="row">
                 <div class="col-md-12 mb-3">
-                    <h3 class="text-primary text-center">{{strtoupper($vaccancy->title)}}</h3>
+                    <h3 class="text-primary text-center">{{$vaccancy->title}}</h3>
                 </div>
                 <div class="d-flex align-items-center flex-wrap">
                     <span class="mx-3 h6 text-success text-nowrap"><i class="fa fa-user"></i> {{$vaccancy->author}}</span>

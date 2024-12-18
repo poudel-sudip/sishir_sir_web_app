@@ -67,7 +67,7 @@
                     @php($i=1)
                     @foreach ($answers as $ans)
                     <div class="mcq-solution-sheet"> 
-                        <h5>{{$i}}. {!!$ans->question ?? $ans->getQuestion->name ?? '' !!}</h5>
+                        <h5>{{$i}}. {!!$ans->question ?? $ans->getQuestion->name ?? '' !!} <small class=" text-secondary"> ({{$exam->marks_per_question}} Marks) </small> </h5>
                         <h6>Options:</h6>
                         <div class="row">
                             <div class="col-md-3">A. {!! $ans->getQuestion->opt_a ?? '' !!}</div>

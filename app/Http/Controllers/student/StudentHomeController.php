@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Blog;
+use App\Models\OpenExams\OpenExam;
 
 class StudentHomeController extends Controller
 {
@@ -25,11 +26,15 @@ class StudentHomeController extends Controller
                 'exams'=>$user->exam_bookings()->count(),
                 'pdf_banks'=>$user->ebook_bookings()->count(),
             ],
+            'free_exams' => (object)[
+                'count' => OpenExam::where('result_status','=','Unpublished')->count(),
+                'link' => '/student/free-exams',
+            ],
         ];
         
-        $posts=Blog::all()->where('status','=','Published')->sortByDesc('id')->take(25);
+        // $posts=Blog::all()->where('status','=','Published')->sortByDesc('id')->take(25);
         // dd($count);
-        return view('student.home',compact('user','count','posts'));
+        return view('student.home',compact('user','count'));
     }
 
     public function addComments(Blog $post,Request $request)
@@ -53,6 +58,14 @@ class StudentHomeController extends Controller
          return redirect('/student/home');
     }
 
-    
+    public function freeExamList(Request $request)
+    {
+        $data['free_exams'] = OpenExam::where('result_status','=','Unpublished')
+        ->get()
+        ->sortByDesc('id')
+        ->values();
+
+        return view('student.examhall.free.list',$data);
+    }
 
 }

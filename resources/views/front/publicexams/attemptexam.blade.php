@@ -8,20 +8,21 @@
                 <div class="public-question-list">
                     <div class="public-question-header">
                         <h5 class="text-center">{{$exam->name}}</h5>  
-                            <div class="d-flex justify-content-around">
-                                <span> Name: {{$user->name}} </span>
-                                <span> Email: {{$user->email}} </span>
-                                <span> Contact: {{$user->contact}} </span>
-                                <span>Courses: {{ $user->courses }}</span>
-                            </div>                   
-                            <div class="icon-bar mt-1 d-flex justify-content-around">
-                                <div class="">Total Questions: {{$exam->questions()->count() ?? '0' }}</div>
-                                <div class="">Marks Per Question: {{$exam->marks_per_question}}</div>
-                                <div class="">Negative Marks: {{$exam->negative_marks}}</div>
-                                <div class="me-5">                                
-                                    Exam Time CountDown : <span class="js-timeout"></span>
-                                </div>
+                        <div class="d-flex justify-content-around">
+                            <span> Name: {{$user->name}} </span>
+                            <span> Email: {{$user->email}} </span>
+                            <span> Contact: {{$user->contact}} </span>
+                            <span>Courses: {{ $user->courses }}</span>
+                        </div>                   
+                        <div class="icon-bar mt-1 d-flex justify-content-around">
+                            <div class="">Total Questions: {{$exam->questions()->count() ?? '0' }}</div>
+                            <div class="">Marks Per Question: {{$exam->marks_per_question}}</div>
+                            <div class="">Negative Marks: {{$exam->negative_marks}}</div>
+                            <div class="me-5">                                
+                                Exam Time CountDown : <span class="js-timeout"></span>
                             </div>
+                        </div>
+                        <div class="text-center mt-3" id="attempt-question-count"> </div>
                     </div>
                     <div class="public-question-body">
                         <form action="/public-exams/{{$openexam->slug}}/save" method="POST" id="exam-form">
@@ -29,8 +30,30 @@
                             <div class="owl-carousel MCQ-exam">
                                 @php($key=-1)
                                 @foreach($exam->questions as $key=>$ques)
-                                <div class="mcq-question-list row">
-                                    <div class="col-md-7 mcq-question">
+                                <div class="mcq-question-list">
+                                    <div class="mcq-question" style="overflow: hidden; border:none;">
+                                        <input type="hidden" name="question-{{$key+1}}" value="{{$ques->id}}">
+                                        <input type="hidden" name="ans-{{$key+1}}" value="">
+                                        <h6 class="mt-3"> {{$key+1}}. {!!$ques->name!!} <small class=" text-secondary"> ({{$exam->marks_per_question}} Marks) </small> </h6>
+
+                                        <div class="mcq-check-option mt-3">
+                                            <div class="mcq-qstn-row">
+                                            <input type="radio" name="ans-{{$key+1}}" value="A" id="ans-{{$key+1}}-1" /> <span class="mcq-option">a.</span><label for="ans-{{$key+1}}-1"> {!! $ques->opt_a !!} </label>
+                                            </div>
+                                            <div class="mcq-qstn-row">
+                                                <input type="radio" name="ans-{{$key+1}}" value="B" id="ans-{{$key+1}}-2" /> <span class="mcq-option">b.</span><label for="ans-{{$key+1}}-2"> {!!$ques->opt_b!!} </label>
+                                            </div>
+                                            <div class="mcq-qstn-row">
+                                                <input type="radio" name="ans-{{$key+1}}" value="C" id="ans-{{$key+1}}-3" /> <span class="mcq-option">c.</span><label for="ans-{{$key+1}}-3"> {!!$ques->opt_c!!} </label>
+                                            </div>
+                                            <div class="mcq-qstn-row">
+                                                <input type="radio" name="ans-{{$key+1}}" value="D" id="ans-{{$key+1}}-4" /> <span class="mcq-option">d.</span><label for="ans-{{$key+1}}-4"> {!!$ques->opt_d!!} </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+
+                                    {{-- <div class="col-md-7 mcq-question">
                                         <input type="hidden" name="question-{{$key+1}}" value="{{$ques->id}}">
                                         <input type="hidden" name="ans-{{$key+1}}" value="">
                                         <h6 > {{$key+1}}. {!!$ques->name!!}</h6>
@@ -48,7 +71,8 @@
                                         <div class="mcq-qstn-row">
                                             <input type="radio" name="ans-{{$key+1}}" value="D" id="ans-{{$key+1}}-4" /> <span class="mcq-option">d.</span><label for="ans-{{$key+1}}-4"> {!!$ques->opt_d!!} </label>
                                         </div>
-                                    </div>
+                                    </div> --}}
+
                                 </div>
                                 @endforeach
                             </div>
@@ -142,6 +166,34 @@
 
         }
     
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const totalQuestions = document.querySelectorAll(".mcq-question").length; // Total number of questions
+            const questionInputs = document.querySelectorAll(".mcq-check-option input[type='radio']");
+
+            // Function to log the attempted question count
+            function logAttemptedCount() {
+                const attempted = document.querySelectorAll(".mcq-check-option input[type='radio']:checked").length;
+                // console.clear(); // Clears the console for a clean output
+                $('#attempt-question-count').html('');
+                // console.log(`Attempted Questions: ${attempted} / ${totalQuestions}`);
+                $('#attempt-question-count').html(`Attempted Questions: ${attempted} / ${totalQuestions}`);
+            }
+
+            // Add event listeners to each radio input
+            questionInputs.forEach(input => {
+                input.addEventListener("change", function () {
+                    if (this.checked) {
+                        logAttemptedCount(); // Trigger log when a radio button changes state
+                    }
+                });
+            });
+
+            // Initial log
+            logAttemptedCount();
+        });
     </script>
 
 @endsection
