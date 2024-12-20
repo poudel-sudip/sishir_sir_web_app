@@ -19,10 +19,10 @@ class BlogController extends Controller
        return view('front.blogs.index',compact('blogs'));
    }
 
-    public function show($slug)
+    public function show($bid)
     {
         $lateat_blogs=Blog::where('status','=','Published')->orderByDesc('id')->take(10)->get();
-        $blog=Blog::where('slug',$slug)->first();
+        $blog=Blog::where('id',$bid)->first();
         if(!$blog)
         {
             abort(404);
@@ -55,6 +55,6 @@ class BlogController extends Controller
         'status'=>'Unpublished',
       ]);
 
-      return redirect('/blogs/'.$blog->slug);
+      return redirect('/blogs/'.$blog->id);
    }
 }

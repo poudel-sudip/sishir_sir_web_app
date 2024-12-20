@@ -17,10 +17,10 @@ class FrontDynamicFormController extends Controller
         // return view('front.forms.formlist',compact('forms'));
     }
 
-    public function showForm($slug)
+    public function showForm($form)
     {
         abort(404);
-        // $category = DynamicFormCategory::where('slug','=',$slug)->first();
+        // $category = DynamicFormCategory::where('id','=',$form)->first();
         // if(!$category)
         // {
         //     abort(404);
@@ -41,10 +41,10 @@ class FrontDynamicFormController extends Controller
         // return view('front.forms.showform',compact('category','proviences'));
     }
 
-    public function saveApplicant($slug, Request $request)
+    public function saveApplicant($form, Request $request)
     {
         abort(404);
-        // $category = DynamicFormCategory::where('slug','=',$slug)->first();
+        // $category = DynamicFormCategory::where('id','=',$form)->first();
         // if(!$category)
         // {
         //     abort(404);
@@ -112,9 +112,9 @@ class FrontDynamicFormController extends Controller
 
     }
 
-    public function showDynamicForm($slug)
+    public function showDynamicForm($form)
     {
-        $vform = DynamicForm::where('slug','=',$slug)->first();
+        $vform = DynamicForm::where('id','=',$form)->first();
         if(!$vform)
         {
             abort(404);
@@ -128,9 +128,9 @@ class FrontDynamicFormController extends Controller
         return view('front.forms.showdynamicform',compact('vform'));
     }
 
-    public function saveDynamicFormApplicant($slug, Request $request)
+    public function saveDynamicFormApplicant($form, Request $request)
     {
-        $vform = DynamicForm::where('slug','=',$slug)->first();
+        $vform = DynamicForm::where('id','=',$form)->first();
         if(!$vform)
         {
             abort(404);

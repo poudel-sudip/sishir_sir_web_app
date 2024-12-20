@@ -23,13 +23,13 @@ class FrontCareerController extends Controller
         return view('front.vaccancy.create',$data);
     }
 
-    public function show($slug)
+    public function show(VaccancyPost $vaccancy)
     {
-        $vaccancy = VaccancyPost::where('slug','=',$slug)->first();
-        if(!$vaccancy)
-        {
-            abort(404);
-        }
+        // $vaccancy = VaccancyPost::where('slug','=',$slug)->first();
+        // if(!$vaccancy)
+        // {
+        //     abort(404);
+        // }
 
         if($vaccancy->status != 'Active')
         {

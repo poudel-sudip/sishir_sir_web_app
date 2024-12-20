@@ -2,7 +2,7 @@
 
 @section('page_title', ($subMenu->name))
 @section('og-title', ($subMenu->name))
-@section('og-url', url('/'.$mainMenu->slug.'/'.$subMenu->slug))
+@section('og-url', url('/'.$mainMenu->id.'/'.$subMenu->id))
 @section('og-description', strip_tags($subMenu->description) ? strip_tags(str_replace('<', '  <', $subMenu->description)) : $subMenu->name )
 @if($subMenu->thumbnail)
 @section('og-image', asset('/storage/'.$subMenu->thumbnail))
@@ -89,10 +89,10 @@
                             <tr>
                                 <td>{{$i}}</td>
                                 <td>{{$cat->name}}</td>
-                                <td width="50"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}/{{$cat->slug}}"><i class="fas fa-eye text-success"></i></a> </td>
+                                <td width="50"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$cat->id}}"><i class="fas fa-eye text-success"></i></a> </td>
                                 {{-- <td style="max-width: 50px">
                                     <div class="d-inline post-share-option">
-                                        @php($shareLink = url($mainMenu->slug.'/'.$subMenu->slug.'/'.$cat->slug))
+                                        @php($shareLink = url($mainMenu->id.'/'.$subMenu->id.'/'.$cat->id))
                                         <a href="javascript:void();" onclick="createPopupWin('//facebook.com/sharer/sharer.php?u={{$shareLink}}&t={{$cat[`name`]}}')"><i class="fab fa-facebook-f"></i></a>
                                         <a href="javascript:void();" onclick="createPopupWin('//twitter.com/intent/tweet?text={{$cat[`name`]}}&url={{$shareLink}}')"><i class="fab fa-twitter"></i></a>
                                         <a href="javascript:void();" onclick="createPopupWin('//wa.me/?text={{$shareLink}}')"><i class="fab fa-whatsapp"></i></a>

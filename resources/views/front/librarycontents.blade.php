@@ -2,7 +2,7 @@
 
 @section('page_title', 'Library: '.($library_category->name))
 @section('og-title', ($library_category->name))
-@section('og-url', url('/library/'.$library_category->slug))
+@section('og-url', url('/library/'.$library_category->id))
 @section('og-description', strip_tags($library_category->name) ? strip_tags(str_replace('<', '  <', $library_category->name)) : $library_category->name )
 
 @section('content')
@@ -31,7 +31,7 @@
                             {
                             $c = (object)[
                                 'name' => $cur->name,
-                                'link' => '/library/'.$cur->slug,
+                                'link' => '/library/'.$cur->id,
                             ];
                             array_push($bcm,$c);
                             $cur = $cur->parent;
@@ -69,9 +69,9 @@
                 <div class="col-md-3 mb-3">
                     <div class="single-blog text-center py-3 library-item border border-primary">
                         <div class="">
-                            <a href="/library/{{$dir->slug}}"><i class="h1 fa fa-folder"></i></a>
+                            <a href="/library/{{$dir->id}}"><i class="h1 fa fa-folder"></i></a>
                         </div>
-                        <h5><a href="/library/{{$dir->slug}}">{{($dir->name)}}</a></h5>
+                        <h5><a href="/library/{{$dir->id}}">{{($dir->name)}}</a></h5>
                     </div>
                 </div>
                 @endforeach
@@ -81,8 +81,8 @@
                     <div class="py-3 px-2 border border-primary border-2">
                         <div class="text-center">
                             {{-- <img src="/storage/{{$material->thumbnail}}" onerror="this.src='{{asset('images/default-post.png')}}'" class="img img-fluid" style="max-height:150px"> --}}
-                            <h1><a href="/library/{{$library_category->slug}}/{{$material->slug}}"><i class="fa fa-file-pdf text-danger"></i></a></h1>
-                            <h5><strong><a href="/library/{{$library_category->slug}}/{{$material->slug}}">{{($material->name)}}</a> </strong></h5>
+                            <h1><a href="/library/{{$library_category->id}}/{{$material->id}}"><i class="fa fa-file-pdf text-danger"></i></a></h1>
+                            <h5><strong><a href="/library/{{$library_category->id}}/{{$material->id}}">{{($material->name)}}</a> </strong></h5>
                         </div>
                         <div class="text-justify">
                             <div><strong>Author(s):</strong> {{$material->author}}</div>
@@ -135,9 +135,9 @@
                 const innerHTML = `
                     <div class="single-blog text-center py-3 library-item border border-primary">
                         <div class="">
-                            <a href="/library/${cat.slug}"><i class="h1 fa fa-folder"></i></a>
+                            <a href="/library/${cat.id}"><i class="h1 fa fa-folder"></i></a>
                         </div>
-                        <h5><a href="/library/${cat.slug}">${cat.name}</a></h5>
+                        <h5><a href="/library/${cat.id}">${cat.name}</a></h5>
                     </div>
                 `;
                 categoryElement.innerHTML = innerHTML;

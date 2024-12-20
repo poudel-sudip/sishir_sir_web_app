@@ -73,9 +73,9 @@
                 const innerHTML = `
                     <div class="single-blog text-center py-3 library-item border border-primary">
                         <div class="">
-                            <a href="/library/${cat.slug}"><i class="h1 fa fa-folder"></i></a>
+                            <a href="/library/${cat.id}"><i class="h1 fa fa-folder"></i></a>
                         </div>
-                        <h5><a href="/library/${cat.slug}">${cat.name}</a></h5>
+                        <h5><a href="/library/${cat.id}">${cat.name}</a></h5>
                     </div>
                 `;
                 categoryElement.innerHTML = innerHTML;

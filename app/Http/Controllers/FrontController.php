@@ -63,7 +63,7 @@ class FrontController extends Controller
         $data['videos'] = FreeVideo::orderByDesc('id')->take(9)->get();
 
         $data['vaccancies'] = VaccancyPost::where('status','=','Active')->orderByDesc('id')->take(7)->get(['id','title','slug'])->map(function($v){
-            $v->link = url('/vaccancies/'.$v->slug);
+            $v->link = url('/vaccancies/'.$v->id);
             return $v;
         });
 
@@ -168,7 +168,7 @@ class FrontController extends Controller
                     {
                         if($update->item->category->subGroup->group)
                         {
-                            $link = '/'.$update->item->category->subGroup->group->slug.'/'.$update->item->category->subGroup->slug.'/'.$update->item->category->slug.'/'.$update->item->slug.'/'.$update->slug;
+                            $link = '/'.$update->item->category->subGroup->group->id.'/'.$update->item->category->subGroup->id.'/'.$update->item->category->id.'/'.$update->item->id.'/'.$update->id;
                         }
                     }
                 }
@@ -195,7 +195,7 @@ class FrontController extends Controller
                 {
                     if($update->category->subGroup->group)
                     {
-                        $link = '/'.$update->category->subGroup->group->slug.'/'.$update->category->subGroup->slug.'/'.$update->category->slug.'/'.$update->slug;
+                        $link = '/'.$update->category->subGroup->group->id.'/'.$update->category->subGroup->id.'/'.$update->category->id.'/'.$update->id;
                     }
                 }
             }
@@ -218,7 +218,7 @@ class FrontController extends Controller
             {
                 if($cat->subGroup->group)
                 {
-                    $link = '/'.$cat->subGroup->group->slug.'/'.$cat->subGroup->slug.'/'.$cat->slug;
+                    $link = '/'.$cat->subGroup->group->id.'/'.$cat->subGroup->id.'/'.$cat->id;
                 }
             }
             return (object)[
@@ -239,7 +239,7 @@ class FrontController extends Controller
             
             if($cat->group)
             {
-                $link = '/'.$cat->group->slug.'/'.$cat->slug;
+                $link = '/'.$cat->group->id.'/'.$cat->id;
             }
             
             return (object)[
@@ -260,7 +260,7 @@ class FrontController extends Controller
             
             if($cat->category)
             {
-                $link = '/library/'.$cat->category->slug.'/'.$cat->slug;
+                $link = '/library/'.$cat->category->id.'/'.$cat->id;
             }
             
             return (object)[
@@ -275,7 +275,7 @@ class FrontController extends Controller
             return (object)[
                 'title' => $b->title,
                 'created_at' => $b->created_at,
-                'link' => '/blogs/'.$b->slug,
+                'link' => '/blogs/'.$b->id,
             ];
         })->toArray();
 
@@ -283,7 +283,7 @@ class FrontController extends Controller
         //     return (object)[
         //         'title' => $b->title,
         //         'created_at' => $b->created_at,
-        //         'link' => '/exam-hall/premium/'.$b->slug,
+        //         'link' => '/exam-hall/premium/'.$b->id,
         //     ];
         // })->toArray();
 
@@ -292,7 +292,7 @@ class FrontController extends Controller
             return (object)[
                 'title' => $b->title,
                 'created_at' => $b->created_at,
-                'link' => '/exam-hall/premium/'.$b->slug,
+                'link' => '/exam-hall/premium/'.$b->id,
             ];
         })
         ->values()
@@ -306,7 +306,7 @@ class FrontController extends Controller
             return (object)[
                 'title' => $b->title,
                 'created_at' => $b->created_at,
-                'link' => '/pdf-banks/bank/'.$b->slug,
+                'link' => '/pdf-banks/bank/'.$b->id,
             ];
         })
         ->toArray();
@@ -319,7 +319,7 @@ class FrontController extends Controller
             return (object)[
                 'title' => $b->title,
                 'created_at' => $b->created_at,
-                'link' => '/vaccancies/'.$b->slug,
+                'link' => '/vaccancies/'.$b->id,
             ];
         })
         ->toArray();
@@ -342,17 +342,17 @@ class FrontController extends Controller
         return view('front.index',$data);
     }
 
-    public function getMenuCategories($groupslug, $menuslug)
+    public function getMenuCategories($group, $menu)
     {
         $data = [];
-        $mainMenu = MenuGroup::where([['slug',$groupslug],['status','Active']])->first();
+        $mainMenu = MenuGroup::where([['id',$group],['status','Active']])->first();
         if(!$mainMenu)
         {
             abort(404);
         }
         $data['mainMenu'] = $mainMenu;
 
-        $subMenu = MenuSubGroup::where([['slug',$menuslug],['status','Active']])->first();
+        $subMenu = MenuSubGroup::where([['id',$menu],['status','Active']])->first();
         if(!$subMenu)
         {
             abort(404);
@@ -369,24 +369,24 @@ class FrontController extends Controller
         return view('front.menucategories',$data);
     }
 
-    public function getMenuItems($groupslug, $menuslug, $catslug)
+    public function getMenuItems($group, $menu, $cat)
     {
         $data = [];
-        $mainMenu = MenuGroup::where([['slug',$groupslug],['status','Active']])->first();
+        $mainMenu = MenuGroup::where([['id',$group],['status','Active']])->first();
         if(!$mainMenu)
         {
             abort(404);
         }
         $data['mainMenu'] = $mainMenu;
 
-        $subMenu = MenuSubGroup::where([['slug',$menuslug],['status','Active']])->first();
+        $subMenu = MenuSubGroup::where([['id',$menu],['status','Active']])->first();
         if(!$subMenu)
         {
             abort(404);
         }
         $data['subMenu'] = $subMenu;
 
-        $menuCategory = MenuItemCategory::where([['slug',$catslug],['status','Active']])->first();
+        $menuCategory = MenuItemCategory::where([['id',$cat],['status','Active']])->first();
         if(!$menuCategory)
         {
             abort(404);
@@ -406,31 +406,31 @@ class FrontController extends Controller
         return view('front.menulist',$data);
     }
 
-    public function getMenuItemDetail($groupslug, $menuslug, $catslug, $itemslug)
+    public function getMenuItemDetail($group, $menu, $cat, $item)
     {
         $data = [];
-        $mainMenu = MenuGroup::where([['slug',$groupslug],['status','Active']])->first();
+        $mainMenu = MenuGroup::where([['id',$group],['status','Active']])->first();
         if(!$mainMenu)
         {
             abort(404);
         }
         $data['mainMenu'] = $mainMenu;
 
-        $subMenu = MenuSubGroup::where([['slug',$menuslug],['status','Active']])->first();
+        $subMenu = MenuSubGroup::where([['id',$menu],['status','Active']])->first();
         if(!$subMenu)
         {
             abort(404);
         }
         $data['subMenu'] = $subMenu;
         
-        $menuCategory = MenuItemCategory::where([['slug',$catslug],['status','Active']])->first();
+        $menuCategory = MenuItemCategory::where([['id',$cat],['status','Active']])->first();
         if(!$menuCategory)
         {
             abort(404);
         }
         $data['menuCategory'] = $menuCategory;
 
-        $menuItem = MenuItem::where([['slug',$itemslug],['status','Active']])->first();
+        $menuItem = MenuItem::where([['id',$item],['status','Active']])->first();
         if(!$menuItem)
         {
             abort(404);
@@ -448,38 +448,38 @@ class FrontController extends Controller
         return view('front.menuitemdetail',$data);
     }
 
-    public function getMenuSubItemDetail($groupslug, $menuslug, $catslug, $itemslug, $subitemslug)
+    public function getMenuSubItemDetail($group, $menu, $cat, $item, $subitem)
     {
         $data = [];
-        $mainMenu = MenuGroup::where([['slug',$groupslug],['status','Active']])->first();
+        $mainMenu = MenuGroup::where([['id',$group],['status','Active']])->first();
         if(!$mainMenu)
         {
             abort(404);
         }
         $data['mainMenu'] = $mainMenu;
 
-        $subMenu = MenuSubGroup::where([['slug',$menuslug],['status','Active']])->first();
+        $subMenu = MenuSubGroup::where([['id',$menu],['status','Active']])->first();
         if(!$subMenu)
         {
             abort(404);
         }
         $data['subMenu'] = $subMenu;
         
-        $menuCategory = MenuItemCategory::where([['slug',$catslug],['status','Active']])->first();
+        $menuCategory = MenuItemCategory::where([['id',$cat],['status','Active']])->first();
         if(!$menuCategory)
         {
             abort(404);
         }
         $data['menuCategory'] = $menuCategory;
 
-        $menuItem = MenuItem::where([['slug',$itemslug],['status','Active']])->first();
+        $menuItem = MenuItem::where([['id',$item],['status','Active']])->first();
         if(!$menuItem)
         {
             abort(404);
         }
         $data['menuItem'] = $menuItem;
 
-        $menuSubItem = MenuSubItem::where([['slug',$subitemslug],['status','Active']])->first();
+        $menuSubItem = MenuSubItem::where([['id',$subitem],['status','Active']])->first();
         if(!$menuSubItem)
         {
             abort(404);
@@ -504,7 +504,7 @@ class FrontController extends Controller
             $filterchar = trim($request->filter);
         }
 
-        $library_categories = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->get(['name','slug'])->toArray();
+        $library_categories = LibraryCategory::where('parent_id','=',null)->where('status','=','Active')->orderBy('name')->get(['id','name','slug'])->toArray();
 
         $data['filterchar'] = $filterchar;
         $data['js_lib_categories'] = json_encode($library_categories);
@@ -512,16 +512,16 @@ class FrontController extends Controller
         return view('front.libraries',$data);
     }
 
-    public function getLibraryContents($catslug)
+    public function getLibraryContents($cat)
     {
-        $library_category = LibraryCategory::where([['slug',$catslug],['status','Active']])->first();
+        $library_category = LibraryCategory::where([['id',$cat],['status','Active']])->first();
         if(!$library_category)
         {
             abort(404);
         }
 
         $data['library_category'] = $library_category;
-        $data['directories'] = $library_category->childs()->get(['name','slug']);
+        $data['directories'] = $library_category->childs()->get(['id','name','slug']);
         $data['library_materials'] = $library_category->materials()->where('status','=','Active')->orderByDesc('id')->get(['id','name','slug','published_year','author','pages','description']);
         $data['js_lib_categories'] = json_encode($data['directories']);
         
@@ -529,15 +529,15 @@ class FrontController extends Controller
         return view('front.librarycontents',$data);
     }
 
-    public function getLibraryContentDetail($catslug, $matslug)
+    public function getLibraryContentDetail($cat, $mat)
     {
-        $library_category = LibraryCategory::where([['slug',$catslug],['status','Active']])->first();
+        $library_category = LibraryCategory::where([['id',$cat],['status','Active']])->first();
         if(!$library_category)
         {
             abort(404);
         }
 
-        $material = LibraryMaterial::where([['slug',$matslug],['status','Active']])->first();
+        $material = LibraryMaterial::where([['id',$mat],['status','Active']])->first();
         if(!$material)
         {
             abort(404);
@@ -574,9 +574,9 @@ class FrontController extends Controller
         return view('front.books.index',$data);
     }
 
-    public function publisherBookCategories($slug)
+    public function publisherBookCategories($pub)
     {
-        $publisher = Categories::where('slug',$slug)->where('type','=','book_publisher')->first();
+        $publisher = Categories::where('id',$pub)->where('type','=','book_publisher')->first();
         if(!$publisher)
         {
             abort(404,'Book Publisher Not Found');
@@ -596,9 +596,9 @@ class FrontController extends Controller
         return view('front.books.publisher_category',$data);
     }
 
-    public function publisherAllBooks($slug)
+    public function publisherAllBooks($pub)
     {
-        $publisher = Categories::where('slug',$slug)->where('type','=','book_publisher')->first();
+        $publisher = Categories::where('id',$pub)->where('type','=','book_publisher')->first();
         if(!$publisher)
         {
             abort(404,'Book Publisher Not Found');
@@ -613,15 +613,15 @@ class FrontController extends Controller
         return view('front.books.publisher_category_books',$data);
     }
 
-    public function publisherCategoryBooks($pslug,$cslug)
+    public function publisherCategoryBooks($pub,$cat)
     {
-        $publisher = Categories::where('slug',$pslug)->where('type','=','book_publisher')->first();
+        $publisher = Categories::where('id',$pub)->where('type','=','book_publisher')->first();
         if(!$publisher)
         {
             abort(404,'Book Publisher Not Found');
         }
 
-        $category = Categories::where('slug',$cslug)->where('type','=','book_category')->first();
+        $category = Categories::where('id',$cat)->where('type','=','book_category')->first();
         if(!$category)
         {
             abort(404,'Book Category Not Found');
@@ -660,9 +660,9 @@ class FrontController extends Controller
     //     return view('front.books.categorybooks',$data);
     // }
 
-    public function singleBook($slug)
+    public function singleBook($bid)
     {
-        $book = Book::where('slug',$slug)->where('status','=','Active')->first();
+        $book = Book::where('id',$bid)->where('status','=','Active')->first();
         if(!$book)
         {
             abort(404,'Book Not Found');
@@ -676,9 +676,9 @@ class FrontController extends Controller
         return view('front.books.single_book',compact('book','book_reviews','counterData'));
     }
 
-    public function addBookReview($slug, Request $request)
+    public function addBookReview($bid, Request $request)
     {
-        $book = Book::where('slug',$slug)->first();
+        $book = Book::where('id',$bid)->first();
         if(!$book)
         {
             abort(404);
@@ -698,7 +698,7 @@ class FrontController extends Controller
             'message' => $request->contents,
         ]);
 
-        return redirect('/books/'.$book->slug);
+        return redirect('/books/'.$book->id);
     }
 
     public function contact()
@@ -892,7 +892,7 @@ class FrontController extends Controller
                     {
                         if($update->item->category->subGroup->group)
                         {
-                            $link = '/'.$update->item->category->subGroup->group->slug.'/'.$update->item->category->subGroup->slug.'/'.$update->item->category->slug.'/'.$update->item->slug.'/'.$update->slug;
+                            $link = '/'.$update->item->category->subGroup->group->id.'/'.$update->item->category->subGroup->id.'/'.$update->item->category->id.'/'.$update->item->id.'/'.$update->id;
                         }
                     }
                 }
@@ -926,7 +926,7 @@ class FrontController extends Controller
                 {
                     if($update->category->subGroup->group)
                     {
-                        $link = '/'.$update->category->subGroup->group->slug.'/'.$update->category->subGroup->slug.'/'.$update->category->slug.'/'.$update->slug;
+                        $link = '/'.$update->category->subGroup->group->id.'/'.$update->category->subGroup->id.'/'.$update->category->id.'/'.$update->id;
                     }
                 }
             }
@@ -957,7 +957,7 @@ class FrontController extends Controller
             {
                 if($cat->subGroup->group)
                 {
-                    $link = '/'.$cat->subGroup->group->slug.'/'.$cat->subGroup->slug.'/'.$cat->slug;
+                    $link = '/'.$cat->subGroup->group->id.'/'.$cat->subGroup->id.'/'.$cat->id;
                 }
             }
             return [
@@ -986,7 +986,7 @@ class FrontController extends Controller
             
             if($cat->group)
             {
-                $link = '/'.$cat->group->slug.'/'.$cat->slug;
+                $link = '/'.$cat->group->id.'/'.$cat->id;
             }
             
             return [
@@ -1016,7 +1016,7 @@ class FrontController extends Controller
         ->take(20)
         ->get(['id','title','slug','created_at'])
         ->map(function($b){
-            $b['link'] = '/blogs/'.$b->slug;
+            $b['link'] = '/blogs/'.$b->id;
             return $b;
         })
         ->values()
@@ -1031,7 +1031,7 @@ class FrontController extends Controller
         ->take(20)
         ->get(['id','title','slug','created_at'])
         ->map(function($b){
-            $b['link'] = '/books/'.$b->slug;
+            $b['link'] = '/books/'.$b->id;
             return $b;
         })
         ->values()
@@ -1046,7 +1046,7 @@ class FrontController extends Controller
         ->take(20)
         ->get(['id','title','slug','created_at'])
         ->map(function($e){
-            $e['link'] = '/exam-hall/premium/'.$e->slug;
+            $e['link'] = '/exam-hall/premium/'.$e->id;
             return $e;
         })
         ->values()
@@ -1066,7 +1066,7 @@ class FrontController extends Controller
             
             if($cat->category)
             {
-                $link = '/library/'.$cat->category->slug.'/'.$cat->slug;
+                $link = '/library/'.$cat->category->id.'/'.$cat->id;
             }
             
             return [
@@ -1091,7 +1091,7 @@ class FrontController extends Controller
         ->get(['id','title','slug','created_at'])
         ->map(function($cat)
         {
-            $link = "/pdf-banks/bank/".$cat->slug;
+            $link = "/pdf-banks/bank/".$cat->id;
                       
             return [
                 'id' => $cat->id,
@@ -1201,15 +1201,15 @@ class FrontController extends Controller
         ]); 
     }
 
-    public function qrBookScanForm($bslug,$bsn)
+    public function qrBookScanForm($book,$bsn)
     {
-        $qrbook = QRBook::with('book')->whereHas('book')->where('slug',$bslug)->first();
+        $qrbook = QRBook::with('book')->whereHas('book')->where('id',$book)->first();
         if(!$qrbook)
         {
             abort(404,'Book Not Found');
         }
         
-        $furl = $qrbook->slug.'/'.$bsn;
+        $furl = $qrbook->id.'/'.$bsn;
         $furl = url('/qr-book-scans/'.$furl);
 
         $main_book = $qrbook->scanMembers()->where('book_link','=',$furl)->where('is_main','=',true)->first(['id','book_link','book_id','is_main']);
@@ -1581,9 +1581,9 @@ class FrontController extends Controller
         return view('front.img_gallery',$data);
     }
 
-    public function addPhysicalBookOrder($slug, Request $request)
+    public function addPhysicalBookOrder($bid, Request $request)
     {
-        $book = Book::where('slug',$slug)->first();
+        $book = Book::where('id',$bid)->first();
         if(!$book)
         {
             abort(404);
@@ -1616,7 +1616,7 @@ class FrontController extends Controller
             
         ]);
 
-        return redirect('/books/'.$book->slug)->with('success_message','Your Request Has Been Submitted. Our Team Will Call You For Further Enquiries. Please Wait Patiently.');
+        return redirect('/books/'.$book->id)->with('success_message','Your Request Has Been Submitted. Our Team Will Call You For Further Enquiries. Please Wait Patiently.');
     }
 
 }

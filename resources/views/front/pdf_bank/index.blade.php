@@ -36,7 +36,7 @@
                         <h5><a href="{{ url('/pdf-banks') }}">All PDF Banks</a></h5>
                         <ul class="course-nav" style="height:auto; min-height: 370px; ">
                             @foreach($pdf_bank_categories as $cat)
-                                <li><a href="/pdf-banks/category/{{$cat->slug}}">{{$cat->name}}</a></li>
+                                <li><a href="/pdf-banks/category/{{$cat->id}}">{{$cat->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -46,13 +46,13 @@
                         <div class="row">
                             @forelse($pdf_banks as $row)
                             <div class="col-md-4 my-3">
-                                <a href="/pdf-banks/bank/{{$row->slug}}">
+                                <a href="/pdf-banks/bank/{{$row->id}}">
                                     <div class="single-blog pt-3 border border-primary border-2">
                                         <div class="blog-image text-center">
                                             <img src="/storage/{{$row->thumbnail}}">
                                         </div>
                                         <div class="blog-details">
-                                            <h4 class="text-center"><a href="/pdf-banks/bank/{{$row->slug}}">{{$row->title}}</a></h4>
+                                            <h4 class="text-center"><a href="/pdf-banks/bank/{{$row->id}}">{{$row->title}}</a></h4>
                                             <div class="text-center text-danger" style="margin-top: -0.5rem">(PDF Sets: <span class="text-primary">{{ $row->type == 'set' ? $row->pdf_count : '1' }}</span>)</div>
                                             <div class="mx-2">Price : @if($row->discount > 0) <s class="text-danger">Rs. {{ $row->price }}</s> @endif <strong class="text-success"> Rs. {{ ($row->price - $row->discount) }}</strong></div>
                                         </div>

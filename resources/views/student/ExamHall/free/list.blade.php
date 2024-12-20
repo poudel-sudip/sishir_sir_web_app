@@ -31,7 +31,7 @@
                                 <td>{{$i}}</td>
                                 <td>{{$row->exam->name ?? ''}} ({{ $row->exam ? ($row->exam->questions ? $row->exam->questions->count() : '-') : '-' }} Questions) </td>
                                 <td>
-                                    <a href="/public-exams/{{$row->slug}}" class="btn btn-primary btn-sm">Attempt Exam</a>
+                                    <a href="/public-exams/{{$row->id}}" class="btn btn-primary btn-sm">Attempt Exam</a>
                                 </td>
                             </tr>
                             @php($i++)

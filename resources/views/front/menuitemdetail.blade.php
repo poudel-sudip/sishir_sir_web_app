@@ -2,7 +2,7 @@
 
 @section('page_title', ($menuItem->name))
 @section('og-title', ($menuItem->name))
-@section('og-url', url('/'.$mainMenu->slug.'/'.$subMenu->slug.'/'.$menuCategory->slug.'/'.$menuItem->slug))
+@section('og-url', url('/'.$mainMenu->id.'/'.$subMenu->id.'/'.$menuCategory->id.'/'.$menuItem->id))
 @section('og-description', strip_tags($menuItem->description) ? strip_tags(str_replace('<', '  <', $menuItem->description)) : $menuItem->name )
 @if($menuItem->thumbnail)
 @section('og-image', asset('/storage/'.$menuItem->thumbnail))
@@ -17,8 +17,8 @@
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item">{{($mainMenu->name)}}</li>
-                        <li class="breadcrumb-item"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}">{{($subMenu->name)}}</a></li>
-                        <li class="breadcrumb-item"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}/{{$menuCategory->slug}}">{{($menuCategory->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}">{{($subMenu->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$menuCategory->id}}">{{($menuCategory->name)}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{($menuItem->name)}}</li>
                     </ol>
                 </div>
@@ -92,10 +92,10 @@
                                 <tr>
                                     <td>{{$i}}</td>
                                     <td>{{$cat->name}}</td>
-                                    <td width="50"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}/{{$menuCategory->slug}}/{{$menuItem->slug}}/{{$cat->slug}}"><i class="fas fa-eye text-success"></i></a> </td>
+                                    <td width="50"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$menuCategory->id}}/{{$menuItem->id}}/{{$cat->id}}"><i class="fas fa-eye text-success"></i></a> </td>
                                     {{-- <td style="max-width: 50px">
                                         <div class="d-inline post-share-option">
-                                            @php($shareLink = url($mainMenu->slug.'/'.$subMenu->slug.'/'.$menuCategory->slug.'/'.$menuItem->slug.'/'.$cat->slug))
+                                            @php($shareLink = url($mainMenu->id.'/'.$subMenu->id.'/'.$menuCategory->id.'/'.$menuItem->id.'/'.$cat->id))
                                             <a href="javascript:void();" onclick="createPopupWin('//facebook.com/sharer/sharer.php?u={{$shareLink}}&t={{$cat[`name`]}}')"><i class="fab fa-facebook-f"></i></a>
                                             <a href="javascript:void();" onclick="createPopupWin('//twitter.com/intent/tweet?text={{$cat[`name`]}}&url={{$shareLink}}')"><i class="fab fa-twitter"></i></a>
                                             <a href="javascript:void();" onclick="createPopupWin('//wa.me/?text={{$shareLink}}')"><i class="fab fa-whatsapp"></i></a>

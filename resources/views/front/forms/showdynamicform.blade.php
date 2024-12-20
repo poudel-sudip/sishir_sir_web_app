@@ -2,7 +2,7 @@
 
 @section('page_title', ($vform->title))
 @section('og-title', ($vform->title))
-@section('og-url', url('/dynamic-forms/'.$vform->slug))
+@section('og-url', url('/dynamic-forms/'.$vform->id))
 @section('og-description', ($vform->title))
 @if($vform->banner)
 @section('og-image', asset('/storage/'.$vform->banner))
@@ -39,7 +39,7 @@
                             @endif
                             
                             <div class="col-md-6">
-                                <form action="/dynamic-forms/{{$vform->slug}}" method="post" enctype="multipart/form-data">
+                                <form action="/dynamic-forms/{{$vform->id}}" method="post" enctype="multipart/form-data">
                                     @csrf
     
                                     @if (Session::has('successMessage'))

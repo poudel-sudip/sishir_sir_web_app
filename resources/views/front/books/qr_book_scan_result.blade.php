@@ -2,7 +2,7 @@
 
 @section('page_title', ($book->title))
 @section('og-title', ($book->title))
-@section('og-url', url('/qr-book-scans/'.$book->slug))
+@section('og-url', url('/qr-book-scans/'.$book->id))
 @section('og-description', strip_tags($book->description) ? strip_tags(str_replace('<', '  <', $book->description)) : $book->title )
 @if($book->thumbnail)
 @section('og-image', asset('/storage/'.$book->thumbnail))

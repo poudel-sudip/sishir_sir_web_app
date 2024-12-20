@@ -2,7 +2,7 @@
 
 @section('page_title', ($menuSubItem->name))
 @section('og-title', ($menuSubItem->name))
-@section('og-url', url('/'.$mainMenu->slug.'/'.$subMenu->slug.'/'.$menuCategory->slug.'/'.$menuItem->slug.'/'.$menuSubItem->slug))
+@section('og-url', url('/'.$mainMenu->id.'/'.$subMenu->id.'/'.$menuCategory->id.'/'.$menuItem->id.'/'.$menuSubItem->id))
 @section('og-description', strip_tags($menuSubItem->description) ? strip_tags(str_replace('<', '  <', $menuSubItem->description)) : $menuSubItem->name )
 @if($menuSubItem->thumbnail)
 @section('og-image', asset('/storage/'.$menuSubItem->thumbnail))
@@ -17,9 +17,9 @@
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item">{{($mainMenu->name)}}</li>
-                        <li class="breadcrumb-item"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}">{{($subMenu->name)}}</a></li>
-                        <li class="breadcrumb-item"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}/{{$menuCategory->slug}}">{{($menuCategory->name)}}</a></li>
-                        <li class="breadcrumb-item"><a href="/{{$mainMenu->slug}}/{{$subMenu->slug}}/{{$menuCategory->slug}}/{{$menuItem->slug}}">{{($menuItem->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}">{{($subMenu->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$menuCategory->id}}">{{($menuCategory->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$menuCategory->id}}/{{$menuItem->id}}">{{($menuItem->name)}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{($menuSubItem->name)}}</li>
                     </ol>
                 </div>

@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('page_title', ($blog->title))
 @section('og-title', ($blog->title))
-@section('og-url', url('blogs/'.$blog->slug))
+@section('og-url', url('blogs/'.$blog->id))
 @if($blog->image)
 @section('og-image', asset('/storage/'.$blog->image))
 @endif
@@ -101,7 +101,7 @@
                                 <img src="/storage/{{$blogs->image}}">
                             </div>
                             <div class="col-8">
-                                <h4 class="blog-list-title"><a href="/blogs/{{$blogs->slug}}">{{$blogs->title}}</a></h4>
+                                <h4 class="blog-list-title"><a href="/blogs/{{$blogs->id}}">{{$blogs->title}}</a></h4>
                                 <div>Published: <span class="text-primary"> {{date('Y-m-d',strtotime($blogs->created_at))}}</span></div>
                                 <div>By: <span class="text-success"> {{$blogs->author}}</span></div>
                             </div>

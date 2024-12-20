@@ -164,7 +164,7 @@
                                 <div class="col-sm-6 col-md-8 form-banner"><img src="/storage/{{$form->banner}}" alt=""></div>
                                 <div class="col-sm-6 col-md-4 form-fillup">
                                     <h4>Class Registeration Form</h4>
-                                    <form  action="/dynamic-forms/{{$form->slug}}" method="post" enctype="multipart/form-data">
+                                    <form  action="/dynamic-forms/{{$form->id}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         @if (Session::has('successMessage'))
                                         <div class="form-group row my-2">
@@ -289,10 +289,10 @@
                             <div class="col-sm-6 col-md-3 mb-3">
                                 <div class="seller-item border border-primary rounded border-2">
                                     <div class="seller-header text-center">
-                                        <a href="/exam-hall/premium/{{$row->slug}}">
+                                        <a href="/exam-hall/premium/{{$row->id}}">
                                             <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                         </a>
-                                        <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->slug}}">{{($row->title)}}</a></h6>
+                                        <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->id}}">{{($row->title)}}</a></h6>
                                         <h6 class="small">{{$row->category_exams()->count()}} MCQ Sets </h6>
 
                                     </div>
@@ -308,10 +308,10 @@
                             <div class="col-sm-6 col-md-3 mb-3">
                                 <div class="seller-item border border-primary rounded border-2">
                                     <div class="seller-header text-center">
-                                        <a href="/public-exams/{{$row->slug}}">
+                                        <a href="/public-exams/{{$row->id}}">
                                             <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                         </a>
-                                        <h6 class="mt-3"><a href="/public-exams/{{$row->slug}}">{{($row->name)}}</a></h6>
+                                        <h6 class="mt-3"><a href="/public-exams/{{$row->id}}">{{($row->name)}}</a></h6>
                                         <h6 class="small">{{ $row->exam ? ($row->exam->questions ? $row->exam->questions()->count() : '-') : '-' }} Questions </h6>
 
                                     </div>
@@ -362,10 +362,10 @@
                                     <div class="col-sm-6 col-md-3 mb-3">
                                         <div class="seller-item border border-primary rounded border-2">
                                             <div class="seller-header text-center">
-                                                <a href="/exam-hall/premium/{{$row->slug}}">
+                                                <a href="/exam-hall/premium/{{$row->id}}">
                                                     <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                                 </a>
-                                                <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->slug}}">{{($row->title)}}</a></h6>
+                                                <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->id}}">{{($row->title)}}</a></h6>
                                                 <h6 class="small">{{$row->mcq_count}} MCQ Sets </h6>
 
                                             </div>
@@ -383,10 +383,10 @@
                                 <div class="col-sm-6 col-md-3 mb-3">
                                     <div class="seller-item border border-primary rounded border-2">
                                         <div class="seller-header text-center">
-                                            <a href="/public-exams/{{$row->slug}}">
+                                            <a href="/public-exams/{{$row->id}}">
                                                 <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                             </a>
-                                            <h6 class="mt-3"><a href="/public-exams/{{$row->slug}}">{{($row->name)}}</a></h6>
+                                            <h6 class="mt-3"><a href="/public-exams/{{$row->id}}">{{($row->name)}}</a></h6>
                                             <h6 class="small">{{ $row->exam ? ($row->exam->questions ? $row->exam->questions()->count() : '-') : '-' }} Questions </h6>
     
                                         </div>
@@ -452,10 +452,10 @@
                                     <div class="col-sm-6 col-md-3 mb-3">
                                         <div class="seller-item border border-primary rounded border-2">
                                             <div class="seller-header text-center">
-                                                <a href="/pdf-banks/bank/{{$row->slug}}">
+                                                <a href="/pdf-banks/bank/{{$row->id}}">
                                                     <img src="/storage/{{$row->thumbnail}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                                 </a>
-                                                <h6 class="mt-3"><a href="/pdf-banks/bank/{{$row->slug}}">{{($row->title)}}</a></h6>
+                                                <h6 class="mt-3"><a href="/pdf-banks/bank/{{$row->id}}">{{($row->title)}}</a></h6>
                                                 <h6 class="small">{{$row->type == 'set' ? $row->pdf_count : '1'}} PDF Sets </h6>
 
                                             </div>
@@ -520,13 +520,13 @@
                 <div class="col-md-6">
                     <div class="blog-section border border-primary">
                         <div class="blog-header">
-                            <a href="/blogs/{{$last_blog->slug}}"><img src="/storage/{{$last_blog->image}}" alt=""></a>
+                            <a href="/blogs/{{$last_blog->id}}"><img src="/storage/{{$last_blog->image}}" alt=""></a>
                         </div>
                         <div class="blog-footer">
                             <h3>{{$last_blog->title}}</h3>
                             <div class="blog-footer-details">{!! Helper::excerpt($last_blog->description,500) !!}</div>
                             <div class="mb-3 mt-2"><small class="text-primary">Published: {{date('Y-m-d',strtotime($last_blog->created_at))}}</small> <small class="text-success" style="float: right">By: {{$last_blog->author}}</small></div>
-                            <div class="blog-details"><a href="/blogs/{{$last_blog->slug}}">View Details</a></div>
+                            <div class="blog-details"><a href="/blogs/{{$last_blog->id}}">View Details</a></div>
                         </div>
                     </div>
                 </div>
@@ -538,7 +538,7 @@
                                 <img src="/storage/{{$blog->image}}">
                             </div>
                             <div class="col-8">
-                                <h4 class="blog-list-title"><a href="/blogs/{{$blog->slug}}">{{$blog->title}}</a></h4>
+                                <h4 class="blog-list-title"><a href="/blogs/{{$blog->id}}">{{$blog->title}}</a></h4>
                                 <div>Published: <span class="text-primary"> {{date('Y-m-d',strtotime($blog->created_at))}}</span></div>
                                 <div>By: <span class="text-success"> {{$blog->author}}</span></div>
                             </div>
@@ -582,12 +582,12 @@
                         @foreach($books as $book)
                             <div class="seller-item bg-light p-3 border border-primary rounded">
                                 <div class="seller-header text-center">
-                                    <a href="/books/{{$book->slug}}">
+                                    <a href="/books/{{$book->id}}">
                                         <img src="/storage/{{$book->thumbnail}}" alt="" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
                                     </a>
                                 </div>
                                 <div class="seller-footer">
-                                    <h4 class="text-center" title="{{($book->title)}}"> <a href="/books/{{$book->slug}}"> {{($book->title)}} </a></h4>
+                                    <h4 class="text-center" title="{{($book->title)}}"> <a href="/books/{{$book->id}}"> {{($book->title)}} </a></h4>
                                     <div class="text-center text-danger" style="margin-top: -0.5rem">(Edition: <span class="text-primary">{{ $book->edition ?? '' }}</span>)</div>
                                     <div>Price : @if($book->discount > 0) <s class="text-danger">Rs. {{ $book->price }}</s> @endif <strong class="text-success"> Rs. {{ ($book->price - (($book->price*$book->discount)/100)) }}</strong></div>
                                 </div>

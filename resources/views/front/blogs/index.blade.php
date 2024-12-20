@@ -28,10 +28,10 @@
                 <div class="col-md-4 mb-2">
                     <div class="single-blog">
                         <div class="blog-image">
-                            <a href="/blogs/{{$blog->slug}}"><img src="/storage/{{$blog->image}}"></a>
+                            <a href="/blogs/{{$blog->id}}"><img src="/storage/{{$blog->image}}"></a>
                         </div>
                         <div class="blog-details">
-                            <h4><a href="/blogs/{{$blog->slug}}">{{$blog->title}}</a></h4>
+                            <h4><a href="/blogs/{{$blog->id}}">{{$blog->title}}</a></h4>
                             <div class="blog-description">{!! Helper::excerpt($blog->description,220) !!}</div>
                             <div class="blog-footer">
                                 <div><i class="fa fa-commenting text-primary" aria-hidden="true"></i> <span class="text-success">{{$blog->comments->where('status','Published')->count()}}</span></div>

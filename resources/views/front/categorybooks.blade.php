@@ -16,7 +16,7 @@
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/books-category/{{$category->slug}}">{{($category->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/books-category/{{$category->id}}">{{($category->name)}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Books</li>
                     </ol>
                 </div>
@@ -32,7 +32,7 @@
                         <h5><a href="{{ url('/books') }}">All Categories</a></h5>
                         <ul class="course-nav">
                             @foreach($categories as $cat)
-                                <li><a href="/books-category/{{$cat->slug}}">{{$cat->name}}</a></li>
+                                <li><a href="/books-category/{{$cat->id}}">{{$cat->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -47,7 +47,7 @@
                                         <img src="/storage/{{$book->thumbnail}}">
                                     </div>
                                     <div class="blog-details">
-                                        <h4><a href="/books/{{$book->slug}}">{{$book->title}}</a></h4>
+                                        <h4><a href="/books/{{$book->id}}">{{$book->title}}</a></h4>
                                         {{-- <div class="">{!! $book->description !!}</div> --}}
                                         <div class="mx-2">
                                             <span>Price: <strong class="text-success">Rs. {{$book->price - $book->discount}}</strong></span>

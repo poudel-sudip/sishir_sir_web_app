@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('page_title', ($vaccancy->title))
 @section('og-title', ($vaccancy->title))
-@section('og-url', url('vaccancies/'.$vaccancy->slug))
+@section('og-url', url('vaccancies/'.$vaccancy->id))
 @if($vaccancy->thumbnail)
 @section('og-image', asset('/storage/'.$vaccancy->thumbnail))
 @endif

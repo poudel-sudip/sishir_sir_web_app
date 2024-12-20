@@ -2,7 +2,7 @@
 
 @section('page_title', ($material->name))
 @section('og-title', ($material->name))
-@section('og-url', url('/library/'.$library_category->slug.'/'.$material->slug))
+@section('og-url', url('/library/'.$library_category->id.'/'.$material->id))
 @section('og-description', strip_tags($material->description) ? strip_tags(str_replace('<', '  <', $material->description)) : $material->name )
 @if($material->thumbnail)
 @section('og-image', asset('/storage/'.$material->thumbnail))
@@ -17,7 +17,7 @@
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ ('/library') }}">Library</a></li>
-                        <li class="breadcrumb-item"><a href="/library/{{$library_category->slug}}">{{($library_category->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/library/{{$library_category->id}}">{{($library_category->name)}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{($material->name)}}</li>
                     </ol>
                 </div>

@@ -87,7 +87,7 @@
               <ul class="dropdown-menu">
                 @foreach($child_menus as $child)
                   <?php 
-                    $child_link = "/".$parent->slug."/".$child->slug;
+                    $child_link = "/".$parent->id."/".$child->id;
                   ?>
                   
                   <li class="parent-dropdown">
@@ -99,7 +99,7 @@
 
                       <div class="child-dropdown">
                         @foreach($grandchild_menus as $grandchild)
-                          <a href="/{{$parent->slug}}/{{$child->slug}}/{{$grandchild->slug}}"> {{($grandchild->name)}} </a>
+                          <a href="/{{$parent->id}}/{{$child->id}}/{{$grandchild->id}}"> {{($grandchild->name)}} </a>
                         @endforeach
                       </div>
                     @endif
@@ -118,7 +118,7 @@
             <ul class="dropdown-menu">
               @foreach(App\Models\Categories::where(['status'=>'Active','type'=>'book_publisher'])->whereHas('pub_categories')->orderBy('order')->take(5)->get() as $b)
               <li class="parent-dropdown">
-                <a class="dropdown-item" aria-current="page" href="/book-publishers/{{$b->slug}}">{{($b->name)}}</a>
+                <a class="dropdown-item" aria-current="page" href="/book-publishers/{{$b->id}}">{{($b->name)}}</a>
               </li>
               @endforeach
             </ul>

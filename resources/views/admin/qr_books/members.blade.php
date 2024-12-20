@@ -20,7 +20,7 @@
         <div class="card">
           <div class="card-body">
             <div class="custon-table-header">
-              <h4 class="card-title">QR Generated Book Scan Members || {{$book->title}}</h4>
+              <h4 class="card-title">QR Generated Book Scan Members: <br> {{$book->book->title ?? ''}}</h4>
               <div class="text-right">
                 <a href="/admin/qr-books/{{$book->id}}/scans/export"><button type="button" class="btn btn-sm ml-3 btn-info"> Excel Export </button></a>
               </div>

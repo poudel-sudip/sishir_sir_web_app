@@ -2,7 +2,7 @@
 
 @section('page_title', ($book->title))
 @section('og-title', ($book->title))
-@section('og-url', url('/books/'.$book->slug))
+@section('og-url', url('/books/'.$book->id))
 @section('og-description', strip_tags($book->description) ? strip_tags(str_replace('<', '  <', $book->description)) : $book->title )
 @if($book->thumbnail)
 @section('og-image', asset('/storage/'.$book->thumbnail))
@@ -23,10 +23,10 @@
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         @if($book->publisher)
-                        <li class="breadcrumb-item"><a href="/book-publishers/{{$book->publisher->slug}}">{{($book->publisher->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/book-publishers/{{$book->publisher->id}}">{{($book->publisher->name)}}</a></li>
                         @endif
                         @if($book->category)
-                        <li class="breadcrumb-item"><a href="/book-publishers/{{$book->publisher->slug}}/category/{{$book->category->slug}}">{{($book->category->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/book-publishers/{{$book->publisher->id}}/category/{{$book->category->id}}">{{($book->category->name)}}</a></li>
                         @endif
                         <li class="breadcrumb-item active" aria-current="page">{{($book->title)}}</li>
                     </ol>
@@ -201,7 +201,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="leave-review">
-                                <form action="/books/{{$book->slug}}/review/add" method="post" enctype="multipart/form-data">
+                                <form action="/books/{{$book->id}}/review/add" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
@@ -246,7 +246,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="leave-review">
-                                <form action="/books/{{$book->slug}}/physical-order/add" method="post" enctype="multipart/form-data">
+                                <form action="/books/{{$book->id}}/physical-order/add" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         

@@ -6,7 +6,7 @@
 @endsection
 
 @section('og-title', ucwords($vaccancy->title))
-@section('og-url', url('vaccancies/'.$vaccancy->slug))
+@section('og-url', url('vaccancies/'.$vaccancy->id))
 @if($vaccancy->thumbnail)
 @section('og-image', asset('/storage/'.$vaccancy->thumbnail))
 @endif
@@ -15,7 +15,7 @@
 @section('content')
 
     <?php 
-        $view_count = Helper::addViewCount(ucwords($vaccancy->title),'/vaccancies/'.$vaccancy->slug);
+        $view_count = Helper::addViewCount(ucwords($vaccancy->title),'/vaccancies/'.$vaccancy->id);
     ?>
 
     <div class="container-fluid">
@@ -60,7 +60,7 @@
     <script>
         function handleShare(event)
         {
-            let pageURL = '/vaccancies/{{$vaccancy->slug}}';
+            let pageURL = '/vaccancies/{{$vaccancy->id}}';
             const postData = { type: 'share', page: 'Vaccancy Details Show',pageurl: pageURL };
             postDataWithFetch('/page-counter-increment', postData);
             // alert(pageURL);

@@ -25,9 +25,9 @@ class FrontPdfBankController extends Controller
         return view('front.pdf_bank.index',$data);
     }
 
-    public function categoryPdfBanks($slug)
+    public function categoryPdfBanks($cat)
     {
-        $category = PDFBankCategory::where('slug','=',$slug)->where('status','=','Active')->first();
+        $category = PDFBankCategory::where('id','=',$cat)->where('status','=','Active')->first();
         if(!$category)
         {
             abort(404,'PDF Bank Category Not Found');
@@ -47,9 +47,9 @@ class FrontPdfBankController extends Controller
         return view('front.pdf_bank.index',$data);
     }
 
-    public function singlePdfBankDetails($slug)
+    public function singlePdfBankDetails($bank)
     {
-        $pdf_bank = PDFBank::where('slug','=',$slug)
+        $pdf_bank = PDFBank::where('id','=',$bank)
         ->where('status','=','Active')
         ->withCount(['chapters as pdf_count' => function($ch){
             $ch->where('status','=','Active');

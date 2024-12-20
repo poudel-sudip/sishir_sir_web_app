@@ -2,7 +2,7 @@
 @section('page_title', ($pdf_bank->title))
 
 @section('og-title', ($pdf_bank->title))
-@section('og-url', url('pdf-banks/bank/'.$pdf_bank->slug))
+@section('og-url', url('pdf-banks/bank/'.$pdf_bank->id))
 @if($pdf_bank->thumbnail)
 @section('og-image', asset('/storage/'.$pdf_bank->thumbnail))
 @endif
@@ -18,7 +18,7 @@
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                         <li class="breadcrumb-item"><a href="/pdf-banks">PDF Banks</a></li>
-                        <li class="breadcrumb-item"><a href="/pdf-banks/category/{{$pdf_bank->category->slug ?? ''}}">{{$pdf_bank->category->name ?? ''}}</a></li>
+                        <li class="breadcrumb-item"><a href="/pdf-banks/category/{{$pdf_bank->category->id ?? ''}}">{{$pdf_bank->category->name ?? ''}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{$pdf_bank->title}}</li>
                     </ol>
                 </div>

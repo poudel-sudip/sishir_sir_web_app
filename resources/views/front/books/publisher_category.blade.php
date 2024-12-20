@@ -32,10 +32,10 @@
                         <div class="col-md-3 mb-3">
                             <div class="seller-item border border-primary rounded border-2">
                                 <div class="seller-header text-center">
-                                    <a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">
+                                    <a href="/book-publishers/{{$publisher->id}}/category/{{$cat->id}}">
                                         <img src="/storage/{{$cat->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
                                     </a>
-                                    <h5 class="mt-3"><a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">{{($cat->name)}}</a></h5>
+                                    <h5 class="mt-3"><a href="/book-publishers/{{$publisher->id}}/category/{{$cat->id}}">{{($cat->name)}}</a></h5>
                                 </div>
                             </div>
                         </div>

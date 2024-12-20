@@ -41,9 +41,9 @@ class PublicExamController extends Controller
         return view('front.publicexams.examslist',$data);
     }
 
-    public function examform($examslug)
+    public function examform($eid)
     {
-        $exam=OpenExam::where('slug','=',$examslug)->where('result_status','=','Unpublished')->first();
+        $exam=OpenExam::where('id','=',$eid)->where('result_status','=','Unpublished')->first();
         if(!$exam)
         {
            abort(404);
@@ -67,7 +67,7 @@ class PublicExamController extends Controller
         return view('front.publicexams.examform',compact('exam','user'));
     }
 
-    public function examshow(Request $request, $examslug)
+    public function examshow(Request $request, $eid)
     {
         $request->validate([
             'name'=>'required|string|min:3',
@@ -75,7 +75,7 @@ class PublicExamController extends Controller
             'contact'=>'required|numeric|digits:10',
         ]);
 
-        $openexam=OpenExam::where('slug','=',$examslug)->where('result_status','=','Unpublished')->first();
+        $openexam=OpenExam::where('id','=',$eid)->where('result_status','=','Unpublished')->first();
         if(!$openexam)
         {
            abort(404);
@@ -123,7 +123,7 @@ class PublicExamController extends Controller
         return view('front.publicexams.attemptexam',compact('user','exam','openexam'));
     }
 
-    public function examsave(Request $request, $examslug)
+    public function examsave(Request $request, $eid)
     {
 
         $total_questions=$request->index;
@@ -197,9 +197,9 @@ class PublicExamController extends Controller
         return view('front.publicexams.resultlist',compact('exams'));
     }
 
-    public function resultshow($examslug)
+    public function resultshow($eid)
     {
-        $exam=OpenExam::where('slug','=',$examslug)->where('result_status','=','Published')->first();
+        $exam=OpenExam::where('id','=',$eid)->where('result_status','=','Published')->first();
         if(!$exam)
         {
            abort(404);
@@ -211,9 +211,9 @@ class PublicExamController extends Controller
         return view('front.publicexams.resultshow',compact('exam','results','counterData'));
     }
 
-    public function premiumExamShow($slug)
+    public function premiumExamShow($eid)
     {
-        $exam = ExamHallCategories::where('slug','=',$slug)
+        $exam = ExamHallCategories::where('id','=',$eid)
         ->where('status','=','Active')
         ->withCount(['category_exams as mcq_count' => function($ch){
             $ch->whereHas('exam',function($e){
@@ -274,11 +274,11 @@ class PublicExamController extends Controller
         return view('front.publicexams.showpremiumexam',compact('exam','counterData'));
     }
 
-    public function categoryPremiumExamList($slug, Request $request)
+    public function categoryPremiumExamList($cat, Request $request)
     {
         $exam_group = Categories::where('status','=','Active')
         ->where('type','=','exam_hall')
-        ->where('slug','=',$slug)
+        ->where('id','=',$cat)
         ->first();
 
         if(!$exam_group)
@@ -315,9 +315,9 @@ class PublicExamController extends Controller
         
     }
 
-    public function examQuestionsPdfDownload($examslug, Request $request)
+    public function examQuestionsPdfDownload($eid, Request $request)
     {
-        $openexam=OpenExam::where('slug','=',$examslug)->where('result_status','=','Unpublished')->first();
+        $openexam=OpenExam::where('id','=',$eid)->where('result_status','=','Unpublished')->first();
         if(!$openexam)
         {
            abort(404);

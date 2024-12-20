@@ -17,9 +17,9 @@
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/book-publishers/{{$publisher->slug}}">{{($publisher->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/book-publishers/{{$publisher->id}}">{{($publisher->name)}}</a></li>
                         @if($category)
-                        <li class="breadcrumb-item"><a href="/book-publishers/{{$publisher->slug}}/category/{{$category->slug}}">{{($category->name)}}</a></li>
+                        <li class="breadcrumb-item"><a href="/book-publishers/{{$publisher->id}}/category/{{$category->id}}">{{($category->name)}}</a></li>
                         @endif
                         <li class="breadcrumb-item active" aria-current="page">Books</li>
                     </ol>
@@ -33,10 +33,10 @@
             <div class="row course-details">
                 <div class="col-md-3">
                     <div class="side-navbar border border-primary border-2">
-                        <h5><a href="/book-publishers/{{$publisher->slug}}/all-books">All Books</a></h5>
+                        <h5><a href="/book-publishers/{{$publisher->id}}/all-books">All Books</a></h5>
                         <ul class="course-nav" style="height:auto; min-height: 370px; ">
                             @foreach($categories as $cat)
-                                <li><a href="/book-publishers/{{$publisher->slug}}/category/{{$cat->slug}}">{{($cat->name)}}</a></li>
+                                <li><a href="/book-publishers/{{$publisher->id}}/category/{{$cat->id}}">{{($cat->name)}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -46,13 +46,13 @@
                         <div class="row">
                             @forelse($books as $book)
                             <div class="col-md-4 my-3">
-                                <a href="/books/{{$book->slug}}">
+                                <a href="/books/{{$book->id}}">
                                     <div class="single-blog pt-3 border border-primary border-2">
                                         <div class="blog-image text-center">
                                             <img src="/storage/{{$book->thumbnail}}">
                                         </div>
                                         <div class="blog-details">
-                                            <h4 class="text-center"><a href="/books/{{$book->slug}}">{{$book->title}}</a></h4>
+                                            <h4 class="text-center"><a href="/books/{{$book->id}}">{{$book->title}}</a></h4>
                                             <div class="text-center text-danger" style="margin-top: -0.5rem;"> (Edition: <span class="text-primary">{{ $book->edition ?? '' }}</span>) </div>
                                             <div class="mx-2">
                                                 <span>Price: <strong class="text-success">Rs. {{($book->price - (($book->price*$book->discount)/100))}}</strong></span>

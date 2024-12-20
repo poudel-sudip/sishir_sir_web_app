@@ -53,7 +53,7 @@ class QRBookController extends Controller
         {
             for ($i=1; $i <= $book->quantity; $i++) { 
                 $book->scanMembers()->create([
-                    'book_link' => url('/qr-book-scans/'.$book->slug.'/sn-'.$i),
+                    'book_link' => url('/qr-book-scans/'.$book->id.'/sn-'.$i),
                     'is_main' => true,
                 ]);
             }
@@ -94,7 +94,7 @@ class QRBookController extends Controller
         {
             for ($i=$prev+1; $i <= $new; $i++) { 
                 $book->scanMembers()->create([
-                    'book_link' => url('/qr-book-scans/'.$book->slug.'/sn-'.$i),
+                    'book_link' => url('/qr-book-scans/'.$book->id.'/sn-'.$i),
                     'is_main' => true,
                 ]);
             }

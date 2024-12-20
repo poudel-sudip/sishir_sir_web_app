@@ -49,7 +49,7 @@
                         <ul class="course-nav" style="height:auto; min-height: 370px; ">
                             @foreach($exam_categories as $row)
                                 <li>
-                                    <a href="/exam-hall/category/{{$row->slug}}">
+                                    <a href="/exam-hall/category/{{$row->id}}">
                                         <i class="fas fa-star pr-2 text-light"></i>
                                         {{$row->name}}
                                     </a>
@@ -66,7 +66,7 @@
                             <ul class="course-nav" style="height:auto; min-height: 370px; ">
                                 @foreach($free_exams as $row)
                                     <li>
-                                        <a href="/public-exams/{{$row->slug}}">
+                                        <a href="/public-exams/{{$row->id}}">
                                             <i class="fas fa-star pr-2 text-light"></i>
                                             {{$row->name}}
                                             ({{ $row->exam ? ($row->exam->questions ? $row->exam->questions->count() : '-') : '-' }} Questions)
@@ -91,10 +91,10 @@
                                     <div class="col-md-4 mb-3">
                                         <div class="seller-item border border-primary rounded border-2">
                                             <div class="seller-header text-center">
-                                                <a href="/exam-hall/premium/{{$exam->slug}}">
+                                                <a href="/exam-hall/premium/{{$exam->id}}">
                                                     <img src="/storage/{{$exam->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
                                                 </a>
-                                                <h5 class="mt-3"><a href="/exam-hall/premium/{{$exam->slug}}">{{($exam->title)}}</a></h5>
+                                                <h5 class="mt-3"><a href="/exam-hall/premium/{{$exam->id}}">{{($exam->title)}}</a></h5>
                                                 <h6>{{$exam->category_exams->count()}} Sets </h6>
 
                                             </div>
@@ -117,7 +117,7 @@
                         <ul class="course-nav" style="height:auto; min-height: 370px; ">
                             @foreach($exams as $row)
                                 <li>
-                                    <a href="/public-exams/{{$row->slug}}">
+                                    <a href="/public-exams/{{$row->id}}">
                                         <i class="fas fa-star pr-2 text-light"></i>
                                         {{$row->name}}
                                         ({{ $row->exam ? ($row->exam->questions ? $row->exam->questions->count() : '-') : '-' }} Questions)

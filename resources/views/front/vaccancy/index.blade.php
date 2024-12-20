@@ -41,10 +41,10 @@
                 <div class="col-md-4 mb-2">
                     <div class="single-blog border border-primary rounded">
                         <div class="blog-image">
-                            <a href="/vaccancies/{{$vaccancy->slug}}"><img src="/storage/{{$vaccancy->thumbnail}}" class="img img-fluid"></a>
+                            <a href="/vaccancies/{{$vaccancy->id}}"><img src="/storage/{{$vaccancy->thumbnail}}" class="img img-fluid"></a>
                         </div>
                         <div class="blog-details">
-                            <h4 class="text-center"><a href="/vaccancies/{{$vaccancy->slug}}">{{$vaccancy->title}}</a></h4>
+                            <h4 class="text-center"><a href="/vaccancies/{{$vaccancy->id}}">{{$vaccancy->title}}</a></h4>
                             <div class="blog-footer">
                                 <div><i class="fa fa-user text-primary" aria-hidden="true"></i> <span class="text-success">{{$vaccancy->author}}</span></div>
                                 <div class="text-end">Posted On: <span class="text-primary"> {{date('Y-m-d',strtotime($vaccancy->created_at))}}</span></div>

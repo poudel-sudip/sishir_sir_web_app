@@ -716,7 +716,7 @@ Route::delete('/student/tickets/{ticket}/contents','App\Http\Controllers\Student
 Route::get('/student/vaccancies','App\Http\Controllers\Student\VaccancyController@index')->middleware('role:Student');
 Route::get('/student/vaccancies/create','App\Http\Controllers\Student\VaccancyController@create')->middleware('role:Student');
 Route::post('/student/vaccancies','App\Http\Controllers\Student\VaccancyController@store')->middleware('role:Student');
-Route::get('/student/vaccancies/{slug}','App\Http\Controllers\Student\VaccancyController@show')->middleware('role:Student');
+Route::get('/student/vaccancies/{vaccancy}','App\Http\Controllers\Student\VaccancyController@show')->middleware('role:Student');
 
 Route::get('/student/free-exams','App\Http\Controllers\Student\StudentHomeController@freeExamList')->middleware('role:Student');
 
@@ -762,40 +762,40 @@ Route::get('/image-gallery', 'App\Http\Controllers\FrontController@imageGallery'
 
 // front blogs
 Route::get('/blogs','App\Http\Controllers\Blog\BlogController@index');
-Route::get('/blogs/{slug}','App\Http\Controllers\Blog\BlogController@show');
+Route::get('/blogs/{bid}','App\Http\Controllers\Blog\BlogController@show');
 Route::post('/blogs/{blog}/comments/add','App\Http\Controllers\Blog\BlogController@addComments');
 
 //front public exams mgmt
 Route::get('/public-exams', 'App\Http\Controllers\PublicExamController@examlist');
-Route::get('/public-exams/{examslug}', 'App\Http\Controllers\PublicExamController@examform');
-Route::post('/public-exams/{examslug}/attempt', 'App\Http\Controllers\PublicExamController@examshow');
-Route::post('/public-exams/{examslug}/save', 'App\Http\Controllers\PublicExamController@examsave');
-Route::get('/public-exams/{examslug}/download-questions', 'App\Http\Controllers\PublicExamController@examQuestionsPdfDownload')->middleware('auth');
+Route::get('/public-exams/{eid}', 'App\Http\Controllers\PublicExamController@examform');
+Route::post('/public-exams/{eid}/attempt', 'App\Http\Controllers\PublicExamController@examshow');
+Route::post('/public-exams/{eid}/save', 'App\Http\Controllers\PublicExamController@examsave');
+Route::get('/public-exams/{eid}/download-questions', 'App\Http\Controllers\PublicExamController@examQuestionsPdfDownload')->middleware('auth');
 
 //front public exams results
 Route::get('/results', 'App\Http\Controllers\PublicExamController@resultlist');
-Route::get('/results/{examslug}', 'App\Http\Controllers\PublicExamController@resultshow');
+Route::get('/results/{eid}', 'App\Http\Controllers\PublicExamController@resultshow');
 
 //front premium exams section
-Route::get('/exam-hall/premium/{slug}', 'App\Http\Controllers\PublicExamController@premiumExamShow');
-Route::get('/exam-hall/category/{slug}', 'App\Http\Controllers\PublicExamController@categoryPremiumExamList');
+Route::get('/exam-hall/premium/{eid}', 'App\Http\Controllers\PublicExamController@premiumExamShow');
+Route::get('/exam-hall/category/{cat}', 'App\Http\Controllers\PublicExamController@categoryPremiumExamList');
 
 //front ebooks
 Route::get('/books','App\Http\Controllers\FrontController@books');
-Route::post('/books/{slug}/physical-order/add','App\Http\Controllers\FrontController@addPhysicalBookOrder');
-Route::post('/books/{slug}/review/add','App\Http\Controllers\FrontController@addBookReview');
-Route::get('/books/{slug}','App\Http\Controllers\FrontController@singleBook');
-Route::get('/book-publishers/{slug}/all-books','App\Http\Controllers\FrontController@publisherAllBooks');
-Route::get('/book-publishers/{pslug}/category/{cslug}','App\Http\Controllers\FrontController@publisherCategoryBooks');
-Route::get('/book-publishers/{slug}','App\Http\Controllers\FrontController@publisherBookCategories');
+Route::post('/books/{bid}/physical-order/add','App\Http\Controllers\FrontController@addPhysicalBookOrder');
+Route::post('/books/{bid}/review/add','App\Http\Controllers\FrontController@addBookReview');
+Route::get('/books/{bid}','App\Http\Controllers\FrontController@singleBook');
+Route::get('/book-publishers/{pub}/all-books','App\Http\Controllers\FrontController@publisherAllBooks');
+Route::get('/book-publishers/{pub}/category/{cat}','App\Http\Controllers\FrontController@publisherCategoryBooks');
+Route::get('/book-publishers/{pub}','App\Http\Controllers\FrontController@publisherBookCategories');
 
-Route::get('/qr-book-scans/{bslug}/{bsn}','App\Http\Controllers\FrontController@qrBookScanForm');
+Route::get('/qr-book-scans/{book}/{bsn}','App\Http\Controllers\FrontController@qrBookScanForm');
 Route::post('/qr-book-scans/{book}/{member}','App\Http\Controllers\FrontController@qrBookScanMemberStore');
 
 //front library materials
 Route::get('/library','App\Http\Controllers\FrontController@getLibrary');
-Route::get('/library/{catslug}','App\Http\Controllers\FrontController@getLibraryContents');
-Route::get('/library/{catslug}/{matslug}','App\Http\Controllers\FrontController@getLibraryContentDetail');
+Route::get('/library/{cat}','App\Http\Controllers\FrontController@getLibraryContents');
+Route::get('/library/{cat}/{mat}','App\Http\Controllers\FrontController@getLibraryContentDetail');
 
 //front search mgmt
 Route::get('/search','App\Http\Controllers\FrontController@search');
@@ -805,16 +805,16 @@ Route::get('/testimonials','App\Http\Controllers\FrontController@getTestimonials
 Route::post('/testimonials/add','App\Http\Controllers\FrontController@addTestimonials');
 
 //front dynamic forms
-Route::get('/dynamic-forms/{slug}','App\Http\Controllers\FrontDynamicFormController@showDynamicForm');
-Route::post('/dynamic-forms/{slug}','App\Http\Controllers\FrontDynamicFormController@saveDynamicFormApplicant');
+Route::get('/dynamic-forms/{form}','App\Http\Controllers\FrontDynamicFormController@showDynamicForm');
+Route::post('/dynamic-forms/{form}','App\Http\Controllers\FrontDynamicFormController@saveDynamicFormApplicant');
 
 Route::get('/question-of-the-day/{qdate}','App\Http\Controllers\FrontController@getQuestionOfDay');
 Route::post('/question-of-the-day/{qdate}/comment/add','App\Http\Controllers\FrontController@addCommentToQuestionOfDay');
 
 //front pdf banks
 Route::get('/pdf-banks','App\Http\Controllers\FrontPdfBankController@index');
-Route::get('/pdf-banks/category/{slug}','App\Http\Controllers\FrontPdfBankController@categoryPdfBanks');
-Route::get('/pdf-banks/bank/{slug}','App\Http\Controllers\FrontPdfBankController@singlePdfBankDetails');
+Route::get('/pdf-banks/category/{cat}','App\Http\Controllers\FrontPdfBankController@categoryPdfBanks');
+Route::get('/pdf-banks/bank/{bank}','App\Http\Controllers\FrontPdfBankController@singlePdfBankDetails');
 
 //nepal pay proxy apis
 Route::post('/nepal-pay/get-payment-instrument-details','App\Http\Controllers\NepalPayProxyController@getPaymentInstrumentDetails');
@@ -827,15 +827,15 @@ Route::get('/nepal-pay/return-payment-notification','App\Http\Controllers\NepalP
 Route::get('/vaccancies','App\Http\Controllers\FrontCareerController@index');
 Route::get('/vaccancies/create','App\Http\Controllers\FrontCareerController@create')->middleware('auth');
 Route::post('/vaccancies','App\Http\Controllers\FrontCareerController@store')->middleware('auth');
-Route::get('/vaccancies/{slug}','App\Http\Controllers\FrontCareerController@show');
+Route::get('/vaccancies/{vaccancy}','App\Http\Controllers\FrontCareerController@show');
 
 
 
 //front menu details
-Route::get('/{groupslug}/{menuslug}','App\Http\Controllers\FrontController@getMenuCategories');
-Route::get('/{groupslug}/{menuslug}/{catslug}','App\Http\Controllers\FrontController@getMenuItems');
-Route::get('/{groupslug}/{menuslug}/{catslug}/{itemslug}','App\Http\Controllers\FrontController@getMenuItemDetail');
-Route::get('/{groupslug}/{menuslug}/{catslug}/{itemslug}/{subitemslug}','App\Http\Controllers\FrontController@getMenuSubItemDetail');
+Route::get('/{group}/{menu}','App\Http\Controllers\FrontController@getMenuCategories');
+Route::get('/{group}/{menu}/{cat}','App\Http\Controllers\FrontController@getMenuItems');
+Route::get('/{group}/{menu}/{cat}/{item}','App\Http\Controllers\FrontController@getMenuItemDetail');
+Route::get('/{group}/{menu}/{cat}/{item}/{subitem}','App\Http\Controllers\FrontController@getMenuSubItemDetail');
 
 
 

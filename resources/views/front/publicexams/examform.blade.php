@@ -2,7 +2,7 @@
 @section('page_title', 'Attempt: '.($exam->name))
 
 @section('og-title', ($exam->name))
-@section('og-url', url('public-exams/'.$exam->slug))
+@section('og-url', url('public-exams/'.$exam->id))
 @if($exam->image)
 @section('og-image', asset('/storage/'.$exam->image))
 @endif
@@ -30,7 +30,7 @@
                 <div class="col-md-6">
                     <div class="card mb-5 shadow border border-primary border-2" style="border-radius: 8px; padding: 10px 50px">
                         <div class="card-body enroll_form">
-                            <form method="POST" action="/public-exams/{{$exam->slug}}/attempt">
+                            <form method="POST" action="/public-exams/{{$exam->id}}/attempt">
                                 @csrf
 
                                 <div class="form-group row">

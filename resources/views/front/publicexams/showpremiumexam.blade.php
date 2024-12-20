@@ -2,7 +2,7 @@
 @section('page_title', ($exam->title))
 
 @section('og-title', ($exam->title))
-@section('og-url', url('exam-hall/premium/'.$exam->slug))
+@section('og-url', url('exam-hall/premium/'.$exam->id))
 @if($exam->image)
 @section('og-image', asset('/storage/'.$exam->image))
 @endif

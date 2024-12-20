@@ -3013,7 +3013,7 @@ p {
         overflow-y: auto;
         overflow-x: hidden;
         height: 350px;
-        border-right: 1px solid rgb(83, 83, 83);
+        /* border-right: 1px solid rgb(83, 83, 83); */
     }
     .MCQ-exam .owl-nav {
         bottom: 18%;

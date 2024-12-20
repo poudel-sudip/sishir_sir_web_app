@@ -22,13 +22,13 @@ class VaccancyController extends Controller
         return view('student.vaccancy.create',$data);
     }
 
-    public function show($slug)
+    public function show(VaccancyPost $vaccancy)
     {
-        $vaccancy = VaccancyPost::where('slug','=',$slug)->first();
-        if(!$vaccancy)
-        {
-            abort(404);
-        }
+        // $vaccancy = VaccancyPost::where('slug','=',$slug)->first();
+        // if(!$vaccancy)
+        // {
+        //     abort(404);
+        // }
 
         if($vaccancy->status != 'Active')
         {
@@ -37,7 +37,7 @@ class VaccancyController extends Controller
 
         // $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-        $pgurl = "/vaccancies/".$vaccancy->slug;
+        $pgurl = "/vaccancies/".$vaccancy->id;
         $pgtype = 'article';
         $counterData = Helper::pageCounterCounts($vaccancy->title,$pgurl,$pgtype);
 
