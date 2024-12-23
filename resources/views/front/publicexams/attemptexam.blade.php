@@ -1,97 +1,124 @@
 @extends('front.layouts.app')
 @section('page_title', 'Attempt: '.($exam->name))
 @section('content')
+
+    <style>
+        .MCQ-exam .owl-item {
+            height: auto;
+        }
+
+    </style>
+
     <div class="container-fluid px-md-5">
         <div class="public-exam-section mt-3">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="public-question-list">
-                    <div class="public-question-header">
-                        <h5 class="text-center">{{$exam->name}}</h5>  
-                        <div class="d-flex justify-content-around">
-                            <span> Name: {{$user->name}} </span>
-                            <span> Email: {{$user->email}} </span>
-                            <span> Contact: {{$user->contact}} </span>
-                            <span>Courses: {{ $user->courses }}</span>
-                        </div>                   
-                        <div class="icon-bar mt-1 d-flex justify-content-around">
-                            <div class="">Total Questions: {{$exam->questions()->count() ?? '0' }}</div>
-                            <div class="">Marks Per Question: {{$exam->marks_per_question}}</div>
-                            <div class="">Negative Marks: {{$exam->negative_marks}}</div>
-                            <div class="me-5">                                
-                                Exam Time CountDown : <span class="js-timeout"></span>
-                            </div>
-                        </div>
-                        <div class="text-center mt-3" id="attempt-question-count"> </div>
-                    </div>
-                    <div class="public-question-body">
-                        <form action="/public-exams/{{$openexam->id}}/save" method="POST" id="exam-form">
-                            @csrf
-                            <div class="owl-carousel MCQ-exam">
-                                @php($key=-1)
-                                @foreach($exam->questions as $key=>$ques)
-                                <div class="mcq-question-list">
-                                    <div class="mcq-question" style="overflow: hidden; border:none;">
-                                        <input type="hidden" name="question-{{$key+1}}" value="{{$ques->id}}">
-                                        <input type="hidden" name="ans-{{$key+1}}" value="">
-                                        <h6 class="mt-3"> {{$key+1}}. {!!$ques->name!!} <small class=" text-secondary"> ({{$exam->marks_per_question}} Marks) </small> </h6>
-
-                                        <div class="mcq-check-option mt-3">
-                                            <div class="mcq-qstn-row">
-                                            <input type="radio" name="ans-{{$key+1}}" value="A" id="ans-{{$key+1}}-1" /> <span class="mcq-option">a.</span><label for="ans-{{$key+1}}-1"> {!! $ques->opt_a !!} </label>
-                                            </div>
-                                            <div class="mcq-qstn-row">
-                                                <input type="radio" name="ans-{{$key+1}}" value="B" id="ans-{{$key+1}}-2" /> <span class="mcq-option">b.</span><label for="ans-{{$key+1}}-2"> {!!$ques->opt_b!!} </label>
-                                            </div>
-                                            <div class="mcq-qstn-row">
-                                                <input type="radio" name="ans-{{$key+1}}" value="C" id="ans-{{$key+1}}-3" /> <span class="mcq-option">c.</span><label for="ans-{{$key+1}}-3"> {!!$ques->opt_c!!} </label>
-                                            </div>
-                                            <div class="mcq-qstn-row">
-                                                <input type="radio" name="ans-{{$key+1}}" value="D" id="ans-{{$key+1}}-4" /> <span class="mcq-option">d.</span><label for="ans-{{$key+1}}-4"> {!!$ques->opt_d!!} </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-
-                                    {{-- <div class="col-md-7 mcq-question">
-                                        <input type="hidden" name="question-{{$key+1}}" value="{{$ques->id}}">
-                                        <input type="hidden" name="ans-{{$key+1}}" value="">
-                                        <h6 > {{$key+1}}. {!!$ques->name!!}</h6>
-                                    </div>
-                                    <div class="mcq-check-option col-md-5">
-                                        <div class="mcq-qstn-row">
-                                        <input type="radio" name="ans-{{$key+1}}" value="A" id="ans-{{$key+1}}-1" /> <span class="mcq-option">a.</span><label for="ans-{{$key+1}}-1"> {!! $ques->opt_a !!} </label>
-                                        </div>
-                                        <div class="mcq-qstn-row">
-                                            <input type="radio" name="ans-{{$key+1}}" value="B" id="ans-{{$key+1}}-2" /> <span class="mcq-option">b.</span><label for="ans-{{$key+1}}-2"> {!!$ques->opt_b!!} </label>
-                                        </div>
-                                        <div class="mcq-qstn-row">
-                                            <input type="radio" name="ans-{{$key+1}}" value="C" id="ans-{{$key+1}}-3" /> <span class="mcq-option">c.</span><label for="ans-{{$key+1}}-3"> {!!$ques->opt_c!!} </label>
-                                        </div>
-                                        <div class="mcq-qstn-row">
-                                            <input type="radio" name="ans-{{$key+1}}" value="D" id="ans-{{$key+1}}-4" /> <span class="mcq-option">d.</span><label for="ans-{{$key+1}}-4"> {!!$ques->opt_d!!} </label>
-                                        </div>
-                                    </div> --}}
-
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="public-question-list">
+                        <div class="public-question-header" style="">
+                            <h5 class="text-center">{{$exam->name}}</h5>  
+                            <div class="d-flex justify-content-around">
+                                <span> Name: {{$user->name}} </span>
+                                <span> Email: {{$user->email}} </span>
+                                <span> Contact: {{$user->contact}} </span>
+                                <span>Courses: {{ $user->courses }}</span>
+                            </div>                   
+                            <div class="icon-bar mt-1 d-flex justify-content-around">
+                                <div class="">Total Questions: {{$exam->questions()->count() ?? '0' }}</div>
+                                <div class="">Marks Per Question: {{$exam->marks_per_question}}</div>
+                                <div class="">Negative Marks: {{$exam->negative_marks}}</div>
+                                <div class="me-5">                                
+                                    Exam Time CountDown : <span class="js-timeout"></span>
                                 </div>
-                                @endforeach
                             </div>
-                            <div class="text-center">
-                                <input type="hidden" name="index" value="<?php echo $key+1 ?>">
-                                <input type="hidden" name="exam_id" value="{{$openexam->id}}">
-                                <input type="hidden" name="user_name" value="{{$user->name}}">
-                                <input type="hidden" name="user_email" value="{{$user->email}}">
-                                <input type="hidden" name="user_contact" value="{{$user->contact}}">
-                                <input type="hidden" name="courses" value="{{$user->courses}}">
-                                <input type="submit" value="Submit" class="btn btn-primary mt-3 mcq-submit-btn">
-                            </div>
-                        </form>
+                            <div class="text-center mt-3" id="attempt-question-count"> </div>
+                        </div>
+                        <div class="public-question-body">
+                            <form action="/public-exams/{{$openexam->id}}/save" method="POST" id="exam-form">
+                                @csrf
+                                @php
+                                    $pages = $exam->questions->chunk(10); // Split into pages
+                                    $key = -1;
+                                @endphp
+                            
+                                <!-- Top Navigation -->                               
+                                <div class="owl-nav d-flex justify-content-end my-1" style="margin-top: -10px">
+                                    <button type="button" class="mx-1 btn border border-primary text-primary owl-prev">Previous Page</button>
+                                    <button type="button" class="mx-1 btn border border-primary text-primary owl-next">Next Page</button>
+                                </div>
+                            
+                                <div class="owl-carousel MCQ-exam MCQ-List" style="">
+                                    @foreach($pages as $pageIndex => $questions)
+                                        <div class="mcq-question-list page-{{ $pageIndex + 1 }}" style="">
+                                            @foreach($questions as $key => $ques)                                        
+                                                <div class="mcq-question my-2" style=" ">
+                                                    <input type="hidden" name="question-{{$key+1}}" value="{{$ques->id}}">
+                                                    <input type="hidden" name="ans-{{$key+1}}" value="">
+                                                    <h6 class="mt-3" style="font-size:20px;">
+                                                        {{$key+1}}. {!!$ques->name!!}
+                                                        <small class="text-secondary">({{$exam->marks_per_question}} Marks)</small>
+                                                    </h6>
+                            
+                                                    <div class="mcq-check-option mt-3" style="">
+                                                        <div class="mcq-qstn-row">
+                                                            <input type="radio" name="ans-{{$key+1}}" value="A" id="ans-{{$key+1}}-1" />
+                                                            <span class="mcq-option">a.</span>
+                                                            <label for="ans-{{$key+1}}-1"> {!! $ques->opt_a !!} </label>
+                                                        </div>
+                                                        <div class="mcq-qstn-row">
+                                                            <input type="radio" name="ans-{{$key+1}}" value="B" id="ans-{{$key+1}}-2" />
+                                                            <span class="mcq-option">b.</span>
+                                                            <label for="ans-{{$key+1}}-2"> {!!$ques->opt_b!!} </label>
+                                                        </div>
+                                                        <div class="mcq-qstn-row">
+                                                            <input type="radio" name="ans-{{$key+1}}" value="C" id="ans-{{$key+1}}-3" />
+                                                            <span class="mcq-option">c.</span>
+                                                            <label for="ans-{{$key+1}}-3"> {!!$ques->opt_c!!} </label>
+                                                        </div>
+                                                        <div class="mcq-qstn-row" style="">
+                                                            <input type="radio" name="ans-{{$key+1}}" value="D" id="ans-{{$key+1}}-4" />
+                                                            <span class="mcq-option">d.</span>
+                                                            <label for="ans-{{$key+1}}-4"> {!!$ques->opt_d!!} </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <hr class="question-separator" style="">
+                                                
+                                            @endforeach
+                                        </div>
+                                    @endforeach
+                                </div>
+                            
+                                <!-- Bottom Navigation -->
+                                <div class="owl-nav d-flex justify-content-end" style="margin-top: -10px">
+                                    <button type="button" class="mx-1 btn border border-primary text-primary owl-prev">Previous Page</button>
+                                    <button type="button" class="mx-1 btn border border-primary text-primary owl-next">Next Page</button>
+                                </div>
+                            
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary mt-3 " >Submit Exam</button>
+                                </div>
+
+                                <div class="text-center">
+                                    <input type="hidden" name="index" value="<?php echo $key+1 ?>">
+                                    <input type="hidden" name="exam_id" value="{{$openexam->id}}">
+                                    <input type="hidden" name="user_name" value="{{$user->name}}">
+                                    <input type="hidden" name="user_email" value="{{$user->email}}">
+                                    <input type="hidden" name="user_contact" value="{{$user->contact}}">
+                                    <input type="hidden" name="courses" value="{{$user->courses}}">
+                                    <input type="submit" value="Submit" class="btn btn-primary mt-3 mcq-submit-btn">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+
+@endsection
+
+@section('page-footer-content')
 
     <script src="{{ asset('admin/js/sweetalert2@11.js') }}"></script>
 
@@ -142,25 +169,33 @@
         });
 
         function examSubmitAction(title)
-        {
+        {           
 
             Swal.fire({
                 title: title,
                 text: "",
                 icon: 'warning',
+                showDenyButton: false,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
+                denyButtonColor: '#00e3f3',
                 confirmButtonText: 'Yes, Submit It',
-                cancelButtonText: 'No, Cancel It'
+                cancelButtonText: 'No, Cancel It',
+                denyButtonText: 'No, View Other Exams'
             }).then((result) => {
-                if (result.isConfirmed) {
+                if(result.isConfirmed) 
+                {
                     $('#exam-form').submit();
+                }
+                else if(result.isDenied)
+                {
+                    window.location.href = '/public-exams';
                 }
                 else
                 {
-                    // alert('cancncelled');
-                    window.location.href = '/public-exams';
+                    // alert('cancncelled'); 
+                    window.location.href = '/public-exams';                   
                 }
             });
 
@@ -194,6 +229,29 @@
             // Initial log
             logAttemptedCount();
         });
+    </script>
+
+    <script>
+
+        $(".MCQ-List").owlCarousel("destroy"); // Destroy existing instance
+        var carousel = $(".MCQ-List").owlCarousel({
+            items: 1,
+            smartSpeed: 600,
+            nav: false,
+            dots: true,
+            loop: false,
+            autoHeight: true,
+        });
+
+        // Custom Navigation
+        $(".owl-nav .owl-prev").click(function () {
+            carousel.trigger("prev.owl.carousel");
+        });
+
+        $(".owl-nav .owl-next").click(function () {
+            carousel.trigger('next.owl.carousel');                    
+        });
+        
     </script>
 
 @endsection

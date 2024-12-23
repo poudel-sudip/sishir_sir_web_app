@@ -298,6 +298,17 @@ class FrontController extends Controller
         ->values()
         ->toArray();
 
+        $free_exam_updates =  $data['exams']
+        ->map(function($b){
+            return (object)[
+                'title' => $b->name,
+                'created_at' => $b->created_at,
+                'link' => '/public-exams/'.$b->id,
+            ];
+        })
+        ->values()
+        ->toArray();
+
         $pdf_bank_updates = PDFBank::where('status','=','Active')
         ->orderByDesc('id')
         ->take(6)        
@@ -333,6 +344,7 @@ class FrontController extends Controller
         $data['updates'] = array_merge($data['updates'], $menu_items);
         $data['updates'] = array_merge($data['updates'], $menu_sub_items);
         $data['updates'] = array_merge($data['updates'], $library_materials);
+        $data['updates'] = array_merge($data['updates'], $free_exam_updates);
         // $data['updates'] = array_merge($data['updates'], $vaccancy_updates);
 
         usort($data['updates'], function($a, $b) {return strcmp($b->created_at,$a->created_at);});

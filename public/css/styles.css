@@ -2940,6 +2940,8 @@ p {
 
 .MCQ-exam {
     width: 100%;
+    height:auto !important; 
+    border:none;
 }
 
 .MCQ-exam .owl-nav {
@@ -3000,19 +3002,19 @@ p {
         /* grid-gap: 10px; */
         overflow-y: auto;
         overflow-x: hidden;
-        height: 314px;
+        /* height: 314px; */
         border-bottom: 1px solid rgb(83, 83, 83);
     }
     .MCQ-exam .owl-item {
-        border: 2px solid #1375b9;
-        height: 375px;
+        /* border: 2px solid #1375b9; */
+        /* height: 375px; */
         /* overflow-y: scroll;
         overflow-x: hidden; */
     }
     .MCQ-exam .mcq-question {
         overflow-y: auto;
         overflow-x: hidden;
-        height: 350px;
+        /* height: 350px; */
         /* border-right: 1px solid rgb(83, 83, 83); */
     }
     .MCQ-exam .owl-nav {
@@ -3125,11 +3127,18 @@ p {
 
 .mcq-question {
     /* max-height: 300px; */
-    overflow: hidden;
+    overflow:hidden; 
+    border:none; 
+    height:auto;
 }
 
 .mcq-question p img {
     overflow-y: scroll;
+}
+.mcq-check-option {
+    height: auto; 
+    border:none; 
+    font-size:18px;
 }
 
 .mcq-check-option .mcq-qstn-row {
@@ -3138,6 +3147,9 @@ p {
     border-bottom: 1px solid #bfbfbf;
     padding: 10px 10px 5px;
     /* margin-bottom: 10px; */
+}
+.mcq-check-option .mcq-qstn-row:last-child{
+    border: none;
 }
 
 .mcq-check-option .mcq-option {
@@ -3165,9 +3177,20 @@ p {
     /* border-bottom: 1px solid #d8d8d8; */
     background: #e7f3e3;
     padding: 10px;
-    margin-top: 1rem;
-    margin-bottom: 15px;
+    height:auto; 
+    border:2px solid #1375b9;
+    /* margin-top: 1rem; */
+    /* margin-bottom: 15px; */
     /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+}
+.mcq-question-list .question-separator {
+    background:#1375b9; 
+    height:3px; 
+    opacity:1;
+}
+
+.mcq-question-list .question-separator:last-child{
+    display: none;
 }
 
 .mcq-question-list h6 p audio,

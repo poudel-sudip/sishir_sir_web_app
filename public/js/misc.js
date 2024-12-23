@@ -118,6 +118,24 @@ $('.eb-seller-carousel').owlCarousel({
   }
 });
 
+// mcq slider
+// $('.MCQ-List').owlCarousel({
+//   smartSpeed: 600,
+//   // nav: true,
+//   loop: false,
+//   // navText: ['<span><i class="fa fa-chevron-left"></i> Previous Page </span>', '<span>Next Page <i class="fa fa-chevron-right"></i></span>'],
+//   responsive: {
+//       0: {
+//           items: 1
+//       },
+//       600: {
+//           items: 1
+//       },
+//       1000: {
+//           items: 1
+//       }
+//   }
+// });
 
 var back_to_top_btn = $('#back_to_top');
 

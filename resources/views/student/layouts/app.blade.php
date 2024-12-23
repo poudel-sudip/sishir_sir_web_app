@@ -178,6 +178,14 @@
             </li>
 
             <li class="nav-item">
+              <a class="nav-link" href="/blogs"><i class="fas fa-blog text-primary"></i>Blogs</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/books"><i class="fas fa-swatchbook text-info"></i>Books</a>
+          </li>
+
+            <li class="nav-item">
               <a class="nav-link" href="/free-videos"><i class="fas fa-video text-pink"></i>Videos</a>
             </li>
 
@@ -247,5 +255,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+@yield('page-footer-content')
+
 </body>
 </html>

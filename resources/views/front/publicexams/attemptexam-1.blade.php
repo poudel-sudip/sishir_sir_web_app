@@ -1,14 +1,6 @@
 @extends('front.layouts.app')
 @section('page_title', 'Attempt: '.($exam->name))
 @section('content')
-
-    <style>
-        .MCQ-exam .owl-item {
-            height: auto;
-        }
-
-    </style>
-
     <div class="container-fluid px-md-5">
         <div class="public-exam-section mt-3">
         <div class="row">
@@ -35,54 +27,55 @@
                     <div class="public-question-body">
                         <form action="/public-exams/{{$openexam->id}}/save" method="POST" id="exam-form">
                             @csrf
-                            @php
-                                $pages = $exam->questions->chunk(10); // Split into pages
-                                $key = -1;
-                            @endphp
+                            <div class="owl-carousel MCQ-exam">
+                                @php($key=-1)
+                                @foreach($exam->questions as $key=>$ques)
+                                <div class="mcq-question-list">
+                                    <div class="mcq-question" style="overflow: hidden; border:none;">
+                                        <input type="hidden" name="question-{{$key+1}}" value="{{$ques->id}}">
+                                        <input type="hidden" name="ans-{{$key+1}}" value="">
+                                        <h6 class="mt-3"> {{$key+1}}. {!!$ques->name!!} <small class=" text-secondary"> ({{$exam->marks_per_question}} Marks) </small> </h6>
 
-                            <div class="owl-carousel MCQ-exam" style="height:auto !important; border:1px solid #1375b9;">
-                                @foreach($pages as $pageIndex => $questions)
-                                    <div class="mcq-question-list page-{{ $pageIndex + 1 }}" style="height:auto;">
-                                        @foreach($questions as $key => $ques)                                        
-                                            <div class="mcq-question my-2" style="overflow:hidden; border:none; height:auto;">
-                                                <input type="hidden" name="question-{{$key+1}}" value="{{$ques->id}}">
-                                                <input type="hidden" name="ans-{{$key+1}}" value="">
-                                                <h6 class="mt-3" style="font-size:22px;">
-                                                    {{$key+1}}. {!!$ques->name!!}
-                                                    <small class="text-secondary">({{$exam->marks_per_question}} Marks)</small>
-                                                </h6>
-
-                                                <div class="mcq-check-option mt-3" style="height: auto; border:none;font-size:18px;">
-                                                    <div class="mcq-qstn-row">
-                                                        <input type="radio" name="ans-{{$key+1}}" value="A" id="ans-{{$key+1}}-1" />
-                                                        <span class="mcq-option">a.</span>
-                                                        <label for="ans-{{$key+1}}-1"> {!! $ques->opt_a !!} </label>
-                                                    </div>
-                                                    <div class="mcq-qstn-row">
-                                                        <input type="radio" name="ans-{{$key+1}}" value="B" id="ans-{{$key+1}}-2" />
-                                                        <span class="mcq-option">b.</span>
-                                                        <label for="ans-{{$key+1}}-2"> {!!$ques->opt_b!!} </label>
-                                                    </div>
-                                                    <div class="mcq-qstn-row">
-                                                        <input type="radio" name="ans-{{$key+1}}" value="C" id="ans-{{$key+1}}-3" />
-                                                        <span class="mcq-option">c.</span>
-                                                        <label for="ans-{{$key+1}}-3"> {!!$ques->opt_c!!} </label>
-                                                    </div>
-                                                    <div class="mcq-qstn-row" style="border: none;">
-                                                        <input type="radio" name="ans-{{$key+1}}" value="D" id="ans-{{$key+1}}-4" />
-                                                        <span class="mcq-option">d.</span>
-                                                        <label for="ans-{{$key+1}}-4"> {!!$ques->opt_d!!} </label>
-                                                    </div>
-                                                </div>
+                                        <div class="mcq-check-option mt-3">
+                                            <div class="mcq-qstn-row">
+                                            <input type="radio" name="ans-{{$key+1}}" value="A" id="ans-{{$key+1}}-1" /> <span class="mcq-option">a.</span><label for="ans-{{$key+1}}-1"> {!! $ques->opt_a !!} </label>
                                             </div>
-                                            <hr style="background:#1375b9; height:3px; opacity:1;">
-                                        
-                                        @endforeach
-                                       
+                                            <div class="mcq-qstn-row">
+                                                <input type="radio" name="ans-{{$key+1}}" value="B" id="ans-{{$key+1}}-2" /> <span class="mcq-option">b.</span><label for="ans-{{$key+1}}-2"> {!!$ques->opt_b!!} </label>
+                                            </div>
+                                            <div class="mcq-qstn-row">
+                                                <input type="radio" name="ans-{{$key+1}}" value="C" id="ans-{{$key+1}}-3" /> <span class="mcq-option">c.</span><label for="ans-{{$key+1}}-3"> {!!$ques->opt_c!!} </label>
+                                            </div>
+                                            <div class="mcq-qstn-row">
+                                                <input type="radio" name="ans-{{$key+1}}" value="D" id="ans-{{$key+1}}-4" /> <span class="mcq-option">d.</span><label for="ans-{{$key+1}}-4"> {!!$ques->opt_d!!} </label>
+                                            </div>
+                                        </div>
                                     </div>
+                                    
+
+                                    {{-- <div class="col-md-7 mcq-question">
+                                        <input type="hidden" name="question-{{$key+1}}" value="{{$ques->id}}">
+                                        <input type="hidden" name="ans-{{$key+1}}" value="">
+                                        <h6 > {{$key+1}}. {!!$ques->name!!}</h6>
+                                    </div>
+                                    <div class="mcq-check-option col-md-5">
+                                        <div class="mcq-qstn-row">
+                                        <input type="radio" name="ans-{{$key+1}}" value="A" id="ans-{{$key+1}}-1" /> <span class="mcq-option">a.</span><label for="ans-{{$key+1}}-1"> {!! $ques->opt_a !!} </label>
+                                        </div>
+                                        <div class="mcq-qstn-row">
+                                            <input type="radio" name="ans-{{$key+1}}" value="B" id="ans-{{$key+1}}-2" /> <span class="mcq-option">b.</span><label for="ans-{{$key+1}}-2"> {!!$ques->opt_b!!} </label>
+                                        </div>
+                                        <div class="mcq-qstn-row">
+                                            <input type="radio" name="ans-{{$key+1}}" value="C" id="ans-{{$key+1}}-3" /> <span class="mcq-option">c.</span><label for="ans-{{$key+1}}-3"> {!!$ques->opt_c!!} </label>
+                                        </div>
+                                        <div class="mcq-qstn-row">
+                                            <input type="radio" name="ans-{{$key+1}}" value="D" id="ans-{{$key+1}}-4" /> <span class="mcq-option">d.</span><label for="ans-{{$key+1}}-4"> {!!$ques->opt_d!!} </label>
+                                        </div>
+                                    </div> --}}
+
+                                </div>
                                 @endforeach
                             </div>
-                            
                             <div class="text-center">
                                 <input type="hidden" name="index" value="<?php echo $key+1 ?>">
                                 <input type="hidden" name="exam_id" value="{{$openexam->id}}">

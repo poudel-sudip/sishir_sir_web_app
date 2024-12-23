@@ -274,24 +274,24 @@
                 }
             });
 
-            // mcq slider
-            $('.MCQ-exam').owlCarousel({
-                smartSpeed: 600,
-                nav: true,
-                loop: false,
-                navText: ['<span><i class="fa fa-chevron-left"></i> Previous</span>', '<span>Next <i class="fa fa-chevron-right"></i></span>'],
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 1
-                    },
-                    1000: {
-                        items: 1
-                    }
-                }
-            });
+            // // mcq slider
+            // $('.MCQ-exam').owlCarousel({
+            //     smartSpeed: 600,
+            //     nav: true,
+            //     loop: false,
+            //     navText: ['<span><i class="fa fa-chevron-left"></i> Previous</span>', '<span>Next <i class="fa fa-chevron-right"></i></span>'],
+            //     responsive: {
+            //         0: {
+            //             items: 1
+            //         },
+            //         600: {
+            //             items: 1
+            //         },
+            //         1000: {
+            //             items: 1
+            //         }
+            //     }
+            // });
 
             // chapter image slide
             $('.chapter-file-carousel').owlCarousel({
