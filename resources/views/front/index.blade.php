@@ -573,7 +573,7 @@
         <div class="container-fluid px-md-5 eb-seller my-5">
             <div class="row">
                 <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3">My Books</h2>
+                    <h2 class="home-section-heading mb-3">Books</h2>
                 </div>
             </div>
             <div class="row mt-4">

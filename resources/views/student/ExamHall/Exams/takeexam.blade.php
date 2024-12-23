@@ -48,7 +48,7 @@
                                             <div class="mcq-question my-2" style=" ">
                                                 <input type="hidden" name="question-{{$key+1}}" value="{{$ques->id}}">
                                                 <input type="hidden" name="ans-{{$key+1}}" value="">
-                                                <h6 class="mt-3" style="font-size:20px;">
+                                                <h6 class="mt-3" style="font-size:20px; text-align:justify;">
                                                     {{$key+1}}. {!!$ques->name!!}
                                                     <small class="text-secondary">({{$exam->marks_per_question}} Marks)</small>
                                                 </h6>
