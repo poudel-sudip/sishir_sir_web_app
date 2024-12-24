@@ -22,6 +22,24 @@
                     <div class="card-body">
                         <form method="POST" action="{{ ('/moderator/exam-hall') }}" enctype="multipart/form-data" class="forms-sample">
                             @csrf
+
+                            <div class="form-group row">
+                                <label for="exam_group" class="col-md-4 col-form-label">{{ __('Exam Set Group') }}</label>
+
+                                <div class="col-md-8">
+                                    <select id="exam_group" class="form-control @error('exam_group') is-invalid @enderror" name="exam_group" value="{{ old('exam_group') }}" >
+                                        <option value="">Select a Exam Group</option>
+                                        @foreach($groups as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('exam_group')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
                             
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label">{{ __('Exam Set Name') }}</label>

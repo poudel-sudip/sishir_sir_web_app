@@ -13,6 +13,7 @@ use App\Models\ExamHall\ExamHallCQC;
 use App\Models\Exams\Exam;
 use App\Models\Exams\ExamCategory;
 use App\Models\User;
+use App\Models\Categories as ExamGroup;
 
 class ExamHallController extends Controller
 {
@@ -31,25 +32,28 @@ class ExamHallController extends Controller
 
     public function create()
     {
-        return view('moderator.examhall.category.create');
+        $data['groups'] = ExamGroup::where('type','=','exam_hall')->where('status','=','Active')->get();
+        return view('moderator.examhall.category.create',$data);
     }
 
     public function store(Request $request)
     {
         // dd($request->all());
         $request->validate([
+            "exam_group" => "nullable|numeric",
             'title'=>'string|required|min:5',
             'price'=>'required|numeric',
             'discount'=>'required|numeric',
             'description'=>'required|string',
             'status'=>'required|string|min:1',
             'image' => 'required|image',
-            'search_tags' => 'nullable|string',
+            'search_tags' => 'nullable|string',            
         ]);
 
         $image = request('image')->store('uploads','public');
 
         ExamHallCategories::create([
+            'group_id'=>$request->exam_group ?? null,
             'user_id' => auth()->user()->id,
             'title'=>$request->title,
             'price'=>$request->price,
@@ -65,6 +69,7 @@ class ExamHallController extends Controller
 
     public function edit(ExamHallCategories $category)
     {
+        $data['groups'] = ExamGroup::where('type','=','exam_hall')->where('status','=','Active')->get();
         $data['category'] = $category;
         return view('moderator.examhall.category.edit',$data);
     }
@@ -73,6 +78,7 @@ class ExamHallController extends Controller
     {
         // dd($category,$request->all());
         $request->validate([
+            "exam_group" => "nullable|numeric",
             "categoryID" => "required|numeric",
             "title" => "required|string|min:5",
             "price" => "required|numeric",
@@ -91,6 +97,7 @@ class ExamHallController extends Controller
         }
 
         $category->update([
+            'group_id'=>$request->exam_group ?? null,
             'title'=>$request->title,
             'price'=>$request->price,
             'discount'=>$request->discount ?? 0,

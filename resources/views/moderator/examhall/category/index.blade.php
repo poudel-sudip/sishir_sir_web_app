@@ -29,6 +29,7 @@
                                 <thead>
                                 <tr>
                                     <th>SN</th>
+                                    <th class="text-wrap">Exam Group</th>
                                     <th class="text-wrap">Exam Set Title</th>
                                     <th>Exams Count</th>
                                     <th>Price (Rs)</th>
@@ -46,6 +47,7 @@
                                 @foreach($categories as $cat)
                                     <tr>
                                         <td>{{$i}}</td>
+                                        <td class="text-wrap">{{$cat->examGroup->name ?? ''}}</td>
                                         <td class="text-wrap">{{$cat->title}}</td>
                                         <td> <a href="/moderator/exam-hall/{{$cat->id}}/exams">Count({{$cat->category_exams->count()}})</a> </td>
                                         <td>{{$cat->price}}</td>

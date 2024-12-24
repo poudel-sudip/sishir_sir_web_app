@@ -38,6 +38,25 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="exam_group" class="col-md-4 col-form-label">{{ __('Exam Set Group') }}</label>
+
+                                <div class="col-md-8">
+                                    <select id="exam_group" class="form-control @error('exam_group') is-invalid @enderror" name="exam_group" value="{{ old('exam_group') ?? $category->examGroup->id ?? '' }}" >
+                                        <option value="{{$category->examGroup->id ?? ''}}">{{$category->examGroup->name ?? ''}}</option>
+                                        <option value="">----------------</option>
+                                        @foreach($groups as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('exam_group')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label">{{ __('Exam Set Name') }}</label>
 
                                 <div class="col-md-8">
