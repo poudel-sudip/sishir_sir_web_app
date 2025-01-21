@@ -70,8 +70,8 @@ class ExamController extends Controller
     public function examIndex()
     {
         $user = auth()->user();
-        // $data['exams'] = Exam::where('user_id','=',$user->id)->get(['id','category_id','name','exam_time','status']);
-        $data['exams'] = Exam::get(['id','user_id','category_id','name','exam_time','status']);
+        $data['exams'] = Exam::where('user_id','=',$user->id)->get(['id','user_id','category_id','name','exam_time','status']);
+        // $data['exams'] = Exam::get(['id','user_id','category_id','name','exam_time','status']);
         return view('moderator.exams.exam.index',$data);
     }
 

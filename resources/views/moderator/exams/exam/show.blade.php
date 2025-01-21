@@ -71,6 +71,7 @@
                             </div>
                         </div>
 
+                        @if($exam->user_id == auth()->user()->id)
                         <div class="course-row">
                             <div>Solution PDF: </div>
                             <div>
@@ -79,6 +80,7 @@
                                 @endif
                             </div>
                         </div>
+                        @endif
                         
                     </div>
                 </div>

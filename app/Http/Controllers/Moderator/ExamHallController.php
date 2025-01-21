@@ -25,8 +25,8 @@ class ExamHallController extends Controller
     public function index()
     {
         $user = auth()->user();
-        // $data['categories'] = ExamHallCategories::where('user_id','=',$user->id)->get();
-        $data['categories'] = ExamHallCategories::get();
+        $data['categories'] = ExamHallCategories::where('user_id','=',$user->id)->get();
+        // $data['categories'] = ExamHallCategories::get();
         return view('moderator.examhall.category.index',$data);
     }
 

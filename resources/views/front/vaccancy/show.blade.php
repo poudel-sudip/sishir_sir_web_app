@@ -40,6 +40,9 @@
                         @if(trim($vaccancy->pdf_file))
                         <a href="{{url('/storage/'.$vaccancy->pdf_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
                         @endif
+                        @if(trim($vaccancy->img_file))
+                        <a href="{{url('/storage/'.$vaccancy->img_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                        @endif
                     </div>
                     <div class="col-md-8">
                         <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>

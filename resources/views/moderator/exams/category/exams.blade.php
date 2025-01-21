@@ -44,7 +44,7 @@
                             <td>{{ $i }}</td>
                             <td>{{ $exam->name }}</td>
                             <td>{{ $exam->exam_time.':00' }} </td>
-                            <td> <a href="/moderator/exams/{{$exam->id}}/questions"> Count({{ $exam->questions->count() }}) </a></td>
+                            <td> <a @if($exam->user_id == auth()->user()->id) href="/moderator/exams/{{$exam->id}}/questions" @endif> Count({{ $exam->questions->count() }}) </a></td>
                             <td>
                               @if($exam->status == 'Inactive')
                               <span class="text-danger">{{$exam->status}}</span>
