@@ -15,10 +15,10 @@ class CreateAdvertisementsTable extends Migration
     {
         Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
-            $table->string('banner');
+            $table->string('banner')->nullable();
             $table->string('link')->nullable();
             $table->string('info')->nullable();
-            $table->string('position')->nullable()->default('after_landing_section');
+            $table->string('position')->nullable();
             $table->string('status')->nullable()->default('Active');
             $table->timestamps();
         });

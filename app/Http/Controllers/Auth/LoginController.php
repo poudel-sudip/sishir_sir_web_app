@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use App\Models\Advertisement;
 
 class LoginController extends Controller
 {
@@ -113,6 +114,8 @@ class LoginController extends Controller
     {
         return view('auth.login',[
             'user_count' => User::count(),
+            'top_ad' => Advertisement::where('status','=','Active')->where('position','=','auth_top_ad')->first(),
+            'bottom_ad' => Advertisement::where('status','=','Active')->where('position','=','auth_bottom_ad')->first(),
         ]);
     }
 

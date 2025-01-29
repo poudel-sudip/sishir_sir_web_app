@@ -11,6 +11,7 @@ use App\Models\ExamHall\ExamHallCategories;
 use App\Helpers\Helper;
 use App\Models\Categories;
 use App\Helpers\CustomPdfHelper;
+use App\Models\Advertisement;
 
 class PublicExamController extends Controller
 {
@@ -36,6 +37,7 @@ class PublicExamController extends Controller
         ->get(['id','name','slug','order','status'])
         ->values();
 
+        $data['sidebar_ad'] = Advertisement::where('status','Active')->where('position','page_sidebar_ad')->first();
 
         // dd($data);
         return view('front.publicexams.examslist',$data);

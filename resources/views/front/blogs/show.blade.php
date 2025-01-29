@@ -108,6 +108,12 @@
                         </div>
                         @endforeach
                     </div>
+
+                    @if($sidebar_ad)
+                        <div class="mt-2 text-center">
+                            <img src="/storage/{{$sidebar_ad->banner}}" onerror="this.src='/images/ads/default-200X300.png'" alt="" class="img img-fluid" style="max-height: 300px;">
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

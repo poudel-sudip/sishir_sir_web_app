@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-10">           
             <div class="auth-container auth-register">
                 <div class="user-welcome text-center">
                     <div class="mb-4 justify-content-center">
@@ -162,6 +162,12 @@
                 </div>
             </div>
         </div>
+        
+        @if(isset($bottom_ad) && $bottom_ad)
+            <div class="mt-4 col-12 text-center">
+                <img src="/storage/{{$bottom_ad->banner}}" onerror="this.src='/images/ads/default-1000X100.png'" alt="" class="img img-fluid" style="max-height: 100px;">
+            </div>
+        @endif
     </div>
 </div>
 

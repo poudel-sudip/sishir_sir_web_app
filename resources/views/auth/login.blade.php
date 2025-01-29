@@ -2,9 +2,15 @@
 @section('page_title','Login')
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center">        
         <div class="col-md-8">
-            <div class="auth-container">
+            @if(isset($top_ad) && $top_ad)
+                <div class="text-center">
+                    <img src="/storage/{{$top_ad->banner}}" onerror="this.src='/images/ads/default-750X50.png'" alt="" class="img img-fluid" style="max-height: 50px;">
+                </div>
+            @endif
+
+            <div class="auth-container mt-2">                
                 <div class="user-welcome text-center">
                     <div class="mb-4 justify-content-center">
                         <a href="/"><img class="img-1" src="{{ asset('images/logo-w.png') }}" alt=""></a>
@@ -88,6 +94,12 @@
                 </div>
             </div>
         </div>
+
+        @if(isset($bottom_ad) && $bottom_ad)
+            <div class="mt-4 col-12 text-center">
+                <img src="/storage/{{$bottom_ad->banner}}" onerror="this.src='/images/ads/default-1000X100.png'" alt="" class="img img-fluid" style="max-height: 100px;">
+            </div>
+        @endif
     </div>
 </div>
 @endsection

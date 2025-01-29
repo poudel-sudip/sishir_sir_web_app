@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Provience\Provience;
 use App\Models\User;
+use App\Models\Advertisement;
 
 class RegisterController extends Controller
 {
@@ -86,6 +87,8 @@ class RegisterController extends Controller
         return view('auth.register',[
             'proviences' => Provience::all()->sortBy('name'),
             'user_count' => User::count(),
+            'top_ad' => Advertisement::where('status','=','Active')->where('position','=','auth_top_ad')->first(),
+            'bottom_ad' => Advertisement::where('status','=','Active')->where('position','=','auth_bottom_ad')->first(),
         ]);
     }
 

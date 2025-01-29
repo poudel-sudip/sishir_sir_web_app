@@ -28,9 +28,23 @@
                                 <label for="info" class="col-md-4 col-form-label">{{ __('Banner Caption') }}</label>
 
                                 <div class="col-md-8">
-                                    <input id="info" name="info" type="text" class="form-control @error('info') is-invalid @enderror" value="{{ old('info') ?? $ad->info }}" autocomplete="info" autofocus>
+                                    <input id="info" name="info" type="text" class="form-control @error('info') is-invalid @enderror" value="{{ old('info') ?? $ad->info }}" autocomplete="info" readonly>
 
                                     @error('info')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="position" class="col-md-4 col-form-label">{{ __('Banner Position') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="position" name="position" type="text" class="form-control @error('position') is-invalid @enderror" value="{{ old('position') ?? $ad->position }}" autocomplete="position" readonly>
+
+                                    @error('position')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -55,7 +69,7 @@
                                 
                             </div>
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="position" class="col-md-4 col-form-label">{{ __('Banner Position') }}</label>
 
                                 <div class="col-md-8">
@@ -68,7 +82,6 @@
                                         <option value="after_blogs">after_blogs</option>
                                         <option value="after_books">after_books</option>
                                         <option value="after_videos">after_videos</option>
-                                        {{-- <option value="after_testimonial">after_testimonial</option> --}}
                                     </select>
                                     @error('position')
                                     <span class="invalid-feedback" role="alert">
@@ -76,7 +89,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group row">
                                 <label for="status" class="col-md-4 col-form-label">{{ __('Banner Status') }}</label>

@@ -1,4 +1,14 @@
 
+@php($content_ad = App\Models\Advertisement::where(['status'=>'Active','position'=>'page_content_ad'])->first())
+@if ($content_ad)
+<section class="my-3 text-center">
+  <div class="container-fluid">
+    <img src="/storage/{{$content_ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="" class="img img-fluid" style="max-height: 100px;">
+  </div>
+</section>  
+@endif
+
+
 @php($important_footer_links = App\Models\Categories::where(['status'=>'Active','type'=>'imp_link'])->whereHas('imp_links')->get())
 @if($important_footer_links->count())
 <section class="footer-imp-link mt-5 mb-1">

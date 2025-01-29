@@ -137,17 +137,11 @@
         
     </section> --}}
 
-    @if($ads->where('position','=','after_landing_section')->count())
+    @if($ad = $ads->where('position','=','home_below_landing_ad')->first())
         <section class="home-banner">
-            <div class="container-fluid px-md-5">
-                <div class="row">
-                    @foreach ($ads->where('position','=','after_landing_section')->values() as $ad)
-                    <div class="col-md-12 my-2 text-center">
-                        <img class="img img-fluid" src="/storage/{{$ad->banner}}" alt="" style="max-height:350px;">
-                        <div>{{$ad->info}}</div>
-                    </div>
-                    @endforeach
-                </div>
+            <div class="container-fluid px-md-5 my-1 text-center">
+                <img class="img img-fluid" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="" style="max-height:100px;">
+                {{-- <div>{{$ad->info}}</div> --}}
             </div>
         </section>
     @endif
@@ -413,6 +407,16 @@
         </section>
     @endif
 
+    @if($ad = $ads->where('position','=','home_below_mock_test_ad')->first())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5 my-1 text-center">
+                <img class="img img-fluid" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="" style="max-height:100px;">
+                {{-- <div>{{$ad->info}}</div> --}}
+            </div>
+        </section>
+    @endif
+
+    {{-- 
     @if($ads->where('position','=','after_mock_test')->count())
         <section class="home-banner">
             <div class="container-fluid px-md-5">
@@ -426,7 +430,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
 
 
     @if(count($pdf_bank_categories))
@@ -476,6 +480,15 @@
         </section>
     @endif
 
+    @if($ad = $ads->where('position','=','home_below_pdf_bank_ad')->first())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5 my-1 text-center">
+                <img class="img img-fluid" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="" style="max-height:100px;">
+                {{-- <div>{{$ad->info}}</div> --}}
+            </div>
+        </section>
+    @endif
+
     <section class="home-ebook mt-3 mb-5">
         <div class="container-fluid px-md-5">
             <div class="row mb-3">
@@ -494,7 +507,16 @@
         </div>
     </section>
 
-    @if($ads->where('position','=','after_library')->count())
+    @if($ad = $ads->where('position','=','home_below_library_ad')->first())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5 my-1 text-center">
+                <img class="img img-fluid" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="" style="max-height:100px;">
+                {{-- <div>{{$ad->info}}</div> --}}
+            </div>
+        </section>
+    @endif
+
+    {{-- @if($ads->where('position','=','after_library')->count())
         <section class="home-banner">
             <div class="container-fluid px-md-5">
                 <div class="row">
@@ -507,7 +529,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
 
     <section class="home-blog mt-3 mb-5">
         <div class="container-fluid px-md-5">
@@ -554,7 +576,16 @@
         </div>
     </section>
 
-    @if($ads->where('position','=','after_blogs')->count())
+    @if($ad = $ads->where('position','=','home_below_blog_ad')->first())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5 my-1 text-center">
+                <img class="img img-fluid" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="" style="max-height:100px;">
+                {{-- <div>{{$ad->info}}</div> --}}
+            </div>
+        </section>
+    @endif
+
+    {{-- @if($ads->where('position','=','after_blogs')->count())
         <section class="home-banner">
             <div class="container-fluid px-md-5">
                 <div class="row">
@@ -567,7 +598,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
 
     @if(count($books))
         <div class="container-fluid px-md-5 eb-seller my-5">
@@ -604,7 +635,16 @@
 
     @endif
 
-    @if($ads->where('position','=','after_books')->count())
+    @if($ad = $ads->where('position','=','home_below_books_ad')->first())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5 my-1 text-center">
+                <img class="img img-fluid" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="" style="max-height:100px;">
+                {{-- <div>{{$ad->info}}</div> --}}
+            </div>
+        </section>
+    @endif
+
+    {{-- @if($ads->where('position','=','after_books')->count())
         <section class="home-banner">
             <div class="container-fluid px-md-5">
                 <div class="row">
@@ -617,7 +657,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
 
     @if(count($videos))
         <section class="course-section">
@@ -658,7 +698,16 @@
         </section>
     @endif
 
-    @if($ads->where('position','=','after_videos')->count())
+    @if($ad = $ads->where('position','=','home_below_video_ad')->first())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5 my-1 text-center">
+                <img class="img img-fluid" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="" style="max-height:100px;">
+                {{-- <div>{{$ad->info}}</div> --}}
+            </div>
+        </section>
+    @endif
+
+    {{-- @if($ads->where('position','=','after_videos')->count())
         <section class="home-banner">
             <div class="container-fluid px-md-5">
                 <div class="row">
@@ -671,7 +720,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
 
 
     @if(count($img_gallery))

@@ -22,11 +22,13 @@ class ADController extends Controller
 
     public function create()
     {
+        abort(403,'Not Allowed');
         return view('admin.advertisement.create');
     }
 
     public function store(Request $request)
     {
+        abort(403,'Not Allowed');
         // dd($request->all());
         $request->validate([
             'info'=>'string|nullable|max:250',
@@ -70,14 +72,12 @@ class ADController extends Controller
         $img = $request->old_banner;
         if(isset($request->banner))
         {
-            $img=$request->banner->store('uploads','public');
+            $img=$request->banner->store('uploads/advertisement','public');
 
         }
                
         $ad->update([
             'banner' => $img,
-            'info' => $request->info,
-            'position' => $request->position,
             'status' => $request->status,
         ]);
 
@@ -86,6 +86,7 @@ class ADController extends Controller
 
     public function destroy(Advertisement $ad)
     {
+        abort(403,'Not Allowed');
         $ad->delete();
         return redirect('/admin/advertisement');
     }

@@ -21,12 +21,12 @@
                   <div class="card-body">
                     <div class="custon-table-header">
                         <h4 class="card-title">Advertisement</h4>
-                        <div class="text-right">
+                        {{-- <div class="text-right">
                             <a href="{{ ('/admin/advertisement/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add AD </button></a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="table-responsive table-responsive-md">
-                      <table class="table table-bordered" id="advanced-desc-table">
+                      <table class="table table-bordered" id="advanced-asc-table">
                         <thead>
                           <tr>
                             <th>SN</th>
@@ -43,16 +43,16 @@
                           <tr>
                             <td width="50">{{$i}}</td>
                             <td class="text-wrap">{{$row->info}}</td>
-                            <td class="text-center"> <img src="/storage/{{$row->banner}}" alt="" style="height: 150px; width:auto;" class="img img-fluid img-responsive">  </td>
+                            <td class="text-center"> <img src="/storage/{{$row->banner}}" alt="" style="max-width:100%; width:auto; max-height:150px; height: auto; " class="">  </td>
                             <td class="text-wrap">{{$row->position}}</td>
                             <td width="50"><span class='text-{{$row->status == "Active" ? "success" : "danger"}}'>{{$row->status}}</span></td>
-                            <td class="classroom-btn" width="75">
+                            <td class="classroom-btn" width="50">
                               <a href="/admin/advertisement/{{$row->id}}/edit" class="btn btn-warning">Edit</a>
-                              <form id="delete-form-{{$row->id}}" action="/admin/advertisement/{{$row->id}}" method="POST" class="d-inline">
+                              {{-- <form id="delete-form-{{$row->id}}" action="/admin/advertisement/{{$row->id}}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="btn btn-danger">Delete</a>
-                              </form>
+                              </form> --}}
                             </td>
                           </tr>
                           @php($i++)

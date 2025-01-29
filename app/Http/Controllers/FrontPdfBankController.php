@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ebook\Ebook as PDFBank;
 use App\Models\Ebook\EbookCategory as PDFBankCategory;
 use App\Helpers\Helper;
+use App\Models\Advertisement;
 
 class FrontPdfBankController extends Controller
 {
@@ -21,6 +22,7 @@ class FrontPdfBankController extends Controller
         ->paginate(12);
 
         $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')->orderBy('order')->get();
+        $data['sidebar_ad'] = Advertisement::where('status','Active')->where('position','page_sidebar_ad')->first();
 
         return view('front.pdf_bank.index',$data);
     }
@@ -43,6 +45,7 @@ class FrontPdfBankController extends Controller
         ->paginate(12);
 
         $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')->orderByDesc('id')->get();
+        $data['sidebar_ad'] = Advertisement::where('status','Active')->where('position','page_sidebar_ad')->first();
 
         return view('front.pdf_bank.index',$data);
     }

@@ -8,6 +8,7 @@ use App\Models\Categories;
 use Illuminate\Http\Request;
 use function Symfony\Component\String\b;
 use App\Helpers\Helper;
+use App\Models\Advertisement;
 
 class BlogController extends Controller
 {
@@ -33,8 +34,9 @@ class BlogController extends Controller
         $pgtype = 'article';
         $counterData = Helper::pageCounterCounts($blog->title,$pgurl,$pgtype);
 
+        $sidebar_ad = Advertisement::where('status','Active')->where('position','page_sidebar_ad')->first();
         // dd($pgurl,$counterData);
-        return view('front.blogs.show',compact('blog', 'lateat_blogs','counterData'));
+        return view('front.blogs.show',compact('blog', 'lateat_blogs','counterData','sidebar_ad'));
     }
 
    public function addComments(Blog $blog,Request $request)
