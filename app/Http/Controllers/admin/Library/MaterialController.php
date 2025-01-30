@@ -158,4 +158,42 @@ class MaterialController extends Controller
         return redirect('/admin/library/'.$category->id.'/directories');
     }
 
+    public function importForm(LibraryCategory $category)
+    {
+        $data['category'] = $category;
+        $data['libraries'] = LibraryCategory::where('parent_id','=',null)
+        ->where('id','!=',$category->id)
+        ->orderBy('name')
+        ->get(['id','name','parent_id'])
+        ->groupBy(function ($item) {
+            return strtoupper(substr($item->name, 0, 1));
+        })->toJson();
+
+        $data['libraries'] = json_decode($data['libraries']);
+        // dd($data);
+        return view('admin.library.materials.import',$data);
+    }
+
+    public function importFile(LibraryCategory $category, Request $request)
+    {
+        // dd($category,$request->all());
+        $request->validate([
+            'library_group' => 'required|string',
+            'main_library' => 'required|numeric',
+            'sub_library' => 'nullable|numeric',
+            'pdf_files' => 'required|array',
+        ]);
+
+        $pdf_files = LibraryMaterial::find($request->pdf_files);
+        foreach ($pdf_files as $pdf) 
+        {
+            unset($pdf->id,$pdf->category_id,$pdf->slug,$pdf->created_at,$pdf->updated_at);
+            $pdf = $pdf->toArray();
+            $category->materials()->create($pdf);
+        }
+
+        return redirect('/admin/library/'.$category->id.'/materials');
+    }
+
+    
 }

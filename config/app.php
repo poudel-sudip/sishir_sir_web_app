@@ -163,7 +163,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
-        Jorenvh\Share\Providers\ShareServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -230,9 +229,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Share' => Jorenvh\Share\ShareFacade::class,
-        
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,        
         'Helper' =>  App\Helpers\Helper::class,
         'Image' => Intervention\Image\Facades\Image::class,
     ],

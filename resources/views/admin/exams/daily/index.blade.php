@@ -94,6 +94,7 @@
                     </div>
                     <div class="description small d-flex justify-content-between">
                       <a href="{{ asset('admin/files/questionupload.xlsx') }}" target="_blank">Download Bulk Question Upload Sample</a>
+                      <a href="/admin/daily-mcq-questions/download" target="_blank">Download All Daily Questions</a>
                     </div>
                   </div>
                 </div>

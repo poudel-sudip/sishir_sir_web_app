@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\DailyQuestionsImport;
+use App\Exports\Exams\DailyQuestionsExport;
 use App\Models\Exams\DailyMCQQuestion;
 use Intervention\Image\Facades\Image as QuestionImage;
+use Carbon\Carbon;
 
 class DailyQuestionController extends Controller
 {
@@ -18,7 +20,10 @@ class DailyQuestionController extends Controller
 
     public function index()
     {
-        $data['questions'] = DailyMCQQuestion::orderByDesc('id')->take(400)->get();
+        // $dfrom = Carbon::now()->subDays(30)->format('Y-m-d');
+        // dd($dfrom);
+        $data['questions'] = DailyMCQQuestion::orderByDesc('show_date')->take(400)->get();
+        // $data['questions'] = DailyMCQQuestion::where('show_date','>',$dfrom)->orderByDesc('id')->take(400)->get();
         return view('admin.exams.daily.index',$data);
     }
 
@@ -211,5 +216,11 @@ class DailyQuestionController extends Controller
         $data['question'] = $question;
         $data['comments'] = $question->comments()->orderByDesc('id')->get();
         return view('admin.exams.daily.comments',$data);
+    }
+
+    public function download(Request $request)
+    {
+        $filename = 'daily_questions.xlsx';
+        return Excel::download(new DailyQuestionsExport, $filename);
     }
 }

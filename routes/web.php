@@ -403,6 +403,8 @@ Route::delete('/admin/library/{category}','App\Http\Controllers\Admin\Library\Ca
 Route::get('/admin/library/{category}/materials','App\Http\Controllers\Admin\Library\MaterialController@index')->middleware('role:Admin');
 Route::get('/admin/library/{category}/materials/create','App\Http\Controllers\Admin\Library\MaterialController@create')->middleware('role:Admin');
 Route::post('/admin/library/{category}/materials','App\Http\Controllers\Admin\Library\MaterialController@store')->middleware('role:Admin');
+Route::get('/admin/library/{category}/materials/import','App\Http\Controllers\Admin\Library\MaterialController@importForm')->middleware('role:Admin');
+Route::patch('/admin/library/{category}/materials/import','App\Http\Controllers\Admin\Library\MaterialController@importFile')->middleware('role:Admin');
 Route::get('/admin/library/{category}/materials/{material}/edit','App\Http\Controllers\Admin\Library\MaterialController@edit')->middleware('role:Admin');
 Route::get('/admin/library/{category}/materials/{material}','App\Http\Controllers\Admin\Library\MaterialController@show')->middleware('role:Admin');
 Route::patch('/admin/library/{category}/materials/{material}','App\Http\Controllers\Admin\Library\MaterialController@update')->middleware('role:Admin');
@@ -476,7 +478,7 @@ Route::get('/admin/daily-mcq-questions','App\Http\Controllers\Admin\Exams\DailyQ
 Route::get('/admin/daily-mcq-questions/create','App\Http\Controllers\Admin\Exams\DailyQuestionController@create')->middleware('role:Admin');
 Route::get('/admin/daily-mcq-questions/upload','App\Http\Controllers\Admin\Exams\DailyQuestionController@upload')->middleware('role:Admin');
 Route::post('/admin/daily-mcq-questions/import','App\Http\Controllers\Admin\Exams\DailyQuestionController@import')->middleware('role:Admin');
-// Route::get('/admin/daily-mcq-questions/download','App\Http\Controllers\Admin\Exams\DailyQuestionController@download')->middleware('role:Admin');
+Route::get('/admin/daily-mcq-questions/download','App\Http\Controllers\Admin\Exams\DailyQuestionController@download')->middleware('role:Admin');
 Route::post('/admin/daily-mcq-questions','App\Http\Controllers\Admin\Exams\DailyQuestionController@store')->middleware('role:Admin');
 Route::get('/admin/daily-mcq-questions/{question}/edit','App\Http\Controllers\Admin\Exams\DailyQuestionController@edit')->middleware('role:Admin');
 
