@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Library\LibraryCategory;
 use App\Models\Library\LibraryMaterial;
+use Spatie\PdfToImage\Pdf as PdfToImage;
+use Imagick;
 
 class MaterialController extends Controller
 {
@@ -58,14 +60,25 @@ class MaterialController extends Controller
             ]);
             $data['download'] = $request->can_download;
             $data['filename'] = $request->file->getClientOriginalName();
-            $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
+            $data['fileurl'] = $request->file->storeAs('uploads/library/files',$data['filename'],'public');
         }
 
         if(isset($request->thumbnail))
         {
-            $data['thumbnail'] = $request->thumbnail->store('uploads','public');
+            $data['thumbnail'] = $request->thumbnail->store('uploads/library/thumbnails','public');
         }
 
+        if(!isset($data['thumbnail']) || !$data['thumbnail'] || !file_exists(public_path('/storage/'.$data['thumbnail'])))
+        {
+            $pdfPath = public_path('/storage/'.$data['fileurl']); 
+            $imagePath = '/uploads/library/thumbnails/pdf/'.date('Y-m-d').'-'.time().'.jpg';
+
+            if($this->pdfToImage($pdfPath, $imagePath))
+            {
+                $data['thumbnail'] = $imagePath;
+            }           
+        }
+        
         $category->materials()->create($data);
 
         // return redirect('/admin/library/'.$category->id.'/materials');
@@ -89,7 +102,8 @@ class MaterialController extends Controller
     }
 
     public function update(LibraryCategory $category, LibraryMaterial $material, Request $request)
-    {
+    {        
+        // dd($material,$request->all());
         $request->validate([
             'name' => 'string|required',
             // 'order' => 'numeric|required',
@@ -130,7 +144,7 @@ class MaterialController extends Controller
             elseif(isset($request->file))
             {
                 $data['filename'] = $request->file->getClientOriginalName();
-                $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
+                $data['fileurl'] = $request->file->storeAs('uploads/library/files',$data['filename'],'public');
             }
             else
             {
@@ -143,9 +157,20 @@ class MaterialController extends Controller
         $data['thumbnail'] = $request->old_thumbnail;
         if(isset($request->thumbnail))
         {
-            $data['thumbnail'] = $request->thumbnail->store('uploads','public');
+            $data['thumbnail'] = $request->thumbnail->store('uploads/library/thumbnails','public');
         }
 
+        if(!$data['thumbnail'] || !file_exists(public_path('/storage/'.$data['thumbnail'])))
+        {
+            $pdfPath = public_path('/storage/'.$data['fileurl']); 
+            $imagePath = '/uploads/library/thumbnails/pdf/'.date('Y-m-d').'-'.time().'.jpg';
+
+            if($this->pdfToImage($pdfPath, $imagePath))
+            {
+                $data['thumbnail'] = $imagePath;
+            }           
+        }
+        
         $material->update($data);
         // return redirect('/admin/library/'.$category->id.'/materials');
         return redirect('/admin/library/'.$category->id.'/directories');
@@ -195,5 +220,37 @@ class MaterialController extends Controller
         return redirect('/admin/library/'.$category->id.'/materials');
     }
 
+    private function pdfToImage($pdfPath, $imagePath)
+    {
+        if(file_exists($pdfPath))
+        {
+            try 
+            {
+                if(!file_exists(storage_path('app/public/uploads/library/thumbnails/pdf')))
+                {
+                    mkdir(storage_path('app/public/uploads/library/thumbnails/pdf'), 0777, true);
+                }
+                $pdf = new PdfToImage($pdfPath);
+                $pdf->setPage(1)
+                    ->setResolution(150) // Set quality (default: 300)
+                    ->saveImage(storage_path('app/public/'.$imagePath));
+                    
+                // Apply white background using Imagick
+                $imagick = new Imagick(storage_path('app/public/'.$imagePath));
+                $imagick->setImageBackgroundColor('#fff');
+                $imagick = $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+                $imagick->writeImage(storage_path('app/public/'.$imagePath));               
+                
+                return 1;
+                
+            } 
+            catch (\Throwable $th) {
+                return 0;
+                //throw $th;
+            }                                
+        } 
+
+        return 0;
+    }
     
 }
