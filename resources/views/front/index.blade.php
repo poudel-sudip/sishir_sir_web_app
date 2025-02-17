@@ -56,11 +56,11 @@
             <div class="row align-items-stretch flex-row-reverse">
                 
                 <div class="my-1 col-md-3 ">
-                    <div class="updates border border-primary border-2" style="height: 100%">
+                    <div class="updates border-primary border-2" style="height: 100%">
                         <div class="update-header">
                             <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fas fa-clock"></i> Updates </h5></div>
                         </div>
-                        <div class="update-body" style="max-height:375px; overflow-y:scroll">
+                        <div class="update-body" style="overflow-y:scroll">
                             <ul class="p-0">
                                 @forelse($updates as $row)                         
                                     <li><a href="{{$row->link}}"><i class="far fa-check-circle"></i>{{($row->title)}}</a></li>
@@ -73,22 +73,86 @@
                     
                 </div>
 
-                <div class="my-1 col-md-6 text-center">
-                    @if($today_question)
+                <div class="my-1 col-md-6">
+                    {{-- @if($today_question)
                         <div class="" >
                             <a href="/question-of-the-day/{{$today_question->show_date}}">
-                                <img src="{{$today_question->image}}" alt="{{$today_question->show_date}}"  style="max-height:400px;" class="img img-fluid border border-3 border-danger">                                   
+                                <img src="{{$today_question->image}}" alt="{{$today_question->show_date}}" class="img img-fluid border-3 q-of-day-img-home">                                   
                             </a>
                         </div>
-                    @endif
+                    @endif --}}
+                    <div class="q-of-day-home-page">
+                        @if(isset($today_question) && $today_question)
+                            <div class="bg-lgray" >
+                                <div class="bg-white">
+                                    <div class="text-center q-heading">
+                                        <h2 class="q-title pb-2">QUESTION OF THE DAY</h2>
+                                    </div>
+                                    
+                                    <div id="q_block" class="">
+                                        <div class="q-question">
+                                            Q. {!! $today_question->question !!}
+                                        </div>
+        
+                                        <div class="q-options-container">
+                                            <div class="q-option" data-answer="A" data-correct="{{$today_question->opt_correct}}">
+                                                <span class="q-option-marker">A.</span>
+                                                <div class="q-option-text">{!! $today_question->opt_a !!}</div>
+                                            </div>
+                                            <div class="q-option" data-answer="B" data-correct="{{$today_question->opt_correct}}">
+                                                <span class="q-option-marker">B.</span>
+                                                <div class="q-option-text">{!! $today_question->opt_b !!}</div>
+                                            </div>
+                                            <div class="q-option" data-answer="C" data-correct="{{$today_question->opt_correct}}">
+                                                <span class="q-option-marker">C.</span>
+                                                <div class="q-option-text">{!! $today_question->opt_c !!}</div>
+                                            </div>
+                                            <div class="q-option" data-answer="D" data-correct="{{$today_question->opt_correct}}">
+                                                <span class="q-option-marker">D.</span>
+                                                <div class="q-option-text">{!! $today_question->opt_d !!}</div>
+                                            </div>
+                                        </div> 
+                                    </div>
+
+                                    <div id="qs_block" class="px-3 text-start d-none">
+                                        <div class="mt-3 q-on-solution"> <strong> Q. {!! $today_question->question !!} </strong></div>
+                                        <div class="mt-2"><em>Ans:</em> <strong class="text-success bold"> {{$today_question->opt_correct}} </strong></div>
+                                        <div class="py-2">
+                                            <em>Explanation:</em>
+                                            <div>{!! $today_question->rationale !!}</div>
+                                        </div>
+                                    </div>                                
+                                </div>
+
+                                <div class="text-center mt-2 h-26 position-relative">
+                                    <a role="button" class="q-view-btn d-none" id="q-viewans-btn">View Solution</a>
+                                    <a role="button" class="q-view-btn d-none" id="q-gotit-btn">Got It !</a>
+
+                                    <a class="question-share-btn" href="/question-of-the-day/{{$today_question_date->show_date}}">
+                                        <i class="far fa-share-square pe-1"></i>Share                                 
+                                    </a>
+                                </div>
+                                
+                            </div>
+                        @endif
+
+                        @if($ad = $ads->where('position','=','home_below_landing_ad')->first())
+                            <section class="home-banner">
+                                <div class="container-fluid mb-2 text-center">
+                                    <img class="img w-100" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="">
+                                    {{-- <div>{{$ad->info}}</div> --}}
+                                </div>
+                            </section>
+                        @endif
+                    </div>
                 </div>
                 
-                <div class="my-1 col-md-3 ">
-                    <div class="updates border border-primary border-2" style="height: 100%">
+                <div class="my-1 col-md-3">
+                    <div class="updates border-primary border-2" style="height: 100%">
                         <div class="update-header">
                             <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fa-chart-bar"></i> Latest Vaccancies </h5></div>
                         </div>
-                        <div class="update-body" style="max-height:375px; overflow-y:scroll">
+                        <div class="update-body" style="overflow-y:scroll">
                             <ul class="p-0">
                                 @forelse($vaccancies as $row)                         
                                     <li><a href="{{$row->link}}"><i class="fa fa-pen-nib"></i>{{($row->title)}}  </a></li>
@@ -110,7 +174,7 @@
             <div class="row">
                 <div class="col-md-8">
                     @if($today_question)
-                        <div class="border border-2 border-danger" >
+                        <div class="border-2 border-danger" >
                             <a href="/question-of-the-day/{{$today_question->show_date}}">
                                 <img src="{{$today_question->image}}" alt="{{$today_question->show_date}}" width="100%" style="max-height:500px;" class="img img-fluid">                                   
                             </a>
@@ -118,7 +182,7 @@
                     @endif
                   
                 </div>
-                <div class="col-md-4 border border-primary border-2 rounded p-0" style=" ">
+                <div class="col-md-4 border-primary border-2 rounded p-0" style=" ">
                     <div class="homepage-side-update " style="box-shadow: none; height:auto; ">
                         <div class="update-header"><h5><i class="fas fa-clock"></i> UPDATES</h5></div>
                         <div class="update-body " style="height: 475px; overflow-y:scroll;">
@@ -136,15 +200,6 @@
         </div>
         
     </section> --}}
-
-    @if($ad = $ads->where('position','=','home_below_landing_ad')->first())
-        <section class="home-banner">
-            <div class="container-fluid px-md-5 my-1 text-center">
-                <img class="img img-fluid" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="" style="max-height:100px;">
-                {{-- <div>{{$ad->info}}</div> --}}
-            </div>
-        </section>
-    @endif
     
 
     @if(count($dynamic_forms))
@@ -870,6 +925,51 @@
         js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+@endsection
+
+@section('page-footer-content')
+
+    <script>
+        $(document).ready(function () {
+            $('.q-option').on('click', function () {
+                $('#q-viewans-btn').removeClass('d-none');
+
+                var myans = $(this).attr('data-answer');
+                var correct = $(this).attr('data-correct');
+
+                $('.q-option').css('background-color', '');
+
+                if (myans === correct) {
+                    $(this).css('background-color', '#91ed91');
+                } else {
+                    $(this).css('background-color', '#f07f7f'); 
+                    $('.q-option[data-answer="' + correct + '"]').css('background-color', '#91ed91'); 
+                }
+            });
+
+            $('#q-viewans-btn').on('click', function () {
+                $('.q-option').css('background-color', '');
+                $('#q-viewans-btn').addClass('d-none');
+                $('#q-gotit-btn').removeClass('d-none');
+                $('#q_block').addClass('d-none');
+                $('#qs_block').removeClass('d-none');
+
+                $('.q-title').html('SOLUTION');
+            });
+
+            $('#q-gotit-btn').on('click', function () {
+                $('.q-option').css('background-color', '');
+                $('#q-viewans-btn').addClass('d-none');
+                $('#q-gotit-btn').addClass('d-none');
+                $('#q_block').removeClass('d-none');
+                $('#qs_block').addClass('d-none');
+
+                $('.q-title').html('QUESTION OF THE DAY');
+            });
+        });
+
     </script>
 
 @endsection
