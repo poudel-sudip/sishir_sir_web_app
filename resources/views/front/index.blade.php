@@ -56,7 +56,7 @@
             <div class="row align-items-stretch flex-row-reverse">
                 
                 <div class="my-1 col-md-3 ">
-                    <div class="updates border-primary border-2" style="height: 100%">
+                    <div class="updates border border-primary border-2" style="height: 100%">
                         <div class="update-header">
                             <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fas fa-clock"></i> Updates </h5></div>
                         </div>
@@ -90,32 +90,32 @@
                                     </div>
                                     
                                     <div id="q_block" class="">
-                                        <div class="q-question">
+                                        <h4 class="q-question">
                                             Q. {!! $today_question->question !!}
-                                        </div>
+                                        </h4>
         
                                         <div class="q-options-container">
                                             <div class="q-option" data-answer="A" data-correct="{{$today_question->opt_correct}}">
                                                 <span class="q-option-marker">A.</span>
-                                                <div class="q-option-text">{!! $today_question->opt_a !!}</div>
+                                                <h5 class="q-option-text">{!! $today_question->opt_a !!}</h5>
                                             </div>
                                             <div class="q-option" data-answer="B" data-correct="{{$today_question->opt_correct}}">
                                                 <span class="q-option-marker">B.</span>
-                                                <div class="q-option-text">{!! $today_question->opt_b !!}</div>
+                                                <h5 class="q-option-text">{!! $today_question->opt_b !!}</h5>
                                             </div>
                                             <div class="q-option" data-answer="C" data-correct="{{$today_question->opt_correct}}">
                                                 <span class="q-option-marker">C.</span>
-                                                <div class="q-option-text">{!! $today_question->opt_c !!}</div>
+                                                <h5 class="q-option-text">{!! $today_question->opt_c !!}</h5>
                                             </div>
                                             <div class="q-option" data-answer="D" data-correct="{{$today_question->opt_correct}}">
                                                 <span class="q-option-marker">D.</span>
-                                                <div class="q-option-text">{!! $today_question->opt_d !!}</div>
+                                                <h5 class="q-option-text">{!! $today_question->opt_d !!}</h5>
                                             </div>
                                         </div> 
                                     </div>
 
                                     <div id="qs_block" class="px-3 text-start d-none">
-                                        <div class="mt-3 q-on-solution"> <strong> Q. {!! $today_question->question !!} </strong></div>
+                                        <h4 class="mt-3 q-on-solution"> <strong> Q. {!! $today_question->question !!} </strong></h4>
                                         <div class="mt-2"><em>Ans:</em> <strong class="text-success bold"> {{$today_question->opt_correct}} </strong></div>
                                         <div class="py-2">
                                             <em>Explanation:</em>
@@ -148,7 +148,7 @@
                 </div>
                 
                 <div class="my-1 col-md-3">
-                    <div class="updates border-primary border-2" style="height: 100%">
+                    <div class="updates border border-primary border-2" style="height: 100%">
                         <div class="update-header">
                             <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fa-chart-bar"></i> Latest Vaccancies </h5></div>
                         </div>
@@ -174,7 +174,7 @@
             <div class="row">
                 <div class="col-md-8">
                     @if($today_question)
-                        <div class="border-2 border-danger" >
+                        <div class="border border-2 border-danger" >
                             <a href="/question-of-the-day/{{$today_question->show_date}}">
                                 <img src="{{$today_question->image}}" alt="{{$today_question->show_date}}" width="100%" style="max-height:500px;" class="img img-fluid">                                   
                             </a>
@@ -182,7 +182,7 @@
                     @endif
                   
                 </div>
-                <div class="col-md-4 border-primary border-2 rounded p-0" style=" ">
+                <div class="col-md-4 border-primary border border-2 rounded p-0" style=" ">
                     <div class="homepage-side-update " style="box-shadow: none; height:auto; ">
                         <div class="update-header"><h5><i class="fas fa-clock"></i> UPDATES</h5></div>
                         <div class="update-body " style="height: 475px; overflow-y:scroll;">
@@ -389,7 +389,11 @@
     @if(count($examhall_categories))
         <section class="footer-imp-link mt-5 mb-5">
             <div class="container-fluid px-md-5">
-                <h4 class="m-4 text-center">Mock Tests</h4>
+                <div class="row">
+                    <div class="col-md-12 relative">
+                        <h2 class="home-section-heading">Mock Tests</h2>
+                    </div>
+                </div>
                 <nav>
                     <div class="nav nav-tabs justify-content-center align-items-center" id="nav-mock-test-tab" role="tablist">
                         @php($isFirstElement = true)
@@ -401,7 +405,7 @@
                         <button class="border nav-link" id="nav-mock-test-results-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-results" type="button" role="tab" aria-controls="nav-mock-test-results" aria-selected="true">Results</button>
                     </div>
                 </nav>
-                <div class="tab-content shadow border border-danger border-2 p-1" id="nav-mock-test-tabContent" style="border-top:0px !important;">
+                <div class="tab-content shadow border-danger border border-2 p-1" id="nav-mock-test-tabContent" style="border-top:0px !important;">
                     @php($isFirstElement = true)
                     @foreach($examhall_categories as $cat)
                         <div class="tab-pane fade  {{$isFirstElement ? 'active show' : ''}} " id="nav-mock-test-{{ $cat->id }}" role="tabpanel" aria-labelledby="nav-mock-test-{{ $cat->id }}-tab" tabindex="0">
@@ -409,7 +413,7 @@
                             <div class="row">
                                 @foreach ($cat->exam_sets as $row)
                                     <div class="col-sm-6 col-md-3 mb-3">
-                                        <div class="seller-item border border-primary rounded border-2">
+                                        <div class="seller-item border-primary rounded border border-2">
                                             <div class="seller-header text-center">
                                                 <a href="/exam-hall/premium/{{$row->id}}">
                                                     <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
@@ -430,7 +434,7 @@
                         <div class="row">
                             @foreach ($exams as $row)
                                 <div class="col-sm-6 col-md-3 mb-3">
-                                    <div class="seller-item border border-primary rounded border-2">
+                                    <div class="seller-item border-primary rounded border border-2">
                                         <div class="seller-header text-center">
                                             <a href="/public-exams/{{$row->id}}">
                                                 <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
@@ -448,13 +452,13 @@
                     <div class="tab-pane fade" id="nav-mock-test-results" role="tabpanel" aria-labelledby="nav-mock-test-results-tab" tabindex="0">
                         <div class="row">
                             <div class="col-12 m-5 text-center">
-                                <a href="/results" class="btn px-4" style="background:#1375b9; color:#fff;">View Exam Results...</a>
+                                <a href="/results" class="btn btn-sm px-4" style="background:#1375b9; color:#fff;">View Exam Results...</a>
                             </div>                       
                         </div>
                     </div>
                     
                     <div class="text-end">
-                        <a href="/public-exams" class="btn" style="background:#1375b9; color:#fff;">View All Exams...</a>
+                        <a href="/public-exams" class="btn btn-sm" style="background:#1375b9; color:#fff;">View All Exams...</a>
                     </div>
                 </div>
                 
@@ -491,7 +495,11 @@
     @if(count($pdf_bank_categories))
         <section class="footer-imp-link mt-5 mb-5">
             <div class="container-fluid px-md-5">
-                <h4 class="m-4 text-center">Premium PDF Bank</h4>
+                <div class="row">
+                    <div class="col-md-12 relative">
+                        <h2 class="home-section-heading">Premium PDF Bank</h2>
+                    </div>
+                </div>
                 <nav>
                     <div class="nav nav-tabs justify-content-center align-items-center" id="nav-pdf-bank-tab" role="tablist">
                         @php($isFirstElement = true)
@@ -501,7 +509,7 @@
                         @endforeach
                     </div>
                 </nav>
-                <div class="tab-content shadow border border-danger border-2 p-1" id="nav-pdf-bank-tabContent" style="border-top:0px !important;">
+                <div class="tab-content shadow border-danger border border-2 p-1" id="nav-pdf-bank-tabContent" style="border-top:0px !important;">
                     @php($isFirstElement = true)
                     @foreach($pdf_bank_categories as $cat)
                         <div class="tab-pane fade  {{$isFirstElement ? 'active show' : ''}} " id="nav-pdf-bank-{{ $cat->id }}" role="tabpanel" aria-labelledby="nav-pdf-bank-{{ $cat->id }}-tab" tabindex="0">
@@ -509,7 +517,7 @@
                             <div class="row">
                                 @foreach ($cat->pdf_banks as $row)
                                     <div class="col-sm-6 col-md-3 mb-3">
-                                        <div class="seller-item border border-primary rounded border-2">
+                                        <div class="seller-item border-primary rounded border border-2">
                                             <div class="seller-header text-center">
                                                 <a href="/pdf-banks/bank/{{$row->id}}">
                                                     <img src="/storage/{{$row->thumbnail}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
@@ -527,7 +535,7 @@
                     @endforeach
 
                     <div class="text-end">
-                        <a href="/pdf-banks" class="btn" style="background:#1375b9; color:#fff;">View all PDF Banks...</a>
+                        <a href="/pdf-banks" class="btn btn-sm" style="background:#1375b9; color:#fff;">View all PDF Banks...</a>
                     </div>
                 </div>
                 
@@ -546,9 +554,9 @@
 
     <section class="home-ebook mt-3 mb-5">
         <div class="container-fluid px-md-5">
-            <div class="row mb-3">
-                <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3 ">Digital Library</h2>
+            <div class="row">
+                <div class="col-md-12 relative">
+                    <h2 class="home-section-heading">Digital Library</h2>
                 </div>
             </div>
             <div class="lib-filter-alphabets">
@@ -571,65 +579,83 @@
         </section>
     @endif
 
-    {{-- @if($ads->where('position','=','after_library')->count())
-        <section class="home-banner">
-            <div class="container-fluid px-md-5">
-                <div class="row">
-                    @foreach ($ads->where('position','=','after_library')->values() as $ad)
-                    <div class="col-md-12 my-2 text-center">
-                        <img class="img img-fluid" src="/storage/{{$ad->banner}}" alt="" style="max-height:350px;">
-                        <div>{{$ad->info}}</div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif --}}
-
     <section class="home-blog mt-3 mb-5">
         <div class="container-fluid px-md-5">
-            <div class="row mb-3">
-                <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3">Blogs</h2>
+            <div class="row">
+                <div class="col-md-12 relative">
+                    <h2 class="home-section-heading">Blogs</h2>
                 </div>
             </div>
+            
             <div class="row">
-                <div class="col-md-6">
-                    <div class="blog-section border border-primary">
+                <!-- Left Side (4 Blogs in 2x2 Grid) -->
+                <div class="col-md-4">
+                    <div class="row home-blog-list">
+                        @foreach ($blogs->take(5) as $blog)
+                            <div class="col-md-6 col-6 mb-3 @if ($loop->first) hidden @endif">
+                                <div class="blog-item p-2">
+                                    <a href="/blogs/{{$blog->id}}">
+                                        <div class="blog-list-img">
+                                            <img src="/storage/{{$blog->image}}" class="img-fluid" alt="{{$blog->title}}">
+                                        </div>
+                                    </a>
+                                    <a href="/blogs/{{$blog->id}}"><h5 class="mt-2 blog-title">{{$blog->title}}</h5></a>
+                                    <small class="text-primary">Published: {{date('Y-m-d',strtotime($blog->created_at))}}</small>
+                                    <small class="text-success d-block">By: {{$blog->author}}</small>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Center Blog (Latest Blog) -->
+                <div class="col-md-4 text-center">
+                    <div class="blog-section">
                         <div class="blog-header">
-                            <a href="/blogs/{{$last_blog->id}}"><img src="/storage/{{$last_blog->image}}" alt=""></a>
+                            <a href="/blogs/{{$last_blog->id}}">
+                                <img src="/storage/{{$last_blog->image}}" class="img-fluid" alt="{{$last_blog->title}}">
+                            </a>
                         </div>
                         <div class="blog-footer">
                             <h3>{{$last_blog->title}}</h3>
-                            <div class="blog-footer-details">{!! Helper::excerpt($last_blog->description,500) !!}</div>
-                            <div class="mb-3 mt-2"><small class="text-primary">Published: {{date('Y-m-d',strtotime($last_blog->created_at))}}</small> <small class="text-success" style="float: right">By: {{$last_blog->author}}</small></div>
-                            <div class="blog-details"><a href="/blogs/{{$last_blog->id}}">View Details</a></div>
+                            <div class="blog-footer-details">{!! Str::limit(strip_tags($last_blog->description), 500) !!}</div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <small class="text-primary">Published: {{date('Y-m-d',strtotime($last_blog->created_at))}}</small>
+                                <small class="text-success">By: {{$last_blog->author}}</small>
+                            </div>
+                            <div class="blog-details mt-3">
+                                <a href="/blogs/{{$last_blog->id}}" class="btn">View Details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 position-relative">
-                    <div class="home-blog-list">
-                        @foreach ($blogs as $blog)
-                        <div class="row mb-2 @if ($loop->first) hidden @endif">
-                            <div class="col-4">
-                                <img src="/storage/{{$blog->image}}">
+
+                <!-- Right Side (Next 4 Blogs in 2x2 Grid) -->
+                <div class="col-md-4">
+                    <div class="row home-blog-list">
+                        @foreach ($blogs->skip(5)->take(4) as $blog)
+                            <div class="col-md-6 col-6 mb-3">
+                                <div class="blog-item p-2">
+                                    <a href="/blogs/{{$blog->id}}">
+                                        <div class="blog-list-img">
+                                            <img src="/storage/{{$blog->image}}" class="img-fluid" alt="{{$blog->title}}">
+                                        </div>
+                                    </a>
+                                    <a href="/blogs/{{$blog->id}}"><h5 class="mt-2 blog-title">{{$blog->title}}</h5></a>
+                                    <small class="text-primary">Published: {{date('Y-m-d',strtotime($blog->created_at))}}</small>
+                                    <small class="text-success d-block">By: {{$blog->author}}</small>
+                                </div>
                             </div>
-                            <div class="col-8">
-                                <h4 class="blog-list-title"><a href="/blogs/{{$blog->id}}">{{$blog->title}}</a></h4>
-                                <div>Published: <span class="text-primary"> {{date('Y-m-d',strtotime($blog->created_at))}}</span></div>
-                                <div>By: <span class="text-success"> {{$blog->author}}</span></div>
-                            </div>
-                        </div>
                         @endforeach
                     </div>
-                    <div class="home-blog-btn">
-                        <a href="/blogs" class="btn">View all...</a>
-                    </div>
-                    
                 </div>
+            </div>
+            <div class="text-end">
+                <a href="/blogs" class="btn btn-sm" style="background:#1375b9;color:#fff">View all Blogs...</a>
             </div>
         </div>
     </section>
+
 
     @if($ad = $ads->where('position','=','home_below_blog_ad')->first())
         <section class="home-banner">
@@ -658,8 +684,8 @@
     @if(count($books))
         <div class="container-fluid px-md-5 eb-seller my-5">
             <div class="row">
-                <div class="col-md-12 text-center relative">
-                    <h2 class="home-section-heading mb-3">Books</h2>
+                <div class="col-md-12 relative">
+                    <h2 class="home-section-heading">Books</h2>
                 </div>
             </div>
             <div class="row mt-4">
@@ -684,7 +710,7 @@
                 
             </div>
             <div class="text-end mt-2">
-                <a href="/books" class="btn" style="background:#1375b9;color:#fff">View all...</a>
+                <a href="/books" class="btn btn-sm" style="background:#1375b9;color:#fff">View all...</a>
             </div>
         </div>
 
@@ -718,15 +744,15 @@
         <section class="course-section">
             <div class="container-fluid px-md-5">
                 <div class="row">
-                    <div class="col-md-12 text-center relative">
-                        <h2 class="home-section-heading mb-3 ">Videos</h2>
+                    <div class="col-md-12 relative">
+                        <h2 class="home-section-heading">Videos</h2>
                         {{-- <div class="header-view-more"><a href="{{ url('/free-videos') }}">View More</a></div> --}}
                     </div>
                 </div>
                 <div class="course-container">
                     <div class="owl-carousel review-slider">
                         @foreach($videos as $video)
-                            <div class="card-course border border-primary border-2">
+                            <div class="card-course border-primary border border-2">
                                 <a href="/free-videos/{{$video->id}}">
                                     <div class="single-video w-100" style="position: relative;">
                                         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 1; cursor: pointer;z-index:99" ></div>
@@ -746,7 +772,7 @@
                         @endforeach
                     </div>
                     <div class="text-end mt-2">
-                        <a href="/free-videos" class="btn" style="background:#1375b9;color:#fff">View all...</a>
+                        <a href="/free-videos" class="btn btn-sm" style="background:#1375b9;color:#fff">View all...</a>
                     </div>
                 </div>
             </div>
@@ -782,14 +808,14 @@
         <section class="course-section">
             <div class="container-fluid px-md-5">
                 <div class="row">
-                    <div class="col-md-12 text-center relative">
-                        <h2 class="home-section-heading mb-3 ">Image Gallery</h2>
+                    <div class="col-md-12 relative">
+                        <h2 class="home-section-heading">Image Gallery</h2>
                     </div>
                 </div>
                 <div class="course-container">
                     <div class="owl-carousel review-slider">
                         @foreach($img_gallery as $row)
-                            <div class="card-course border border-primary border-2" title="{{$row->caption}}">
+                            <div class="card-course border-primary border border-2" title="{{$row->caption}}">
                                 <a target="_blank" href="/storage/{{$row->image}}"><img src="/storage/{{$row->image}}" class="img img-fluid" alt="img_error" style="width: 100%; max-height:300px"></a>
                                 <div  class="ps-1 text-center text-nowrap" style="overflow-x: hidden; text-overflow: ellipsis;">
                                    {{$row->caption}}
@@ -798,7 +824,7 @@
                         @endforeach
                     </div>
                     <div class="text-end mt-2">
-                        <a href="/image-gallery" class="btn" style="background:#1375b9;color:#fff">View all...</a>
+                        <a href="/image-gallery" class="btn btn-sm" style="background:#1375b9;color:#fff">View all...</a>
                     </div>
                 </div>
             </div>
@@ -809,9 +835,9 @@
     @if(count($testimonials))
         <section class="review-section mt-5">
             <div class="container-fluid px-md-5">
-                <div class="row mb-3">
-                    <div class="col-md-12 text-center relative">
-                        <h2 class="home-section-heading mb-3">Testimonial</h2>
+                <div class="row">
+                    <div class="col-md-12 relative">
+                        <h2 class="home-section-heading">Testimonial</h2>
                     </div>
                 </div>
                 <div class="review-container">
@@ -854,7 +880,7 @@
 
     @if($homepopup)
         <div id="pup-up-container" class="mt-5" style="">
-            <div id="pop-up" class="mt-3 p-3 border border-3 border-primary bg-light" style="">
+            <div id="pop-up" class="mt-3 p-3 border-3 border-primary bg-light" style="">
                 <button id='close-btn'>X</button>
                 <div class="text-center">
                     <img src="/storage/{{$homepopup->image}}" alt="" class="img img-fluid" style="max-height:320px; width:auto;">

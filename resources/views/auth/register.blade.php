@@ -204,7 +204,6 @@
         {
             $("#icon_click").click(function() 
             {
-                console.log("click icon");
                 $(this).toggleClass("fas fa-eye fas fa-eye-slash");
                 var type = $(this).hasClass("fas fa-eye-slash") ? "text" : "password";
                 $("#password").attr("type", type);
@@ -212,7 +211,6 @@
 
             $("#icon_click_confirm").click(function() 
             {
-                console.log("icon_click_confirm");
                 $(this).toggleClass("fas fa-eye fas fa-eye-slash");
                 var type = $(this).hasClass("fas fa-eye-slash") ? "text" : "password";
                 $("#password-confirm").attr("type", type);

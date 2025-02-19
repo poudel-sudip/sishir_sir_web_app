@@ -53,7 +53,7 @@ class FrontController extends Controller
         $data['highlights'] = Categories::where('type', '=', 'home_highlight')->where('status', '=', 'Active')->orderByDesc('id')->get(['id', 'type', 'name as title', 'description as link']);
         $data['exams'] = OpenExam::where('result_status', '=', 'Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status', '=', 'Published')->orderByDesc('id')->first();
-        $data['blogs'] = Blog::where('status', '=', 'Published')->orderByDesc('id')->take(5)->get(['id', 'title', 'slug', 'image', 'author', 'created_at']);
+        $data['blogs'] = Blog::where('status', '=', 'Published')->orderByDesc('id')->take(9)->get(['id', 'title', 'slug', 'image', 'author', 'created_at']);
         $data['books'] = Book::where('status', '=', 'Active')->orderByDesc('id')->take(9)->get(['id', 'title', 'slug', 'price', 'discount', 'thumbnail', 'published_year', 'edition']);
         $data['testimonials'] = Testimonial::where('status', '=', 'Active')->orderByDesc('id')->take(9)->get();
         $data['ads'] = Advertisement::where('status', '=', 'Active')->get();
@@ -72,9 +72,9 @@ class FrontController extends Controller
         if ($today_question) {
             // $today_question->image = $this->generateQuestionImage($today_question);
             $today_question_date = (object)$today_question->only(['id', 'show_date', 'image']);
+            $data['today_question_date'] = $today_question_date;
         }
 
-        $data['today_question_date'] = $today_question_date;
         $data['today_question'] = $today_question;
         $data['img_gallery'] = ImageGallery::where('status', '=', 1)->orderByDesc('id')->take(9)->get();
 

@@ -129,6 +129,75 @@ p {
     }
 }
 
+/* back to top */
+.back-to-top-container {
+    position: fixed !important;
+    bottom: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 9999; /* Ensure it's on top */
+}
+
+/* Progress ring around the button */
+.progress-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+    transition: opacity 0.3s ease-out;
+    opacity: 1;
+}
+
+.progress-ring-border {
+    fill: none;
+    stroke: #1375b9; 
+    stroke-width: 6; 
+}
+
+.progress-ring-background {
+    fill: none;
+    stroke: #e9e9e9;
+    stroke-width: 6;
+}
+
+.progress-ring-bar {
+    fill: none;
+    stroke: #1375b9;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-dasharray: 282.74; /* Full circumference */
+    stroke-dashoffset: 282.74; /* Initially hidden */
+    transition: stroke-dashoffset 0.3s ease-out;
+}
+
+/* Styling for back-to-top button */
+#backToTop {
+    position: relative;
+    z-index: 2;
+    background-color: #ffffff;
+    color: #1375b9;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#backToTop:hover {
+    opacity: 1;
+}
 
 /*====================== main navbar======================= */
 
@@ -3507,6 +3576,7 @@ p {
 .mcq-question p img {
     overflow-y: scroll;
 }
+
 .mcq-check-option {
     height: auto; 
     border:none; 
@@ -3527,16 +3597,17 @@ p {
 .mcq-check-option .mcq-option {
     font-weight: 500;
     text-transform: uppercase;
-    color: #1375b9;
+    color: #000000;
 }
 .mcq-qstn-row label, .mcq-qstn-row label p{
-    color: #1375b9;
+    color: #000000;
 }
 .mcq-question-list h6,
 .mcq-question-list h5,
 .mcq-solution-sheet h5 {
-    color: #1375b9 !important;
+    color: #201C59 !important;
     font-size: 18px;
+    font-weight: 600;
 }
 .mcq-question-list h6 p,
 .mcq-question-list h5 p,
@@ -5608,7 +5679,7 @@ label.star:before {
 }
 .shishir-header .main-nav .navbar-nav .nav-link{
     color: #ffffff;
-    font-size: 17px;
+    font-size: 1rem;
     padding: 0.7rem .8rem 0.7rem .8rem !important;
 }
 .shishir-header .main-nav .navbar-nav .nav-link:hover{
@@ -5661,7 +5732,15 @@ label.star:before {
     color: #1375b9;
 }
 .home-section-heading{
-    font-size: 24px;
+    font-size: 18px;
+    padding: 7px 10px;
+    color: #ffffff;
+    font-weight: 600;
+    width: 280px;
+    height: 40px;
+    background: #0f75bd;
+    border-radius: 5px;
+    clip-path: polygon(0 0, 67% 0, 100% 100%, 0% 100%);
 }
 /* video course */
 .video-course .post-thumb{
@@ -5737,11 +5816,11 @@ label.star:before {
 
 /* home-blog */
 .home-blog .blog-section{
-    /* padding: 30px; */
+    padding: 1rem 1rem 2rem;
     background: #ffffff;
-    border-radius: 20px;
+    border-radius: 10px;
     /* margin-left: 50px; */
-    margin-right: 50px;
+    /* margin-right: 50px; */
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     margin-bottom: 30px;
 }
@@ -5749,12 +5828,16 @@ label.star:before {
     .home-blog .blog-section{
         /* padding: 20px; */
         margin-left: 10px;
-        margin-right: 10px;
+        /* margin-right: 10px; */
         margin-bottom: 60px;
     }
     .blog-section .blog-header{
         height: auto !important;
     }
+}
+.home-blog{
+    background: #BDE4FF;
+    padding-bottom: 0.5rem;
 }
 .blog-section .blog-header{
     width: 100%;
@@ -5802,20 +5885,46 @@ label.star:before {
     text-align: center;
 }
 .blog-section .blog-footer .blog-details a{
-    padding: 9px 30px;
+    padding: 4px 20px;
     border: 2px solid #ffffff;
     background: #1375b9;
     color: #ffffff;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
     border-radius: 10px;
 }
-.home-blog-list img{
-    width: 100%;
-    height: 110px;
-    object-fit: cover;
+.home-blog-list .blog-item{
+    background: #ffffff;
 }
-.home-blog-list .blog-list-title{
+.home-blog-list .blog-list-img{
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+.home-blog-list .blog-list-img img{
+    width: 100%;
+    object-fit: content;
+}
+.details-blog-list .img-container{
+    height: 110px;
+    overflow: hidden;
+}
+.details-blog-list img{
+    width: 100%;
+}
+
+.home-blog-list .blog-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    line-height: 1.5em; 
+    min-height: 3em; 
+    font-size: 18px;
+    font-weight: 600;
+}
+.details-blog-list .blog-list-title{
     text-align: justify;
     display: -webkit-box;
     max-width: 100%;
@@ -5834,6 +5943,18 @@ label.star:before {
     background: #1375b9;
     color: #ffffff;
 }
+@media (max-width: 768px) {
+    .home-blog .col-md-4:first-child {
+        order: 2;
+    }
+    .home-blog .col-md-4:nth-child(2) {
+        order: 1;
+    }
+    .home-blog .col-md-4:last-child {
+        order: 3;
+    }
+}
+
 /* home-ebook */
 .home-ebook .ebook-section{
     padding: 10px;

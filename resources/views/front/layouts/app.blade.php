@@ -72,7 +72,18 @@
   @include('front.includes.footer')
 
   <!-- Back to top button -->
-  <div class="back-to-top" id="back_to_top"> <i class="fa fa-angle-up"></i></div>
+  {{-- <div class="back-to-top" id="back_to_top"> <i class="fa fa-angle-up"></i></div> --}}
+  <div class="back-to-top-container">
+    <svg class="progress-ring" viewBox="0 0 100 100">
+        <circle class="progress-ring-border" cx="50" cy="50" r="36" stroke-width="1" />
+        <circle class="progress-ring-background" cx="50" cy="50" r="35" stroke-width="6" />
+        <circle class="progress-ring-bar" cx="50" cy="50" r="35" stroke-width="6" stroke-dasharray="282.74" stroke-dashoffset="282.74" />
+    </svg>
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-level-up-alt"></i>
+    </button>
+</div>
+
 
   <script src="{{ asset('js/libraries/bootstrap.min.js') }}"></script>
   <script src="{{ asset('js/libraries/owl.carousel.min.js') }}"></script>
@@ -86,6 +97,95 @@
   <script type="text/javascript" src="{{asset('js/misc.js')}}"></script>
 
   @yield('page-footer-content')
+
+  <script>
+    function adjustFontSize() {
+      let zoomLevel = Math.round(window.devicePixelRatio * 100); 
+      let baseFontSize = 16; 
+
+      // Calculate new font size based on zoom level
+      let newFontSize = baseFontSize - Math.floor((zoomLevel - 100) / 10); 
+      newFontSize = Math.max(newFontSize, 10);
+
+      let elements = {
+        "body": newFontSize,
+        "h1": newFontSize + 10, 
+        "h2": newFontSize + 8, 
+        "h3": newFontSize + 6,
+        "h4": newFontSize + 4,
+        "h5": newFontSize + 2,
+        "p": newFontSize, 
+        "a": newFontSize, 
+        "div": newFontSize, 
+        "span": newFontSize, 
+        "button": newFontSize, 
+      };
+
+      // Apply new font sizes
+      for (let tag in elements) {
+        document.querySelectorAll(tag).forEach(el => {
+          el.style.fontSize = `${elements[tag]}px`;
+        });
+      }
+    }
+
+    // Run on page load and when resizing
+    window.addEventListener("resize", adjustFontSize);
+    adjustFontSize();
+
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      const $progressRingBar = $('.progress-ring-bar');
+      const $progressRing = $('.progress-ring');
+      const $backToTopButton = $('#backToTop');
+
+      // Function to update progress based on scroll position
+      function updateScrollProgress() {
+          const scrollTop = $(document).scrollTop();
+          const documentHeight = $(document).height() - $(window).height();
+          const scrollPercentage = (scrollTop / documentHeight) * 100;
+
+          // Calculate stroke dashoffset to reflect scroll progress (range 0-282.74)
+          const dashoffset = 282.74 - (scrollPercentage / 100) * 282.74;
+          $progressRingBar.css('stroke-dashoffset', dashoffset);
+      }
+
+      // Function to handle back-to-top button click and 360-degree rotation
+      function scrollToTop() {
+          // Start the 360-degree rotation animation
+          $backToTopButton.css({
+              'transition': 'transform 1s ease',
+              'transform': 'rotate(360deg)'
+          });
+
+          // Scroll the page to the top after rotation is complete
+          setTimeout(function () {
+              $('html, body').animate({ scrollTop: 0 }, 'smooth');
+               $backToTopButton.css('transform', 'rotate(0deg)');
+          }, 1000);  // Delay to let the rotation animation finish
+      }
+
+      // Show and hide back-to-top button based on scroll position
+      $(window).scroll(function () {
+          updateScrollProgress();
+          if ($(window).scrollTop() > 200) {
+              $backToTopButton.fadeIn();
+              $progressRing.fadeIn();
+          } else {
+              $backToTopButton.fadeOut();
+              $progressRing.fadeOut();
+          }
+      });
+
+      // Listen for back-to-top button click
+      $backToTopButton.click(function () {
+          scrollToTop();
+      });
+  });
+
+  </script>
 
 </body>
 </html>

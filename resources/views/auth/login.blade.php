@@ -78,7 +78,7 @@
                                 {{-- <a href="{{ url('auth/facebook') }}" class="btn">
                                     <img src="{{ asset('images/social-icons/facebook.png') }}" alt="Facebook Logo" style="width: 24px; height: 24px;"> 
                                     Login with Facebook
-                                </a>                                                        --}}
+                                </a>--}}
                             </div>
 
                             <div class="hidden-md">
@@ -137,7 +137,7 @@
                     </li>
                     <li>
                         <img src="{{ asset('images/social-icons/mail.png') }}" alt="Mail">
-                        <a href="">info@shisiradhikari.com</a>
+                        <a href="mailto:info@shisiradhikari.com">info@shisiradhikari.com</a>
                     </li>
                 </ul>
             </div>
@@ -171,7 +171,6 @@
     {
         $("#icon_click").click(function() 
         {
-            console.log("click icon");
        		$(this).toggleClass("fas fa-eye fas fa-eye-slash");
          	var type = $(this).hasClass("fas fa-eye-slash") ? "text" : "password";
             $("#pass").attr("type", type);
