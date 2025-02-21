@@ -2363,7 +2363,7 @@ p {
   }
   .q-heading .q-title{
     color: #C51239;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 800;
     padding-bottom: 0 !important;
   }
@@ -2374,7 +2374,7 @@ p {
     padding: 10px;
     margin-top: 5px;
     color: #201C59;
-    font-size: 20px;
+    font-size: 1.2rem;
     font-weight: 600;
   }
 
@@ -2383,8 +2383,8 @@ p {
     border-radius: 10px;
     padding: 5px 10px;
     margin-top: 5px;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 500;
     color: #000000;
   }
   .q-options-container .q-option-text{
@@ -5679,7 +5679,7 @@ label.star:before {
 }
 .shishir-header .main-nav .navbar-nav .nav-link{
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 1.1rem;
     padding: 0.7rem .8rem 0.7rem .8rem !important;
 }
 .shishir-header .main-nav .navbar-nav .nav-link:hover{

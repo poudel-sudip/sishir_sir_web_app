@@ -90,32 +90,32 @@
                                     </div>
                                     
                                     <div id="q_block" class="">
-                                        <h4 class="q-question">
+                                        <div class="q-question">
                                             Q. {!! $today_question->question !!}
-                                        </h4>
+                                        </div>
         
                                         <div class="q-options-container">
                                             <div class="q-option" data-answer="A" data-correct="{{$today_question->opt_correct}}">
                                                 <span class="q-option-marker">A.</span>
-                                                <h5 class="q-option-text">{!! $today_question->opt_a !!}</h5>
+                                                <div class="q-option-text">{!! $today_question->opt_a !!}</div>
                                             </div>
                                             <div class="q-option" data-answer="B" data-correct="{{$today_question->opt_correct}}">
                                                 <span class="q-option-marker">B.</span>
-                                                <h5 class="q-option-text">{!! $today_question->opt_b !!}</h5>
+                                                <div class="q-option-text">{!! $today_question->opt_b !!}</div>
                                             </div>
                                             <div class="q-option" data-answer="C" data-correct="{{$today_question->opt_correct}}">
                                                 <span class="q-option-marker">C.</span>
-                                                <h5 class="q-option-text">{!! $today_question->opt_c !!}</h5>
+                                                <div class="q-option-text">{!! $today_question->opt_c !!}</div>
                                             </div>
                                             <div class="q-option" data-answer="D" data-correct="{{$today_question->opt_correct}}">
                                                 <span class="q-option-marker">D.</span>
-                                                <h5 class="q-option-text">{!! $today_question->opt_d !!}</h5>
+                                                <div class="q-option-text">{!! $today_question->opt_d !!}</div>
                                             </div>
                                         </div> 
                                     </div>
 
                                     <div id="qs_block" class="px-3 text-start d-none">
-                                        <h4 class="mt-3 q-on-solution"> <strong> Q. {!! $today_question->question !!} </strong></h4>
+                                        <div class="mt-3 q-on-solution"> <strong> Q. {!! $today_question->question !!} </strong></div>
                                         <div class="mt-2"><em>Ans:</em> <strong class="text-success bold"> {{$today_question->opt_correct}} </strong></div>
                                         <div class="py-2">
                                             <em>Explanation:</em>

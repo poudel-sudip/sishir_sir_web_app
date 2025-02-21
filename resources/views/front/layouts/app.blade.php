@@ -98,12 +98,10 @@
 
   @yield('page-footer-content')
 
-  <script>
+  {{-- <script>
     function adjustFontSize() {
       let zoomLevel = Math.round(window.devicePixelRatio * 100); 
       let baseFontSize = 16; 
-
-      // Calculate new font size based on zoom level
       let newFontSize = baseFontSize - Math.floor((zoomLevel - 100) / 10); 
       newFontSize = Math.max(newFontSize, 10);
 
@@ -115,25 +113,21 @@
         "h4": newFontSize + 4,
         "h5": newFontSize + 2,
         "p": newFontSize, 
-        "a": newFontSize, 
+        "a": newFontSize + 1, 
         "div": newFontSize, 
         "span": newFontSize, 
         "button": newFontSize, 
       };
 
-      // Apply new font sizes
       for (let tag in elements) {
         document.querySelectorAll(tag).forEach(el => {
           el.style.fontSize = `${elements[tag]}px`;
         });
       }
     }
-
-    // Run on page load and when resizing
     window.addEventListener("resize", adjustFontSize);
     adjustFontSize();
-
-  </script>
+  </script> --}}
 
   <script>
     $(document).ready(function () {
