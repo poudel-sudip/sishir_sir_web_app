@@ -40,7 +40,7 @@ class ADController extends Controller
         $img = '';
         if(isset($request->banner))
         {
-            $img = $request->banner->store('uploads','public');
+            $img = $request->banner->store('uploads/advertisement','public');
         }
 
         Advertisement::create([
