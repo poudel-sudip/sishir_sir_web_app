@@ -30,6 +30,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/libraries/jquery-3.6.0.min.js') }}"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <div id="app">

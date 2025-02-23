@@ -93,15 +93,15 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="home-blog-list">
+                    <div class="details-blog-list">
                         <h5 class="mb-3"><u>Latest Blogs</u></h5>
                         @foreach ($lateat_blogs as $blogs)
                         <div class="row mb-2 @if ($blog->id == $blogs->id) hidden @endif">
-                            <div class="col-4">
+                            <div class="col-4 img-container">
                                 <img src="/storage/{{$blogs->image}}">
                             </div>
                             <div class="col-8">
-                                <h4 class="blog-list-title"><a href="/blogs/{{$blogs->id}}">{{$blogs->title}}</a></h4>
+                                <a href="/blogs/{{$blogs->id}}"><h4 class="blog-list-title">{{$blogs->title}}</h4></a>
                                 <div>Published: <span class="text-primary"> {{date('Y-m-d',strtotime($blogs->created_at))}}</span></div>
                                 <div>By: <span class="text-success"> {{$blogs->author}}</span></div>
                             </div>
