@@ -82,7 +82,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{($parent->name)}}</a>
               <?php
-                $child_menus = $parent->subGroups()->where('status','=','Active')->orderBy('order')->take(10)->get(['id','name','slug','type']);
+                $child_menus = $parent->subGroups()->where('status','=','Active')->orderBy('order')->take(15)->get(['id','name','slug','type']);
               ?>
               <ul class="dropdown-menu">
                 @foreach($child_menus as $child)

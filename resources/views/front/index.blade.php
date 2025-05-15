@@ -202,6 +202,33 @@
     </section> --}}
     
 
+    <section class="home-ebook mt-3 mb-5">
+        <div class="container-fluid px-md-5">
+            <div class="row">
+                <div class="col-md-12 relative">
+                    <h2 class="home-section-heading">Digital Library</h2>
+                </div>
+            </div>
+            <div class="lib-filter-alphabets">
+                <a href="/library" class="lib-filter-character active" > All </a>
+                @for($i='A';$i<'Z';$i++)
+                    <a href="/library?filter={{$i}}" class="lib-filter-character" > {{$i}} </a>
+                @endfor
+                <a href="/library?filter=Z" class="lib-filter-character" > Z </a>
+            </div>    
+           
+        </div>
+    </section>
+
+    @if($ad = $ads->where('position','=','home_below_library_ad')->first())
+        <section class="home-banner">
+            <div class="container-fluid px-md-5 my-1 text-center">
+                <img class="img img-fluid" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="" style="max-height:100px;">
+                {{-- <div>{{$ad->info}}</div> --}}
+            </div>
+        </section>
+    @endif
+    
     @if(count($dynamic_forms))
     <section class="home-slider my-5">
         <div class="container-fluid px-md-5">
@@ -552,32 +579,7 @@
         </section>
     @endif
 
-    <section class="home-ebook mt-3 mb-5">
-        <div class="container-fluid px-md-5">
-            <div class="row">
-                <div class="col-md-12 relative">
-                    <h2 class="home-section-heading">Digital Library</h2>
-                </div>
-            </div>
-            <div class="lib-filter-alphabets">
-                <a href="/library" class="lib-filter-character active" > All </a>
-                @for($i='A';$i<'Z';$i++)
-                    <a href="/library?filter={{$i}}" class="lib-filter-character" > {{$i}} </a>
-                @endfor
-                <a href="/library?filter=Z" class="lib-filter-character" > Z </a>
-            </div>    
-           
-        </div>
-    </section>
-
-    @if($ad = $ads->where('position','=','home_below_library_ad')->first())
-        <section class="home-banner">
-            <div class="container-fluid px-md-5 my-1 text-center">
-                <img class="img img-fluid" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="" style="max-height:100px;">
-                {{-- <div>{{$ad->info}}</div> --}}
-            </div>
-        </section>
-    @endif
+    
 
     <section class="home-blog mt-3 mb-5">
         <div class="container-fluid px-md-5">
