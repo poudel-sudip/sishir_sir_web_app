@@ -20,8 +20,8 @@
     </style>
     
     <section class="mt-2">
-        <div class="container-fluidb px-md-5">
-            <div class="row">
+        <div class="container-fluid px-md-5">
+            <div class="row align-items-center">
                 @if($highlights->count())
                 <div class="col-12 mb-2">
                     <div class="d-flex align-items-center " style="background: #ffced2; border-radius:6px; font-weight:bold;">
@@ -44,8 +44,9 @@
                         </marquee>
                     </div>
                 </div>
-                <div class="col-md-3 text-end">
-                    <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=1375b9&aj_time=yes&font_size=18&line_brake=0&bikram_sambat=0&nst=no&api=500122n569" width="307" height="22"></iframe>
+                <div class="col-md-3 align-self-end">
+                    <div class="text-dark" id="nepaliDateContainer" style="line-height: 0.7;"></div>
+                    {{-- <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=1375b9&aj_time=yes&font_size=18&line_brake=0&bikram_sambat=0&nst=no&api=500122n569" width="307" height="22"></iframe> --}}
                 </div>
             </div>
         </div>
@@ -834,7 +835,7 @@
     @endif
 
     {{-- review section start --}}
-    @if(count($testimonials))
+    {{-- @if(count($testimonials))
         <section class="review-section mt-5">
             <div class="container-fluid px-md-5">
                 <div class="row">
@@ -871,7 +872,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
    
     <!-- Messenger Chat Plugin Code -->
     <div id="fb-root"></div>
@@ -999,6 +1000,112 @@
         });
 
     </script>
+
+    @if(isset($fetched_page))
+        <script>
+
+            var content = {};
+            const nepaliWeekdays = ["आइतबार", "सोमबार", "मंगलबार", "बुधबार", "बिहीबार", "शुक्रबार", "शनिबार"];
+            const nepaliDigits = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
+            
+            function convertToNepaliDigits(number) {
+                return number.toString().split('').map(digit => nepaliDigits[digit] ? nepaliDigits[digit] : digit).join('');
+            }
+
+            function convertAmPmToNepali(hours) {
+                if(hours < 12) {
+                    return 'बिहान';
+                } else if (hours == 12) {
+                    return 'मध्यान्ह';
+                } else if (hours > 12 && hours < 17) {
+                    return 'दिउँसो';
+                } else if (hours >= 17 && hours < 20) {
+                    return 'साँझ';
+                } else if (hours >= 20 && hours < 24) {
+                    return 'राति';
+                }
+
+            }
+
+            async function todayNepaliDateContent() {
+            
+                try {
+                    
+                    const context = {!!$fetched_page!!};   // Assuming this is a string containing HTML content
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(context, 'text/html');
+                    
+                    const eventDiv = doc.querySelector('.event');
+                    if (eventDiv) {
+
+                        const htmlParts = eventDiv.innerHTML.split('<hr>');
+                        htmlParts.forEach(htmlPart => {
+                            const partDoc = parser.parseFromString(htmlPart, 'text/html');
+                            const keyElement = partDoc.querySelector('.ev_left');
+                            const valueElement = partDoc.querySelector('.ev_right');
+
+                            const key = keyElement ? keyElement.textContent.trim() : '';
+                            const value = valueElement ? valueElement.textContent.trim() : '';
+
+                            if (key && value) {
+                                content[key] = value;
+                            }
+                        });
+                    }
+                    
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+                
+            }
+
+            function updateDate() {
+                var dateContainer = document.querySelector('#nepaliDateContainer');
+                var currentDate = new Date();
+                var hours = currentDate.getHours();
+                var minutes = currentDate.getMinutes();
+                // var ampm = hours >= 12 ? 'PM' : 'AM';
+                var ampm = convertAmPmToNepali(hours);
+
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                hours = hours < 10 ? '0' + hours : hours;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+
+                var ad_date = content['ईसवी'];
+                var bs_date = content['वि.सं'];
+                var np_date = content['नेपाल संवत'];
+                var time = hours + ':' + minutes + ' ' + ampm;
+
+                bs_date = convertToNepaliDigits(bs_date);
+                np_date = convertToNepaliDigits(np_date);
+                time = convertToNepaliDigits(time);
+
+                var textcontent = ``;
+                textcontent += `<p>वि.सं: <span>${bs_date}</span></p>`;
+                textcontent += `<p>नेपाल संवत: <span>${np_date}</span></p>`;
+                // textcontent += `<p>ईसवी: <span>${ad_date}</span></p>`;
+                textcontent += `<p>समय: <span>${time}</span></p>`;
+
+                dateContainer.innerHTML = textcontent;
+                
+            }
+
+            todayNepaliDateContent();
+
+            var now = new Date();
+            var secondsUntilNextMinute = 60 - now.getSeconds();
+
+            updateDate();
+            setTimeout(function() {
+                updateDate();
+                setInterval(updateDate, 60000);
+            }, secondsUntilNextMinute * 1000);
+
+            
+        </script>
+
+    @endif
 
 @endsection
 

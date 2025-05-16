@@ -57,7 +57,7 @@
                     @foreach($blogs as $post)
                         <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
                     @endforeach
-                </div>
+                </div>               
 
                 <div class="col-6 single-search-area">
                     <h5> PDF Banks: {{count($pdf_banks) >= 20 ? count($pdf_banks).'+' : count($pdf_banks)}} </h5>
@@ -65,6 +65,14 @@
                         <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
                     @endforeach
                 </div>
+
+                <div class="col-6 single-search-area">
+                    <h5> Vaccancies: {{count($vaccancies) >= 20 ? count($vaccancies).'+' : count($vaccancies)}} </h5>
+                    @foreach($vaccancies as $post)
+                        <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
+                    @endforeach
+                </div>
+
             </div>
         </div>
     </div>

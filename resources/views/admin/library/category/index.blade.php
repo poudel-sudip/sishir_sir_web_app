@@ -61,7 +61,7 @@
                       <a href="/admin/library/{{$cat->id}}/directories" class="h1"><i class="fa fa-folder-open text-primary"></i></a>
                     </div>
                     <div class="h5">
-                      <a href="/admin/library/{{$cat->id}}/directories" style="color:inherit;">{{ucwords($cat->name)}}</a>
+                      <a href="/admin/library/{{$cat->id}}/directories" style="color:inherit;">{{ucwords($cat->name)}} <small>({{$cat->total_materials ?? '0'}} Files)</small></a>
                     </div>
                     <div>
                       <a class="edit-folder btn-sm btn-info" href="#edit_folder" folder-name="{{$cat->name}}"  folder-id="{{$cat->id}}" data-toggle="modal" data-target="#edit_folder">Edit</a>

@@ -30,6 +30,7 @@ class CreateLibraryMaterialsTable extends Migration
             $table->string('author')->nullable();
             $table->string('pages')->nullable();
             $table->string('published_year')->nullable();
+            $table->string('source')->nullable();
             // $table->tinyInteger('notified')->nullable()->default(0);
             $table->timestamps();
         });

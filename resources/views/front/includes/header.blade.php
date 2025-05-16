@@ -70,12 +70,19 @@
         <i class="fa fa-bars text-white" aria-hidden="true"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <?php
-          $parent_menus = App\Models\Menu\MenuGroup::where('status','=','Active')->orderBy('order')->take(8)->get();
-        ?>
+        
         <ul class="navbar-nav mb-2 mb-lg-0">
+          
+          <?php
+            $parent_menus = App\Models\Menu\MenuGroup::where('status','=','Active')->orderBy('order')->take(8)->get();
+          ?>         
+
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/library">Library</a>
           </li>
 
           @foreach($parent_menus as $parent)

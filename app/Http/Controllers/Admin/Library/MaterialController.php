@@ -44,6 +44,7 @@ class MaterialController extends Controller
             'author' => 'nullable|string',
             'published_year' => 'nullable|string',
             'pages' => 'nullable|string',
+            'source' => 'nullable|string',
         ]);
 
         if($data['type'] == 'text' || $data['type'] == 'Text')
@@ -122,9 +123,10 @@ class MaterialController extends Controller
             'author' => 'nullable|string',
             'published_year' => 'nullable|string',
             'pages' => 'nullable|string',
+            'source' => 'nullable|string',
         ]);
         
-        $data = $request->only(['name','order','status','type','search_tags','description','author','published_year','pages']);
+        $data = $request->only(['name','order','status','type','search_tags','description','author','published_year','pages','source']);
 
         if($data['type'] == 'text' || $data['type'] == 'Text')
         {

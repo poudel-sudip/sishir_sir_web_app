@@ -13,6 +13,8 @@ class LibraryCategory extends Model
     use HasFactory;
     protected $guarded = [];
 
+    protected $appends = ['total_materials', 'active_materials'];
+
     protected static function boot()
     {
         parent::boot();
@@ -37,5 +39,34 @@ class LibraryCategory extends Model
     public function childs(): HasMany
     {
         return $this->hasMany(LibraryCategory::class, 'parent_id');
+    }
+
+    public function getTotalMaterialsAttribute()
+    {
+        return $this->countLibraryMaterialsRecursive($this, 'all');
+    }
+
+    public function getActiveMaterialsAttribute()
+    {
+        return $this->countLibraryMaterialsRecursive($this, 'Active');
+    }
+
+    protected function countLibraryMaterialsRecursive(LibraryCategory $category,$stat): int
+    {
+        if(in_array($stat, ['Active', 'Inactive']))
+        {
+            $count = $category->materials()->where('status','=',$stat)->count();
+        }        
+        else
+        {
+            $count = $category->materials()->count();
+        }
+
+
+        foreach ($category->childs as $child) {
+            $count += $this->countLibraryMaterialsRecursive($child, $stat);
+        }
+
+        return $count;
     }
 }

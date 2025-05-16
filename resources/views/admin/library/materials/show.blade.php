@@ -74,6 +74,10 @@
                             <div>{{$material->published_year}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Source:</div>
+                            <div><a @if(trim($material->source)) href="{{$material->source}}" target="_blank" @endif> {{$material->source}} </a></div>
+                        </div>
+                        <div class="course-row">
                             <div>Thumbnail:</div>
                             <div><img src="/storage/{{$material->thumbnail}}" alt="" class="img img-fluid" style="max-height:200px"></div>
                         </div>

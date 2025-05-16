@@ -47,6 +47,11 @@
                         </div>
 
                         <div class="course-row">
+                            <div>Search Tags </div>
+                            <div>{!! $vaccancy->search_tags !!}</div>
+                        </div>
+
+                        <div class="course-row">
                             <div>Image File </div>
                             <div class="text-center"><img src="/storage/{{$vaccancy->img_file}}" alt="" class="img img-fluid" style=""></div>
                         </div>

@@ -54,8 +54,8 @@ class FrontController extends Controller
         $data['exams'] = OpenExam::where('result_status', '=', 'Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status', '=', 'Published')->orderByDesc('id')->first();
         $data['blogs'] = Blog::where('status', '=', 'Published')->orderByDesc('id')->take(9)->get(['id', 'title', 'slug', 'image', 'author', 'created_at']);
-        $data['books'] = Book::where('status', '=', 'Active')->orderByDesc('id')->take(9)->get(['id', 'title', 'slug', 'price', 'discount', 'thumbnail', 'published_year', 'edition']);
-        $data['testimonials'] = Testimonial::where('status', '=', 'Active')->orderByDesc('id')->take(9)->get();
+        $data['books'] = Book::where('status', '=', 'Active')->orderByDesc('id')->take(9)->get(['id', 'title', 'slug', 'price', 'discount', 'thumbnail', 'published_year', 'edition','created_at']);
+        // $data['testimonials'] = Testimonial::where('status', '=', 'Active')->orderByDesc('id')->take(9)->get();
         $data['ads'] = Advertisement::where('status', '=', 'Active')->get();
         $data['homepopup'] = HomePopup::where('status', '=', 'Active')->orderByDesc('id')->first();
 
@@ -304,15 +304,25 @@ class FrontController extends Controller
             })
             ->toArray();
 
-        $vaccancy_updates = VaccancyPost::where('status', '=', 'Active')
-            ->orderByDesc('id')
-            ->take(6)
-            ->get(['id', 'title', 'slug', 'created_at'])
+        // $vaccancy_updates = VaccancyPost::where('status', '=', 'Active')
+        //     ->orderByDesc('id')
+        //     ->take(6)
+        //     ->get(['id', 'title', 'slug', 'created_at'])
+        //     ->map(function ($b) {
+        //         return (object)[
+        //             'title' => $b->title,
+        //             'created_at' => $b->created_at,
+        //             'link' => '/vaccancies/' . $b->id,
+        //         ];
+        //     })
+        //     ->toArray();
+
+        $book_updates = $data['books']
             ->map(function ($b) {
                 return (object)[
                     'title' => $b->title,
                     'created_at' => $b->created_at,
-                    'link' => '/vaccancies/' . $b->id,
+                    'link' => '/books/' . $b->id,
                 ];
             })
             ->toArray();
@@ -327,12 +337,21 @@ class FrontController extends Controller
         $data['updates'] = array_merge($data['updates'], $menu_sub_items);
         $data['updates'] = array_merge($data['updates'], $library_materials);
         $data['updates'] = array_merge($data['updates'], $free_exam_updates);
+        $data['updates'] = array_merge($data['updates'], $book_updates);
         // $data['updates'] = array_merge($data['updates'], $vaccancy_updates);
 
         usort($data['updates'], function ($a, $b) {
             return strcmp($b->created_at, $a->created_at);
         });
         $data['updates'] = array_slice($data['updates'], 0, 7, true);
+
+
+        $fetch_url = 'https://www.ashesh.com.np/panchang/widget.php?header_color=faf8ee&header_title=Today';
+        $fetch_data = file_get_contents($fetch_url);
+        preg_match('/<body[^>]*>(.*?)<\/body>/is', $fetch_data, $fetch_data_matches);
+        $fetched_data_body = $fetch_data_matches[1] ?? '';
+
+        $data['fetched_page'] = json_encode($fetched_data_body);
 
         // dd($data);
         return view('front.index', $data);
@@ -1052,6 +1071,27 @@ class FrontController extends Controller
             ->values()
             ->toArray();
 
+        $data['vaccancies'] = VaccancyPost::where('status', '=', 'Active')
+            ->where(function ($req) use ($query) {
+                $req->where('title', 'Like', '%' . $query . '%')
+                    ->orWhere('slug', 'Like', '%' . $query . '%')
+                    ->orWhere('search_tags','Like','%'.$query.'%');
+            })
+            ->orderByDesc('id')
+            ->take(20)
+            ->get(['id', 'title', 'slug', 'created_at'])
+            ->map(function ($cat) {
+                return [
+                    'id' => $cat->id,
+                    'title' => $cat->title,
+                    'slug' => $cat->slug,
+                    'created_at' => $cat->created_at,
+                    'link' => '/vaccancies/' . $cat->id,
+                ];
+            })
+            ->values()
+            ->toArray();
+        
         // dd($data);
 
         return view('front.search', $data);

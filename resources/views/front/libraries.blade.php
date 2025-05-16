@@ -75,7 +75,7 @@
                         <div class="">
                             <a href="/library/${cat.id}"><i class="h1 fa fa-folder"></i></a>
                         </div>
-                        <h5><a href="/library/${cat.id}">${cat.name}</a></h5>
+                        <h5><a href="/library/${cat.id}">${cat.name} (${cat.active_materials} Files)</a></h5>
                     </div>
                 `;
                 categoryElement.innerHTML = innerHTML;

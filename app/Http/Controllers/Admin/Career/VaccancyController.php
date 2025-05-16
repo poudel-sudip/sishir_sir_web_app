@@ -35,6 +35,7 @@ class VaccancyController extends Controller
             'img_file' => 'nullable|image',
             'thumbnail' => 'required|image',
             'status' => 'required|string',
+            'search_tags' => 'nullable|string',
         ]);
 
         $pdf = null;
@@ -66,6 +67,7 @@ class VaccancyController extends Controller
             'author' => ucwords($request->author ?? auth()->user()->name),
             'description' => $request->description,
             'status' => $request->status,
+            'search_tags' => $request->search_tags,
         ]); 
 
         return redirect('/admin/careers');
@@ -97,7 +99,7 @@ class VaccancyController extends Controller
             'pdf_file' => 'nullable|file',
             'img_file' => 'nullable|file',
             'thumbnail' => 'nullable|image',
-            
+            'search_tags' => 'nullable|string',
         ]);
         
         $pdf = $request->old_pdf_file;
@@ -142,6 +144,7 @@ class VaccancyController extends Controller
             'author' => ucwords($request->author ?? auth()->user()->name),
             'description' => $request->description,
             'status'=>$request->status,
+            'search_tags' => $request->search_tags,
         ]);
 
         return redirect('/admin/careers');

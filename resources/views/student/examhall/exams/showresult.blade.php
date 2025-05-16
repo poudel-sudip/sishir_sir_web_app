@@ -60,7 +60,10 @@
                             <a class="view-video btn btn-primary" href="#videoModal" video-title="{{'Video Answer Solution for '.$exam->name}}" video-url="{{$exam->answer_video}}" data-bs-toggle="modal" data-bs-target="#videoModal" data-toggle="modal" data-target="#videoModal">Play Solution Video <span class="fas fa-video"></span></a>
                             @endif
                             @if($exam->answer_pdf)
-                            <a class="view-pdf btn btn-success" href="#pdfModal" pdf-title="{{'PDF Answer Solution for '.$exam->name}}" pdf-url="{{$exam->answer_pdf}}" data-bs-toggle="modal" data-bs-target="#pdfModal" data-toggle="modal" data-target="#pdfModal">View Solution PDF <span class="fas fa-file-pdf"></span></a>
+                                <div class="_df_button btn btn-success" id="pdf_book_df" source="/storage/{{$exam->answer_pdf}}">
+                                    View Solution PDF <span class="fas fa-file-pdf"></span>
+                                </div>
+                                {{-- <a class="view-pdf btn btn-success" href="#pdfModal" pdf-title="{{'PDF Answer Solution for '.$exam->name}}" pdf-url="{{$exam->answer_pdf}}" data-bs-toggle="modal" data-bs-target="#pdfModal" data-toggle="modal" data-target="#pdfModal">View Solution PDF <span class="fas fa-file-pdf"></span></a> --}}
                             @endif
                         </div>
                     </div>
@@ -117,7 +120,7 @@
         </div>
     </div>
 
-    <!-- Modal HTML -->
+    {{-- <!-- Modal HTML -->
     <div id="pdfModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="pdfViewLModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
@@ -132,10 +135,30 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
+    <link href="{{asset('dflip/css/dflip.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('dflip/css/themify-icons.min.css')}}" rel="stylesheet" type="text/css">
+
+    <script src="{{asset('dflip/js/dflip.min.js')}}" type="text/javascript"></script>
 
     <script>
+        var option_pdf_book_df = {
+            // height:'100%',
+            webgl:true,
+            soundEnable: true,
+            enableDownload: false,
+            backgroundColor: "#1375b9",
+            scrollWheel: false,
+            pageMode: DFLIP.PAGE_MODE.SINGLE,
+            singlePageMode: DFLIP.SINGLE_PAGE_MODE.BOOKLET,
+            allControls: "startPage,altPrev,pageNumber,altNext,endPage,thumbnail,zoomIn,zoomOut,fullScreen,pageMode",
+            moreControls: "",
+            hideControls: "share,download",
+        };
+    </script>
+
+    {{-- <script>
         $(document).ready(function(){
             $('.view-pdf').click(function(){
                 const title = $(this).attr('pdf-title');
@@ -150,6 +173,6 @@
                 
             })
         })
-    </script>
+    </script> --}}
 
 @endsection

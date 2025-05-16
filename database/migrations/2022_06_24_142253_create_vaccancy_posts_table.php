@@ -23,6 +23,7 @@ class CreateVaccancyPostsTable extends Migration
             $table->string('img_file')->nullable();
             $table->string('author')->nullable();
             $table->longText('description')->nullable();
+            $table->text('search_tags')->nullable();
             $table->string('status', 100)->nullable()->default('Active');
             $table->timestamps();
         });

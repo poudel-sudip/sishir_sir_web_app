@@ -83,6 +83,7 @@
                 <div><strong>Published On: </strong> {{$material->published_year}} </div>
                 <div><strong>Author(s)/Publisher(s): </strong>  {{$material->author ? (html_entity_decode('&copy;')."  ".$material->author) : ""}} </div>
                 <div><strong>No of Pages: </strong> {{$material->pages}} </div>
+                <div><strong>Source: </strong> <a @if(trim($material->source)) href="{{$material->source}}" target="_blank" @endif> {{$material->source}} </a> </div>
 
             </div>
 
