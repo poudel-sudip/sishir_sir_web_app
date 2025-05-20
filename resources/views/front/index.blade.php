@@ -45,14 +45,14 @@
                     </div>
                 </div>
                 <div class="col-md-3 align-self-end">
-                    <div class="text-dark" id="nepaliDateContainer" style="line-height: 0.7;"></div>
+                    <div class="text-center text-md-start" id="nepaliDateContainer" style="line-height: 1.5; color: #1374ba !important;"></div>
                     {{-- <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=1375b9&aj_time=yes&font_size=18&line_brake=0&bikram_sambat=0&nst=no&api=500122n569" width="307" height="22"></iframe> --}}
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="mt-3">
+    <section class="">
         <div class="container-fluid px-md-5">
             <div class="row align-items-stretch flex-row-reverse">
                 
@@ -1082,10 +1082,10 @@
                 time = convertToNepaliDigits(time);
 
                 var textcontent = ``;
-                textcontent += `<p>वि.सं: <span>${bs_date}</span></p>`;
-                textcontent += `<p>नेपाल संवत: <span>${np_date}</span></p>`;
-                // textcontent += `<p>ईसवी: <span>${ad_date}</span></p>`;
-                textcontent += `<p>समय: <span>${time}</span></p>`;
+                textcontent += `<div>वि.सं: <span>${bs_date}</span></div>`;
+                textcontent += `<div>नेपाल संवत: <span>${np_date}</span></div>`;
+                // textcontent += `<div>ईसवी: <span>${ad_date}</span></div>`;
+                textcontent += `<div>समय: <span>${time}</span></div>`;
 
                 dateContainer.innerHTML = textcontent;
                 

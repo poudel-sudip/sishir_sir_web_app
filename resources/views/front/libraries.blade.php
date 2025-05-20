@@ -33,8 +33,20 @@
     </div>
 
     <div class="container-fluid px-md-5">
+        <div class="d-flex justify-content-start align-items-center mb-3" id="toggle_view_button">
+            <span class="me-2">View Type:</span>
+            <button id="gridViewBtn" class="btn btn-outline-primary btn-sm mx-1 active" title="Grid View">
+                <i class="fa fa-th"></i>
+            </button>
+            <button id="listViewBtn" class="btn btn-outline-primary btn-sm mx-1" title="List View">
+                <i class="fa fa-list"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="container-fluid px-md-5">
         <div class="blog-container mt-5">
-            <div class="row" id="library_categories_list">
+            <div class="row" id="library_categories_list" showType="grid">
                 
             </div>
         </div>
@@ -66,21 +78,60 @@
 
         function displayCategories(categories) {
             const categoriesDiv = document.getElementById('library_categories_list');
+            const showType = categoriesDiv.getAttribute('showType');
             categoriesDiv.innerHTML = '';
-            categories.forEach(cat => {
-                const categoryElement = document.createElement('div');
-                categoryElement.classList.add('col-md-3','mb-3');
-                const innerHTML = `
-                    <div class="single-blog text-center py-3 library-item border border-primary">
-                        <div class="">
-                            <a href="/library/${cat.id}"><i class="h1 fa fa-folder"></i></a>
+
+            if(showType=='grid') {
+                categories.forEach(cat => {
+                    const categoryElement = document.createElement('div');
+                    categoryElement.classList.add('col-md-3','mb-3');
+                    const innerHTML = `
+                        <div class="single-blog text-center py-3 library-item border border-primary">
+                            <div class="">
+                                <a href="/library/${cat.id}"><i class="h1 fa fa-folder"></i></a>
+                            </div>
+                            <h5><a href="/library/${cat.id}">${cat.name} <small style="color:red;"> (${cat.active_materials} Files) </small> </a></h5>
                         </div>
-                        <h5><a href="/library/${cat.id}">${cat.name} (${cat.active_materials} Files)</a></h5>
-                    </div>
+                    `;
+                    categoryElement.innerHTML = innerHTML;
+                    categoriesDiv.appendChild(categoryElement);
+                });
+                
+            } else if(showType == 'list'){
+                const tableDiv = document.createElement('div');
+                tableDiv.classList.add('table-responsive', 'table-responsive-md');
+                const table = document.createElement('table');
+                table.classList.add('table', 'table-bordered');
+
+                const thead = document.createElement('thead');
+                thead.innerHTML = `
+                    <tr>
+                        <th style="width:60px;">#</th>
+                        <th>Category Name</th>
+                        <th>Files</th>
+                        <th>Action</th>
+                    </tr>
                 `;
-                categoryElement.innerHTML = innerHTML;
-                categoriesDiv.appendChild(categoryElement);
-            });
+                table.appendChild(thead);
+
+                const tbody = document.createElement('tbody');
+                categories.forEach((cat, idx) => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${idx + 1}</td>
+                        <td><a href="/library/${cat.id}">${cat.name}</a></td>
+                        <td>${cat.active_materials}</td>
+                        <td><a href="/library/${cat.id}" class="btn btn-primary btn-sm">View</a></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+                
+                table.appendChild(tbody);
+            
+                tableDiv.appendChild(table);
+                categoriesDiv.appendChild(tableDiv);
+            } else { }
+            
 
         }
 
@@ -94,5 +145,41 @@
             filterCategories(filchar); 
         </script>
     @endif
+
+    <script>
+        $('#gridViewBtn').on('click', function() {
+            $(this).addClass('active');
+            $('#listViewBtn').removeClass('active');
+            $('#library_categories_list').attr('showType','grid');
+
+            const filterChar = $('.lib-filter-character.active').attr('charfil');
+            if(filterChar == 'all')
+            {
+                displayCategories(libraryCategories); 
+            }
+            else
+            {
+                filterCategories(filterChar);
+            }
+        });
+
+        $('#listViewBtn').on('click', function() {
+            $(this).addClass('active');
+            $('#gridViewBtn').removeClass('active');
+            $('#library_categories_list').attr('showType','list');
+
+            const filterChar = $('.lib-filter-character.active').attr('charfil');
+            if(filterChar == 'all')
+            {
+                displayCategories(libraryCategories); 
+            }
+            else
+            {
+                filterCategories(filterChar);
+            }
+        });
+
+        
+    </script>
     
 @endsection

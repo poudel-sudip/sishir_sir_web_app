@@ -520,9 +520,14 @@ class FrontController extends Controller
         }
 
         $data['library_category'] = $library_category;
-        $data['directories'] = $library_category->childs()->get(['id', 'name', 'slug']);
-        $data['library_materials'] = $library_category->materials()->where('status', '=', 'Active')->orderByDesc('id')->get(['id', 'name', 'slug', 'published_year', 'author', 'pages', 'description']);
-        $data['js_lib_categories'] = json_encode($data['directories']);
+        // $data['directories'] = $library_category->childs()->get(['id', 'name', 'slug']);
+        // $data['library_materials'] = $library_category->materials()->where('status', '=', 'Active')->orderByDesc('id')->get(['id', 'name', 'slug', 'published_year', 'author', 'pages', 'description']);
+        
+        $directories = $library_category->childs()->get(['id', 'name', 'slug']);
+        $library_materials = $library_category->materials()->where('status', '=', 'Active')->orderByDesc('id')->get(['id', 'name', 'slug', 'published_year', 'author', 'pages', 'description']);
+        
+        $data['js_lib_categories'] = json_encode($directories);
+        $data['js_lib_materials'] = json_encode($library_materials);
 
         // dd($data);
         return view('front.librarycontents', $data);
@@ -583,8 +588,12 @@ class FrontController extends Controller
             ->where('status', '=', 'Active')
             ->get()
             ->map(function ($cat) {
-                $bookimg = $cat->cat_books()->where('status', '=', 'Active')->orderByDesc('order')->first(['thumbnail']);
-                $cat->image = $bookimg->thumbnail ?? null;
+                // $bookimg = $cat->cat_books()->where('status', '=', 'Active')->orderByDesc('order')->first(['thumbnail']);
+                // $cat->image = $bookimg->thumbnail ?? null;
+                $book = $cat->cat_books()->where('status', '=', 'Active')->orderByDesc('order')->first(['title','thumbnail','edition']);
+                $cat->image = $book->thumbnail ?? null;
+                $cat->book_title = $book->title ?? null;
+                $cat->book_edition = $book->edition ?? null;
                 return $cat;
             });
 

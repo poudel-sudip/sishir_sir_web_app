@@ -326,12 +326,23 @@
             <span class="menu-title">Provience</span>
         </a>
       </li>
-
+      
       <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/careers') }}">
-            <i class="mdi mdi-alpha-v-box menu-icon"></i>
-            <span class="menu-title">Vaccancies</span>
+        <a class="nav-link" data-toggle="collapse" href="#vaccancies-section" aria-expanded="false" aria-controls="vaccancies-section">
+          <i class="mdi mdi-alpha-v-box menu-icon"></i>
+          <span class="menu-title">Vaccancies</span>
+          <i class="menu-arrow"></i>
         </a>
+        <div class="collapse" id="vaccancies-section">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/careers-category') }}">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/careers') }}">Vaccancies</a>
+            </li>
+          </ul>
+        </div>
       </li>
 
       <li class="nav-item">

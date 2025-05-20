@@ -170,6 +170,7 @@ class Helper
         $data['exam'] = PremiumExam::count() + FreeExam::count();
         $data['mcq'] = Question::count() + DailyQuestion::count();
         $data['download'] = PostViewCounter::getTotalDownloadCount();
+        $data['vaccancy'] = VaccancyPost::count();
         $data['website'] = PostViewCounter::getTotalViewCount();
 
         return (object)($data);

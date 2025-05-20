@@ -80,4 +80,8 @@ class Categories extends Model
         return $this->hasManyThrough(Booking::class,Course::class,'category_id','course_id','id');
     }
 
+    public function vaccancies(): HasMany
+    {
+        return$this->hasMany(VaccancyPost::class,'category_id');
+    }
 }

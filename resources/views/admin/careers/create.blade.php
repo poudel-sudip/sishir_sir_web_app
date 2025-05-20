@@ -24,6 +24,24 @@
                             @csrf
 
                             <div class="form-group row">
+                                <label for="category" class="col-md-4 col-form-label">{{ __(' Category') }}</label>
+
+                                <div class="col-md-8">
+                                    <select id="category" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" >
+                                        <option value=""></option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{ucwords($category->name)}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label">{{ __('Vaccancy Title') }}</label>
 
                                 <div class="col-md-8">

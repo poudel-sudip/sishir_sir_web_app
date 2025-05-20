@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Categories;
 use App\Models\VaccancyApplicant;
 
 class VaccancyPost extends Model
@@ -30,5 +32,10 @@ class VaccancyPost extends Model
     public function applicants(): HasMany
     {
         return $this->hasMany(VaccancyApplicant::class, 'vaccancy_id');
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Categories::class, 'category_id');
     }
 }

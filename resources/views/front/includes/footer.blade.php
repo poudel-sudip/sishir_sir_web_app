@@ -138,6 +138,7 @@
                 <div><span>Total MCQs: </span><strong class="counter-count-"> {{$web_counter->mcq ?? '0'}} </strong></div>
                 <div><span>Total PDF Bank: </span><strong class="counter-count-"> {{$web_counter->pdf_bank ?? '0'}} </strong></div>
                 <div><span>Total PDF: </span><strong class="counter-count-"> {{$web_counter->pdf ?? '0'}} </strong></div>
+                <div><span>Total Vaccancies: </span><strong class="counter-count-"> {{$web_counter->vaccancy ?? '0'}} </strong></div>
                 <div><span>Total Downloads: </span><strong class="counter-count-"> {{$web_counter->download ?? '0'}} </strong></div>
                 <div><span>Website Visit Counter: </span><strong class="counter-count-"> {{$web_counter->website ?? '0'}} </strong></div>
               </div>

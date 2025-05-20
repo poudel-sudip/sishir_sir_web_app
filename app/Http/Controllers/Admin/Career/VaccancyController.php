@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Career;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\VaccancyPost;
+use App\Models\Categories as Category;
 
 class VaccancyController extends Controller
 {
@@ -21,7 +22,8 @@ class VaccancyController extends Controller
 
     public function create()
     {
-        return view('admin.careers.create');
+        $data['categories'] = Category::where('type','=','vaccancy_category')->get();
+        return view('admin.careers.create',$data);
     }
 
     public function store(Request $request)
@@ -36,6 +38,7 @@ class VaccancyController extends Controller
             'thumbnail' => 'required|image',
             'status' => 'required|string',
             'search_tags' => 'nullable|string',
+            'category' => 'nullable|numeric',
         ]);
 
         $pdf = null;
@@ -60,6 +63,7 @@ class VaccancyController extends Controller
 
         VaccancyPost::create([
             'user_id' => auth()->user()->id ?? null,
+            'category_id' => $request->category ?? null,
             'title' => $request->title,
             'thumbnail' => $thumbnail,
             'pdf_file' => $pdf,
@@ -80,7 +84,9 @@ class VaccancyController extends Controller
 
     public function edit(VaccancyPost $vaccancy)
     {
-        return view('admin.careers.edit',compact('vaccancy'));
+        $data['categories'] = Category::where('type','=','vaccancy_category')->get();
+        $data['vaccancy'] = $vaccancy;
+        return view('admin.careers.edit',$data);
     }
 
     public function update(VaccancyPost $vaccancy,Request $request)
@@ -100,6 +106,7 @@ class VaccancyController extends Controller
             'img_file' => 'nullable|file',
             'thumbnail' => 'nullable|image',
             'search_tags' => 'nullable|string',
+            'category' => 'nullable|numeric',
         ]);
         
         $pdf = $request->old_pdf_file;
@@ -145,6 +152,7 @@ class VaccancyController extends Controller
             'description' => $request->description,
             'status'=>$request->status,
             'search_tags' => $request->search_tags,
+            'category_id' => $request->category ?? null,
         ]);
 
         return redirect('/admin/careers');

@@ -35,7 +35,8 @@
                                     <a href="/book-publishers/{{$publisher->id}}/category/{{$cat->id}}">
                                         <img src="/storage/{{$cat->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
                                     </a>
-                                    <h5 class="mt-3"><a href="/book-publishers/{{$publisher->id}}/category/{{$cat->id}}">{{($cat->name)}}</a></h5>
+                                    <h5 class="mt-3"><a style="color:#1374ba;" href="/book-publishers/{{$publisher->id}}/category/{{$cat->id}}">{{($cat->name)}}</a></h5>
+                                    <h6><small class="">{{$cat->book_title}} <span class="text-danger">(Edition: {{$cat->book_edition}})</span> </small></h6>
                                 </div>
                             </div>
                         </div>

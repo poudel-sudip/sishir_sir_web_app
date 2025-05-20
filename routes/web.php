@@ -266,7 +266,7 @@ Route::get('/leads/enquiries/{enquiry}/edit', 'App\Http\Controllers\Leads\Enquir
 Route::patch('/leads/enquiries/{enquiry}', 'App\Http\Controllers\Leads\EnquiryController@update')->middleware('role:Admin');
 Route::delete('/leads/enquiries/{enquiry}', 'App\Http\Controllers\Leads\EnquiryController@destroy')->middleware('role:Admin');
 
-//admin career mgmt
+//admin career vaccancy mgmt
 Route::get('/admin/careers', 'App\Http\Controllers\Admin\Career\VaccancyController@index')->middleware('role:Admin');
 Route::get('/admin/careers/create', 'App\Http\Controllers\Admin\Career\VaccancyController@create')->middleware('role:Admin');
 Route::post('/admin/careers', 'App\Http\Controllers\Admin\Career\VaccancyController@store')->middleware('role:Admin');
@@ -274,6 +274,15 @@ Route::get('/admin/careers/{vaccancy}', 'App\Http\Controllers\Admin\Career\Vacca
 Route::get('/admin/careers/{vaccancy}/edit', 'App\Http\Controllers\Admin\Career\VaccancyController@edit')->middleware('role:Admin');
 Route::patch('/admin/careers/{vaccancy}', 'App\Http\Controllers\Admin\Career\VaccancyController@update')->middleware('role:Admin');
 Route::delete('/admin/careers/{vaccancy}', 'App\Http\Controllers\Admin\Career\VaccancyController@destroy')->middleware('role:Admin');
+
+//admin carrier vaccancy category
+Route::get('/admin/careers-category', 'App\Http\Controllers\Admin\Career\CategoryController@index')->middleware('role:Admin');
+Route::get('/admin/careers-category/create', 'App\Http\Controllers\Admin\Career\CategoryController@create')->middleware('role:Admin');
+Route::post('/admin/careers-category', 'App\Http\Controllers\Admin\Career\CategoryController@store')->middleware('role:Admin');
+Route::patch('/admin/careers-category', 'App\Http\Controllers\Admin\Career\CategoryController@update')->middleware('role:Admin');
+Route::delete('/admin/careers-category/{category}', 'App\Http\Controllers\Admin\Career\CategoryController@destroy')->middleware('role:Admin');
+Route::get('/admin/careers-category/{category}/vaccancies', 'App\Http\Controllers\Admin\Career\CategoryController@vaccancies')->middleware('role:Admin');
+
 
 //career applicants mgmt
 Route::get('/admin/careers/{vaccancy}/applicants', 'App\Http\Controllers\Admin\Career\ApplicantController@index')->middleware('role:Admin');

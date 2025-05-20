@@ -20,7 +20,10 @@
                 <div class="card">
                     <div class="card-header">Show Vaccancy Details </div>
                     <div class="card-body">
-                        
+                        <div class="course-row">
+                            <div>Category  </div>
+                            <div>{{$vaccancy->category->name ?? ' '}}</div>
+                        </div>
                         <div class="course-row">
                             <div>Title  </div>
                             <div>{{$vaccancy->title}}</div>

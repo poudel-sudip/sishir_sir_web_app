@@ -1,15 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Career Vaccancies
+    Vaccancy Lists | {{ucwords($category->name)}}
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">All Career Vaccancies</h3>
+            <h3 class="page-title">Vaccancies || {{ucwords($category->name)}}</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="/admin/careers-category">Categories</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Vaccancies</li>
                 </ol>
             </nav>
@@ -19,10 +20,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">Careers / Vaccancies</h4>
+                            <h4 class="card-title">Vaccancies || {{ucwords($category->name)}} </h4>
                             <div class="text-right">
                                 <a href="{{ ('/admin/careers/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Vaccancy </button></a>
-
                             </div>
                         </div>
                         <div class="table-responsive table-responsive-md">
@@ -39,7 +39,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {{-- @php($i=1) --}}
                                 @foreach($vaccancies as $vaccancy)
                                     <tr>
                                         <td>{{$vaccancy->id}}</td>
@@ -64,7 +63,6 @@
                                             </form>                                            
                                         </td>
                                     </tr>
-                                    {{-- @php($i++) --}}
                                 @endforeach
                                 </tbody>
                             </table>

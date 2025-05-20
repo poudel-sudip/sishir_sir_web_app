@@ -60,8 +60,13 @@ class MaterialController extends Controller
                 'can_download' => 'required|boolean',
             ]);
             $data['download'] = $request->can_download;
-            $data['filename'] = $request->file->getClientOriginalName();
-            $data['fileurl'] = $request->file->storeAs('uploads/library/files',$data['filename'],'public');
+            $pdfFile = $request->file('file');
+            $pdfPath = $pdfFile->getPathname();
+
+            $data['filename'] = $pdfFile->getClientOriginalName();
+            $data['fileurl'] = $pdfFile->storeAs('uploads/library/files',$data['filename'],'public');
+            $data['pages'] = (int)($data['pages']) > 0 ? (int)($data['pages']) : $this->getPdfPageCount($pdfPath);
+            
         }
 
         if(isset($request->thumbnail))
@@ -145,8 +150,13 @@ class MaterialController extends Controller
             }
             elseif(isset($request->file))
             {
-                $data['filename'] = $request->file->getClientOriginalName();
-                $data['fileurl'] = $request->file->storeAs('uploads/library/files',$data['filename'],'public');
+                $pdfFile = $request->file('file');
+                $pdfPath = $pdfFile->getPathname();
+
+                $data['filename'] = $pdfFile->getClientOriginalName();
+                $data['fileurl'] = $pdfFile->storeAs('uploads/library/files',$data['filename'],'public');
+                $data['pages'] = (int)($data['pages']) > 0 ? (int)($data['pages']) : $this->getPdfPageCount($pdfPath);
+                
             }
             else
             {
@@ -255,4 +265,20 @@ class MaterialController extends Controller
         return 0;
     }
     
+    private function getPdfPageCount($pdfPath)
+    {
+        if (file_exists($pdfPath)) {
+            try {
+                $pdf = new PdfToImage($pdfPath);
+                $count = $pdf->getNumberOfPages();
+                if ($count > 0) {
+                    return $count;
+                }
+            } catch (\Throwable $e) {
+                // throw $e;
+            }            
+        }
+
+        return 0;
+    }
 }
