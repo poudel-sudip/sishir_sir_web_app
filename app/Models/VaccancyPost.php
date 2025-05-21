@@ -7,14 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\Categories;
 use App\Models\VaccancyApplicant;
+use App\Models\Categories as Category;
 
 class VaccancyPost extends Model
 {
     use HasFactory;
-    protected $guarded = [];
-    
+    protected $guarded = [];   
+
+    protected $casts = [
+        'tag_ids' => 'array',
+    ];
+
+    protected $appends = ['related_tag_names'];   
+
     protected static function boot()
     {
         parent::boot();
@@ -34,8 +40,30 @@ class VaccancyPost extends Model
         return $this->hasMany(VaccancyApplicant::class, 'vaccancy_id');
     }
 
-    public function category(): BelongsTo
+    public function getRelatedTagNamesAttribute()
     {
-        return $this->belongsTo(Categories::class, 'category_id');
+        $tagIds = is_array($this->tag_ids)
+            ? $this->tag_ids
+            : (is_string($this->tag_ids) ? json_decode($this->tag_ids, true) : []);
+
+        if (empty($tagIds)) {
+            return [];
+        }      
+
+        return Category::whereIn('id', $tagIds)->where('type','=','vaccancy_tag')->pluck('name')->toArray();
     }
+
+    public function relatedTags()
+    {
+        $tagIds = is_array($this->tag_ids)
+            ? $this->tag_ids
+            : (is_string($this->tag_ids) ? json_decode($this->tag_ids, true) : []);
+
+        if (empty($tagIds)) {
+            return collect([]);
+        }  
+
+        return Category::whereIn('id', $tagIds)->where('type','=','vaccancy_tag')->get();
+    }
+    
 }

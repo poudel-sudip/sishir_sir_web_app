@@ -30,6 +30,13 @@
                 <a href="/student/vaccancies/create" class="btn btn-success">Submit Your New Vacancy <i class="fa fa-paint-brush"></i> </a>
             </div>
 
+            <div class="my-2 h6">
+                <span><a href="/student/vaccancies" class="btn btn-sm btn-primary">All</a></span>
+                @foreach ($tag_categories as $tag)
+                    <span><a href="/student/vaccancies-tag/{{$tag->id}}" class="btn btn-sm btn-outline-primary">{{$tag->name}}</a></span>
+                @endforeach
+            </div>
+
             <div class="row">
                 @forelse($vaccancies as $vaccancy)
                 <div class="col-md-6 mb-2">

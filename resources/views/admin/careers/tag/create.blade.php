@@ -1,29 +1,29 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Create Vaccancy Category
+    Create Vaccancy Tag
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Create Vaccancy Category</h3>
+            <h3 class="page-title">Create Vaccancy Tag</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/careers-category') }}">Vaccancy Category</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Add Category</li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/careers-tag') }}">Vaccancy Tags</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add</li>
                 </ol>
             </nav>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Create Vaccancy Category</div>
+                    <div class="card-header">Create Vaccancy Tag</div>
                   <div class="card-body">
-                    <form class="forms-sample" method="POST" action="/admin/careers-category" enctype="multipart/form-data">
+                    <form class="forms-sample" method="POST" action="/admin/careers-tag" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
-                            <label for="name" class="col-sm-3 col-form-label">{{ __('Category Name') }}</label>
+                            <label for="name" class="col-sm-3 col-form-label">{{ __('Tag Name') }}</label>
                             <div class="col-md-9">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                 @error('name')

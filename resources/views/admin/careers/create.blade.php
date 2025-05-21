@@ -21,25 +21,7 @@
                     <div class="card-header">Create Career Vaccancy Post</div>
                     <div class="card-body">
                         <form method="POST" action="{{ ('/admin/careers') }}" enctype="multipart/form-data" class="forms-sample">
-                            @csrf
-
-                            <div class="form-group row">
-                                <label for="category" class="col-md-4 col-form-label">{{ __(' Category') }}</label>
-
-                                <div class="col-md-8">
-                                    <select id="category" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" >
-                                        <option value=""></option>
-                                        @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{ucwords($category->name)}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('category')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+                            @csrf                            
 
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label">{{ __('Vaccancy Title') }}</label>
@@ -77,6 +59,31 @@
 
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-1">
+                                <label for="related_tags" class="col-md-4 col-form-label">{{ __('Related Tags') }}</label>
+                                <div class="col-md-8">
+                                    @foreach($tags as $tag)
+                                        <div class="d-inline-block text-center border">
+                                            <input 
+                                                class=" @error('related_tags') is-invalid @enderror" 
+                                                type="checkbox" 
+                                                name="related_tags[]" 
+                                                id="tag_{{ $tag->id }}" 
+                                                value="{{ $tag->id }}"
+                                                {{ (is_array(old('related_tags')) && in_array($tag->id, old('related_tags'))) ? 'checked' : '' }}
+                                            >
+                                            <label class="" for="tag_{{ $tag->id }}">{{ $tag->name }}</label>
+                                        </div>
+                                    @endforeach
+
+                                    @error('related_tags')
+                                    <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror

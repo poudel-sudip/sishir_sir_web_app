@@ -125,10 +125,23 @@
                                     </div>                                
                                 </div>
 
+                                {{-- <div class="text-center mt-2 d-flex justify-content-between">
+                                    <a class="btn btn-sm btn-primary" href="/question-of-the-day-quiz">
+                                        <i class="fa fa-check-square pe-1"></i>Play Quiz                                 
+                                    </a>
+
+                                    <a role="button" class="q-view-btn d-none" id="q-viewans-btn">View Solution</a>
+                                    <a role="button" class="q-view-btn d-none" id="q-gotit-btn">Got It !</a>                                   
+
+                                    <a class="btn btn-sm btn-danger" href="/question-of-the-day/{{$today_question_date->show_date}}">
+                                        <i class="far fa-share-square pe-1"></i>Share                                 
+                                    </a>
+                                </div> --}}
+
                                 <div class="text-center mt-2 h-26 position-relative">
                                     <a role="button" class="q-view-btn d-none" id="q-viewans-btn">View Solution</a>
                                     <a role="button" class="q-view-btn d-none" id="q-gotit-btn">Got It !</a>
-
+                                
                                     <a class="question-share-btn" href="/question-of-the-day/{{$today_question_date->show_date}}">
                                         <i class="far fa-share-square pe-1"></i>Share                                 
                                     </a>

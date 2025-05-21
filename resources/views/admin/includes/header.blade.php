@@ -336,7 +336,7 @@
         <div class="collapse" id="vaccancies-section">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/careers-category') }}">Categories</a>
+              <a class="nav-link" href="{{ url('/admin/careers-tag') }}">Tags</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/careers') }}">Vaccancies</a>

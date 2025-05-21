@@ -16,7 +16,6 @@ class CreateVaccancyPostsTable extends Migration
         Schema::create('vaccancy_posts', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->nullable();
-            $table->bigInteger('category_id')->nullable();
             $table->string('title');
             $table->string('slug')->nullable();
             $table->string('thumbnail')->nullable();
@@ -25,7 +24,9 @@ class CreateVaccancyPostsTable extends Migration
             $table->string('author')->nullable();
             $table->longText('description')->nullable();
             $table->text('search_tags')->nullable();
+            $table->string('tag_ids')->nullable();
             $table->string('status', 100)->nullable()->default('Active');
+
             $table->timestamps();
         });
     }

@@ -60,6 +60,31 @@
                                 </div>
         
                                 <div class="form-group row">
+                                    <label for="related_tags" class="col-md-6 col-form-label">{{ __('Vaccancy Related Tags') }}</label>
+                                    <div class="col-md-12">
+                                        @foreach($tag_categories as $tag)
+                                            <div class="d-inline-block my-1 mx-2 text-center">
+                                                <input 
+                                                    class=" @error('related_tags') is-invalid @enderror" 
+                                                    type="checkbox" 
+                                                    name="related_tags[]" 
+                                                    id="tag_{{ $tag->id }}" 
+                                                    value="{{ $tag->id }}"
+                                                    {{ (is_array(old('related_tags')) && in_array($tag->id, old('related_tags'))) ? 'checked' : '' }}
+                                                >
+                                                <label class="" for="tag_{{ $tag->id }}">{{ $tag->name }}</label>
+                                            </div>
+                                        @endforeach
+
+                                        @error('related_tags')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
                                     <label for="pdf_file" class="col-md-6 col-form-label">{{ __('Vaccancy PDF File') }}</label>
         
                                     <div class="col-md-12">

@@ -11,7 +11,7 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>All Vaccancies</h2>
+                <h2>{{$selected_tag->name}} Vaccancies</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                       <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
@@ -37,9 +37,9 @@
             </div>
 
             <div class="my-2 h6">
-                <span><a href="/vaccancies" class="btn btn-sm btn-primary">All</a></span>
+                <span><a href="/vaccancies" class="btn btn-sm btn-outline-primary">All</a></span>
                 @foreach ($tag_categories as $tag)
-                    <span><a href="/vaccancies-tag/{{$tag->id}}" class="btn btn-sm btn-outline-primary">{{$tag->name}}</a></span>
+                    <span><a href="/vaccancies-tag/{{$tag->id}}" class="btn btn-sm {{$tag->id == $selected_tag->id ? 'btn-primary' : 'btn-outline-primary'}} ">{{$tag->name}}</a></span>
                 @endforeach
             </div>
 

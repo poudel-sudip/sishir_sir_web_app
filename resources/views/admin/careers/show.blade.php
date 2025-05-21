@@ -19,11 +19,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Show Vaccancy Details </div>
-                    <div class="card-body">
-                        <div class="course-row">
-                            <div>Category  </div>
-                            <div>{{$vaccancy->category->name ?? ' '}}</div>
-                        </div>
+                    <div class="card-body">                        
                         <div class="course-row">
                             <div>Title  </div>
                             <div>{{$vaccancy->title}}</div>
@@ -39,6 +35,10 @@
                         <div class="course-row">
                             <div>Status </div>
                             <div>{{$vaccancy->status}}</div>
+                        </div>
+                        <div class="course-row">
+                            <div>Related Tags </div>
+                            <div>{{implode(', ',$vaccancy->related_tag_names)}}</div>
                         </div>
                         <div class="course-row">
                             <div>Thumbnail </div>

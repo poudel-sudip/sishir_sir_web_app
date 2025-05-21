@@ -22,7 +22,7 @@ class VaccancyController extends Controller
 
     public function create()
     {
-        $data['categories'] = Category::where('type','=','vaccancy_category')->get();
+        $data['tags'] = Category::where('type','vaccancy_tag')->get();
         return view('admin.careers.create',$data);
     }
 
@@ -38,12 +38,17 @@ class VaccancyController extends Controller
             'thumbnail' => 'required|image',
             'status' => 'required|string',
             'search_tags' => 'nullable|string',
-            'category' => 'nullable|numeric',
+            'related_rags' => 'array|nullable',
         ]);
 
         $pdf = null;
         $img = null;
         $thumbnail = null;
+        $related_tags = [];
+        if(isset($request->related_tags) && is_array($request->related_tags))
+        {
+            $related_tags = (array_map('intval', $request->related_tags));
+        }
 
         if(isset($request->pdf_file))
         {
@@ -60,10 +65,8 @@ class VaccancyController extends Controller
             $thumbnail = $request->thumbnail->store('uploads/vaccancy/thumbnail','public');
         }
 
-
         VaccancyPost::create([
             'user_id' => auth()->user()->id ?? null,
-            'category_id' => $request->category ?? null,
             'title' => $request->title,
             'thumbnail' => $thumbnail,
             'pdf_file' => $pdf,
@@ -72,6 +75,7 @@ class VaccancyController extends Controller
             'description' => $request->description,
             'status' => $request->status,
             'search_tags' => $request->search_tags,
+            'tag_ids' => $related_tags,
         ]); 
 
         return redirect('/admin/careers');
@@ -84,8 +88,12 @@ class VaccancyController extends Controller
 
     public function edit(VaccancyPost $vaccancy)
     {
-        $data['categories'] = Category::where('type','=','vaccancy_category')->get();
+        $vaccancy->tag_ids = is_array($vaccancy->tag_ids)
+            ? $vaccancy->tag_ids
+            : (is_string($vaccancy->tag_ids) ? json_decode($vaccancy->tag_ids, true) : []);
+
         $data['vaccancy'] = $vaccancy;
+        $data['tags'] = Category::where('type','vaccancy_tag')->get();
         return view('admin.careers.edit',$data);
     }
 
@@ -106,12 +114,17 @@ class VaccancyController extends Controller
             'img_file' => 'nullable|file',
             'thumbnail' => 'nullable|image',
             'search_tags' => 'nullable|string',
-            'category' => 'nullable|numeric',
+            'related_rags' => 'array|nullable',
         ]);
         
         $pdf = $request->old_pdf_file;
         $img = $request->old_img_file;
         $thumbnail = $request->old_thumbnail;
+        $related_tags = [];
+        if(isset($request->related_tags) && is_array($request->related_tags))
+        {
+            $related_tags = (array_map('intval', $request->related_tags));
+        }
 
         if(isset($request->clear_pdf_file))
         {
@@ -152,7 +165,7 @@ class VaccancyController extends Controller
             'description' => $request->description,
             'status'=>$request->status,
             'search_tags' => $request->search_tags,
-            'category_id' => $request->category ?? null,
+            'tag_ids' => $related_tags,
         ]);
 
         return redirect('/admin/careers');

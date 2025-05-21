@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Vaccancy Lists | {{ucwords($category->name)}}
+    Vaccancy Lists | {{ucwords($tag->name)}}
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Vaccancies || {{ucwords($category->name)}}</h3>
+            <h3 class="page-title">Vaccancies || {{ucwords($tag->name)}}</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="/admin/careers-category">Categories</a></li>
+                    <li class="breadcrumb-item"><a href="/admin/careers-tag">Tags</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Vaccancies</li>
                 </ol>
             </nav>
@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">Vaccancies || {{ucwords($category->name)}} </h4>
+                            <h4 class="card-title">Vaccancies || {{ucwords($tag->name)}} </h4>
                             <div class="text-right">
                                 <a href="{{ ('/admin/careers/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Vaccancy </button></a>
                             </div>
@@ -30,7 +30,6 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Category</th>
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>Posted On</th>
@@ -42,7 +41,6 @@
                                 @foreach($vaccancies as $vaccancy)
                                     <tr>
                                         <td>{{$vaccancy->id}}</td>
-                                        <td class="text-wrap">{{$vaccancy->category->name ?? ''}}</td>
                                         <td class="text-wrap">{{$vaccancy->title}}</td>
                                         <td class="text-wrap">{{$vaccancy->author}}</td>
                                         <td class="text-wrap">{{$vaccancy->created_at}}</td>

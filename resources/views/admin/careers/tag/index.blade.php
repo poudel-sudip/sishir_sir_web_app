@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-  Vaccancy Categories
+  Vaccancy Tags
 @endsection
 
 @section('content')
   <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title">All Vaccancy Categories </h3>
+      <h3 class="page-title">All Vaccancy Tags </h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-          <li class="breadcrumb-item active" aria-current="page"> Vaccancy Categories </li>
+          <li class="breadcrumb-item active" aria-current="page"> Vaccancy Tags </li>
         </ol>
       </nav>
     </div>
@@ -20,9 +20,9 @@
         <div class="card">
           <div class="card-body">
             <div class="custon-table-header">
-              <h4 class="card-title">All Vaccancy Categories</h4>
+              <h4 class="card-title">All Vaccancy Tags</h4>
               <div class="text-right">
-                <a href="/admin/careers-category/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Category </button></a>
+                <a href="/admin/careers-tag/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Tag </button></a>
               </div>
             </div>
             <div class="table-responsive table-responsive-md">
@@ -30,21 +30,21 @@
                 <thead>
                   <tr>
                     <th>SN</th>
-                    <th>Category Title</th>
+                    <th>Tag Title</th>
                     <th>Vaccancies</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   @php($i=1)
-                  @foreach($categories as $cat)
+                  @foreach($tags as $cat)
                     <tr>
                       <td>{{$i}}</td>
                       <td>{{$cat->name}}</td>
-                      <td> <a href="/admin/careers-category/{{$cat->id}}/vaccancies" class="btn-sm btn-info">Vaccancies ( {{$cat->vaccancies()->count()}} ) </a> </td>
+                      <td> <a href="/admin/careers-tag/{{$cat->id}}/vaccancies" class="btn-sm btn-info">Vaccancies ({{$cat->vaccancies()->count()}}) </a> </td>
                       <td class="classroom-btn" width="50">
                         <a class="edit-category btn btn-warning" href="#edit_category" cat-name="{{$cat->name}}"  cat-id="{{$cat->id}}" data-toggle="modal" data-target="#edit_category">Edit</a>
-                        <form id="delete-form-{{$cat->id}}" action="/admin/careers-category/{{$cat->id}}" method="POST" style="display: inline">
+                        <form id="delete-form-{{$cat->id}}" action="/admin/careers-tag/{{$cat->id}}" method="POST" style="display: inline">
                             @csrf
                             @method('DELETE')
                             <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
@@ -63,28 +63,28 @@
     </div>
   </div>
 
-  {{-- for edit category model start--}}
+  {{-- for edit tag model start--}}
   <div class="modal fade" id="edit_category" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Vaccancy Category</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Vaccancy Tag</h5>
                 <button type="button" class="close border-danger" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="text-danger">&times;</span>
                 </button>
             </div>
 
             <div class="modal-body enroll_form">
-                <form method="POST" action="/admin/careers-category" enctype="multipart/form-data">
+                <form method="POST" action="/admin/careers-tag" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
                     <div class="form-group row">
-                      <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Category ID') }}</label>
+                      <label for="tag_id" class="col-md-4 col-form-label text-md-right">{{ __('Tag ID') }}</label>
 
                       <div class="col-md-8">
-                        <input id="category_id" type="text" class="form-control @error('category_id') is-invalid @enderror" name="category_id" value="{{ old('category_id') }}" required readonly>
-                        @error('category_id')
+                        <input id="tag_id" type="text" class="form-control @error('tag_id') is-invalid @enderror" name="tag_id" value="{{ old('tag_id') }}" required readonly>
+                        @error('tag_id')
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
                           </span>
@@ -93,11 +93,11 @@
                     </div>
 
                     <div class="form-group row">
-                      <label for="category_name" class="col-md-4 col-form-label text-md-right">{{ __('Category Name') }}</label>
+                      <label for="tag_name" class="col-md-4 col-form-label text-md-right">{{ __('Tag Name') }}</label>
 
                       <div class="col-md-8">
-                        <input id="category_name" type="text" class="form-control @error('category_name') is-invalid @enderror" name="category_name" value="{{ old('category_name') }}" required autofocus>
-                        @error('category_name')
+                        <input id="tag_name" type="text" class="form-control @error('tag_name') is-invalid @enderror" name="tag_name" value="{{ old('tag_name') }}" required autofocus>
+                        @error('tag_name')
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
                           </span>
@@ -117,22 +117,22 @@
         </div>
     </div>
   </div>
-  {{-- for edit category model end--}}
+  {{-- for edit tag model end--}}
 
   <script>
 
     $(document).ready(function(){
       $('.edit-category').click(function(){
-        $('#category_id').attr('value','');
-        $('#category_name').attr('value','');
+        $('#tag_id').attr('value','');
+        $('#tag_name').attr('value','');
 
         //fetch current data
         let fid = $(this).attr('cat-id');
         let fname = $(this).attr('cat-name');
 
         //set the value to edit model
-        $('#category_id').attr('value',fid);
-        $('#category_name').attr('value',fname);
+        $('#tag_id').attr('value',fid);
+        $('#tag_name').attr('value',fname);
       });
     });
 

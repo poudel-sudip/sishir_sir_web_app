@@ -79,9 +79,9 @@ class Categories extends Model
     {
         return $this->hasManyThrough(Booking::class,Course::class,'category_id','course_id','id');
     }
-
-    public function vaccancies(): HasMany
+    
+    public function vaccancies()
     {
-        return$this->hasMany(VaccancyPost::class,'category_id');
+        return VaccancyPost::whereJsonContains('tag_ids', $this->id);
     }
 }

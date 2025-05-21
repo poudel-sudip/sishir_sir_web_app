@@ -7,18 +7,28 @@ use Illuminate\Http\Request;
 use App\Models\VaccancyPost;
 use App\Models\VaccancyApplicant;
 use App\Helpers\Helper;
+use App\Models\Categories as Category;
 
 class VaccancyController extends Controller
 {
     public function index(Request $request)
     {
+        $data['tag_categories'] = Category::where('type','=','vaccancy_tag')->get();
         $data['vaccancies'] = VaccancyPost::where('status','=','Active')->orderByDesc('id')->paginate(10);
         return view('student.vaccancy.index',$data);
     }
 
+    public function tagVaccancies(Category $tag, Request $request)
+    {   
+        $data['selected_tag'] = $tag;
+        $data['tag_categories'] = Category::where('type','=','vaccancy_tag')->get();
+        $data['vaccancies'] = $tag->vaccancies()->where('status','=','Active')->orderByDesc('id')->paginate(15);
+        return view('student.vaccancy.tagwise',$data);
+    }
+
     public function create()
     {
-        $data = [];
+        $data['tag_categories'] = Category::where('type','=','vaccancy_tag')->get();
         return view('student.vaccancy.create',$data);
     }
 
@@ -54,10 +64,16 @@ class VaccancyController extends Controller
             'description' => 'required|string',
             'pdf_file' => 'nullable|file',
             'thumbnail' => 'required|image',
+            'related_rags' => 'array|nullable',
         ]);
 
         $pdf = null;
         $thumbnail = null;
+        $related_tags = [];
+        if(isset($request->related_tags) && is_array($request->related_tags))
+        {
+            $related_tags = (array_map('intval', $request->related_tags));
+        }
 
         if(isset($request->pdf_file))
         {
@@ -77,6 +93,7 @@ class VaccancyController extends Controller
             'author' => ucwords($request->author ?? auth()->user()->name),
             'description' => $request->description,
             'status' => 'Inactive',
+            'tag_ids' => $related_tags,
         ]); 
 
         return redirect('/student/vaccancies')->with('alert_message','The Vaccancy Has Been Posted. It Will Be Published To Public After Review.');

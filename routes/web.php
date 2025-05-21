@@ -275,13 +275,13 @@ Route::get('/admin/careers/{vaccancy}/edit', 'App\Http\Controllers\Admin\Career\
 Route::patch('/admin/careers/{vaccancy}', 'App\Http\Controllers\Admin\Career\VaccancyController@update')->middleware('role:Admin');
 Route::delete('/admin/careers/{vaccancy}', 'App\Http\Controllers\Admin\Career\VaccancyController@destroy')->middleware('role:Admin');
 
-//admin carrier vaccancy category
-Route::get('/admin/careers-category', 'App\Http\Controllers\Admin\Career\CategoryController@index')->middleware('role:Admin');
-Route::get('/admin/careers-category/create', 'App\Http\Controllers\Admin\Career\CategoryController@create')->middleware('role:Admin');
-Route::post('/admin/careers-category', 'App\Http\Controllers\Admin\Career\CategoryController@store')->middleware('role:Admin');
-Route::patch('/admin/careers-category', 'App\Http\Controllers\Admin\Career\CategoryController@update')->middleware('role:Admin');
-Route::delete('/admin/careers-category/{category}', 'App\Http\Controllers\Admin\Career\CategoryController@destroy')->middleware('role:Admin');
-Route::get('/admin/careers-category/{category}/vaccancies', 'App\Http\Controllers\Admin\Career\CategoryController@vaccancies')->middleware('role:Admin');
+//admin carrier vaccancy tags
+Route::get('/admin/careers-tag', 'App\Http\Controllers\Admin\Career\TagController@index')->middleware('role:Admin');
+Route::get('/admin/careers-tag/create', 'App\Http\Controllers\Admin\Career\TagController@create')->middleware('role:Admin');
+Route::post('/admin/careers-tag', 'App\Http\Controllers\Admin\Career\TagController@store')->middleware('role:Admin');
+Route::patch('/admin/careers-tag', 'App\Http\Controllers\Admin\Career\TagController@update')->middleware('role:Admin');
+Route::delete('/admin/careers-tag/{tag}', 'App\Http\Controllers\Admin\Career\TagController@destroy')->middleware('role:Admin');
+Route::get('/admin/careers-tag/{tag}/vaccancies', 'App\Http\Controllers\Admin\Career\TagController@vaccancies')->middleware('role:Admin');
 
 
 //career applicants mgmt
@@ -727,6 +727,7 @@ Route::delete('/student/tickets/{ticket}/contents', 'App\Http\Controllers\Studen
 
 //student vaccancy management
 Route::get('/student/vaccancies', 'App\Http\Controllers\Student\VaccancyController@index')->middleware('role:Student');
+Route::get('/student/vaccancies-tag/{tag}', 'App\Http\Controllers\Student\VaccancyController@tagVaccancies')->middleware('role:Student');
 Route::get('/student/vaccancies/create', 'App\Http\Controllers\Student\VaccancyController@create')->middleware('role:Student');
 Route::post('/student/vaccancies', 'App\Http\Controllers\Student\VaccancyController@store')->middleware('role:Student');
 Route::get('/student/vaccancies/{vaccancy}', 'App\Http\Controllers\Student\VaccancyController@show')->middleware('role:Student');
@@ -838,6 +839,7 @@ Route::get('/nepal-pay/return-payment-notification', 'App\Http\Controllers\Nepal
 
 //front vaccancy management
 Route::get('/vaccancies', 'App\Http\Controllers\FrontCareerController@index');
+Route::get('/vaccancies-tag/{tag}', 'App\Http\Controllers\FrontCareerController@tagVaccancies');
 Route::get('/vaccancies/create', 'App\Http\Controllers\FrontCareerController@create')->middleware('auth');
 Route::post('/vaccancies', 'App\Http\Controllers\FrontCareerController@store')->middleware('auth');
 Route::get('/vaccancies/{vaccancy}', 'App\Http\Controllers\FrontCareerController@show');

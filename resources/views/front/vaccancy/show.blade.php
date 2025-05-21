@@ -49,6 +49,12 @@
                     </div>
                 </div>
                 <div class="col-md-12 mt-3">
+                    <div class="my-2">
+                        <span class="mx-2">Tags:  {{implode(', ',$vaccancy->related_tag_names)}} </span>
+                        {{-- @foreach ($vaccancy->related_tag_names as $tag)
+                            <span class="mx-2">{{$tag}}</span>
+                        @endforeach --}}
+                    </div>
                     <div class="blog-full-description">{!! $vaccancy->description !!}</div>
                     <div class="text-center">
                         <img src="/storage/{{$vaccancy->img_file}}" class="img img-fluid" alt="">

@@ -30,7 +30,6 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Category</th>
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>Posted On</th>
@@ -43,7 +42,6 @@
                                 @foreach($vaccancies as $vaccancy)
                                     <tr>
                                         <td>{{$vaccancy->id}}</td>
-                                        <td class="text-wrap">{{$vaccancy->category->name ?? ''}}</td>
                                         <td class="text-wrap">{{$vaccancy->title}}</td>
                                         <td class="text-wrap">{{$vaccancy->author}}</td>
                                         <td class="text-wrap">{{$vaccancy->created_at}}</td>
