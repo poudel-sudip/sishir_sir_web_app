@@ -35,12 +35,14 @@
             <div class="text-end mb-2">
                 <a href="/vaccancies/create" class="btn btn-success">Submit Your New Vacancy <i class="fa fa-paint-brush"></i> </a>
             </div>
-
-            <div class="my-2 h6">
-                <span><a href="/vaccancies" class="btn btn-sm btn-outline-primary">All</a></span>
-                @foreach ($tag_categories as $tag)
-                    <span><a href="/vaccancies-tag/{{$tag->id}}" class="btn btn-sm {{$tag->id == $selected_tag->id ? 'btn-primary' : 'btn-outline-primary'}} ">{{$tag->name}}</a></span>
-                @endforeach
+            
+            <div class="my-2">
+                <div class="lib-filter-alphabets justify-content-center">
+                    <a href="/vaccancies" class="lib-filter-character" > All </a>
+                    @foreach ($tag_categories as $tag)
+                        <a href="/vaccancies-tag/{{$tag->id}}" class="lib-filter-character {{$tag->id == $selected_tag->id ? 'active' : ''}}" > {{$tag->name}} </a>
+                    @endforeach                    
+                </div>                  
             </div>
 
             <div class="row">
@@ -50,15 +52,15 @@
                         <div class="blog-image">
                             <a href="/vaccancies/{{$vaccancy->id}}"><img src="/storage/{{$vaccancy->thumbnail}}" class="img img-fluid"></a>
                         </div>
-                        <div class="blog-details">
-                            <h4 class="text-center"><a href="/vaccancies/{{$vaccancy->id}}">{{$vaccancy->title}}</a></h4>
+                        <div class="blog-details" style="background: transparent;">
+                            <h4 class="text-center"><a href="/vaccancies/{{$vaccancy->id}}" style="color: #1374ba;">{{$vaccancy->title}}</a></h4>
                             <div class="blog-footer">
-                                <div><i class="fa fa-user text-primary" aria-hidden="true"></i> <span class="text-success">{{$vaccancy->author}}</span></div>
+                                <div><i class="fa fa-user text-danger" aria-hidden="true"></i> <span class="text-danger">{{$vaccancy->author}}</span></div>
                                 <div class="text-end">Posted On: <span class="text-primary"> {{date('Y-m-d',strtotime($vaccancy->created_at))}}</span></div>
                             </div>
                         </div>
                     </div>
-                </div>                
+                </div>                 
                 @empty              
                     <div class="text-center">No Vaccancies Published......</div>
                 @endforelse

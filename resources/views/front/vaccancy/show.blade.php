@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="blogs-details-container bg-white">
+        <div class="blogs-details-container bg-white border border-success rounded">
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="text-primary text-center">{{($vaccancy->title)}}</h3>

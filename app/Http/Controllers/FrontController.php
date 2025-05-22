@@ -62,6 +62,8 @@ class FrontController extends Controller
         $data['dynamic_forms'] = DynamicForm::where('banner', '!=', '')->where('status', '=', 'Active')->orderByDesc('id')->take(5)->get();
         $data['videos'] = FreeVideo::orderByDesc('id')->take(9)->get();
 
+        $data['vaccancy_tags'] = Categories::where('type', '=', 'vaccancy_tag')->orderBy('id')->get();
+
         $data['vaccancies'] = VaccancyPost::where('status', '=', 'Active')->orderByDesc('id')->take(7)->get(['id', 'title', 'slug'])->map(function ($v) {
             $v->link = url('/vaccancies/' . $v->id);
             return $v;

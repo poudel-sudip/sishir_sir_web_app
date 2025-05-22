@@ -153,6 +153,10 @@
           <li class="nav-item">
             <a class="nav-link" href="/blogs">Blogs</a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/vaccancies">Vaccancies</a>
+          </li>
           
         </ul>
       </div>

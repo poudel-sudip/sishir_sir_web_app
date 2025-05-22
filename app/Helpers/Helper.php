@@ -22,6 +22,7 @@ use App\Models\Ebook\Ebook as PdfBank;
 use App\Models\ExamHall\ExamHallCategories as PremiumExam;
 use App\Models\OpenExams\OpenExam as FreeExam;
 use App\Models\VaccancyPost;
+use App\Models\Categories;
 
 class Helper
 {
@@ -166,7 +167,8 @@ class Helper
         $data['pdf'] = $lib_pdf + $m_sg_pdf + $m_cat_pdf + $m_itm_pdf + $m_sitm_pdf + $pdf_bank_pdf + $pdf_bank_contentpdf + $vaccancy_pdf;        
         $data['pdf_bank'] = PdfBank::count();
         $data['blog'] = Blog::count();
-        $data['book'] = Book::count();
+        $data['book'] = Categories::where('type','=','book_category')->count();
+        $data['book_edition'] = Book::count();
         $data['exam'] = PremiumExam::count() + FreeExam::count();
         $data['mcq'] = Question::count() + DailyQuestion::count();
         $data['download'] = PostViewCounter::getTotalDownloadCount();

@@ -125,7 +125,7 @@
                                     </div>                                
                                 </div>
 
-                                {{-- <div class="text-center mt-2 d-flex justify-content-between">
+                                <div class="text-center mt-2 d-flex justify-content-between">
                                     <a class="btn btn-sm btn-primary" href="/question-of-the-day-quiz">
                                         <i class="fa fa-check-square pe-1"></i>Play Quiz                                 
                                     </a>
@@ -136,16 +136,16 @@
                                     <a class="btn btn-sm btn-danger" href="/question-of-the-day/{{$today_question_date->show_date}}">
                                         <i class="far fa-share-square pe-1"></i>Share                                 
                                     </a>
-                                </div> --}}
+                                </div>
 
-                                <div class="text-center mt-2 h-26 position-relative">
+                                {{-- <div class="text-center mt-2 h-26 position-relative">
                                     <a role="button" class="q-view-btn d-none" id="q-viewans-btn">View Solution</a>
                                     <a role="button" class="q-view-btn d-none" id="q-gotit-btn">Got It !</a>
                                 
                                     <a class="question-share-btn" href="/question-of-the-day/{{$today_question_date->show_date}}">
                                         <i class="far fa-share-square pe-1"></i>Share                                 
                                     </a>
-                                </div>
+                                </div> --}}
                                 
                             </div>
                         @endif
@@ -819,6 +819,24 @@
         </section>
     @endif --}}
 
+    @if(count($vaccancy_tags))
+        <section class="home-ebook mt-3 mb-5">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    <div class="col-md-12 relative">
+                        <h2 class="home-section-heading">Vaccancies</h2>
+                    </div>
+                </div>
+                <div class="lib-filter-alphabets">
+                    <a href="/vaccancies" class="lib-filter-character" > All </a>
+                    @foreach ($vaccancy_tags as $tag)
+                        <a href="/vaccancies-tag/{{$tag->id}}" class="lib-filter-character" > {{$tag->name}} </a>
+                    @endforeach                    
+                </div>    
+            
+            </div>
+        </section>
+    @endif
 
     @if(count($img_gallery))
         <section class="course-section">

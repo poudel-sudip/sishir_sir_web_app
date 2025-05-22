@@ -100,6 +100,10 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link" href="/question-of-the-day-quiz"><i class="fas fa-stopwatch text-primary me-1"></i>Play Quiz</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="/discussion-forum"><i class="fas fa-table text-danger me-1"></i>Discussion Forum</a>
                     </li>
 

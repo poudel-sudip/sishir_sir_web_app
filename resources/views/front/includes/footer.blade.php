@@ -76,7 +76,8 @@
               <li><a href="//drive.google.com/drive/folders/1aRMa-Zzow1NTHkrbP218PVQoL7g_lK27" target="_blank">Health Days</a></li>
               <li><a href="/enquiry">Enquiries</a></li>
               <li><a href="/testimonials">Testimonials</a></li>
-              <li><a href="/vaccancies">Latest Vaccancies</a></li>
+              {{-- <li><a href="/vaccancies">Latest Vaccancies</a></li> --}}
+              <li><a href="/question-of-the-day-quiz">Play Quiz</a></li>
               <li><a href="/discussion-forum">Discussion Forum</a></li>
               <li><a href="/web-policy">Web Policy</a></li>
             </ul>
@@ -134,6 +135,7 @@
                 <div><span>Last Updated Date: </span><span id="last_date"></span></div>
                 <div><span>Total Blogs: </span><strong class="counter-count-"> {{$web_counter->blog ?? '0'}} </strong></div>
                 <div><span>Total Books: </span><strong class="counter-count-"> {{$web_counter->book ?? '0'}} </strong></div>
+                <div><span>Total Book Editions: </span><strong class="counter-count-"> {{$web_counter->book_edition ?? '0'}} </strong></div>
                 <div><span>Total Exams: </span><strong class="counter-count-"> {{$web_counter->exam ?? '0'}} </strong></div>
                 <div><span>Total MCQs: </span><strong class="counter-count-"> {{$web_counter->mcq ?? '0'}} </strong></div>
                 <div><span>Total PDF Bank: </span><strong class="counter-count-"> {{$web_counter->pdf_bank ?? '0'}} </strong></div>

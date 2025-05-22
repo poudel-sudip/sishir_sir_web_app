@@ -174,6 +174,10 @@
             </li>
 
             <li class="nav-item">
+              <a class="nav-link" href="/question-of-the-day-quiz"><i class="fas fa-stopwatch text-primary"></i>Play Quiz</a>
+            </li>
+
+            <li class="nav-item">
               <a class="nav-link" href="/discussion-forum"><i class="fas fa-table text-danger"></i>Discussion Forum</a>
             </li>
 

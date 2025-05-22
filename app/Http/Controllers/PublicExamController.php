@@ -12,6 +12,7 @@ use App\Helpers\Helper;
 use App\Models\Categories;
 use App\Helpers\CustomPdfHelper;
 use App\Models\Advertisement;
+use App\Models\Exams\DailyMCQQuestion;
 
 class PublicExamController extends Controller
 {
@@ -344,6 +345,17 @@ class PublicExamController extends Controller
 
         return CustomPdfHelper::createPdf($title,$html);
                 
+    }
+
+
+    public function playDailyQuestionQuiz(Request $request)
+    {
+        
+        // $data['questions'] = DailyMCQQuestion::whereDate('show_date','<=',date('Y-m-d'))->orderByDesc('show_date')->take(100)->get()->values();
+        $data['questions'] = DailyMCQQuestion::whereDate('show_date','<=',date('Y-m-d'))->inRandomOrder()->take(100)->get()->values();
+
+        // dd($data);
+        return view('front.publicexams.play_daily_question_quiz',$data);
     }
 
 }

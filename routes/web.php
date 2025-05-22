@@ -824,6 +824,7 @@ Route::post('/dynamic-forms/{form}', 'App\Http\Controllers\FrontDynamicFormContr
 
 Route::get('/question-of-the-day/{qdate}', 'App\Http\Controllers\FrontController@getQuestionOfDay');
 Route::post('/question-of-the-day/{qdate}/comment/add', 'App\Http\Controllers\FrontController@addCommentToQuestionOfDay');
+Route::get('/question-of-the-day-quiz', 'App\Http\Controllers\PublicExamController@playDailyQuestionQuiz');
 
 //front pdf banks
 Route::get('/pdf-banks', 'App\Http\Controllers\FrontPdfBankController@index');
