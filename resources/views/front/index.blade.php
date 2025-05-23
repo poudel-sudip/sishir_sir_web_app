@@ -117,7 +117,10 @@
 
                                     <div id="qs_block" class="px-3 text-start d-none">
                                         <div class="mt-3 q-on-solution"> <strong> Q. {!! $today_question->question !!} </strong></div>
-                                        <div class="mt-2"><em>Ans:</em> <strong class="text-success bold"> {{$today_question->opt_correct}} </strong></div>
+                                        <div class="mt-2">
+                                            @php($correctkey = 'opt_'.strtolower($today_question->opt_correct))
+                                            <em>Ans:</em> <strong class="text-success bold"> [{{$today_question->opt_correct}}] {{$today_question->$correctkey}} </strong>
+                                        </div>
                                         <div class="py-2">
                                             <em>Explanation:</em>
                                             <div>{!! $today_question->rationale !!}</div>
@@ -1005,7 +1008,7 @@
                     $(this).css('background-color', '#91ed91');
                 } else {
                     $(this).css('background-color', '#f07f7f'); 
-                    $('.q-option[data-answer="' + correct + '"]').css('background-color', '#91ed91'); 
+                    // $('.q-option[data-answer="' + correct + '"]').css('background-color', '#91ed91'); 
                 }
             });
 

@@ -33,6 +33,10 @@
                             <div>{{$vaccancy->author}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Source:</div>
+                            <div><a @if(trim($vaccancy->source)) href="{{$vaccancy->source}}" target="_blank" @endif> {{$vaccancy->source}} </a></div>
+                        </div>
+                        <div class="course-row">
                             <div>Status </div>
                             <div>{{$vaccancy->status}}</div>
                         </div>

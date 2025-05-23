@@ -76,7 +76,7 @@
               <li><a href="//drive.google.com/drive/folders/1aRMa-Zzow1NTHkrbP218PVQoL7g_lK27" target="_blank">Health Days</a></li>
               <li><a href="/enquiry">Enquiries</a></li>
               <li><a href="/testimonials">Testimonials</a></li>
-              {{-- <li><a href="/vaccancies">Latest Vaccancies</a></li> --}}
+              {{-- <li><a href="/vaccancies">Latest Vacancies</a></li> --}}
               <li><a href="/question-of-the-day-quiz">Play Quiz</a></li>
               <li><a href="/discussion-forum">Discussion Forum</a></li>
               <li><a href="/web-policy">Web Policy</a></li>
@@ -140,7 +140,7 @@
                 <div><span>Total MCQs: </span><strong class="counter-count-"> {{$web_counter->mcq ?? '0'}} </strong></div>
                 <div><span>Total PDF Bank: </span><strong class="counter-count-"> {{$web_counter->pdf_bank ?? '0'}} </strong></div>
                 <div><span>Total PDF: </span><strong class="counter-count-"> {{$web_counter->pdf ?? '0'}} </strong></div>
-                <div><span>Total Vaccancies: </span><strong class="counter-count-"> {{$web_counter->vaccancy ?? '0'}} </strong></div>
+                <div><span>Total Vacancies: </span><strong class="counter-count-"> {{$web_counter->vaccancy ?? '0'}} </strong></div>
                 <div><span>Total Downloads: </span><strong class="counter-count-"> {{$web_counter->download ?? '0'}} </strong></div>
                 <div><span>Website Visit Counter: </span><strong class="counter-count-"> {{$web_counter->website ?? '0'}} </strong></div>
               </div>

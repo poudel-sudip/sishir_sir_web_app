@@ -133,6 +133,20 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="source" class="col-md-4 col-form-label">{{ __('Source') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="source" type="text" class="form-control @error('source') is-invalid @enderror" name="source" value="{{ old('source')  }}" autocomplete="source">
+
+                                    @error('source')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
                                 <label for="thumbnail" class="col-md-4 col-form-label">{{ __(' Thumbnail') }}</label>
     
                                 <div class="col-md-8">

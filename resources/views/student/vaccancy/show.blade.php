@@ -43,7 +43,9 @@
                 </div>
                 <div class="col-md-12 mt-3">
                     <div class="my-2">
-                        <span class="mx-2">Tags:  {{implode(', ',$vaccancy->related_tag_names)}} </span>
+                        <div><strong class="me-2">Tags:  </strong> {{implode(', ',$vaccancy->related_tag_names)}} </div>
+                        <div><strong>Source/Reference: </strong> <a @if(trim($vaccancy->source)) href="{{$vaccancy->source}}" target="_blank" @endif> {{$vaccancy->source}} </a> </div>
+
                         {{-- @foreach ($vaccancy->related_tag_names as $tag)
                             <span class="mx-2">{{$tag}}</span>
                         @endforeach --}}

@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    {{$selected_tag->name}} Vaccancies
+    {{$selected_tag->name}} Vacancies
 @endsection
 
 @section('student-title-icon')
@@ -24,7 +24,7 @@
                 </div>
             @endif
 
-            <h2 class="text-center mt-3 text-primary">{{$selected_tag->name}} Vaccancies</h2>
+            <h2 class="text-center mt-3 text-primary">{{$selected_tag->name}} Vacancies</h2>
 
             <div class="text-end mb-2">
                 <a href="/student/vaccancies/create" class="btn btn-success">Submit Your New Vacancy <i class="fa fa-paint-brush"></i> </a>
@@ -54,7 +54,7 @@
                     </div>
                 </div>                
                 @empty              
-                    <div class="text-center">No Vaccancies Published......</div>
+                    <div class="text-center">No Vacancies Published......</div>
                 @endforelse
             </div>
             <div class="mt-2">

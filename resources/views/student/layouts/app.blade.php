@@ -166,7 +166,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/student/vaccancies"><i class="fas fa-graduation-cap  text-pink"></i>Latest Vaccancies</a>
+              <a class="nav-link" href="/student/vaccancies"><i class="fas fa-graduation-cap  text-pink"></i>Latest Vacancies</a>
             </li>
 
             <li class="nav-item">

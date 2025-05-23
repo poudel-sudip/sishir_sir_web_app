@@ -160,7 +160,7 @@
                     $(this).css('background-color', '#91ed91');
                 } else {
                     $(this).css('background-color', '#f07f7f');
-                    $(this).parent().find('.q-option[data-answer="' + correct + '"]').css('background-color', '#91ed91');
+                    //$(this).parent().find('.q-option[data-answer="' + correct + '"]').css('background-color', '#91ed91');
                 }                
 
             });

@@ -65,6 +65,7 @@ class VaccancyController extends Controller
             'pdf_file' => 'nullable|file',
             'thumbnail' => 'required|image',
             'related_rags' => 'array|nullable',
+            'source' => 'nullable|source',
         ]);
 
         $pdf = null;
@@ -94,9 +95,10 @@ class VaccancyController extends Controller
             'description' => $request->description,
             'status' => 'Inactive',
             'tag_ids' => $related_tags,
+            'source' => $request->source,
         ]); 
 
-        return redirect('/student/vaccancies')->with('alert_message','The Vaccancy Has Been Posted. It Will Be Published To Public After Review.');
+        return redirect('/student/vaccancies')->with('alert_message','The Vacancy Has Been Posted. It Will Be Published To Public After Review.');
 
     }
 }

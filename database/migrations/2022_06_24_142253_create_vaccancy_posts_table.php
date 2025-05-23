@@ -26,7 +26,8 @@ class CreateVaccancyPostsTable extends Migration
             $table->text('search_tags')->nullable();
             $table->string('tag_ids')->nullable();
             $table->string('status', 100)->nullable()->default('Active');
-
+            $table->string('source')->nullable();
+            
             $table->timestamps();
         });
     }

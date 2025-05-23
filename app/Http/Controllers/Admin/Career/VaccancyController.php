@@ -39,6 +39,7 @@ class VaccancyController extends Controller
             'status' => 'required|string',
             'search_tags' => 'nullable|string',
             'related_rags' => 'array|nullable',
+            'source' => 'nullable|string',
         ]);
 
         $pdf = null;
@@ -76,6 +77,7 @@ class VaccancyController extends Controller
             'status' => $request->status,
             'search_tags' => $request->search_tags,
             'tag_ids' => $related_tags,
+            'source' => $request->source,
         ]); 
 
         return redirect('/admin/careers');
@@ -115,6 +117,7 @@ class VaccancyController extends Controller
             'thumbnail' => 'nullable|image',
             'search_tags' => 'nullable|string',
             'related_rags' => 'array|nullable',
+            'source' => 'nullable|string',
         ]);
         
         $pdf = $request->old_pdf_file;
@@ -166,6 +169,7 @@ class VaccancyController extends Controller
             'status'=>$request->status,
             'search_tags' => $request->search_tags,
             'tag_ids' => $related_tags,
+            'source' => $request->source,
         ]);
 
         return redirect('/admin/careers');

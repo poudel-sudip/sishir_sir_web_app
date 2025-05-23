@@ -67,6 +67,7 @@ class FrontCareerController extends Controller
             'img_file' => 'nullable|file',
             'thumbnail' => 'required|image',
             'related_rags' => 'array|nullable',
+            'source' => 'nullable|string',
         ]);
 
         $pdf = null;
@@ -103,9 +104,10 @@ class FrontCareerController extends Controller
             'description' => $request->description,
             'status' => 'Inactive',
             'tag_ids' => $related_tags,
+            'source' => $request->source,
         ]); 
 
-        return redirect('/vaccancies')->with('alert_message','The Vaccancy Has Been Posted. It Will Be Published To Public After Review.');
+        return redirect('/vaccancies')->with('alert_message','The Vacancy Has Been Posted. It Will Be Published To Public After Review.');
 
     }
 

@@ -155,7 +155,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="/vaccancies">Vaccancies</a>
+            <a class="nav-link" href="/vaccancies">Vacancies</a>
           </li>
           
         </ul>

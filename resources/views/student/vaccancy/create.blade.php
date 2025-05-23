@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    Post New Vaccancy
+    Post New Vacancy
 @endsection
 
 @section('student-title-icon')
@@ -19,12 +19,12 @@
                                 @csrf
 
                                 <div class="form-group text-center">
-                                  <div class="h3" style="color:#005cb3;">Add New Vaccancy Post</div>  
+                                  <div class="h3" style="color:#005cb3;">Add New Vacancy Post</div>  
                                 </div>
                                 <hr style="margin-top:0;height:2px;background:#0084ff;opacity:1;">
                                 
                                 <div class="form-group row">
-                                    <label for="title" class="col-md-6 col-form-label">{{ __('Vaccancy Title') }}</label>
+                                    <label for="title" class="col-md-6 col-form-label">{{ __('Vacancy Title') }}</label>
         
                                     <div class="col-md-12">
                                         <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
@@ -52,7 +52,7 @@
                                 </div>
         
                                 <div class="form-group row">
-                                    <label for="related_tags" class="col-md-6 col-form-label">{{ __('Vaccancy Related Tags') }}</label>
+                                    <label for="related_tags" class="col-md-6 col-form-label">{{ __('Vacancy Related Tags') }}</label>
                                     <div class="col-md-12">
                                         @foreach($tag_categories as $tag)
                                             <div class="d-inline-block my-1 mx-2 text-center">
@@ -77,7 +77,7 @@
                                 </div>
                                 
                                 <div class="form-group row">
-                                    <label for="pdf_file" class="col-md-6 col-form-label">{{ __('Vaccancy PDF File') }}</label>
+                                    <label for="pdf_file" class="col-md-6 col-form-label">{{ __('Vacancy PDF File') }}</label>
         
                                     <div class="col-md-12">
                                         <input id="pdf_file" type="file" class="form-control @error('pdf_file') is-invalid @enderror" name="pdf_file" value="{{ old('pdf_file') }}" accept=".pdf">
@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="thumbnail" class="col-md-6 col-form-label">{{ __('Vaccancy Thumbnail') }}</label>
+                                    <label for="thumbnail" class="col-md-6 col-form-label">{{ __('Vacancy Thumbnail') }}</label>
         
                                     <div class="col-md-12">
                                         <input id="thumbnail" type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" value="{{ old('thumbnail') }}" accept="image/png, image/jpeg" required>
@@ -105,7 +105,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="description" class="col-md-6 col-form-label">{{ __('Vaccancy Description ') }}</label>
+                                    <label for="description" class="col-md-6 col-form-label">{{ __('Vacancy Description ') }}</label>
         
                                     <div class="col-md-12">
                                         <textarea id="description"  class="summernote form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required >{{ old('description') }}</textarea>
@@ -118,10 +118,24 @@
                                     </div>
                                 </div>
         
+                                <div class="form-group row">
+                                    <label for="source" class="col-md-6 col-form-label">{{ __('Source/Reference') }}</label>
+        
+                                    <div class="col-md-12">
+                                        <input id="source" type="text" class="form-control @error('source') is-invalid @enderror" name="source" value="{{ old('source') ?? '' }}" required autocomplete="source">
+        
+                                        @error('source')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                
                                 <div class="form-group row mt-2 justify-content-center">
                                     <div class="col-md-4">
                                         <button type="submit" class="btn btn-primary register-btn">
-                                            {{ __('Submit Vaccancy Post') }}
+                                            {{ __('Submit Vacancy Post') }}
                                         </button>
                                     </div>
                                 </div>

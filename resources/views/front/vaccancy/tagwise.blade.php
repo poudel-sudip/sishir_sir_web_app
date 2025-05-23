@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('page_title', 'Vaccancies')
+@section('page_title', 'Vacancies')
 @section('content')
 
     <style>
@@ -11,11 +11,11 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{$selected_tag->name}} Vaccancies</h2>
+                <h2>{{$selected_tag->name}} Vacancies</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                       <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Vaccancies</li>
+                      <li class="breadcrumb-item active" aria-current="page">Vacancies</li>
                     </ol>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                     </div>
                 </div>                 
                 @empty              
-                    <div class="text-center">No Vaccancies Published......</div>
+                    <div class="text-center">No Vacancies Published......</div>
                 @endforelse
             </div>
             <div class="">
