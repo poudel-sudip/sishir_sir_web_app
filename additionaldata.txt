@@ -96,3 +96,6 @@ GOOGLE_REDIRECT_URI=https://shisiradhikari.com/auth/google/callback
 FACEBOOK_CLIENT_ID=9303580253018854
 FACEBOOK_CLIENT_SECRET=a1adb60b272376690d31a386b8045379
 FACEBOOK_REDIRECT_URI=https://shisiradhikari.com/auth/facebook/callback
+
+
+{{ SafeGoogleTranslate::trans('Vacancies', app()->getLocale()) }}

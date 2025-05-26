@@ -97,19 +97,19 @@
         
                                         <div class="q-options-container">
                                             <div class="q-option" data-answer="A" data-correct="{{$today_question->opt_correct}}">
-                                                <span class="q-option-marker">A.</span>
+                                                <span class="q-option-marker">A. </span>
                                                 <div class="q-option-text">{!! $today_question->opt_a !!}</div>
                                             </div>
                                             <div class="q-option" data-answer="B" data-correct="{{$today_question->opt_correct}}">
-                                                <span class="q-option-marker">B.</span>
+                                                <span class="q-option-marker">B. </span>
                                                 <div class="q-option-text">{!! $today_question->opt_b !!}</div>
                                             </div>
                                             <div class="q-option" data-answer="C" data-correct="{{$today_question->opt_correct}}">
-                                                <span class="q-option-marker">C.</span>
+                                                <span class="q-option-marker">C. </span>
                                                 <div class="q-option-text">{!! $today_question->opt_c !!}</div>
                                             </div>
                                             <div class="q-option" data-answer="D" data-correct="{{$today_question->opt_correct}}">
-                                                <span class="q-option-marker">D.</span>
+                                                <span class="q-option-marker">D. </span>
                                                 <div class="q-option-text">{!! $today_question->opt_d !!}</div>
                                             </div>
                                         </div> 
@@ -827,7 +827,7 @@
             <div class="container-fluid px-md-5">
                 <div class="row">
                     <div class="col-md-12 relative">
-                        <h2 class="home-section-heading">Vaccancies</h2>
+                        <h2 class="home-section-heading">Vacancies</h2>
                     </div>
                 </div>
                 <div class="lib-filter-alphabets">

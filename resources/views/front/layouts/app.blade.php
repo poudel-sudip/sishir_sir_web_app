@@ -91,6 +91,21 @@
   {{--<script src="{{ asset('js/main.js') }}"></script>--}}
 
   {{--  <script src="{{ asset('js/libraries.js') }}"></script>--}}
+  
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: '', // default language of your site
+        includedLanguages: 'en,ne', // languages you want to support
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+
+  <script type="text/javascript" 
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+  </script>
+
   <script src="{{ asset('js/front.js') }}"></script>
 
   <script type="text/javascript" src="{{asset('js/noprint.js')}}"></script>

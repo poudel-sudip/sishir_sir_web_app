@@ -156,6 +156,10 @@
 
           <li class="nav-item">
             <a class="nav-link" href="/vaccancies">Vacancies</a>
+          </li>          
+
+          <li class="nav-item">
+            <div class="nav-link" id="google_translate_element" ></div>
           </li>
           
         </ul>

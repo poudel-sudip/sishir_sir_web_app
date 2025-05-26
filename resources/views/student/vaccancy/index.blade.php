@@ -30,11 +30,13 @@
                 <a href="/student/vaccancies/create" class="btn btn-success">Submit Your New Vacancy <i class="fa fa-paint-brush"></i> </a>
             </div>
 
-            <div class="my-2 h6">
-                <span><a href="/student/vaccancies" class="btn btn-sm btn-primary">All</a></span>
-                @foreach ($tag_categories as $tag)
-                    <span><a href="/student/vaccancies-tag/{{$tag->id}}" class="btn btn-sm btn-outline-primary">{{$tag->name}}</a></span>
-                @endforeach
+            <div class="my-2">
+                <div class="lib-filter-alphabets justify-content-center">
+                    <a href="/student/vaccancies" class="lib-filter-character active" > All </a>
+                    @foreach ($tag_categories as $tag)
+                        <a href="/student/vaccancies-tag/{{$tag->id}}" class="lib-filter-character" > {{$tag->name}} </a>
+                    @endforeach                    
+                </div>                  
             </div>
 
             <div class="row">
