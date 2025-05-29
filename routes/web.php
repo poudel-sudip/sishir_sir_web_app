@@ -845,6 +845,7 @@ Route::get('/vaccancies/create', 'App\Http\Controllers\FrontCareerController@cre
 Route::post('/vaccancies', 'App\Http\Controllers\FrontCareerController@store')->middleware('auth');
 Route::get('/vaccancies/{vaccancy}', 'App\Http\Controllers\FrontCareerController@show');
 
+Route::get('/child-nutrition-calculator', 'App\Http\Controllers\FrontMiscController@childNutritionCalculator');
 
 
 //front menu details

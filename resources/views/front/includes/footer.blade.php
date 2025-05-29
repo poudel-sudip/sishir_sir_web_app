@@ -68,6 +68,7 @@
             <ul class="footer-menu">
               <li><a href="/about-us">About Us</a></li>
               <li><a href="/bmi-calculator">BMI Calculator</a></li>
+              <li><a href="/child-nutrition-calculator">Child Nutrition Calculator</a></li>
               <li><a href="/health-ingos">Health INGOs in Nepal</a></li>
               <li><a href="/palika-bibaran">Palika Bibaran in Nepal</a></li>
               <li><a href="//drive.google.com/drive/u/2/folders/1XP8xzmVw51RiRfooHMZf1vAdyydnvmY4"> Barambar Chahine Dastavej</a></li>

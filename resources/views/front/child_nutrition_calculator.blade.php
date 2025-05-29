@@ -1,0 +1,127 @@
+@extends('front.layouts.app')
+
+@section('page_title', 'Child Nutrition Calculator')
+@section('og-title', 'Child Nutrition Calculator')
+@section('og-url', url('/child-nutrition-calculator'))
+
+@section('content')
+    <div class="container-fluid px-md-5">
+        <div class="row">
+            <div class="col-md-12 etutor-breadcrumb text-center">
+                <h2>Child Nutrition Calculator</h2>
+                <div aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Child Nutrition Calculator</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="blogs-details-container bg-white  border border-success rounded">
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="{{ url('/child-nutrition-calculator') }}" method="get" class="d-flex flex-column justify-content-between" style="height: 100%;">
+                        <div class="form-group my-1">
+                            <label for="agegroup">Age Group of Baby:</label>
+                            <select class="form-control" id="agegroup" name="agegroup" required>
+                                <option value="">Select Age Group</option>
+                                <option value="0_2_years">0-2 Years</option>
+                                <option value="2_5_years">2-5 Years</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group my-1">
+                            <label for="gender">Gender of Baby:</label>
+                            <select class="form-control" id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group my-1">
+                            <label for="edema">Nutritional Edema of Baby:</label>
+                            <select class="form-control" id="edema" name="edema" >
+                                <option value="">Select Nutritional Edema</option>
+                                <option value="p0">No Nutritional Edema</option>
+                                <option value="p1">Nutritional edema on feet</option>
+                                <option value="p2">Nutritional edema on feet, legs and hands</option>
+                                <option value="p3">Nutritional edema involving face and whole body</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group my-1">
+                            <label for="muac">MUAC (mm) of Baby:</label>
+                            <input type="text" class="form-control" id="muac" name="muac" >
+                        </div>
+                        <div class="form-group my-1">
+                            <label for="height">Height/Length (cm) of Baby:</label>
+                            <input type="text" class="form-control" id="height" name="height" >
+                        </div>
+                        <div class="form-group my-1">
+                            <label for="weight">Weight (kg) of Baby:</label>
+                            <input type="text" class="form-control" id="weight" name="weight" >
+                        </div>
+                        
+                        <button type="submit" class="mt-2 btn btn-primary">Calculate Nutrition Status</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    @if($zScoreHeightData || $zScoreMuacData)
+                        <div class="">
+                            <h4>Child Nutrition Status Result:</h4>
+                            <h5 class="mt-3">Input:</h5>
+                            <div class="d-flex justify-content-between">
+                                <div class="mx-2"><strong>Gender:</strong> {{ $zScoreHeightData->input_gender ?? $zScoreMuacData->input_gender ?? ''}}</div>
+                                <div class="mx-2"><strong>Age Group:</strong> {{ $zScoreHeightData->input_agegroup ?? $zScoreMuacData->input_agegroup ?? ''}}</div>
+                                @if(isset($zScoreMuacData))
+                                    <div class="mx-2"><strong>MUAC:</strong> {{ $zScoreMuacData->input_muac }} MM</div>
+                                @endif
+                                @if(isset($zScoreHeightData))
+                                    <div class="mx-2"><strong>Height/Length:</strong> {{ $zScoreHeightData->input_height }} CM</div>
+                                    <div class="mx-2"><strong>Weight:</strong> {{ $zScoreHeightData->input_median }} KG</div>
+                                @endif
+                            </div>
+
+                            @if(isset($zScoreMuacData))
+                                <div class="mt-3 alert {{ $zScoreMuacData->output_case == 'severe_abnormal' ? 'alert-danger' : ($zScoreMuacData->output_case == 'moderate_abnormal' ? 'alert-warning' : ($zScoreMuacData->output_case == 'normal' ? 'alert-success' :'')) }}">
+                                    <h5 class="">MUAC Result:</h5>
+                                    <div>{!! $zScoreMuacData->output_remarks !!}</div>
+                                </div>
+                            @endif
+
+                            @if(isset($zScoreEdemaData))
+                                <div class="mt-3 alert {{ $zScoreEdemaData->output_case == 'abnormal' ? 'alert-danger' : ($zScoreEdemaData->output_case == 'normal' ? 'alert-success' : '') }}">
+                                    <h5 class="">Edema Result:</h5>
+                                    <div>{!! $zScoreEdemaData->output_remarks !!}</div>
+                                </div>
+                            @endif
+
+                            @if(isset($zScoreHeightData))
+                                <div class="mt-3">
+                                    <h5 class="">Height/Length Standard:</h5>
+                                    <div class="d-flex justify-between">
+                                        <div class="mx-2"><strong>Gender:</strong> {{ $zScoreHeightData->input_gender }}</div>
+                                        <div class="mx-2"><strong>Age Group:</strong> {{ $zScoreHeightData->input_agegroup }}</div>
+                                        <div class="mx-2"><strong>Height/Length:</strong> {{ $zScoreHeightData->Height }} CM</div>
+                                        <div class="mx-2"><strong>M. Weight:</strong> {{ $zScoreHeightData->M }} KG</div>
+                                        <div class="mx-2"><strong>-3SD:</strong> {{ $zScoreHeightData->SD3neg }} KG</div>
+                                        <div class="mx-2"><strong>-2SD:</strong> {{ $zScoreHeightData->SD2neg }} KG</div>
+                                        <div class="mx-2"><strong>-1SD:</strong> {{ $zScoreHeightData->SD1neg }} KG</div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-3 alert {{ $zScoreHeightData->output_case == 'severe_abnormal' ? 'alert-danger' : ($zScoreHeightData->output_case == 'moderate_abnormal' ? 'alert-warning' : ($zScoreHeightData->output_case == 'normal' ? 'alert-success' :'')) }}">
+                                    <h5 class="">Height/Length Result:</h5>
+                                    <div>{!! $zScoreHeightData->output_remarks !!}</div>
+                                </div>
+                            @endif
+
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
