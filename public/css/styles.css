@@ -6830,3 +6830,36 @@ label.star:before {
     background-color: #e3342f;
     border-color: #e3342f
 }
+
+.alert-red {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity))!important;
+    color: #ffffff;
+    border-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity))!important;
+}
+
+.alert-red a {
+    color: #ffffff;
+}
+
+.alert-green {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity))!important;
+    color: #ffffff;
+    border-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity))!important;
+}
+
+.alert-green a {
+    color: #ffffff;
+}
+
+.alert-yellow {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-warning-rgb), var(--bs-bg-opacity))!important;
+    /* color: #ffffff; */
+    border-color: rgba(var(--bs-warning-rgb), var(--bs-bg-opacity))!important;
+}
+
+.alert-yellow a {
+    /* color: #ffffff; */
+}

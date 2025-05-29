@@ -49,7 +49,7 @@ class FrontMiscController extends Controller
             $gender = strtolower(trim($request->gender));
         }
 
-        if(isset($request->agegroup) && trim($request->agegroup) && in_array($request->agegroup, ['0_2_years', '2_5_years']))
+        if(isset($request->agegroup) && trim($request->agegroup) && in_array($request->agegroup, ['0_23_months', '23_59_months']))
         {
             $agegroup = strtolower(trim($request->agegroup));
         }
@@ -138,19 +138,19 @@ class FrontMiscController extends Controller
 
     public function zScoreFinder($height,$median,$gender,$agegroup)
     {
-        if($gender == 'male' && $agegroup == '0_2_years')
+        if($gender == 'male' && $agegroup == '0_23_months')
         {
             $filepath = public_path('admin/files/z-scores/wfh_boys_0-to-2-years_zscores.xlsx');
         }
-        else if($gender == 'male' && $agegroup == '2_5_years')
+        else if($gender == 'male' && $agegroup == '23_59_months')
         {
             $filepath = public_path('admin/files/z-scores/wfh_boys_2-to-5-years_zscores.xlsx');
         }
-        else if($gender == 'female' && $agegroup == '0_2_years')
+        else if($gender == 'female' && $agegroup == '0_23_months')
         {
             $filepath = public_path('admin/files/z-scores/wfh_girls_0-to-2-years_zscores.xlsx');
         }
-        else if($gender == 'female' && $agegroup == '2_5_years')
+        else if($gender == 'female' && $agegroup == '23_59_months')
         {
             $filepath = public_path('admin/files/z-scores/wfh_girls_2-to-5-years_zscores.xlsx');
         }
@@ -217,7 +217,7 @@ class FrontMiscController extends Controller
             $selectedRecord['input_gender'] = $gender;
             $selectedRecord['input_agegroup'] = $agegroup;
 
-            if($selectedRecord['input_median'] < $selectedRecord['SD3neg'])
+            if($selectedRecord['input_median'] <= $selectedRecord['SD3neg'])
             {
                 // Below SD3neg
                 $selectedRecord['output_case'] = 'severe_abnormal';
@@ -226,7 +226,7 @@ class FrontMiscController extends Controller
                 <div>Immediate medical attention is required.</div>
                 ';
             }
-            else if(($selectedRecord['input_median'] >= $selectedRecord['SD3neg']) && ($selectedRecord['input_median'] < $selectedRecord['SD2neg']))
+            else if(($selectedRecord['input_median'] > $selectedRecord['SD3neg']) && ($selectedRecord['input_median'] <= $selectedRecord['SD2neg']))
             {
                 // Between SD3neg and SD2neg
                 $selectedRecord['output_case'] = 'moderate_abnormal';
@@ -235,7 +235,7 @@ class FrontMiscController extends Controller
                 <div>Medical attention is required.</div>
                 ';
             }
-            else if(($selectedRecord['input_median'] >= $selectedRecord['SD2neg']))
+            else if(($selectedRecord['input_median'] > $selectedRecord['SD2neg']))
             {
                 // Above SD2neg 
                 $selectedRecord['output_case'] = 'normal';

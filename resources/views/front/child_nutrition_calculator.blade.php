@@ -5,10 +5,18 @@
 @section('og-url', url('/child-nutrition-calculator'))
 
 @section('content')
+
+    <style>
+        form label{
+            color: #1374ba;
+            font-weight: 600;
+        }
+    </style>
+
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>Child Nutrition Calculator</h2>
+                <h2 >Child Nutrition Calculator</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
@@ -25,8 +33,8 @@
                             <label for="agegroup">Age Group of Baby:</label>
                             <select class="form-control" id="agegroup" name="agegroup" required>
                                 <option value="">Select Age Group</option>
-                                <option value="0_2_years">0-2 Years</option>
-                                <option value="2_5_years">2-5 Years</option>
+                                <option value="0_23_months">0-23 Months</option>
+                                <option value="23_59_months">23-59 Months</option>
                             </select>
                         </div>
 
@@ -51,15 +59,15 @@
                         </div>
 
                         <div class="form-group my-1">
-                            <label for="muac">MUAC (mm) of Baby:</label>
+                            <label for="muac">MUAC of Baby (mm):</label>
                             <input type="text" class="form-control" id="muac" name="muac" >
                         </div>
                         <div class="form-group my-1">
-                            <label for="height">Height/Length (cm) of Baby:</label>
+                            <label for="height">Height/Length of Baby (cm):</label>
                             <input type="text" class="form-control" id="height" name="height" >
                         </div>
                         <div class="form-group my-1">
-                            <label for="weight">Weight (kg) of Baby:</label>
+                            <label for="weight">Weight of Baby (kg):</label>
                             <input type="text" class="form-control" id="weight" name="weight" >
                         </div>
                         
@@ -69,8 +77,8 @@
                 <div class="col-md-6">
                     @if($zScoreHeightData || $zScoreMuacData)
                         <div class="">
-                            <h4>Child Nutrition Status Result:</h4>
-                            <h5 class="mt-3">Input:</h5>
+                            <h4 style="color: #1374ba;">Child Nutrition Status Result:</h4>
+                            <h5 class="mt-3" style="color: #1374ba;">Input:</h5>
                             <div class="d-flex justify-content-between">
                                 <div class="mx-2"><strong>Gender:</strong> {{ $zScoreHeightData->input_gender ?? $zScoreMuacData->input_gender ?? ''}}</div>
                                 <div class="mx-2"><strong>Age Group:</strong> {{ $zScoreHeightData->input_agegroup ?? $zScoreMuacData->input_agegroup ?? ''}}</div>
@@ -84,14 +92,14 @@
                             </div>
 
                             @if(isset($zScoreMuacData))
-                                <div class="mt-3 alert {{ $zScoreMuacData->output_case == 'severe_abnormal' ? 'alert-danger' : ($zScoreMuacData->output_case == 'moderate_abnormal' ? 'alert-warning' : ($zScoreMuacData->output_case == 'normal' ? 'alert-success' :'')) }}">
-                                    <h5 class="">MUAC Result:</h5>
+                                <div class="mt-3 alert {{ $zScoreMuacData->output_case == 'severe_abnormal' ? 'alert-red' : ($zScoreMuacData->output_case == 'moderate_abnormal' ? 'alert-yellow' : ($zScoreMuacData->output_case == 'normal' ? 'alert-green' :'')) }}">
+                                    <h5 class="" >MUAC Result:</h5>
                                     <div>{!! $zScoreMuacData->output_remarks !!}</div>
                                 </div>
                             @endif
 
                             @if(isset($zScoreEdemaData))
-                                <div class="mt-3 alert {{ $zScoreEdemaData->output_case == 'abnormal' ? 'alert-danger' : ($zScoreEdemaData->output_case == 'normal' ? 'alert-success' : '') }}">
+                                <div class="mt-3 alert {{ $zScoreEdemaData->output_case == 'abnormal' ? 'alert-red' : ($zScoreEdemaData->output_case == 'normal' ? 'alert-green' : '') }}">
                                     <h5 class="">Edema Result:</h5>
                                     <div>{!! $zScoreEdemaData->output_remarks !!}</div>
                                 </div>
@@ -99,7 +107,7 @@
 
                             @if(isset($zScoreHeightData))
                                 <div class="mt-3">
-                                    <h5 class="">Height/Length Standard:</h5>
+                                    <h5 class="" style="color: #1374ba;">Height/Length Standard:</h5>
                                     <div class="d-flex justify-between">
                                         <div class="mx-2"><strong>Gender:</strong> {{ $zScoreHeightData->input_gender }}</div>
                                         <div class="mx-2"><strong>Age Group:</strong> {{ $zScoreHeightData->input_agegroup }}</div>
@@ -111,7 +119,7 @@
                                     </div>
                                 </div>
 
-                                <div class="mt-3 alert {{ $zScoreHeightData->output_case == 'severe_abnormal' ? 'alert-danger' : ($zScoreHeightData->output_case == 'moderate_abnormal' ? 'alert-warning' : ($zScoreHeightData->output_case == 'normal' ? 'alert-success' :'')) }}">
+                                <div class="mt-3 alert {{ $zScoreHeightData->output_case == 'severe_abnormal' ? 'alert-red' : ($zScoreHeightData->output_case == 'moderate_abnormal' ? 'alert-yellow' : ($zScoreHeightData->output_case == 'normal' ? 'alert-green' :'')) }}">
                                     <h5 class="">Height/Length Result:</h5>
                                     <div>{!! $zScoreHeightData->output_remarks !!}</div>
                                 </div>
@@ -124,4 +132,18 @@
         </div>
     </div>
 
+
+    <script>
+        $('#agegroup').on('change', function() {
+            var ageGroup = $(this).val();
+            if (ageGroup === '0_23_months') {
+                $('#height').attr('placeholder', 'Length in cm');
+            } else if (ageGroup === '23_59_months') {
+                $('#height').attr('placeholder', 'Height in cm');
+            }
+            else{
+                $('#height').attr('placeholder', '');
+            }
+        });
+    </script>
 @endsection

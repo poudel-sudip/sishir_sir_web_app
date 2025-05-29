@@ -1,8 +1,12 @@
 <header class="shishir-header sticky-sm-top">
   <div class="topbar" style="background: #fff;">
     <div class="container">
-      <div class="row">
-        <div class="col-md-3">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <div class="mb-1 text-center text-md-start">
+            <a href="/child-nutrition-calculator" class="btn btn-danger mx-1">Child Nutrition Calculator</a>
+            <a href="/bmi-calculator" class="btn btn-info mx-1">BMI Calculator</a>
+          </div>
           <div class="search-area">
             <form action="/search/" method="GET">
               <div class="input-group">
@@ -13,13 +17,17 @@
           </div>
         </div>
 
-        <div class="col-md-6 ">
+        <div class="col-md-4">
           <div class="text-center" >
-            <a href="{{ url('/') }}"><img src="{{ asset('images/logo.png') }}" alt="Logo" class="img img-fluid" style="max-height:55px;"></a>
+            <a href="{{ url('/') }}"><img src="{{ asset('images/logo.png') }}" alt="Logo" class="img img-fluid" style="max-height:85px;"></a>
           </div>
         </div>
         
-        <div class="col-sm-3 col-12 auth-nav">
+        <div class="col-sm-4 col-12 auth-nav">
+          <div class="mb-1 d-flex justify-content-center justify-content-lg-end">
+            <div class="" id="google_translate_element" ></div>
+          </div>
+
           <nav class="navbar navbar-expand justify-content-center justify-content-lg-end" style="float: none;">
             <ul class="navbar-nav align-items-center">
               @guest
@@ -157,10 +165,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/vaccancies">Vacancies</a>
           </li>          
-
-          <li class="nav-item">
-            <div class="nav-link" id="google_translate_element" ></div>
-          </li>
+         
           
         </ul>
       </div>
