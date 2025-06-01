@@ -3,6 +3,7 @@
 @section('page_title', 'Child Nutrition Calculator')
 @section('og-title', 'Child Nutrition Calculator')
 @section('og-url', url('/child-nutrition-calculator'))
+@section('og-image', asset('/images/logo.png'))
 
 @section('content')
 
@@ -30,16 +31,16 @@
                 <div class="col-md-6">
                     <form action="{{ url('/child-nutrition-calculator') }}" method="get" class="d-flex flex-column justify-content-between" style="height: 100%;">
                         <div class="form-group my-1">
-                            <label for="agegroup">Age Group of Baby:</label>
+                            <label for="agegroup">Age Group of Child:</label>
                             <select class="form-control" id="agegroup" name="agegroup" required>
                                 <option value="">Select Age Group</option>
                                 <option value="0_23_months">0-23 Months</option>
-                                <option value="23_59_months">23-59 Months</option>
+                                <option value="24_59_months">24-59 Months</option>
                             </select>
                         </div>
 
                         <div class="form-group my-1">
-                            <label for="gender">Gender of Baby:</label>
+                            <label for="gender">Gender of Child:</label>
                             <select class="form-control" id="gender" name="gender" required>
                                 <option value="">Select Gender</option>
                                 <option value="male">Male</option>
@@ -48,7 +49,7 @@
                         </div>
 
                         <div class="form-group my-1">
-                            <label for="edema">Nutritional Edema of Baby:</label>
+                            <label for="edema">Nutritional Edema of Child:</label>
                             <select class="form-control" id="edema" name="edema" >
                                 <option value="">Select Nutritional Edema</option>
                                 <option value="p0">No Nutritional Edema</option>
@@ -59,15 +60,15 @@
                         </div>
 
                         <div class="form-group my-1">
-                            <label for="muac">MUAC of Baby (mm):</label>
+                            <label for="muac">MUAC of Child (mm):</label>
                             <input type="text" class="form-control" id="muac" name="muac" >
                         </div>
                         <div class="form-group my-1">
-                            <label for="height">Height/Length of Baby (cm):</label>
+                            <label for="height">Height/Length of Child (cm):</label>
                             <input type="text" class="form-control" id="height" name="height" >
                         </div>
                         <div class="form-group my-1">
-                            <label for="weight">Weight of Baby (kg):</label>
+                            <label for="weight">Weight of Child (kg):</label>
                             <input type="text" class="form-control" id="weight" name="weight" >
                         </div>
                         
@@ -79,7 +80,7 @@
                         <div class="">
                             <h4 style="color: #1374ba;">Child Nutrition Status Result:</h4>
                             <h5 class="mt-3" style="color: #1374ba;">Input:</h5>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between flex-wrap">
                                 <div class="mx-2"><strong>Gender:</strong> {{ $zScoreHeightData->input_gender ?? $zScoreMuacData->input_gender ?? ''}}</div>
                                 <div class="mx-2"><strong>Age Group:</strong> {{ $zScoreHeightData->input_agegroup ?? $zScoreMuacData->input_agegroup ?? ''}}</div>
                                 @if(isset($zScoreMuacData))
@@ -94,7 +95,7 @@
                             @if(isset($zScoreMuacData))
                                 <div class="mt-3 alert {{ $zScoreMuacData->output_case == 'severe_abnormal' ? 'alert-red' : ($zScoreMuacData->output_case == 'moderate_abnormal' ? 'alert-yellow' : ($zScoreMuacData->output_case == 'normal' ? 'alert-green' :'')) }}">
                                     <h5 class="" >MUAC Result:</h5>
-                                    <div>{!! $zScoreMuacData->output_remarks !!}</div>
+                                    <div>{!! ($zScoreMuacData->output_remarks) !!}</div>
                                 </div>
                             @endif
 
@@ -108,7 +109,7 @@
                             @if(isset($zScoreHeightData))
                                 <div class="mt-3">
                                     <h5 class="" style="color: #1374ba;">Height/Length Standard:</h5>
-                                    <div class="d-flex justify-between">
+                                    <div class="d-flex justify-content-between flex-wrap">
                                         <div class="mx-2"><strong>Gender:</strong> {{ $zScoreHeightData->input_gender }}</div>
                                         <div class="mx-2"><strong>Age Group:</strong> {{ $zScoreHeightData->input_agegroup }}</div>
                                         <div class="mx-2"><strong>Height/Length:</strong> {{ $zScoreHeightData->Height }} CM</div>
@@ -138,7 +139,7 @@
             var ageGroup = $(this).val();
             if (ageGroup === '0_23_months') {
                 $('#height').attr('placeholder', 'Length in cm');
-            } else if (ageGroup === '23_59_months') {
+            } else if (ageGroup === '24_59_months') {
                 $('#height').attr('placeholder', 'Height in cm');
             }
             else{

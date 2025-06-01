@@ -410,6 +410,30 @@
         </div>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#web-page-setting-section" aria-expanded="false" aria-controls="web-page-setting-section">
+          <i class="mdi mdi-settings menu-icon"></i>
+          <span class="menu-title">Web Page Settings</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="web-page-setting-section">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/web-pages/about') }}">About Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/web-pages/policy') }}">Policy Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/web-pages/vision') }}">Vision Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/web-pages/contact') }}">Contact Page</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
       <li class="nav-item sidebar-actions">
         <a class="nav-link" href="{{ url('/change-password') }}">
           <i class="mdi mdi-key-variant menu-icon"></i>
@@ -426,7 +450,7 @@
       </a>
 
       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-          @csrf
+        @csrf
       </form>
 
       </li>

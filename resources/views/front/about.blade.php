@@ -17,9 +17,11 @@
                 </div>
             </div>
         </div>
-        <div class="blogs-details-container bg-white">
+        <div class="blogs-details-container personal-details border border-primary rounded">
             <div class="text-justify">
-                <div class="my-4 text-justify">
+                {!! $page->description !!}
+                
+                {{-- <div class="my-4 text-justify">
                     <strong>Shisiradhikari.com</strong> is a Nepalese education website that was created in 2022 by <strong>Shisir Kumar Adhikari</strong>,
                     who is also the author of the Mentor Series Books for Health Loksewa. 
                     The primary objective of this website is to provide a comprehensive set of online tools aimed
@@ -49,7 +51,7 @@
                     Overall, <strong>shisiradhikari.com</strong> strives to be a valuable online resource for students and educators 
                     alike. By offering a combination of video lessons and supplementary materials, 
                     it aims to facilitate effective learning in the health sciences and Health Loksewa field in Nepal.
-                </div>
+                </div> --}}
                 
             </div>
         </div>

@@ -567,7 +567,11 @@ class FrontController extends Controller
     }
     public function about()
     {
-        return view('front.about');
+        $page = Categories::where('type', '=', 'webpage-about')->first();
+        if(!$page) {
+            abort(404, 'About Page Not Found');
+        }
+        return view('front.about', compact('page'));
     }
 
     public function books()
@@ -1530,8 +1534,11 @@ class FrontController extends Controller
 
     public function webPolicy()
     {
-        $data = [];
-        return view('front.policy', $data);
+        $page = Categories::where('type', '=', 'webpage-policy')->first();
+        if(!$page) {
+            abort(404, 'Privacy Policy Page Not Found');
+        }
+        return view('front.policy', compact('page'));
     }
 
     public function imageGallery()

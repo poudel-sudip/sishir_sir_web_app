@@ -49,7 +49,7 @@ class FrontMiscController extends Controller
             $gender = strtolower(trim($request->gender));
         }
 
-        if(isset($request->agegroup) && trim($request->agegroup) && in_array($request->agegroup, ['0_23_months', '23_59_months']))
+        if(isset($request->agegroup) && trim($request->agegroup) && in_array($request->agegroup, ['0_23_months', '24_59_months']))
         {
             $agegroup = strtolower(trim($request->agegroup));
         }
@@ -73,7 +73,7 @@ class FrontMiscController extends Controller
                 // Severe Malnutrition
                 $mcase = 'severe_abnormal';
                 $mrem = '
-                <div>Severe Malnutrition</div>
+                <div>Severe acute malnutrition</div>
                 <div>Immediate medical attention is required.</div>
                 ';
             }
@@ -82,7 +82,7 @@ class FrontMiscController extends Controller
                 // Moderate Malnutrition
                 $mcase = 'moderate_abnormal';
                 $mrem = '
-                <div>Moderate Malnutrition</div>
+                <div>Moderate acute malnutrition</div>
                 <div>Medical attention is required.</div>
                 ';
             }
@@ -111,7 +111,7 @@ class FrontMiscController extends Controller
         if($edema)
         {
             $edemaCases = [
-                'p0' => 'No Nutritional Edema: 0',
+                'p0' => 'No nutritional edema: 0',
                 'p1' => 'Nutritional edema on feet: +',
                 'p2' => 'Nutritional edema on feet, legs and hands: ++',
                 'p3' => 'Nutritional edema involving face and whole body: +++',
@@ -123,7 +123,7 @@ class FrontMiscController extends Controller
             }
 
             $mrem = '
-                <div>' . ($edema == 'p0' ? 'Child is Healthy.' : 'Child is Unhealthy.') . '</div>
+                <div>' . ($edema == 'p0' ? 'Child is healthy.' : 'Child is unhealthy.') . '</div>
                 <div>' . $edemaCases[$edema] . '</div>
             ';
             $zScoreEdemaData = (object) [
@@ -142,7 +142,7 @@ class FrontMiscController extends Controller
         {
             $filepath = public_path('admin/files/z-scores/wfh_boys_0-to-2-years_zscores.xlsx');
         }
-        else if($gender == 'male' && $agegroup == '23_59_months')
+        else if($gender == 'male' && $agegroup == '24_59_months')
         {
             $filepath = public_path('admin/files/z-scores/wfh_boys_2-to-5-years_zscores.xlsx');
         }
@@ -150,7 +150,7 @@ class FrontMiscController extends Controller
         {
             $filepath = public_path('admin/files/z-scores/wfh_girls_0-to-2-years_zscores.xlsx');
         }
-        else if($gender == 'female' && $agegroup == '23_59_months')
+        else if($gender == 'female' && $agegroup == '24_59_months')
         {
             $filepath = public_path('admin/files/z-scores/wfh_girls_2-to-5-years_zscores.xlsx');
         }
@@ -222,7 +222,7 @@ class FrontMiscController extends Controller
                 // Below SD3neg
                 $selectedRecord['output_case'] = 'severe_abnormal';
                 $selectedRecord['output_remarks'] = '
-                <div>Severe Malnutrition</div>
+                <div>Severe acute malnutrition</div>
                 <div>Immediate medical attention is required.</div>
                 ';
             }
@@ -231,7 +231,7 @@ class FrontMiscController extends Controller
                 // Between SD3neg and SD2neg
                 $selectedRecord['output_case'] = 'moderate_abnormal';
                 $selectedRecord['output_remarks'] = '
-                <div>Moderate Malnutrition</div>
+                <div>Moderate acute malnutrition</div>
                 <div>Medical attention is required.</div>
                 ';
             }

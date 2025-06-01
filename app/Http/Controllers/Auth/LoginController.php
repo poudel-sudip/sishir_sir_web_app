@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use App\Models\Advertisement;
+use App\Models\Categories;
 
 class LoginController extends Controller
 {
@@ -112,10 +113,22 @@ class LoginController extends Controller
 
     protected function showLoginForm()
     {
+        $vision = Categories::where('type', '=', 'webpage-vision')->first();
+        if(!$vision) {
+            abort(404, 'Vision Page Not Found');
+        }
+
+        $contact = Categories::where('type', '=', 'webpage-contact')->first();
+        if(!$contact) {
+            abort(404, 'Contact Page Not Found');
+        }
+
         return view('auth.login',[
             'user_count' => User::count(),
             'top_ad' => Advertisement::where('status','=','Active')->where('position','=','auth_top_ad')->first(),
             'bottom_ad' => Advertisement::where('status','=','Active')->where('position','=','auth_bottom_ad')->first(),
+            'vision' => $vision,
+            'contact' => $contact,
         ]);
     }
 

@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="blogs-details-container bg-white">
+        <div class="blogs-details-container bg-white border border-primary rounded">
             <div class="row">
                 <div class="col-md-8">
                     <div class="row">

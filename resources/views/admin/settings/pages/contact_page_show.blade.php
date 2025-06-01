@@ -1,0 +1,36 @@
+@extends('admin.layouts.app')
+@section('admin-title')
+  Contact Page
+@endsection
+
+@section('content')
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">Contact Page</h3>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Contact Page</li>
+        </ol>
+      </nav>
+    </div> 
+    <div class="row">
+      <div class="col-md-12 stretch-card grid-margin">
+        <div class="card">
+          <div class="card-body">
+            <div class="custon-table-header">
+              <h4 class="card-title">Contact Page</h4>
+              <div class="text-right">
+                <a href="/admin/web-pages/contact/edit"><button type="button" class="btn btn-sm ml-3 btn-warning"> Edit Page </button></a>
+              </div>
+            </div> 
+            <hr>
+            <div class="">
+              {!! $page->description !!}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection

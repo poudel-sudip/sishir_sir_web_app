@@ -106,7 +106,11 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-6 personal-details position-relative">
-            <h1 class="text-danger">Shisir Kumar Adhikari</h1>
+            <div>
+                {!! $contact->description !!}
+            </div>
+            
+            {{-- <h1 class="text-danger">Shisir Kumar Adhikari</h1>
             <span>&#40;Aadharbhut Nagar Hospital Madhuban - Bardiya&#41;
                 <br>
                 CMA, HA &#40;CTEVT&#41; , BPH &#40;PU&#41; , M.Ed. 
@@ -143,12 +147,15 @@
             </div>
             <div class="person-image">
                 <img class="w-100" src="{{ asset('images/shisiradhikari.png') }}" alt="">
-            </div>
+            </div> --}}
         </div>
         <div class="col-md-6">
             <div class="vision-container">
                 <h1>Vision</h1>
-                <p>Shisiradhikari.com is a Nepalese education website that was created in 2022 
+                <div>
+                    {!! $vision->description !!}
+                </div>
+                {{-- <p>Shisiradhikari.com is a Nepalese education website that was created in 2022 
                     by Shisir Kumar Adhikari, who is also the author of the Mentor Series Books 
                     for Health Loksewa. The primary objective of this website is to provide a 
                     comprehensive set of online tools aimed at educating 
@@ -161,7 +168,7 @@
                     and facilitating understanding in an easily digestible format. By utilizing 
                     videos, the website aims to make the learning process 
                     engaging, interactive, and accessible to a wide range of students.
-                </p>
+                </p> --}}
             </div>
         </div>
     </div>

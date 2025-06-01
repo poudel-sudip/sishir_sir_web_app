@@ -537,9 +537,22 @@ Route::patch('/admin/highlights', 'App\Http\Controllers\Admin\HighlightControlle
 Route::delete('/admin/highlights/{highlight}', 'App\Http\Controllers\Admin\HighlightController@destroy')->middleware('role:Admin');
 
 
+//admin web settings mgmt
+Route::get('/admin/web-pages/about', 'App\Http\Controllers\Admin\SettingController@aboutPageShow')->middleware('role:Admin');
+Route::get('/admin/web-pages/about/edit', 'App\Http\Controllers\Admin\SettingController@aboutPageEdit')->middleware('role:Admin');
+Route::patch('/admin/web-pages/about', 'App\Http\Controllers\Admin\SettingController@aboutPageUpdate')->middleware('role:Admin');
 
+Route::get('/admin/web-pages/policy', 'App\Http\Controllers\Admin\SettingController@policyPageShow')->middleware('role:Admin');
+Route::get('/admin/web-pages/policy/edit', 'App\Http\Controllers\Admin\SettingController@policyPageEdit')->middleware('role:Admin');
+Route::patch('/admin/web-pages/policy', 'App\Http\Controllers\Admin\SettingController@policyPageUpdate')->middleware('role:Admin');
 
+Route::get('/admin/web-pages/vision', 'App\Http\Controllers\Admin\SettingController@visionPageShow')->middleware('role:Admin');
+Route::get('/admin/web-pages/vision/edit', 'App\Http\Controllers\Admin\SettingController@visionPageEdit')->middleware('role:Admin');
+Route::patch('/admin/web-pages/vision', 'App\Http\Controllers\Admin\SettingController@visionPageUpdate')->middleware('role:Admin');
 
+Route::get('/admin/web-pages/contact', 'App\Http\Controllers\Admin\SettingController@contactPageShow')->middleware('role:Admin');
+Route::get('/admin/web-pages/contact/edit', 'App\Http\Controllers\Admin\SettingController@contactPageEdit')->middleware('role:Admin');
+Route::patch('/admin/web-pages/contact', 'App\Http\Controllers\Admin\SettingController@contactPageUpdate')->middleware('role:Admin');
 
 
 

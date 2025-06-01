@@ -167,14 +167,14 @@
                 <div class="my-1 col-md-3">
                     <div class="updates border border-primary border-2" style="height: 100%">
                         <div class="update-header">
-                            <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fa-chart-bar"></i> Latest Vaccancies </h5></div>
+                            <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fa-chart-bar"></i> Latest Vacancies </h5></div>
                         </div>
                         <div class="update-body" style="overflow-y:scroll">
                             <ul class="p-0">
                                 @forelse($vaccancies as $row)                         
                                     <li><a href="{{$row->link}}"><i class="fa fa-pen-nib"></i>{{($row->title)}}  </a></li>
                                 @empty
-                                    <li>No Vaccancies Available</li>
+                                    <li>No Vacancies Available</li>
                                 @endforelse
                             </ul>
                         </div>

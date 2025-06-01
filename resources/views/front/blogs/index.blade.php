@@ -26,7 +26,7 @@
             <div class="row">
                 @forelse($blogs as $blog)
                 <div class="col-md-4 mb-2">
-                    <div class="single-blog">
+                    <div class="single-blog rounded">
                         <div class="blog-image">
                             <a href="/blogs/{{$blog->id}}"><img src="/storage/{{$blog->image}}"></a>
                         </div>
