@@ -612,7 +612,7 @@
                     <div class="row home-blog-list">
                         @foreach ($blogs->take(5) as $blog)
                             <div class="col-md-6 col-6 mb-3 @if ($loop->first) hidden @endif">
-                                <div class="blog-item p-2">
+                                <div class="blog-item p-2 rounded">
                                     <a href="/blogs/{{$blog->id}}">
                                         <div class="blog-list-img">
                                             <img src="/storage/{{$blog->image}}" class="img-fluid" alt="{{$blog->title}}">
@@ -629,7 +629,7 @@
 
                 <!-- Center Blog (Latest Blog) -->
                 <div class="col-md-4 text-center">
-                    <div class="blog-section">
+                    <div class="blog-section rounded">
                         <div class="blog-header">
                             <a href="/blogs/{{$last_blog->id}}">
                                 <img src="/storage/{{$last_blog->image}}" class="img-fluid" alt="{{$last_blog->title}}">
@@ -654,7 +654,7 @@
                     <div class="row home-blog-list">
                         @foreach ($blogs->skip(5)->take(4) as $blog)
                             <div class="col-md-6 col-6 mb-3">
-                                <div class="blog-item p-2">
+                                <div class="blog-item rounded p-2">
                                     <a href="/blogs/{{$blog->id}}">
                                         <div class="blog-list-img">
                                             <img src="/storage/{{$blog->image}}" class="img-fluid" alt="{{$blog->title}}">

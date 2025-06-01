@@ -26,16 +26,16 @@
             
             <div class="row">
                 @foreach($testimonials as $testimonial)
-                    <div class="col-md-4">
-                        <div class="border shadow rounded p-3">
-                            <div class="profile-image">
-                                <img src="/storage/{{$testimonial->image}}" class="img img-fluid" alt="" style="max-height:200px !important;">
+                    <div class="col-md-4 my-1 rounded">
+                        <div class="border border-primary shadow rounded p-3">
+                            <div class="profile-image text-center ">
+                                <img src="/storage/{{$testimonial->image}}" class="img img-fluid" alt="" style="width:100px; height:100px; border-radius:50%; max-height:200px !important;">
                             </div>
-                            <div class="profile-details">
-                                <h5>{{$testimonial->name}}</h5>
-                                <p>{{$testimonial->role}}</p>
+                            <div class="profile-details text-center">
+                                <h5 class="text-primary">{{$testimonial->name}}</h5>
+                                <p class="text-success">{{$testimonial->role}}</p>
                             </div>
-                            <div class="review">
+                            <div class="review text-center">
                                 <p>{{$testimonial->message}}</p>
                             </div>
                         </div>
