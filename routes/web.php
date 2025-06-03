@@ -554,6 +554,24 @@ Route::get('/admin/web-pages/contact', 'App\Http\Controllers\Admin\SettingContro
 Route::get('/admin/web-pages/contact/edit', 'App\Http\Controllers\Admin\SettingController@contactPageEdit')->middleware('role:Admin');
 Route::patch('/admin/web-pages/contact', 'App\Http\Controllers\Admin\SettingController@contactPageUpdate')->middleware('role:Admin');
 
+//admin faq mgmt
+Route::get('/admin/faqs', 'App\Http\Controllers\Admin\FaqController@index')->middleware('role:Admin');
+Route::get('/admin/faqs/create', 'App\Http\Controllers\Admin\FaqController@create')->middleware('role:Admin');
+Route::post('/admin/faqs', 'App\Http\Controllers\Admin\FaqController@store')->middleware('role:Admin');
+Route::get('/admin/faqs/{faq}/edit', 'App\Http\Controllers\Admin\FaqController@edit')->middleware('role:Admin');
+Route::get('/admin/faqs/{faq}', 'App\Http\Controllers\Admin\FaqController@show')->middleware('role:Admin');
+Route::patch('/admin/faqs/{faq}', 'App\Http\Controllers\Admin\FaqController@update')->middleware('role:Admin');
+Route::delete('/admin/faqs/{faq}', 'App\Http\Controllers\Admin\FaqController@destroy')->middleware('role:Admin');
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -860,6 +878,9 @@ Route::get('/vaccancies/{vaccancy}', 'App\Http\Controllers\FrontCareerController
 
 Route::get('/child-nutrition-calculator', 'App\Http\Controllers\FrontMiscController@childNutritionCalculator');
 
+//front faqs
+Route::get('/faqs', 'App\Http\Controllers\FrontMiscController@listFaqs');
+Route::get('/faqs/{id}', 'App\Http\Controllers\FrontMiscController@showFaq');
 
 //front menu details
 Route::get('/{group}/{menu}', 'App\Http\Controllers\FrontController@getMenuCategories');

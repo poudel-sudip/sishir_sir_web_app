@@ -1107,6 +1107,23 @@ class FrontController extends Controller
             ->values()
             ->toArray();
         
+        $data['faqs'] = Categories::where('status', '=', 'active')
+            ->where('type', '=', 'faq')
+            ->where(function ($req) use ($query) {
+                $req->where('name', 'Like', '%' . $query . '%')
+                    ->orWhere('slug', 'Like', '%' . $query . '%');
+                    // ->orWhere('search_tags', 'Like', '%' . $query . '%');
+            })
+            ->orderByDesc('id')
+            ->take(20)
+            ->get(['id', 'name as title', 'slug', 'created_at'])
+            ->map(function ($b) {
+                $b['link'] = '/faqs/' . $b->id;
+                return $b;
+            })
+            ->values()
+            ->toArray();
+
         // dd($data);
 
         return view('front.search', $data);

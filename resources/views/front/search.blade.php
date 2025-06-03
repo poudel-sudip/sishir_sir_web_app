@@ -73,6 +73,13 @@
                     @endforeach
                 </div>
 
+                <div class="col-6 single-search-area">
+                    <h5> Faqs: {{count($faqs) >= 20 ? count($faqs).'+' : count($faqs)}} </h5>
+                    @foreach($faqs as $post)
+                        <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
+                    @endforeach
+                </div>
+
             </div>
         </div>
     </div>

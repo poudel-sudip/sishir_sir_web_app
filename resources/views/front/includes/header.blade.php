@@ -93,6 +93,7 @@
             <a class="nav-link" href="/library">Library</a>
           </li>
 
+          
           @foreach($parent_menus as $parent)
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{($parent->name)}}</a>
@@ -123,6 +124,10 @@
               </ul>
             </li>
           @endforeach
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/faqs">FAQ</a>
+          </li> 
           
           {{-- <li class="nav-item ">
             <a class="nav-link" href="/books">My Book</a>
@@ -164,9 +169,8 @@
 
           <li class="nav-item">
             <a class="nav-link" href="/vaccancies">Vacancies</a>
-          </li>          
-         
-          
+          </li>         
+                   
         </ul>
       </div>
     </div>

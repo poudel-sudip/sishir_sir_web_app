@@ -226,6 +226,13 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/faqs') }}">
+            <i class="mdi mdi-alpha-f-box menu-icon"></i>
+            <span class="menu-title">FAQ</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/qr-books') }}">
           <i class="mdi mdi-alpha-b-box menu-icon"></i>
           <span class="menu-title">Books For QR</span>

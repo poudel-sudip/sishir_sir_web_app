@@ -267,4 +267,30 @@ class FrontMiscController extends Controller
         }
         
     }
+
+    public function listFaqs(Request $request)
+    {
+        $faqs = Category::where('type','=','faq')
+            ->where('status', 'active')
+            ->orderByDesc('id')
+            ->get();
+
+        return view('front.faq.index', compact('faqs'));
+    }
+
+    public function showFaq(Request $request, $id)
+    {
+        $faq = Category::where('type','=','faq')
+            ->where('status','=','active')
+            ->where('id','=',$id)
+            ->first();
+
+        if(!$faq)
+        {
+            abort(404, 'FAQ not found.');
+        }
+
+        return view('front.faq.show', compact('faq'));
+    }
+        
 }
