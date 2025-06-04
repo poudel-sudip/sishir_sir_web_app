@@ -15,7 +15,9 @@ class FaqController extends Controller
 
     public function index()
     {
-        $faqs = Faq::where('type','=','faq')->get();
+        $faqs = Faq::where('type','=','faq')
+        ->orderByDesc('id')
+        ->get();
         return view('admin.faq.index', compact('faqs'));
     }
 

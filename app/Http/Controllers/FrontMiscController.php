@@ -272,10 +272,14 @@ class FrontMiscController extends Controller
     {
         $faqs = Category::where('type','=','faq')
             ->where('status', 'active')
-            ->orderByDesc('id')
+            // ->orderByDesc('id')
             ->get();
 
-        return view('front.faq.index', compact('faqs'));
+        $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
+        $pgtitle = 'FAQ - Frequently Asked Questions';
+        $counterData = Helper::pageCounterCounts($pgtitle,$pgurl);
+
+        return view('front.faq.index', compact('faqs', 'counterData'));
     }
 
     public function showFaq(Request $request, $id)
@@ -290,7 +294,11 @@ class FrontMiscController extends Controller
             abort(404, 'FAQ not found.');
         }
 
-        return view('front.faq.show', compact('faq'));
+        $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
+        $pgtype = 'article';
+        $counterData = Helper::pageCounterCounts($faq->name,$pgurl,$pgtype);
+
+        return view('front.faq.show', compact('faq', 'counterData'));
     }
         
 }

@@ -124,10 +124,7 @@
               </ul>
             </li>
           @endforeach
-          
-          <li class="nav-item">
-            <a class="nav-link" href="/faqs">FAQ</a>
-          </li> 
+             
           
           {{-- <li class="nav-item ">
             <a class="nav-link" href="/books">My Book</a>
@@ -170,7 +167,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/vaccancies">Vacancies</a>
           </li>         
-                   
+              
+          <li class="nav-item">
+            <a class="nav-link" href="/faqs">FAQs</a>
+          </li> 
+          
         </ul>
       </div>
     </div>

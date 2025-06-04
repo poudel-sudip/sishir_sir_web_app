@@ -17,14 +17,29 @@
                 </div>
             </div>
         </div>
+        
+        <div class="mb-3">
+            <div class="row align-items-center">
+                <div class="col-md-6 align-self-center">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span class="mx-3 h6 text-info text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
+                        <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="">
 
             <div class="accordion" id="faqAccordion">
-                @forelse($faqs as $faq)
+                @forelse($faqs as $key=>$faq)
                     <div class="accordion-item border border-primary">
-                        <div class="accordion-header" id="faq-{{ $faq->id }}">
+                        <div class="accordion-header text-justify" id="faq-{{ $faq->id }}">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $faq->id }}" aria-expanded="false" aria-controls="collapse-{{ $faq->id }}">
-                                <strong style="color: #1374ba;">{{ $faq->name }}</strong>
+                                <strong style="color: #1374ba;">{{ $key + 1 }}. {{ $faq->name }}</strong>
                             </button>
                         </div>
                         <div id="collapse-{{ $faq->id }}" class="accordion-collapse collapse" aria-labelledby="faq-{{ $faq->id }}" data-bs-parent="#faqAccordion">
@@ -40,5 +55,14 @@
             
         </div>
     </div>
+
+    <script>
+        function handleShare(event)
+        {
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'share', page: 'FAQ Show',pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
+        }
+    </script>
 
 @endsection

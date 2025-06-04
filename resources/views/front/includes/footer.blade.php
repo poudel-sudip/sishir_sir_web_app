@@ -80,6 +80,8 @@
               {{-- <li><a href="/vaccancies">Latest Vacancies</a></li> --}}
               <li><a href="/question-of-the-day-quiz">Play Quiz</a></li>
               <li><a href="/discussion-forum">Discussion Forum</a></li>
+              <li><a href="/library/487">Scholarships</a></li>
+              <li><a href="/faqs">FAQs</a></li>
               <li><a href="/web-policy">Web Policy</a></li>
             </ul>
             <hr>
