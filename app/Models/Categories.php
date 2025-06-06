@@ -84,4 +84,9 @@ class Categories extends Model
     {
         return VaccancyPost::whereJsonContains('tag_ids', $this->id);
     }
+
+    public function healthDays(): HasMany
+    {
+        return $this->hasMany(HealthDay::class,'category_id')->orderBy('date','ASC');
+    }
 }

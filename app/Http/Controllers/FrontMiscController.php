@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Helpers\Helper;
 use App\Models\Categories as Category;
+use App\Models\HealthDay;
 
 class FrontMiscController extends Controller
 {
@@ -301,4 +302,82 @@ class FrontMiscController extends Controller
         return view('front.faq.show', compact('faq', 'counterData'));
     }
         
+
+    public function healthDaysList(Request $request)
+    {
+        $year = date('Y');
+        if(isset($request->year) && trim($request->year) && is_numeric($request->year) && (int)$request->year > 2000 )
+        {
+            $year = (int)$request->year;
+        }
+
+        $healthDays = HealthDay::whereYear('date', '=', $year)
+            ->orderBy('date', 'asc')
+            ->get()
+            ->values();
+
+        $healthYears = HealthDay::selectRaw('YEAR(date) as year')
+            ->groupBy('year')
+            ->orderBy('year', 'desc')
+            ->pluck('year')
+            ->toArray();
+
+        array_push($healthYears, date('Y'));
+        sort($healthYears);
+        $healthYears = array_values(array_unique($healthYears));
+
+        $data['year'] = $year;
+        $data['healthDays'] = $healthDays;
+        $data['healthYears'] = $healthYears;
+
+        return view('front.health_days.index', $data);
+    }
+
+    public function yearHealthDaysList(Request $request, $year)
+    {        
+        $year = (int)$year;
+        if($year < 2000 || $year > 2100)
+        {
+            abort(403, 'Invalid year provided.');
+        }
+
+        $healthDays = HealthDay::whereYear('date', '=', $year)
+            ->orderBy('date', 'asc')
+            ->get()
+            ->values();
+
+        $healthYears = HealthDay::selectRaw('YEAR(date) as year')
+            ->groupBy('year')
+            ->orderBy('year', 'desc')
+            ->pluck('year')
+            ->toArray();
+
+        array_push($healthYears, date('Y'));
+        sort($healthYears);
+        $healthYears = array_values(array_unique($healthYears));
+
+        $data['year'] = $year;
+        $data['healthDays'] = $healthDays;
+        $data['healthYears'] = $healthYears;
+
+        return view('front.health_days.index', $data);
+    }
+
+    public function showHealthDay(Request $request, $id)
+    {
+        $healthDay = HealthDay::where('id', '=', $id)
+            ->first();
+
+        if(!$healthDay)
+        {
+            abort(404, 'Health Day not found.');
+        }
+
+        $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
+        $pgtype = 'article';
+        $counterData = Helper::pageCounterCounts($healthDay->title, $pgurl, $pgtype);
+
+        // dd($counterData,$pgurl);
+        return view('front.health_days.show', compact('healthDay', 'counterData'));
+    }
 }

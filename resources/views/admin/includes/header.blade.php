@@ -219,6 +219,13 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/health-days') }}">
+            <i class="mdi mdi-alpha-d-box menu-icon"></i>
+            <span class="menu-title">Health Days</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/highlights') }}">
             <i class="mdi mdi-alpha-h-box menu-icon"></i>
             <span class="menu-title">Home Highlights</span>

@@ -563,12 +563,15 @@ Route::get('/admin/faqs/{faq}', 'App\Http\Controllers\Admin\FaqController@show')
 Route::patch('/admin/faqs/{faq}', 'App\Http\Controllers\Admin\FaqController@update')->middleware('role:Admin');
 Route::delete('/admin/faqs/{faq}', 'App\Http\Controllers\Admin\FaqController@destroy')->middleware('role:Admin');
 
-
-
-
-
-
-
+//admin health days management
+Route::get('/admin/health-days', 'App\Http\Controllers\Admin\HealthDayController@index')->middleware('role:Admin');
+Route::get('/admin/health-days/create', 'App\Http\Controllers\Admin\HealthDayController@create')->middleware('role:Admin');
+Route::post('/admin/health-days', 'App\Http\Controllers\Admin\HealthDayController@store')->middleware('role:Admin');
+Route::get('/admin/health-days/import', 'App\Http\Controllers\Admin\HealthDayController@import')->middleware('role:Admin');
+Route::get('/admin/health-days/{healthDay}/edit', 'App\Http\Controllers\Admin\HealthDayController@edit')->middleware('role:Admin');
+Route::get('/admin/health-days/{healthDay}', 'App\Http\Controllers\Admin\HealthDayController@show')->middleware('role:Admin');
+Route::patch('/admin/health-days/{healthDay}', 'App\Http\Controllers\Admin\HealthDayController@update')->middleware('role:Admin');
+Route::delete('/admin/health-days/{healthDay}', 'App\Http\Controllers\Admin\HealthDayController@destroy')->middleware('role:Admin');
 
 
 
@@ -881,6 +884,11 @@ Route::get('/child-nutrition-calculator', 'App\Http\Controllers\FrontMiscControl
 //front faqs
 Route::get('/faqs', 'App\Http\Controllers\FrontMiscController@listFaqs');
 Route::get('/faqs/{id}', 'App\Http\Controllers\FrontMiscController@showFaq');
+
+// Route::get('/health-days', 'App\Http\Controllers\FrontMiscController@healthDaysList');
+// Route::get('/health-days/year/{year}', 'App\Http\Controllers\FrontMiscController@yearHealthDaysList');
+// Route::get('/health-days/show/{id}', 'App\Http\Controllers\FrontMiscController@showHealthDay');
+
 
 //front menu details
 Route::get('/{group}/{menu}', 'App\Http\Controllers\FrontController@getMenuCategories');
