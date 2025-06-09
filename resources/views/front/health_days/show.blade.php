@@ -4,9 +4,9 @@
 @section('og-title', $healthDay->title)
 @section('og-url', url('/health-days/show/'.$healthDay->id))
 @section('og-description', strip_tags($healthDay->description) ? strip_tags(str_replace('<', '  <', $healthDay->description)) : $healthDay->title )
-{{-- @if($healthDay->image)
+@if($healthDay->image)
 @section('og-image', asset('/storage/'.$healthDay->image))
-@endif --}}
+@endif
 
 
 
@@ -18,7 +18,8 @@
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ ('/health-days/year/'.date('Y', strtotime($healthDay->date))) }}">Health Days</a></li>
+                        <li class="breadcrumb-item"><a href="{{ ('/health-days') }}">Health Days</a></li>
+                        <li class="breadcrumb-item"><a href="{{ ('/health-days/year/'.date('Y', strtotime($healthDay->date))) }}">{{date('Y', strtotime($healthDay->date))}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{$healthDay->title}}</li>
                     </ol>
                 </div>
@@ -44,6 +45,9 @@
                 <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
             </div>
         
+            <div class="my-2">
+                <span class="mx-3 h6 text-success text-nowrap"><i class="fa fa-user"></i> Author(s): {{$healthDay->author}}</span>
+            </div>
             
             @if(trim($healthDay->pdf_file))
                 <div class="mt-4">

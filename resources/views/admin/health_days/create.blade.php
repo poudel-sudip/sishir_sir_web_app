@@ -57,9 +57,23 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="author" class="col-md-12 pb-0 mb-0 col-form-label">{{ __('Health Day Author') }}</label>
+
+                                <div class="col-md-12">
+                                    <input id="author" type="text" class="form-control @error('author') is-invalid @enderror" name="author" value="{{ old('author') }}"  autocomplete="author" >
+
+                                    @error('author')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="pdf_file" class="col-sm-12 pb-0 mb-0 col-form-label">{{ __('PDF File') }}</label>
                                 <div class="col-md-12">
-                                    <input id="pdf_file" type="file" class="form-control @error('pdf_file') is-invalid @enderror" name="pdf_file" value="{{ old('pdf_file')  }}" autocomplete="pdf_file" >
+                                    <input id="pdf_file" type="file" class="form-control @error('pdf_file') is-invalid @enderror" name="pdf_file" value="{{ old('pdf_file')  }}" autocomplete="pdf_file" accept=".pdf">
                                     @error('pdf_file')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -82,6 +96,18 @@
                                 </div>
                             </div>
                             
+                            <div class="form-group row">
+                                <label for="thumbnail" class="col-sm-12 pb-0 mb-0 col-form-label">{{ __('Thumbnail File') }}</label>
+                                <div class="col-md-12">
+                                    <input id="thumbnail" type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" value="{{ old('thumbnail')  }}" autocomplete="thumbnail" accept="image/*" >
+                                    @error('thumbnail')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             {{-- <div class="form-group row">
                                 <label for="status" class="col-md-12 pb-0 mb-0 col-form-label">{{ __(' Status') }}</label>
 

@@ -885,9 +885,9 @@ Route::get('/child-nutrition-calculator', 'App\Http\Controllers\FrontMiscControl
 Route::get('/faqs', 'App\Http\Controllers\FrontMiscController@listFaqs');
 Route::get('/faqs/{id}', 'App\Http\Controllers\FrontMiscController@showFaq');
 
-Route::get('/health-days', 'App\Http\Controllers\FrontMiscController@healthDaysList');
-Route::get('/health-days/year/{year}', 'App\Http\Controllers\FrontMiscController@yearHealthDaysList');
-Route::get('/health-days/show/{id}', 'App\Http\Controllers\FrontMiscController@showHealthDay');
+// Route::get('/health-days', 'App\Http\Controllers\FrontMiscController@healthDaysList');
+// Route::get('/health-days/year/{year}', 'App\Http\Controllers\FrontMiscController@yearHealthDaysList');
+// Route::get('/health-days/show/{id}', 'App\Http\Controllers\FrontMiscController@showHealthDay');
 
 
 //front menu details

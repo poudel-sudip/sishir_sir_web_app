@@ -26,6 +26,21 @@
                 </div>
             </div>
         </div>
+
+        <div class="mb-3">
+            <div class="row align-items-center">
+                <div class="col-md-6 align-self-center">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <span class="mx-3 h6 text-info text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
+                        <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="blogs-details-container bg-white  border border-success rounded">
             <div class="row">
                 <div class="col-md-6">
@@ -146,5 +161,14 @@
                 $('#height').attr('placeholder', '');
             }
         });
+    </script>
+
+    <script>
+        function handleShare(event)
+        {
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'share', page: 'Child Nutrition Calculator',pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
+        }
     </script>
 @endsection

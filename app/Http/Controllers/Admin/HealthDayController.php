@@ -70,14 +70,15 @@ class HealthDayController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'pdf_file' => 'nullable|file|mimes:pdf',
+            'author' => 'nullable|string',
             // 'category_id' => 'required|exists:categories,id',
-            // 'image' => 'nullable|image',
+            'thumbnail' => 'nullable|image',
         ]);
 
-        // $image = null;
-        // if($request->hasFile('image')) {
-        //     $image = $request->file('image')->store('uploads/health_days/'.date('Y',strtotime($request->date)), 'public');
-        // }
+        $image = null;
+        if($request->hasFile('thumbnail')) {
+            $image = $request->file('thumbnail')->store('uploads/health_days/'.date('Y',strtotime($request->date)), 'public');
+        }
 
         $pdf = null;
         if($request->hasFile('pdf_file')) {
@@ -89,8 +90,9 @@ class HealthDayController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'pdf_file' => $pdf,
+            'author' => $request->author,
             // 'category_id' => $request->category_id,
-            // 'image' => $image,
+            'image' => $image,
         ]);
         
 
@@ -116,14 +118,15 @@ class HealthDayController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'pdf_file' => 'nullable|file|mimes:pdf',
+            'author' => 'nullable|string',
             // 'category_id' => 'required|exists:categories,id',
-            // 'image' => 'nullable|image',
+            'thumbnail' => 'nullable|image',
         ]);
 
-        // $image = $healthDay->image;
-        // if($request->hasFile('image')) {
-        //     $image = $request->file('image')->store('uploads/health_days/'.date('Y',strtotime($request->date)), 'public');
-        // }
+        $image = $healthDay->image;
+        if($request->hasFile('thumbnail')) {
+            $image = $request->file('thumbnail')->store('uploads/health_days/'.date('Y',strtotime($request->date)), 'public');
+        }
 
         $pdf = $healthDay->pdf_file;
         if($request->hasFile('pdf_file')) {
@@ -135,8 +138,9 @@ class HealthDayController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'pdf_file' => $pdf,
+            'author' => $request->author,
             // 'category_id' => $request->category_id,
-            // 'image' => $image,
+            'image' => $image,
         ]);
 
         return redirect('/admin/health-days?year='.date('Y',strtotime($request->date)))->with('success', 'Health Day updated successfully.');

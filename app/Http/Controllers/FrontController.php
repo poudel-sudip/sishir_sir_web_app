@@ -42,6 +42,7 @@ use App\Models\Books\PhysicalBookOrder;
 use App\Models\Ebook\Ebook as PDFBank;
 use App\Models\Ebook\EbookCategory as PDFBankCategory;
 use App\Models\VaccancyPost;
+use App\Models\HealthDay;
 
 class FrontController extends Controller
 {
@@ -329,6 +330,17 @@ class FrontController extends Controller
             })
             ->toArray();
 
+        $health_day_updates = HealthDay::orderByDesc('date')
+            ->get()
+            ->values()
+            ->map(function ($b) {
+                return (object)[
+                    'title' => $b->title,
+                    'created_at' => $b->created_at,
+                    'link' => '/health-days/show/' . $b->id,
+                ];
+            })
+            ->toArray();
 
         $data['updates'] = array_merge($data['updates'], $pdf_bank_updates);
         $data['updates'] = array_merge($data['updates'], $premium_exam_updates);
@@ -340,6 +352,7 @@ class FrontController extends Controller
         $data['updates'] = array_merge($data['updates'], $library_materials);
         $data['updates'] = array_merge($data['updates'], $free_exam_updates);
         $data['updates'] = array_merge($data['updates'], $book_updates);
+        // $data['updates'] = array_merge($data['updates'], $health_day_updates);
         // $data['updates'] = array_merge($data['updates'], $vaccancy_updates);
 
         usort($data['updates'], function ($a, $b) {
@@ -1124,6 +1137,21 @@ class FrontController extends Controller
             ->values()
             ->toArray();
 
+        $data['health_days'] = HealthDay::where(function ($req) use ($query) {
+                $req->where('title', 'Like', '%' . $query . '%');
+                    // ->orWhere('search_tags', 'Like', '%' . $query . '%');
+            })
+            ->orderByDesc('date')
+            ->take(20)
+            ->get(['id', 'title', 'created_at'])
+            ->map(function ($b) {
+                $b['link'] = '/health-days/show/' . $b->id;
+                $b['slug'] = $b->title;
+                return $b;
+            })
+            ->values()
+            ->toArray();
+
         // dd($data);
 
         return view('front.search', $data);
@@ -1353,7 +1381,9 @@ class FrontController extends Controller
     public function bmiCalculator()
     {
         $data = [];
-
+        $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
+        $pgtitle = 'BMI Calculator';
+        $data['counterData'] = Helper::pageCounterCounts($pgtitle,$pgurl);
         return view('front.bmi_calculator', $data);
     }
 

@@ -16,6 +16,7 @@ class HealthDay extends Model
         'title',
         'pdf_file',
         'description',
+        'author',
         'image',
     ];
     

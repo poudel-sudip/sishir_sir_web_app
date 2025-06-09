@@ -41,6 +41,7 @@
                                     {{-- <th>Category</th> --}}
                                     <th>Date</th>
                                     <th>Title</th>
+                                    <th>Author</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -51,6 +52,7 @@
                                             {{-- <td>{{optional($row->category)->name}}</td> --}}
                                             <td width="100">{{date('Y-m-d',strtotime($row->date))}}</td>
                                             <td class="text-wrap">{{ $row->title }}</td>
+                                            <td class="text-wrap">{{ $row->author }}</td>
                                             {{-- <td class="{{strtolower($row->status) == 'active' ? 'text-primary' : 'text-danger'}}"> {{ucwords($row->status)}} </td> --}}
                                             <td class="classroom-btn" width="100">
                                                 <a href="/admin/health-days/{{$row->id}}" class="btn btn-primary">Show</a>

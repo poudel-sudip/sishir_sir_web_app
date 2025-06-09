@@ -80,6 +80,13 @@
                     @endforeach
                 </div>
 
+                <div class="col-6 single-search-area">
+                    <h5> Health Days: {{count($health_days) >= 20 ? count($health_days).'+' : count($health_days)}} </h5>
+                    @foreach($health_days as $post)
+                        <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
+                    @endforeach
+                </div>
+
             </div>
         </div>
     </div>

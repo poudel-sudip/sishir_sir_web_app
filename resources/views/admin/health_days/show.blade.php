@@ -30,6 +30,11 @@
                             <div>{{$healthDay->title}}</div>
                         </div>
                        
+                        <div class="course-row">
+                            <div>Author : </div>
+                            <div>{{$healthDay->author}}</div>
+                        </div>
+
                         {{-- <div class="course-row">
                             <div>Status: </div>
                             <div>{{$healthDay->status}}</div>
@@ -38,6 +43,11 @@
                         <div class="course-row">
                             <div>Description: </div>
                             <div>{!! $healthDay->description !!}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Thumbnail: </div>
+                            <div><img src="/storage/{{$healthDay->image}}" class="img img-fluid" style="max-height:150px" alt=""></div>
                         </div>
 
                         @if(trim($healthDay->pdf_file))

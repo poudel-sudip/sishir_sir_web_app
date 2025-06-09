@@ -20,6 +20,7 @@ class CreateHealthDaysTable extends Migration
             $table->string('title')->nullable();
             $table->string('pdf_file')->nullable();
             $table->longText('description')->nullable();
+            $table->string('author')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
 

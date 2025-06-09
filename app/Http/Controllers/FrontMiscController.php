@@ -133,8 +133,12 @@ class FrontMiscController extends Controller
             ];
         }
 
+        $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
+        $pgtitle = 'Child Nutrition Calculator';
+        $counterData = Helper::pageCounterCounts($pgtitle,$pgurl);
+
         // dd($zScoreHeightData);
-        return view('front.child_nutrition_calculator',compact('zScoreHeightData','zScoreMuacData','zScoreEdemaData'));
+        return view('front.child_nutrition_calculator',compact('zScoreHeightData','zScoreMuacData','zScoreEdemaData','counterData'));
     }
 
     public function zScoreFinder($height,$median,$gender,$agegroup)
@@ -327,7 +331,7 @@ class FrontMiscController extends Controller
         $healthYears = array_values(array_unique($healthYears));
 
         $data['year'] = $year;
-        $data['healthDays'] = $healthDays;
+        $data['healthDays'] = json_encode($healthDays);
         $data['healthYears'] = $healthYears;
 
         return view('front.health_days.index', $data);
@@ -357,7 +361,7 @@ class FrontMiscController extends Controller
         $healthYears = array_values(array_unique($healthYears));
 
         $data['year'] = $year;
-        $data['healthDays'] = $healthDays;
+        $data['healthDays'] = json_encode($healthDays);
         $data['healthYears'] = $healthYears;
 
         return view('front.health_days.index', $data);
