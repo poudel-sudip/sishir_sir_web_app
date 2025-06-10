@@ -49,11 +49,18 @@
             </div>
             <div class="border border-primary rounded" style="width: 100%;">
 
-                <div class="lib-filter-alphabets ">
-                    <span class="lib-filter-character active" charfil="0"> All </span>
+                {{-- <div class="lib-filter-alphabets ">
+                    <span class="month-filter lib-filter-character active" charfil="0"> All </span>
                     @for($i=1;$i<=12;++$i)
-                        <span class="lib-filter-character" charfil='{{$i}}'> {{date('M', mktime(0, 0, 0, $i, 1))}} </span>
+                        <span class="month-filter lib-filter-character" charfil='{{$i}}'> {{date('M', mktime(0, 0, 0, $i, 1))}} </span>
                     @endfor
+                </div>   --}}
+
+                <div class="lib-filter-alphabets ">
+                    <span class="category-filter lib-filter-character active" charfil="all"> All </span>
+                    @foreach($healthCategories as $cat)
+                        <span class="category-filter lib-filter-character" charfil='{{$cat->id}}'> {{ $cat->name }} </span>
+                    @endforeach
                 </div>  
                 
                 <div class="mt-2 p-2 px-md-5" id="data-content">                   
@@ -68,27 +75,47 @@
         const healthDays = {!! $healthDays !!};
         displayContent(healthDays);
 
-        $('.lib-filter-character').on('click',function(e){
+        // $('.month-filter').on('click',function(e){
+        //     filchar = $(this).attr('charfil');
+        //     $('.month-filter').removeClass('active');
+        //     $(this).addClass('active');
+            
+        //     if(filchar == '0')
+        //     {
+        //         displayContent(healthDays); 
+        //     }
+        //     else
+        //     {
+        //         filterContentByMonth(filchar);
+        //     }
+        // });       
+        
+        // function filterContentByMonth(month) {
+        //     const fmonth = month.padStart(2, '0'); 
+        //     const filtered = healthDays.filter(day => {
+        //         const dateMonth = day.date.slice(5, 7);
+        //         return dateMonth == fmonth;
+        //     });
+        //     displayContent(filtered);
+        // }
+
+        $('.category-filter').on('click',function(e){
             filchar = $(this).attr('charfil');
-            $('.lib-filter-character').removeClass('active');
+            $('.category-filter').removeClass('active');
             $(this).addClass('active');
             
-            if(filchar == '0')
+            if(filchar == 'all')
             {
                 displayContent(healthDays); 
             }
             else
             {
-                filterContent(filchar);
+                filterContentByCategory(filchar);
             }
         });
-        
-        function filterContent(month) {
-            const fmonth = month.padStart(2, '0'); 
-            const filtered = healthDays.filter(day => {
-                const dateMonth = day.date.slice(5, 7);
-                return dateMonth == fmonth;
-            });
+
+        function filterContentByCategory(cat) {
+            const filtered = healthDays.filter(day => day.category_id == cat);
             displayContent(filtered);
         }
 

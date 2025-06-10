@@ -46,7 +46,8 @@
             </div>
         
             <div class="my-2">
-                <span class="mx-3 h6 text-success text-nowrap"><i class="fa fa-user"></i> Author(s): {{$healthDay->author}}</span>
+                <div class="mx-3 h6 text-success text-nowrap"><i class="fa fa-user"></i> Author(s): {{$healthDay->author}}</div>
+                <div class="mx-3 h6 text-primary text-nowrap">Category: {{optional($healthDay->category)->name}}</div>
             </div>
             
             @if(trim($healthDay->pdf_file))

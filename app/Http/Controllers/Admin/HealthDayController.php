@@ -14,7 +14,7 @@ class HealthDayController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function indexDay(Request $request)
     {
         $year = date('Y');
         if ($request->has('year') && is_numeric($request->year)) {
@@ -44,24 +44,24 @@ class HealthDayController extends Controller
         return view('admin.health_days.index', $data);
     }
 
-    public function create(Request $request)
+    public function createDay(Request $request)
     {
         $year = date('Y');
         if ($request->has('year') && is_numeric($request->year)) {
             $year = (int)$request->year;
         }
 
-        // $categories = Category::where('type', 'health-days')->get();
+        $categories = Category::where('type', 'health-days')->get();
         $canImport = HealthDay::whereYear('date', $year)->count() ? false : true;
         $data['defaultDate'] = $year.'-'.date('m-d');
         $data['canImport'] = $canImport;
-        // $data['categories'] = $categories;
+        $data['categories'] = $categories;
         // dd($data);
 
         return view('admin.health_days.create', $data);
     }
 
-    public function store(Request $request)
+    public function storeDay(Request $request)
     {
         // dd($request->all());
 
@@ -71,7 +71,7 @@ class HealthDayController extends Controller
             'description' => 'nullable|string',
             'pdf_file' => 'nullable|file|mimes:pdf',
             'author' => 'nullable|string',
-            // 'category_id' => 'required|exists:categories,id',
+            'category_id' => 'nullable|exists:categories,id',
             'thumbnail' => 'nullable|image',
         ]);
 
@@ -91,7 +91,7 @@ class HealthDayController extends Controller
             'description' => $request->description,
             'pdf_file' => $pdf,
             'author' => $request->author,
-            // 'category_id' => $request->category_id,
+            'category_id' => $request->category_id,
             'image' => $image,
         ]);
         
@@ -99,19 +99,19 @@ class HealthDayController extends Controller
         return redirect('/admin/health-days?year='.date('Y',strtotime($request->date)))->with('success', 'Health Day created successfully.');
     }
 
-    public function show(HealthDay $healthDay)
+    public function showDay(HealthDay $healthDay)
     {
         // Show details of a specific health day
         return view('admin.health_days.show', compact('healthDay'));
     }
 
-    public function edit(HealthDay $healthDay)
+    public function editDay(HealthDay $healthDay)
     {
-        // Show details of a specific health day
-        return view('admin.health_days.edit', compact('healthDay'));
+        $categories = Category::where('type', 'health-days')->get();
+        return view('admin.health_days.edit', compact('healthDay','categories'));
     }
 
-    public function update(Request $request, HealthDay $healthDay)
+    public function updateDay(Request $request, HealthDay $healthDay)
     {
         $request->validate([
             'date' => 'required|date',
@@ -119,7 +119,7 @@ class HealthDayController extends Controller
             'description' => 'nullable|string',
             'pdf_file' => 'nullable|file|mimes:pdf',
             'author' => 'nullable|string',
-            // 'category_id' => 'required|exists:categories,id',
+            'category_id' => 'nullable|exists:categories,id',
             'thumbnail' => 'nullable|image',
         ]);
 
@@ -139,21 +139,21 @@ class HealthDayController extends Controller
             'description' => $request->description,
             'pdf_file' => $pdf,
             'author' => $request->author,
-            // 'category_id' => $request->category_id,
+            'category_id' => $request->category_id,
             'image' => $image,
         ]);
 
         return redirect('/admin/health-days?year='.date('Y',strtotime($request->date)))->with('success', 'Health Day updated successfully.');
     }
 
-    public function destroy(Request $request, HealthDay $healthDay)
+    public function destroyDay(Request $request, HealthDay $healthDay)
     {
         $healthDay->delete();
 
         return redirect('/admin/health-days?year='.date('Y',strtotime($healthDay->date)))->with('success', 'Health Day deleted successfully.');
     }
 
-    public function import(Request $request)
+    public function importDay(Request $request)
     {
         $year = null;
         if ($request->has('year') && is_numeric($request->year)) {
@@ -191,4 +191,48 @@ class HealthDayController extends Controller
         return redirect('/admin/health-days?year='.$year)->with('success', 'Health Days imported successfully.');
     }
        
+    public function indexCategory()
+    {
+        $categories = Category::where('type','=','health-days')->get();
+        // dd($categories);
+        return view('admin.health_days.categories',compact('categories'));
+    }
+
+    public function storeCategory(Request $request)
+    {
+        $request->validate(['category'=> 'string|required|min:2']);
+        Category::create([
+            'name' => $request->category,
+            'type' => 'health-days',
+            'status' => 'active',
+        ]);
+
+        return redirect('/admin/health-days/categories');
+    }
+
+    public function updateCategory(Request $request)
+    {
+        $request->validate([
+            'category_id' => 'numeric|required|min:1',
+            'category_name' => 'string|required',
+        ]);
+        Category::where('type','=','health-days')
+        ->find($request->category_id)
+        ->update(['name'=>$request->category_name]);
+
+        return redirect('/admin/health-days/categories');
+    }
+
+    public function destroyCategory($category)
+    {
+        $category = Category::where('type','=','health-days')->find($category);
+        if($category)
+        {
+            $category->delete();
+        }
+        
+        return redirect('/admin/health-days/categories');
+    }
+
+
 }

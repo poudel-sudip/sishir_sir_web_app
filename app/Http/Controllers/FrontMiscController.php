@@ -333,6 +333,7 @@ class FrontMiscController extends Controller
         $data['year'] = $year;
         $data['healthDays'] = json_encode($healthDays);
         $data['healthYears'] = $healthYears;
+        $data['healthCategories'] = Category::where('type','=','health-days')->get();
 
         return view('front.health_days.index', $data);
     }
@@ -340,7 +341,7 @@ class FrontMiscController extends Controller
     public function yearHealthDaysList(Request $request, $year)
     {        
         $year = (int)$year;
-        if($year < 2000 || $year > 2100)
+        if($year < 1900 || $year > 2100)
         {
             abort(403, 'Invalid year provided.');
         }
@@ -363,6 +364,7 @@ class FrontMiscController extends Controller
         $data['year'] = $year;
         $data['healthDays'] = json_encode($healthDays);
         $data['healthYears'] = $healthYears;
+        $data['healthCategories'] = Category::where('type','=','health-days')->get();
 
         return view('front.health_days.index', $data);
     }

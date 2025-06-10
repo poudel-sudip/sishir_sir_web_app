@@ -38,7 +38,7 @@
                                 <thead>
                                 <tr>
                                     <th>SN</th>
-                                    {{-- <th>Category</th> --}}
+                                    <th>Category</th>
                                     <th>Date</th>
                                     <th>Title</th>
                                     <th>Author</th>
@@ -49,7 +49,7 @@
                                     @foreach($healthDays as $key=>$row)
                                         <tr>
                                             <td width="50">{{$key+1}}</td>
-                                            {{-- <td>{{optional($row->category)->name}}</td> --}}
+                                            <td>{{optional($row->category)->name}}</td>
                                             <td width="100">{{date('Y-m-d',strtotime($row->date))}}</td>
                                             <td class="text-wrap">{{ $row->title }}</td>
                                             <td class="text-wrap">{{ $row->author }}</td>

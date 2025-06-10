@@ -216,13 +216,24 @@
             <i class="mdi mdi-file-delimited menu-icon"></i>
             <span class="menu-title">Blogs</span>
         </a>
-      </li>
+      </li>     
 
       <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/health-days') }}">
-            <i class="mdi mdi-alpha-d-box menu-icon"></i>
-            <span class="menu-title">Health Days</span>
+        <a class="nav-link" data-toggle="collapse" href="#health-days-section" aria-expanded="false" aria-controls="health-days-section">
+          <i class="mdi mdi-alpha-d-box menu-icon"></i>
+          <span class="menu-title">Health Days</span>
+          <i class="menu-arrow"></i>
         </a>
+        <div class="collapse" id="health-days-section">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/health-days/categories') }}">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/health-days') }}">Days</a>
+            </li>
+          </ul>
+        </div>
       </li>
 
       <li class="nav-item">

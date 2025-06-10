@@ -29,6 +29,24 @@
                             @csrf
 
                             <div class="form-group row">
+                                <label for="category_id" class="col-md-12 pb-0 mb-0 col-form-label">{{ __('Category') }}</label>
+
+                                <div class="col-md-12">
+                                    <select id="category_id" class="form-control @error('category_id') is-invalid @enderror" name="category_id" value="{{ old('category_id') }}" >
+                                        <option value="">Select Health Day Category</option>
+                                        @foreach ($categories as $cat)
+                                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="date" class="col-md-12 pb-0 mb-0 col-form-label">{{ __('Date') }}</label>
 
                                 <div class="col-md-12">
