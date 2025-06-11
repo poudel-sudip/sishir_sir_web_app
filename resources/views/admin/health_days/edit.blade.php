@@ -110,6 +110,34 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="sorting_date" class="col-sm-12 pb-0 mb-0 col-form-label">{{ __('Sorting Date') }}</label>
+                                <div class="col-md-12">
+                                    @php($sorting_dates = explode(':',($healthDay->sorting_date ?? '00:00')))
+                                    <div class="d-flex align-items-center">
+                                        <div class="mr-2">
+                                            <select name="sorting_month" id="sorting_month" class="form-control" required>
+                                                @foreach ($sorting_month as $k=>$v)
+                                                    <option value="{{$k}}" {{$sorting_dates[0] == $k ? 'selected' : ''}} >{{$v}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="ml-2">
+                                            <select name="sorting_date" id="sorting_date" class="form-control" required>
+                                                @for ($i=1;$i<=32;$i++)
+                                                    <option value="{{ sprintf('%02d', $i) }}" {{$sorting_dates[1] == sprintf('%02d', $i) ? 'selected' : ''}}>{{ sprintf('%02d', $i) }}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                    </div>                                    
+                                    @error('sorting_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="description" class="col-md-12 pb-0 mb-0 col-form-label">{{ __('Description ') }}</label>
 
                                 <div class="col-md-12">

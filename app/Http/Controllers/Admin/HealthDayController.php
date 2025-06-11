@@ -59,7 +59,7 @@ class HealthDayController extends Controller
 
     public function indexDay(Request $request)
     {        
-        $healthDays = HealthDay::orderByDesc('id')->get()->values();
+        $healthDays = HealthDay::orderBy('sorting_date','asc')->get()->values();
         $data['healthDays'] = $healthDays;
 
         // dd($data); 
@@ -69,7 +69,32 @@ class HealthDayController extends Controller
     public function createDay(Request $request)
     {        
         $data['categories'] = Category::where('type', 'health-day-category')->get();
-
+        $data['sorting_month'] = (object)[
+            "01" => 'January',
+            "02" => 'February',
+            "03" => 'March',
+            "04" => 'April',
+            "05" => 'May',
+            "06" => 'June',
+            "07" => 'July',
+            "08" => 'August',
+            "09" => 'September',
+            "10" => 'October',
+            "11" => 'November',
+            "12" => 'December',
+            "13" => 'Baisakh',
+            "14" => 'Jestha',
+            "15" => 'Ashadh',
+            "16" => 'Shrawan',
+            "17" => 'Bhadra',
+            "18" => 'Ashwin',
+            "19" => 'Kartik',
+            "20" => 'Mangsir',
+            "21" => 'Poush',
+            "22" => 'Magh',
+            "23" => 'Falgun',
+            "24" => 'Chaitra',
+        ];
         // dd($data);
         return view('admin.health_days.create', $data);
     }
@@ -87,6 +112,8 @@ class HealthDayController extends Controller
             'pdf_file' => 'nullable|file|mimes:pdf',
             'description' => 'nullable|string',
             'thumbnail_image' => 'nullable|image',
+            'sorting_month' => 'required|numeric|gte:1|lte:24',
+            'sorting_date' => 'required|numeric|gte:1|lte:32',  
         ]);
 
         $thumbnail_image = null;
@@ -104,15 +131,18 @@ class HealthDayController extends Controller
             $pdf = $request->file('pdf_file')->store('uploads/health_days/'.date('Y',strtotime($request->date)), 'public');
         }
 
+        $sortdate = ($request->sorting_month ?? '00').':'.($request->sorting_date ?? '00');
+
         $healthDay = HealthDay::create([
             'category_id' => $request->category_id,
             'date' => $request->date,
             'title' => $request->title,
             'description' => $request->description,
             'pdf_file' => $pdf,
-            'author_name' => $request->author_name,
-            'author_image' => $author_image,
+            'author_name' => $request->author_name ?? auth()->user()->name ?? null,
+            'author_image' => $author_image ?? auth()->user()->photo ?? null,
             'thumbnail_image' => $thumbnail_image,
+            'sorting_date' => $sortdate,
         ]);
         
 
@@ -129,6 +159,33 @@ class HealthDayController extends Controller
     {
         $data['healthDay'] = $healthDay;
         $data['categories'] = Category::where('type', 'health-day-category')->get();
+        $data['sorting_month'] = (object)[
+            "01" => 'January',
+            "02" => 'February',
+            "03" => 'March',
+            "04" => 'April',
+            "05" => 'May',
+            "06" => 'June',
+            "07" => 'July',
+            "08" => 'August',
+            "09" => 'September',
+            "10" => 'October',
+            "11" => 'November',
+            "12" => 'December',
+            "13" => 'Baisakh',
+            "14" => 'Jestha',
+            "15" => 'Ashadh',
+            "16" => 'Shrawan',
+            "17" => 'Bhadra',
+            "18" => 'Ashwin',
+            "19" => 'Kartik',
+            "20" => 'Mangsir',
+            "21" => 'Poush',
+            "22" => 'Magh',
+            "23" => 'Falgun',
+            "24" => 'Chaitra',
+        ];
+
         return view('admin.health_days.edit', $data);
     }
 
@@ -145,6 +202,8 @@ class HealthDayController extends Controller
             'pdf_file' => 'nullable|file|mimes:pdf',
             'description' => 'nullable|string',
             'thumbnail_image' => 'nullable|image',
+            'sorting_month' => 'required|numeric|gte:1|lte:24',
+            'sorting_date' => 'required|numeric|gte:1|lte:32', 
         ]);
 
         $thumbnail_image = $healthDay->thumbnail_image;
@@ -162,16 +221,18 @@ class HealthDayController extends Controller
             $pdf = $request->file('pdf_file')->store('uploads/health_days/'.date('Y',strtotime($request->date)), 'public');
         }
 
+        $sortdate = ($request->sorting_month ?? '00').':'.($request->sorting_date ?? '00');
+
         $healthDay->update([           
             'category_id' => $request->category_id,
             'date' => $request->date,
             'title' => $request->title,
             'description' => $request->description,
             'pdf_file' => $pdf,
-            'author_name' => $request->author_name,
-            'author_image' => $author_image,
+            'author_name' => $request->author_name ?? auth()->user()->name ?? null,
+            'author_image' => $author_image ?? auth()->user()->photo ?? null,
             'thumbnail_image' => $thumbnail_image,
-
+            'sorting_date' => $sortdate,
         ]);
 
         return redirect('/admin/health-days')->with('success', 'Health Day updated successfully.');
@@ -188,7 +249,11 @@ class HealthDayController extends Controller
     public function indexDaySlogan(HealthDay $healthDay)
     {
         $data['healthDay'] = $healthDay;
-        $data['slogans'] = $healthDay->slogans()->where('type','=','health-day-slogan')->orderBy('name','asc')->get()->values();
+        $data['slogans'] = $healthDay->slogans()
+        ->where('type','=','health-day-slogan')
+        ->orderBy('name','desc')
+        ->get()
+        ->values();
         // dd($categories);
         return view('admin.health_days.slogans',$data);
     }

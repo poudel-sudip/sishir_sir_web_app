@@ -309,7 +309,7 @@ class FrontMiscController extends Controller
 
     public function healthDaysList(Request $request)
     {        
-        $healthDays = HealthDay::orderBy('id', 'asc')
+        $healthDays = HealthDay::orderBy('sorting_date', 'asc')
             ->get()
             ->values();       
 
@@ -331,7 +331,7 @@ class FrontMiscController extends Controller
 
         $healthDay->slogan_list = $healthDay->slogans()
         ->where('type','=','health-day-slogan')
-        ->orderBy('name','asc')
+        ->orderBy('name','desc')
         ->get(['name as year','description as title'])
         ->values();
 

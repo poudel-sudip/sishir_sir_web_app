@@ -9,6 +9,17 @@
 
 
 @section('content')
+
+    <style>
+        .health-day-slogan .year{
+            background: #fff;
+            padding: 2px 5px;
+            border-radius: 5px;
+            border: 1px solid #9b3e00;
+            border-bottom: 3px solid #db3545;
+        }
+    </style>
+
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
@@ -22,30 +33,44 @@
                 </div>
             </div>
         </div>
-        <div class="blogs-details-container my-3  border border-primary rounded">
+        <div class="blogs-details-container my-3  border border-primary rounded bg-white">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h3 class="text-primary">{{($healthDay->title)}}</h3>
+                    <div class="mx-3 h6 text-primary text-nowrap"><i class="fas fa-calendar"></i> {{$healthDay->date}}</div>
+                    <div class="mx-3 h6 text-danger text-nowrap border-bottom border-danger pb-2"><i class="fa fa-tag"></i> {{optional($healthDay->category)->name}}</div>
+                </div>
+                <div class="col-12">
+                    <div class="lib-filter-alphabets ">
+                        <span class="year-filter lib-filter-character active" charfil="all" style="margin: 5px 0;"> All </span>
+                        @foreach($healthDay->slogan_list as $sl)
+                            <span class="year-filter lib-filter-character" style="margin: 5px 0;" charfil='{{$sl->year}}'> {{ $sl->year }} </span>
+                        @endforeach
+                    </div> 
                 </div>
                 <div class="d-flex align-items-center flex-wrap">
                     <span class="mx-3 h6 text-success text-nowrap"> <img src="/storage/{{$healthDay->author_image }}" onerror="this.src='/images/student.jpg'" style="height:35px; width:35px; border-radius:50%; border:1px solid #198754;"> {{$healthDay->author_name}}</span>
-                    <span class="mx-3 h6 text-primary text-nowrap"><i class="fas fa-calendar"></i> {{$healthDay->date}}</span>
-                    <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-tag"></i> {{optional($healthDay->category)->name}}</span>
+                    {{-- <span class="mx-3 h6 text-primary text-nowrap"><i class="fas fa-calendar"></i> {{$healthDay->date}}</span> --}}
+                    {{-- <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-tag"></i> {{optional($healthDay->category)->name}}</span> --}}
                     <span class="mx-3 h6 text-info text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
                     <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                 </div>
             </div>
             <div class="mt-3">                
                 <div class="mt-3">
-                    <div class="blog-full-description">{!! $healthDay->description !!}</div>
+                    <div class="blog-full-description" style="color:#000 !important;">{!! $healthDay->description !!}</div>
 
                     @if($healthDay->slogan_list->count())
                         <div class="mt-4 px-md-5">
-                            <h5>Themes of {{$healthDay->title}}</h5>
+                            <h5 class="text-danger">Themes/Slogans of {{$healthDay->title}}</h5>
+                            <div class="my-2 d-flex align-items-center">
+                                <div class="me-3"><strong>Year</strong></div>
+                                <div class="ms-3" style=""><strong>Theme/Slogan</strong></div>
+                            </div>
                             @foreach ($healthDay->slogan_list as $sl)
-                                <div class="my-2 d-flex align-items-center">
-                                    <div class="me-3">{{$sl->year}}</div>
-                                    <div class="text-justify">{{$sl->title}}</div>
+                                <div class="my-2 d-flex align-items-center health-day-slogan" id="slogan-{{$sl->year}}">
+                                    <div class="me-3 year">{{$sl->year}}</div>
+                                    <div class="text-justify"><a href="javascript:void();">{{$sl->title}}</a></div>
                                 </div>
                             @endforeach   
                         </div>
@@ -67,6 +92,24 @@
             const postData = { type: 'share', page: 'Health Day Show',pageurl: pageURL };
             postDataWithFetch('/page-counter-increment', postData);
         }
+
+        $('.year-filter').on('click',function(e){
+            filchar = $(this).attr('charfil');
+            $('.year-filter').removeClass('active');
+            $(this).addClass('active');
+            
+            if(filchar == 'all')
+            {
+                $('.health-day-slogan').removeClass('hidden');
+            }
+            else
+            {
+                var sl = 'slogan-'+filchar;
+                $('.health-day-slogan').addClass('hidden');
+                $('#'+sl).removeClass('hidden');
+            }
+        });
+
     </script>
- 
+  
 @endsection

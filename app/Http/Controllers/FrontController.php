@@ -330,7 +330,8 @@ class FrontController extends Controller
             })
             ->toArray();
 
-        $health_day_updates = HealthDay::orderByDesc('id')
+        $health_day_updates = HealthDay::orderBy('sorting_date','desc')
+            ->take(6)
             ->get()
             ->values()
             ->map(function ($b) {

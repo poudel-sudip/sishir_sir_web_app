@@ -19,6 +19,7 @@ class HealthDay extends Model
         'author_name',
         'author_image',
         'thumbnail_image',
+        'sorting_date',
     ];
     
     public function category(): BelongsTo

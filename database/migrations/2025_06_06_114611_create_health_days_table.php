@@ -23,6 +23,8 @@ class CreateHealthDaysTable extends Migration
             $table->string('author_name')->nullable();
             $table->string('author_image')->nullable();
             $table->string('thumbnail_image')->nullable();
+            $table->string('sorting_date')->nullable()->default('00:00');
+
             $table->timestamps();
 
             $table->index('category_id');

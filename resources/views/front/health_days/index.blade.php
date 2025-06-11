@@ -90,7 +90,7 @@
                         ${cat.date}
                     </div>
                     <div class="rounded border border-info p-1" style="width: 100%;">
-                        <a href="/health-days/show/${cat.id}">${cat.title}</a>
+                        <a class="h6" href="/health-days/show/${cat.id}">${cat.title}</a>
                     </div>                    
                 `;
                 dataElement.innerHTML = innerHTML;
