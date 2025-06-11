@@ -3,8 +3,8 @@
 @section('og-title', $healthDay->title)
 @section('og-url', url('/health-days/show/'.$healthDay->id))
 @section('og-description', strip_tags($healthDay->description) ? strip_tags(str_replace('<', '  <', $healthDay->description)) : $healthDay->title )
-@if($healthDay->image)
-@section('og-image', asset('/storage/'.$healthDay->image))
+@if($healthDay->thumbnail_image)
+@section('og-image', asset('/storage/'.$healthDay->thumbnail_image))
 @endif
 
 
