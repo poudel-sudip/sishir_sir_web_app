@@ -56,9 +56,22 @@
                     <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                 </div>
             </div>
-            <div class="mt-3">                
+            <div class="mt-3">  
+
+                @if($healthDay->pdf_file)
+                    <div class="">
+                        <a href="{{url('/storage/'.$healthDay->pdf_file)}}" filename="{{($healthDay->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                    </div>     
+                @endif  
+
                 <div class="mt-3">
                     <div class="blog-full-description" style="color:#000 !important;">{!! $healthDay->description !!}</div>
+
+                    {{-- @if($healthDay->pdf_file)
+                        <div class="my-2">
+                            <div class="_df_book" id="pdf_book_df" source="/storage/{{$healthDay->pdf_file}}" ></div>
+                        </div>
+                    @endif --}}
 
                     @if($healthDay->slogan_list->count())
                         <div class="mt-4 px-md-5">
@@ -86,6 +99,29 @@
     </div>
 
     <script>
+
+         function handleDownload(event) {
+            event.preventDefault(); // Prevent the default behavior of the link
+
+            var downloadUrl = event.target.getAttribute("href");
+            var filename = event.target.getAttribute("filename");
+            var fileExtension = downloadUrl.split('.').pop().toLowerCase();
+
+            var link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = filename +" || shisiradhikari.com."+fileExtension; // Set an empty value for the download attribute to preserve the original filename
+
+            document.body.appendChild(link);
+
+            link.click(); // Simulate a click event to initiate the download
+
+            document.body.removeChild(link); // Remove the dynamically created link element
+            
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'download', page: 'Health Day Show',pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
+        }
+
         function handleShare(event)
         {
             let pageURL = getPageURLWithoutProtocol();
@@ -112,4 +148,29 @@
 
     </script>
   
+    {{-- @if($healthDay->pdf_file)
+        <link href="{{asset('dflip/css/dflip.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('dflip/css/themify-icons.min.css')}}" rel="stylesheet" type="text/css">
+
+        <script src="{{asset('dflip/js/dflip.min.js')}}" type="text/javascript"></script>
+
+        <script>
+            var option_pdf_book_df = {
+                // height:'100%',
+                webgl:true,
+                soundEnable: true,
+                enableDownload: false,
+                backgroundColor: "#1375b9",
+                scrollWheel: false,
+                pageMode: DFLIP.PAGE_MODE.SINGLE,
+                singlePageMode: DFLIP.SINGLE_PAGE_MODE.BOOKLET,
+                allControls: "startPage,altPrev,pageNumber,altNext,endPage,thumbnail,zoomIn,zoomOut,fullScreen,pageMode",
+                moreControls: "",
+                hideControls: "share,download",
+            };
+        </script>
+
+    @endif --}}
+
+
 @endsection

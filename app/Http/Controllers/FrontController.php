@@ -71,6 +71,11 @@ class FrontController extends Controller
         });
 
 
+        $data['healthDays'] = HealthDay::orderBy('sorting_date', 'asc')
+            ->take(10)
+            ->get(['id','title','date','sorting_date'])
+            ->values(); 
+
         $today_question = DailyMCQQuestion::where('show_date', '=', date('Y-m-d'))->first();
         if ($today_question) {
             // $today_question->image = $this->generateQuestionImage($today_question);

@@ -822,6 +822,35 @@
         </section>
     @endif --}}
 
+    @if(count($healthDays))
+        <section class="home-ebook mt-3 mb-5 pt-3" style="background: #bde3ff;">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    <div class="col-md-12 relative">
+                        <h2 class="home-section-heading">Health Days</h2>
+                    </div>
+                </div>
+                
+                <div class="px-md-5">
+                    @foreach ($healthDays as $day)
+                        <div class="my-2 d-flex justify-content-between align-items-center">
+                            <div class="p-1 rounded bg-info  text-center text-nowrap">
+                                {{$day->date}}
+                            </div>
+                            <div class="rounded border border-primary p-1" style="width: 100%;">
+                                <a class="h6" href="/health-days/show/{{$day->id}}">{{$day->title}}</a>
+                            </div>  
+                        </div>
+                    @endforeach                    
+                </div>
+            
+                <div class="text-end mt-2">
+                    <a href="/health-days" class="btn btn-sm" style="background:#1375b9;color:#fff">View all...</a>
+                </div>
+            </div>
+        </section>
+    @endif
+
     @if(count($vaccancy_tags))
         <section class="home-ebook mt-3 mb-5">
             <div class="container-fluid px-md-5">

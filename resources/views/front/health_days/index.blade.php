@@ -6,25 +6,6 @@
 
 @section('content')
 
-    {{-- <style>
-        .health-year {
-            margin: 8px 0;
-            text-align: end;
-            padding: 0 5px 0 25px;
-        }
-        .health-year a {
-            background: #fff;
-            padding: 2px 5px;
-            border-radius: 5px;
-            border-bottom: 3px solid #db3545;
-            
-        }
-        .health-year a:hover, .health-year a.active {
-            background: #c3e0f3;
-        }
-        
-    </style> --}}
-
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">

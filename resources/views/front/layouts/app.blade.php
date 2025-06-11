@@ -108,7 +108,7 @@
 
   <script src="{{ asset('js/front.js') }}"></script>
 
-  {{-- <script type="text/javascript" src="{{asset('js/noprint.js')}}"></script> --}}
+  <script type="text/javascript" src="{{asset('js/noprint.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/misc.js')}}"></script>
 
   @yield('page-footer-content')
