@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <style>
+    {{-- <style>
         .health-year {
             margin: 8px 0;
             text-align: end;
@@ -23,49 +23,32 @@
             background: #c3e0f3;
         }
         
-    </style>
+    </style> --}}
 
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>Health Days of {{ $year }}</h2>
+                <h2>Health Days</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/health-days/year/{{$year}}">{{$year}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Health Days</li>
                     </ol>
                 </div>
             </div>
         </div>        
         
-        <div class="d-flex justify-content-between">
-            <div class="py-1 px-1 rounded" style="background: #1374ba;">
-                @foreach($healthYears as $y)                    
-                    <div class="health-year">
-                        <a href="/health-days/year/{{$y}}" class="{{ $year == $y ? 'active' : '' }} " style="">{{ $y }}</a>
-                    </div>
+        <div class="mb-4 p-4 border border-primary rounded">
+            
+            <div class="lib-filter-alphabets ">
+                <span class="category-filter lib-filter-character active" charfil="all"> All </span>
+                @foreach($healthCategories as $cat)
+                    <span class="category-filter lib-filter-character" charfil='{{$cat->id}}'> {{ $cat->name }} </span>
                 @endforeach
-            </div>
-            <div class="border border-primary rounded" style="width: 100%;">
+            </div>  
+            
+            <div class="mt-2 " id="data-content">                   
 
-                {{-- <div class="lib-filter-alphabets ">
-                    <span class="month-filter lib-filter-character active" charfil="0"> All </span>
-                    @for($i=1;$i<=12;++$i)
-                        <span class="month-filter lib-filter-character" charfil='{{$i}}'> {{date('M', mktime(0, 0, 0, $i, 1))}} </span>
-                    @endfor
-                </div>   --}}
-
-                <div class="lib-filter-alphabets ">
-                    <span class="category-filter lib-filter-character active" charfil="all"> All </span>
-                    @foreach($healthCategories as $cat)
-                        <span class="category-filter lib-filter-character" charfil='{{$cat->id}}'> {{ $cat->name }} </span>
-                    @endforeach
-                </div>  
-                
-                <div class="mt-2 p-2 px-md-5" id="data-content">                   
-
-                </div>
             </div>
         </div>
         
@@ -74,30 +57,6 @@
     <script>
         const healthDays = {!! $healthDays !!};
         displayContent(healthDays);
-
-        // $('.month-filter').on('click',function(e){
-        //     filchar = $(this).attr('charfil');
-        //     $('.month-filter').removeClass('active');
-        //     $(this).addClass('active');
-            
-        //     if(filchar == '0')
-        //     {
-        //         displayContent(healthDays); 
-        //     }
-        //     else
-        //     {
-        //         filterContentByMonth(filchar);
-        //     }
-        // });       
-        
-        // function filterContentByMonth(month) {
-        //     const fmonth = month.padStart(2, '0'); 
-        //     const filtered = healthDays.filter(day => {
-        //         const dateMonth = day.date.slice(5, 7);
-        //         return dateMonth == fmonth;
-        //     });
-        //     displayContent(filtered);
-        // }
 
         $('.category-filter').on('click',function(e){
             filchar = $(this).attr('charfil');
@@ -124,15 +83,11 @@
             contentDiv.innerHTML = '';
 
             dataDays.forEach(cat => {
-
-                const dateObj = new Date(cat.date);
-                const dateOptions = { month: 'short', day: '2-digit' };
-                const formattedDate = dateObj.toLocaleDateString('en-US', dateOptions);
                 const dataElement = document.createElement('div');
                 dataElement.classList.add('my-2','d-flex','justify-content-between','align-items-center');
                 const innerHTML = `
                     <div class="p-1 rounded bg-info  text-center text-nowrap">
-                        ${formattedDate}
+                        ${cat.date}
                     </div>
                     <div class="rounded border border-info p-1" style="width: 100%;">
                         <a href="/health-days/show/${cat.id}">${cat.title}</a>
@@ -145,7 +100,6 @@
         }
 
     </script>
-
 
 
 @endsection

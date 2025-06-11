@@ -330,7 +330,7 @@ class FrontController extends Controller
             })
             ->toArray();
 
-        $health_day_updates = HealthDay::orderByDesc('date')
+        $health_day_updates = HealthDay::orderByDesc('id')
             ->get()
             ->values()
             ->map(function ($b) {
@@ -352,7 +352,7 @@ class FrontController extends Controller
         $data['updates'] = array_merge($data['updates'], $library_materials);
         $data['updates'] = array_merge($data['updates'], $free_exam_updates);
         $data['updates'] = array_merge($data['updates'], $book_updates);
-        // $data['updates'] = array_merge($data['updates'], $health_day_updates);
+        $data['updates'] = array_merge($data['updates'], $health_day_updates);
         // $data['updates'] = array_merge($data['updates'], $vaccancy_updates);
 
         usort($data['updates'], function ($a, $b) {

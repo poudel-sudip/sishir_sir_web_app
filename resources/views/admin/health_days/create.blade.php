@@ -15,11 +15,7 @@
                 </ol>
             </nav>
         </div>
-        @if($canImport)
-            <div class="text-right">
-                <a href="/admin/health-days/import?year={{ date('Y', strtotime($defaultDate)) }}" class="btn btn-sm btn-info">Import Data From Year {{ date('Y', strtotime($defaultDate.'- 1 year')) }}</a>
-            </div>
-        @endif
+        
         <div class="row justify-content-center">
             <div class="col-md-12 grid-margin stretch-card">                
                 <div class="card">                    
@@ -50,7 +46,7 @@
                                 <label for="date" class="col-md-12 pb-0 mb-0 col-form-label">{{ __('Date') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') ?? date('Y-m-d', strtotime($defaultDate)) }}" required autocomplete="date" autofocus>
+                                    <input id="date" type="text" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}" required autocomplete="date" autofocus>
 
                                     @error('date')
                                     <span class="invalid-feedback" role="alert">
@@ -75,12 +71,24 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="author" class="col-md-12 pb-0 mb-0 col-form-label">{{ __('Health Day Author') }}</label>
+                                <label for="author_name" class="col-md-12 pb-0 mb-0 col-form-label">{{ __('Health Day Author') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="author" type="text" class="form-control @error('author') is-invalid @enderror" name="author" value="{{ old('author') }}"  autocomplete="author" >
+                                    <input id="author_name" type="text" class="form-control @error('author_name') is-invalid @enderror" name="author_name" value="{{ old('author_name') }}"  autocomplete="author_name" >
 
-                                    @error('author')
+                                    @error('author_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="author_image" class="col-sm-12 pb-0 mb-0 col-form-label">{{ __('Author Image') }}</label>
+                                <div class="col-md-12">
+                                    <input id="author_image" type="file" class="form-control @error('author_image') is-invalid @enderror" name="author_image" value="{{ old('author_image')  }}" autocomplete="author_image" accept="image/*" >
+                                    @error('author_image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -115,10 +123,10 @@
                             </div>
                             
                             <div class="form-group row">
-                                <label for="thumbnail" class="col-sm-12 pb-0 mb-0 col-form-label">{{ __('Thumbnail File') }}</label>
+                                <label for="thumbnail_image" class="col-sm-12 pb-0 mb-0 col-form-label">{{ __('Thumbnail Image') }}</label>
                                 <div class="col-md-12">
-                                    <input id="thumbnail" type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" value="{{ old('thumbnail')  }}" autocomplete="thumbnail" accept="image/*" >
-                                    @error('thumbnail')
+                                    <input id="thumbnail_image" type="file" class="form-control @error('thumbnail_image') is-invalid @enderror" name="thumbnail_image" value="{{ old('thumbnail_image')  }}" autocomplete="thumbnail_image" accept="image/*" >
+                                    @error('thumbnail_image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

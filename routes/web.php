@@ -578,6 +578,10 @@ Route::get('/admin/health-days/{healthDay}', 'App\Http\Controllers\Admin\HealthD
 Route::patch('/admin/health-days/{healthDay}', 'App\Http\Controllers\Admin\HealthDayController@updateDay')->middleware('role:Admin');
 Route::delete('/admin/health-days/{healthDay}', 'App\Http\Controllers\Admin\HealthDayController@destroyDay')->middleware('role:Admin');
 
+Route::get('/admin/health-days/{healthDay}/slogans', 'App\Http\Controllers\Admin\HealthDayController@indexDaySlogan')->middleware('role:Admin');
+Route::post('/admin/health-days/{healthDay}/slogans', 'App\Http\Controllers\Admin\HealthDayController@storeDaySlogan')->middleware('role:Admin');
+Route::patch('/admin/health-days/{healthDay}/slogans', 'App\Http\Controllers\Admin\HealthDayController@updateDaySlogan')->middleware('role:Admin');
+Route::delete('/admin/health-days/{healthDay}/slogans/{slogan}', 'App\Http\Controllers\Admin\HealthDayController@destroyDaySlogan')->middleware('role:Admin');
 
 
 
@@ -891,7 +895,6 @@ Route::get('/faqs', 'App\Http\Controllers\FrontMiscController@listFaqs');
 Route::get('/faqs/{id}', 'App\Http\Controllers\FrontMiscController@showFaq');
 
 Route::get('/health-days', 'App\Http\Controllers\FrontMiscController@healthDaysList');
-Route::get('/health-days/year/{year}', 'App\Http\Controllers\FrontMiscController@yearHealthDaysList');
 Route::get('/health-days/show/{id}', 'App\Http\Controllers\FrontMiscController@showHealthDay');
 
 

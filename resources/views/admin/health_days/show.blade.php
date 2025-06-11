@@ -21,6 +21,11 @@
                     <div class="card-body">
                         
                         <div class="course-row">
+                            <div>Category : </div>
+                            <div>{{optional($healthDay->category)->name}}</div>
+                        </div>
+
+                        <div class="course-row">
                             <div>Date : </div>
                             <div>{{$healthDay->date}}</div>
                         </div>
@@ -31,14 +36,14 @@
                         </div>
                        
                         <div class="course-row">
-                            <div>Author : </div>
-                            <div>{{$healthDay->author}}</div>
+                            <div>Author Name: </div>
+                            <div>{{$healthDay->author_name}}</div>
                         </div>
-
-                        {{-- <div class="course-row">
-                            <div>Status: </div>
-                            <div>{{$healthDay->status}}</div>
-                        </div> --}}
+                      
+                        <div class="course-row">
+                            <div>Author Image : </div>
+                            <div><img src="/storage/{{$healthDay->author_image}}" alt="{{$healthDay->author_image}}"  class="img img-fluid" style="max-height:75px;"></div>
+                        </div>
 
                         <div class="course-row">
                             <div>Description: </div>
@@ -47,7 +52,7 @@
 
                         <div class="course-row">
                             <div>Thumbnail: </div>
-                            <div><img src="/storage/{{$healthDay->image}}" class="img img-fluid" style="max-height:150px" alt=""></div>
+                            <div><img src="/storage/{{$healthDay->thumbnail_image}}" class="img img-fluid" style="max-height:150px" alt=""></div>
                         </div>
 
                         @if(trim($healthDay->pdf_file))
@@ -56,6 +61,18 @@
                                 <div><iframe src="/storage/{{$healthDay->pdf_file}}" frameborder="0"style="width: 100%; min-height:500px" target="_parent" ></iframe></div>
                             </div>
                         @endif
+
+                        <div class="course-row">
+                            <div>Slogans: </div>
+                            <div>
+                                @foreach ($healthDay->slogans as $sl)
+                                    <div class="my-2 d-flex align-items-center border-bottom pb-1">
+                                        <div class="mr-3">{{$sl->name}}</div>
+                                        <div class="text-justify">{{$sl->description}}</div>
+                                    </div>
+                                @endforeach                               
+                            </div>
+                        </div>
 
                     </div>
                 </div>

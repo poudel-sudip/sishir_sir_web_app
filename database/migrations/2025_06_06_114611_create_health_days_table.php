@@ -20,13 +20,12 @@ class CreateHealthDaysTable extends Migration
             $table->string('title')->nullable();
             $table->string('pdf_file')->nullable();
             $table->longText('description')->nullable();
-            $table->string('author')->nullable();
-            $table->string('image')->nullable();
+            $table->string('author_name')->nullable();
+            $table->string('author_image')->nullable();
+            $table->string('thumbnail_image')->nullable();
             $table->timestamps();
 
             $table->index('category_id');
-            $table->index('date');
-            $table->index(['category_id','date']);
         });
     }
 

@@ -16,21 +16,12 @@
         </div>
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="text-right pt-3 px-4">
-                        <label for="change_year">Selected Year:</label>
-                        <select name="year" id="change_year">
-                            <option value="">Select Year</option>
-                            @foreach($healthYears as $yr)
-                                <option value="{{ $yr }}" {{ $yr == $year ? 'selected' : '' }}>{{ $yr }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                <div class="card">                    
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">Health Days || {{$year}}</h4>
+                            <h4 class="card-title">Health Days</h4>
                             <div class="text-right">
-                                <a href="{{ ('/admin/health-days/create?year='.$year) }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Health Day </button></a>
+                                <a href="{{ ('/admin/health-days/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Health Day </button></a>
                             </div>
                         </div>
                         <div class="table-responsive table-responsive-md">
@@ -42,6 +33,7 @@
                                     <th>Date</th>
                                     <th>Title</th>
                                     <th>Author</th>
+                                    <th>Slogans</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -49,11 +41,12 @@
                                     @foreach($healthDays as $key=>$row)
                                         <tr>
                                             <td width="50">{{$key+1}}</td>
-                                            <td>{{optional($row->category)->name}}</td>
-                                            <td width="100">{{date('Y-m-d',strtotime($row->date))}}</td>
+                                            <td class="text-wrap">{{optional($row->category)->name}}</td>
+                                            <td class="text-wrap">{{ $row->date }}</td>
                                             <td class="text-wrap">{{ $row->title }}</td>
-                                            <td class="text-wrap">{{ $row->author }}</td>
+                                            <td class="text-wrap">{{ $row->author_name }}</td>
                                             {{-- <td class="{{strtolower($row->status) == 'active' ? 'text-primary' : 'text-danger'}}"> {{ucwords($row->status)}} </td> --}}
+                                            <td class="classroom-btn" width="100"> <a href="/admin/health-days/{{$row->id}}/slogans" class="">Slogans ({{$row->slogans()->count()}}) </a> </td>
                                             <td class="classroom-btn" width="100">
                                                 <a href="/admin/health-days/{{$row->id}}" class="btn btn-primary">Show</a>
                                                 <a href="/admin/health-days/{{$row->id}}/edit" class="btn btn-danger">Edit</a>
@@ -99,13 +92,5 @@
         }
     </script>
     
-    <script>
-        document.getElementById('change_year').addEventListener('change', function() {
-            var selectedYear = this.value;
-            if (selectedYear) {
-                window.location.href = '/admin/health-days?year=' + selectedYear;
-            }
-        });
-    </script>
 
 @endsection

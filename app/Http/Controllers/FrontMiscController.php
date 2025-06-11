@@ -308,63 +308,13 @@ class FrontMiscController extends Controller
         
 
     public function healthDaysList(Request $request)
-    {
-        $year = date('Y');
-        if(isset($request->year) && trim($request->year) && is_numeric($request->year) && (int)$request->year > 2000 )
-        {
-            $year = (int)$request->year;
-        }
-
-        $healthDays = HealthDay::whereYear('date', '=', $year)
-            ->orderBy('date', 'asc')
-            ->get()
-            ->values();
-
-        $healthYears = HealthDay::selectRaw('YEAR(date) as year')
-            ->groupBy('year')
-            ->orderBy('year', 'desc')
-            ->pluck('year')
-            ->toArray();
-
-        array_push($healthYears, date('Y'));
-        sort($healthYears);
-        $healthYears = array_values(array_unique($healthYears));
-
-        $data['year'] = $year;
-        $data['healthDays'] = json_encode($healthDays);
-        $data['healthYears'] = $healthYears;
-        $data['healthCategories'] = Category::where('type','=','health-days')->get();
-
-        return view('front.health_days.index', $data);
-    }
-
-    public function yearHealthDaysList(Request $request, $year)
     {        
-        $year = (int)$year;
-        if($year < 1900 || $year > 2100)
-        {
-            abort(403, 'Invalid year provided.');
-        }
-
-        $healthDays = HealthDay::whereYear('date', '=', $year)
-            ->orderBy('date', 'asc')
+        $healthDays = HealthDay::orderBy('id', 'asc')
             ->get()
-            ->values();
+            ->values();       
 
-        $healthYears = HealthDay::selectRaw('YEAR(date) as year')
-            ->groupBy('year')
-            ->orderBy('year', 'desc')
-            ->pluck('year')
-            ->toArray();
-
-        array_push($healthYears, date('Y'));
-        sort($healthYears);
-        $healthYears = array_values(array_unique($healthYears));
-
-        $data['year'] = $year;
         $data['healthDays'] = json_encode($healthDays);
-        $data['healthYears'] = $healthYears;
-        $data['healthCategories'] = Category::where('type','=','health-days')->get();
+        $data['healthCategories'] = Category::where('type','=','health-day-category')->get();
 
         return view('front.health_days.index', $data);
     }
@@ -379,11 +329,17 @@ class FrontMiscController extends Controller
             abort(404, 'Health Day not found.');
         }
 
+        $healthDay->slogan_list = $healthDay->slogans()
+        ->where('type','=','health-day-slogan')
+        ->orderBy('name','asc')
+        ->get(['name as year','description as title'])
+        ->values();
+
         $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
         $pgtype = 'article';
         $counterData = Helper::pageCounterCounts($healthDay->title, $pgurl, $pgtype);
 
-        // dd($counterData,$pgurl);
+        // dd($healthDay,$counterData,$pgurl);
         return view('front.health_days.show', compact('healthDay', 'counterData'));
     }
 }
