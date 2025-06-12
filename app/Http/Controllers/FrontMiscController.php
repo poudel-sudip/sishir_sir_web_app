@@ -310,7 +310,7 @@ class FrontMiscController extends Controller
     public function healthDaysList(Request $request)
     {        
         $healthDays = HealthDay::orderBy('sorting_date', 'asc')
-            ->get()
+            ->get(['id','title','date','category_id'])
             ->values();       
 
         $data['healthDays'] = json_encode($healthDays);

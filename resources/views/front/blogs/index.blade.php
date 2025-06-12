@@ -26,14 +26,14 @@
             <div class="row">
                 @forelse($blogs as $blog)
                 <div class="col-md-4 mb-2">
-                    <div class="single-blog rounded">
+                    <div class="single-blog rounded border border-primary rounded">
                         <div class="blog-image">
                             <a href="/blogs/{{$blog->id}}"><img src="/storage/{{$blog->image}}"></a>
                         </div>
-                        <div class="blog-details">
-                            <h4><a href="/blogs/{{$blog->id}}">{{$blog->title}}</a></h4>
+                        <div class="blog-details" style="background: #bde3ff">
+                            <h4><a href="/blogs/{{$blog->id}}" style="color: #1374ba">{{$blog->title}}</a></h4>
                             <div class="blog-description">{!! Helper::excerpt($blog->description,220) !!}</div>
-                            <div class="blog-footer">
+                            <div class="blog-footer border-danger">
                                 <div><i class="fa fa-commenting text-primary" aria-hidden="true"></i> <span class="text-success">{{$blog->comments->where('status','Published')->count()}}</span></div>
                                 <div class="text-end">Published: <span class="text-primary"> {{date('Y-m-d',strtotime($blog->created_at))}}</span></div>
                             </div>

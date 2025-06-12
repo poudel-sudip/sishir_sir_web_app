@@ -60,7 +60,7 @@
 
                 @if($healthDay->pdf_file)
                     <div class="">
-                        <a href="{{url('/storage/'.$healthDay->pdf_file)}}" filename="{{($healthDay->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                        <a href="{{url('/storage/'.$healthDay->pdf_file)}}" filename="{{($healthDay->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{$counterData->page_download_count ?? '0'}}) </a>
                     </div>     
                 @endif  
 

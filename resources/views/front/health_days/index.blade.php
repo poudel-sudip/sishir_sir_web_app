@@ -28,7 +28,45 @@
                 @endforeach
             </div>  
             
-            <div class="mt-2 " id="data-content">                   
+            <div class="container-fluid px-md-5">
+                <div class="d-flex justify-content-start align-items-center mb-3" id="toggle_view_button">
+                    <span class="me-2">View Type:</span>                    
+                    <button id="listViewBtn" class="btn btn-outline-primary btn-sm mx-1 active" title="List View">
+                        <i class="fa fa-list"></i>
+                    </button>
+                    <button id="gridViewBtn" class="btn btn-outline-primary btn-sm mx-1 " title="Grid View">
+                        <i class="fa fa-th"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-2 " id="data-content" showType="list">                   
+                @php($healthDaysData = json_decode($healthDays))
+                @foreach ($healthDaysData as $day)
+                    <div class="my-2 d-flex justify-content-between align-items-center">
+                        <div class="p-1 rounded bg-info  text-center text-nowrap">
+                            {{$day->date}}
+                        </div>
+                        <div class="rounded border border-info p-1" style="width: 100%;">
+                            <a class="h6" href="/health-days/show/{{$day->id}}">{{$day->title}}</a>
+                        </div>  
+                    </div>
+                @endforeach
+
+                <div class="row align-items-stretch">
+                    {{-- @foreach ($healthDaysData as $day)
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="my-2">
+                                <div class="text-center bg-info rounded p-1" style="width: 100%;">
+                                    <a class="h6" href="/health-days/show/{{$day->id}}">{{$day->title}}</a>
+                                </div> 
+                                <div class="p-1 rounded border border-info text-center text-nowrap text-danger" >
+                                    {{$day->date}}
+                                </div>                                 
+                            </div>
+                        </div>                        
+                    @endforeach  --}}
+                </div>
 
             </div>
         </div>
@@ -37,7 +75,7 @@
 
     <script>
         const healthDays = {!! $healthDays !!};
-        displayContent(healthDays);
+        // displayContent(healthDays);
 
         $('.category-filter').on('click',function(e){
             filchar = $(this).attr('charfil');
@@ -60,27 +98,92 @@
         }
 
         function displayContent(dataDays) {
+
             const contentDiv = document.getElementById('data-content');
+            const showType = contentDiv.getAttribute('showType');
             contentDiv.innerHTML = '';
 
-            dataDays.forEach(cat => {
-                const dataElement = document.createElement('div');
-                dataElement.classList.add('my-2','d-flex','justify-content-between','align-items-center');
-                const innerHTML = `
-                    <div class="p-1 rounded bg-info  text-center text-nowrap">
-                        ${cat.date}
-                    </div>
-                    <div class="rounded border border-info p-1" style="width: 100%;">
-                        <a class="h6" href="/health-days/show/${cat.id}">${cat.title}</a>
-                    </div>                    
-                `;
-                dataElement.innerHTML = innerHTML;
-                contentDiv.appendChild(dataElement);
-            });
+            if(showType == 'list') {
+                dataDays.forEach(cat => {
+                    const dataElement = document.createElement('div');
+                    dataElement.classList.add('my-2','d-flex','justify-content-between','align-items-center');
+                    const innerHTML = `
+                        <div class="p-1 rounded bg-info  text-center text-nowrap">
+                            ${cat.date}
+                        </div>
+                        <div class="rounded border border-info p-1" style="width: 100%;">
+                            <a class="h6" href="/health-days/show/${cat.id}">${cat.title}</a>
+                        </div>                    
+                    `;
+                    dataElement.innerHTML = innerHTML;
+                    contentDiv.appendChild(dataElement);
+                });
+            } else if(showType == 'grid') {
+                const container = document.createElement('div');
+                container.classList.add('row','align-items-stretch');
+                dataDays.forEach(cat => {
+                    const dataElement = document.createElement('div');
+                    dataElement.classList.add('col-12','col-sm-6','col-md-4','col-lg-3');
+                    const innerHTML = `
+                        <div class="my-2">
+                            <div class="text-center bg-info rounded p-1" style="width: 100%;">
+                                <a class="h6" href="/health-days/show/${cat.id}">${cat.title}</a>
+                            </div> 
+                            <div class="p-1 rounded border border-info text-center text-nowrap text-danger" >
+                                ${cat.date}
+                            </div>                                 
+                        </div>                                                               
+                    `;
+                    dataElement.innerHTML = innerHTML;
+                    container.appendChild(dataElement);
+                });
+                contentDiv.appendChild(container);
+            } else {}
+            
                       
         }
 
     </script>
 
+    <script>
+        $('#gridViewBtn').on('click', function() {
+            $(this).addClass('active');
+            $('#listViewBtn').removeClass('active');
+            $('#data-content').attr('showType','grid');
+
+            if(healthDays.length){
+                const filterChar = $('.category-filter.active').attr('charfil');
+                if(filterChar == 'all')
+                {
+                    displayContent(healthDays); 
+                }
+                else
+                {
+                    filterContentByCategory(filterChar);
+                }
+            } else {}
+            
+        });
+
+        $('#listViewBtn').on('click', function() {
+            $(this).addClass('active');
+            $('#gridViewBtn').removeClass('active');
+            $('#data-content').attr('showType','list');
+
+            if(healthDays.length){
+                const filterChar = $('.category-filter.active').attr('charfil');
+                if(filterChar == 'all')
+                {
+                    displayContent(healthDays); 
+                }
+                else
+                {
+                    filterContentByCategory(filterChar);
+                }
+            } else {}
+        });
+
+        
+    </script>
 
 @endsection
