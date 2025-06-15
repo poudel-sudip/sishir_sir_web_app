@@ -60,6 +60,7 @@ class RegisterController extends Controller
             'district_city'=>['required','string','min:1'],
             'provience'=>['required','string','min:1'],
             'blood_group'=>['required','string'],
+            'donate_blood' => ['required','numeric','in:0,1'],
         ]);
     }
 
@@ -79,6 +80,7 @@ class RegisterController extends Controller
             'district_city'=>ucwords($data['district_city']),
             'provience'=>ucwords($data['provience']),
             'blood_group'=>ucwords($data['blood_group']),
+            'donate_blood' => $data['donate_blood'] ?? 0,
         ]);
     }
 

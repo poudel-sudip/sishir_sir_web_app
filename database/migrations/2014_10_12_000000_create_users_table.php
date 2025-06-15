@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('status')->default('Active');
             $table->string('photo')->nullable();
             $table->string('blood_group')->nullable();
+            $table->tinyInteger('donate_blood')->nullable()->default(0);
             $table->string('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();

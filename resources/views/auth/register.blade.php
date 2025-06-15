@@ -84,12 +84,48 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group text-left">
+                                            <label for="donate_blood">{{ __('Can you be contacted in the future as a blood donor?') }}</label>
+                                            
+                                            <div class="d-flex align-items-center">
+                                                <div class="mr-4">
+                                                    <div class="form-check">
+                                                        <label class="col-form-label form-check-label">
+                                                        <input id="donate_blood_1" type="radio" class="form-check-input" name="donate_blood" value="1"  >Yes</label>
+                                                    </div>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="form-check">
+                                                        <label class="col-form-label form-check-label">
+                                                        <input id="donate_blood_0" type="radio" class="form-check-input" name="donate_blood" value="0" checked >No</label>
+                                                    </div>
+                                                </div>
+                                                @error('donate_blood')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>                                            
+
+                                            @error('donate_blood')
+                                            <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group text-left">
-                                            <label for="provience" class="col-form-label">{{ __('Provience') }}</label>
+                                            <label for="provience" class="col-form-label">{{ __('Province') }}</label>
                                             <select name="provience" id="provience" class="form-control @error('provience') is-invalid @enderror" required onchange="getCities()">
-                                                <option value="">Choose a Provience...</option>
+                                                <option value="">Choose a Province...</option>
                                                 @foreach($proviences as $pro)
                                                 <option value="{{ucwords($pro->name)}}">{{ucwords($pro->name)}}</option>
                                                 @endforeach

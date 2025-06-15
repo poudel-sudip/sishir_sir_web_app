@@ -37,8 +37,20 @@
                             <div>{{$user->contact}}</div>
                         </div>
                         <div class="course-row">
+                            <div>User Province:</div>
+                            <div>{{$user->provience}}</div>
+                        </div>
+                        <div class="course-row">
+                            <div>User District:</div>
+                            <div>{{$user->district_city}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>Blood Group:</div>
                             <div>{{$user->blood_group}}</div>
+                        </div>
+                        <div class="course-row">
+                            <div>Can Donate Blood:</div>
+                            <div>{{$user->donate_blood?'Yes':'No'}}</div>
                         </div>
                         <div class="course-row">
                             <div>Role:</div>

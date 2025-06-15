@@ -32,8 +32,12 @@
                                         <th>Full Name</th>
                                         <th>Email</th>
                                         <th>Contact</th>
+                                        <th>Province</th>
+                                        <th>District</th>
+                                        <th>B Group</th>
+                                        <th>B Donate</th>
                                         <th>Role</th>
-                                        <th class="text-wrap">Created Date</th>
+                                        {{-- <th class="text-wrap">Created Date</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>       
@@ -41,9 +45,13 @@
                                     @foreach($users as $user)
                                     <tr>
                                         <td>{{$user->id}}</td>
-                                        <td>{{$user->name}}</td>
-                                        <td>{{$user->email}}</td>
-                                        <td>{{$user->contact}}</td>
+                                        <td class="text-wrap">{{$user->name}}</td>
+                                        <td class="text-wrap">{{$user->email}}</td>
+                                        <td class="text-wrap">{{$user->contact}}</td>
+                                        <td class="text-wrap">{{$user->provience}}</td>
+                                        <td class="text-wrap">{{$user->district_city}}</td>
+                                        <td class="text-wrap">{{$user->blood_group}}</td>
+                                        <td class="text-wrap">{{$user->donate_blood ? 'Yes' : 'No'}}</td>
                                         <td>
                                             @if($user->role == 'Admin')
                                             <span class="text-primary">{{$user->role}}</span>
@@ -53,7 +61,7 @@
                                             <span class="text-success">{{$user->role}}</span>
                                             @endif
                                         </td>
-                                        <td class="text-wrap">{{$user->created_at}}</td>
+                                        {{-- <td class="text-wrap">{{$user->created_at}}</td> --}}
                                         
                                         <td class="classroom-btn" width="160">
                                             <a href="/admin/users/{{$user->id}}" class="btn btn-primary">Show</a>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Provience\Provience;
 
 class UsersController extends Controller
 {
@@ -18,7 +19,8 @@ class UsersController extends Controller
     public function index()
     {
         return view('admin.users.index',[
-            'users'=>User::whereIn('role',['Admin','Student','Moderator'])->get(['id','name','email','contact','role','created_at']),
+            'users'=>User::whereIn('role',['Admin','Student','Moderator'])
+            ->get(['id','name','email','contact','role','blood_group','provience','district_city','donate_blood','created_at']),
         ]);
     }
 
@@ -60,8 +62,11 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        $courses = Course::all()->sortBy('order');
-        return view('admin.users.edit', compact('user','courses'));
+        $data['user'] = $user;
+        $data['courses'] = Course::all()->sortBy('order');
+        $data['proviences'] = Provience::all()->sortBy('name');
+
+        return view('admin.users.edit', $data);
     }
 
     public function update(User $user)
@@ -76,6 +81,9 @@ class UsersController extends Controller
             'password'=>'string',
             'old_password'=>'string',
             'blood_group'=>['required'],
+            'provience' => 'required|string',
+            'district_city' => 'nullable|string',
+            'donate_blood' => 'required|numeric|in:0,1',
         ]);
 
         if($data['password']===$data['old_password'])
@@ -94,6 +102,9 @@ class UsersController extends Controller
             'status'=>$data['status'],
             'password'=>$password,
             'blood_group'=>$data['blood_group'],
+            'donate_blood'=>$data['donate_blood'],
+            'provience'=>$data['provience'],
+            'district_city'=>$data['district_city'],
         ]);
 
         return redirect('/admin/users');

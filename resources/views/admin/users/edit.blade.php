@@ -16,7 +16,7 @@
           </nav>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">Edit User : {{$user->name}}</div>
                     <div class="card-body">
@@ -67,6 +67,40 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="provience" class="col-md-4 col-form-label">{{ __('Provience') }}</label>
+
+                                <div class="col-md-8">
+                                    <select name="provience" id="provience" class="form-control @error('provience') is-invalid @enderror" value="{{ old('provience') }}" required autocomplete="provience">
+                                        <option value="{{ucwords($user->provience)}}">{{ucwords($user->provience)}}</option>
+                                        <option value="">---------</option>
+                                        @foreach ($proviences as $pro)
+                                            <option value="{{$pro->name}}">{{$pro->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('provience')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="district_city" class="col-md-4 col-form-label">{{ __('District') }}</label>
+
+                                <div class="col-md-8">
+                                    <select name="district_city" id="district_city" class="form-control @error('district_city') is-invalid @enderror" value="{{ old('district_city') }}"  autocomplete="district_city">
+                                        <option value="{{ucwords($user->district_city)}}">{{ucwords($user->district_city)}}</option>
+                                    </select>
+                                    @error('district_city')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="blood_group" class="col-md-4 col-form-label">{{ __('Blood Group') }}</label>
 
                                 <div class="col-md-8">
@@ -86,6 +120,30 @@
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="donate_blood" class="col-md-4 col-form-label">{{ __('Can Donate Blood') }}</label>
+
+                                <div class="col-md-8 row">
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="donate_blood_1" type="radio" class="form-check-input" name="donate_blood" value="1" @if($user->donate_blood) checked @endif >Yes</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="donate_blood_0" type="radio" class="form-check-input" name="donate_blood" value="0" @if(!$user->donate_blood) checked @endif>No</label>
+                                        </div>
+                                    </div>
+                                    @error('donate_blood')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -155,5 +213,36 @@
             </div>
         </div>
     </div>
+
+    <script>
+                
+        var proviences = {
+            @foreach($proviences as $pro)
+            '{{$pro->name}}' : [
+                @foreach($pro->cities as $city)
+                "{{$city->name}}",
+                @endforeach
+            ],
+            @endforeach
+        };
+
+        $('#provience').on('change',function(){
+            var province = $(this).val();
+            $("#district_city").html("");
+            if(province)
+            {
+                var cities = proviences[province];
+                var op='';
+                cities.forEach((city) => {
+                    op += '<option value="' + city + '">' + city + '</option>';
+                });
+                // console.log(op);
+                $("#district_city").append(op);
+            }
+            
+        });
+        
+
+    </script>
 
 @endsection
