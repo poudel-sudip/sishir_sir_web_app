@@ -5,8 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-10">           
             <div class="auth-container auth-register">
-                <div class="inner-container"></div>
-                <div class="outer-container">
+                <div class="inner-container" style="height: 100% !important;"></div>
+                <div class="outer-container" style="height: 600px !important;">
                     <div class="left-content">
                         <div class="logo-container mx-auto">
                             <a href="/"><img class="w-100" src="{{ asset('images/logo-w.png') }}" alt=""></a>
@@ -174,6 +174,13 @@
                                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="password">
                                             <i id="icon_click_confirm" class="fas fa-eye"></i>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="text-left d-flex align-items-center">
+                                        <input class="mr-1" type="checkbox" name="agree_terms" id="agree_terms" required>
+                                        <label class="ml-1" for="agree_terms">By signing up, you agree to our <a href="/web-policy" class="text-primary">Terms, Conditions and Privacy Policy</a></label>
                                     </div>
                                 </div>
 
