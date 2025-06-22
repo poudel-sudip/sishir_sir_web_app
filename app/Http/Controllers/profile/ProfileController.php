@@ -81,6 +81,8 @@ class ProfileController extends Controller
             'provience'=>'required | string | min:1',
             'old-photo'=>'',
             'photo'=>'',
+            'blood_group' => '',
+            'donate_blood' => '',
         ]);
         $img=$data['old-photo'];
         if(isset($data['photo']))
@@ -94,6 +96,9 @@ class ProfileController extends Controller
             'photo'=>$img,
             'district_city'=>ucwords($data['district_city']),
             'provience'=>ucwords($data['provience']),
+            'blood_group'=>ucwords($data['blood_group']),
+            'donate_blood'=>ucwords($data['donate_blood']),
+            
         ]);
 
         return redirect('/profile');

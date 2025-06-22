@@ -110,6 +110,54 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="blood_group" class="col-md-4 col-form-label text-md-right">{{ __('Blood Group') }}</label>
+
+                                <div class="col-md-8">
+                                    <select name="blood_group" id="blood_group" class="form-control @error('blood_group') is-invalid @enderror" value="{{ old('blood_group') ?? auth()->user()->blood_group }}" required autocomplete="blood_group">
+                                        <option value="{{ucwords(auth()->user()->blood_group)}}">{{ucwords(auth()->user()->blood_group)}}</option>
+                                        <option value="">---------</option>
+                                        <option value="AB Positive">AB Positive (AB+)</option>
+                                        <option value="AB Negative">AB Negative (AB-)</option>
+                                        <option value="A Positive">A Positive (A+)</option>
+                                        <option value="A Negative">A Negative (A-)</option>
+                                        <option value="B Positive">B Positive (B+)</option>
+                                        <option value="B Negative">B Negative (B-)</option>
+                                        <option value="O Positive">O Positive (O+)</option>
+                                        <option value="O Negative">O Negative (O-)</option>
+                                    </select>
+                                    @error('blood_group')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="donate_blood" class="col-md-4 col-form-label text-md-right">{{ __('Can Donate Blood') }}</label>
+
+                                <div class="col-md-8 row">
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="donate_blood_1" type="radio" class="form-check-input" name="donate_blood" value="1" @if(auth()->user()->donate_blood) checked @endif >Yes</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="donate_blood_0" type="radio" class="form-check-input" name="donate_blood" value="0" @if(!auth()->user()->donate_blood) checked @endif>No</label>
+                                        </div>
+                                    </div>
+                                    @error('donate_blood')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

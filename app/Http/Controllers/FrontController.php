@@ -366,13 +366,41 @@ class FrontController extends Controller
         });
         $data['updates'] = array_slice($data['updates'], 0, 7, true);
 
+        // try {
+        //     $fetch_url = 'https://www.ashesh.com.np/panchang/widget.php?header_color=faf8ee&header_title=Today';
+        //     $fetch_data = file_get_contents($fetch_url);
+        //     preg_match('/<body[^>]*>(.*?)<\/body>/is', $fetch_data, $fetch_data_matches);
+        //     $fetched_data_body = $fetch_data_matches[1] ?? '';
 
-        $fetch_url = 'https://www.ashesh.com.np/panchang/widget.php?header_color=faf8ee&header_title=Today';
-        $fetch_data = file_get_contents($fetch_url);
-        preg_match('/<body[^>]*>(.*?)<\/body>/is', $fetch_data, $fetch_data_matches);
-        $fetched_data_body = $fetch_data_matches[1] ?? '';
+        //     $data['fetched_page'] = json_encode($fetched_data_body);
+        // } 
+        // catch (\Throwable $th) {
+        //     //throw $th;
+        // }
+        
 
-        $data['fetched_page'] = json_encode($fetched_data_body);
+        try {
+            $fetch_url = 'https://www.ashesh.com.np/panchang/widget.php?header_color=faf8ee&header_title=Today';
+
+            // Set context with timeout
+            $context = stream_context_create([
+                'http' => [
+                    'timeout' => 10 // seconds
+                ]
+            ]);
+
+            $fetch_data = @file_get_contents($fetch_url, false, $context);
+
+            if ($fetch_data !== false) {
+                preg_match('/<body[^>]*>(.*?)<\/body>/is', $fetch_data, $fetch_data_matches);
+                $fetched_data_body = $fetch_data_matches[1] ?? '';
+                $data['fetched_page'] = json_encode($fetched_data_body);
+            } 
+        } 
+        catch (\Throwable $th) {
+            // Optional: Log error or fallback
+        }
+
 
         // dd($data);
         return view('front.index', $data);

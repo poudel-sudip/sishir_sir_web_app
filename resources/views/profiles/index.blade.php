@@ -40,6 +40,10 @@
                     <div class="booking-title col-3">Blood Group:</div>
                     <div class="booking-data col-8">{{auth()->user()->blood_group}}</div>
                 </div>
+                <div class="single-details row mt-1">
+                    <div class="booking-title col-3">Can Donate Blood:</div>
+                    <div class="booking-data col-8">{{auth()->user()->donate_blood ? 'Yes' : 'No'}}</div>
+                </div>
             </div>
             
         </div>
