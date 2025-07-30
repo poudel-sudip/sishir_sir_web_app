@@ -23,7 +23,7 @@
         </div>
         <div class="blogs-details-container bg-white border border-primary rounded">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12">
                             <h3 class="text-primary">{{($blog->title)}}</h3>
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                {{-- <div class="col-md-4">
                     <div class="details-blog-list">
                         <h5 class="mb-3"><u>Latest Blogs</u></h5>
                         @foreach ($lateat_blogs as $blogs)
@@ -114,7 +114,7 @@
                             <img src="/storage/{{$sidebar_ad->banner}}" onerror="this.src='/images/ads/default-200X300.png'" alt="" class="img img-fluid" style="max-height: 300px;">
                         </div>
                     @endif
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -126,6 +126,14 @@
             const postData = { type: 'share', page: 'Blog Show',pageurl: pageURL };
             postDataWithFetch('/page-counter-increment', postData);
         }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('table').each(function () {
+            $(this).wrap('<div style="overflow-x: auto; display: block; max-width: 100%;"></div>');
+            });
+        });
     </script>
  
 @endsection

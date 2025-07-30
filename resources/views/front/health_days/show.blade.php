@@ -173,4 +173,13 @@
     @endif --}}
 
 
+    
+    <script>
+        $(document).ready(function () {
+            $('table').each(function () {
+            $(this).wrap('<div style="overflow-x: auto; display: block; max-width: 100%;"></div>');
+            });
+        });
+    </script>
+    
 @endsection
