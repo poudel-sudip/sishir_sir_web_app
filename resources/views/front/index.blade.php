@@ -628,26 +628,28 @@
                 </div>
 
                 <!-- Center Blog (Latest Blog) -->
-                <div class="col-md-4 text-center">
-                    <div class="blog-section rounded">
-                        <div class="blog-header">
-                            <a href="/blogs/{{$last_blog->id}}">
-                                <img src="/storage/{{$last_blog->image}}" class="img-fluid" alt="{{$last_blog->title}}">
-                            </a>
-                        </div>
-                        <div class="blog-footer">
-                            <h3>{{$last_blog->title}}</h3>
-                            <div class="blog-footer-details">{!! Str::limit(strip_tags($last_blog->description), 500) !!}</div>
-                            <div class="d-flex justify-content-between mt-2">
-                                <small class="text-primary">Published: {{date('Y-m-d',strtotime($last_blog->created_at))}}</small>
-                                <small class="text-success">By: {{$last_blog->author}}</small>
+                @if(isset($last_blog))
+                    <div class="col-md-4 text-center">
+                        <div class="blog-section rounded">
+                            <div class="blog-header">
+                                <a href="/blogs/{{$last_blog->id}}">
+                                    <img src="/storage/{{$last_blog->image}}" class="img-fluid" alt="{{$last_blog->title}}">
+                                </a>
                             </div>
-                            <div class="blog-details mt-3">
-                                <a href="/blogs/{{$last_blog->id}}" class="btn">View Details</a>
+                            <div class="blog-footer">
+                                <h3>{{$last_blog->title}}</h3>
+                                <div class="blog-footer-details">{!! Str::limit(strip_tags($last_blog->description), 500) !!}</div>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <small class="text-primary">Published: {{date('Y-m-d',strtotime($last_blog->created_at))}}</small>
+                                    <small class="text-success">By: {{$last_blog->author}}</small>
+                                </div>
+                                <div class="blog-details mt-3">
+                                    <a href="/blogs/{{$last_blog->id}}" class="btn">View Details</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
 
                 <!-- Right Side (Next 4 Blogs in 2x2 Grid) -->
                 <div class="col-md-4">

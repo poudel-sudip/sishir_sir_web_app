@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Advertisement;
+use App\Models\Categories;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(1)->create();
         // $this->advertisementSeeder();
+        $this->webPageSeedeer();
     }
 
     private function advertisementSeeder()
@@ -103,5 +105,37 @@ class DatabaseSeeder extends Seeder
         foreach ($ads as $ad) {
             Advertisement::create($ad);
         }
+    }
+
+    private function webPageSeedeer()
+    {
+        $pages = [
+            [
+                'type' => 'webpage-about',
+                'name' => 'About Us',
+                'status' => 'Active',
+            ],
+            [
+                'type' => 'webpage-policy',
+                'name' => 'Privacy Policy',
+                'status' => 'Active',
+            ],
+            [
+                'type' => 'webpage-vision',
+                'name' => 'Vision',
+                'status' => 'Active',
+            ],
+            [
+                'type' => 'webpage-contact',
+                'name' => 'Contact',
+                'status' => 'Active',
+            ],
+            
+        ];
+
+        foreach ($pages as $page) {
+            Categories::create($page);
+        }
+
     }
 }

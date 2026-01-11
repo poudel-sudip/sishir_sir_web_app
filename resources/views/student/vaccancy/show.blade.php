@@ -33,9 +33,9 @@
                 </div>
             </div>
             <div class="row mt-3">
-                {{-- <div class="col-md-12">
-                    <img src="/storage/{{$vaccancy->image}}" style="width: 100%">
-                </div> --}}
+                <div lass="col-md-12 text-center">
+                    <img src="/storage/{{$vaccancy->img_file}}" class="img img-fluid" alt="">
+                </div>
                 <div class="row justify-content-end">
                     <div class="col-md-8">
                         <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>

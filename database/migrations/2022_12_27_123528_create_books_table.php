@@ -21,7 +21,7 @@ class CreateBooksTable extends Migration
             $table->string('slug')->nullable();
             $table->string('price')->nullable();
             $table->string('discount')->nullable();
-            $table->integer('order', 100)->nullable()->default(1);
+            $table->integer('order')->nullable()->default(1);
             $table->longText('description')->nullable();
             $table->string('author')->nullable();
             $table->string('edition')->nullable();
