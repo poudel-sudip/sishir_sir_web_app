@@ -90,7 +90,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="/library">Library</a>
+            <a class="nav-link" href="/library">eLibrary</a>
           </li>
 
           <li class="nav-item">

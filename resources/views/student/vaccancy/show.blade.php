@@ -33,9 +33,7 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <div lass="col-md-12 text-center">
-                    <img src="/storage/{{$vaccancy->img_file}}" class="img img-fluid" alt="">
-                </div>
+                
                 <div class="row justify-content-end">
                     <div class="col-md-8">
                         <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
@@ -51,6 +49,9 @@
                         @endforeach --}}
                     </div>
                     <div class="blog-full-description">{!! $vaccancy->description !!}</div>
+                    <div class="text-center">
+                        <img src="/storage/{{$vaccancy->img_file}}" class="img img-fluid" alt="">
+                    </div>
                     @if(trim($vaccancy->pdf_file))
                     <div>
                         <div class="_df_book" id="pdf_book_df" source="/storage/{{$vaccancy->pdf_file}}" ></div>
