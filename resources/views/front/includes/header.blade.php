@@ -90,7 +90,11 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="/library">Library</a>
+            <a class="nav-link" href="/library">eLibrary</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/pdf-banks">eBooks</a>
           </li>
 
           
@@ -150,9 +154,6 @@
               <li class="parent-dropdown">
                 <a class="dropdown-item" aria-current="page" href="/results">Results</a>
               </li>
-              <li class="parent-dropdown">
-                <a class="dropdown-item" aria-current="page" href="/pdf-banks">PDF Banks</a>
-              </li>
             </ul>
           </li>
           
@@ -164,13 +165,25 @@
             <a class="nav-link" href="/health-days">Health Days</a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">News Hub</a>
+            <ul class="dropdown-menu">
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/blogs">Blogs</a>
+              </li>
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/vaccancies">Vacancies</a>
+              </li>
+            </ul>
+          </li>
+
+          {{-- <li class="nav-item">
             <a class="nav-link" href="/blogs">Blogs</a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" href="/vaccancies">Vacancies</a>
-          </li>         
+          </li>          --}}
               
           <li class="nav-item">
             <a class="nav-link" href="/faqs">FAQs</a>

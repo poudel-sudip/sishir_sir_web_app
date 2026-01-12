@@ -115,12 +115,12 @@ class LoginController extends Controller
     {
         $vision = Categories::where('type', '=', 'webpage-vision')->first();
         if(!$vision) {
-            abort(404, 'Vision Page Not Found');
+            abort(403, 'Vision Page Not Found');
         }
 
         $contact = Categories::where('type', '=', 'webpage-contact')->first();
         if(!$contact) {
-            abort(404, 'Contact Page Not Found');
+            abort(403, 'Contact Page Not Found');
         }
 
         return view('auth.login',[
