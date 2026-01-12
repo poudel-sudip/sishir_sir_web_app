@@ -28,10 +28,10 @@
             <div class="row course-details">
                 <div class="col-md-3">
                     <div class="side-navbar border border-primary border-2">
-                        <h5><a href="{{ url('/books') }}">All Books</a></h5>
+                        <h5><a class="d-block" href="{{ url('/books') }}">All Books</a></h5>
                         <ul class="course-nav" style="height:auto; min-height: 370px; ">
                             @foreach($categories as $cat)
-                                <li><a href="/book-publishers/{{$cat->publisher->id}}/category/{{$cat->id}}">{{$cat->name}}</a></li>
+                                <li><a class="d-block" href="/book-publishers/{{$cat->publisher->id}}/category/{{$cat->id}}">{{$cat->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>

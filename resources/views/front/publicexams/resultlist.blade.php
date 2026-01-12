@@ -19,7 +19,7 @@
             <div class="row">
                 @foreach($exams as $exam)
                 <div class="col-md-6"> 
-                    <div class="public-result-list"><span class="icon-checkmark1 text-success"></span> <a href="/results/{{$exam->id}}"> {{$exam->name}} </a></div>
+                    <div class="public-result-list"><span class="icon-checkmark1 text-success"></span> <a class="d-block" href="/results/{{$exam->id}}"> {{$exam->name}} </a></div>
                 </div>
                 @endforeach
             </div>
