@@ -127,7 +127,7 @@
         </div>
         
         <hr> --}}
-        <div class="visitor-tracker mt-3 wow fadeInUp">
+        <div class="visitor-tracker mt-3">
           <h5 class="footer-toggle-section-handeler"  style="cursor: pointer;">Web Counter </h5>
           <?php 
            $web_counter = Helper::websiteCounter();  

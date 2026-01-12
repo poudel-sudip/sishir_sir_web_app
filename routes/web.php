@@ -15,17 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 //Route::get('/uploads', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/artisancalls', function () {
-    // Artisan::call('clear-compiled');
-    // Artisan::call('auth:clear-resets');
-    // Artisan::call('cache:clear');
-    // Artisan::call('config:clear');
-    // Artisan::call('event:clear');
-    // Artisan::call('route:clear');
-    // Artisan::call('view:clear');
+    Artisan::call('clear-compiled');
+    Artisan::call('auth:clear-resets');
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('event:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
 
     // Artisan::call('storage:link');
-    // Artisan::call('migrate:fresh');
-    // Artisan::call('db:seed');
     echo '403 | Permission Denied';
 });
 
