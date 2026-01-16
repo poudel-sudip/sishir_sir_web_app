@@ -1,18 +1,18 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    PDF Bank Wallet Collections Filter
+    eBook Wallet Collections Filter
 @endsection
 
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">PDF Bank Wallet Collections Filter</h3>
+            <h3 class="page-title">eBook Wallet Collections Filter</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="/admin/wallet-collection">Wallet Collections</a></li>
-                <li class="breadcrumb-item"><a href="/admin/wallet-collection/booking-type/pdf-bank">PDF Banks</a></li>
+                <li class="breadcrumb-item"><a href="/admin/wallet-collection/booking-type/pdf-bank">eBooks</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Filter</li>
               </ol>
             </nav>
@@ -34,7 +34,7 @@
                                 <input type="date" id="end_date" name="end_date" class="col-12 p-1 rounded d-inline-block border-primary">
                             </div>
                             <div class="col-12 col-sm-6 col-md-3 col-lg-2 m-1 row text-nowrap align-items-center ">
-                                <label for="pdf_bank_id" class="col-12">PDF Bank: </label>
+                                <label for="pdf_bank_id" class="col-12">eBook: </label>
                                 <select name="pdf_bank_id" id="pdf_bank_id" class="col-12 p-1 rounded d-inline-block border-primary">
                                     <option value=""></option>
                                     @if(isset($pdf_bank_groups))
@@ -62,11 +62,11 @@
                                 <select name="data_type" id="data_type" class="col-12 p-1 rounded d-inline-block border-primary">
                                     <option value="all">All</option>
                                     <option value="wallet">Wallet Only</option>
-                                    <option value="pdf-bank">PDF Bank Only</option>
+                                    <option value="pdf-bank">eBook Only</option>
                                     <option value="details">Details Only</option>                                    
-                                    <option value="wallet-pdf-bank">Wallet and PDF Bank </option>                                    
+                                    <option value="wallet-pdf-bank">Wallet and eBook </option>                                    
                                     <option value="wallet-details">Wallet and Booking Details</option>                                    
-                                    <option value="pdf-bank-details">PDF Bank and Booking Details</option>                                    
+                                    <option value="pdf-bank-details">eBook and Booking Details</option>                                    
                                 </select>
                             </div>
                             <div class="col-12 m-1 ">
@@ -95,7 +95,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="custon-table-header">
-                                <h4 class="card-title">PDF Bank Wallets:</h4>                           
+                                <h4 class="card-title">eBook Wallets:</h4>                           
                             </div>
                             <div class="table-responsive table-responsive-md">
                                 <table class="table table-bordered advanced-asc-table" >
@@ -140,14 +140,14 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="custon-table-header">
-                                <h4 class="card-title">PDF Banks:</h4>
+                                <h4 class="card-title">eBooks:</h4>
                             </div>
                             <div class="table-responsive table-responsive-md">
                                 <table class="table table-bordered advanced-asc-table">
                                     <thead>
                                         <tr>
                                             <th width="40">SN</th>
-                                            <th>PDF Bank</th>
+                                            <th>eBook</th>
                                             <th>Count</th>
                                             <th>Amount</th>
                                         </tr>
@@ -192,7 +192,7 @@
                                     <thead>
                                         <tr>
                                             <th width="40">SN</th>
-                                            <th>PDF Bank</th>
+                                            <th>eBook</th>
                                             <th>User</th>
                                             <th>Amount</th>
                                             <th>Mode</th>

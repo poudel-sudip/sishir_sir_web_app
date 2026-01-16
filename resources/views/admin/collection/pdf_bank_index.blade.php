@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    PDF Bank Wallet Collections
+    eBook Wallet Collections
 @endsection
 
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Exam Wallet Collections</h3>
+            <h3 class="page-title">eBook Wallet Collections</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="/admin/wallet-collection">PDF Banks</a></li>
+                <li class="breadcrumb-item"><a href="/admin/wallet-collection">eBooks</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Wallet Collections</li>
               </ol>
           </nav>
@@ -21,7 +21,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">PDF Bank Wallets:</h4>
+                            <h4 class="card-title">eBook Wallets:</h4>
                             <div class="text-right">
                                 <a href="/admin/wallet-collection/booking-type/pdf-bank/filter" class="btn btn-success">Filter</a>
                             </div>
@@ -67,14 +67,14 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">PDF Banks:</h4>
+                            <h4 class="card-title">eBooks:</h4>
                         </div>
                         <div class="table-responsive table-responsive-md">
                             <table class="table table-bordered advanced-asc-table" >
                                 <thead>
                                     <tr>
                                         <th width="40">SN</th>
-                                        <th>PDF Bank</th>
+                                        <th>eBook</th>
                                         <th>Count</th>
                                         <th>Amount</th>
                                     </tr>
