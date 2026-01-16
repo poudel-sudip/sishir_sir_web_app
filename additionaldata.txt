@@ -1,0 +1,6 @@
+private function generatePdfThumbnail($pdfPath)
+{
+    $pdfStoragePath = Storage::disk('public')->path($pdfPath);
+    $size = Storage::disk('public')->size($pdfPath);
+    $size = \Number::fileSize($size);
+}

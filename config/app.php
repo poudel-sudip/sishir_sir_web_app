@@ -234,6 +234,7 @@ return [
         'Helper' =>  App\Helpers\Helper::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Number' => Illuminate\Support\Number::class,
     ],
 
 ];

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image as QuestionImage;
+use Storage;
+use Number;
 
 use App\Models\Batch;
 use App\Models\Categories;
@@ -563,6 +565,8 @@ class FrontController extends Controller
 
     public function getLibraryContents($cat)
     {
+        $storage = Storage::disk('public');
+
         $library_category = LibraryCategory::where([['id', $cat], ['status', 'Active']])->first();
         if (!$library_category) {
             abort(404);
@@ -573,7 +577,25 @@ class FrontController extends Controller
         // $data['library_materials'] = $library_category->materials()->where('status', '=', 'Active')->orderByDesc('id')->get(['id', 'name', 'slug', 'published_year', 'author', 'pages', 'description']);
         
         $directories = $library_category->childs()->get(['id', 'name', 'slug']);
-        $library_materials = $library_category->materials()->where('status', '=', 'Active')->orderByDesc('id')->get(['id', 'name', 'slug', 'published_year', 'author', 'pages', 'description']);
+        $library_materials = $library_category->materials()
+        ->where('status', '=', 'Active')
+        ->orderByDesc('id')
+        // ->get(['id', 'name', 'slug', 'published_year', 'author', 'pages', 'description']);
+        ->get(['id', 'name', 'slug', 'published_year', 'author', 'pages', 'fileurl'])
+        ->map(function($m) use($storage){
+
+            $size = "0 KB";
+            try {
+                $size = $storage->size($m->fileurl);
+                $size = Number::fileSize($size);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+    
+            $m->description = '';
+            $m->size = $size;
+            return $m;
+        });
         
         $data['js_lib_categories'] = json_encode($directories);
         $data['js_lib_materials'] = json_encode($library_materials);

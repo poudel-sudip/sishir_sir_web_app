@@ -196,6 +196,7 @@
                                 <div><strong>Author(s):</strong> ${mat.author}</div>
                                 <div><strong>Published On:</strong> ${mat.published_year}</div>
                                 <div><strong>Pages:</strong> ${mat.pages}</div>
+                                <div><strong>Size:</strong> ${mat.size}</div>
                                 <div>${mat.description}</div>
                             </div>
                         </div>
@@ -218,6 +219,7 @@
                         <th>Author(s)</th>
                         <th>Published On</th>
                         <th>Pages</th>
+                        <th>Size</th>
                         <th style="width:75px;">Action</th>
                     </tr>
                 `;
@@ -232,6 +234,7 @@
                         <td>${mat.author}</td>
                         <td>${mat.published_year}</td>
                         <td>${mat.pages}</td>
+                        <td>${mat.size}</td>
                         <td><a href="/library/{{$library_category->id}}/${mat.id}" class="btn btn-primary btn-sm">View</a></td>
                     `;
                     tbody.appendChild(tr);
