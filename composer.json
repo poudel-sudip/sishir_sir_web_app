@@ -10,7 +10,7 @@
         "ext-intl": "*",
         "ext-json": "*",
         "ext-sodium": "*",
-        "calcinai/php-imagick": "^0.1.2",
+        "ext-imagick": "*",
         "firebase/php-jwt": "^6.10",
         "guzzlehttp/guzzle": "^7.9",
         "intervention/image": "^2.7",
@@ -26,8 +26,9 @@
         "maatwebsite/excel": "^3.1",
         "php-open-source-saver/jwt-auth": "^2.2",
         "phpoffice/phpspreadsheet": "^1.18",
+        "smalot/pdfparser": "^2.12",
         "spatie/laravel-image-optimizer": "^1.8",
-        "spatie/pdf-to-image": "*",
+        "spatie/pdf-to-image": "^3.1.0",
         "tecnickcom/tcpdf": "^6.7"
     },
     "require-dev": {
@@ -76,7 +77,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "minimum-stability": "stable",
     "prefer-stable": true

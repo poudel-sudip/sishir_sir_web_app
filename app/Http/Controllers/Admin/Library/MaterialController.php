@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Admin\Library;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\File;
 use App\Models\Library\LibraryCategory;
 use App\Models\Library\LibraryMaterial;
 use Spatie\PdfToImage\Pdf as PdfToImage;
+use Smalot\PdfParser\Parser as PdfParser;
 use Imagick;
+use Storage;
 
 class MaterialController extends Controller
 {
@@ -33,6 +36,8 @@ class MaterialController extends Controller
 
     public function store(LibraryCategory $category, Request $request)
     {
+        $storage = Storage::disk('public');
+
         $data = $request->validate([
             'name' => 'string|required',
             // 'order' => 'numeric|required',
@@ -61,28 +66,22 @@ class MaterialController extends Controller
             ]);
             $data['download'] = $request->can_download;
             $pdfFile = $request->file('file');
-            $pdfPath = $pdfFile->getPathname();
 
             $data['filename'] = $pdfFile->getClientOriginalName();
             $data['fileurl'] = $pdfFile->storeAs('uploads/library/files',$data['filename'],'public');
-            $data['pages'] = (int)($data['pages']) > 0 ? (int)($data['pages']) : $this->getPdfPageCount($pdfPath);
+            $data['pages'] = (int)($data['pages']) > 0 ? (int)($data['pages']) : $this->getPdfPageCount($data['fileurl']);
             
         }
 
+        $data['thumbnail'] = null;
         if(isset($request->thumbnail))
         {
             $data['thumbnail'] = $request->thumbnail->store('uploads/library/thumbnails','public');
         }
 
-        if(!isset($data['thumbnail']) || !$data['thumbnail'] || !file_exists(public_path('/storage/'.$data['thumbnail'])))
+        if(!$data['thumbnail'] || !$storage->exists($data['thumbnail']))
         {
-            $pdfPath = public_path('/storage/'.$data['fileurl']); 
-            $imagePath = '/uploads/library/thumbnails/pdf/'.date('Y-m-d').'-'.time().'.jpg';
-
-            if($this->pdfToImage($pdfPath, $imagePath))
-            {
-                $data['thumbnail'] = $imagePath;
-            }           
+            $data['thumbnail'] = $this->getPdfThumbnail($data['fileurl']);          
         }
         
         $category->materials()->create($data);
@@ -109,6 +108,8 @@ class MaterialController extends Controller
 
     public function update(LibraryCategory $category, LibraryMaterial $material, Request $request)
     {        
+        $storage = Storage::disk('public');
+
         // dd($material,$request->all());
         $request->validate([
             'name' => 'string|required',
@@ -155,8 +156,7 @@ class MaterialController extends Controller
 
                 $data['filename'] = $pdfFile->getClientOriginalName();
                 $data['fileurl'] = $pdfFile->storeAs('uploads/library/files',$data['filename'],'public');
-                $data['pages'] = (int)($data['pages']) > 0 ? (int)($data['pages']) : $this->getPdfPageCount($pdfPath);
-                
+                $data['pages'] = (int)($data['pages']) > 0 ? (int)($data['pages']) : $this->getPdfPageCount($data['fileurl']);
             }
             else
             {
@@ -172,15 +172,9 @@ class MaterialController extends Controller
             $data['thumbnail'] = $request->thumbnail->store('uploads/library/thumbnails','public');
         }
 
-        if(!$data['thumbnail'] || !file_exists(public_path('/storage/'.$data['thumbnail'])))
+        if(!$data['thumbnail'] || !$storage->exists($data['thumbnail']))
         {
-            $pdfPath = public_path('/storage/'.$data['fileurl']); 
-            $imagePath = '/uploads/library/thumbnails/pdf/'.date('Y-m-d').'-'.time().'.jpg';
-
-            if($this->pdfToImage($pdfPath, $imagePath))
-            {
-                $data['thumbnail'] = $imagePath;
-            }           
+            $data['thumbnail'] = $this->getPdfThumbnail($data['fileurl']);          
         }
         
         $material->update($data);
@@ -232,53 +226,87 @@ class MaterialController extends Controller
         return redirect('/admin/library/'.$category->id.'/materials');
     }
 
-    private function pdfToImage($pdfPath, $imagePath)
-    {
-        if(file_exists($pdfPath))
-        {
-            try 
-            {
-                if(!file_exists(storage_path('app/public/uploads/library/thumbnails/pdf')))
-                {
-                    mkdir(storage_path('app/public/uploads/library/thumbnails/pdf'), 0777, true);
-                }
-                $pdf = new PdfToImage($pdfPath);
-                $pdf->setPage(1)
-                    ->setResolution(150) // Set quality (default: 300)
-                    ->saveImage(storage_path('app/public/'.$imagePath));
+    // private function pdfToImage($pdfPath, $imagePath)
+    // {
+    //     if(file_exists($pdfPath))
+    //     {
+    //         try 
+    //         {
+    //             if(!file_exists(storage_path('app/public/uploads/library/thumbnails/pdf')))
+    //             {
+    //                 mkdir(storage_path('app/public/uploads/library/thumbnails/pdf'), 0777, true);
+    //             }
+    //             $pdf = new PdfToImage($pdfPath);
+    //             $pdf->setPage(1)
+    //                 ->setResolution(150) // Set quality (default: 300)
+    //                 ->saveImage(storage_path('app/public/'.$imagePath));
                     
-                // Apply white background using Imagick
-                $imagick = new Imagick(storage_path('app/public/'.$imagePath));
-                $imagick->setImageBackgroundColor('#fff');
-                $imagick = $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
-                $imagick->writeImage(storage_path('app/public/'.$imagePath));               
+    //             // Apply white background using Imagick
+    //             $imagick = new Imagick(storage_path('app/public/'.$imagePath));
+    //             $imagick->setImageBackgroundColor('#fff');
+    //             $imagick = $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+    //             $imagick->writeImage(storage_path('app/public/'.$imagePath));               
                 
-                return 1;
+    //             return 1;
                 
-            } 
-            catch (\Throwable $th) {
-                return 0;
-                //throw $th;
-            }                                
-        } 
+    //         } 
+    //         catch (\Throwable $th) {
+    //             return 0;
+    //             //throw $th;
+    //         }                                
+    //     } 
 
-        return 0;
-    }
+    //     return 0;
+    // }
     
     private function getPdfPageCount($pdfPath)
     {
+        $storage = Storage::disk('public');
+        $pdfPath = $storage->path($pdfPath);
+
         if (file_exists($pdfPath)) {
+
             try {
-                $pdf = new PdfToImage($pdfPath);
-                $count = $pdf->getNumberOfPages();
-                if ($count > 0) {
-                    return $count;
-                }
+                $parser = new PdfParser();
+                $pdf = $parser->parseFile($pdfPath);
+                $pageCount = count($pdf->getPages());
+
+                return $pageCount;
+
             } catch (\Throwable $e) {
                 // throw $e;
             }            
         }
 
         return 0;
+    }
+
+    private function getPdfThumbnail($pdfPath)
+    {
+        $storage = Storage::disk('public');
+        $pdfPath = $storage->path($pdfPath);
+        $thumbnail = 'uploads/library/thumbnails/pdf/'.date('Y-m-d').'-'.time().'.jpg';
+        
+        if (file_exists($pdfPath)) {
+
+            try {
+                $thumbnailPath = $storage->path($thumbnail);
+
+                $pdf = new PdfToImage($pdfPath);
+                $image = $pdf->selectPage(1)
+                    ->resolution(300)
+                    ->quality(100)
+                    ->layerMethod(\Spatie\PdfToImage\Enums\LayerMethod::Merge)
+                    ->backgroundColor('white')
+                    ->save($thumbnailPath);
+
+                return $thumbnail;
+
+            } catch (\Throwable $e) {
+                // throw $e;
+            }            
+        }
+
+        return null;
     }
 }
