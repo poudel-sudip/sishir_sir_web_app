@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    PDF Banks
+  eBooks
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">All PDF Single Banks</h3>
+            <h3 class="page-title">All eBook Singles</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">PDF Banks</li>
+              <li class="breadcrumb-item active" aria-current="page">eBooks</li>
               </ol>
           </nav>
         </div>  
@@ -19,10 +19,10 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">PDF Bank Singles</h4>
+                        <h4 class="card-title">eBook Singles</h4>
                         <div class="text-right">
                           <a href="/admin/pdf-bank/pdf-singles/import"><button type="button" class="btn btn-sm ml-3 btn-info"> Import PDF From Material Library </button></a>
-                          <a href="{{ ('/admin/pdf-bank/pdf-singles/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add PDF Bank</button></a>
+                          <a href="{{ ('/admin/pdf-bank/pdf-singles/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add eBook</button></a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">
@@ -30,7 +30,7 @@
                         <thead>
                           <tr>
                             <th>ID</th>
-                            <th>PDf Bank Name</th>
+                            <th>eBook Name</th>
                             <th>Category</th>
                             <th>Author</th>
                             <th>Price</th>

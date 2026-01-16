@@ -60,7 +60,7 @@
                 </div>               
 
                 <div class="col-6 single-search-area">
-                    <h5> PDF Banks: {{count($pdf_banks) >= 20 ? count($pdf_banks).'+' : count($pdf_banks)}} </h5>
+                    <h5> eBooks: {{count($pdf_banks) >= 20 ? count($pdf_banks).'+' : count($pdf_banks)}} </h5>
                     @foreach($pdf_banks as $post)
                         <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
                     @endforeach

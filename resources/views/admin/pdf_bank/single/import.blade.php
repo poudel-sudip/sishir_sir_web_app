@@ -6,11 +6,11 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Import Library Material In PDF Bank </h3>
+            <h3 class="page-title">Import Library Material In eBook </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/pdf-singles') }}">PDF Banks</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/pdf-singles') }}">eBooks</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Import </li>
                 </ol>
             </nav>
@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">PDF Bank Import Library Material PDF File </div>
+                    <div class="card-header">eBook Import Library Material PDF File </div>
                     <div class="card-body">
                         <form method="POST" action="/admin/pdf-bank/pdf-singles/copy" enctype="multipart/form-data" class="forms-sample">
                             @csrf

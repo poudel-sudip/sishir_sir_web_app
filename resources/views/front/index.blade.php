@@ -223,7 +223,7 @@
         <div class="container-fluid px-md-5">
             <div class="row">
                 <div class="col-md-12 relative">
-                    <h2 class="home-section-heading">Digital Library</h2>
+                    <h2 class="home-section-heading">eLibrary</h2>
                 </div>
             </div>
             <div class="lib-filter-alphabets">
@@ -541,7 +541,7 @@
             <div class="container-fluid px-md-5">
                 <div class="row">
                     <div class="col-md-12 relative">
-                        <h2 class="home-section-heading">Premium PDF Bank</h2>
+                        <h2 class="home-section-heading">eBooks</h2>
                     </div>
                 </div>
                 <nav>
@@ -579,7 +579,7 @@
                     @endforeach
 
                     <div class="text-end">
-                        <a href="/pdf-banks" class="btn btn-sm" style="background:#1375b9; color:#fff;">View all PDF Banks...</a>
+                        <a href="/pdf-banks" class="btn btn-sm" style="background:#1375b9; color:#fff;">View all eBooks...</a>
                     </div>
                 </div>
                 

@@ -11,7 +11,7 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/pdf-singles') }}">PDF Banks</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/pdf-singles') }}">eBook</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Bookings</li>
               </ol>
           </nav>
@@ -32,7 +32,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Date</th>
-                                <th>PDf Bank</th>
+                                <th>eBook</th>
                                 <th>Booked By</th>
                                 <th>Email</th>
                                 <th>Contact</th>

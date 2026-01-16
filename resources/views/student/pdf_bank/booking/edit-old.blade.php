@@ -1,7 +1,7 @@
 @extends('student.layouts.app')
 
 @section('student-title')
-    Edit PDF Bank Booking
+    Edit eBook Booking
 @endsection
 @section('student-title-icon')
     <i class="far fa-file-pdf"></i>
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="pdf_bank" class="col-md-4 col-form-label text-md-right">{{ __('PDF Bank') }}</label>
+                                <label for="pdf_bank" class="col-md-4 col-form-label text-md-right">{{ __('eBook') }}</label>
 
                                 <div class="col-md-8">
                                     <input id="pdf_bank" type="text" class="form-control @error('pdf_bank') is-invalid @enderror" name="pdf_bank" value="{{ old('pdf_bank') ?? ($booking->book->title.' @ Rs.'. ($booking->book->price - $booking->book->discount)) }}" readonly>

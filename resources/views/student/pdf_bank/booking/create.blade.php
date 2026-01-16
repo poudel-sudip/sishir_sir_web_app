@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    Enroll PDF Bank
+    Enroll eBook
 @endsection
 @section('student-title-icon')
     <i class="fas fa-file-pdf"></i>
@@ -12,7 +12,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">{{ __('Enroll New PDF Bank') }}</div>
+                    <div class="card-header">{{ __('Enroll New eBook') }}</div>
 
                     <div class="card-body enroll_form">
 
@@ -25,7 +25,7 @@
                            
                             @csrf
                             <div class="form-group row">
-                                <label for="pdf_bank" class="col-md-4 col-form-label text-md-right">{{ __('PDF Bank') }}</label>
+                                <label for="pdf_bank" class="col-md-4 col-form-label text-md-right">{{ __('eBook') }}</label>
 
                                 <div class="col-md-8">
                                     <select name="pdf_bank" id="pdf_bank" class="enroll-form-control @error('pdf_bank') is-invalid @enderror" value="{{ old('pdf_bank') }}" autofocus required>

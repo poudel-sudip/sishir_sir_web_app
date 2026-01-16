@@ -128,7 +128,7 @@
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#pdf_bank" aria-expanded="false" aria-controls="pdf_bank">
           <i class="mdi mdi-file-pdf menu-icon"></i>
-          <span class="menu-title">PDF Bank</span>
+          <span class="menu-title">eBooks</span>
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="pdf_bank">
@@ -137,10 +137,10 @@
               <a class="nav-link" href="{{ url('/admin/pdf-bank/categories') }}">Categories</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/pdf-bank/pdf-groups') }}">PDF Bank Groups</a>
+              <a class="nav-link" href="{{ url('/admin/pdf-bank/pdf-groups') }}">eBook Groups</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/pdf-bank/pdf-singles') }}">PDF Bank Singles</a>
+              <a class="nav-link" href="{{ url('/admin/pdf-bank/pdf-singles') }}">eBook Singles</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/pdf-bank-bookings') }}">Latest Bookings</a>

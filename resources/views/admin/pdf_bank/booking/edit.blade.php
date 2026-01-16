@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Edit PDF Bank Booking
+    Edit eBook Booking
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Edit PDF Bank Booking</h3>
+            <h3 class="page-title">Edit eBook Booking</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank-bookings') }}">PDF Bank Bookings</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank-bookings') }}">eBook Bookings</a></li>
               <li class="breadcrumb-item active" aria-current="page">Edit</li>
               </ol>
           </nav>
@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Edit  PDF Bank Booking Details</div>
+                    <div class="card-header">Edit  eBook Booking Details</div>
                     <div class="card-body">
                         <form method="POST" action="/admin/pdf-bank-bookings/{{$booking->id}}" enctype="multipart/form-data">
                             @csrf
@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="group_name" class="col-md-4 col-form-label">{{ __('PDF Bank Group') }}</label>
+                                <label for="group_name" class="col-md-4 col-form-label">{{ __('eBook Group') }}</label>
                                 <div class="col-md-8">
                                         <select name="group_name" id="group_name" class="form-control @error('group_name') is-invalid @enderror" value="{{ old('group_name') }}" autofocus required>
                                             <option value="{{$booking->book->id ?? ''}}">{{$booking->book->title ?? ''}} @ Rs. {{(($booking->book->price ?? '0') - ($booking->book->discount ?? '0'))}}</option>

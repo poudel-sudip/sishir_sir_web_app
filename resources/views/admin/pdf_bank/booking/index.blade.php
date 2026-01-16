@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Latest 300 PDF Bank Bookings
+    Latest 300 eBook Bookings
 @endsection
 
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Latest 300 PDF Bank  Bookings</h3>
+            <h3 class="page-title">Latest 300 eBook  Bookings</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">PDF Bank  Bookings</li>
+              <li class="breadcrumb-item active" aria-current="page">eBook  Bookings</li>
               </ol>
           </nav>
         </div>  
@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-body">
                       <div class="custon-table-header">
-                          <h4 class="card-title">Latest 300 PDF Bank Bookings</h4>
+                          <h4 class="card-title">Latest 300 eBook Bookings</h4>
                             <div class="text-right">
                                 <a href="{{ ('/admin/pdf-bank-bookings/all') }}"><button type="button" class="btn btn-sm ml-3 btn-primary"> All Bookings </button></a>
                                 <a href="{{ ('/admin/pdf-bank-bookings/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Booking </button></a>
@@ -32,7 +32,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Date</th>
-                                <th>PDF Bank</th>
+                                <th>eBook</th>
                                 <th>Booked By</th>
                                 <th>Email</th>
                                 <th>Contact</th>

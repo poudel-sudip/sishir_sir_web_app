@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    Enrolled PDF Banks
+    Enrolled eBooks
 @endsection
 
 @section('student-title-icon')
@@ -12,8 +12,8 @@
     <div class="student-content-wrapper student-enroll-section">
         <div class="row">
             <div class="col-md-12 mb-2 text-end">
-                {{-- <a class="student-enroll-btn" href="{{ url('/student/pdf-bank-bookings/create') }}">Book PDF Bank</a> --}}
-                <a class="student-enroll-btn" href="/pdf-banks">Book PDF Bank</a>
+                {{-- <a class="student-enroll-btn" href="{{ url('/student/pdf-bank-bookings/create') }}">Enroll eBook</a> --}}
+                <a class="student-enroll-btn" href="/pdf-banks">Enroll eBook</a>
             </div>
         </div>
         <div class="row">

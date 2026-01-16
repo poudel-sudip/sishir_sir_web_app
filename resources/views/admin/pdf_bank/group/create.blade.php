@@ -1,24 +1,24 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Create PDF Bank
+    Create eBook
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Create PDF Bank</h3>
+            <h3 class="page-title">Create eBook</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/pdf-groups') }}">PDF Banks</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Add PDF Bank </li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/pdf-groups') }}">eBooks</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Add eBook </li>
                 </ol>
             </nav>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Add PDF Bank</div>
+                    <div class="card-header">Add eBook</div>
                     <div class="card-body">
                         <form method="POST" action="{{ ('/admin/pdf-bank/pdf-groups') }}" enctype="multipart/form-data" class="forms-sample">
                             @csrf
@@ -42,7 +42,7 @@
                             </div>
                             
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label">{{ __('PDF Bank Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label">{{ __('eBook Name') }}</label>
 
                                 <div class="col-md-8">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>

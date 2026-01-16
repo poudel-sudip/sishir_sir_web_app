@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    PDF Singles | {{$category->name}}
+  eBook Singles | {{$category->name}}
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-        <h3 class="page-title">PDF Singles | {{$category->name}}</h3>
+        <h3 class="page-title">eBook Singles | {{$category->name}}</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
               <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/categories') }}">Categories</a></li>
-              <li class="breadcrumb-item active" aria-current="page">PDF Singles </li>
+              <li class="breadcrumb-item active" aria-current="page">eBook Singles </li>
             </ol>
         </nav>
         </div>
@@ -21,9 +21,9 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">PDF Singles | {{$category->name}}</h4>
+                        <h4 class="card-title">eBook Singles | {{$category->name}}</h4>
                         <div class="text-right">
-                            <a href="{{ ('/admin/pdf-bank/pdf-singles/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add PDF Single </button></a>
+                            <a href="{{ ('/admin/pdf-bank/pdf-singles/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add eBook Single </button></a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">
@@ -31,7 +31,7 @@
                         <thead>
                           <tr>
                             <th>SN</th>
-                            <th>PDF Bank</th>
+                            <th>eBook</th>
                             {{-- <th>Category</th> --}}
                             <th>Price</th>
                             <th>Purchases</th>

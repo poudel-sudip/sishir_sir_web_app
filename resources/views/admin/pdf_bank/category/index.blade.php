@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    PDF Bank Categories
+  eBook Categories
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-        <h3 class="page-title">All PDF Bank Categories</h3>
+        <h3 class="page-title">All eBook Categories</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">PDF Bank Categories </li>
+            <li class="breadcrumb-item active" aria-current="page">eBook Categories </li>
             </ol>
         </nav>
         </div>
@@ -20,7 +20,7 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">PDF Bank Categories Lists</h4>
+                        <h4 class="card-title">eBook Categories Lists</h4>
                         <div class="text-right">
                             <a href="{{ ('/admin/pdf-bank/categories/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Category </button></a>
                         </div>
@@ -33,8 +33,8 @@
                             <th>Category Name</th>
                             <th>Order</th>
                             <th>Status</th>
-                            <th>PDF Groups</th>
-                            <th>PDF Singles</th>
+                            <th>eBook Groups</th>
+                            <th>eBook Singles</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -46,8 +46,8 @@
                             <td>{{$cat->name}}</td>
                             <td>{{$cat->order}}</td>
                             <td><span class='text-{{$cat->status == "Active" ? "success" : "danger"}}'>{{$cat->status}}</span></td>
-                            <td class="classroom-btn"> <a href="/admin/pdf-bank/categories/{{$cat->id}}/groups" class="btn btn-primary">PDF Groups ({{$cat->ebooks()->where('type','=','set')->count()}}) </a> </td>
-                            <td class="classroom-btn"> <a href="/admin/pdf-bank/categories/{{$cat->id}}/singles" class="btn btn-primary">PDF Singles ({{$cat->ebooks()->where('type','=','single')->count()}}) </a> </td>
+                            <td class="classroom-btn"> <a href="/admin/pdf-bank/categories/{{$cat->id}}/groups" class="btn btn-primary">eBook Groups ({{$cat->ebooks()->where('type','=','set')->count()}}) </a> </td>
+                            <td class="classroom-btn"> <a href="/admin/pdf-bank/categories/{{$cat->id}}/singles" class="btn btn-primary">eBook Singles ({{$cat->ebooks()->where('type','=','single')->count()}}) </a> </td>
                             <td class="classroom-btn" width="50">
                               <a href="/admin/pdf-bank/categories/{{$cat->id}}/edit" class="btn btn-warning">Edit</a>
                               <form class="d-inline" id="delete-form-{{$cat->id}}" action="/admin/pdf-bank/categories/{{$cat->id}}" method="POST">

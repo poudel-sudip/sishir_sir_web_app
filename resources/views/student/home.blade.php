@@ -42,7 +42,7 @@
 
                 <div class="student-dashboard-card block-fourth">
                     <div class="first-row">
-                        <span>PDF Bank Bookings</span>
+                        <span>eBook Bookings</span>
                         <i class="fas fa-file-pdf"></i>
                     </div>
                     <div class="second-row">
@@ -76,7 +76,7 @@
                     </li>           
                     
                     <li class="nav-item">
-                      <a class="nav-link" href="/student/pdf-bank-bookings"><i class="fas fa-file-pdf text-pink  me-1"></i>PDF Bank Bookings</a>
+                      <a class="nav-link" href="/student/pdf-bank-bookings"><i class="fas fa-file-pdf text-pink  me-1"></i>eBook Bookings</a>
                     </li>
         
                     <li class="nav-item">
@@ -96,7 +96,7 @@
                     </li> 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/library"><i class="fas fa-swatchbook text-info me-1"></i>Library</a>
+                        <a class="nav-link" href="/library"><i class="fas fa-swatchbook text-info me-1"></i>eLibrary</a>
                     </li>
 
                     <li class="nav-item">

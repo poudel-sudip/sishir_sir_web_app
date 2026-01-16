@@ -16,7 +16,7 @@
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ ('/library') }}">Library</a></li>
+                        <li class="breadcrumb-item"><a href="{{ ('/library') }}">eLibrary</a></li>
                         <li class="breadcrumb-item"><a href="/library/{{$library_category->id}}">{{($library_category->name)}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{($material->name)}}</li>
                     </ol>

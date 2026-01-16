@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Show PDF Bank Booking
+    Show eBook Booking
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Show PDF Bank Booking </h3>
+            <h3 class="page-title">Show eBook Booking </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank-bookings') }}">PDF Bank Bookings</a> </li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank-bookings') }}">eBook Bookings</a> </li>
                 <li class="breadcrumb-item active" aria-current="page">Show</li>
                 </ol>
             </nav>
@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">View PDF Bank Bookings Details</div>
+                    <div class="card-header">View eBook Bookings Details</div>
                     <div class="card-body">
                         <div class="course-row">
                             <div>Booking ID:</div>
@@ -37,11 +37,11 @@
                             <div>{{$booking->status}}</div>
                         </div>
                         <div class="course-row">
-                            <div>PDF Bank Name:</div>
+                            <div>eBook Name:</div>
                             <div>{{$booking->book->title ?? ''}}</div>
                         </div>
                         <div class="course-row">
-                            <div>PDF Bank Price:</div>
+                            <div>eBook Price:</div>
                             <div>Rs. {{($booking->book->price)-($booking->book->discount)}}</div>
                         </div>
                        

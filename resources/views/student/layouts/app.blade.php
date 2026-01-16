@@ -150,7 +150,7 @@
             </li> --}}
             
             <li class="nav-item">
-              <a class="nav-link" href="/student/pdf-bank-bookings"><i class="fas fa-file-pdf text-pink"></i>PDF Bank Bookings</a>
+              <a class="nav-link" href="/student/pdf-bank-bookings"><i class="fas fa-file-pdf text-pink"></i>eBook Bookings</a>
             </li>
 
             <li class="nav-item">
@@ -170,7 +170,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/library"><i class="fas fa-swatchbook text-info"></i>Library</a>
+              <a class="nav-link" href="/library"><i class="fas fa-swatchbook text-info"></i>eLibrary</a>
             </li>
 
             <li class="nav-item">

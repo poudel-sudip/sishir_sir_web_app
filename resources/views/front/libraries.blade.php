@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('page_title', 'Library')
+@section('page_title', 'eLibrary')
 @section('content')
 <style>
     .single-blog p, .single-blog .blog-description span {
@@ -11,11 +11,11 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>Digital Library</h2>
+                <h2>eLibrary</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                       <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Library</li>
+                      <li class="breadcrumb-item active" aria-current="page">eLibrary</li>
                     </ol>
                 </div>
             </div>

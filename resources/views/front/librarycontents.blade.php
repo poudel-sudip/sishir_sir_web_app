@@ -1,6 +1,6 @@
 @extends('front.layouts.app')
 
-@section('page_title', 'Library: '.($library_category->name))
+@section('page_title', 'eLibrary: '.($library_category->name))
 @section('og-title', ($library_category->name))
 @section('og-url', url('/library/'.$library_category->id))
 @section('og-description', strip_tags($library_category->name) ? strip_tags(str_replace('<', '  <', $library_category->name)) : $library_category->name )
@@ -20,7 +20,7 @@
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ ('/library') }}">Library</a></li>
+                        <li class="breadcrumb-item"><a href="{{ ('/library') }}">eLibrary</a></li>
                         {{-- <li class="breadcrumb-item active" aria-current="page">{{($library_category->name)}}</li> --}}
 
                         @if($library_category)

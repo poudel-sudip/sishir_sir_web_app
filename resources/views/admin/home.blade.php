@@ -57,7 +57,7 @@
                   <div class="card-body px-3 py-4">
                     <div class="d-flex justify-content-between align-items-start">
                       <div class="color-card">
-                        <p class="mb-0 color-card-head">Total PDF Bank Bookings</p>
+                        <p class="mb-0 color-card-head">Total eBook Bookings</p>
                         <h2 class="text-white mt-3 text-center">{{ $data->pdf_booking->count }}</h2>
                       </div>
                       <i class="card-icon-indicator mdi mdi-calendar-multiple bg-inverse-icon-danger"></i>

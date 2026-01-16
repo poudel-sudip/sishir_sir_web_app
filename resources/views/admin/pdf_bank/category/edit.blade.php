@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Edit PDF Bank Category
+    Edit eBook Category
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Edit PDF Bank Category</h3>
+            <h3 class="page-title">Edit eBook Category</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/categories') }}">PDF Bank Categories</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/categories') }}">eBook Categories</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Edit Category </li>
                 </ol>
             </nav>
@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Edit PDF Bank Category</div>
+                    <div class="card-header">Edit eBook Category</div>
                   <div class="card-body">
                     <form class="forms-sample" method="POST" action="{{ ('/admin/pdf-bank/categories/'.$category->id) }}" enctype="multipart/form-data">
                         @csrf

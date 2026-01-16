@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    PDF Bank Contents
+    eBook Contents
 @endsection
 
 @section('student-title-icon')

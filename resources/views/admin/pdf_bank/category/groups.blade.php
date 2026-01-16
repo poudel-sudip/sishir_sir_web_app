@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    PDF Groups | {{$category->name}}
+  eBook Groups | {{$category->name}}
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-        <h3 class="page-title">PDF Groups | {{$category->name}}</h3>
+        <h3 class="page-title">eBook Groups | {{$category->name}}</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
               <li class="breadcrumb-item"><a href="{{ url('/admin/pdf-bank/categories') }}">Categories</a></li>
-              <li class="breadcrumb-item active" aria-current="page">PDF Groups </li>
+              <li class="breadcrumb-item active" aria-current="page">eBook Groups </li>
             </ol>
         </nav>
         </div>
@@ -21,9 +21,9 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">PDF Groups | {{$category->name}}</h4>
+                        <h4 class="card-title">eBook Groups | {{$category->name}}</h4>
                         <div class="text-right">
-                            <a href="{{ ('/admin/pdf-bank/pdf-groups/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add PDF Group </button></a>
+                            <a href="{{ ('/admin/pdf-bank/pdf-groups/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add eBook Group </button></a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">
@@ -31,7 +31,7 @@
                         <thead>
                           <tr>
                             <th>SN</th>
-                            <th>PDF Bank Group</th>
+                            <th>eBook Group</th>
                             {{-- <th>Category</th> --}}
                             <th>Price</th>
                             <th>PDF Files</th>

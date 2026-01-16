@@ -17,7 +17,7 @@
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/pdf-banks">PDF Banks</a></li>
+                        <li class="breadcrumb-item"><a href="/pdf-banks">eBooks</a></li>
                         <li class="breadcrumb-item"><a href="/pdf-banks/category/{{$pdf_bank->category->id ?? ''}}">{{$pdf_bank->category->name ?? ''}}</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{$pdf_bank->title}}</li>
                     </ol>
@@ -39,7 +39,7 @@
                         </div> 
                         <div class="">
                             @if($pdf_bank->bookings()->count()>=1)
-                            <div class="text- text-danger">{{$pdf_bank->bookings()->count()}} Users Already Enrolled This PDF Bank.</div>
+                            <div class="text- text-danger">{{$pdf_bank->bookings()->count()}} Users Already Enrolled This eBook.</div>
                             @endif
                         </div>                       
                     </div>

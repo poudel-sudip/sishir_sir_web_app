@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    PDF Banks
+  eBooks
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">All PDF Banks</h3>
+            <h3 class="page-title">All eBooks</h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">PDF Banks</li>
+              <li class="breadcrumb-item active" aria-current="page">eBooks</li>
               </ol>
           </nav>
         </div>  
@@ -19,9 +19,9 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">PDF Bank Groups</h4>
+                        <h4 class="card-title">eBook Groups</h4>
                         <div class="text-right">
-                            <a href="{{ ('/admin/pdf-bank/pdf-groups/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add PDF Bank Group</button></a>
+                            <a href="{{ ('/admin/pdf-bank/pdf-groups/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add eBook Group</button></a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">
@@ -29,7 +29,7 @@
                         <thead>
                           <tr>
                             <th>ID</th>
-                            <th>PDf Bank Name</th>
+                            <th>eBook Name</th>
                             <th>Category</th>
                             <th>Author</th>
                             <th>Price</th>

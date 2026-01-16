@@ -129,10 +129,6 @@
             </li>
           @endforeach
              
-          
-          {{-- <li class="nav-item ">
-            <a class="nav-link" href="/books">My Book</a>
-          </li> --}}
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="/books" role="button" aria-expanded="false">Books</a>
@@ -157,14 +153,6 @@
             </ul>
           </li>
           
-          <!--<li class="nav-item">-->
-          <!--  <a class="nav-link" href="/public-exams">Mock Test</a>-->
-          <!--</li>-->
-          
-          <li class="nav-item">
-            <a class="nav-link" href="/health-days">Health Days</a>
-          </li>
-
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">News Hub</a>
             <ul class="dropdown-menu">
@@ -174,16 +162,11 @@
               <li class="parent-dropdown">
                 <a class="dropdown-item" aria-current="page" href="/vaccancies">Vacancies</a>
               </li>
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/health-days">Health Days</a>
+              </li>
             </ul>
           </li>
-
-          {{-- <li class="nav-item">
-            <a class="nav-link" href="/blogs">Blogs</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/vaccancies">Vacancies</a>
-          </li>          --}}
               
           <li class="nav-item">
             <a class="nav-link" href="/faqs">FAQs</a>

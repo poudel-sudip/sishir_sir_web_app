@@ -46,8 +46,8 @@ class BookingController extends Controller
         ])->count();
             
         if($search){
-            // return back()->withInput()->with('alreadybooked', 'You Have Already Enrolled This PDF Bank !!!');
-            return back()->withInput()->with('alreadybooked', 'You have already enrolled in this PDF bank. Please visit the Dashboard to view and download the PDF.');
+            // return back()->withInput()->with('alreadybooked', 'You Have Already Enrolled This eBook !!!');
+            return back()->withInput()->with('alreadybooked', 'You have already enrolled in this eBook. Please visit the Dashboard to view and download the PDF.');
         }
 
         $booking = Booking::create([

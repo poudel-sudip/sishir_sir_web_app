@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('page_title', $pdf_category->name ?? 'All PDF Banks')
+@section('page_title', $pdf_category->name ?? 'All eBooks')
 @section('content')
     <style>
         .single-blog p, .single-blog .blog-description span {
@@ -12,15 +12,15 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{ $pdf_category->name ?? 'All PDF Banks' }} </h2>
+                <h2>{{ $pdf_category->name ?? 'All eBooks' }} </h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         @if($pdf_category)
-                        <li class="breadcrumb-item"><a href="/pdf-banks">All PDF Banks</a></li>
+                        <li class="breadcrumb-item"><a href="/pdf-banks">All eBooks</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{$pdf_category->name}}</li>
                         @else
-                        <li class="breadcrumb-item active" aria-current="page">All PDF Banks</li>
+                        <li class="breadcrumb-item active" aria-current="page">All eBooks</li>
                         @endif
                     </ol>
                 </div>
@@ -33,7 +33,7 @@
             <div class="row course-details">
                 <div class="col-md-3">
                     <div class="side-navbar border border-2 border-primary">
-                        <h5><a class="d-block" href="{{ url('/pdf-banks') }}">All PDF Banks</a></h5>
+                        <h5><a class="d-block" href="{{ url('/pdf-banks') }}">All eBooks</a></h5>
                         <ul class="course-nav" style="height:auto; min-height: 370px; ">
                             @foreach($pdf_bank_categories as $cat)
                                 <li><a class="d-block" href="/pdf-banks/category/{{$cat->id}}">{{$cat->name}}</a></li>
@@ -65,7 +65,7 @@
                                 </a>
                             </div>
                             @empty
-                                <div>No PDF Banks Published</div>
+                                <div>No eBooks Published</div>
                             @endforelse
                         </div>
                         <div class="">
