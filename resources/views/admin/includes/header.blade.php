@@ -207,7 +207,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/library') }}">
           <i class="mdi mdi-alpha-l-box menu-icon"></i>
-          <span class="menu-title">Material Library</span>
+          <span class="menu-title">eLibrary</span>
         </a>
       </li>
 

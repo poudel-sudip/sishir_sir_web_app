@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Show Library Material | {{$category->name}}
+    Show eLibrary Material | {{$category->name}}
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Show Library Material Details</h3>
+            <h3 class="page-title">Show eLibrary Material Details</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">Library</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">eLibrary</a></li>
                 <li class="breadcrumb-item"><a href="{{ url('/admin/library/'.$category->id.'/directories') }}">{{ucwords($category->name)}}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Show</li>
                 </ol>

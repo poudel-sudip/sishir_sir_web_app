@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Import Library Material PDF File | {{$category->name}} 
+    Import eLibrary PDF File | {{$category->name}} 
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Import Library Material PDF File | {{$category->name}} </h3>
+            <h3 class="page-title">Import eLibrary PDF File | {{$category->name}} </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">Library</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">eLibrary</a></li>
                 <li class="breadcrumb-item"><a href="{{ url('/admin/library/'.$category->id.'/directories') }}">{{ucwords($category->name)}}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Import </li>
                 </ol>
@@ -19,14 +19,14 @@
         <div class="row justify-content-center">
             <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Import Library Material PDF File | {{$category->name}} </div>
+                    <div class="card-header">Import eLibrary  PDF File | {{$category->name}} </div>
                     <div class="card-body">
                         <form method="POST" action="/admin/library/{{$category->id}}/materials/import" enctype="multipart/form-data" class="forms-sample">
                             @csrf
                             @method('PATCH')
 
                             {{-- <div class="form-group row">
-                                <label for="main_library" class="col-md-4 col-form-label">{{ __('Material Library') }}</label>
+                                <label for="main_library" class="col-md-4 col-form-label">{{ __('eLibrary') }}</label>
                                 <div class="col-md-8">
                                     <select name="main_library" id="main_library" class="form-control @error('main_library') is-invalid @enderror" value="{{ old('main_library') }}" autofocus required>
                                         <option value="">Select A File Library</option>
@@ -43,10 +43,10 @@
                             </div> --}}
 
                             <div class="form-group row">
-                                <label for="library_group" class="col-md-4 col-form-label">{{ __('Library Group') }}</label>
+                                <label for="library_group" class="col-md-4 col-form-label">{{ __('eLibrary Group') }}</label>
                                 <div class="col-md-8">
                                     <select name="library_group" id="library_group" class="form-control @error('library_group') is-invalid @enderror" value="{{ old('library_group') }}" autofocus required>
-                                        <option value="">Select A Library Group</option>
+                                        <option value="">Select A eLibrary Group</option>
                                         @foreach($libraries as $cat=>$val)
                                             <option value="{{$cat}}"> {{$cat}} </option>
                                         @endforeach
@@ -60,7 +60,7 @@
                             </div>
             
                             <div class="form-group row">
-                                <label for="main_library" class="col-md-4 col-form-label">{{ __('Material Library') }}</label>
+                                <label for="main_library" class="col-md-4 col-form-label">{{ __('eLibrary') }}</label>
                                 <div class="col-md-8">
                                     <select name="main_library" id="main_library" class="form-control @error('main_library') is-invalid @enderror" value="{{ old('main_library') }}" autofocus required>
                                     </select>
@@ -73,7 +73,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="sub_library" class="col-md-4 col-form-label">{{ __('Material Sub Library') }}</label>
+                                <label for="sub_library" class="col-md-4 col-form-label">{{ __('Sub eLibrary') }}</label>
             
                                 <div class="col-md-8">
                                     <select name="sub_library" id="sub_library" class="form-control @error('sub_library') is-invalid @enderror" value="{{ old('sub_library') }}"  >
@@ -129,7 +129,7 @@
                 var mat_libs = libraries[label];
 
                 // var op='';
-                var op='<option value=""> Select One Main Library </option>';
+                var op='<option value=""> Select One Main eLibrary </option>';
                 mat_libs.forEach((row) => {
                     op += '<option value="' + row.id + '">' + row.name + '</option>';
                 });
@@ -170,7 +170,7 @@
 
                         if(sub_libs.length)
                         {
-                            op='<option value=""> Select One Sub Library </option>';
+                            op='<option value=""> Select One Sub eLibrary </option>';
                             sub_libs.forEach((row) => {
                                 op += '<option value="' + row.id + '">' + row.name + '</option>';
                             });

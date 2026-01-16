@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Edit Library Material
+    Edit eLibrary Material
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Edit Library Material</h3>
+            <h3 class="page-title">Edit eLibrary Material</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">Library</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">eLibrary</a></li>
                     <li class="breadcrumb-item"><a href="{{ url('/admin/library/'.$category->id.'/directories') }}">{{ucwords($category->name)}}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Edit</li>
                 </ol>
@@ -19,7 +19,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Edit Library Material | {{$category->name}}</div>
+                    <div class="card-header">Edit eLibrary Material | {{$category->name}}</div>
                   <div class="card-body">
                     <form class="forms-sample" method="POST" action="/admin/library/{{$category->id}}/materials/{{$material->id}}" enctype="multipart/form-data">
                         @csrf

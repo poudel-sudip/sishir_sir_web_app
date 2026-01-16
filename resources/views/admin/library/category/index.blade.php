@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-  Libraries @if($category) | {{$category->name}} @endif
+  eLibraries @if($category) | {{$category->name}} @endif
 @endsection
 
 @section('content')
   <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title"> Libraries @if($category) | {{ucwords($category->name)}} @endif </h3>
+      <h3 class="page-title"> eLibraries @if($category) | {{ucwords($category->name)}} @endif </h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">Library</a></li>
+          <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">eLibrary</a></li>
           @if($category)
             @php 
             $cur = $category;
@@ -42,7 +42,7 @@
         <div class="card">
           <div class="card-body">
             <div class="custon-table-header">
-              <h4 class="card-title">Libraries @if($category) | {{ucwords($category->name)}} @endif</h4>
+              <h4 class="card-title">eLibraries @if($category) | {{ucwords($category->name)}} @endif</h4>
             </div>
             <div class="chatroom-section">
               <div class="row chatroom-main-content align-items-center">

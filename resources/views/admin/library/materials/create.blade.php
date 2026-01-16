@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Create Library Material
+    Create eLibrary Material
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Create Library Material</h3>
+            <h3 class="page-title">Create eLibrary Material</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">Library</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/library') }}">eLibrary</a></li>
                 <li class="breadcrumb-item"><a href="{{ url('/admin/library/'.$category->id.'/directories') }}">{{ucwords($category->name)}}</a></li>
                 {{-- <li class="breadcrumb-item"><a href="{{ url('/admin/library/'.$category->id.'/materials') }}">Materials</a></li> --}}
                 <li class="breadcrumb-item active" aria-current="page">Add </li>
@@ -21,8 +21,8 @@
             <div class="col-md-10 grid-margin stretch-card">                
                 <div class="card">                 
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <span>Add Library Material | {{$category->name}}</span>
-                        <a href="/admin/library/{{$category->id}}/materials/import" class="btn btn-sm btn-info">Import From Library</a>
+                        <span>Add eLibrary Material | {{$category->name}}</span>
+                        <a href="/admin/library/{{$category->id}}/materials/import" class="btn btn-sm btn-info">Import From eLibrary</a>
                     </div>
                     <div class="card-body">
                         <form class="forms-sample" method="POST" action="/admin/library/{{$category->id}}/materials" enctype="multipart/form-data">
