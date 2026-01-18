@@ -41,7 +41,7 @@ class ProjectUpdate extends Command
      */
     public function handle()
     {
-        $this->eLibraryPdfPagesUpdate();
+        // $this->eLibraryPdfPagesUpdate();
         // return 0;
         
     }
