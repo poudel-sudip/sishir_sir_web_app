@@ -8,6 +8,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Helpers\Helper;
 use App\Models\Categories as Category;
 use App\Models\HealthDay;
+use Storage;
+use Number;
 
 class FrontMiscController extends Controller
 {
@@ -334,6 +336,15 @@ class FrontMiscController extends Controller
         ->orderBy('name','desc')
         ->get(['name as year','description as title'])
         ->values();
+
+        $pdf_size = "0 KB";
+        try {
+            $pdf_size = Storage::disk('public')->size($healthDay->pdf_file);
+            $pdf_size = Number::fileSize($pdf_size);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        $healthDay->pdf_size = $pdf_size;
 
         $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
         $pgtype = 'article';

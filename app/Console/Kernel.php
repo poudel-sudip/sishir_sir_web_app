@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // Commands\PostAutoNotifyUserCommand::class,
+        // Commands\ProjectUpdate::class,
     ];
 
     /**
@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('post-auto-notify-user:manage')
+        // $schedule->command('project-update:manage')
         // ->everyMinute()
         // ->withoutOverlapping()
         // ->runInBackground();

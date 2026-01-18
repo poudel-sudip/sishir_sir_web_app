@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Ebook\Ebook as PDFBank;
 use App\Models\Ebook\EbookBooking as Booking;
 use App\Models\Ebook\EbookChapter as PDFContent;
+use Storage;
+use Number;
 
 class PdfContentController extends Controller
 {
@@ -29,13 +31,21 @@ class PdfContentController extends Controller
         
         if($pdfbank->type == 'single')
         {
+            $pdf_size = "0 KB";
+            try {
+                $pdf_size = Storage::disk('public')->size($pdfbank->pdf_file);
+                $pdf_size = Number::fileSize($pdf_size);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+
             $data['content'] = (object)[
                 'id' => $pdfbank->id,
                 'title' => $pdfbank->title,
                 'download' => $pdfbank->download,
                 'pdf_file' => $pdfbank->pdf_file,
                 'video_file' => $pdfbank->video_file,
-                
+                'pdf_size' => $pdf_size,
             ];
             return view('student.pdf_bank.content.show',$data);
         }
@@ -51,6 +61,15 @@ class PdfContentController extends Controller
     {
         $pdfbank = $booking->book;
         // $contents = $pdfbank->chapters()->where('status','=','Active')->get();
+
+        $pdf_size = "0 KB";
+        try {
+            $pdf_size = Storage::disk('public')->size($content->pdf_file);
+            $pdf_size = Number::fileSize($pdf_size);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        $content->pdf_size = $pdf_size;
 
         $data['booking'] = $booking;
         $data['pdfbank'] = $pdfbank;

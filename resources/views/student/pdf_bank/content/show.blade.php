@@ -23,7 +23,7 @@
                     @endif
 
                     @if($content->download)                        
-                        <a href="/storage/{{$content->pdf_file}}" filename="{{ucwords($pdfbank->title.'__'.$content->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                        <a href="/storage/{{$content->pdf_file}}" filename="{{ucwords($pdfbank->title.'__'.$content->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{ $content->pdf_size ?? 'undefined' }})</a>
                     @endif
                 </div>
             </div>

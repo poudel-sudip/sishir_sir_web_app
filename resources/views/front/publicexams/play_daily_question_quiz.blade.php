@@ -10,7 +10,7 @@
     </style>
 
     <div class="container-fluid px-md-5">
-        <div class="public-exam-section mt-3">
+        <div class="public-exam-section mt-5 p-0">
             <div class="row">
                 <div class="col-md-12">
                     <div class="public-question-list">                        
@@ -21,8 +21,8 @@
                                     $key = -1;
                                 @endphp
                             
-                                <div class="mb-3 p-3" >
-                                    <div class="q-of-day-home-page px-5 py-3">
+                                <div class="" >
+                                    <div class="q-of-day-home-page px-1 px-md-5 py-3">
                                         <div class="bg-white">
                                             <div class="text-center q-heading px-4" style="width: fit-content !important;" >
                                                 <h2 class="q-title">Play Quiz</h2>

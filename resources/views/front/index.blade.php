@@ -84,7 +84,7 @@
                     @endif --}}
                     <div class="q-of-day-home-page">
                         @if(isset($today_question) && $today_question)
-                            <div class="bg-lgray" >
+                            <div class="bg-lgray px-2 px-md-4" >
                                 <div class="bg-white">
                                     <div class="text-center q-heading">
                                         <h2 class="q-title pb-2">QUESTION OF THE DAY</h2>

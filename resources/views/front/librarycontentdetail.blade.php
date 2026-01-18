@@ -49,7 +49,7 @@
                                 <i class="fa fa-download"></i> Login to Download
                             </a>
                         @endif --}}
-                    <a href="{{url('/storage/'.$material->fileurl)}}" filename="{{($material->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                    <a href="{{url('/storage/'.$material->fileurl)}}" filename="{{($material->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{ $material->size ?? 'undefined' }}) </a>
                     @endif
                 </div>
                 <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>

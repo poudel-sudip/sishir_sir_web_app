@@ -35,6 +35,14 @@
             <div class="row mt-3">
                 
                 <div class="row justify-content-end">
+                    <div class="col-md-4">
+                        @if(trim($vaccancy->pdf_file))
+                        <a href="{{url('/storage/'.$vaccancy->pdf_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{$vaccancy->pdf_size ?? 'undefined'}})</a>
+                        @endif
+                        @if(trim($vaccancy->img_file))
+                        <a href="{{url('/storage/'.$vaccancy->img_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{$vaccancy->img_size ?? 'undefined'}})</a>
+                        @endif
+                    </div>
                     <div class="col-md-8">
                         <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
                     </div>
@@ -73,6 +81,28 @@
             const postData = { type: 'share', page: 'Vaccancy Details Show',pageurl: pageURL };
             postDataWithFetch('/page-counter-increment', postData);
             // alert(pageURL);
+        }
+
+        function handleDownload(event) {
+            event.preventDefault(); // Prevent the default behavior of the link
+
+            var downloadUrl = event.target.getAttribute("href");
+            var filename = event.target.getAttribute("filename");
+            var fileExtension = downloadUrl.split('.').pop().toLowerCase();
+
+            var link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = filename +" || shisiradhikari.com."+fileExtension; // Set an empty value for the download attribute to preserve the original filename
+
+            document.body.appendChild(link);
+
+            link.click(); // Simulate a click event to initiate the download
+
+            document.body.removeChild(link); // Remove the dynamically created link element
+            
+            let pageURL = getPageURLWithoutProtocol();
+            const postData = { type: 'download', page: 'Vaccancy Details Show', pageurl: pageURL };
+            postDataWithFetch('/page-counter-increment', postData);
         }
     </script>
 

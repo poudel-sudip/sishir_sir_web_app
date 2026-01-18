@@ -54,13 +54,14 @@
                     {{-- <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-tag"></i> {{optional($healthDay->category)->name}}</span> --}}
                     <span class="mx-3 h6 text-info text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
                     <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
+                    <span class="mx-3 h6 text-primary text-nowrap"><i class="fa fa-download"></i> {{$counterData->page_download_count ?? '0'}}</span>
                 </div>
             </div>
             <div class="mt-3">  
 
                 @if($healthDay->pdf_file)
                     <div class="">
-                        <a href="{{url('/storage/'.$healthDay->pdf_file)}}" filename="{{($healthDay->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{$counterData->page_download_count ?? '0'}}) </a>
+                        <a href="{{url('/storage/'.$healthDay->pdf_file)}}" filename="{{($healthDay->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{$healthDay->pdf_size ?? 'undefined'}}) </a>
                     </div>     
                 @endif  
 

@@ -8,6 +8,8 @@ use App\Models\VaccancyPost;
 use App\Models\VaccancyApplicant;
 use App\Helpers\Helper;
 use App\Models\Categories as Category;
+use Storage;
+use Number;
 
 class VaccancyController extends Controller
 {
@@ -45,6 +47,24 @@ class VaccancyController extends Controller
             abort(404);
         }
 
+        $pdf_size = "0 KB";
+        try {
+            $pdf_size = Storage::disk('public')->size($vaccancy->pdf_file);
+            $pdf_size = Number::fileSize($pdf_size);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        $vaccancy->pdf_size = $pdf_size;
+
+        $img_size = "0 KB";
+        try {
+            $img_size = Storage::disk('public')->size($vaccancy->img_file);
+            $img_size = Number::fileSize($img_size);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        $vaccancy->img_size = $img_size;
+        
         // $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
         $pgurl = "/vaccancies/".$vaccancy->id;

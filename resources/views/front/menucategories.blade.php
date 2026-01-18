@@ -38,7 +38,7 @@
                 <div class="my-4 row align-items-center">
                     <div class="col-md-4">
                         @if($subMenu->type == 'file' && $subMenu->download)
-                        <a href="/storage/{{$subMenu->fileurl}}" filename="{{($subMenu->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download</a>
+                        <a href="/storage/{{$subMenu->fileurl}}" filename="{{($subMenu->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{ $subMenu->size ?? 'undefined' }})</a>
                         @endif
                     </div>
                     <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>

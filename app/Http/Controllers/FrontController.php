@@ -410,6 +410,8 @@ class FrontController extends Controller
 
     public function getMenuCategories($group, $menu)
     {
+        $storage = Storage::disk('public');
+        
         $data = [];
         $mainMenu = MenuGroup::where([['id', $group], ['status', 'Active']])->first();
         if (!$mainMenu) {
@@ -421,6 +423,17 @@ class FrontController extends Controller
         if (!$subMenu) {
             abort(404);
         }
+
+        $size = "0 KB";
+        try {
+            $size = $storage->size($subMenu->fileurl);
+            $size = Number::fileSize($size);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        $subMenu->size = $size;
+
         $data['subMenu'] = $subMenu;
 
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
@@ -435,6 +448,8 @@ class FrontController extends Controller
 
     public function getMenuItems($group, $menu, $cat)
     {
+        $storage = Storage::disk('public');
+
         $data = [];
         $mainMenu = MenuGroup::where([['id', $group], ['status', 'Active']])->first();
         if (!$mainMenu) {
@@ -452,6 +467,17 @@ class FrontController extends Controller
         if (!$menuCategory) {
             abort(404);
         }
+
+        $size = "0 KB";
+        try {
+            $size = $storage->size($menuCategory->fileurl);
+            $size = Number::fileSize($size);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        $menuCategory->size = $size;
+
         $data['menuCategory'] = $menuCategory;
 
         $data['menuItems'] = $menuCategory->items()->where('status', '=', 'Active')->orderByDesc('id')->get();
@@ -469,6 +495,8 @@ class FrontController extends Controller
 
     public function getMenuItemDetail($group, $menu, $cat, $item)
     {
+        $storage = Storage::disk('public');
+
         $data = [];
         $mainMenu = MenuGroup::where([['id', $group], ['status', 'Active']])->first();
         if (!$mainMenu) {
@@ -492,6 +520,17 @@ class FrontController extends Controller
         if (!$menuItem) {
             abort(404);
         }
+
+        $size = "0 KB";
+        try {
+            $size = $storage->size($menuItem->fileurl);
+            $size = Number::fileSize($size);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        $menuItem->size = $size;
+
         $data['menuItem'] = $menuItem;
 
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
@@ -507,6 +546,8 @@ class FrontController extends Controller
 
     public function getMenuSubItemDetail($group, $menu, $cat, $item, $subitem)
     {
+        $storage = Storage::disk('public');
+
         $data = [];
         $mainMenu = MenuGroup::where([['id', $group], ['status', 'Active']])->first();
         if (!$mainMenu) {
@@ -536,6 +577,17 @@ class FrontController extends Controller
         if (!$menuSubItem) {
             abort(404);
         }
+
+        $size = "0 KB";
+        try {
+            $size = $storage->size($menuSubItem->fileurl);
+            $size = Number::fileSize($size);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        $menuSubItem->size = $size;
+
         $data['menuSubItem'] = $menuSubItem;
 
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
@@ -606,6 +658,8 @@ class FrontController extends Controller
 
     public function getLibraryContentDetail($cat, $mat)
     {
+        $storage = Storage::disk('public');
+
         $library_category = LibraryCategory::where([['id', $cat], ['status', 'Active']])->first();
         if (!$library_category) {
             abort(404);
@@ -615,6 +669,16 @@ class FrontController extends Controller
         if (!$material) {
             abort(404);
         }
+
+        $size = "0 KB";
+        try {
+            $size = $storage->size($material->fileurl);
+            $size = Number::fileSize($size);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        $material->size = $size;
 
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
         $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
