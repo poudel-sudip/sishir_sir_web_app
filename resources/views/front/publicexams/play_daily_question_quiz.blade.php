@@ -109,7 +109,7 @@
             nav: false,
             dots: false,
             loop: false,
-            autoHeight: false,
+            autoHeight: true,
         });
 
         // Custom Navigation
