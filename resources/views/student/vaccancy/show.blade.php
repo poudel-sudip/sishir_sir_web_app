@@ -25,38 +25,26 @@
                 <div class="col-md-12 mb-3">
                     <h3 class="text-primary text-center">{{$vaccancy->title}}</h3>
                 </div>
-                <div class="d-flex align-items-center flex-wrap">
+                <div class="mt-2 d-flex align-items-center flex-wrap">
                     <span class="mx-3 h6 text-success text-nowrap"><i class="fa fa-user"></i> {{$vaccancy->author}}</span>
-                    <span class="mx-3 h6 text-primary text-nowrap"><i class="fa fa-pen"></i> {{$vaccancy->created_at}}</span>
-                    <span class="mx-3 h6 text-info text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
+                    <span class="mx-3 h6 text-primary text-nowrap"><i class="fa fa-pen"></i> {{$vaccancy->created_at->format('Y-m-d H:i')}}</span>
                     <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
+                    <span class="mx-3 h6 text-info text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
+                    <span class="mx-2 h6 text-nowrap text-primary"> 
+                        <span class="text-danger"> {{$counterData->page_download_count ?? '0'}} <i class="fa fa-download"></i> </span> 
+
+                        @if(trim($vaccancy->pdf_file))
+                        <a href="{{url('/storage/'.$vaccancy->pdf_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download ({{$vaccancy->pdf_size}})</a>
+                        @endif
+                        @if(trim($vaccancy->img_file))
+                        <a href="{{url('/storage/'.$vaccancy->img_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download ({{$vaccancy->img_size}})</a>
+                        @endif
+                    </span>
+
                 </div>
             </div>
             <div class="row mt-3">
-                
-                <div class="row justify-content-end">
-                    <div class="col-md-4">
-                        @if(trim($vaccancy->pdf_file))
-                        <a href="{{url('/storage/'.$vaccancy->pdf_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{$vaccancy->pdf_size ?? 'undefined'}})</a>
-                        @endif
-                        @if(trim($vaccancy->img_file))
-                        <a href="{{url('/storage/'.$vaccancy->img_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{$vaccancy->img_size ?? 'undefined'}})</a>
-                        @endif
-                    </div>
-                    <div class="col-md-8">
-                        <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
-                    </div>
-                </div>
                 <div class="col-md-12 mt-3">
-                    <div class="my-2">
-                        <div><strong class="me-2">Tags:  </strong> {{implode(', ',$vaccancy->related_tag_names)}} </div>
-                        <div><strong>Source/Reference: </strong> <a @if(trim($vaccancy->source)) href="{{$vaccancy->source}}" target="_blank" @endif> {{$vaccancy->source}} </a> </div>
-
-                        {{-- @foreach ($vaccancy->related_tag_names as $tag)
-                            <span class="mx-2">{{$tag}}</span>
-                        @endforeach --}}
-                    </div>
-                    <div class="blog-full-description">{!! $vaccancy->description !!}</div>
                     <div class="text-center">
                         <img src="/storage/{{$vaccancy->img_file}}" class="img img-fluid" alt="">
                     </div>
@@ -65,8 +53,19 @@
                         <div class="_df_book" id="pdf_book_df" source="/storage/{{$vaccancy->pdf_file}}" ></div>
                     </div>
                     @endif
+
+                    <div class="mt-2 blog-full-description">{!! $vaccancy->description !!}</div>
+                    <div class="my-2">
+                        <div><strong class="me-2">Tags:  </strong> {{implode(', ',$vaccancy->related_tag_names)}} </div>
+                        <div><strong>Source/Reference: </strong> <a @if(trim($vaccancy->source)) href="{{$vaccancy->source}}" target="_blank" @endif> {{$vaccancy->source}} </a> </div>
+                    </div>
+
+                    <div class="row align-items-center justify-content-end">
+                        <div class="col-md-8">
+                            <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>
+                        </div>
+                    </div>
                 </div>
-                
             </div>
         </div>
     </div>

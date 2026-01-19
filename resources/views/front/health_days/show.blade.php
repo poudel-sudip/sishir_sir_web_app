@@ -23,12 +23,12 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{$healthDay->title}}</h2>
+                {{-- <h2>{{$healthDay->title}}</h2> --}}
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ ('/health-days') }}">Health Days</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{($healthDay->title)}}</li>
+                        {{-- <li class="breadcrumb-item active" aria-current="page">{{($healthDay->title)}}</li> --}}
                     </ol>
                 </div>
             </div>
@@ -50,20 +50,19 @@
                 </div>
                 <div class="d-flex align-items-center flex-wrap">
                     <span class="mx-3 h6 text-success text-nowrap"> <img src="/storage/{{$healthDay->author_image }}" onerror="this.src='/images/student.jpg'" style="height:35px; width:35px; border-radius:50%; border:1px solid #198754;"> {{$healthDay->author_name}}</span>
+                    <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                     {{-- <span class="mx-3 h6 text-primary text-nowrap"><i class="fas fa-calendar"></i> {{$healthDay->date}}</span> --}}
                     {{-- <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-tag"></i> {{optional($healthDay->category)->name}}</span> --}}
                     <span class="mx-3 h6 text-info text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
-                    <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
-                    <span class="mx-3 h6 text-primary text-nowrap"><i class="fa fa-download"></i> {{$counterData->page_download_count ?? '0'}}</span>
+                    <span class="mx-2 h6 text-nowrap text-primary">
+                        <span class="text-danger"> {{$counterData->page_download_count ?? '0'}} <i class="fa fa-download"></i> </span> 
+                        @if($healthDay->pdf_file)
+                            <a href="{{url('/storage/'.$healthDay->pdf_file)}}" filename="{{($healthDay->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download ({{ $healthDay->pdf_size ?? 'undefined' }}) </a>
+                        @endif
+                    </span>
                 </div>
             </div>
             <div class="mt-3">  
-
-                @if($healthDay->pdf_file)
-                    <div class="">
-                        <a href="{{url('/storage/'.$healthDay->pdf_file)}}" filename="{{($healthDay->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{$healthDay->pdf_size ?? 'undefined'}}) </a>
-                    </div>     
-                @endif  
 
                 <div class="mt-3">
                     <div class="blog-full-description" style="color:#000 !important;">{!! $healthDay->description !!}</div>

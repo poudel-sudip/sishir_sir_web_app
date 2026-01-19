@@ -154,7 +154,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/student/exam-bookings"><i class="fas fa-laptop-house text-info"></i>Exam Set Bookings</a>
+              <a class="nav-link" href="/student/exam-bookings"><i class="fas fa-laptop-house text-info"></i>ExamSet Bookings</a>
             </li>           
 
             <li class="nav-item">

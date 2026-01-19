@@ -190,7 +190,7 @@
     <div class="row">
       
       <div class="col-12 text-center">
-        <div id="copyright" style="font-size: 14px">Copyright &copy; <script> document.write(new Date().getFullYear()); </script> All right reserved <a href="/">E. Health Network Pvt. Ltd.</a> Developed By <a target="_blank" href="//etutorclass.com">E-Tutor Class Pvt. Ltd.</a></div>
+        <div id="copyright" style="font-size: 14px">Copyright &copy; 2023 - <script> document.write(new Date().getFullYear()); </script>. All right reserved <a href="/">E. Health Network Pvt. Ltd.</a> </div>
       </div>
       
     </div>

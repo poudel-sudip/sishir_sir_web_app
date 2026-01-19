@@ -12,7 +12,7 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{($menuSubItem->name)}}</h2>
+                {{-- <h2>{{($menuSubItem->name)}}</h2> --}}
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
@@ -20,7 +20,7 @@
                         <li class="breadcrumb-item"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}">{{($subMenu->name)}}</a></li>
                         <li class="breadcrumb-item"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$menuCategory->id}}">{{($menuCategory->name)}}</a></li>
                         <li class="breadcrumb-item"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$menuCategory->id}}/{{$menuItem->id}}">{{($menuItem->name)}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{($menuSubItem->name)}}</li>
+                        {{-- <li class="breadcrumb-item active" aria-current="page">{{($menuSubItem->name)}}</li> --}}
                     </ol>
                 </div>
             </div>
@@ -29,22 +29,22 @@
     <div class="container-fluid px-md-5">
 
         <div class="blog-container ">
-            <h3 class="text-primary">{{($menuSubItem->name)}}</h3>
-            <div class="px-5">
+            <h3 class="text-primary text-center">{{($menuSubItem->name)}}</h3>
+            <div class="mt-3">
                 <span class="mx-2 text-primary"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($menuSubItem->created_at))}}</span>
-                <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
-                <span class="mx-2 text-primary"><i class="fa fa-download"></i> {{$counterData->page_download_count ?? '0'}}</span>
                 <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
+                <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
+                <span class="mx-2 text-primary">
+                    <span class="text-danger"> {{$counterData->page_download_count ?? '0'}} <i class="fa fa-download"></i>  </span>
+                    @if($menuSubItem->type == 'file' && $menuSubItem->download)
+                        <a href="/storage/{{$menuSubItem->fileurl}}" filename="{{($menuSubItem->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary">  Download ({{ $menuSubItem->size ?? 'undefined' }}) </a>
+                    @endif
+                </span>
             </div>
 
-            <div class="my-4 row align-items-center">
-                <div class="col-md-4">
-                    @if($menuSubItem->type == 'file' && $menuSubItem->download)
-                    <a href="/storage/{{$menuSubItem->fileurl}}" filename="{{($menuSubItem->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{ $menuSubItem->size ?? 'undefined' }}) </a>
-                    @endif
-                </div>
-                <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
-            </div>
+            <div class="mb-4 row align-items-center justify-content-end">
+                <div class="col-md-6"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
+            </div>  
         
             
             @if($menuSubItem->type == 'file')

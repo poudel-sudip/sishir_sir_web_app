@@ -12,13 +12,13 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{($material->name)}}</h2>
+                {{-- <h2>{{($material->name)}}</h2> --}}
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ ('/library') }}">eLibrary</a></li>
                         <li class="breadcrumb-item"><a href="/library/{{$library_category->id}}">{{($library_category->name)}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{($material->name)}}</li>
+                        {{-- <li class="breadcrumb-item active" aria-current="page">{{($material->name)}}</li> --}}
                     </ol>
                 </div>
             </div>
@@ -27,32 +27,23 @@
     <div class="container-fluid px-md-5">
 
         <div class="blog-container ">
-            <h3 class="text-primary">{{($material->name)}}</h3>
-            <div class="px-5 text-primary">
+            <h3 class="text-primary text-center">{{($material->name)}}</h3>
+            <div class="mt-3">
                 <span class="mx-2 text-nowrap text-primary"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($material->created_at))}}</span>
                 <span class="mx-2 text-nowrap text-primary"><i class="fa fa-calendar"></i> {{$material->published_year}}</span>
                 <span class="mx-2 text-nowrap text-success"><i class="fa fa-users"></i> {{$material->author}}</span>
-                <span class="mx-2 text-nowrap text-danger"><i class="fa fa-file"></i> {{$material->pages}}</span>
-                <span class="mx-2 text-nowrap text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
-                <span class="mx-2 text-nowrap text-primary"><i class="fa fa-download"></i> {{$counterData->page_download_count ?? '0'}}</span>
+                <span class="mx-2 text-nowrap text-primary"><i class="fa fa-file"></i> {{$material->pages}}</span>
                 <span class="mx-2 text-nowrap text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
-            </div>
-            <div class="my-4 row align-items-center">
-                <div class="col-md-4">
+                <span class="mx-2 text-nowrap text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
+                <span class="mx-2 text-nowrap text-primary">
+                    <span class="text-danger"> {{$counterData->page_download_count ?? '0'}} <i class="fa fa-download"></i> </span> 
                     @if($material->type == 'file' && $material->download)
-                        {{-- @if(auth()->check())
-                            <a href="/storage/{{$material->fileurl}}" onclick="handleDownload(event)" class="text-primary">
-                                <i class="fa fa-download"></i>  Download
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}" class="text-primary">
-                                <i class="fa fa-download"></i> Login to Download
-                            </a>
-                        @endif --}}
-                    <a href="{{url('/storage/'.$material->fileurl)}}" filename="{{($material->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> <i class="fa fa-download"></i>  Download ({{ $material->size ?? 'undefined' }}) </a>
+                        <a href="{{url('/storage/'.$material->fileurl)}}" filename="{{($material->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download ({{ $material->size ?? 'undefined' }}) </a>
                     @endif
-                </div>
-                <div class="col-md-8"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
+                </span>
+            </div>
+            <div class="mb-4 row align-items-center justify-content-end">
+                <div class="col-md-6"><div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div></div>
             </div>          
 
             @if($material->type == 'file')

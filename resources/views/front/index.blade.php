@@ -75,92 +75,78 @@
                 </div>
 
                 <div class="my-1 col-md-6">
-                    {{-- @if($today_question)
-                        <div class="" >
-                            <a href="/question-of-the-day/{{$today_question->show_date}}">
-                                <img src="{{$today_question->image}}" alt="{{$today_question->show_date}}" class="img img-fluid border-3 q-of-day-img-home">                                   
-                            </a>
-                        </div>
-                    @endif --}}
-                    <div class="q-of-day-home-page">
-                        @if(isset($today_question) && $today_question)
-                            <div class="bg-lgray px-2 px-md-4" >
-                                <div class="bg-white">
-                                    <div class="text-center q-heading">
-                                        <h2 class="q-title pb-2">QUESTION OF THE DAY</h2>
+                    <div class="bg-white p-1" style="border-radius: 15px !important; border: 8px solid #1375b9;">
+                        <div class="q-of-day-home-page" style="border-radius: 15px !important; border: 3px solid #ff0000;">
+                            @if(isset($today_question) && $today_question)
+                                <div class="bg-lgray px-2 px-md-4" >
+                                    <div class="bg-white">
+                                        <div class="text-center q-heading">
+                                            <h2 class="q-title pb-2">QUESTION OF THE DAY</h2>
+                                        </div>
+                                        
+                                        <div id="q_block" class="">
+                                            <div class="q-question">
+                                                Q. {!! $today_question->question !!}
+                                            </div>
+            
+                                            <div class="q-options-container">
+                                                <div class="q-option" data-answer="A" data-correct="{{$today_question->opt_correct}}">
+                                                    <span class="q-option-marker">A. </span>
+                                                    <div class="q-option-text">{!! $today_question->opt_a !!}</div>
+                                                </div>
+                                                <div class="q-option" data-answer="B" data-correct="{{$today_question->opt_correct}}">
+                                                    <span class="q-option-marker">B. </span>
+                                                    <div class="q-option-text">{!! $today_question->opt_b !!}</div>
+                                                </div>
+                                                <div class="q-option" data-answer="C" data-correct="{{$today_question->opt_correct}}">
+                                                    <span class="q-option-marker">C. </span>
+                                                    <div class="q-option-text">{!! $today_question->opt_c !!}</div>
+                                                </div>
+                                                <div class="q-option" data-answer="D" data-correct="{{$today_question->opt_correct}}">
+                                                    <span class="q-option-marker">D. </span>
+                                                    <div class="q-option-text">{!! $today_question->opt_d !!}</div>
+                                                </div>
+                                            </div> 
+                                        </div>
+
+                                        <div id="qs_block" class="px-3 text-start d-none">
+                                            <div class="mt-3 q-on-solution"> <strong> Q. {!! $today_question->question !!} </strong></div>
+                                            <div class="mt-2">
+                                                @php($correctkey = 'opt_'.strtolower($today_question->opt_correct))
+                                                <em>Ans:</em> <strong class="text-success bold"> [{{$today_question->opt_correct}}] {{$today_question->$correctkey}} </strong>
+                                            </div>
+                                            <div class="py-2">
+                                                <em>Explanation:</em>
+                                                <div>{!! $today_question->rationale !!}</div>
+                                            </div>
+                                        </div>                                
+                                    </div>
+
+                                    <div class="text-center mt-2 d-flex justify-content-between">
+                                        <a class="btn btn-sm btn-primary" href="/question-of-the-day-quiz">
+                                            <i class="fa fa-check-square pe-1"></i>Play Quiz                                 
+                                        </a>
+
+                                        <a role="button" class="q-view-btn d-none" id="q-viewans-btn">View Solution</a>
+                                        <a role="button" class="q-view-btn d-none" id="q-gotit-btn">Got It !</a>                                   
+
+                                        <a class="btn btn-sm btn-danger" href="/question-of-the-day/{{$today_question_date->show_date}}">
+                                            <i class="far fa-share-square pe-1"></i>Share                                 
+                                        </a>
                                     </div>
                                     
-                                    <div id="q_block" class="">
-                                        <div class="q-question">
-                                            Q. {!! $today_question->question !!}
-                                        </div>
-        
-                                        <div class="q-options-container">
-                                            <div class="q-option" data-answer="A" data-correct="{{$today_question->opt_correct}}">
-                                                <span class="q-option-marker">A. </span>
-                                                <div class="q-option-text">{!! $today_question->opt_a !!}</div>
-                                            </div>
-                                            <div class="q-option" data-answer="B" data-correct="{{$today_question->opt_correct}}">
-                                                <span class="q-option-marker">B. </span>
-                                                <div class="q-option-text">{!! $today_question->opt_b !!}</div>
-                                            </div>
-                                            <div class="q-option" data-answer="C" data-correct="{{$today_question->opt_correct}}">
-                                                <span class="q-option-marker">C. </span>
-                                                <div class="q-option-text">{!! $today_question->opt_c !!}</div>
-                                            </div>
-                                            <div class="q-option" data-answer="D" data-correct="{{$today_question->opt_correct}}">
-                                                <span class="q-option-marker">D. </span>
-                                                <div class="q-option-text">{!! $today_question->opt_d !!}</div>
-                                            </div>
-                                        </div> 
+                                </div>
+                            @endif
+
+                            @if($ad = $ads->where('position','=','home_below_landing_ad')->first())
+                                <section class="home-banner">
+                                    <div class="container-fluid mb-2 text-center">
+                                        <img class="img w-100" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="">
+                                        {{-- <div>{{$ad->info}}</div> --}}
                                     </div>
-
-                                    <div id="qs_block" class="px-3 text-start d-none">
-                                        <div class="mt-3 q-on-solution"> <strong> Q. {!! $today_question->question !!} </strong></div>
-                                        <div class="mt-2">
-                                            @php($correctkey = 'opt_'.strtolower($today_question->opt_correct))
-                                            <em>Ans:</em> <strong class="text-success bold"> [{{$today_question->opt_correct}}] {{$today_question->$correctkey}} </strong>
-                                        </div>
-                                        <div class="py-2">
-                                            <em>Explanation:</em>
-                                            <div>{!! $today_question->rationale !!}</div>
-                                        </div>
-                                    </div>                                
-                                </div>
-
-                                <div class="text-center mt-2 d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary" href="/question-of-the-day-quiz">
-                                        <i class="fa fa-check-square pe-1"></i>Play Quiz                                 
-                                    </a>
-
-                                    <a role="button" class="q-view-btn d-none" id="q-viewans-btn">View Solution</a>
-                                    <a role="button" class="q-view-btn d-none" id="q-gotit-btn">Got It !</a>                                   
-
-                                    <a class="btn btn-sm btn-danger" href="/question-of-the-day/{{$today_question_date->show_date}}">
-                                        <i class="far fa-share-square pe-1"></i>Share                                 
-                                    </a>
-                                </div>
-
-                                {{-- <div class="text-center mt-2 h-26 position-relative">
-                                    <a role="button" class="q-view-btn d-none" id="q-viewans-btn">View Solution</a>
-                                    <a role="button" class="q-view-btn d-none" id="q-gotit-btn">Got It !</a>
-                                
-                                    <a class="question-share-btn" href="/question-of-the-day/{{$today_question_date->show_date}}">
-                                        <i class="far fa-share-square pe-1"></i>Share                                 
-                                    </a>
-                                </div> --}}
-                                
-                            </div>
-                        @endif
-
-                        @if($ad = $ads->where('position','=','home_below_landing_ad')->first())
-                            <section class="home-banner">
-                                <div class="container-fluid mb-2 text-center">
-                                    <img class="img w-100" src="/storage/{{$ad->banner}}" onerror="this.src='/images/ads/default-1600X100.png'" alt="">
-                                    {{-- <div>{{$ad->info}}</div> --}}
-                                </div>
-                            </section>
-                        @endif
+                                </section>
+                            @endif
+                        </div>
                     </div>
                 </div>
                 

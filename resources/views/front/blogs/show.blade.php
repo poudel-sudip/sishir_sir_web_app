@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="container-fluid px-md-5">
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>Blog Details</h2>
                 <div aria-label="breadcrumb">
@@ -20,13 +20,13 @@
                     </ol>
                 </div>
             </div>
-        </div>
-        <div class="blogs-details-container bg-white border border-primary rounded">
+        </div> --}}
+        <div class="mt-3 blogs-details-container bg-white border border-primary rounded">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-12">
-                            <h3 class="text-primary">{{($blog->title)}}</h3>
+                        <div class="col-md-12 text-center">
+                            <h3 class="text-primary ">{{($blog->title)}}</h3>
                         </div>
                         <div class="d-flex align-items-center flex-wrap">
                             <span class="mx-3 h5 text-success text-nowrap"> <img src="/storage/{{$blog->authorimage ?? $blog->creator->photo ?? ''}}" onerror="this.src='/images/student.jpg'" style="height:50px; width:50px; border-radius:50%; border:1px solid #198754;"> {{$blog->author}}</span>
