@@ -46,7 +46,7 @@
                             <td>{{ $exam->exam->name ?? '' }}</td>
                             <td>{{ $exam->exam->exam_date ?? '' }}</td>
                             <td>{{ $exam->exam->exam_time.':00' ?? '' }} </td>
-                            <td>{{ $exam->exam->questions->count() }} </td>
+                            <td>{{ $exam->exam->questions()->count() }} </td>
                             <td>{{ $exam->exam->creator->name ?? '-' }}</td>
                             <td class="classroom-btn" width="160">
                              

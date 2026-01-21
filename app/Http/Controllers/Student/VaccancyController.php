@@ -81,11 +81,11 @@ class VaccancyController extends Controller
         $request->validate([
             'title' => 'required|string',
             'author' => 'required|string',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'pdf_file' => 'nullable|file',
             'thumbnail' => 'required|image',
             'related_rags' => 'array|nullable',
-            'source' => 'nullable|source',
+            'source' => 'nullable|string',
         ]);
 
         $pdf = null;

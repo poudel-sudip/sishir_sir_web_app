@@ -13,8 +13,8 @@
     <div class="student-content-wrapper student-enroll-section bg-white">
         <div class="row mb-2">
             <div class="col-md-12">
-                <div class="h3 text-center">{{$pdfbank->title}}</div>
-                <div class="h4 text-center text-success">{{$content->title}}</div>
+                {{-- <div class="h3 text-center">{{$pdfbank->title}}</div> --}}
+                <div class="h3 text-center ">{{$content->title}}</div>
             </div>
             <div class="col-12">
                 <div class="text-end">

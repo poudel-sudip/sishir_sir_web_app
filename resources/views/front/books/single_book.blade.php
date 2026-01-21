@@ -33,8 +33,8 @@
                 </div>
             </div>
         </div>
-        <div class="blogs-details-container ebook-section" style="background:transparent">            
-            <div class="ebook-page-details">
+        <div class="blogs-details-container ebook-section mt-2" style="background:transparent">            
+            <div class="ebook-page-details m-0">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
@@ -61,6 +61,14 @@
                                 {{-- <div class="addto-ebook-favorite">
                                     <button onclick="" title="Add to favorite"><i class="fas fa-heart"></i></button>
                                 </div> --}}
+                                <div class="d-flex justify-content-end align-items-center flex-wrap gap-2">
+                                    <div class="text-orange fs-5 fw-bold text-nowrap"><i class="fas fa-pen-nib me-1"></i> Available Editions:</div>
+                                    <select name="edition" id="edition" class="form-select w-auto">
+                                        @foreach($book_editions as $edition)
+                                            <option value="{{$edition->id}}" @if($edition->id == $book->id) selected @endif >{{$edition->edition}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <h2 class="mt-3 mt-md-0">{{($book->title)}}</h2>
                                 @if(($book->reviews()->avg('rating')) > 0)
                                     <h5 class="text-end d-md-none">
@@ -73,6 +81,7 @@
                                         </strong>
                                     </h5>
                                 @endif
+                                
                                 <h6 class="text-end">
                                     <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
                                     <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
@@ -318,5 +327,10 @@
             const postData = { type: 'share', page: 'Single Book Details',pageurl: pageURL };
             postDataWithFetch('/page-counter-increment', postData);
         }
+
+        document.getElementById('edition').addEventListener('change', function() {
+            var selectedEditionId = this.value;
+            window.location.href = '/books/' + selectedEditionId;
+        });
     </script>
 @endsection 

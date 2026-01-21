@@ -11,8 +11,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="view-evaluation"> 
-                    <div class="h4 text-center">{{$category->title}}</div>
-                    <div class="h5 text-center">{{$exam->name}}</div>
+                    {{-- <div class="h4 text-center">{{$category->title}}</div> --}}
+                    <div class="h4 text-center">{{$exam->name}}</div>
                     <div class="show-result-header">
                         <div>
                             <p>Total Questions: {{$result->total_questions}}</p>

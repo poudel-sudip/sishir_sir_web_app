@@ -35,10 +35,10 @@
                         <span class="text-danger"> {{$counterData->page_download_count ?? '0'}} <i class="fa fa-download"></i> </span> 
 
                         @if(trim($vaccancy->pdf_file))
-                        <a href="{{url('/storage/'.$vaccancy->pdf_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download ({{$vaccancy->pdf_size}})</a>
+                        <a href="{{url('/storage/'.$vaccancy->pdf_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download <i class="fa fa-file-pdf"></i> ({{$vaccancy->pdf_size}})</a>
                         @endif
                         @if(trim($vaccancy->img_file))
-                        <a href="{{url('/storage/'.$vaccancy->img_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download ({{$vaccancy->img_size}})</a>
+                        <a href="{{url('/storage/'.$vaccancy->img_file)}}" filename="{{($vaccancy->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download <i class="fa fa-file-image"></i> ({{$vaccancy->img_size}})</a>
                         @endif
                     </span>
 

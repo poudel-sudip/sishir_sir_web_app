@@ -69,7 +69,7 @@
                                         <a href="/public-exams/{{$row->id}}" class="d-block">
                                             <i class="fas fa-star pr-2 text-light"></i>
                                             {{$row->name}}
-                                            ({{ $row->exam ? ($row->exam->questions ? $row->exam->questions->count() : '-') : '-' }} Questions)
+                                            ({{ $row->exam ? ($row->exam->questions()->count() ?? '-') : '-' }} Questions)
                                         </a>
                                     </li>
                                 @endforeach
@@ -101,7 +101,7 @@
                                                     <img src="/storage/{{$exam->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:200px; width:auto;" class="img img-fluid" draggable="false">
                                                 </a>
                                                 <h5 class="mt-3"><a href="/exam-hall/premium/{{$exam->id}}">{{($exam->title)}}</a></h5>
-                                                <h6>{{$exam->category_exams->count()}} Sets </h6>
+                                                <h6>{{$exam->category_exams()->count()}} Sets </h6>
 
                                             </div>
                                         </div>

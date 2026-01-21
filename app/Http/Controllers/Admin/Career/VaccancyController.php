@@ -32,7 +32,7 @@ class VaccancyController extends Controller
         $request->validate([
             'title' => 'required|string',
             'author' => 'required|string',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'pdf_file' => 'nullable|file',
             'img_file' => 'nullable|image',
             'thumbnail' => 'required|image',
@@ -105,7 +105,7 @@ class VaccancyController extends Controller
         $request->validate([
             'title' => 'required|string',
             'author' => 'required|string',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'clear_pdf_file' => 'nullable',
             'clear_img_file' => 'nullable',
             'old_pdf_file' => 'nullable|string',

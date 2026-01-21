@@ -12,8 +12,8 @@
             <div class="col-md-12">
                 <div class="card student_exam_card">
                     <div class="card-header bg-white">  
-                        <h4>{{$category->title}}</h4>
-                        <h6>{{$exam->name}}</h6>                     
+                        {{-- <h4>{{$category->title}}</h4> --}}
+                        <h4>{{$exam->name}}</h4>                     
                         <div class="icon-bar mcq-countdown" >
                            Exam Time CountDown : <span class="js-timeout"></span>
                         </div>

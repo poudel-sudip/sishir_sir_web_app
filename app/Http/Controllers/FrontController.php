@@ -57,7 +57,7 @@ class FrontController extends Controller
         $data['exams'] = OpenExam::where('result_status', '=', 'Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status', '=', 'Published')->orderByDesc('id')->first();
         $data['blogs'] = Blog::where('status', '=', 'Published')->orderByDesc('id')->take(9)->get(['id', 'title', 'slug', 'image', 'author', 'created_at']);
-        $data['books'] = Book::where('status', '=', 'Active')->orderByDesc('id')->take(9)->get(['id', 'title', 'slug', 'price', 'discount', 'thumbnail', 'published_year', 'edition','created_at']);
+        $data['books'] = Book::where('status', '=', 'Active')->orderByDesc('id')->take(6)->get(['id', 'title', 'slug', 'price', 'discount', 'thumbnail', 'published_year', 'edition','created_at']);
         // $data['testimonials'] = Testimonial::where('status', '=', 'Active')->orderByDesc('id')->take(9)->get();
         $data['ads'] = Advertisement::where('status', '=', 'Active')->get();
         $data['homepopup'] = HomePopup::where('status', '=', 'Active')->orderByDesc('id')->first();
@@ -709,7 +709,7 @@ class FrontController extends Controller
 
     public function books()
     {
-        $data['books'] = Book::where('status', '=', 'Active')->orderByDesc('order')->paginate(12);
+        $data['books'] = Book::where('status', '=', 'Active')->orderByDesc('order')->paginate(12,['id','title','price','discount','thumbnail']);
         $data['categories'] = Categories::where(['status' => 'Active', 'type' => 'book_category'])->whereHas('cat_books')->get();
         // dd($data);
         return view('front.books.index', $data);
@@ -768,6 +768,16 @@ class FrontController extends Controller
             abort(404, 'Book Category Not Found');
         }
 
+        $last_edition_book = $category->cat_books()
+            ->where('status', '=', 'Active')
+            ->orderByDesc('id')
+            ->first(['id', 'title']);
+
+        if($last_edition_book)
+        {
+            return redirect('/books/' . $last_edition_book->id);
+        }
+
         $data['publisher'] = $publisher;
         $data['category'] = $category;
         $data['categories'] = $publisher->pub_categories()->where('status', '=', 'Active')->get();
@@ -803,7 +813,7 @@ class FrontController extends Controller
 
     public function singleBook($bid)
     {
-        $book = Book::where('id', $bid)->where('status', '=', 'Active')->first();
+        $book = Book::with('category:id,name')->where('id', $bid)->where('status', '=', 'Active')->first();
         if (!$book) {
             abort(404, 'Book Not Found');
         }
@@ -813,7 +823,11 @@ class FrontController extends Controller
         $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
         $counterData = Helper::pageCounterCounts('Single Book Detail', $pgurl);
 
-        return view('front.books.single_book', compact('book', 'book_reviews', 'counterData'));
+        $category = $book->category;
+        $book_editions = $category->cat_books()->where('status', '=', 'Active')->orderByDesc('order')->get(['id','title','edition']);
+
+        // dd($book,$category,$book_editions);
+        return view('front.books.single_book', compact('book', 'book_reviews', 'counterData','book_editions'));
     }
 
     public function addBookReview($bid, Request $request)

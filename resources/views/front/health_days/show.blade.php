@@ -57,7 +57,7 @@
                     <span class="mx-2 h6 text-nowrap text-primary">
                         <span class="text-danger"> {{$counterData->page_download_count ?? '0'}} <i class="fa fa-download"></i> </span> 
                         @if($healthDay->pdf_file)
-                            <a href="{{url('/storage/'.$healthDay->pdf_file)}}" filename="{{($healthDay->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download ({{ $healthDay->pdf_size ?? 'undefined' }}) </a>
+                            <a href="{{url('/storage/'.$healthDay->pdf_file)}}" filename="{{($healthDay->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download <i class="fa fa-file-pdf"></i> ({{ $healthDay->pdf_size ?? 'undefined' }}) </a>
                         @endif
                     </span>
                 </div>

@@ -55,7 +55,7 @@
                                 <label for="description" class="col-md-12 col-form-label">{{ __('Description ') }}</label>
 
                                 <div class="col-md-12">
-                                    <textarea id="description" class="form-control summernote @error('description') is-invalid @enderror" name="description" required >{!! old('description') !!}</textarea>
+                                    <textarea id="description" class="form-control summernote @error('description') is-invalid @enderror" name="description" >{!! old('description') !!}</textarea>
 
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">

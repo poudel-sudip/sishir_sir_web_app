@@ -38,7 +38,7 @@
                 <span class="mx-2 text-nowrap text-primary">
                     <span class="text-danger"> {{$counterData->page_download_count ?? '0'}} <i class="fa fa-download"></i> </span> 
                     @if($material->type == 'file' && $material->download)
-                        <a href="{{url('/storage/'.$material->fileurl)}}" filename="{{($material->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download ({{ $material->size ?? 'undefined' }}) </a>
+                        <a href="{{url('/storage/'.$material->fileurl)}}" filename="{{($material->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download <i class="fa fa-file-pdf"></i> ({{ $material->size ?? 'undefined' }}) </a>
                     @endif
                 </span>
             </div>

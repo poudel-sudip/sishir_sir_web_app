@@ -37,7 +37,7 @@
                     <span class="mx-2 text-primary">
                         <span class="text-danger"> {{$counterData->page_download_count ?? '0'}} <i class="fa fa-download"></i>  </span>
                         @if($subMenu->type == 'file' && $subMenu->download)
-                            <a href="/storage/{{$subMenu->fileurl}}" filename="{{($subMenu->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary">  Download ({{ $subMenu->size ?? 'undefined' }}) </a>
+                            <a href="/storage/{{$subMenu->fileurl}}" filename="{{($subMenu->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary">  Download <i class="fa fa-file-pdf"></i> ({{ $subMenu->size ?? 'undefined' }}) </a>
                         @endif
                     </span>
                 </div>

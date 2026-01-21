@@ -78,7 +78,7 @@
                     <div class="bg-white p-1" style="border-radius: 15px !important; border: 8px solid #1375b9;">
                         <div class="q-of-day-home-page" style="border-radius: 15px !important; border: 3px solid #ff0000;">
                             @if(isset($today_question) && $today_question)
-                                <div class="bg-lgray px-2 px-md-4" >
+                                <div class="bg-lgray px-2 px-md-4" style="max-height: max-content !important;">
                                     <div class="bg-white">
                                         <div class="text-center q-heading">
                                             <h2 class="q-title pb-2">QUESTION OF THE DAY</h2>
@@ -470,7 +470,7 @@
                                                 <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                             </a>
                                             <h6 class="mt-3"><a href="/public-exams/{{$row->id}}">{{($row->name)}}</a></h6>
-                                            <h6 class="small">{{ $row->exam ? ($row->exam->questions ? $row->exam->questions()->count() : '-') : '-' }} Questions </h6>
+                                            <h6 class="small">{{ $row->exam ? ($row->exam->questions()->count() ?? '-') : '-' }} Questions </h6>
     
                                         </div>
                                     </div>

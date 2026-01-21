@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    Exams | {{$category->title}}
+    Exams
 @endsection
 
 @section('student-title-icon')
