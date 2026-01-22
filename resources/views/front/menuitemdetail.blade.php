@@ -41,7 +41,7 @@
                         <span class="mx-2 text-primary">
                             <span class="text-danger"> {{$counterData->page_download_count ?? '0'}} <i class="fa fa-download"></i>  </span>
                             @if($menuItem->type == 'file' && $menuItem->download)
-                                <a href="/storage/{{$menuItem->fileurl}}" filename="{{($menuItem->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary">  Download <i class="fa fa-file-pdf"></i> ({{ $menuItem->size ?? 'undefined' }}) </a>
+                                <a href="/storage/{{$menuItem->fileurl}}" filename="{{($menuItem->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary">  Download <i class="fa fa-file-pdf text-danger"></i> ({{ $menuItem->size ?? 'undefined' }}) </a>
                             @endif
                         </span>
                     </div>
@@ -75,7 +75,7 @@
                 </div>
             @else
                 <div class="table-responsive table-responsive-md ">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered asc-data-table">
                         <thead>
                             <tr>
                                 <th>SN</th>
@@ -89,8 +89,9 @@
                             $i = 1;
                         ?>
     
-                        @forelse($menuSubItems as $cat)
-                            <tbody>
+                        <tbody>
+                            @forelse($menuSubItems as $cat)
+                                
                                 <tr>
                                     <td>{{$i}}</td>
                                     <td>{{$cat->name}}</td>
@@ -105,11 +106,12 @@
                                         </div>
                                     </td> --}}
                                 </tr>
-                            </tbody>
-                            @php($i++)
-                        @empty              
-                            <div>No Menu Items Published</div>
-                        @endforelse
+                                
+                                @php($i++)
+                            @empty              
+                                <tr><td colspan="3">No Menu Items Published</td></tr>
+                            @endforelse
+                        </tbody>
                     </table>
                 </div>
             @endif
@@ -213,6 +215,40 @@
             var top = ( screen.height - height ) / 2;
             var newWindow = window.open( url, "Center Window", 'resizable = yes, width=' + width + ', height=' + height + ', top='+ top + ', left=' + left);
         }
+    </script>
+
+    <script defer src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
+
+    <script>
+        let dataTableInstance = null;
+
+        function initDataTable() {
+
+            if (typeof $.fn.DataTable === 'undefined') {
+                console.warn('DataTables not loaded yet');
+                return;
+            }
+
+            if (!$.fn.DataTable.isDataTable('.asc-data-table')) {
+                $('.asc-data-table').DataTable({
+                    paging: false,
+                    info: false,
+                    searching: false,
+                    order: [[0, 'asc']]
+                });
+            }
+        }
+
+        function destroyDataTable() {
+            if ($.fn.DataTable.isDataTable('.asc-data-table')) {
+                $('.asc-data-table').DataTable().destroy();
+            }
+        }
+
+        $('.asc-data-table').on('click', function() {
+            initDataTable();
+        });
+        
     </script>
 
 @endsection

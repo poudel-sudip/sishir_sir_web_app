@@ -204,6 +204,7 @@ class BookController extends Controller
             "description" => "string|required",
             "status" => "string|required",
             "thumbnail" => "image|required",
+            "image3d" => "image|nullable",
             "content_pdf" => "file|mimes:pdf|nullable",
             'search_tags' => 'string|nullable',
         ]);
@@ -213,11 +214,18 @@ class BookController extends Controller
         $data['publisher_id'] = $publisher->id;
         $data['category_id'] = $category->id;
         $data['thumbnail'] = '';
+        $data['image3d'] = '';
+
         if(isset($request->thumbnail))
         {
             $data['thumbnail'] = $request->thumbnail->store('uploads','public');
         }
       
+        if(isset($request->image3d))
+        {
+            $data['image3d'] = $request->image3d->store('uploads','public');
+        }
+
         if(isset($request->content_pdf))
         {
             $data['content_pdf'] = $request->content_pdf->store('uploads/books/pdf','public');
@@ -274,6 +282,7 @@ class BookController extends Controller
             "status" => "string|required",
             "thumbnail" => "image|nullable",
             "old_thumbnail" => "string|nullable",
+            "image3d" => "image|nullable",
             "old_content_pdf" => "string|nullable",
             "content_pdf" => "file|mimes:pdf|nullable",
             'search_tags' => 'string|nullable',
@@ -284,6 +293,12 @@ class BookController extends Controller
         if(isset($request->thumbnail))
         {
             $data['thumbnail'] = $request->thumbnail->store('uploads','public');
+        }
+
+        $data['image3d'] = $book->image3d;
+        if(isset($request->image3d))
+        {
+            $data['image3d'] = $request->image3d->store('uploads','public');
         }
         
         $data['content_pdf'] = $request->old_content_pdf;

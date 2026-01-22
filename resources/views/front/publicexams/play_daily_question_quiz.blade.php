@@ -35,30 +35,46 @@
                                                             <div class="mcq-question mt-2" style=" ">
                                                                 <div id="" class="q_block">
                                                                     <div class="q-question">
-                                                                        Q{{$key+1}}. {!! $ques->question !!}
+                                                                        <div class="d-flex gap-1">
+                                                                            <div class="">Q{{$key+1}}.</div>
+                                                                            <div class="">{!! $ques->question !!}</div>
+                                                                        </div>
                                                                     </div>
                                     
                                                                     <div class="q-options-container">
                                                                         <div class="q-option" data-answer="A" data-correct="{{$ques->opt_correct}}">
-                                                                            <span class="q-option-marker">A.</span>
-                                                                            <div class="q-option-text">{!! $ques->opt_a !!}</div>
+                                                                            <div class="d-flex gap-1">
+                                                                                <span class="q-option-marker">A.</span>
+                                                                                <div class="q-option-text">{!! $ques->opt_a !!}</div>
+                                                                            </div>
                                                                         </div>
                                                                         <div class="q-option" data-answer="B" data-correct="{{$ques->opt_correct}}">
-                                                                            <span class="q-option-marker">B.</span>
-                                                                            <div class="q-option-text">{!! $ques->opt_b !!}</div>
+                                                                            <div class="d-flex gap-1">
+                                                                                <span class="q-option-marker">B.</span>
+                                                                                <div class="q-option-text">{!! $ques->opt_b !!}</div>
+                                                                            </div>
                                                                         </div>
                                                                         <div class="q-option" data-answer="C" data-correct="{{$ques->opt_correct}}">
-                                                                            <span class="q-option-marker">C.</span>
-                                                                            <div class="q-option-text">{!! $ques->opt_c !!}</div>
+                                                                            <div class="d-flex gap-1">
+                                                                                <span class="q-option-marker">C.</span>
+                                                                                <div class="q-option-text">{!! $ques->opt_c !!}</div>
+                                                                            </div>
                                                                         </div>
                                                                         <div class="q-option" data-answer="D" data-correct="{{$ques->opt_correct}}">
-                                                                            <span class="q-option-marker">D.</span>
-                                                                            <div class="q-option-text">{!! $ques->opt_d !!}</div>
+                                                                            <div class="d-flex gap-1">
+                                                                                <span class="q-option-marker">D.</span>
+                                                                                <div class="q-option-text">{!! $ques->opt_d !!}</div>
+                                                                            </div>
                                                                         </div>
                                                                     </div> 
                                                                 </div>
                                                                 <div id="" class="qs_block px-3 text-start d-none">
-                                                                    <div class="mt-3 q-on-solution"> <strong> Q{{$key+1}}. {!! $ques->question !!} </strong></div>
+                                                                    <div class="mt-3 q-on-solution">
+                                                                        <div class="d-flex gap-1">
+                                                                            <strong>Q{{$key+1}}.</strong>
+                                                                            <strong> {!! $ques->question !!}</strong>
+                                                                        </div>
+                                                                    </div>
                                                                     <div class="mt-2">
                                                                         @php($correctkey = 'opt_'.strtolower($ques->opt_correct))                                                                        
                                                                         <em>Ans:</em> <strong class="text-success bold"> [{{$ques->opt_correct}}]  {{$ques->$correctkey}} </strong>
@@ -77,8 +93,8 @@
 
                                         <div class="row justify-content-between align-items-center">
                                             <div class="col">
-                                                <a role="button" class="q-view-btn d-none" id="q-viewans-btn">View Solution</a>
-                                                <a role="button" class="q-view-btn d-none" id="q-gotit-btn">Got It !</a>
+                                                <a role="button" class="q-view-btn d-none text-nowrap" id="q-viewans-btn">View Solution</a>
+                                                <a role="button" class="q-view-btn d-none text-nowrap" id="q-gotit-btn">Got It !</a>
                                             </div>
 
                                             <div class="col owl-nav d-flex justify-content-end" style="margin-top: 10px;">

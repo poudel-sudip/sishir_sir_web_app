@@ -37,7 +37,7 @@
                     <span class="mx-2 text-primary">
                         <span class="text-danger"> {{$counterData->page_download_count ?? '0'}} <i class="fa fa-download"></i>  </span>
                         @if($subMenu->type == 'file' && $subMenu->download)
-                            <a href="/storage/{{$subMenu->fileurl}}" filename="{{($subMenu->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary">  Download <i class="fa fa-file-pdf"></i> ({{ $subMenu->size ?? 'undefined' }}) </a>
+                            <a href="/storage/{{$subMenu->fileurl}}" filename="{{($subMenu->name)}}" onclick="handleDownload(event)" target="_blank" class="text-primary">  Download <i class="fa fa-file-pdf text-danger"></i> ({{ $subMenu->size ?? 'undefined' }}) </a>
                         @endif
                     </span>
                 </div>
@@ -72,41 +72,30 @@
             </div>
         @else
             <div class="table-responsive table-responsive-md ">
-                <table class="table table-bordered">
+                <table class="table table-bordered asc-data-table">
                     <thead>
                         <tr>
-                            <th>SN</th>
+                            <th width="100">SN</th>
                             <th>Title</th>
-                            <th>View</th>
-                            {{-- <th>Share</th> --}}
+                            <th width="50">View</th>
                         </tr>
                     </thead>
                     <?php 
                         $menuCategories = $subMenu->categories()->where('status','=','Active')->orderBy('order')->get(['id','name','slug']); 
                         $i = 1;
                     ?>
-
-                    @forelse($menuCategories as $cat)
-                        <tbody>
+                    <tbody>
+                        @forelse($menuCategories as $cat)
                             <tr>
                                 <td>{{$i}}</td>
                                 <td>{{$cat->name}}</td>
                                 <td width="50"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$cat->id}}"><i class="fas fa-eye text-success"></i></a> </td>
-                                {{-- <td style="max-width: 50px">
-                                    <div class="d-inline post-share-option">
-                                        @php($shareLink = url($mainMenu->id.'/'.$subMenu->id.'/'.$cat->id))
-                                        <a href="javascript:void();" onclick="createPopupWin('//facebook.com/sharer/sharer.php?u={{$shareLink}}&t={{$cat[`name`]}}')"><i class="fab fa-facebook-f"></i></a>
-                                        <a href="javascript:void();" onclick="createPopupWin('//twitter.com/intent/tweet?text={{$cat[`name`]}}&url={{$shareLink}}')"><i class="fab fa-twitter"></i></a>
-                                        <a href="javascript:void();" onclick="createPopupWin('//wa.me/?text={{$shareLink}}')"><i class="fab fa-whatsapp"></i></a>
-                                        <a href="javascript:void();" onclick="createPopupWin('//pinterest.com/pin/create/button/?url={{$shareLink}}')"><i class="fab fa-pinterest-p"></i></a>
-                                    </div>
-                                </td> --}}
                             </tr>
-                        </tbody>
-                        @php($i++)
-                    @empty              
-                        <div>No Menu Categories Published</div>
-                    @endforelse
+                            @php($i++)
+                        @empty              
+                            <tr><td colspan="3">No Menu Categories Published</td></tr>
+                        @endforelse
+                    </tbody>
                 </table>
             </div>
         @endif
@@ -181,6 +170,40 @@
             var top = ( screen.height - height ) / 2;
             var newWindow = window.open( url, "Center Window", 'resizable = yes, width=' + width + ', height=' + height + ', top='+ top + ', left=' + left);
         }
+    </script>
+
+    <script defer src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
+
+    <script>
+        let dataTableInstance = null;
+
+        function initDataTable() {
+
+            if (typeof $.fn.DataTable === 'undefined') {
+                console.warn('DataTables not loaded yet');
+                return;
+            }
+
+            if (!$.fn.DataTable.isDataTable('.asc-data-table')) {
+                $('.asc-data-table').DataTable({
+                    paging: false,
+                    info: false,
+                    searching: false,
+                    order: [[0, 'asc']]
+                });
+            }
+        }
+
+        function destroyDataTable() {
+            if ($.fn.DataTable.isDataTable('.asc-data-table')) {
+                $('.asc-data-table').DataTable().destroy();
+            }
+        }
+
+        $('.asc-data-table').on('click', function() {
+            initDataTable();
+        });
+        
     </script>
 
 @endsection

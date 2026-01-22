@@ -68,6 +68,8 @@
             {
                 filterCategories(filchar);
             }
+
+            initDataTable();
         });
         
         function filterCategories(letter) {
@@ -101,7 +103,7 @@
                 const tableDiv = document.createElement('div');
                 tableDiv.classList.add('table-responsive', 'table-responsive-md');
                 const table = document.createElement('table');
-                table.classList.add('table', 'table-bordered');
+                table.classList.add('table', 'table-bordered','asc-data-table');
 
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
@@ -161,6 +163,8 @@
             {
                 filterCategories(filterChar);
             }
+
+            destroyDataTable();
         });
 
         $('#listViewBtn').on('click', function() {
@@ -177,9 +181,40 @@
             {
                 filterCategories(filterChar);
             }
+
+            initDataTable();
         });
 
         
     </script>
     
+    <script defer src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
+
+    <script>
+        let dataTableInstance = null;
+
+        function initDataTable() {
+            if (typeof $.fn.DataTable === 'undefined') {
+                console.warn('DataTables not loaded yet');
+                return;
+            }
+
+            if (!$.fn.DataTable.isDataTable('.asc-data-table')) {
+                $('.asc-data-table').DataTable({
+                    paging: false,
+                    info: false,
+                    searching: false,
+                    order: [[0, 'asc']]
+                });
+            }
+        }
+
+        function destroyDataTable() {
+            if ($.fn.DataTable.isDataTable('.asc-data-table')) {
+                $('.asc-data-table').DataTable().destroy();
+            }
+        }
+
+    </script>
+
 @endsection

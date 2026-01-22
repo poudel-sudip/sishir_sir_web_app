@@ -285,6 +285,19 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="image3d" class="col-md-4 col-form-label">{{ __('Book 3D Image') }}</label>
+                                <div class="col-md-8">
+                                    <input id="image3d" type="file" class="form-control @error('image3d') is-invalid @enderror" name="image3d" value="{{ old('image3d') }}" >
+
+                                    @error('image3d')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
 
                             <div class="form-group row">
                                 <label for="search_tags" class="col-md-4 col-form-label">{{ __('Search Tags') }}</label>

@@ -111,6 +111,11 @@
                             <div>Book Thumbnail Image: </div>
                             <div><img src="/storage/{{$book->thumbnail}}" width="200" alt=""></div>
                         </div>
+
+                        <div class="course-row">
+                            <div>Book 3D Image: </div>
+                            <div><img src="/storage/{{$book->image3d}}" width="200" alt=""></div>
+                        </div>
                         
                         <div class="course-row">
                             <div>Book Description: </div>

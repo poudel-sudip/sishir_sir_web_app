@@ -756,7 +756,7 @@ class FrontController extends Controller
         return view('front.books.publisher_category_books', $data);
     }
 
-    public function publisherCategoryBooks($pub, $cat)
+    public function publisherCategoryBooks($pub, $cat, Request $request)
     {
         $publisher = Categories::where('id', $pub)->where('type', '=', 'book_publisher')->first();
         if (!$publisher) {
@@ -768,23 +768,35 @@ class FrontController extends Controller
             abort(404, 'Book Category Not Found');
         }
 
-        $last_edition_book = $category->cat_books()
+        if(isset($request->show) && $request->show == 'all')
+        {
+            $data['publisher'] = $publisher;
+            $data['category'] = $category;
+            $data['categories'] = $publisher->pub_categories()->where('status', '=', 'Active')->get();
+            $data['books'] = $category->cat_books()
+            ->where('status', '=', 'Active')
+            ->orderByDesc('order')
+            ->paginate(12,['id','title','price','discount','thumbnail','edition','order'])
+            ->withQueryString();
+
+            return view('front.books.publisher_category_books', $data);
+
+        }
+        else
+        {
+            $last_edition_book = $category->cat_books()
             ->where('status', '=', 'Active')
             ->orderByDesc('id')
             ->first(['id', 'title']);
 
-        if($last_edition_book)
-        {
-            return redirect('/books/' . $last_edition_book->id);
+            if($last_edition_book)
+            {
+                return redirect('/books/' . $last_edition_book->id);
+            }
         }
-
-        $data['publisher'] = $publisher;
-        $data['category'] = $category;
-        $data['categories'] = $publisher->pub_categories()->where('status', '=', 'Active')->get();
-        $data['books'] = $category->cat_books()->where('status', '=', 'Active')->orderByDesc('order')->paginate(12);
-
-        // dd($data);
-        return view('front.books.publisher_category_books', $data);
+        
+        abort(404, 'Book Not Found in this Category');
+        
     }
 
     // public function categoryBooks($slug)

@@ -110,6 +110,8 @@
             {
                 filterCategories(filchar);
             }
+            
+            initDataTable();
         });
         
         function filterCategories(letter) {
@@ -143,7 +145,7 @@
                 const tableDiv = document.createElement('div');
                 tableDiv.classList.add('table-responsive', 'table-responsive-md');
                 const table = document.createElement('table');
-                table.classList.add('table', 'table-bordered');
+                table.classList.add('table', 'table-bordered','asc-data-table');
 
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
@@ -209,7 +211,7 @@
                 const tableDiv = document.createElement('div');
                 tableDiv.classList.add('table-responsive', 'table-responsive-md');
                 const table = document.createElement('table');
-                table.classList.add('table', 'table-bordered');
+                table.classList.add('table', 'table-bordered','asc-data-table');
 
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
@@ -251,7 +253,10 @@
     </script>
 
     <script>
+        
+        
         $('#gridViewBtn').on('click', function() {
+
             $(this).addClass('active');
             $('#listViewBtn').removeClass('active');
             $('#library_categories_list').attr('showType','grid');
@@ -269,6 +274,8 @@
             } else if(libraryMaterials.length) {
                 displayMaterials(libraryMaterials);
             } else {}
+
+            destroyDataTable();
             
         });
 
@@ -290,9 +297,38 @@
             } else if(libraryMaterials.length) {
                 displayMaterials(libraryMaterials);
             } else {}
+
+            initDataTable();
         });
 
-        
+    </script>
+
+    <script defer src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
+
+    <script>
+        let dataTableInstance = null;
+
+        function initDataTable() {
+            if (typeof $.fn.DataTable === 'undefined') {
+                console.warn('DataTables not loaded yet');
+                return;
+            }
+
+            if (!$.fn.DataTable.isDataTable('.asc-data-table')) {
+                $('.asc-data-table').DataTable({
+                    paging: false,
+                    info: false,
+                    searching: false,
+                    order: [[0, 'asc']]
+                });
+            }
+        }
+
+        function destroyDataTable() {
+            if ($.fn.DataTable.isDataTable('.asc-data-table')) {
+                $('.asc-data-table').DataTable().destroy();
+            }
+        }
     </script>
 
 @endsection

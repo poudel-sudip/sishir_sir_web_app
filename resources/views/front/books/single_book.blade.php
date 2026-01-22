@@ -18,7 +18,6 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{($book->title)}}</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
@@ -28,9 +27,11 @@
                         @if($book->category)
                         <li class="breadcrumb-item"><a href="/book-publishers/{{$book->publisher->id}}/category/{{$book->category->id}}">{{($book->category->name)}}</a></li>
                         @endif
-                        <li class="breadcrumb-item active" aria-current="page">{{($book->title)}}</li>
+                        {{-- <li class="breadcrumb-item active" aria-current="page">{{($book->title)}}</li> --}}
                     </ol>
                 </div>
+                <h1>{{($book->title)}}</h1>
+
             </div>
         </div>
         <div class="blogs-details-container ebook-section mt-2" style="background:transparent">            
@@ -62,14 +63,15 @@
                                     <button onclick="" title="Add to favorite"><i class="fas fa-heart"></i></button>
                                 </div> --}}
                                 <div class="d-flex justify-content-end align-items-center flex-wrap gap-2">
-                                    <div class="text-orange fs-5 fw-bold text-nowrap"><i class="fas fa-pen-nib me-1"></i> Available Editions:</div>
+                                    <div class="text-orange fs-5 fw-bold text-nowrap"><i class="fas fa-pen-nib me-1"></i> View Edition:</div>
                                     <select name="edition" id="edition" class="form-select w-auto">
                                         @foreach($book_editions as $edition)
-                                            <option value="{{$edition->id}}" @if($edition->id == $book->id) selected @endif >{{$edition->edition}}</option>
+                                            <option value="/books/{{$edition->id}}" @if($edition->id == $book->id) selected @endif >{{$edition->edition}}</option>
                                         @endforeach
+                                        <option value="/book-publishers/{{$book->publisher->id}}/category/{{$book->category->id}}?show=all">View All Editions</option>
                                     </select>
                                 </div>
-                                <h2 class="mt-3 mt-md-0">{{($book->title)}}</h2>
+                                {{-- <h2 class="mt-3 mt-md-0">{{($book->title)}}</h2> --}}
                                 @if(($book->reviews()->avg('rating')) > 0)
                                     <h5 class="text-end d-md-none">
                                         Rating: 
@@ -85,6 +87,9 @@
                                 <h6 class="text-end">
                                     <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
                                     <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
+                                </h6>
+                                <h6>
+                                    Book Name: <strong class="text-primary"> {{($book->title ?? ' ')}} </strong>
                                 </h6>
                                 <h6>
                                     Publisher: <strong class="text-primary"> {{($book->publisher->name ?? ' ')}} </strong>
@@ -124,9 +129,24 @@
                                 
                             </div>
                             <div class="col-12 book-details">
-                                <div class="book-description text-secondary">
-                                    {!! $book->description !!}
+                                @php
+                                    $hasImage3d = $book->image3d && Storage::disk('public')->exists($book->image3d);          
+                                @endphp
+                                <div class="row">
+                                    @if($hasImage3d)
+                                        <div class="col-md-4">
+                                            <img src="/storage/{{$book->image3d}}" alt="" class="img img-fluid">
+                                        </div>
+                                    @endif
+                                    <div class="col @if($hasImage3d) col-md-8 @endif">
+                                        <div class="book-description text-secondary text-wrap">
+                                            {!! $book->description !!}
+                                        </div>
+                                    </div>
                                 </div>
+                                {{-- <div class="book-description text-secondary text-wrap">
+                                    {!! $book->description !!}
+                                </div> --}}
                                 <div class="row">
                                     <div class="col-md-6 my-2">
                                         {{-- @if(trim($book->purchase_link))
@@ -329,8 +349,8 @@
         }
 
         document.getElementById('edition').addEventListener('change', function() {
-            var selectedEditionId = this.value;
-            window.location.href = '/books/' + selectedEditionId;
+            var selectedEdition = this.value;
+            window.location.href = selectedEdition;
         });
     </script>
 @endsection 
