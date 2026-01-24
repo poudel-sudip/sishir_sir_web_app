@@ -64,7 +64,7 @@
                         <div class="update-body" style="overflow-y:scroll">
                             <ul class="p-0">
                                 @forelse($updates as $row)                         
-                                    <li><a href="{{$row->link}}"><i class="far fa-check-circle"></i>{{($row->title)}}</a></li>
+                                    <li><a href="{{$row->link}}" class="d-flex gap-1"><i class="far fa-check-circle"></i> <span>{{($row->title)}} </span></a></li>
                                 @empty
                                     <li>No Trendings Available</li>
                                 @endforelse
@@ -78,17 +78,17 @@
                     <div class="bg-white p-1" style="border-radius: 15px !important; border: 8px solid #1375b9;">
                         <div class="q-of-day-home-page" style="border-radius: 15px !important; border: 3px solid #ff0000;">
                             @if(isset($today_question) && $today_question)
-                                <div class="bg-lgray px-2 px-md-4" style="max-height: max-content !important;">
+                                <div class="bg-lgray px-2 px-md-4" style="max-height: max-content !important; overflow: hidden;">
                                     <div class="bg-white">
                                         <div class="text-center q-heading">
-                                            <h2 class="q-title pb-2">QUESTION OF THE DAY</h2>
+                                            <h2 class="q-title text-danger pb-2">QUESTION OF THE DAY</h2>
                                         </div>
                                         
                                         <div id="q_block" class="">
                                             <div class="q-question">
                                                 <div class="d-flex gap-1">
                                                     <span>Q.</span>
-                                                    <div>{!! $today_question->question !!}</div>
+                                                    <div class="text-justify">{!! $today_question->question !!}</div>
                                                 </div>
                                             </div>
             
@@ -96,25 +96,25 @@
                                                 <div class="q-option" data-answer="A" data-correct="{{$today_question->opt_correct}}">
                                                     <div class="d-flex gap-1">
                                                         <span class="q-option-marker">A. </span>
-                                                        <div class="q-option-text">{!! $today_question->opt_a !!}</div>
+                                                        <div class="q-option-text text-justify">{!! $today_question->opt_a !!}</div>
                                                     </div>
                                                 </div>
                                                 <div class="q-option" data-answer="B" data-correct="{{$today_question->opt_correct}}">
                                                     <div class="d-flex gap-1">
                                                         <span class="q-option-marker">B. </span>
-                                                        <div class="q-option-text">{!! $today_question->opt_b !!}</div>
+                                                        <div class="q-option-text text-justify">{!! $today_question->opt_b !!}</div>
                                                     </div>
                                                 </div>
                                                 <div class="q-option" data-answer="C" data-correct="{{$today_question->opt_correct}}">
                                                     <div class="d-flex gap-1">
                                                         <span class="q-option-marker">C. </span>
-                                                        <div class="q-option-text">{!! $today_question->opt_c !!}</div>
+                                                        <div class="q-option-text text-justify">{!! $today_question->opt_c !!}</div>
                                                     </div>
                                                 </div>
                                                 <div class="q-option" data-answer="D" data-correct="{{$today_question->opt_correct}}">
                                                     <div class="d-flex gap-1">
                                                         <span class="q-option-marker">D. </span>
-                                                        <div class="q-option-text">{!! $today_question->opt_d !!}</div>
+                                                        <div class="q-option-text text-justify">{!! $today_question->opt_d !!}</div>
                                                     </div>
                                                 </div>
                                             </div> 
@@ -124,16 +124,16 @@
                                             <div class="mt-3 q-on-solution">
                                                 <div class="d-flex gap-1">
                                                     <strong>Q.</strong>
-                                                    <strong>{!! $today_question->question !!}</strong>
+                                                    <strong class="text-justify">{!! $today_question->question !!}</strong>
                                                 </div>
                                             </div>
                                             <div class="mt-2">
                                                 @php($correctkey = 'opt_'.strtolower($today_question->opt_correct))
-                                                <em>Ans:</em> <strong class="text-success bold"> [{{$today_question->opt_correct}}] {{$today_question->$correctkey}} </strong>
+                                                <em>Ans:</em> <strong class="text-success bold text-justify"> [{{$today_question->opt_correct}}] {{$today_question->$correctkey}} </strong>
                                             </div>
                                             <div class="py-2">
                                                 <em>Explanation:</em>
-                                                <div>{!! $today_question->rationale !!}</div>
+                                                <div class="text-justify">{!! $today_question->rationale !!}</div>
                                             </div>
                                         </div>                                
                                     </div>
@@ -174,7 +174,7 @@
                         <div class="update-body" style="overflow-y:scroll">
                             <ul class="p-0">
                                 @forelse($vaccancies as $row)                         
-                                    <li><a href="{{$row->link}}"><i class="fa fa-pen-nib"></i>{{($row->title)}}  </a></li>
+                                    <li><a href="{{$row->link}}" class="d-flex align-items-center gap-1"><i class="fa fa-star text-danger"></i> <span>{{($row->title)}} </span></a></li>
                                 @empty
                                     <li>No Vacancies Available</li>
                                 @endforelse

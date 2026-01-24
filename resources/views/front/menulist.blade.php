@@ -73,7 +73,7 @@
             </div>
         @else
             <div class="table-responsive table-responsive-md ">
-                <table class="table table-bordered asc-data-table">
+                <table class="table table-bordered asc-data-table table-hover table-striped">
                     <thead>
                         <tr>
                             <th>SN</th>

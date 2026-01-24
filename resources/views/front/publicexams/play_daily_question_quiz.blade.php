@@ -37,7 +37,7 @@
                                                                     <div class="q-question">
                                                                         <div class="d-flex gap-1">
                                                                             <div class="">Q{{$key+1}}.</div>
-                                                                            <div class="">{!! $ques->question !!}</div>
+                                                                            <div class="text-justify">{!! $ques->question !!}</div>
                                                                         </div>
                                                                     </div>
                                     
@@ -45,25 +45,25 @@
                                                                         <div class="q-option" data-answer="A" data-correct="{{$ques->opt_correct}}">
                                                                             <div class="d-flex gap-1">
                                                                                 <span class="q-option-marker">A.</span>
-                                                                                <div class="q-option-text">{!! $ques->opt_a !!}</div>
+                                                                                <div class="q-option-text text-justify">{!! $ques->opt_a !!}</div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="q-option" data-answer="B" data-correct="{{$ques->opt_correct}}">
                                                                             <div class="d-flex gap-1">
                                                                                 <span class="q-option-marker">B.</span>
-                                                                                <div class="q-option-text">{!! $ques->opt_b !!}</div>
+                                                                                <div class="q-option-text text-justify">{!! $ques->opt_b !!}</div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="q-option" data-answer="C" data-correct="{{$ques->opt_correct}}">
                                                                             <div class="d-flex gap-1">
                                                                                 <span class="q-option-marker">C.</span>
-                                                                                <div class="q-option-text">{!! $ques->opt_c !!}</div>
+                                                                                <div class="q-option-text text-justify">{!! $ques->opt_c !!}</div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="q-option" data-answer="D" data-correct="{{$ques->opt_correct}}">
                                                                             <div class="d-flex gap-1">
                                                                                 <span class="q-option-marker">D.</span>
-                                                                                <div class="q-option-text">{!! $ques->opt_d !!}</div>
+                                                                                <div class="q-option-text text-justify">{!! $ques->opt_d !!}</div>
                                                                             </div>
                                                                         </div>
                                                                     </div> 
@@ -72,16 +72,16 @@
                                                                     <div class="mt-3 q-on-solution">
                                                                         <div class="d-flex gap-1">
                                                                             <strong>Q{{$key+1}}.</strong>
-                                                                            <strong> {!! $ques->question !!}</strong>
+                                                                            <strong class="text-justify"> {!! $ques->question !!}</strong>
                                                                         </div>
                                                                     </div>
                                                                     <div class="mt-2">
                                                                         @php($correctkey = 'opt_'.strtolower($ques->opt_correct))                                                                        
-                                                                        <em>Ans:</em> <strong class="text-success bold"> [{{$ques->opt_correct}}]  {{$ques->$correctkey}} </strong>
+                                                                        <em>Ans:</em> <strong class="text-success bold text-justify"> [{{$ques->opt_correct}}]  {{$ques->$correctkey}} </strong>
                                                                     </div>
                                                                     <div class="py-2">
                                                                         <em>Explanation:</em>
-                                                                        <div>{!! $ques->rationale !!}</div>
+                                                                        <div class="text-justify">{!! $ques->rationale !!}</div>
                                                                     </div>
                                                                 </div>   
                                                             </div>

@@ -636,10 +636,12 @@ class FrontController extends Controller
         ->get(['id', 'name', 'slug', 'published_year', 'author', 'pages', 'fileurl'])
         ->map(function($m) use($storage){
 
-            $size = "0 KB";
+            $size = "0 MB"; // "0 KB" 
             try {
                 $size = $storage->size($m->fileurl);
-                $size = Number::fileSize($size);
+                // $size = Number::fileSize($size);
+                $size = round($size / 1024 / 1024, 2).' MB';
+
             } catch (\Throwable $th) {
                 //throw $th;
             }
@@ -725,6 +727,7 @@ class FrontController extends Controller
         $data['publisher'] = $publisher;
         $data['categories'] = $publisher->pub_categories()
             ->where('status', '=', 'Active')
+            ->orderBy('order')
             ->get()
             ->map(function ($cat) {
                 // $bookimg = $cat->cat_books()->where('status', '=', 'Active')->orderByDesc('order')->first(['thumbnail']);
@@ -786,7 +789,7 @@ class FrontController extends Controller
         {
             $last_edition_book = $category->cat_books()
             ->where('status', '=', 'Active')
-            ->orderByDesc('id')
+            ->orderByDesc('order')
             ->first(['id', 'title']);
 
             if($last_edition_book)

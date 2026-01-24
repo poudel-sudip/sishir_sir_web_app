@@ -16,7 +16,7 @@
     </style>
 
     <div class="container-fluid px-md-5">
-        <div class="row">
+        <div class="row mb-0">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
@@ -34,16 +34,17 @@
 
             </div>
         </div>
+
         <div class="blogs-details-container ebook-section mt-2" style="background:transparent">            
-            <div class="ebook-page-details m-0">
+            <div class="ebook-page-details m-0 border-danger">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-5">
                                 <div>
-                                    <img src="/storage/{{$book->thumbnail}}" onerror="this.src='{{asset('images/default-post.png')}}'" class="img img-fluid">                                
+                                    <img src="/storage/{{$book->thumbnail}}" onerror="this.src='{{asset('images/default-post.png')}}'" class="img img-fluid border" style="border-radius: 10px; max-height:300px;">                                
                                 </div>
-                                @if(($book->reviews()->avg('rating')) > 0)
+                                {{-- @if(($book->reviews()->avg('rating')) > 0)
                                     <div class="mt-4 d-none d-md-block text-md-center">
                                         <h5>
                                             Rating: 
@@ -55,24 +56,29 @@
                                             </strong>
                                         </h5>
                                     </div>
-                                @endif
+                                @endif --}}
                                 
                             </div>
                             <div class="col-md-7 book-details">
                                 {{-- <div class="addto-ebook-favorite">
                                     <button onclick="" title="Add to favorite"><i class="fas fa-heart"></i></button>
                                 </div> --}}
-                                <div class="d-flex justify-content-end align-items-center flex-wrap gap-2">
-                                    <div class="text-orange fs-5 fw-bold text-nowrap"><i class="fas fa-pen-nib me-1"></i> View Edition:</div>
+                                <div class="d-flex justify-content-start align-items-center flex-wrap gap-2">
+                                    <div class="text-orange fs-6 fw-bold text-nowrap"><i class="fas fa-pen-nib me-1"></i> View Edition:</div>
                                     <select name="edition" id="edition" class="form-select w-auto">
                                         @foreach($book_editions as $edition)
                                             <option value="/books/{{$edition->id}}" @if($edition->id == $book->id) selected @endif >{{$edition->edition}}</option>
                                         @endforeach
-                                        <option value="/book-publishers/{{$book->publisher->id}}/category/{{$book->category->id}}?show=all">View All Editions</option>
+                                        <option value="/book-publishers/{{$book->publisher->id}}/category/{{$book->category->id}}?show=all">View All</option>
                                     </select>
+                                    <h6 class="text-ends">
+                                        <span class="mx-2 fs-6 fw-bold text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
+                                        <span class="mx-2 fs-6 fw-bold text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
+                                    </h6>
+
                                 </div>
                                 {{-- <h2 class="mt-3 mt-md-0">{{($book->title)}}</h2> --}}
-                                @if(($book->reviews()->avg('rating')) > 0)
+                                {{-- @if(($book->reviews()->avg('rating')) > 0)
                                     <h5 class="text-end d-md-none">
                                         Rating: 
                                         <strong class="text-warning">
@@ -82,12 +88,12 @@
                                             <span class="text-primary">({{number_format($book->reviews()->avg('rating'), 2)}}/5.00)</span>
                                         </strong>
                                     </h5>
-                                @endif
+                                @endif --}}
                                 
-                                <h6 class="text-end">
+                                {{-- <h6 class="text-ends">
                                     <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
                                     <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
-                                </h6>
+                                </h6> --}}
                                 <h6>
                                     Book Name: <strong class="text-primary"> {{($book->title ?? ' ')}} </strong>
                                 </h6>
@@ -128,21 +134,46 @@
                                 </h6>                              
                                 
                             </div>
+                            <hr class="bg-danger border border-danger">
                             <div class="col-12 book-details">
                                 @php
                                     $hasImage3d = $book->image3d && Storage::disk('public')->exists($book->image3d);          
                                 @endphp
-                                <div class="row">
+                                {{-- <div class="row">
                                     @if($hasImage3d)
-                                        <div class="col-md-4">
-                                            <img src="/storage/{{$book->image3d}}" alt="" class="img img-fluid">
+                                        <div class="col-autocol-md-40 p-2">
+                                            <img src="/storage/{{$book->image3d}}" alt="" class="img img-fluid border p-1" style="border-radius: 10px; max-height:300px;">
                                         </div>
                                     @endif
-                                    <div class="col @if($hasImage3d) col-md-8 @endif">
-                                        <div class="book-description text-secondary text-wrap">
+                                    <div class="p-2 col @if($hasImage3d) col-md-88 @endif">
+                                        <div class="text-danger fw-bold fs-6">Features of {{ $book->title }}:</div>
+                                        <div class="book-description text-secondary text-wrap text-justify">
                                             {!! $book->description !!}
                                         </div>
                                     </div>
+                                </div> --}}
+                                <div class="book-wrapper">
+                                    @if($hasImage3d)
+                                        <div class="text-center">
+                                            <img
+                                                src="/storage/{{$book->image3d}}"
+                                                alt=""
+                                                class="img-fluid border p-1 mb-2 mx-auto me-md-5 float-none float-md-start"
+                                                style="border-radius:10px; max-height:350px;"
+                                            >
+                                        </div>
+                                        
+                                    @endif
+
+                                    <div class="text-danger fw-bold fs-6">
+                                        Features of {{ $book->title }}:
+                                    </div>
+
+                                    <div class="book-description text-secondary">
+                                        {!! $book->description !!}
+                                    </div>
+
+                                    <div class="clearfix"></div>
                                 </div>
                                 {{-- <div class="book-description text-secondary text-wrap">
                                     {!! $book->description !!}
@@ -181,6 +212,19 @@
                 <div class="row">
                     <div class="col-6">
                         <h4>Book Reviews</h4>
+                        @if(($book->reviews()->avg('rating')) > 0)
+                            <div class="">
+                                <h5>
+                                    Rating: 
+                                    <strong class="text-warning">
+                                        @for($i = 0 ; $i < round($book->reviews()->avg('rating')) ; $i++)
+                                            <i class="fas fa-star"></i>
+                                        @endfor
+                                        <span class="text-primary">({{number_format($book->reviews()->avg('rating'), 2)}}/5.00)</span>
+                                    </strong>
+                                </h5>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-6 text-end">
                         <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal">

@@ -39,7 +39,11 @@
                     <div class="accordion-item border border-primary">
                         <div class="accordion-header text-justify" id="faq-{{ $faq->id }}">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $faq->id }}" aria-expanded="false" aria-controls="collapse-{{ $faq->id }}">
-                                <strong style="color: #1374ba;">{{ $key + 1 }}. {{ $faq->name }}</strong>
+                                {{-- <strong style="color: #1374ba;">{{ $key + 1 }}. {{ $faq->name }}</strong> --}}
+                                <strong class="d-flex gap-1" style="color: #1374ba;">
+                                    <span>{{ $key + 1 }}.</span>
+                                    <div class="text-justify">{{ $faq->name }}</div>
+                                </strong>
                             </button>
                         </div>
                         <div id="collapse-{{ $faq->id }}" class="accordion-collapse collapse" aria-labelledby="faq-{{ $faq->id }}" data-bs-parent="#faqAccordion">

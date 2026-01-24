@@ -145,7 +145,7 @@
                 const tableDiv = document.createElement('div');
                 tableDiv.classList.add('table-responsive', 'table-responsive-md');
                 const table = document.createElement('table');
-                table.classList.add('table', 'table-bordered','asc-data-table');
+                table.classList.add('table', 'table-bordered','asc-data-table','table-hover','table-striped');
 
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
@@ -211,7 +211,7 @@
                 const tableDiv = document.createElement('div');
                 tableDiv.classList.add('table-responsive', 'table-responsive-md');
                 const table = document.createElement('table');
-                table.classList.add('table', 'table-bordered','asc-data-table');
+                table.classList.add('table', 'table-bordered','asc-data-table','table-hover','table-striped');
 
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
