@@ -103,11 +103,11 @@
                 const tableDiv = document.createElement('div');
                 tableDiv.classList.add('table-responsive', 'table-responsive-md');
                 const table = document.createElement('table');
-                table.classList.add('table', 'table-bordered','asc-data-table','table-hover','table-striped');
+                table.classList.add('table', 'table-bordered','asc-data-table','table-hover','table-striped','border-primary');
 
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
-                    <tr>
+                    <tr class="" style="background:#1375b9;color:#ffffff;">
                         <th style="width:60px;">#</th>
                         <th>Category Name</th>
                         <th>Files</th>

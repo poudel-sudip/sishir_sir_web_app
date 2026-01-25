@@ -72,9 +72,9 @@
             </div>
         @else
             <div class="table-responsive table-responsive-md ">
-                <table class="table table-bordered asc-data-table table-hover table-striped">
+                <table class="table table-bordered asc-data-table table-hover table-striped border-primary">
                     <thead>
-                        <tr>
+                        <tr class="" style="background:#1375b9;color:#ffffff;">
                             <th width="100">SN</th>
                             <th>Title</th>
                             <th width="50">View</th>
