@@ -25,7 +25,7 @@
                                     <div class="q-of-day-home-page px-1 px-md-5 py-3 " style="border-radius: 15px !important; border: 3px solid #ff0000;">
                                         <div class="">
                                             <div class="text-center q-heading px-4" style="width: fit-content !important;" >
-                                                <h2 class="q-title">Play Quiz</h2>
+                                                <h2 class="q-title text-danger">Play Quiz</h2>
                                             </div>
                                             
                                             <div class="owl-carousel MCQ-exam MCQ-List" style="">

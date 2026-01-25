@@ -10,7 +10,7 @@
 </style>
     <div class="container-fluid px-md-5">
         <div class="row">
-            <div class="col-md-12 etutor-breadcrumb text-center">
+            <div class="col-md-12 etutor-breadcrumb text-center pt-4 pb-2">
                 <h2>eLibrary</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
@@ -32,21 +32,21 @@
         </div>        
     </div>
 
-    <div class="container-fluid px-md-5">
-        <div class="d-flex justify-content-start align-items-center mb-3" id="toggle_view_button">
-            <span class="me-2">View Type:</span>
-            <button id="gridViewBtn" class="btn btn-outline-primary btn-sm mx-1 active" title="Grid View">
+    <div class="container-fluid px-md-5 mt-2">
+        <div class="d-flex justify-content-center align-items-center" id="toggle_view_button">
+            <span class="me-2 fw-bold text-danger">View Type:</span>
+            <button id="gridViewBtn" class="btn btn-outline-danger btn-sm mx-1 " title="Grid View">
                 <i class="fa fa-th"></i>
             </button>
-            <button id="listViewBtn" class="btn btn-outline-primary btn-sm mx-1" title="List View">
+            <button id="listViewBtn" class="btn btn-outline-danger btn-sm mx-1 active" title="List View">
                 <i class="fa fa-list"></i>
             </button>
         </div>
     </div>
 
     <div class="container-fluid px-md-5">
-        <div class="blog-container mt-5">
-            <div class="row" id="library_categories_list" showType="grid">
+        <div class="blog-container mt-2">
+            <div class="row" id="library_categories_list" showType="list">
                 
             </div>
         </div>

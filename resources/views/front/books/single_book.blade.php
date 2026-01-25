@@ -108,8 +108,8 @@
                                 
                             </div>
 
-                            <div class="w-100 my-4 d-flex justify-content-center">
-                                <div style="width: 60%; height:4px; background:red;"></div>
+                            <div class="w-100 my-4 d-flex justify-content-center justify-content-md-start">
+                                <div class="w-100 w-md-75 w-lg-50" style=" height:4px; background:red;"></div>
                             </div>
                             <div class="col-12 book-details">
                                 @php

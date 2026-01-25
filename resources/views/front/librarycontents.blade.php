@@ -15,7 +15,7 @@
 </style>
     <div class="container-fluid px-md-5">
         <div class="row">
-            <div class="col-md-12 etutor-breadcrumb text-center">
+            <div class="col-md-12 etutor-breadcrumb text-center pt-3 pb-0">
                 <h2>{{($library_category->name)}}</h2>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
@@ -61,20 +61,20 @@
     </div>
 
     <div class="container-fluid px-md-5">
-        <div class="d-flex justify-content-start align-items-center mb-3" id="toggle_view_button">
-            <span class="me-2">View Type:</span>
-            <button id="gridViewBtn" class="btn btn-outline-primary btn-sm mx-1 active" title="Grid View">
+        <div class="d-flex justify-content-center align-items-center" id="toggle_view_button">
+            <span class="me-2 fw-bold text-danger">View Type:</span>
+            <button id="gridViewBtn" class="btn btn-outline-danger btn-sm mx-1 " title="Grid View">
                 <i class="fa fa-th"></i>
             </button>
-            <button id="listViewBtn" class="btn btn-outline-primary btn-sm mx-1" title="List View">
+            <button id="listViewBtn" class="btn btn-outline-danger btn-sm mx-1 active" title="List View">
                 <i class="fa fa-list"></i>
             </button>
         </div>
     </div>
 
     <div class="container-fluid px-md-5">
-        <div class="blog-container mt-5">
-            <div class="row" id="library_categories_list" showType="grid">                                           
+        <div class="blog-container mt-2">
+            <div class="row" id="library_categories_list" showType="list">                                           
 
             </div>
         </div>
@@ -151,8 +151,8 @@
                 thead.innerHTML = `
                     <tr class="" style="background:#1375b9;color:#ffffff;">
                         <th style="width:60px;">#</th>
-                        <th>Category Name</th>
-                        <th>Files</th>
+                        <th class="text-wrap">Category Name</th>
+                        <th class="text-wrap">Files</th>
                         <th>Action</th>
                     </tr>
                 `;
@@ -215,7 +215,7 @@
 
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
-                    <tr class="" style="background:#1375b9;color:#ffffff;">
+                    <tr class="" style="background:#1375b9 !important;color:#ffffff;">
                         <th style="width:60px;">#</th>
                         <th>Material Name</th>
                         <th>Author(s)</th>
@@ -231,12 +231,12 @@
                 materials.forEach((mat, idx) => {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td>${idx + 1}</td>
+                        <td class="text-nowrap">${idx + 1}</td>
                         <td class="text-wrap"><a href="/library/{{$library_category->id}}/${mat.id}">${mat.name}</a></td>
                         <td>${mat.author}</td>
-                        <td>${mat.published_year}</td>
-                        <td>${mat.pages}</td>
-                        <td>${mat.size}</td>
+                        <td class="text-nowrap">${mat.published_year}</td>
+                        <td class="text-nowrap">${mat.pages}</td>
+                        <td class="text-nowrap">${mat.size}</td>
                         <td><a href="/library/{{$library_category->id}}/${mat.id}" class="btn btn-primary btn-sm">View</a></td>
                     `;
                     tbody.appendChild(tr);

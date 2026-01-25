@@ -3,10 +3,12 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-4">
-          <div class="mb-1 text-center text-md-start">
+          
+          <div class="mb-1 text-center text-md-start @if(url()->current() != url('/')) d-none d-md-block @endif">
             <a href="/child-nutrition-calculator" class="btn btn-danger mx-1">Child Nutrition Calculator</a>
             <a href="/bmi-calculator" class="btn btn-info mx-1">BMI Calculator</a>
           </div>
+          
           <div class="search-area">
             <form action="/search/" method="GET">
               <div class="input-group">
