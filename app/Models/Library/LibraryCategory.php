@@ -5,6 +5,8 @@ namespace App\Models\Library;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -24,6 +26,9 @@ class LibraryCategory extends Model
             $count = static::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
             $cat->slug = $count ? "{$slug}-{$count}" : $slug;
         });
+
+        static::saved(fn ($m) => Cache::flush());
+        static::deleted(fn ($m) => Cache::flush());
     }
 
     public function materials(): HasMany
@@ -43,30 +48,70 @@ class LibraryCategory extends Model
 
     public function getTotalMaterialsAttribute()
     {
-        return $this->countLibraryMaterialsRecursive($this, 'all');
+        return $this->countLibraryMaterialsRecursive();
     }
 
     public function getActiveMaterialsAttribute()
     {
-        return $this->countLibraryMaterialsRecursive($this, 'Active');
+        return $this->countLibraryMaterialsRecursive('Active');
     }
 
-    protected function countLibraryMaterialsRecursive(LibraryCategory $category,$stat): int
+    // protected function countLibraryMaterialsRecursive(LibraryCategory $category,$stat): int
+    // {
+    //     if(in_array($stat, ['Active', 'Inactive']))
+    //     {
+    //         $count = $category->materials()->where('status','=',$stat)->count();
+    //     }        
+    //     else
+    //     {
+    //         $count = $category->materials()->count();
+    //     }
+
+
+    //     foreach ($category->childs as $child) {
+    //         $count += $this->countLibraryMaterialsRecursive($child, $stat);
+    //     }
+
+    //     return $count;
+    // }
+
+    protected function countLibraryMaterialsRecursive($stat = null):int
     {
-        if(in_array($stat, ['Active', 'Inactive']))
-        {
-            $count = $category->materials()->where('status','=',$stat)->count();
-        }        
-        else
-        {
-            $count = $category->materials()->count();
-        }
+        $statusKey = $stat ?? 'all';
+        return Cache::remember(
+            "library_cat:{$this->id}:materials:{$statusKey}",
+            now()->addMinutes(30),
+            function () use ($stat) {
 
+                $ids = [$this->id];
+                $queue = [$this->id];
 
-        foreach ($category->childs as $child) {
-            $count += $this->countLibraryMaterialsRecursive($child, $stat);
-        }
+                while (!empty($queue)) {
+                    $children = DB::table('library_categories')
+                        ->whereIn('parent_id', $queue)
+                        ->pluck('id')
+                        ->toArray();
 
-        return $count;
+                    if (empty($children)) {
+                        break;
+                    }
+
+                    $queue = $children;
+                    $ids = array_merge($ids, $children);
+                }
+
+                $query = DB::table('library_materials')
+                    ->whereIn('category_id', $ids);
+
+                if (in_array($stat, ['Active', 'Inactive'])) {
+                    $query->where('status', $stat);
+                }
+
+                return $query->count();
+            }
+        );
+
+        return 0;
     }
+
 }

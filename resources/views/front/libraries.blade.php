@@ -24,7 +24,7 @@
 
     <div class="container-fluid px-md-5">
         <div class="lib-filter-alphabets">
-            <span class="lib-filter-character  {{$filterchar=='all'?'active':''}} " charfil="all"> All </span>
+            <span class="lib-filter-character" charfil="all"> All </span>
             @for($i='A';$i<'Z';$i++)
                 <span class="lib-filter-character {{strtoupper($filterchar) == $i ? 'active':''}} " charfil='{{$i}}'> {{$i}} </span>
             @endfor
@@ -140,7 +140,7 @@
     </script>
 
     @if($filterchar == 'all')
-        <script> displayCategories(libraryCategories); </script>
+        {{-- <script> displayCategories(libraryCategories); </script> --}}
     @else
         <script> 
             var filchar = '{{$filterchar}}';
@@ -214,6 +214,10 @@
                 $('.asc-data-table').DataTable().destroy();
             }
         }
+
+        $('.asc-data-table').on('click', function() {
+            initDataTable();
+        });
 
     </script>
 

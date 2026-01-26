@@ -329,6 +329,10 @@
                 $('.asc-data-table').DataTable().destroy();
             }
         }
+
+        $('.asc-data-table').on('click', function() {
+            initDataTable();
+        });
     </script>
 
 @endsection
