@@ -146,6 +146,14 @@
             }
         });
 
+        const lastSloganYear = '{{ optional($healthDay->slogan_list->first())->year ?? "all"}}';
+        if(lastSloganYear){
+            $('.year-filter').removeClass('active');
+            $(`.year-filter[charfil='${lastSloganYear}']`).addClass('active');
+            $('.health-day-slogan').addClass('hidden');
+            $('#slogan-'+lastSloganYear).removeClass('hidden');
+        }
+
     </script>
   
     {{-- @if($healthDay->pdf_file)

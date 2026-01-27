@@ -16,11 +16,14 @@ class UsersController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $users = User::whereIn('role',['Admin','Student','Moderator'])
+        ->orderByDesc('id')
+        ->paginate(50,['id','name','email','contact','role','blood_group','provience','district_city','donate_blood','created_at']);
+
         return view('admin.users.index',[
-            'users'=>User::whereIn('role',['Admin','Student','Moderator'])
-            ->get(['id','name','email','contact','role','blood_group','provience','district_city','donate_blood','created_at']),
+            'users'=>$users,
         ]);
     }
 

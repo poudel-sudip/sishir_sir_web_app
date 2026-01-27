@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="advanced-desc-table">
+                            <table class="table table-bordered all-desc-table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -100,6 +100,9 @@
                                 })
                                 }
                             </script>
+                        </div>
+                        <div class="mt-2">
+                            {{$users->onEachSide(1)->links('paginator.bootstrap')}}
                         </div>
                     </div>
 
