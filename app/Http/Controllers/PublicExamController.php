@@ -13,6 +13,7 @@ use App\Models\Categories;
 use App\Helpers\CustomPdfHelper;
 use App\Models\Advertisement;
 use App\Models\Exams\DailyMCQQuestion;
+use App\Models\Exams\PlayPuzzle;
 
 class PublicExamController extends Controller
 {
@@ -356,6 +357,22 @@ class PublicExamController extends Controller
 
         // dd($data);
         return view('front.publicexams.play_daily_question_quiz',$data);
+    }
+
+    public function playTextPuzzle(Request $request)
+    {
+        $data['questions'] = PlayPuzzle::where('type','=','text')->inRandomOrder()->take(100)->get()->values();
+
+        // dd($data);
+        return view('front.publicexams.play_text_puzzle',$data);
+    }
+
+    public function playKnowThePicture(Request $request)
+    {
+        $data['questions'] = PlayPuzzle::where('type','=','image')->inRandomOrder()->take(50)->get()->values();
+
+        // dd($data);
+        return view('front.publicexams.play_know_the_picture',$data);
     }
 
 }

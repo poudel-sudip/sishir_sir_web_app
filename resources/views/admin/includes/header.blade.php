@@ -97,6 +97,12 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/daily-mcq-questions') }}">Daily Questions</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/play-puzzle/text') }}">Play Text Puzzle</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/play-puzzle/image') }}">Know The Picture</a>
+            </li>
           </ul>
         </div>
       </li>

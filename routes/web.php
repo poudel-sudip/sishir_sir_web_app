@@ -581,7 +581,21 @@ Route::post('/admin/health-days/{healthDay}/slogans', 'App\Http\Controllers\Admi
 Route::patch('/admin/health-days/{healthDay}/slogans', 'App\Http\Controllers\Admin\HealthDayController@updateDaySlogan')->middleware('role:Admin');
 Route::delete('/admin/health-days/{healthDay}/slogans/{slogan}', 'App\Http\Controllers\Admin\HealthDayController@destroyDaySlogan')->middleware('role:Admin');
 
+Route::get('/admin/play-puzzle/text', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@indexTextPuzzle')->middleware('role:Admin');
+Route::get('/admin/play-puzzle/text/create', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@createTextPuzzle')->middleware('role:Admin');
+Route::post('/admin/play-puzzle/text', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@storeTextPuzzle')->middleware('role:Admin');
+Route::get('/admin/play-puzzle/text/{question}/edit', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@editTextPuzzle')->middleware('role:Admin');
+Route::get('/admin/play-puzzle/text/{question}', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@showTextPuzzle')->middleware('role:Admin');
+Route::patch('/admin/play-puzzle/text/{question}', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@updateTextPuzzle')->middleware('role:Admin');
+Route::delete('/admin/play-puzzle/text/{question}', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@destroyTextPuzzle')->middleware('role:Admin');
 
+Route::get('/admin/play-puzzle/image', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@indexImagePuzzle')->middleware('role:Admin');
+Route::get('/admin/play-puzzle/image/create', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@createImagePuzzle')->middleware('role:Admin');
+Route::post('/admin/play-puzzle/image', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@storeImagePuzzle')->middleware('role:Admin');
+Route::get('/admin/play-puzzle/image/{question}/edit', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@editImagePuzzle')->middleware('role:Admin');
+Route::get('/admin/play-puzzle/image/{question}', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@showImagePuzzle')->middleware('role:Admin');
+Route::patch('/admin/play-puzzle/image/{question}', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@updateImagePuzzle')->middleware('role:Admin');
+Route::delete('/admin/play-puzzle/image/{question}', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@destroyImagePuzzle')->middleware('role:Admin');
 
 
 
@@ -865,7 +879,10 @@ Route::post('/dynamic-forms/{form}', 'App\Http\Controllers\FrontDynamicFormContr
 
 Route::get('/question-of-the-day/{qdate}', 'App\Http\Controllers\FrontController@getQuestionOfDay');
 Route::post('/question-of-the-day/{qdate}/comment/add', 'App\Http\Controllers\FrontController@addCommentToQuestionOfDay');
+
 Route::get('/question-of-the-day-quiz', 'App\Http\Controllers\PublicExamController@playDailyQuestionQuiz');
+Route::get('/play-text-puzzle', 'App\Http\Controllers\PublicExamController@playTextPuzzle');
+Route::get('/know-the-picture', 'App\Http\Controllers\PublicExamController@playKnowThePicture');
 
 //front pdf banks
 Route::get('/pdf-banks', 'App\Http\Controllers\FrontPdfBankController@index');
