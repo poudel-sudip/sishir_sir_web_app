@@ -7,6 +7,19 @@
             height: auto;
         }
 
+        .ans-box {
+            text-transform: uppercase;
+            font-weight: bold
+        }
+
+        .hint-box {
+            background: #71c4ff47;
+        }
+
+        p{
+            color: inherit;
+        }
+
     </style>
 
     <div class="container-fluid px-md-5">
@@ -22,8 +35,8 @@
                                 @endphp
                             
                                 <div class="bg-white p-1" style="border-radius: 15px !important; border: 8px solid #1375b9;">
-                                    <div class="q-of-day-home-page h-100 px-1 px-md-5 py-3 " style="border-radius: 15px !important; border: 3px solid #ff0000;">
-                                        <div class="">
+                                    <div class="q-of-day-home-page px-1 px-md-5 py-3 " style="border-radius: 15px !important; border: 3px solid #ff0000; height: auto;">
+                                        <div class="" style="height: auto;">
                                             <div class="text-center q-heading px-4" style="width: fit-content !important;" >
                                                 <h2 class="q-title text-danger">Play Puzzle</h2>
                                             </div>
@@ -32,7 +45,7 @@
                                                 @foreach($pages as $pageIndex => $questions)
                                                     <div class="page-{{ $pageIndex + 1 }}" style="">
                                                         @foreach($questions as $key => $ques)
-                                                            <div class="mcq-question mt-2 h-100" style=" ">
+                                                            <div class="mcq-question mt-2" style="height: auto;">
                                                                 <div id="" class="q_block">
                                                                     <div class="q-question">
                                                                         <div class="d-flex gap-1">
@@ -42,17 +55,24 @@
                                                                     </div>
                                     
                                                                     <div class="q-options-container">
-                                                                        <div class="answer-group mt-3 d-flex align-items-center justify-content-center gap-2" data-qid="{{ $ques->id }}" data-answer="{{ trim(strtolower($ques->answer)) }}">
-                                                                            @for ($i = 0; $i < mb_strlen($ques->answer); $i++)
-                                                                                <input type="text" id="{{ $ques->id }}_ans_{{ $i }}" data-qid="{{ $ques->id }}" class="rounded p-1 text-center ans-box" style="width: 3rem;" maxlength="1">  
-                                                                            @endfor
+                                                                        <div class="answer-group mt-3 d-flex align-items-center justify-content-center gap-2 flex-wrap" data-qid="{{ $ques->id }}" data-answer="{{ $ques->formatted_answer }}">
+                                                                        
+                                                                            @foreach ($ques->chars as $i => $charData)
+                                                                                <input type="text"
+                                                                                    id="{{ $ques->id }}_ans_{{ $i }}"
+                                                                                    class="rounded p-1 text-center ans-box {{ $charData['is_hint'] ? 'hint-box' : '' }}"
+                                                                                    style="width: 2rem;"
+                                                                                    maxlength="1"
+                                                                                    value="{{$charData['is_hint'] ? $charData['char'] : ''}}"
+                                                                                    {{ $charData['is_hint'] ? 'readonly' : '' }}>
+                                                                            @endforeach
                                                                         </div>
                                                                         <div class="text-center d-none ans_status" id="{{ $ques->id }}_ans_status">
                                                                             <span class="mt-3 d-inline-block rounded-pill text-white p-2 status"></span>
                                                                         </div>
                                                                         <div class="mt-2">
-                                                                            <em>Hints:</em>
-                                                                            <div class="text-justify">{!! $ques->rationale !!}</div>
+                                                                            <em class="fw-bold text-danger">Hints:</em>
+                                                                            <div class="text-justify text-dark">{!! $ques->rationale !!}</div>
                                                                         </div>
                                                                         
                                                                     </div> 
@@ -65,17 +85,26 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="mt-2">
-                                                                        <em>Ans:</em> <strong class="text-success bold text-justify"> {{$ques->answer}} </strong>
+                                                                        <em>Ans:</em> <strong class="text-success bold text-justify"> {{$ques->formatted_answer}} </strong>
                                                                     </div>
                                                                     <div class="py-2">
-                                                                        <em>Explanation:</em>
-                                                                        <div class="text-justify">{!! $ques->rationale !!}</div>
+                                                                        <em class="fw-bold text-danger">Explanation:</em>
+                                                                        <div class="text-justify text-dark">{!! $ques->rationale !!}</div>
                                                                     </div>
                                                                 </div>   
                                                             </div>
                                                         @endforeach
                                                     </div>
                                                 @endforeach
+
+                                                <div class="page-end-page">
+                                                    <div class="mcq-question mt-2" style="height: auto;">
+                                                        <div class="text-center p-4">
+                                                            <h4 class="text-success">You have reached the end of the Sample Puzzle Questions.</h4>
+                                                            <p class="mt-3">Login as Student to play full puzzle  and earn reward points.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>                                                                                  
                                         </div>
 
@@ -162,25 +191,41 @@
             
             document.addEventListener("input", function(e) {
                 if (e.target.classList.contains("ans-box")) {
+
+                    e.target.value = e.target.value.toUpperCase();
                     if (e.target.value.length === 1) {
+
                         let next = e.target.nextElementSibling;
+
+                        while (next && (next.classList.contains("hint-box"))) {
+                            next = next.nextElementSibling;
+                        }
+
                         if (next && next.classList.contains("ans-box")) {
                             next.focus();
                         }
                     }
-                    
+
                     const group = e.target.closest(".answer-group");
                     checkAnswer(group.dataset.qid);
                 }
             });
 
             document.addEventListener("keydown", function(e) {
+
                 if (e.target.classList.contains("ans-box")) {
+
                     if (e.key === "Backspace" && e.target.value === "") {
+
                         let prev = e.target.previousElementSibling;
+
+                        while (prev && (prev.classList.contains("hint-box"))) {
+                            prev = prev.previousElementSibling;
+                        }
+
                         if (prev && prev.classList.contains("ans-box")) {
                             prev.focus();
-                        }  
+                        }
                     }
 
                     const group = e.target.closest(".answer-group");
@@ -212,10 +257,12 @@
                 let user = "";
 
                 inputs.forEach(input => {
-                    user += input.value.toLowerCase();
+                    user += input.value.toUpperCase();
                 });
 
                 inputs.forEach(i => i.style.border = "2px solid black");
+                inputs.forEach(i => i.style.color = "black");
+
                 $('#'+qid+'_ans_status').addClass('d-none');
                 $('#'+qid+'_ans_status .status').removeClass('bg-success bg-danger').text('');
                 $('#q-viewans-btn').addClass('d-none');
@@ -230,13 +277,17 @@
 
                 if (user === correct) {
                     inputs.forEach(i => i.style.border = "2px solid green");
+                    inputs.forEach(i => i.style.color = "green");
                     $('#'+qid+'_ans_status .status').addClass('bg-success').text("Correct Answer!");
-                    return true;
                 } else {
                     inputs.forEach(i => i.style.border = "2px solid red");
+                    inputs.forEach(i => i.style.color = "red");
                     $('#'+qid+'_ans_status .status').addClass('bg-danger').text("Wrong Answer!");
-                    return false;
                 }
+
+                group.closest(".owl-stage-outer").style.height = "auto";
+
+                return user === correct;
 
             }
 

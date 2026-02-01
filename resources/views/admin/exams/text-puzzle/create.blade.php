@@ -27,7 +27,7 @@
                                 <label for="question" class="col-md-4 col-form-label "> <strong>{{ __('Question') }}</strong> </label>
 
                                 <div class="col-md-8">
-                                    <input id="question" type="text" class="form-control @error('question') is-invalid @enderror" name="question" value="{{ old('question') }}" required autocomplete="question" autofocus>
+                                    <input id="question" type="text" class="form-control @error('question') is-invalid @enderror" name="question" value="{{ old('question') ?? 'Guess the Word!' }}" required autocomplete="question" autofocus>
                                     {{-- <textarea id="question" class="form-control summernote @error('question') is-invalid @enderror" name="question" required >{{ old('question') }}</textarea> --}}
 
                                     @error('question')

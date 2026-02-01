@@ -361,7 +361,54 @@ class PublicExamController extends Controller
 
     public function playTextPuzzle(Request $request)
     {
-        $data['questions'] = PlayPuzzle::where('type','=','text')->inRandomOrder()->take(100)->get()->values();
+        $data['questions'] = PlayPuzzle::where('type','=','text')
+        ->inRandomOrder()
+        ->take(15)
+        ->get()
+        ->map(function ($ques) {
+
+            $answer = trim(mb_strtoupper($ques->answer));
+            $length = mb_strlen($answer);
+
+            // Count letters only (exclude spaces)
+            $lettersOnly = preg_replace('/\s+/u', '', $answer);
+            $letterCount = mb_strlen($lettersOnly);
+
+            // Hint count rule
+            $hintCount = ($letterCount <= 3) ? 0 : ceil(($letterCount - 5) / 5) + 1;
+
+            // Collect indexes of letters only
+            $letterIndexes = [];
+            for ($i = 0; $i < $length; $i++) {
+                $char = mb_substr($answer, $i, 1);
+
+                if (trim($char) !== '') {
+                    $letterIndexes[] = $i;
+                }
+            }
+
+            // Random hint indexes
+            shuffle($letterIndexes);
+            $hintIndexes = array_slice($letterIndexes, 0, $hintCount);
+
+            // Convert answer into char array
+            $chars = [];
+            for ($i = 0; $i < $length; $i++) {
+
+                $char = mb_substr($answer, $i, 1);
+
+                $chars[] = [
+                    'char' => $char,
+                    'is_hint' => trim($char) === '' || in_array($i, $hintIndexes)
+                ];
+            }
+
+            $ques->formatted_answer = $answer;
+            $ques->chars = $chars;
+
+            return $ques;
+        })
+        ->values();
 
         // dd($data);
         return view('front.publicexams.play_text_puzzle',$data);
@@ -369,7 +416,54 @@ class PublicExamController extends Controller
 
     public function playKnowThePicture(Request $request)
     {
-        $data['questions'] = PlayPuzzle::where('type','=','image')->inRandomOrder()->take(50)->get()->values();
+        $data['questions'] = PlayPuzzle::where('type','=','image')
+        ->inRandomOrder()
+        ->take(15)
+        ->get()
+        ->map(function ($ques) {
+
+            $answer = trim(mb_strtoupper($ques->answer));
+            $length = mb_strlen($answer);
+
+            // Count letters only (exclude spaces)
+            $lettersOnly = preg_replace('/\s+/u', '', $answer);
+            $letterCount = mb_strlen($lettersOnly);
+
+            // Hint count rule
+            $hintCount = ($letterCount <= 3) ? 0 : ceil(($letterCount - 5) / 5) + 1;
+
+            // Collect indexes of letters only
+            $letterIndexes = [];
+            for ($i = 0; $i < $length; $i++) {
+                $char = mb_substr($answer, $i, 1);
+
+                if (trim($char) !== '') {
+                    $letterIndexes[] = $i;
+                }
+            }
+
+            // Random hint indexes
+            shuffle($letterIndexes);
+            $hintIndexes = array_slice($letterIndexes, 0, $hintCount);
+
+            // Convert answer into char array
+            $chars = [];
+            for ($i = 0; $i < $length; $i++) {
+
+                $char = mb_substr($answer, $i, 1);
+
+                $chars[] = [
+                    'char' => $char,
+                    'is_hint' => trim($char) === '' || in_array($i, $hintIndexes)
+                ];
+            }
+
+            $ques->formatted_answer = $answer;
+            $ques->chars = $chars;
+
+            return $ques;
+        })
+        ->values();
 
         // dd($data);
         return view('front.publicexams.play_know_the_picture',$data);

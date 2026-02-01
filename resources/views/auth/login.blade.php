@@ -15,7 +15,7 @@
                 <div class="outer-container">
                     <div class="left-content">
                         <div class="logo-container mx-auto">
-                            <a href="/"><img class="w-100" src="{{ asset('images/logo-w.png') }}" alt=""></a>
+                            <a href="/"><img class="w-100" src="{{ asset('images/logo.webp') }}" alt=""></a>
                         </div>
                         <div class="hidden-xs">
                             <h6 class="text-center">Don't have an account ?</h6>
