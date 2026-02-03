@@ -60,7 +60,7 @@
                                                                             <span class="mt-3 d-inline-block rounded-pill text-white p-2 status"></span>
                                                                         </div>
                                                                         <div class="mt-2">
-                                                                            <em class="fw-bold text-danger">Hints:</em>
+                                                                            <span class="fw-bold text-danger">Hints:</span>
                                                                             <div class="text-justify text-dark">{!! $ques->rationale !!}</div>
                                                                         </div>
                                                                         
@@ -264,7 +264,7 @@
                 inputs.forEach(input => {
                     input.classList.remove('correct-box', 'wrong-box');
 
-                    if(input.value.trim() !== ''){
+                    if(input.value.trim() !== '' || input.classList.contains('hint-box')){
                         input.classList.add('filled');
                     }
                     else{

@@ -104,6 +104,18 @@
                                         </div>
                                     </div>                                   
                                 </div>
+
+                                <div class="mt-2 d-flex justify-content-between align-items-center">
+                                    <a class="btn btn-sm btn-primary" href="/question-of-the-day-quiz">
+                                        <i class="fa fa-check-square pe-1"></i>Play Quiz                                 
+                                    </a>
+                                    <a class="btn btn-sm btn-success" href="/play-puzzle">
+                                        <i class="fa fa-check-square pe-1"></i>Play Puzzle                                 
+                                    </a>
+                                    <a class="btn btn-sm btn-danger" href="/know-the-picture">
+                                        <i class="fa fa-image pe-1"></i>Know the Picture                                 
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
