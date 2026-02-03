@@ -881,7 +881,7 @@ Route::get('/question-of-the-day/{qdate}', 'App\Http\Controllers\FrontController
 Route::post('/question-of-the-day/{qdate}/comment/add', 'App\Http\Controllers\FrontController@addCommentToQuestionOfDay');
 
 Route::get('/question-of-the-day-quiz', 'App\Http\Controllers\PublicExamController@playDailyQuestionQuiz');
-Route::get('/play-text-puzzle', 'App\Http\Controllers\PublicExamController@playTextPuzzle');
+Route::get('/play-puzzle', 'App\Http\Controllers\PublicExamController@playTextPuzzle');
 Route::get('/know-the-picture', 'App\Http\Controllers\PublicExamController@playKnowThePicture');
 
 //front pdf banks

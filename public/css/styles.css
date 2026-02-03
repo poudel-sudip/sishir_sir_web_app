@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
+:root {
+    --bs-red: #ff0000;
+    --bs-danger: #ff0000;
+    --bs-danger-rgb: 255, 0, 0;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     background: #E3F4FF;
@@ -11,7 +17,8 @@ a {
 }
 
 p {
-    color: #686c6f;
+    /* color: #686c6f; */
+    color: inherit;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -6863,6 +6870,54 @@ label.star:before {
 .alert-yellow a {
     /* color: #ffffff; */
 }
+
+.mcq-question .answer-group .ans-box {
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 2px solid black;
+}
+
+.mcq-question .answer-group .ans-box.filled{
+    background: #1375b9;
+    color: white;
+    border: 2px solid #1375b9;
+}
+
+.mcq-question .answer-group .correct-box{
+    border: 2px solid green !important;
+    color: white !important;
+    background: green !important;
+}
+
+.mcq-question .answer-group .wrong-box{
+    border: 2px solid red !important;
+    color: white !important;
+    background: red !important;
+}
+
+.banner-title-triangle-down {
+    position: relative; 
+    font-weight: bold;
+    font-size: 1rem;
+    background: #1375b9;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+.banner-title-triangle-down::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: #1375b9 transparent transparent transparent;
+}
+
 
 @media (min-width:576px) {
     .w-sm-100 {

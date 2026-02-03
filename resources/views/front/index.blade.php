@@ -168,7 +168,7 @@
                         <a class="btn btn-sm btn-primary" href="/question-of-the-day-quiz">
                             <i class="fa fa-check-square pe-1"></i>Play Quiz                                 
                         </a>
-                        <a class="btn btn-sm btn-success" href="/play-text-puzzle">
+                        <a class="btn btn-sm btn-success" href="/play-puzzle">
                             <i class="fa fa-check-square pe-1"></i>Play Puzzle                                 
                         </a>
                         <a class="btn btn-sm btn-danger" href="/know-the-picture">

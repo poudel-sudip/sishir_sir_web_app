@@ -7,19 +7,6 @@
             height: auto;
         }
 
-        .ans-box {
-            text-transform: uppercase;
-            font-weight: bold
-        }
-
-        .hint-box {
-            background: #71c4ff47;
-        }
-
-        p{
-            color: inherit;
-        }
-
     </style>
 
     <div class="container-fluid px-md-5">
@@ -34,8 +21,8 @@
                                     $key = -1;
                                 @endphp
                             
-                                <div class="bg-white p-1" style="border-radius: 15px !important; border: 8px solid #1375b9;">
-                                    <div class="q-of-day-home-page px-1 px-md-5 py-3 " style="border-radius: 15px !important; border: 3px solid #ff0000; height: auto;">
+                                <div class="p-1" style="border-radius: 15px !important; border: 8px solid #1375b9;">
+                                    <div class="q-of-day-home-page px-1 px-md-5 py-3 " style="border-radius: 15px !important; border: 3px solid #ff0000; height: auto; background: transparent;">
                                         <div class="" style="height: auto;">
                                             <div class="text-center q-heading px-4" style="width: fit-content !important;" >
                                                 <h2 class="q-title text-danger">Play Puzzle</h2>
@@ -47,12 +34,19 @@
                                                         @foreach($questions as $key => $ques)
                                                             <div class="mcq-question mt-2" style="height: auto;">
                                                                 <div id="" class="q_block">
+                                                                    <div class="text-center"><span class="banner-title-triangle-down">Q{{$key+1}}</span></div>
                                                                     <div class="q-question">
+                                                                        <div class="d-flex align-items-center justify-content-center flex-column gap-1">
+                                                                            <div class="text-justify">{!! $ques->question !!}</div>                                                                    
+                                                                        </div>
+                                                                    </div>
+
+                                                                    {{-- <div class="q-question">
                                                                         <div class="d-flex gap-1">
                                                                             <div class="">Q{{$key+1}}.</div>
                                                                             <div class="text-justify">{!! $ques->question !!}</div>
                                                                         </div>
-                                                                    </div>
+                                                                    </div> --}}
                                     
                                                                     <div class="q-options-container">
                                                                         <div class="answer-group mt-3 d-flex align-items-center justify-content-center gap-2 flex-wrap" data-qid="{{ $ques->id }}" data-answer="{{ $ques->formatted_answer }}">
@@ -60,7 +54,7 @@
                                                                             @foreach ($ques->chars as $i => $charData)
                                                                                 <input type="text"
                                                                                     id="{{ $ques->id }}_ans_{{ $i }}"
-                                                                                    class="rounded p-1 text-center ans-box {{ $charData['is_hint'] ? 'hint-box' : '' }}"
+                                                                                    class="rounded p-1 text-center ans-box {{ $charData['is_hint'] ? 'hint-box filled' : '' }}"
                                                                                     style="width: 2rem;"
                                                                                     maxlength="1"
                                                                                     value="{{$charData['is_hint'] ? $charData['char'] : ''}}"
@@ -77,7 +71,7 @@
                                                                         
                                                                     </div> 
                                                                 </div>
-                                                                <div id="" class="qs_block px-3 text-start d-none">
+                                                                {{-- <div id="" class="qs_block px-3 text-start d-none">
                                                                     <div class="mt-3 q-on-solution">
                                                                         <div class="d-flex gap-1">
                                                                             <strong>Q{{$key+1}}.</strong>
@@ -91,7 +85,7 @@
                                                                         <em class="fw-bold text-danger">Explanation:</em>
                                                                         <div class="text-justify text-dark">{!! $ques->rationale !!}</div>
                                                                     </div>
-                                                                </div>   
+                                                                </div>    --}}
                                                             </div>
                                                         @endforeach
                                                     </div>
@@ -109,10 +103,10 @@
                                         </div>
 
                                         <div class="row justify-content-between align-items-center">
-                                            <div class="col">
+                                            {{-- <div class="col">
                                                 <a role="button" class="q-view-btn d-none text-nowrap" id="q-viewans-btn">View Solution</a>
                                                 <a role="button" class="q-view-btn d-none text-nowrap" id="q-gotit-btn">Got It !</a>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="col owl-nav d-flex justify-content-end" style="margin-top: 10px;">
                                                 <button type="button" class="mx-1 btn border border-primary text-primary owl-prev">Previous </button>
@@ -120,6 +114,18 @@
                                             </div>
                                         </div>
                                     </div>                                   
+                                </div>
+
+                                <div class="mt-2 d-flex justify-content-between align-items-center">
+                                    <a class="btn btn-sm btn-primary" href="/question-of-the-day-quiz">
+                                        <i class="fa fa-check-square pe-1"></i>Play Quiz                                 
+                                    </a>
+                                    <a class="btn btn-sm btn-success" href="/play-puzzle">
+                                        <i class="fa fa-check-square pe-1"></i>Play Puzzle                                 
+                                    </a>
+                                    <a class="btn btn-sm btn-danger" href="/know-the-picture">
+                                        <i class="fa fa-image pe-1"></i>Know the Picture                                 
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -149,38 +155,38 @@
         $(".owl-nav .owl-prev").click(function () {
             carousel.trigger("prev.owl.carousel");
 
-            $('#q-viewans-btn').addClass('d-none');
-            if($('.owl-carousel .owl-item.active .mcq-question').find('.q_block').hasClass('d-none'))
-            {
-                $('#q-gotit-btn').removeClass('d-none');
-            }
-            else
-            {
-                if(!$('.owl-carousel .owl-item.active .mcq-question .q_block .q-options-container').find('.ans_status').hasClass('d-none'))
-                {
-                    $('#q-viewans-btn').removeClass('d-none');
-                }
-                $('#q-gotit-btn').addClass('d-none');
-            }
+            // $('#q-viewans-btn').addClass('d-none');
+            // if($('.owl-carousel .owl-item.active .mcq-question').find('.q_block').hasClass('d-none'))
+            // {
+            //     $('#q-gotit-btn').removeClass('d-none');
+            // }
+            // else
+            // {
+            //     if(!$('.owl-carousel .owl-item.active .mcq-question .q_block .q-options-container').find('.ans_status').hasClass('d-none'))
+            //     {
+            //         $('#q-viewans-btn').removeClass('d-none');
+            //     }
+            //     $('#q-gotit-btn').addClass('d-none');
+            // }
                         
         });
 
         $(".owl-nav .owl-next").click(function () {
             carousel.trigger('next.owl.carousel');  
 
-            $('#q-viewans-btn').addClass('d-none');
-            if($('.owl-carousel .owl-item.active .mcq-question').find('.q_block').hasClass('d-none'))
-            {
-                $('#q-gotit-btn').removeClass('d-none');
-            }
-            else
-            {
-                if(!$('.owl-carousel .owl-item.active .mcq-question .q_block .q-options-container').find('.ans_status').hasClass('d-none'))
-                {
-                    $('#q-viewans-btn').removeClass('d-none');
-                }
-                $('#q-gotit-btn').addClass('d-none');
-            }
+            // $('#q-viewans-btn').addClass('d-none');
+            // if($('.owl-carousel .owl-item.active .mcq-question').find('.q_block').hasClass('d-none'))
+            // {
+            //     $('#q-gotit-btn').removeClass('d-none');
+            // }
+            // else
+            // {
+            //     if(!$('.owl-carousel .owl-item.active .mcq-question .q_block .q-options-container').find('.ans_status').hasClass('d-none'))
+            //     {
+            //         $('#q-viewans-btn').removeClass('d-none');
+            //     }
+            //     $('#q-gotit-btn').addClass('d-none');
+            // }
                                           
         });
         
@@ -204,6 +210,7 @@
                         if (next && next.classList.contains("ans-box")) {
                             next.focus();
                         }
+
                     }
 
                     const group = e.target.closest(".answer-group");
@@ -233,6 +240,7 @@
                 }
             });
 
+
             $('#q-viewans-btn').on('click',function(){
 
                 $('.owl-carousel .owl-item.active .mcq-question').find('.q_block').addClass('d-none');
@@ -257,11 +265,18 @@
                 let user = "";
 
                 inputs.forEach(input => {
+                    input.classList.remove('correct-box', 'wrong-box');
+
+                    if(input.value.trim() !== ''){
+                        input.classList.add('filled');
+                    }
+                    else{
+                        input.classList.remove('filled');
+                    }
+                    
                     user += input.value.toUpperCase();
                 });
 
-                inputs.forEach(i => i.style.border = "2px solid black");
-                inputs.forEach(i => i.style.color = "black");
 
                 $('#'+qid+'_ans_status').addClass('d-none');
                 $('#'+qid+'_ans_status .status').removeClass('bg-success bg-danger').text('');
@@ -276,12 +291,10 @@
                 const statusElem = $('#'+qid+'_ans_status .status');
 
                 if (user === correct) {
-                    inputs.forEach(i => i.style.border = "2px solid green");
-                    inputs.forEach(i => i.style.color = "green");
+                    inputs.forEach(i => i.classList.add("correct-box"));
                     $('#'+qid+'_ans_status .status').addClass('bg-success').text("Correct Answer!");
                 } else {
-                    inputs.forEach(i => i.style.border = "2px solid red");
-                    inputs.forEach(i => i.style.color = "red");
+                    inputs.forEach(i => i.classList.add("wrong-box"));
                     $('#'+qid+'_ans_status .status').addClass('bg-danger').text("Wrong Answer!");
                 }
 
