@@ -36,6 +36,7 @@ use App\Models\Library\LibraryMaterial;
 use App\Models\Library\LibraryCategory;
 use App\Models\Forms\DynamicForm;
 use App\Models\PostViewCounter;
+use App\Models\DailyVisitCounter;
 use App\Models\Books\QRBook;
 use App\Models\Exams\DailyMCQQuestion;
 use App\Models\DiscussionForum;
@@ -1364,10 +1365,16 @@ class FrontController extends Controller
                     'url' => $fetched->pageurl,
                 ]);
 
+                $dailyVisitCounter = DailyVisitCounter::firstOrCreate([
+                    'visit_date' => date('Y-m-d'),
+                ]);
+
                 if (strtolower(trim($fetched->type)) == 'share') {
                     $postViewCounter->increment('share_count');
+                    $dailyVisitCounter->increment('share_count');
                 } elseif (strtolower(trim($fetched->type)) == 'download') {
                     $postViewCounter->increment('download_count');
+                    $dailyVisitCounter->increment('download_count');
                 } else {
                 }
 

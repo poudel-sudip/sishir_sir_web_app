@@ -144,6 +144,46 @@ back_to_top_btn.on('click', function(e) {
   $('html, body').animate({scrollTop:0}, '300');
 });
 
+
+    
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const categorySwipers  = document.querySelectorAll('.category-swiper');
+  categorySwipers.forEach(el => {
+
+    // const nextBtn = el.querySelector('.swiper-button-next');
+    // const prevBtn = el.querySelector('.swipSer-button-prev');
+    const prevBtn = el.previousElementSibling;
+    const nextBtn = el.nextElementSibling;
+
+    new Swiper(el, {
+      slidesPerView: "auto",
+      // spaceBetween: 8,
+      freeMode: true,
+      grabCursor: true,
+      navigation: {
+        nextEl: nextBtn,
+        prevEl: prevBtn,
+      }
+    });
+
+    const tabButtons = el.querySelectorAll('.nav-link');
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        tabButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+
+        this.classList.add('active');
+        this.setAttribute('aria-selected', 'true');
+      });
+    });
+  });
+
+});
+  
 function formatYoutubeCount(count) {
   if (count < 1000) {
       return count.toString();

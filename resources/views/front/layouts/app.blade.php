@@ -35,15 +35,17 @@
     gtag('config', 'G-ZS3KVP4N6H');
   </script>
 
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
 
   <link href="{{ asset('css/front.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-  <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
 
   <!-- Scripts -->
   <script src="{{ asset('js/libraries/jquery-3.6.0.min.js') }}"></script>
-  {{-- <script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script> --}}
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
   <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=63ce36b638862e00198c0bcc&product=inline-share-buttons&source=platform" async="async"></script> 
   <script src="{{ asset('js/app.js') }}" defer></script>   
   
@@ -105,6 +107,7 @@
   <script type="text/javascript" 
     src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
   </script>
+
 
   <script src="{{ asset('js/front.js') }}"></script>
 

@@ -265,7 +265,7 @@
                 let user = "";
 
                 inputs.forEach(input => {
-                    input.classList.remove('correct-box', 'wrong-box');
+                    input.classList.remove('correct-box', 'wrong-box','empty');
 
                     if(input.value.trim() !== '' || input.classList.contains('hint-box')){
                         input.classList.add('filled');
@@ -297,6 +297,12 @@
                     inputs.forEach(i => i.classList.add("wrong-box"));
                     $('#'+qid+'_ans_status .status').addClass('bg-danger').text("Wrong Answer!");
                 }
+
+                inputs.forEach(input => {
+                    if(input.value.trim() == ''){
+                        input.classList.add('empty');
+                    }
+                });
 
                 group.closest(".owl-stage-outer").style.height = "auto";
 

@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\PostViewCounter;
+use App\Models\DailyVisitCounter;
 
 use App\Models\Blog;
 use App\Models\Books\Book;
@@ -39,6 +40,13 @@ class Helper
 
             $postViewCounter->increment('view_count');
             
+            $dailyVisitCounter = DailyVisitCounter::firstOrCreate([
+                'visit_date' => date('Y-m-d'),
+            ]);
+
+            $dailyVisitCounter->increment('view_count');
+
+
             $data['page'] = $title;
 
         }
@@ -102,6 +110,10 @@ class Helper
         {
             $postViewCounter = PostViewCounter::firstOrCreate([
                 'url' => $url,
+            ]);
+
+            $dailyVisitCounter = DailyVisitCounter::firstOrCreate([
+                'visit_date' => date('Y-m-d'),
             ]);
 
             if($type == 'article' && !$postViewCounter->title)

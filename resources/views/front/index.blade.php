@@ -377,72 +377,6 @@
     </section>
     @endif
     
-    {{-- <section class="footer-imp-link mt-5 mb-5">
-        <div class="container-fluid px-md-5">
-            <h4 class="m-4 text-center">Mock Tests</h4>
-            <nav>
-                <div class="nav nav-tabs justify-content-center align-items-center" id="nav-mock-test-tab" role="tablist">
-                    <button class="border nav-link active " id="nav-mock-test-premium-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-premium" type="button" role="tab" aria-controls="nav-mock-test-premium" aria-selected="true">Premium</button>
-                    <button class="border nav-link" id="nav-mock-test-free-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-free" type="button" role="tab" aria-controls="nav-mock-test-free" aria-selected="false">Free</button>
-                    <button class="border nav-link" id="nav-mock-test-results-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-results" type="button" role="tab" aria-controls="nav-mock-test-results" aria-selected="false">Results</button>
-                </div>
-            </nav>
-            <div class="tab-content shadow border border-danger border-2 p-1" id="nav-mock-test-tabContent" style="border-top:0px !important;">
-                
-                <div class="tab-pane fade active show" id="nav-mock-test-premium" role="tabpanel" aria-labelledby="nav-mock-test-premium-tab" tabindex="0">
-                    <div class="row">
-                        @foreach ($premiumExams as $row)
-                            <div class="col-sm-6 col-md-3 mb-3">
-                                <div class="seller-item border border-primary rounded border-2">
-                                    <div class="seller-header text-center">
-                                        <a href="/exam-hall/premium/{{$row->id}}">
-                                            <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
-                                        </a>
-                                        <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->id}}">{{($row->title)}}</a></h6>
-                                        <h6 class="small">{{$row->category_exams()->count()}} MCQ Sets </h6>
-
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach                        
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="nav-mock-test-free" role="tabpanel" aria-labelledby="nav-mock-test-free-tab" tabindex="0">
-                    <div class="row">
-                        @foreach ($exams as $row)
-                            <div class="col-sm-6 col-md-3 mb-3">
-                                <div class="seller-item border border-primary rounded border-2">
-                                    <div class="seller-header text-center">
-                                        <a href="/public-exams/{{$row->id}}">
-                                            <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
-                                        </a>
-                                        <h6 class="mt-3"><a href="/public-exams/{{$row->id}}">{{($row->name)}}</a></h6>
-                                        <h6 class="small">{{ $row->exam ? ($row->exam->questions ? $row->exam->questions()->count() : '-') : '-' }} Questions </h6>
-
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach                        
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="nav-mock-test-results" role="tabpanel" aria-labelledby="nav-mock-test-results-tab" tabindex="0">
-                    <div class="row">
-                        <div class="col-12 m-5 text-center">
-                            <a href="/results" class="btn px-4" style="background:#1375b9; color:#fff;">View Exam Results...</a>
-                        </div>                       
-                    </div>
-                </div>
-
-                <div class="text-end">
-                    <a href="/public-exams" class="btn" style="background:#1375b9; color:#fff;">View All Exams...</a>
-                </div>
-            </div>
-            
-        </div>
-    </section> --}}
-
     @if(count($examhall_categories))
         <section class="footer-imp-link mt-5 mb-5">
             <div class="container-fluid px-md-5">
@@ -451,7 +385,7 @@
                         <h2 class="home-section-heading">Mock Tests</h2>
                     </div>
                 </div>
-                <nav>
+                {{-- <nav>
                     <div class="nav nav-tabs justify-content-center align-items-center" id="nav-mock-test-tab" role="tablist">
                         @php($isFirstElement = true)
                         @foreach($examhall_categories as $cat)
@@ -461,7 +395,66 @@
                         <button class="border nav-link" id="nav-mock-test-free-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-free" type="button" role="tab" aria-controls="nav-mock-test-free" aria-selected="true">Free</button>
                         <button class="border nav-link" id="nav-mock-test-results-tab" data-bs-toggle="tab" data-bs-target="#nav-mock-test-results" type="button" role="tab" aria-controls="nav-mock-test-results" aria-selected="true">Results</button>
                     </div>
+                </nav> --}}
+
+                <nav>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper category-swiper flex-1 nav nav-tabs" role="tablist">
+                            <div class="swiper-wrapper" >
+                                
+                                @php($isFirstElement = true)
+
+                                @foreach($examhall_categories as $cat)
+                                    <div class="swiper-slide">
+                                        <button 
+                                            class="nav-link border {{$isFirstElement ? 'active' : ''}}" 
+                                            id="nav-mock-test-{{ $cat->id }}-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#nav-mock-test-{{ $cat->id }}"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="nav-mock-test-{{ $cat->id }}" 
+                                            aria-selected="true"
+                                            >
+                                            {{$cat->name}}
+                                        </button>
+                                    </div>
+                                    @php($isFirstElement = false)
+                                @endforeach
+
+                                <div class="swiper-slide">
+                                    <button class="nav-link border"
+                                        id="nav-mock-test-free-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#nav-mock-test-free"
+                                        type="button"
+                                        aria-controls="nav-mock-test-free" 
+                                        aria-selected="true"
+                                        >
+                                        Free
+                                    </button>
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <button class="nav-link border"
+                                        id="nav-mock-test-results-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#nav-mock-test-results"
+                                        type="button"
+                                        aria-controls="nav-mock-test-results" 
+                                        aria-selected="true">
+                                        Results
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    
                 </nav>
+
                 <div class="tab-content shadow border-danger border border-2 p-1" id="nav-mock-test-tabContent" style="border-top:0px !important;">
                     @php($isFirstElement = true)
                     @foreach($examhall_categories as $cat)
@@ -557,7 +550,7 @@
                         <h2 class="home-section-heading">eBooks</h2>
                     </div>
                 </div>
-                <nav>
+                {{-- <nav>
                     <div class="nav nav-tabs justify-content-center align-items-center" id="nav-pdf-bank-tab" role="tablist">
                         @php($isFirstElement = true)
                         @foreach($pdf_bank_categories as $cat)
@@ -565,7 +558,41 @@
                             @php($isFirstElement = false)
                         @endforeach
                     </div>
+                </nav> --}}
+
+                <nav>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper category-swiper flex-1 nav nav-tabs" role="tablist">
+                            <div class="swiper-wrapper" >
+                                
+                                @php($isFirstElement = true)
+
+                                @foreach($pdf_bank_categories as $cat)
+                                    <div class="swiper-slide">
+                                        <button 
+                                            class="nav-link border {{$isFirstElement ? 'active' : ''}}" 
+                                            id="nav-pdf-bank-{{ $cat->id }}-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#nav-pdf-bank-{{ $cat->id }}"
+                                            type="button"
+                                            role="tab"
+                                            aria-controls="nav-pdf-bank-{{ $cat->id }}"
+                                            aria-selected="true"
+                                            >
+                                            {{$cat->name}}
+                                        </button>
+                                    </div>
+                                    @php($isFirstElement = false)
+                                @endforeach
+
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    
                 </nav>
+
                 <div class="tab-content shadow border-danger border border-2 p-1" id="nav-pdf-bank-tabContent" style="border-top:0px !important;">
                     @php($isFirstElement = true)
                     @foreach($pdf_bank_categories as $cat)

@@ -295,6 +295,12 @@
                     $('#'+qid+'_ans_status .status').addClass('bg-danger').text("Wrong Answer!");
                 }
 
+                inputs.forEach(input => {
+                    if(input.value.trim() == ''){
+                        input.classList.add('empty');
+                    }
+                });
+                
                 group.closest(".owl-stage-outer").style.height = "auto";
 
                 return user === correct;

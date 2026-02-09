@@ -6895,6 +6895,11 @@ label.star:before {
     background: red !important;
 }
 
+.mcq-question .answer-group .ans-box.empty{
+    background-color: transparent !important;
+    border: transparent !important;
+}
+
 .banner-title-triangle-down {
     position: relative; 
     font-weight: bold;
@@ -6916,6 +6921,38 @@ label.star:before {
     border-width: 10px;
     border-style: solid;
     border-color: #1375b9 transparent transparent transparent;
+}
+
+.category-swiper .swiper-slide {
+    width: auto;
+}
+
+.category-swiper .nav-link {
+    white-space: nowrap;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    color: #ffffff;
+    background: #1375b9;
+    position: static;
+    margin: 0 1px;
+    
+}
+.swiper-button-next{
+    right: 1px;
+}
+.swiper-button-prev{
+    left: 1px;
+}
+
+.swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled{
+    opacity: 1;
+}
+
+.swiper-button-next::after, .swiper-button-prev::after {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0 5px;
 }
 
 
