@@ -65,7 +65,31 @@
             <div class="mt-3">  
 
                 <div class="mt-3">
-                    <div class="blog-full-description" style="color:#000 !important;">{!! $healthDay->description !!}</div>
+                    <div class="book-wrapper">
+                        @php
+                            $hasImage3d = $healthDay->thumbnail_image && Storage::disk('public')->exists($healthDay->thumbnail_image);          
+                        @endphp
+
+                        @if($hasImage3d)
+                            <div class="text-center">
+                                <img
+                                    src="/storage/{{$healthDay->thumbnail_image}}"
+                                    alt=""
+                                    class="img-fluid border p-1 mb-2 mx-auto me-md-5 float-none float-md-start"
+                                    style="border-radius:10px; max-height:350px;"
+                                >
+                            </div>
+                            
+                        @endif
+
+                        <div class="book-description text-secondary">
+                            {!! $healthDay->description !!}
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    
+                    {{-- <div class="blog-full-description" style="color:#000 !important;">{!! $healthDay->description !!}</div> --}}
 
                     {{-- @if($healthDay->pdf_file)
                         <div class="my-2">

@@ -36,14 +36,33 @@
                 <a href="/vaccancies/create" class="btn btn-success">Submit Your New Vacancy <i class="fa fa-paint-brush"></i> </a>
             </div>
             
-            <div class="my-2">
+            {{-- <div class="my-2">
                 <div class="lib-filter-alphabets justify-content-center">
                     <a href="/vaccancies" class="lib-filter-character" > All </a>
                     @foreach ($tag_categories as $tag)
                         <a href="/vaccancies-tag/{{$tag->id}}" class="lib-filter-character {{$tag->id == $selected_tag->id ? 'active' : ''}}" > {{$tag->name}} </a>
                     @endforeach                    
                 </div>                  
-            </div>
+            </div> --}}
+
+            <nav class="my-2">
+                <div class="d-flex align-items-center justify-content-center footer-imp-link">
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper category-swiper w-100 nav nav-tabs">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="/vaccancies"> <button class="nav-link border">All</button> </a>
+                            </div>
+                            @foreach($tag_categories as $tag)
+                                <div class="swiper-slide">
+                                    <a href="/vaccancies-tag/{{$tag->id}}"> <button class="nav-link border {{$tag->id == $selected_tag->id ? 'active' : ''}} ">{{$tag->name}}</button> </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </nav>
 
             <div class="row">
                 @forelse($vaccancies as $vaccancy)

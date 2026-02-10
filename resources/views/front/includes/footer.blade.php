@@ -14,7 +14,7 @@
 <section class="footer-imp-link mt-5 mb-1">
   <div class="container-fluid">
     <h4 class="m-4 text-center">Important Links</h4>
-    <nav>
+    {{-- <nav>
       <div class="nav nav-tabs justify-content-center align-items-center" id="nav-tab" role="tablist">
         @php($isFirstElement = true)
         @foreach($important_footer_links as $c)
@@ -22,7 +22,38 @@
           @php($isFirstElement = false)
         @endforeach
       </div>
+    </nav> --}}
+    <nav>
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="swiper-button-prev"></div>
+          <div class="swiper category-swiper w-100 nav nav-tabs" role="tablist">
+            <div class="swiper-wrapper">
+              @php($isFirstElement = true)
+
+              @foreach($important_footer_links as $cat)
+                <div class="swiper-slide">
+                  <button 
+                    class="nav-link border {{$isFirstElement ? 'active' : ''}}" 
+                    id="nav-{{ $cat->id }}-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#nav-{{ $cat->id }}"
+                    type="button"
+                    role="tab"
+                    aria-controls="nav-{{ $cat->id }}"
+                    aria-selected="true"
+                    >
+                      {{$cat->name}}
+                  </button>
+                </div>
+                @php($isFirstElement = false)
+              @endforeach
+
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+      </div>
     </nav>
+
     <div class="tab-content border shadow" id="nav-tabContent">
       @php($isFirstElement = true)
       @foreach($important_footer_links as $c)
@@ -77,12 +108,10 @@
               <li><a href="/health-days">Health Days</a></li>
               <li><a href="/enquiry">Enquiries</a></li>
               <li><a href="/testimonials">Testimonials</a></li>
-              {{-- <li><a href="/vaccancies">Latest Vacancies</a></li> --}}
               <li><a href="/question-of-the-day-quiz">Play Quiz</a></li>
               <li><a href="/play-puzzle">Play Puzzle</a></li>
               <li><a href="/know-the-picture">Know the Picture</a></li>
               <li><a href="/discussion-forum">Discussion Forum</a></li>
-              <li><a href="/library/487">Scholarships</a></li>
               <li><a href="/faqs">FAQs</a></li>
               <li><a href="/web-policy">Web Policy</a></li>
             </ul>

@@ -901,12 +901,30 @@
                         <h2 class="home-section-heading">Vacancies</h2>
                     </div>
                 </div>
-                <div class="lib-filter-alphabets">
+                {{-- <div class="lib-filter-alphabets">
                     <a href="/vaccancies" class="lib-filter-character" > All </a>
                     @foreach ($vaccancy_tags as $tag)
                         <a href="/vaccancies-tag/{{$tag->id}}" class="lib-filter-character" > {{$tag->name}} </a>
                     @endforeach                    
-                </div>    
+                </div>  --}}
+                <nav>
+                    <div class="d-flex align-items-center justify-content-center footer-imp-link">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper category-swiper w-100 nav nav-tabs">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="/vaccancies"> <button class="nav-link border active">All</button> </a>
+                                </div>
+                                @foreach($vaccancy_tags as $tag)
+                                    <div class="swiper-slide">
+                                        <a href="/vaccancies-tag/{{$tag->id}}"> <button class="nav-link border">{{$tag->name}}</button> </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </nav>
             
             </div>
         </section>

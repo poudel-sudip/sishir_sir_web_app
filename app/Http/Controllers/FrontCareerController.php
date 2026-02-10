@@ -17,7 +17,7 @@ class FrontCareerController extends Controller
     public function index(Request $request)
     {
         $data['tag_categories'] = Category::where('type','=','vaccancy_tag')->get();
-        $data['vaccancies'] = VaccancyPost::where('status','=','Active')->orderByDesc('id')->paginate(15);
+        $data['vaccancies'] = VaccancyPost::where('status','=','Active')->orderByDesc('id')->paginate(15,['id','title','thumbnail','author','created_at']);
         return view('front.vaccancy.index',$data);
     }
     
@@ -25,7 +25,7 @@ class FrontCareerController extends Controller
     {   
         $data['selected_tag'] = $tag;
         $data['tag_categories'] = Category::where('type','=','vaccancy_tag')->get();
-        $data['vaccancies'] = $tag->vaccancies()->where('status','=','Active')->orderByDesc('id')->paginate(15);
+        $data['vaccancies'] = $tag->vaccancies()->where('status','=','Active')->orderByDesc('id')->paginate(15,['id','title','thumbnail','author','created_at']);
         return view('front.vaccancy.tagwise',$data);
     }
 

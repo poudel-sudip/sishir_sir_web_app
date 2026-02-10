@@ -21,13 +21,32 @@
         
         <div class="mb-4 p-4 border border-primary rounded">
             
-            <div class="lib-filter-alphabets ">
+            {{-- <div class="lib-filter-alphabets ">
                 <span class="category-filter lib-filter-character active" charfil="all"> All </span>
                 @foreach($healthCategories as $cat)
                     <span class="category-filter lib-filter-character" charfil='{{$cat->id}}'> {{ $cat->name }} </span>
                 @endforeach
-            </div>  
+            </div>   --}}
             
+            <nav class="mb-2">
+                <div class="d-flex align-items-center justify-content-center footer-imp-link">
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper category-swiper w-100 nav nav-tabs">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <button class="category-filter nav-link border active" charfil="all">All</button>
+                            </div>
+                            @foreach($healthCategories as $cat)
+                                <div class="swiper-slide">
+                                   <button class="category-filter nav-link border" charfil='{{$cat->id}}'>{{$cat->name}}</button>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </nav>
+
             <div class="container-fluid px-md-5">
                 <div class="d-flex justify-content-start align-items-center mb-3" id="toggle_view_button">
                     <span class="me-2">View Type:</span>                    
