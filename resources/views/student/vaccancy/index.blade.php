@@ -13,7 +13,7 @@
         .hidden{
             display: none
         }
-    </style>    
+    </style>        
 
     <div class="container-fluid">
         <div class="blog-container mt-3">
@@ -30,14 +30,33 @@
                 <a href="/student/vaccancies/create" class="btn btn-success">Submit Your New Vacancy <i class="fa fa-paint-brush"></i> </a>
             </div>
 
-            <div class="my-2">
+            {{-- <div class="my-2">
                 <div class="lib-filter-alphabets justify-content-center">
                     <a href="/student/vaccancies" class="lib-filter-character active" > All </a>
                     @foreach ($tag_categories as $tag)
                         <a href="/student/vaccancies-tag/{{$tag->id}}" class="lib-filter-character" > {{$tag->name}} </a>
                     @endforeach                    
                 </div>                  
-            </div>
+            </div> --}}
+
+            <nav class="my-2">
+                <div class="d-flex align-items-center justify-content-center footer-imp-link">
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper category-swiper nav nav-tabs">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="/student/vaccancies"> <button class="nav-link border active">All</button> </a>
+                            </div>
+                            @foreach($tag_categories as $tag)
+                                <div class="swiper-slide">
+                                    <a href="/student/vaccancies-tag/{{$tag->id}}"> <button class="nav-link border">{{$tag->name}}</button> </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </nav>
 
             <div class="row">
                 @forelse($vaccancies as $vaccancy)
@@ -65,4 +84,47 @@
         </div>
     </div>
 
+@endsection
+
+@section('page-footer-content')
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const categorySwipers  = document.querySelectorAll('.category-swiper');
+            categorySwipers.forEach(el => {
+
+                // const nextBtn = el.querySelector('.swiper-button-next');
+                // const prevBtn = el.querySelector('.swipSer-button-prev');
+                const prevBtn = el.previousElementSibling;
+                const nextBtn = el.nextElementSibling;
+
+                new Swiper(el, {
+                slidesPerView: "auto",
+                // spaceBetween: 8,
+                freeMode: true,
+                grabCursor: true,
+                navigation: {
+                    nextEl: nextBtn,
+                    prevEl: prevBtn,
+                }
+                });
+
+                const tabButtons = el.querySelectorAll('.nav-link');
+                tabButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    tabButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                    });
+
+                    this.classList.add('active');
+                    this.setAttribute('aria-selected', 'true');
+                });
+                });
+            });
+
+        });
+    </script>
+    
 @endsection

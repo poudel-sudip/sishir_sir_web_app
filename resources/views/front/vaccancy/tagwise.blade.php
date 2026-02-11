@@ -48,7 +48,7 @@
             <nav class="my-2">
                 <div class="d-flex align-items-center justify-content-center footer-imp-link">
                     <div class="swiper-button-prev"></div>
-                    <div class="swiper category-swiper w-100 nav nav-tabs">
+                    <div class="swiper category-swiper nav nav-tabs">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <a href="/vaccancies"> <button class="nav-link border">All</button> </a>

@@ -31,7 +31,7 @@
             <nav class="mb-2">
                 <div class="d-flex align-items-center justify-content-center footer-imp-link">
                     <div class="swiper-button-prev"></div>
-                    <div class="swiper category-swiper w-100 nav nav-tabs">
+                    <div class="swiper category-swiper nav nav-tabs">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <button class="category-filter nav-link border active" charfil="all">All</button>

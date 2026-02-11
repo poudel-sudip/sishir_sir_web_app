@@ -912,6 +912,8 @@ Route::get('/faqs/{id}', 'App\Http\Controllers\FrontMiscController@showFaq');
 Route::get('/health-days', 'App\Http\Controllers\FrontMiscController@healthDaysList');
 Route::get('/health-days/show/{id}', 'App\Http\Controllers\FrontMiscController@showHealthDay');
 
+Route::get('/web-analytics', 'App\Http\Controllers\FrontMiscController@webAnalytics');
+
 
 //front menu details
 Route::get('/{group}/{menu}', 'App\Http\Controllers\FrontController@getMenuCategories');

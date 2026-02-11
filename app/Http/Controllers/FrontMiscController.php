@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Helpers\Helper;
 use App\Models\Categories as Category;
 use App\Models\HealthDay;
+use App\Models\DailyVisitCounter;
 use Storage;
 use Number;
 
@@ -352,5 +353,18 @@ class FrontMiscController extends Controller
 
         // dd($healthDay,$counterData,$pgurl);
         return view('front.health_days.show', compact('healthDay', 'counterData'));
+    }
+
+    public function webAnalytics(Request $request)
+    {
+        $data = [];
+        $data['web_counter'] = Helper::websiteCounter();  
+        $data['daily_visits'] = DailyVisitCounter::orderByDesc('id')
+        ->take(10)
+        ->get(['id','visit_date as date','view_count as view'])
+        ->values();
+
+        // dd($data);
+        return view('front.web-analytics',$data);
     }
 }

@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevBtn = el.previousElementSibling;
     const nextBtn = el.nextElementSibling;
 
-    new Swiper(el, {
+    const swiper = new Swiper(el, {
       slidesPerView: "auto",
       // spaceBetween: 8,
       freeMode: true,
@@ -180,6 +180,14 @@ document.addEventListener("DOMContentLoaded", function () {
         this.setAttribute('aria-selected', 'true');
       });
     });
+
+    const activeIndex = [...tabButtons].findIndex(btn =>
+      btn.classList.contains('active')
+    );
+
+    if (activeIndex !== -1) {
+      swiper.slideTo(activeIndex, 0);
+    }
   });
 
 });

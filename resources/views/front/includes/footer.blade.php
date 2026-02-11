@@ -26,7 +26,7 @@
     <nav>
       <div class="d-flex align-items-center justify-content-center">
         <div class="swiper-button-prev"></div>
-          <div class="swiper category-swiper w-100 nav nav-tabs" role="tablist">
+          <div class="swiper category-swiper nav nav-tabs" role="tablist">
             <div class="swiper-wrapper">
               @php($isFirstElement = true)
 

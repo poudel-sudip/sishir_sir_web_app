@@ -41,7 +41,30 @@
                             <img src="/storage/{{$blog->image}}" style="width: 100%">
                         </div> --}}
                         <div class="col-md-12 mt-3">
-                            <div class="blog-full-description">{!! $blog->description !!}</div>
+                            <div class="book-wrapper">
+                                @php
+                                    $hasImage3d = $blog->image && Storage::disk('public')->exists($blog->image);          
+                                @endphp
+
+                                @if($hasImage3d)
+                                    <div class="text-center">
+                                        <img
+                                            src="/storage/{{$blog->image}}"
+                                            alt=""
+                                            class="img-fluid border p-1 mb-2 mx-auto me-md-5 float-none float-md-start"
+                                            style="border-radius:10px; max-height:350px;"
+                                        >
+                                    </div>
+                                    
+                                @endif
+
+                                <div class="book-description text-secondary">
+                                    {!! $blog->description !!}
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                            {{-- <div class="blog-full-description">{!! $blog->description !!}</div> --}}
                         </div>
                         <div class="col-md-12 mt-4">
                             <div class="sharethis-inline-share-buttons" onclick="handleShare(event)"></div>

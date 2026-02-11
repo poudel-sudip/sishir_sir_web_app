@@ -8,15 +8,17 @@
 
   <title>@yield('student-title') | {{ config('app.name') }}</title>
 
-  <meta name="description" content="E-Tutor Class is Nepal’s First Open Online Tutoring Class  which connects Teachers, Students, Institutions, School, Colleges in a single platform and fulfills the common needs of both the teacher and the students i.e., the giver and the receiver. It is dedicated to enhancing Learning system quality and access through the integration of technology. It manages expert resources from various fields in our work ecosystem and utilizes their skills, experiences, knowledge as well as time to provide bundle-up services to the students at reasonable charges so that they can excel in their future and career.">
-  <meta name="keywords" content="E-tutor Class, e-tutor, online class, online class in Nepal, best online class, Loksewa class, online psc. class">
+  <meta name="description" content="E-Health Network Class is Nepal’s First Open Online Tutoring Class  which connects Teachers, Students, Institutions, School, Colleges in a single platform and fulfills the common needs of both the teacher and the students i.e., the giver and the receiver. It is dedicated to enhancing Learning system quality and access through the integration of technology. It manages expert resources from various fields in our work ecosystem and utilizes their skills, experiences, knowledge as well as time to provide bundle-up services to the students at reasonable charges so that they can excel in their future and career.">
+  <meta name="keywords" content="E-Health Network Class, E-Health Network, online class, online class in Nepal, best online class, Loksewa class, online psc. class">
 
   <meta property="og:image" content="https://www.etutorclass.com/images/logo.webp" />
-  <meta property="og:description" content="E-Tutor Class is Nepal’s First Open Online Tutoring Class which connects Teachers, Students, Institutions, School, Colleges in a single platform and fulfills the common needs of both the teacher and the students i.e., the giver and the receiver. It is dedicated to enhancing Learning system quality and access through the integration of technology." />
+  <meta property="og:description" content="E-Health Network Class is Nepal’s First Open Online Tutoring Class which connects Teachers, Students, Institutions, School, Colleges in a single platform and fulfills the common needs of both the teacher and the students i.e., the giver and the receiver. It is dedicated to enhancing Learning system quality and access through the integration of technology." />
   <meta property="og:title" content="Nepal’s First Open Online Tutoring Class" />
 
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
     <link href="{{ asset('css/front.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
@@ -32,30 +34,21 @@
       body{
       background: #F7F7F7;
       position: relative;
-    }
-    @media (min-width: 1400px){
-      .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-        max-width: 1200px;
       }
-    }
-    .login-username-home{
-      display: none;
-    }
+      @media (min-width: 1400px){
+        .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+          max-width: 1200px;
+        }
+      }
+      .login-username-home{
+        display: none;
+      }
     </style>
     
-     <!-- Global site tag (gtag.js) - Google Analytics -->
-     {{-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZS3KVP4N6H"></script>
-     <script>
-       window.dataLayer = window.dataLayer || [];
-       function gtag(){dataLayer.push(arguments);}
-       gtag('js', new Date());
-     
-       gtag('config', 'G-ZS3KVP4N6H');
-     </script> --}}
 
     <!-- Scripts -->
     <script src="{{ asset('js/libraries/jquery-3.6.0.min.js') }}"></script>
-    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
+
    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
    {{-- summernote --}}
