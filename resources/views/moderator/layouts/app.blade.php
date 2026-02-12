@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('admin-title') | {{ config('app.name') }}</title>
     <link rel="stylesheet" href="{{ asset('admin/vendors/mdi/css/materialdesignicons.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/vendors/flag-icon-css/css/flag-icon.min.css') }}" />
@@ -107,19 +108,20 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
     <script src="{{ asset('admin/js/summernote-audio.js') }}"></script>
+    <script src="{{ asset('admin/js/summernote-image-upload.js') }}"></script>
     <script>
       $('.summernote').summernote({
-          toolbar:[
-            ['style', ['style']],
-            ['font', ['bold', 'italic' , 'underline', 'clear']],
-            ['fontname', ['fontname']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video','audio']],
-            ['view', ['fullscreen', 'codeview', 'help']],
-          ],
-          height:200,
+        toolbar:[
+          ['style', ['style','bold','italic','underline','clear']],
+          ['font', ['strikethrough', 'superscript', 'subscript']],
+          ['fontname', ['fontname','fontsize']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph','height']],
+          ['table', ['table']],
+          ['insert', ['link', 'imageupload', 'video','audio']],
+          ['view', ['fullscreen', 'codeview', 'help']],
+        ],
+        height:200
       });
     </script>
 

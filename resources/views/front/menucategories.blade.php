@@ -172,7 +172,8 @@
         }
     </script>
 
-    <script defer src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.7/css/dataTables.bootstrap5.min.css">
+    <script defer src="https://cdn.datatables.net/2.3.7/js/dataTables.min.js"></script>
 
     <script>
         let dataTableInstance = null;

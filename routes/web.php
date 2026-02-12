@@ -27,6 +27,7 @@ Route::get('/artisancalls', function () {
     echo '403 | Permission Denied';
 });
 
+Route::post('/summernote/upload-image', 'App\Http\Controllers\SummernoteController@uploadImage');
 
 
 // Route::get('/', function(){ return view('welcome'); });
