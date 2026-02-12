@@ -149,7 +149,7 @@
 
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
-                    <tr class="" style="background:#1375b9;color:#ffffff;">
+                    <tr class="" style="background:#0C2B64;color:#ffffff;">
                         <th style="width:60px;">#</th>
                         <th class="text-wrap">Category Name</th>
                         <th class="text-wrap">Files</th>
@@ -215,7 +215,7 @@
 
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
-                    <tr class="" style="background:#1375b9 !important;color:#ffffff;">
+                    <tr class="" style="background:#0C2B64 !important;color:#ffffff;">
                         <th style="width:60px;">#</th>
                         <th>Material Name</th>
                         <th>Author(s)</th>

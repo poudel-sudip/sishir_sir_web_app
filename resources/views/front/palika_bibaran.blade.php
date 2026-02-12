@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="blogs-details-container " style="background:#1375b9;">
+        <div class="blogs-details-container " style="background:#0C2B64;">
             <div class="text-justify">
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe src="//sthaniya.gov.np/gis/website/" 

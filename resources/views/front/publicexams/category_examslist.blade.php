@@ -83,7 +83,7 @@
 
                 <div class="@if($exam_categories->count() || $free_exams->count()) col-md-9 @else col-md-12 @endif">
                     <div class="all-course-list">
-                        <h2 class="my-4 text-center" style="color: #1375b9;"><u>{{($exam_group->name)}} Premium Exams</u></h2>
+                        <h2 class="my-4 text-center" style="color: #0C2B64;"><u>{{($exam_group->name)}} Premium Exams</u></h2>
                         {{-- <div class="free-exam-btn"><a href="#free-exam" class="btn btn-success btn-sm"><i class="fas fa-tag"></i> Free Exams</a></div> --}}
                         <div class="blog-container">
                             <div class="row">

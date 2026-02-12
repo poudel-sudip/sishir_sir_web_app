@@ -5,6 +5,7 @@ namespace App\Helpers;
 use Illuminate\Container\Container;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\PostViewCounter;
 use App\Models\DailyVisitCounter;
@@ -133,7 +134,12 @@ class Helper
 
     public static function lastUpdated()
     {
-        return now();
+        return Carbon::now();
+    }
+
+    public static function totalWebVisits()
+    {
+        return PostViewCounter::getTotalViewCount() ?? 0;
     }
 
     public static function excerpt($content, $max_length = 500, $cut_off = '...', $keep_word = true)
@@ -186,6 +192,7 @@ class Helper
         $data['download'] = PostViewCounter::getTotalDownloadCount();
         $data['vaccancy'] = VaccancyPost::count();
         $data['website'] = PostViewCounter::getTotalViewCount();
+        $data['last_updated'] = Carbon::now();
 
         return (object)($data);
 

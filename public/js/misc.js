@@ -224,5 +224,5 @@ function fetchChannelDetails(channelId, apiKey) {
 }
 
 // Call the function with your channel ID and API key
-fetchChannelDetails('UCSFeHpNoMSF-BBgsDtro0zw', 'AIzaSyC_v6UK7wJPF_j1lcOekgka9Yv7S39IXwM'); //shisir sir
+fetchChannelDetails('UCSFeHpNoMSF-BBgsDtro0zw', 'AIzaSyBxr-THTyWsKMxKrtE_wBJ1r_6OT4zlry8'); //shisir sir
 

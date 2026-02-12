@@ -360,8 +360,9 @@ class FrontMiscController extends Controller
         $data = [];
         $data['web_counter'] = Helper::websiteCounter();  
         $data['daily_visits'] = DailyVisitCounter::orderByDesc('id')
-        ->take(10)
+        ->take(30)
         ->get(['id','visit_date as date','view_count as view'])
+        ->sortBy('id')
         ->values();
 
         // dd($data);

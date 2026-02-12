@@ -14,7 +14,7 @@
         }
 
         .highlight-text:hover{
-            color: #1375b9 !important;            
+            color: #0C2B64 !important;            
         }
 
     </style>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 align-self-end">
-                    <div class="text-center text-md-start" id="nepaliDateContainer" style="line-height: 1.5; color: #1374ba !important;"></div>
+                    <div class="text-center text-md-start" id="nepaliDateContainer" style="line-height: 1.5; color: #0C2B64 !important;"></div>
                     {{-- <iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?time_only=no&font_color=1375b9&aj_time=yes&font_size=18&line_brake=0&bikram_sambat=0&nst=no&api=500122n569" width="307" height="22"></iframe> --}}
                 </div>
             </div>
@@ -59,7 +59,7 @@
                 <div class="my-1 col-md-3 ">
                     <div class="updates border border-primary border-2" style="height: 100%">
                         <div class="update-header">
-                            <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fas fa-clock"></i> Updates </h5></div>
+                            <div class="text-light text-center p-1" style="background: #0C2B64"><h5><i class="fas fas fa-clock"></i> Updates </h5></div>
                         </div>
                         <div class="update-body" style="overflow-y:scroll">
                             <ul class="p-0">
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="my-1 col-md-6">
-                    <div class="bg-white p-1" style="border-radius: 15px !important; border: 8px solid #1375b9;">
+                    <div class="bg-white p-1" style="border-radius: 15px !important; border: 8px solid #0C2B64;">
                         <div class="q-of-day-home-page" style="border-radius: 15px !important; border: 3px solid #ff0000;">
                             @if(isset($today_question) && $today_question)
                                 <div class="bg-lgray px-2 px-md-4" style="max-height: max-content !important; overflow: hidden;">
@@ -180,7 +180,7 @@
                 <div class="my-1 col-md-3">
                     <div class="updates border border-primary border-2" style="height: 100%">
                         <div class="update-header">
-                            <div class="text-light text-center p-1" style="background: #1375b9"><h5><i class="fas fa-chart-bar"></i> Latest Vacancies </h5></div>
+                            <div class="text-light text-center p-1" style="background: #0C2B64"><h5><i class="fas fa-chart-bar"></i> Latest Vacancies </h5></div>
                         </div>
                         <div class="update-body" style="overflow-y:scroll">
                             <ul class="p-0">
@@ -502,13 +502,13 @@
                     <div class="tab-pane fade" id="nav-mock-test-results" role="tabpanel" aria-labelledby="nav-mock-test-results-tab" tabindex="0">
                         <div class="row">
                             <div class="col-12 m-5 text-center">
-                                <a href="/results" class="btn btn-sm px-4" style="background:#1375b9; color:#fff;">View Exam Results...</a>
+                                <a href="/results" class="btn btn-sm px-4" style="background:#0C2B64; color:#fff;">View Exam Results...</a>
                             </div>                       
                         </div>
                     </div>
                     
                     <div class="text-end">
-                        <a href="/public-exams" class="btn btn-sm" style="background:#1375b9; color:#fff;">View All Exams...</a>
+                        <a href="/public-exams" class="btn btn-sm" style="background:#0C2B64; color:#fff;">View All Exams...</a>
                     </div>
                 </div>
                 
@@ -619,7 +619,7 @@
                     @endforeach
 
                     <div class="text-end">
-                        <a href="/pdf-banks" class="btn btn-sm" style="background:#1375b9; color:#fff;">View all eBooks...</a>
+                        <a href="/pdf-banks" class="btn btn-sm" style="background:#0C2B64; color:#fff;">View all eBooks...</a>
                     </div>
                 </div>
                 
@@ -712,7 +712,7 @@
                 </div>
             </div>
             <div class="text-end">
-                <a href="/blogs" class="btn btn-sm" style="background:#1375b9;color:#fff">View all Blogs...</a>
+                <a href="/blogs" class="btn btn-sm" style="background:#0C2B64;color:#fff">View all Blogs...</a>
             </div>
         </div>
     </section>
@@ -771,7 +771,7 @@
                 
             </div>
             <div class="text-end mt-2">
-                <a href="/books" class="btn btn-sm" style="background:#1375b9;color:#fff">View all...</a>
+                <a href="/books" class="btn btn-sm" style="background:#0C2B64;color:#fff">View all...</a>
             </div>
         </div>
 
@@ -833,7 +833,7 @@
                         @endforeach
                     </div>
                     <div class="text-end mt-2">
-                        <a href="/free-videos" class="btn btn-sm" style="background:#1375b9;color:#fff">View all...</a>
+                        <a href="/free-videos" class="btn btn-sm" style="background:#0C2B64;color:#fff">View all...</a>
                     </div>
                 </div>
             </div>
@@ -887,7 +887,7 @@
                 </div>
             
                 <div class="text-end mt-2">
-                    <a href="/health-days" class="btn btn-sm" style="background:#1375b9;color:#fff">View all...</a>
+                    <a href="/health-days" class="btn btn-sm" style="background:#0C2B64;color:#fff">View all...</a>
                 </div>
             </div>
         </section>
@@ -950,7 +950,7 @@
                         @endforeach
                     </div>
                     <div class="text-end mt-2">
-                        <a href="/image-gallery" class="btn btn-sm" style="background:#1375b9;color:#fff">View all...</a>
+                        <a href="/image-gallery" class="btn btn-sm" style="background:#0C2B64;color:#fff">View all...</a>
                     </div>
                 </div>
             </div>

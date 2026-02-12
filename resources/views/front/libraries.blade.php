@@ -107,7 +107,7 @@
 
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
-                    <tr class="" style="background:#1375b9;color:#ffffff;">
+                    <tr class="" style="background:#0C2B64;color:#ffffff;">
                         <th style="width:60px;">#</th>
                         <th>Category Name</th>
                         <th>Files</th>

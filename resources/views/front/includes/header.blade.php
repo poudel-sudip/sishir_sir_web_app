@@ -46,7 +46,7 @@
                 @endif
               @else
                 <li class="nav-item login-username-home">
-                  <a class="nav-link login-user text-nowrap" href="#" role="button" style="color:#1375b9 !important; " >
+                  <a class="nav-link login-user text-nowrap" href="#" role="button" style="color:#0C2B64 !important; " >
                     <i class="fa fa-user"></i>
                     {{ Auth::user()->name }}
                   </a>

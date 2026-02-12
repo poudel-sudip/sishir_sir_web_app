@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-8" style="color:#1375b9 !important;">
+                            <div class="col-md-8" style="color:#0C2B64 !important;">
                                 @if($exam->mcq_count)
                                     <h5>Available MCQ Sets:</h5>
                                     <ol>

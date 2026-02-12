@@ -21,7 +21,7 @@
                                     $key = -1;
                                 @endphp
                             
-                                <div class=" p-1" style="border-radius: 15px !important; border: 8px solid #1375b9;">
+                                <div class=" p-1" style="border-radius: 15px !important; border: 8px solid #0C2B64;">
                                     <div class="q-of-day-home-page px-1 px-md-5 py-3 " style="border-radius: 15px !important; border: 3px solid #ff0000; height: auto; background:transparent;">
                                         <div class="" style="height: auto;">
                                             <div class="text-center q-heading px-4" style="width: fit-content !important;" >

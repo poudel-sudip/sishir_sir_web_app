@@ -336,7 +336,7 @@
             soundEnable: true,
             enableDownload: false,
             transparent: false,
-            backgroundColor: "#1375b9",
+            backgroundColor: "#0C2B64",
             scrollWheel: false,
             pageMode: DFLIP.PAGE_MODE.SINGLE,
             singlePageMode: DFLIP.SINGLE_PAGE_MODE.BOOKLET,

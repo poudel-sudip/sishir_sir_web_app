@@ -30,7 +30,7 @@
         <div class="container-fluid px-md-5">
             <div class="card p-3 border-success">
                 <div class="card-title">
-                    <div class="h3 text-center" style="color:#1375b9 !important; letter-spacing: -1px;">{{$pdf_bank->title}}</div>
+                    <div class="h3 text-center" style="color:#0C2B64 !important; letter-spacing: -1px;">{{$pdf_bank->title}}</div>
                 </div>
                 <div class="row">
                     <div class="col-md-8 seller-item  ">
@@ -95,7 +95,7 @@
                             {!! $pdf_bank->description !!}
                         </div>
                         <div class="row">
-                            <div class="col-md-8" style="color:#1375b9 !important;">
+                            <div class="col-md-8" style="color:#0C2B64 !important;">
                                 @if($pdf_bank->pdf_count)
                                 <h5>Available PDF Sets:</h5>
                                 <ol>

@@ -74,7 +74,7 @@
             <div class="table-responsive table-responsive-md ">
                 <table class="table table-bordered asc-data-table table-hover table-striped border-primary">
                     <thead>
-                        <tr class="" style="background:#1375b9;color:#ffffff;">
+                        <tr class="" style="background:#0C2B64;color:#ffffff;">
                             <th width="100">SN</th>
                             <th>Title</th>
                             <th width="50">View</th>
@@ -113,7 +113,7 @@
             webgl:true,
             soundEnable: true,
             enableDownload: false,
-            backgroundColor: "#1375b9",
+            backgroundColor: "#0C2B64",
             scrollWheel: false,
             pageMode: DFLIP.PAGE_MODE.SINGLE,
             singlePageMode: DFLIP.SINGLE_PAGE_MODE.BOOKLET,
