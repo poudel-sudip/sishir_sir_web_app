@@ -181,6 +181,17 @@ class BookController extends Controller
     {
         $data['publisher'] = $publisher;
         $data['category'] = $category;
+
+        $latest_edition = $category->cat_books()
+        ->orderByDesc('order')
+        ->first();
+
+        if($latest_edition)
+        {
+            $data['latest_edition'] = $latest_edition;
+        }
+            
+        // dd($data);
         return view('admin.books.create',$data);
     }
     

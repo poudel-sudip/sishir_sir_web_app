@@ -172,7 +172,7 @@
     <div class="row">
       
       <div class="col-12 text-center">
-        <div id="copyright" style="font-size: 14px">Copyright &copy; 2023 - <script> document.write(new Date().getFullYear()); </script>. All right reserved <a href="/">E. Health Network Pvt. Ltd.</a> <a href="/web-analytics" class="ms-2 px-2 py-1 bg-danger rounded text-nowrap"> Website Visits: {{ Helper::totalWebVisits() }} </a> </div>
+        <div id="copyright" style="font-size: 14px">Copyright &copy; 2023 - <script> document.write(new Date().getFullYear()); </script>. All right reserved <a href="/">E. Health Network Pvt. Ltd.</a> <a href="/web-analytics" class="ms-2 px-2 py-1 fw-bold bg-danger rounded text-nowrap"> Website Visits: {{ Helper::totalWebVisits() }} </a> </div>
       </div>
       
     </div>

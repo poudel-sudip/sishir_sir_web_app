@@ -43,7 +43,7 @@
                         <div class="col-md-12 mt-3">
                             <div class="book-wrapper">
                                 @php
-                                    $hasImage3d = $blog->image && Storage::disk('public')->exists($blog->image);          
+                                    $hasImage3d = $blog->show_image == '1' && $blog->image && Storage::disk('public')->exists($blog->image);          
                                 @endphp
 
                                 @if($hasImage3d)

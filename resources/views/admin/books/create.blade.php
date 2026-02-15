@@ -20,7 +20,14 @@
         <div class="row justify-content-center">
             <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Add Book</div>
+                    <div class="card-header">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span>Add Book</span>
+                            @if (isset($latest_edition) && $latest_edition)
+                                <a href="javascript:void(0);" onclick="copyData();">Copy Details From Last Edition: {{$latest_edition->edition}}</a>
+                            @endif
+                        </div>
+                    </div>
                     <div class="card-body">
                         <form method="POST" action="/admin/books/publishers/{{$publisher->id}}/categories/{{$category->id}}/books" enctype="multipart/form-data" class="forms-sample">
                             @csrf
@@ -342,4 +349,31 @@
             </div>
         </div>
     </div>
+
+    @if (isset($latest_edition) && $latest_edition)
+        <script>
+            function copyData()
+            {
+                const book = @json($latest_edition);
+
+                $('#title').val(book.title);
+                $('#order').val(book.order);
+                $('#author').val(book.author);
+                $('#edition').val(book.edition);
+                $('#isbn').val(book.isbn);
+                $('#pages').val(book.pages);
+                $('#published_year').val(book.published_year);
+                $('#availability').val(book.availability);
+                $('#price').val(book.price);
+                $('#discount').val(book.discount);
+                $('#purchase_link').val(book.purchase_link);
+                // $('#description').val(book.description);
+                $('#description').summernote('code', book.description);
+                $('#search_tags').val(book.search_tags);
+                $('#status').val(book.status);
+                
+            }
+        </script>
+    @endif
+   
 @endsection

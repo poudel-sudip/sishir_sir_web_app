@@ -65,6 +65,30 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="show_image" class="col-md-4 col-form-label">{{ __('Show Thumbnail') }}</label>
+
+                                <div class="col-md-8 row">
+                                    <div class="col-sm-4">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="show_image_1" type="radio" class="form-check-input" name="show_image" value="1" {{ $blog->show_image == '1' ? 'checked' : '' }} >Yes</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                            <input id="show_image_2" type="radio" class="form-check-input" name="show_image" value="0" {{ $blog->show_image == '0' ? 'checked' : '' }} >No</label>
+                                        </div>
+                                    </div>
+                                    @error('show_image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="author" class="col-md-4 col-form-label">{{ __('Blog Author') }}</label>
 
                                 <div class="col-md-8">

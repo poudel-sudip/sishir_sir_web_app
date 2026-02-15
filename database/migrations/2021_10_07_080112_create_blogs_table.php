@@ -24,7 +24,7 @@ class CreateBlogsTable extends Migration
             $table->string('authorimage')->nullable();
             $table->longText('search_tags')->nullable();
             $table->string('status')->default('UnPublished');
-            // $table->tinyInteger('notified')->nullable()->default(0);
+            $table->tinyInteger('show_image')->nullable()->default(0);
             $table->timestamps();
         });
     }

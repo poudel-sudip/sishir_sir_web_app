@@ -30,12 +30,12 @@
                                 <thead>
                                 <tr>
                                     <th>SN</th>
+                                    <th>Action</th>
                                     <th>Blog Title</th>
                                     <th>Created Date</th>
                                     <th>Author</th>
                                     <th>Comments</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -43,17 +43,6 @@
                                 @foreach($blogs as $blog)
                                     <tr>
                                         <td>{{$i}}</td>
-                                        <td>{{$blog->title}}</td>
-                                        <td>{{date('Y-m-d',strtotime($blog->created_at))}}</td>
-                                        <td>{{$blog->author}}</td>
-                                        <td><a href="/admin/blogs/{{$blog->id}}/comments">Comments {!! $blog->comments()->where('status','=','Unpublished')->count() > 0 ? '<span style="background:#fc3200; color:#fff; border-radius:50%; height:15px; padding:2px; text-align:center; display:inline-block;">'.($blog->comments()->where('status','=','Unpublished')->count()).'</span>' : '' !!} </a></td>
-                                        <td>
-                                            @if($blog->status == 'Unpublished')
-                                                <span class="text-danger">{{$blog->status}}</span>
-                                            @else
-                                                <span class="text-success">{{$blog->status}}</span>
-                                            @endif
-                                        </td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
@@ -68,6 +57,18 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td class="text-wrap">{{$blog->title}}</td>
+                                        <td class="text-wrap">{{date('Y-m-d',strtotime($blog->created_at))}}</td>
+                                        <td class="text-wrap">{{$blog->author}}</td>
+                                        <td class="text-wrap"> <a href="/admin/blogs/{{$blog->id}}/comments">Comments {!! $blog->comments()->where('status','=','Unpublished')->count() > 0 ? '<span style="background:#fc3200; color:#fff; border-radius:50%; height:15px; padding:2px; text-align:center; display:inline-block;">'.($blog->comments()->where('status','=','Unpublished')->count()).'</span>' : '' !!} </a></td>
+                                        <td>
+                                            @if($blog->status == 'Unpublished')
+                                                <span class="text-danger">{{$blog->status}}</span>
+                                            @else
+                                                <span class="text-success">{{$blog->status}}</span>
+                                            @endif
+                                        </td>
+                                        
                                     </tr>
                                     @php($i++)
                                 @endforeach
