@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Models\Blog;
 use App\Models\OpenExams\OpenExam;
 
@@ -18,6 +19,11 @@ class StudentHomeController extends Controller
     public function index()
     {
         $user=auth()->user();
+        if(!$user->contact)
+        {
+            Session::flash('status','Please Complete Your Profile Details.');
+            return redirect('/profile/edit');
+        }
 
         $count= (object) [
             'bookings'=> (object) [

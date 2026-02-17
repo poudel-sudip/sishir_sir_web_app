@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\Ebook\EbookBooking as PdfBankBooking;
 use App\Models\ExamHall\ExamHallBookings as ExamBooking;
 
@@ -258,16 +259,19 @@ class NepalPayProxyController extends Controller
                     $transaction = explode('-',$trans_id);
                     $booking = null;
                     $return_url = '/login';
+                    $expiry = Carbon::now()->addDays(365);
 
                     if($transaction[0] == 'pdfbank')
                     {
                         $booking = PdfBankBooking::find($transaction[1]);
                         $return_url = '/student/pdf-bank-bookings';
+                        $expiry = Carbon::now()->addDays($booking->book->expiry_days ?? 365);
                     }
                     elseif($transaction[0] == 'exam')
                     {
                         $booking = ExamBooking::find($transaction[1]);
                         $return_url = '/student/exam-bookings';
+                        $expiry = Carbon::now()->addDays($booking->category->expiry_days ?? 365);
                     }
                     else
                     {
@@ -286,6 +290,7 @@ class NepalPayProxyController extends Controller
                                     'verificationMode' => 'NepalPayment',
                                     'paymentAmount' => $resData['Amount'],
                                     'remarks' => 'Booked by Student with Nepal Payment From '.$resData['Institution'].' with Gateway Reference Number: '.$resData['GatewayReferenceNo'],
+                                    'expiry_date' =>  $expiry,
                                 ]);
                             }
 

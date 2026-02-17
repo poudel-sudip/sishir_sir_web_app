@@ -108,10 +108,10 @@
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
                     <tr class="" style="background:#0C2B64;color:#ffffff;">
-                        <th style="width:60px;">#</th>
+                        <th width="50">#</th>
                         <th>Category Name</th>
-                        <th>Files</th>
-                        <th>Action</th>
+                        <th width="100">Files</th>
+                        <th width="50">Action</th>
                     </tr>
                 `;
                 table.appendChild(thead);

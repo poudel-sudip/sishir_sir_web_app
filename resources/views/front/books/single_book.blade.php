@@ -133,7 +133,7 @@
                                         Features of {{ $book->title }}
                                     </div>
 
-                                    <div class="book-description text-secondary">
+                                    <div class="book-description">
                                         {!! $book->description !!}
                                     </div>
 

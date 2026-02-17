@@ -150,10 +150,10 @@
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
                     <tr class="" style="background:#0C2B64;color:#ffffff;">
-                        <th style="width:60px;">#</th>
+                        <th width="50">#</th>
                         <th class="text-wrap">Category Name</th>
-                        <th class="text-wrap">Files</th>
-                        <th>Action</th>
+                        <th width="100" class="text-wrap">Files</th>
+                        <th width="50">Action</th>
                     </tr>
                 `;
                 table.appendChild(thead);
@@ -216,13 +216,13 @@
                 const thead = document.createElement('thead');
                 thead.innerHTML = `
                     <tr class="" style="background:#0C2B64 !important;color:#ffffff;">
-                        <th style="width:60px;">#</th>
+                        <th width="50">#</th>
                         <th>Material Name</th>
                         <th>Author(s)</th>
-                        <th>Published On</th>
-                        <th>Pages</th>
-                        <th>Size</th>
-                        <th style="width:75px;">Action</th>
+                        <th width="150">Published On</th>
+                        <th width="50">Pages</th>
+                        <th width="75">Size</th>
+                        <th width="50">Action</th>
                     </tr>
                 `;
                 table.appendChild(thead);
@@ -234,7 +234,7 @@
                         <td class="text-nowrap">${idx + 1}</td>
                         <td class="text-wrap"><a href="/library/{{$library_category->id}}/${mat.id}">${mat.name}</a></td>
                         <td>${mat.author}</td>
-                        <td class="text-nowrap">${mat.published_year}</td>
+                        <td class="text-wrap">${mat.published_year}</td>
                         <td class="text-nowrap">${mat.pages}</td>
                         <td class="text-nowrap">${mat.size}</td>
                         <td><a href="/library/{{$library_category->id}}/${mat.id}" class="btn btn-primary btn-sm">View</a></td>

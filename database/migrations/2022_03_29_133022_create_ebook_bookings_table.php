@@ -28,6 +28,7 @@ class CreateEbookBookingsTable extends Migration
             $table->string('verificationDocument')->nullable();
             $table->string('description')->nullable();
             $table->longText('remarks')->nullable();
+            $table->date('expiry_date')->nullable();
             $table->timestamps();
         });
     }

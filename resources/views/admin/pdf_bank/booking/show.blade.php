@@ -37,6 +37,10 @@
                             <div>{{$booking->status}}</div>
                         </div>
                         <div class="course-row">
+                            <div>Booking Expiry Date:</div>
+                            <div>{{$booking->expiry_date}}</div>
+                        </div>
+                        <div class="course-row">
                             <div>eBook Name:</div>
                             <div>{{$booking->book->title ?? ''}}</div>
                         </div>

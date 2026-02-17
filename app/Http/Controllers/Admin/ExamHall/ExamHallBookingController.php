@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ExamHall\ExamHallCategories;
 use App\Models\ExamHall\ExamHallBookings;
 use App\Models\User;
+use Carbon\Carbon;
 
 class ExamHallBookingController extends Controller
 {
@@ -80,6 +81,26 @@ class ExamHallBookingController extends Controller
             'remarks' => $request->remarks,
         ]);
 
+        if(!$booking->expiry_date)
+        {
+            if($booking->status == 'Expired')
+            {
+                $expiry = Carbon::now();
+            }
+            elseif($booking->status == 'Verified')
+            {
+                $expiry = Carbon::now()->addDays($category->expiry_days);
+            }
+            else 
+            {
+                $expiry = null;
+            }
+
+            $booking->update([
+                'expiry_date' => $expiry,
+            ]);
+        }
+
         // return redirect('/admin/exam-hall/'.$category->id.'/bookings');
         return redirect('/admin/exam-hall/bookings');
     }
@@ -98,6 +119,7 @@ class ExamHallBookingController extends Controller
             "status" => "required|string|min:1",
             "remarks" => "nullable|string",
             "examfee" => "required|numeric",
+            'expiry_date' => 'date|nullable',
         ]);
         $due=(integer)($request->examfee - $request->paymentAmount - $request->discount);
         $img=$request->oldDocument;
@@ -114,7 +136,28 @@ class ExamHallBookingController extends Controller
             "discount" => $request->discount,
             "dueAmount" => $due,
             "remarks" => $request->remarks,
+            'expiry_date' => $request->expiry_date,
         ]);
+
+        if(!$booking->expiry_date)
+        {
+            if($booking->status == 'Expired')
+            {
+                $expiry = Carbon::now();
+            }
+            elseif($booking->status == 'Verified')
+            {
+                $expiry = Carbon::now()->addDays($booking->category->expiry_days ?? 365);
+            }
+            else 
+            {
+                $expiry = null;
+            }
+
+            $booking->update([
+                'expiry_date' => $expiry,
+            ]);
+        }
 
         // return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
         return redirect('/admin/exam-hall/bookings');

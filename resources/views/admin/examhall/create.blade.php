@@ -84,6 +84,20 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="expiry_days" class="col-md-5 col-form-label">{{ __('Booking Expiry Days') }} </label>
+
+                                <div class="col-md-7">
+                                    <input id="expiry_days" type="number" class="form-control @error('expiry_days') is-invalid @enderror" name="expiry_days" value="{{ old('expiry_days') ?? 365 }}" placeholder="365">
+
+                                    @error('expiry_days')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="description" class="col-md-12 col-form-label">{{ __('Exam Set Description') }}</label>
 
                                 <div class="col-md-12">

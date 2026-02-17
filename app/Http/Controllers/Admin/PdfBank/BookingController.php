@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Ebook\Ebook as PDFGroup;
 use App\Models\Ebook\EbookBooking as Booking;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
@@ -73,7 +74,7 @@ class BookingController extends Controller
             $img = request('verificationDocument')->store('uploads','public');
         }
 
-        Booking::create([
+        $booking = Booking::create([
             'book_id' => $group->id,
             'user_id' => $user->id,
             'user_name' => $user->name,
@@ -87,6 +88,26 @@ class BookingController extends Controller
             'remarks' => $request->remarks,
         ]);
 
+        if(!$booking->expiry_date)
+        {
+            if($booking->status == 'Expired')
+            {
+                $expiry = Carbon::now();
+            }
+            elseif($booking->status == 'Verified')
+            {
+                $expiry = Carbon::now()->addDays($group->expiry_days);
+            }
+            else 
+            {
+                $expiry = null;
+            }
+
+            $booking->update([
+                'expiry_date' => $expiry,
+            ]);
+        }
+        
         return redirect('/admin/pdf-bank-bookings');
     }
 
@@ -113,6 +134,7 @@ class BookingController extends Controller
             "status" => "string|required",
             "uploadDocument" => "image|nullable",
             "oldDocument" => "string|nullable",
+            'expiry_date' => 'date|nullable',
         ]);
 
         $group = PDFGroup::find($request->group_name);
@@ -138,7 +160,29 @@ class BookingController extends Controller
             'dueAmount' => $due,
             'verificationDocument' => $img,
             'remarks' => $request->remarks,
+            'expiry_date' => $request->expiry_date,
         ]);
+
+        if(!$booking->expiry_date)
+        {
+            if($booking->status == 'Expired')
+            {
+                $expiry = Carbon::now();
+            }
+            elseif($booking->status == 'Verified')
+            {
+                $expiry = Carbon::now()->addDays($group->expiry_days);
+            }
+            else 
+            {
+                $expiry = null;
+            }
+
+            $booking->update([
+                'expiry_date' => $expiry,
+            ]);
+        }
+
 
         return redirect('/admin/pdf-bank-bookings');
     }

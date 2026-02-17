@@ -147,6 +147,7 @@
                                         <option value="">------</option>
                                         <option value="Unverified">Unverified</option>
                                         <option value="Verified">Verified</option>
+                                        <option value="Expired">Expired</option>
                                     </select>
                                     @error('status')
                                     <span class="invalid-feedback" role="alert">
@@ -156,6 +157,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="expiry_date" class="col-md-4 col-form-label">{{ __('Expiry Date') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="expiry_date" type="date" class="form-control @error('expiry_date') is-invalid @enderror" name="expiry_date" value="{{ old('expiry_date') ?? $booking->expiry_date }}">
+
+                                    @error('expiry_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
                             <div class="form-group row">
                                 <label for="remarks" class="col-md-4 col-form-label">{{ __('Remarks') }}</label>
 

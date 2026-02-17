@@ -44,7 +44,13 @@ class LoginController extends Controller
     }
 
     public function redirectTo() {
-        $role = Auth::user()->role;
+        $user = Auth::user();
+        if(!$user->contact)
+        {
+            Session::flash('status','Please Complete Your Profile Details.');
+            return '/profile/edit';
+        }
+        $role = $user->role;
         switch ($role) {
             case 'Admin':
                 return '/admin/home';

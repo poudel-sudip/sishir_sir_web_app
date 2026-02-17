@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         // Commands\ProjectUpdate::class,
+        // Commands\BookingExpiryUpdate::class,
     ];
 
     /**
@@ -24,11 +25,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // $schedule->call(function () {
+        //     \Log::info("Schedule Task Run");
+        // });
+
         // $schedule->command('project-update:manage')
         // ->everyMinute()
         // ->withoutOverlapping()
         // ->runInBackground();
 
+        $schedule->command('booking-expiry-update:manage')
+        ->daily()
+        ->withoutOverlapping()
+        ->runInBackground();
     }
 
     /**

@@ -128,7 +128,7 @@
             ['font', ['strikethrough', 'superscript', 'subscript']],
             ['fontname', ['fontname','fontsize']],
             ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph','height']],
+            ['para', ['hr','ul', 'ol', 'paragraph','height']],
             ['table', ['table']],
             ['insert', ['link', 'imageupload', 'video','audio']],
             ['view', ['fullscreen', 'codeview', 'help']],

@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Edit Exam Sets : {{$category->title}} </div>
+                    <div class="card-header">Edit Exam Set </div>
                     <div class="card-body">
                         <form method="POST" action="/admin/exam-hall/{{$category->id }}" enctype="multipart/form-data" class="forms-sample">
                             @csrf
@@ -116,6 +116,20 @@
                                         </div>
                                     </div>
                                     @error('isPinned')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="expiry_days" class="col-md-5 col-form-label">{{ __('Booking Expiry Days') }} </label>
+
+                                <div class="col-md-7">
+                                    <input id="expiry_days" type="number" class="form-control @error('expiry_days') is-invalid @enderror" name="expiry_days" value="{{ old('expiry_days') ?? $category->expiry_days ?? 365 }}" placeholder="365">
+
+                                    @error('expiry_days')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

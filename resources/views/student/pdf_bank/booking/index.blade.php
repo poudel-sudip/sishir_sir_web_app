@@ -33,6 +33,7 @@
                         @if($booking->book)
                             <div>{{ $booking->book->type == 'set' ? $booking->book->chapters()->where('status','=','Active')->count() : 1 }} pdf sets</div>
                         @endif
+                        <div class="small">Expiry Date: {{$booking->expiry_date}}</div>
                         <div class="student-vid-status">                            
                             @if ($booking->status == "Verified")
                             <div class="text-success">{{$booking->status}}</div>

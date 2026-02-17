@@ -27,6 +27,7 @@ class CreateExamHallBookingsTable extends Migration
             $table->string('dueAmount', 100)->nullable()->default('0');
             $table->mediumText('description')->nullable();
             $table->mediumText('remarks')->nullable();
+            $table->date('expiry_date')->nullable();
             $table->timestamps();
         });
     }

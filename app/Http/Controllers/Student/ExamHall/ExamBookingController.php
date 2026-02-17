@@ -9,6 +9,7 @@ use App\Models\ExamHall\ExamHallBookings;
 use App\Models\MerchantBooking;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use Carbon\Carbon;
 use App\Models\BookingCoupon as Coupon;
 
 use App\Http\Controllers\NepalPayProxyController;
@@ -233,6 +234,8 @@ class ExamBookingController extends Controller
         }
         // dd($coupon);
         
+        $expiry = Carbon::now()->addDays($booking->category->expiry_days ?? 365);
+
         $booking->update([
             'verificationMode' => 'Coupon',
             'paymentAmount' => '0',
@@ -240,6 +243,7 @@ class ExamBookingController extends Controller
             'status' => 'Verified',
             'remarks'=>'Booked by Student with Coupon Code: '.$coupon->coupon,
             'updatedBy'=>auth()->user()->name,
+            'expiry_date' => $expiry,
         ]);
 
         $coupon->update([
@@ -284,6 +288,7 @@ class ExamBookingController extends Controller
 
                     if($json_response->status === 'COMPLETE')
                     {
+                        $expiry = Carbon::now()->addDays($booking->category->expiry_days ?? 365);
 
                         $booking->update([
                             'status'=>'Verified',
@@ -291,6 +296,7 @@ class ExamBookingController extends Controller
                             'paymentAmount'=> $json_response->total_amount,
                             'remarks'=>'Booked by Student with Direct Esewa Payment For Product ID: '.$json_response->transaction_uuid.'  and Transaction Code: '.$json_response->ref_id,
                             'updatedBy'=>auth()->user()->name,
+                            'expiry_date' => $expiry,
                         ]);
 
                         return redirect('/student/exam-bookings')->with('success_message','Transction Completed Succesfully.');
@@ -330,12 +336,15 @@ class ExamBookingController extends Controller
                 {
                     if ($ps === 'true' && $rc === 'successful')
                     {
+                        $expiry = Carbon::now()->addDays($booking->category->expiry_days ?? 365);
+
                         $booking->update([
                             'status'=>'Verified',
                             'verificationMode'=>'Fonepay',
                             'paymentAmount'=> $pamt,
                             'remarks'=>'Booked by Student with Direct Fonepay Payment with Unique Retrival Reference Number: '.$uid,
                             'updatedBy'=>auth()->user()->name,
+                            'expiry_date' => $expiry,
                         ]);
 
                         return redirect('/student/exam-bookings')->with('success_message','Transction Completed Succesfully.');
@@ -384,12 +393,15 @@ class ExamBookingController extends Controller
         
         if($status_code == 200)
         {
+            $expiry = Carbon::now()->addDays($booking->category->expiry_days ?? 365);
+
             $booking->update([
                 'status'=>'Verified',
                 'verificationMode'=>'Khalti',
                 'paymentAmount'=>($booking->category->price - $booking->category->discount),
                 'remarks'=>'Booked by Student with Direct Khalti Payment',
                 'updatedBy'=>auth()->user()->name,
+                'expiry_date' => $expiry,
             ]);
             // MerchantBooking::create([
             //     'type' => 'exam',

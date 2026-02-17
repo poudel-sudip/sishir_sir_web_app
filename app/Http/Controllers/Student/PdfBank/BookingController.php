@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use Carbon\Carbon;
 use App\Models\Ebook\Ebook as PDFBank;
 use App\Models\Ebook\EbookBooking as Booking;
 use App\Models\MerchantBooking;
@@ -221,6 +222,8 @@ class BookingController extends Controller
         }
         // dd($coupon);
         
+        $expiry = Carbon::now()->addDays($booking->book->expiry_days ?? 365);
+
         $booking->update([
             'verificationMode' => 'Coupon',
             'paymentAmount' => '0',
@@ -228,6 +231,7 @@ class BookingController extends Controller
             'status' => 'Verified',
             'remarks'=>'Booked by Student with Coupon Code: '.$coupon->coupon,
             'updatedBy'=>auth()->user()->name,
+            'expiry_date' => $expiry,
         ]);
 
         $coupon->update([
@@ -288,13 +292,14 @@ class BookingController extends Controller
 
                     if($json_response->status === 'COMPLETE')
                     {
-
+                        $expiry = Carbon::now()->addDays($booking->book->expiry_days ?? 365);
                         $booking->update([
                             'status'=>'Verified',
                             'verificationMode'=>'Esewa',
                             'paymentAmount'=> $json_response->total_amount,
                             'remarks'=>'Booked by Student with Direct Esewa Payment For Product ID: '.$json_response->transaction_uuid.'  and Transaction Code: '.$json_response->ref_id,
                             'updatedBy'=>auth()->user()->name,
+                            'expiry_date' => $expiry,
                         ]);
 
                         return redirect('/student/pdf-bank-bookings')->with('success_message','Transction Completed Succesfully.');
@@ -334,12 +339,14 @@ class BookingController extends Controller
                 {
                     if ($ps === 'true' && $rc === 'successful')
                     {
+                        $expiry = Carbon::now()->addDays($booking->book->expiry_days ?? 365);
                         $booking->update([
                             'status'=>'Verified',
                             'verificationMode'=>'Fonepay',
                             'paymentAmount'=> $pamt,
                             'remarks'=>'Booked by Student with Direct Fonepay Payment with Unique Retrival Reference Number: '.$uid,
                             'updatedBy'=>auth()->user()->name,
+                            'expiry_date' => $expiry,
                         ]);
 
                         return redirect('/student/pdf-bank-bookings')->with('success_message','Transction Completed Succesfully.');

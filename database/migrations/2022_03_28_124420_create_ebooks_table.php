@@ -30,6 +30,7 @@ class CreateEbooksTable extends Migration
             $table->tinyInteger('download')->default(0);
             $table->string('pages')->nullable();
             $table->string('paper')->nullable();
+            $table->integer('expiry_days')->nullable()->default(365);
             $table->string('status')->nullable()->default('Inactive');
             $table->timestamps();
         });

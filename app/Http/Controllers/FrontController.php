@@ -839,8 +839,12 @@ class FrontController extends Controller
         $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
         $counterData = Helper::pageCounterCounts('Single Book Detail', $pgurl);
 
+        $book_editions = collect([]);
         $category = $book->category;
-        $book_editions = $category->cat_books()->where('status', '=', 'Active')->orderByDesc('order')->get(['id','title','edition']);
+        if($category)
+        {
+            $book_editions = $category->cat_books()->where('status', '=', 'Active')->orderByDesc('order')->get(['id','title','edition']);
+        }
 
         // dd($book,$category,$book_editions);
         return view('front.books.single_book', compact('book', 'book_reviews', 'counterData','book_editions'));

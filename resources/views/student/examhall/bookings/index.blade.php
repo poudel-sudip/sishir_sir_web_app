@@ -25,6 +25,7 @@
                                 <th>ID</th>
                                 {{-- <th>Date</th> --}}
                                 <th>Exam Set</th>
+                                <th class="text-nowrap">Expiry Date</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -34,9 +35,10 @@
                             <tr>
                                 <td>{{$booking->id}}</td>
                                 {{-- <td>{{date('Y/m/d',strtotime($booking->created_at))}}</td> --}}
-                                <td>{{($booking->category->title ?? '').' ('.($booking->category->category_exams->count() ?? '0').' sets) '}}</td>
+                                <td class="text-wrap">{{($booking->category->title ?? '').' ('.($booking->category->category_exams->count() ?? '0').' sets) '}}</td>
+                                <td>{{$booking->expiry_date}}</td>
                                 <td>{{$booking->status}}</td>
-                                <td>
+                                <td class="text-nowrap">
                                     @if($booking->status!="Verified")
                                         <a href="/student/exam-bookings/{{$booking->id}}/edit" class="btn btn-warning btn-sm mb-1 ">Verify</a> 
                                         <form id="delete-form-{{$booking->id}}" action="/student/exam-bookings/{{$booking->id}}" method="POST" style="display: inline">

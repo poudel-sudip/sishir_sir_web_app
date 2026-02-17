@@ -58,7 +58,7 @@
                                     
                                 @endif
 
-                                <div class="book-description text-secondary">
+                                <div class="book-description">
                                     {!! $blog->description !!}
                                 </div>
 
