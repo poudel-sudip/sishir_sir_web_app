@@ -108,6 +108,23 @@ class BookingController extends Controller
             ]);
         }
         
+
+        $category_id = $booking->book->id ?? null;
+        $type = $booking->book->type ?? null;
+
+        if($category_id && $type)
+        {
+            if($type == 'set')
+            {
+                return redirect('/admin/pdf-bank/pdf-groups/'.$category_id.'/bookings');
+            }
+            else if($type == 'single')
+            {
+                return redirect('/admin/pdf-bank/pdf-singles/'.$category_id.'/bookings');
+            }
+
+        }
+        
         return redirect('/admin/pdf-bank-bookings');
     }
 
@@ -183,13 +200,45 @@ class BookingController extends Controller
             ]);
         }
 
+        $category_id = $booking->book->id ?? null;
+        $type = $booking->book->type ?? null;
+
+        if($category_id && $type)
+        {
+            if($type == 'set')
+            {
+                return redirect('/admin/pdf-bank/pdf-groups/'.$category_id.'/bookings');
+            }
+            else if($type == 'single')
+            {
+                return redirect('/admin/pdf-bank/pdf-singles/'.$category_id.'/bookings');
+            }
+
+        }
 
         return redirect('/admin/pdf-bank-bookings');
     }
 
     public function destroy(Booking $booking)
     {
+        $category_id = $booking->book->id ?? null;
+        $type = $booking->book->type ?? null;
+
         $booking->delete();
+
+        if($category_id && $type)
+        {
+            if($type == 'set')
+            {
+                return redirect('/admin/pdf-bank/pdf-groups/'.$category_id.'/bookings');
+            }
+            else if($type == 'single')
+            {
+                return redirect('/admin/pdf-bank/pdf-singles/'.$category_id.'/bookings');
+            }
+
+        }
+
         return redirect('/admin/pdf-bank-bookings');
     }
 }

@@ -16,9 +16,24 @@ class BlogController extends Controller
    {
         // $headercategories=Categories::all()->where('status','=','Active');
         // $last_blog=Blog::where('status','=','Published')->orderByDesc('created_at')->first();
-        $blogs = Blog::where('status','=','Published')->orderByDesc('id')->paginate(12);
-       return view('front.blogs.index',compact('blogs'));
+        $data['blog_categories'] = Categories::where('type', '=', 'blog-category')->whereHas('blogs')->orderBy('id')->get(['id','name']);
+        $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->paginate(12);
+       return view('front.blogs.index',$data);
    }
+
+    public function categoryBlogs($category, Request $request)
+    {   
+        $category = Categories::where('type','=','blog-category')->find($category);
+        if(!$category)
+        {
+            abort(404,'Blog Category not found');
+        }
+
+        $data['selected_category'] = $category;
+        $data['blog_categories'] = Categories::where('type','=','blog-category')->get(['id','name']);
+        $data['blogs'] = $category->blogs()->where('status','=','Published')->orderByDesc('id')->paginate(12);
+        return view('front.blogs.category-wise',$data);
+    }
 
     public function show($bid)
     {

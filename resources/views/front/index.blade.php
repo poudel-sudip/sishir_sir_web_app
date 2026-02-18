@@ -645,6 +645,29 @@
                     <h2 class="home-section-heading">Blogs</h2>
                 </div>
             </div>
+
+            @if (isset($blog_categories) && $blog_categories->count())
+                <div class="mb-1">
+                    <nav>
+                        <div class="d-flex align-items-center justify-content-center footer-imp-link">
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper category-swiper nav nav-tabs"> 
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <a href="/blogs"> <button class="nav-link border active">All</button> </a>
+                                    </div>
+                                    @foreach($blog_categories as $cat)
+                                        <div class="swiper-slide">
+                                            <a href="/blogs-category/{{$cat->id}}"> <button class="nav-link border">{{$cat->name}}</button> </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </nav>
+                </div>
+            @endif
             
             <div class="row">
                 <!-- Left Side (4 Blogs in 2x2 Grid) -->

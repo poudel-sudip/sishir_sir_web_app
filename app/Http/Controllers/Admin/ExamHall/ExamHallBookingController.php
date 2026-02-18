@@ -101,7 +101,11 @@ class ExamHallBookingController extends Controller
             ]);
         }
 
-        // return redirect('/admin/exam-hall/'.$category->id.'/bookings');
+        if($booking->category)
+        {
+            return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
+        }
+
         return redirect('/admin/exam-hall/bookings');
     }
 
@@ -159,14 +163,25 @@ class ExamHallBookingController extends Controller
             ]);
         }
 
-        // return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
+        if($booking->category)
+        {
+            return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
+        }
+
         return redirect('/admin/exam-hall/bookings');
     }
 
     public function destroy(Request $request, ExamHallBookings $booking)
     {
+        $category_id = $booking->category->id ?? null;
+
         $booking->delete();
-        // return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
+
+        if($category_id)
+        {
+            return redirect('/admin/exam-hall/'.$category_id.'/bookings');
+        }
+
         return redirect('/admin/exam-hall/bookings');
 
     }

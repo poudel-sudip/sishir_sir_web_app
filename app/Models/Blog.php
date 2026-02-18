@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
+use App\Models\Categories as Category;
 
 class Blog extends Model
 {
@@ -39,5 +40,10 @@ class Blog extends Model
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

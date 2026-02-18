@@ -31,6 +31,7 @@
                           <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Action</th>
                                 <th>Date</th>
                                 <th>eBook</th>
                                 <th>Booked By</th>
@@ -40,13 +41,21 @@
                                 {{-- <th>Due Amount</th> --}}
                                 <th>Status</th>
                                 <th>Remarks</th>
-                                <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
                               @foreach($bookings as $booking)
                             <tr>
                                 <td class="text-wrap">{{$booking->id}}</td>
+                                <td class="classroom-btn" width="50">
+                                    <a href="/admin/pdf-bank-bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
+                                    <a href="/admin/pdf-bank-bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
+                                    <form id="delete-form-{{$booking->id}}" action="/admin/pdf-bank-bookings/{{$booking->id}}" method="POST" style="display: inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
+                                    </form>
+                                </td>
                                 <td class="text-wrap">{{date('Y-m-d',strtotime($booking->created_at))}}</td>
                                 <td class="text-wrap">{{$booking->book->title ?? ''}}</td>
                                 <td class="text-wrap">{{$booking->user->name ?? ''}}</td>
@@ -66,15 +75,7 @@
                                     @endif
                                 </td>
                                 <td class="text-wrap" max-width="150px">{{ $booking->remarks }}</td>
-                                <td class="classroom-btn" width="50">
-                                    <a href="/admin/pdf-bank-bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                    <a href="/admin/pdf-bank-bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
-                                    <form id="delete-form-{{$booking->id}}" action="/admin/pdf-bank-bookings/{{$booking->id}}" method="POST" style="display: inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
-                                    </form>
-                                </td>
+                                
                             </tr>
                             @endforeach
                           </tbody>

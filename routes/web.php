@@ -219,6 +219,13 @@ Route::delete('/admin/pdf-bank-bookings/{booking}', 'App\Http\Controllers\Admin\
 //admin merchant wise bookings
 Route::get('/admin/booking-through-merchant', 'App\Http\Controllers\Admin\MerchantBookingController@index')->middleware('role:Admin');
 
+//blogs category managing by admin
+Route::get('/admin/blogs/categories', 'App\Http\Controllers\Admin\Blog\CategoryController@index')->middleware('role:Admin');
+Route::post('/admin/blogs/categories', 'App\Http\Controllers\Admin\Blog\CategoryController@store')->middleware('role:Admin');
+Route::patch('/admin/blogs/categories', 'App\Http\Controllers\Admin\Blog\CategoryController@update')->middleware('role:Admin');
+Route::delete('/admin/blogs/categories/{category}', 'App\Http\Controllers\Admin\Blog\CategoryController@destroy')->middleware('role:Admin');
+Route::get('/admin/blogs/categories/{category}/posts', 'App\Http\Controllers\Admin\Blog\CategoryController@blogPosts')->middleware('role:Admin');
+
 //blogs managing by admin
 Route::get('/admin/blogs', 'App\Http\Controllers\Admin\Blog\BlogController@index')->middleware('role:Admin');
 Route::get('/admin/blogs/create', 'App\Http\Controllers\Admin\Blog\BlogController@create')->middleware('role:Admin');
@@ -832,6 +839,7 @@ Route::get('/image-gallery', 'App\Http\Controllers\FrontController@imageGallery'
 
 // front blogs
 Route::get('/blogs', 'App\Http\Controllers\Blog\BlogController@index');
+Route::get('/blogs-category/{cat}', 'App\Http\Controllers\Blog\BlogController@categoryBlogs');
 Route::get('/blogs/{bid}', 'App\Http\Controllers\Blog\BlogController@show');
 Route::post('/blogs/{blog}/comments/add', 'App\Http\Controllers\Blog\BlogController@addComments');
 

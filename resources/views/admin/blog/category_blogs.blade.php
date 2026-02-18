@@ -1,15 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Blogs
+    Category Blogs
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">All Blogs</h3>
+            <h3 class="page-title">Category Blogs</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/admin/blogs/categories') }}">Categories</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Blogs</li>
                 </ol>
             </nav>
@@ -19,7 +20,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">Blogs table</h4>
+                            <h4 class="card-title">{{ $category->name }}</h4>
                             <div class="text-right">
                                 <a href="{{ ('/admin/blogs/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Blog </button></a>
 

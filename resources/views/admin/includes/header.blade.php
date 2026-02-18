@@ -217,12 +217,30 @@
         </a>
       </li>
 
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/blogs') }}">
             <i class="mdi mdi-file-delimited menu-icon"></i>
             <span class="menu-title">Blogs</span>
         </a>
-      </li>     
+      </li>   --}}
+      
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#blogs-section" aria-expanded="false" aria-controls="blogs-section">
+          <i class="mdi mdi-file-delimited menu-icon"></i>
+          <span class="menu-title">Blogs</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="blogs-section">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/blogs/categories') }}">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/blogs') }}">Blogs</a>
+            </li>
+          </ul>
+        </div>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#health-days-section" aria-expanded="false" aria-controls="health-days-section">

@@ -89,4 +89,9 @@ class Categories extends Model
     {
         return $this->hasMany(HealthDay::class,'category_id')->orderBy('date','ASC');
     }
+
+    public function blogs(): HasMany
+    {
+        return $this->hasMany(Blog::class,'category_id');
+    }
 }
