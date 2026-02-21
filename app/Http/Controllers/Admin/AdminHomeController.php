@@ -38,6 +38,7 @@ class AdminHomeController extends Controller
                 'verified' => ExamHallBookings::where('status','=','Verified')->count(),
                 'unverified' => ExamHallBookings::where('status','=','Unverified')->count(),
                 'processing' => ExamHallBookings::where('status','=','Processing')->count(),
+                'expired' => ExamHallBookings::where('status','=','Expired')->count(),
                 'link' => '/admin/exam-hall/bookings',
             ],
             'pdf_booking' => (object)[
@@ -45,6 +46,7 @@ class AdminHomeController extends Controller
                 'verified' => EbookBooking::where('status','=','Verified')->count(),
                 'unverified' => EbookBooking::where('status','=','Unverified')->count(),
                 'processing' => EbookBooking::where('status','=','Processing')->count(),
+                'expired' => EbookBooking::where('status','=','Expired')->count(),
                 'link' => '/admin/pdf-bank-bookings',
             ],
             'enquiry' => (object)[
@@ -53,9 +55,9 @@ class AdminHomeController extends Controller
             ],
         ];
         
-        $batches = Batch::all()->where('isPinned','=','Yes')->sortByDesc('status');
-        $exams = ExamHallCategories::all()->where('isPinned','=','Yes');
-        $ebooks = Ebook::where('isPinned','=','Yes')->get();
+        $batches = Batch::orderByDesc('id')->where('isPinned','=','Yes')->take(12)->get('id','name','status');
+        $exams = ExamHallCategories::orderByDesc('id')->where('isPinned','=','Yes')->take(12)->get(['id','title','status']);
+        $ebooks = Ebook::orderByDesc('id')->where('isPinned','=','Yes')->take(12)->get(['id','title','status']);
         // dd($data,$exams,$vendors);
         
         return view('admin.home',compact('data','batches','exams','ebooks'));

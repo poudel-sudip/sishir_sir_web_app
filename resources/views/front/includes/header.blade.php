@@ -90,15 +90,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> </a>
           </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/library">eLibrary</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/pdf-banks">eBooks</a>
-          </li>
-
           
           @foreach($parent_menus as $parent)
             <li class="nav-item dropdown">
@@ -130,7 +121,26 @@
               </ul>
             </li>
           @endforeach
-             
+
+          <li class="nav-item">
+            <a class="nav-link" href="/pdf-banks">eBooks</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Mock Test</a>
+            <ul class="dropdown-menu">
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/public-exams">Exams</a>
+              </li>
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/results">Results</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/library">eLibrary</a>
+          </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="/books" role="button" aria-expanded="false">Books</a>
@@ -144,22 +154,10 @@
           </li>
           
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Mock Test</a>
-            <ul class="dropdown-menu">
-              <li class="parent-dropdown">
-                <a class="dropdown-item" aria-current="page" href="/public-exams">Exams</a>
-              </li>
-              <li class="parent-dropdown">
-                <a class="dropdown-item" aria-current="page" href="/results">Results</a>
-              </li>
-            </ul>
-          </li>
-          
-          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">News Hub</a>
             <ul class="dropdown-menu">
               <li class="parent-dropdown">
-                <a class="dropdown-item" aria-current="page" href="/blogs">Blogs</a>
+                <a class="dropdown-item" aria-current="page" href="/newsroom">Newsroom</a>
               </li>
               <li class="parent-dropdown">
                 <a class="dropdown-item" aria-current="page" href="/vaccancies">Vacancies</a>

@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Edit Blog
+    Edit News
 @endsection
 
 @section('content')
@@ -10,17 +10,17 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/blogs') }}">Blogs</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Edit Blog </li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/newsroom') }}">Newsroom</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit News </li>
                 </ol>
             </nav>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Blog Slug: {{$blog->slug}}</div>
+                    <div class="card-header">Edit News</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ ('/admin/blogs/'.$blog->id) }}" enctype="multipart/form-data" class="forms-sample">
+                        <form method="POST" action="{{ ('/admin/newsroom/'.$blog->id) }}" enctype="multipart/form-data" class="forms-sample">
                             @csrf
                             @method('PATCH')
 
@@ -29,7 +29,7 @@
 
                                 <div class="col-md-8">
                                     <select id="category" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}">
-                                        <option value="">Select Blog Category</option>
+                                        <option value="">Select Newsroom Category</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category->id}}" {{ $blog->category_id == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                                         @endforeach
@@ -43,7 +43,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="title" class="col-md-4 col-form-label">{{ __('Blog Title') }}</label>
+                                <label for="title" class="col-md-4 col-form-label">{{ __('Newsroom Title') }}</label>
 
                                 <div class="col-md-8">
                                     <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') ?? $blog->title }}" required autocomplete="title" autofocus>
@@ -108,7 +108,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="author" class="col-md-4 col-form-label">{{ __('Blog Author') }}</label>
+                                <label for="author" class="col-md-4 col-form-label">{{ __(' Author') }}</label>
 
                                 <div class="col-md-8">
                                     <input id="author" type="text" class="form-control @error('author') is-invalid @enderror" name="author" value="{{ old('author') ?? $blog->author }}" autocomplete="author">

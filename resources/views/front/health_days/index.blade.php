@@ -34,11 +34,11 @@
                     <div class="swiper category-swiper nav nav-tabs">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <button class="category-filter nav-link border active" charfil="all">All</button>
+                                <button class="category-filter nav-link border {{ $selectedCategoryId ? '' : 'active' }} " charfil="all">All</button>
                             </div>
                             @foreach($healthCategories as $cat)
                                 <div class="swiper-slide">
-                                   <button class="category-filter nav-link border" charfil='{{$cat->id}}'>{{$cat->name}}</button>
+                                   <button class="category-filter nav-link border {{ $selectedCategoryId == $cat->id ? 'active' : '' }}" charfil='{{$cat->id}}'>{{$cat->name}}</button>
                                 </div>
                             @endforeach
                         </div>
@@ -202,6 +202,10 @@
             } else {}
         });
 
+        const preSelectedCategoryId = @json($selectedCategoryId);
+        if(preSelectedCategoryId) {
+            filterContentByCategory(preSelectedCategoryId);
+        }
         
     </script>
 

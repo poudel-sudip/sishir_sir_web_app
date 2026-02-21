@@ -67,9 +67,9 @@ class BlogController extends Controller
 
         if($blog->category)
         {
-            return redirect('/admin/blogs/categories/'.$blog->category_id.'/posts');
+            return redirect('/admin/newsroom/categories/'.$blog->category_id.'/posts');
         }
-        return redirect('/admin/blogs');
+        return redirect('/admin/newsroom');
     }
 
     public function show(Blog $blog)
@@ -124,10 +124,10 @@ class BlogController extends Controller
 
         if($blog->category)
         {
-            return redirect('/admin/blogs/categories/'.$blog->category_id.'/posts');
+            return redirect('/admin/newsroom/categories/'.$blog->category_id.'/posts');
         }
 
-        return redirect('/admin/blogs');
+        return redirect('/admin/newsroom');
     }
 
     public function destroy(Blog $blog)
@@ -137,8 +137,8 @@ class BlogController extends Controller
 
         if($category_id)
         {
-            return redirect('/admin/blogs/categories/'.$category_id.'/posts');
+            return redirect('/admin/newsroom/categories/'.$category_id.'/posts');
         }
-        return redirect('/admin/blogs');
+        return redirect('/admin/newsroom');
     }
 }

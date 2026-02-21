@@ -31,7 +31,7 @@
                           <tr>
                             <th>SN</th>
                             <th>Name</th>
-                            {{-- <th>Slug</th> --}}
+                            <th>Order</th>
                             <th>Links</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -43,7 +43,7 @@
                           <tr>
                             <td>{{$i}}</td>
                             <td>{{$cat->name}}</td>
-                            {{-- <td>{{$cat->slug}}</td> --}}
+                            <td>{{$cat->order}}</td>
                             <td><a href="/admin/imp-links/{{$cat->id}}/links">Links ({{$cat->imp_links()->count()}}) </a></td>
                             <td class="text-wrap"><span class="text-{{$cat->status == 'Active' ? 'success' : 'danger'}}">{{$cat->status}}</span></td>
                             <td class="classroom-btn" width="50">

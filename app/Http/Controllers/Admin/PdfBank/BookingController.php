@@ -28,10 +28,11 @@ class BookingController extends Controller
         return view('admin.pdf_bank.booking.allbooking',compact('bookings'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $page_type = $request->page_type ?? null;
         $groups = PDFGroup::where('status','=','Active')->get();
-        return view('admin.pdf_bank.booking.create',compact('groups'));
+        return view('admin.pdf_bank.booking.create',compact('groups', 'page_type'));
     }
 
     public function store(Request $request)
@@ -109,8 +110,14 @@ class BookingController extends Controller
         }
         
 
-        $category_id = $booking->book->id ?? null;
-        $type = $booking->book->type ?? null;
+        $category_id = null;
+        $type = null;
+        if($request->has('page_type') && $request->page_type == 'group')
+        {
+            $category_id = $booking->book->id ?? null;
+            $type = $booking->book->type ?? null;
+        }
+
 
         if($category_id && $type)
         {
@@ -133,10 +140,11 @@ class BookingController extends Controller
         return view('admin.pdf_bank.booking.show',compact('booking'));
     }
 
-    public function edit(Booking $booking)
+    public function edit(Request $request, Booking $booking)
     {
+        $page_type = $request->page_type ?? null;
         $groups = PDFGroup::where('status','=','Active')->get();
-        return view('admin.pdf_bank.booking.edit',compact('booking','groups'));
+        return view('admin.pdf_bank.booking.edit',compact('booking','groups', 'page_type'));
     }
 
     public function update(Request $request, Booking $booking)
@@ -200,9 +208,15 @@ class BookingController extends Controller
             ]);
         }
 
-        $category_id = $booking->book->id ?? null;
-        $type = $booking->book->type ?? null;
+        $category_id = null;
+        $type = null;
+        if($request->has('page_type') && $request->page_type == 'group')
+        {
+            $category_id = $booking->book->id ?? null;
+            $type = $booking->book->type ?? null;
+        }
 
+        
         if($category_id && $type)
         {
             if($type == 'set')
@@ -219,10 +233,16 @@ class BookingController extends Controller
         return redirect('/admin/pdf-bank-bookings');
     }
 
-    public function destroy(Booking $booking)
+    public function destroy(Request $request, Booking $booking)
     {
-        $category_id = $booking->book->id ?? null;
-        $type = $booking->book->type ?? null;
+        
+        $category_id = null;
+        $type = null;
+        if($request->has('page_type') && $request->page_type == 'group')
+        {
+            $category_id = $booking->book->id ?? null;
+            $type = $booking->book->type ?? null;
+        }
 
         $booking->delete();
 

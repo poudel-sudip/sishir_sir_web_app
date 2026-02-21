@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('page_title', ($blog->title))
 @section('og-title', ($blog->title))
-@section('og-url', url('blogs/'.$blog->id))
+@section('og-url', url('newsroom/'.$blog->id))
 @if($blog->image)
 @section('og-image', asset('/storage/'.$blog->image))
 @endif
@@ -15,7 +15,7 @@
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ ('/blogs') }}">Blogs</a></li>
+                        <li class="breadcrumb-item"><a href="{{ ('/newsroom') }}">Newsroom</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{($blog->title)}}</li>
                     </ol>
                 </div>
@@ -29,11 +29,11 @@
                             <h3 class="text-primary ">{{($blog->title)}}</h3>
                         </div>
                         <div class="d-flex align-items-center flex-wrap">
-                            <span class="mx-3 h5 text-success text-nowrap"> <img src="/storage/{{$blog->authorimage ?? $blog->creator->photo ?? ''}}" onerror="this.src='/images/student.jpg'" style="height:50px; width:50px; border-radius:50%; border:1px solid #198754;"> {{$blog->author}}</span>
-                            {{-- <span class="mx-2"><i class="fa fa-user"></i> {{$blog->author}}</span> --}}
-                            <span class="mx-3 h6 text-primary text-nowrap"><i class="fa fa-pen"></i> {{$blog->created_at}}</span>
+                            <span class="mx-3 h5 text-success text-nowrap"> <img src="/storage/{{$blog->authorimage ?? $blog->creator->photo ?? ''}}" onerror="this.src='/images/student.jpg'" style="height:50px; width:50px; border-radius:50%; border:1px solid #198754;"> <a href="/newsroom-author/{{$blog->author}}" class="text-success">{{$blog->author}}</a></span>
+                            <span class="mx-3 h6 text-primary text-nowrap"><i class="fa fa-calendar-alt"></i> {{$blog->created_at->format('d M, Y, h:i A')}}</span>
                             <span class="mx-3 h6 text-info text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
                             <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
+                            <span class="mx-3 h6 text-primary text-nowrap" id="read-time"></span>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -74,7 +74,7 @@
                         <div class="col-md-12">
                             <div class="mt-4 leave-comment">
                                 <p>Leave Your Comment</p>
-                                <form  action="/blogs/{{$blog->id}}/comments/add" method="POST" enctype="multipart/form-data">
+                                <form  action="/newsroom/{{$blog->id}}/comments/add" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
@@ -117,14 +117,14 @@
                 </div>
                 {{-- <div class="col-md-4">
                     <div class="details-blog-list">
-                        <h5 class="mb-3"><u>Latest Blogs</u></h5>
+                        <h5 class="mb-3"><u>Latest News</u></h5>
                         @foreach ($lateat_blogs as $blogs)
                         <div class="row mb-2 @if ($blog->id == $blogs->id) hidden @endif">
                             <div class="col-4 img-container">
                                 <img src="/storage/{{$blogs->image}}">
                             </div>
                             <div class="col-8">
-                                <a href="/blogs/{{$blogs->id}}"><h4 class="blog-list-title">{{$blogs->title}}</h4></a>
+                                <a href="/newsroom/{{$blogs->id}}"><h4 class="blog-list-title">{{$blogs->title}}</h4></a>
                                 <div>Published: <span class="text-primary"> {{date('Y-m-d',strtotime($blogs->created_at))}}</span></div>
                                 <div>By: <span class="text-success"> {{$blogs->author}}</span></div>
                             </div>
@@ -154,8 +154,15 @@
     <script>
         $(document).ready(function () {
             $('table').each(function () {
-            $(this).wrap('<div style="overflow-x: auto; display: block; max-width: 100%;"></div>');
+                $(this).wrap('<div style="overflow-x: auto; display: block; max-width: 100%;"></div>');
             });
+
+            $('iframe').each(function () {
+                $(this).wrap('<div style="overflow-x: auto; display: block; max-width: 100%;"></div>');
+            });
+
+            let readTime = calculateReadingTime();
+            $('#read-time').html('<i class="fa fa-book-reader"></i> ' + readTime.estimatedMinutes + ' Mins Read');
         });
     </script>
  

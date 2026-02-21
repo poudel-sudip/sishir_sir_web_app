@@ -312,13 +312,25 @@ class FrontMiscController extends Controller
 
     public function healthDaysList(Request $request)
     {        
+        $selectedCategoryId = null;
+
         $healthDays = HealthDay::orderBy('sorting_date', 'asc')
             ->get(['id','title','date','category_id'])
             ->values();       
 
+        if($request->has('selected') && trim($request->selected) && is_numeric($request->selected))
+        {
+            if(in_array((int)$request->selected,$healthDays->pluck('category_id')->unique()->toArray()))
+            {
+                $selectedCategoryId = (int)$request->selected;
+            }   
+        }
+
         $data['healthDays'] = json_encode($healthDays);
         $data['healthCategories'] = Category::where('type','=','health-day-category')->get();
+        $data['selectedCategoryId'] = $selectedCategoryId;
 
+        // dd($data);
         return view('front.health_days.index', $data);
     }
 

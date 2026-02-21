@@ -25,11 +25,13 @@ class LinksController extends Controller
         $data = request()->validate([
             'name'=>'required | string',
             'status'=>'required',
+            'order'=>'nullable|numeric',
         ]);
         Categories::create([
             'type' => 'imp_link',
             'name'=>$data['name'],
             'status'=>$data['status'],
+            'order'=>$data['order'] ?? 1,
         ]);
         return redirect('/admin/imp-links');
     }  
@@ -45,10 +47,12 @@ class LinksController extends Controller
        $data = $request->validate([
             'name'=>'required | string',
             'status'=>'required',
+            'order'=>'nullable|numeric',
         ]);
         $category->update([
             'name'=>$data['name'],
             'status'=>$data['status'],
+            'order'=>$data['order'] ?? 1,
         ]);
         return redirect('/admin/imp-links');
     }

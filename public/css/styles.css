@@ -1153,7 +1153,7 @@ p {
     border-top: 1px solid #e1e1e1;
 }
 
-.course-page .side-navbar .course-nav li:hover {
+.course-page .side-navbar .course-nav li:hover, .course-page .side-navbar .course-nav li.active {
     /* background: #eff0f1; */
     background: #fa0101;
 }
@@ -6960,6 +6960,57 @@ label.star:before {
     background: #0077b5;
     opacity: 1;
     height: 2px;
+}
+
+.dch-title {
+    color: transparent;
+    background: linear-gradient(90deg, red, green);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.dcv-title {
+    color: transparent;
+    background: linear-gradient(180deg, red, green);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.dchl-title {
+    color: transparent;
+    background: linear-gradient(90deg, red, green);
+    position: relative;
+    display: inline-block;
+    padding: 0 2rem; 
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.dcvl-title {
+    color: transparent;
+    background: linear-gradient(180deg, red, green);
+    position: relative;
+    display: inline-block;
+    padding: 0 2rem; 
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.dchl-title::after, .dcvl-title::after{
+    background: linear-gradient(90deg, red, green);
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 3px;
+}
+
+.text-header-blue {
+    color: #0C2B64 !important;
 }
 
 

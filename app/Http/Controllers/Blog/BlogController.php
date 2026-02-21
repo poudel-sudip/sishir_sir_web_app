@@ -16,8 +16,8 @@ class BlogController extends Controller
    {
         // $headercategories=Categories::all()->where('status','=','Active');
         // $last_blog=Blog::where('status','=','Published')->orderByDesc('created_at')->first();
-        $data['blog_categories'] = Categories::where('type', '=', 'blog-category')->whereHas('blogs')->orderBy('id')->get(['id','name']);
-        $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->paginate(12);
+        $data['blog_categories'] = Categories::where('type', '=', 'blog-category')->whereHas('blogs')->orderBy('order')->get(['id','name']);
+        $data['blogs'] = Blog::where('status','=','Published')->orderByDesc('id')->paginate(6);
        return view('front.blogs.index',$data);
    }
 
@@ -30,9 +30,31 @@ class BlogController extends Controller
         }
 
         $data['selected_category'] = $category;
-        $data['blog_categories'] = Categories::where('type','=','blog-category')->get(['id','name']);
-        $data['blogs'] = $category->blogs()->where('status','=','Published')->orderByDesc('id')->paginate(12);
+        $data['blog_categories'] = Categories::where('type', '=', 'blog-category')->whereHas('blogs')->orderBy('order')->get(['id','name']);
+        $data['blogs'] = $category->blogs()->where('status','=','Published')->orderByDesc('id')->paginate(6);
         return view('front.blogs.category-wise',$data);
+    }
+
+    public function authorBlogs($author, Request $request)
+    {   
+        $author = Blog::where('author','=',$author)
+        ->orWhere('author','LIKE','%'.$author.'%')
+        ->first(['author']);
+        if(!$author)
+        {
+            return redirect('/newsroom');
+        }
+
+        $author = $author->author;
+
+        $data['selected_author'] = $author;
+        $data['blogs'] = Blog::where('author','=',$author)
+        ->orWhere('author','LIKE','%'.$author.'%')
+        ->where('status','=','Published')
+        ->orderByDesc('id')
+        ->paginate(6);
+
+        return view('front.blogs.author-wise',$data);
     }
 
     public function show($bid)
@@ -72,6 +94,6 @@ class BlogController extends Controller
         'status'=>'Unpublished',
       ]);
 
-      return redirect('/blogs/'.$blog->id);
+      return redirect('/newsroom/'.$blog->id);
    }
 }

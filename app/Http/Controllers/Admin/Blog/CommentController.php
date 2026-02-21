@@ -23,13 +23,13 @@ class CommentController extends Controller
     public function update(Blog $blog,Comment $comment,$status)
     {
         $comment->update(['status'=>$status]);
-        return redirect('/admin/blogs/'.$blog->id.'/comments');
+        return redirect('/admin/newsroom/'.$blog->id.'/comments');
     }
 
     public function destroy(Blog $blog,Comment $comment)
     {
         $comment->delete();
-        return redirect('/admin/blogs/'.$blog->id.'/comments');
+        return redirect('/admin/newsroom/'.$blog->id.'/comments');
     }
 
 

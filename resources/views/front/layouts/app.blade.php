@@ -69,8 +69,8 @@
 
   @include('front.includes.header')
 
-  @yield('content')
-
+  <main id="main-area-content">@yield('content')</main>
+  
   @include('front.includes.footer')
 
   <!-- Back to top button -->

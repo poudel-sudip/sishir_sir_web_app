@@ -67,6 +67,7 @@
                         <p class="text-success">Verified<span class="booking-badge">{{ $data->pdf_booking->verified }}</p>
                           <p class="text-warning">Unverified<span class="booking-badge-un">{{ $data->pdf_booking->unverified }}</p>
                             <p class="text-warning">Processing<span class="booking-badge-un">{{ $data->pdf_booking->processing }}</p>
+                            <p class="text-warning">Expired<span class="booking-badge-un">{{ $data->pdf_booking->expired }}</p>
                             </div>
                       <div class="text-right col-4">
                         <a class="view-from-dashboard-button" href="{{ $data->pdf_booking->link }}">View</a>
@@ -90,6 +91,7 @@
                         <p class="text-success">Verified<span class="booking-badge">{{ $data->exam_booking->verified }}</p>
                           <p class="text-warning">Unverified<span class="booking-badge-un">{{ $data->exam_booking->unverified }}</p>
                             <p class="text-warning">Processing<span class="booking-badge-un">{{ $data->exam_booking->processing }}</p>
+                            <p class="text-warning">Expired<span class="booking-badge-un">{{ $data->exam_booking->expired }}</p>
                             </div>
                       <div class="text-right col-4">
                         <a class="view-from-dashboard-button" href="{{ $data->exam_booking->link }}">View</a>
@@ -168,8 +170,9 @@
                     <div class="justify-content-between align-items-end flot-bar-wrapper">
                       <div class="row">
                         <div class="col-8 booking-un-verified">
-                          <p class="text-success">Verified<span class="booking-badge">{{ $exam->bookings()->where('status','=','Verified')->count() }}</p>
-                          <p class="text-warning">Unverified<span class="booking-badge-un">{{ $exam->bookings()->where('status','!=','Verified')->count() }}</p>
+                          <p class="text-success">Verified<span class="booking-badge bg-success">{{ $exam->bookings()->where('status','=','Verified')->count() }}</p>
+                          <p class="text-danger">Unverified<span class="booking-badge bg-danger">{{ $exam->bookings()->whereNotIn('status',['Verified','Expired'])->count() }}</p>
+                          <p class="text-warning">Expired<span class="booking-badge bg-warning">{{ $exam->bookings()->where('status','=','Expired')->count() }}</p>
                         </div>
                         <div class="text-right col-4 classroom-btn" style="padding-left: 0;padding-right:0">
                           <a class="btn btn-outline-info" title="View All" href="{{ url('/admin/exam-hall/'.$exam->id.'/bookings') }}">View</a>

@@ -23,7 +23,8 @@
                         <form method="POST" action="/admin/pdf-bank-bookings/{{$booking->id}}" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
-
+                            <input type="hidden" name="page_type" value="{{$page_type ?? null}}">
+                            
                             <div class="form-group row">
                                 <label for="bookingid" class="col-md-4 col-form-label">{{ __('Booking ID') }}</label>
 

@@ -22,10 +22,11 @@ class ExamHallBookingController extends Controller
         return view('admin.examhall.booking.index',compact('bookings'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $page_type = $request->page_type ?? null;
         $categories= ExamHallCategories::where('status','Active')->get();
-        return view('admin.examhall.booking.create',compact('categories'));
+        return view('admin.examhall.booking.create',compact('categories','page_type'));
     }
 
     public function show(ExamHallBookings $booking)
@@ -33,9 +34,10 @@ class ExamHallBookingController extends Controller
         return view('admin.examhall.booking.show',compact('booking'));
     }
 
-    public function edit(ExamHallBookings $booking)
+    public function edit(ExamHallBookings $booking, Request $request)
     {
-        return view('admin.examhall.booking.edit',compact('booking'));
+        $page_type = $request->page_type ?? null;
+        return view('admin.examhall.booking.edit',compact('booking','page_type'));
     }
 
     public function store(Request $request)
@@ -101,9 +103,15 @@ class ExamHallBookingController extends Controller
             ]);
         }
 
-        if($booking->category)
+        $category_id = null;
+        if($request->has('page_type') && $request->page_type == 'group')
         {
-            return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
+            $category_id = $booking->category->id ?? null;
+        }
+
+        if($category_id)
+        {
+            return redirect('/admin/exam-hall/'.$category_id.'/bookings');
         }
 
         return redirect('/admin/exam-hall/bookings');
@@ -163,9 +171,15 @@ class ExamHallBookingController extends Controller
             ]);
         }
 
-        if($booking->category)
+        $category_id = null;
+        if($request->has('page_type') && $request->page_type == 'group')
         {
-            return redirect('/admin/exam-hall/'.$booking->category_id.'/bookings');
+            $category_id = $booking->category->id ?? null;
+        }
+
+        if($category_id)
+        {
+            return redirect('/admin/exam-hall/'.$category_id.'/bookings');
         }
 
         return redirect('/admin/exam-hall/bookings');
@@ -173,7 +187,12 @@ class ExamHallBookingController extends Controller
 
     public function destroy(Request $request, ExamHallBookings $booking)
     {
-        $category_id = $booking->category->id ?? null;
+
+        $category_id = null;
+        if($request->has('page_type') && $request->page_type == 'group')
+        {
+            $category_id = $booking->category->id ?? null;
+        }
 
         $booking->delete();
 

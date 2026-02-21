@@ -398,6 +398,49 @@
                 </nav> --}}
 
                 <nav>
+                    <div class="d-flex align-items-center justify-content-center footer-imp-link">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper category-swiper nav nav-tabs"> 
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="/public-exams"> <button class="nav-link border active">All</button> </a>
+                                </div>
+                                @foreach($examhall_categories as $cat)
+                                    <div class="swiper-slide">
+                                        <a href="/exam-hall/category/{{$cat->id}}"> <button class="nav-link border">{{$cat->name}}</button> </a>
+                                    </div>
+                                @endforeach
+                                <div class="swiper-slide">
+                                    <a href="/public-exams"> <button class="nav-link border">Free</button> </a>
+                                </div>
+                                <div class="swiper-slide">
+                                    <a href="/results"> <button class="nav-link border">Results</button> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </nav>
+
+                <div class="shadow border-danger border border-top-0 border-2 p-1">
+                    <div class="row align-items-stretch">
+                        @foreach ($premium_exams as $row)
+                            <div class="col-sm-6 col-md-3 mb-3">
+                                <div class="seller-item border-primary rounded border border-2 h-100">
+                                    <div class="seller-header text-center h-100">
+                                        <a href="/exam-hall/premium/{{$row->id}}">
+                                            <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
+                                        </a>
+                                        <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->id}}">{{($row->title)}}</a></h6>
+                                        <h6 class="small">{{$row->mcq_count}} MCQ Sets </h6>
+
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                {{-- <nav>
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="swiper-button-prev"></div>
                         <div class="swiper category-swiper flex-1 nav nav-tabs" role="tablist">
@@ -453,9 +496,9 @@
                         <div class="swiper-button-next"></div>
                     </div>
                     
-                </nav>
+                </nav> --}}
 
-                <div class="tab-content shadow border-danger border border-2 p-1" id="nav-mock-test-tabContent" style="border-top:0px !important;">
+                {{-- <div class="tab-content shadow border-danger border border-2 p-1" id="nav-mock-test-tabContent" style="border-top:0px !important;">
                     @php($isFirstElement = true)
                     @foreach($examhall_categories as $cat)
                         <div class="tab-pane fade  {{$isFirstElement ? 'active show' : ''}} " id="nav-mock-test-{{ $cat->id }}" role="tabpanel" aria-labelledby="nav-mock-test-{{ $cat->id }}-tab" tabindex="0">
@@ -510,7 +553,7 @@
                     <div class="text-end">
                         <a href="/public-exams" class="btn btn-sm" style="background:#0C2B64; color:#fff;">View All Exams...</a>
                     </div>
-                </div>
+                </div> --}}
                 
             </div>
         </section>
@@ -561,6 +604,45 @@
                 </nav> --}}
 
                 <nav>
+                    <div class="d-flex align-items-center justify-content-center footer-imp-link">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper category-swiper nav nav-tabs"> 
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="/pdf-banks"> <button class="nav-link border active">All</button> </a>
+                                </div>
+                                @foreach($pdf_bank_categories as $cat)
+                                    <div class="swiper-slide">
+                                        <a href="/pdf-banks/category/{{$cat->id}}"> <button class="nav-link border">{{$cat->name}}</button> </a>
+                                    </div>
+                                @endforeach
+                               
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </nav>
+
+                <div class="shadow border-danger border border-top-0 border-2 p-1">
+                    <div class="row align-items-stretch">
+                        @foreach ($pdf_bank_ebooks as $row)
+                            <div class="col-sm-6 col-md-3 mb-3">
+                                <div class="seller-item border-primary rounded border border-2 h-100">
+                                    <div class="seller-header text-center h-100">
+                                        <a href="/pdf-banks/bank/{{$row->id}}">
+                                            <img src="/storage/{{$row->thumbnail}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
+                                        </a>
+                                        <h6 class="mt-3"><a href="/pdf-banks/bank/{{$row->id}}">{{($row->title)}}</a></h6>
+                                        <h6 class="small">{{$row->type == 'set' ? $row->pdf_count : '1'}} PDF Sets </h6>
+
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                {{-- <nav>
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="swiper-button-prev"></div>
                         <div class="swiper category-swiper flex-1 nav nav-tabs" role="tablist">
@@ -591,9 +673,9 @@
                         <div class="swiper-button-next"></div>
                     </div>
                     
-                </nav>
+                </nav> --}}
 
-                <div class="tab-content shadow border-danger border border-2 p-1" id="nav-pdf-bank-tabContent" style="border-top:0px !important;">
+                {{-- <div class="tab-content shadow border-danger border border-2 p-1" id="nav-pdf-bank-tabContent" style="border-top:0px !important;">
                     @php($isFirstElement = true)
                     @foreach($pdf_bank_categories as $cat)
                         <div class="tab-pane fade  {{$isFirstElement ? 'active show' : ''}} " id="nav-pdf-bank-{{ $cat->id }}" role="tabpanel" aria-labelledby="nav-pdf-bank-{{ $cat->id }}-tab" tabindex="0">
@@ -621,7 +703,7 @@
                     <div class="text-end">
                         <a href="/pdf-banks" class="btn btn-sm" style="background:#0C2B64; color:#fff;">View all eBooks...</a>
                     </div>
-                </div>
+                </div> --}}
                 
             </div>
         </section>
@@ -642,7 +724,7 @@
         <div class="container-fluid px-md-5">
             <div class="row">
                 <div class="col-md-12 relative">
-                    <h2 class="home-section-heading">Blogs</h2>
+                    <h2 class="home-section-heading">Newsroom</h2>
                 </div>
             </div>
 
@@ -654,11 +736,11 @@
                             <div class="swiper category-swiper nav nav-tabs"> 
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <a href="/blogs"> <button class="nav-link border active">All</button> </a>
+                                        <a href="/newsroom"> <button class="nav-link border active">All</button> </a>
                                     </div>
                                     @foreach($blog_categories as $cat)
                                         <div class="swiper-slide">
-                                            <a href="/blogs-category/{{$cat->id}}"> <button class="nav-link border">{{$cat->name}}</button> </a>
+                                            <a href="/newsroom-category/{{$cat->id}}"> <button class="nav-link border">{{$cat->name}}</button> </a>
                                         </div>
                                     @endforeach
                                 </div>
@@ -676,14 +758,14 @@
                         @foreach ($blogs->take(5) as $blog)
                             <div class="col-md-6 col-6 mb-3 @if ($loop->first) hidden @endif">
                                 <div class="blog-item p-2 rounded">
-                                    <a href="/blogs/{{$blog->id}}">
+                                    <a href="/newsroom/{{$blog->id}}">
                                         <div class="blog-list-img">
                                             <img src="/storage/{{$blog->image}}" class="img-fluid" alt="{{$blog->title}}">
                                         </div>
                                     </a>
-                                    <a href="/blogs/{{$blog->id}}"><h5 class="mt-2 blog-title">{{$blog->title}}</h5></a>
+                                    <a href="/newsroom/{{$blog->id}}"><h5 class="mt-2 blog-title">{{$blog->title}}</h5></a>
                                     <small class="text-primary">Published: {{date('Y-m-d',strtotime($blog->created_at))}}</small>
-                                    <small class="text-success d-block">By: {{$blog->author}}</small>
+                                    <small class="text-success d-block">By: <a class="text-success" href="/newsroom-author/{{$blog->author}}">{{$blog->author}}</a></small>
                                 </div>
                             </div>
                         @endforeach
@@ -695,7 +777,7 @@
                     <div class="col-md-4 text-center">
                         <div class="blog-section rounded">
                             <div class="blog-header">
-                                <a href="/blogs/{{$last_blog->id}}">
+                                <a href="/newsroom/{{$last_blog->id}}">
                                     <img src="/storage/{{$last_blog->image}}" class="img-fluid" alt="{{$last_blog->title}}">
                                 </a>
                             </div>
@@ -704,10 +786,10 @@
                                 <div class="blog-footer-details">{!! Str::limit(strip_tags($last_blog->description), 500) !!}</div>
                                 <div class="d-flex justify-content-between mt-2">
                                     <small class="text-primary">Published: {{date('Y-m-d',strtotime($last_blog->created_at))}}</small>
-                                    <small class="text-success">By: {{$last_blog->author}}</small>
+                                    <small class="text-success">By: <a class="text-success" href="/newsroom-author/{{$last_blog->author}}">{{$last_blog->author}}</a></small>
                                 </div>
                                 <div class="blog-details mt-3">
-                                    <a href="/blogs/{{$last_blog->id}}" class="btn">View Details</a>
+                                    <a href="/newsroom/{{$last_blog->id}}" class="btn">View Details</a>
                                 </div>
                             </div>
                         </div>
@@ -720,14 +802,14 @@
                         @foreach ($blogs->skip(5)->take(4) as $blog)
                             <div class="col-md-6 col-6 mb-3">
                                 <div class="blog-item rounded p-2">
-                                    <a href="/blogs/{{$blog->id}}">
+                                    <a href="/newsroom/{{$blog->id}}">
                                         <div class="blog-list-img">
                                             <img src="/storage/{{$blog->image}}" class="img-fluid" alt="{{$blog->title}}">
                                         </div>
                                     </a>
-                                    <a href="/blogs/{{$blog->id}}"><h5 class="mt-2 blog-title">{{$blog->title}}</h5></a>
+                                    <a href="/newsroom/{{$blog->id}}"><h5 class="mt-2 blog-title">{{$blog->title}}</h5></a>
                                     <small class="text-primary">Published: {{date('Y-m-d',strtotime($blog->created_at))}}</small>
-                                    <small class="text-success d-block">By: {{$blog->author}}</small>
+                                    <small class="text-success d-block">By: <a class="text-success" href="/newsroom-author/{{$blog->author}}">{{$blog->author}}</a></small>
                                 </div>
                             </div>
                         @endforeach
@@ -735,7 +817,7 @@
                 </div>
             </div>
             <div class="text-end">
-                <a href="/blogs" class="btn btn-sm" style="background:#0C2B64;color:#fff">View all Blogs...</a>
+                <a href="/newsroom" class="btn btn-sm" style="background:#0C2B64;color:#fff">View all News...</a>
             </div>
         </div>
     </section>
@@ -895,6 +977,25 @@
                         <h2 class="home-section-heading">Health Days</h2>
                     </div>
                 </div>
+
+                <nav>
+                    <div class="d-flex align-items-center justify-content-center footer-imp-link">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper category-swiper nav nav-tabs"> 
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="/health-days"> <button class="nav-link border active">All</button> </a>
+                                </div>
+                                @foreach($healthDayCategories as $tag)
+                                    <div class="swiper-slide">
+                                        <a href="/health-days?selected={{$tag->id}}"> <button class="nav-link border">{{$tag->name}}</button> </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </nav>
                 
                 <div class="px-md-5">
                     @foreach ($healthDays as $day)

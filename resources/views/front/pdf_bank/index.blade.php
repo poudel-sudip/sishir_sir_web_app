@@ -33,10 +33,10 @@
             <div class="row course-details">
                 <div class="col-md-3">
                     <div class="side-navbar border border-2 border-primary">
-                        <h5><a class="d-block" href="{{ url('/pdf-banks') }}">All eBooks</a></h5>
+                        <h5><a class="d-block active" href="{{ url('/pdf-banks') }}">All eBooks</a></h5>
                         <ul class="course-nav" style="height:auto; min-height: 370px; ">
                             @foreach($pdf_bank_categories as $cat)
-                                <li><a class="d-block" href="/pdf-banks/category/{{$cat->id}}">{{$cat->name}}</a></li>
+                                <li class="{{ $pdf_category && $pdf_category->id == $cat->id ? 'active' : '' }}"><a class="d-block" href="/pdf-banks/category/{{$cat->id}}">{{$cat->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>

@@ -23,7 +23,7 @@
                       <div class="custon-table-header">
                           <h4 class="card-title">Bookings | {{$group->title}}</h4>
                             <div class="text-right">
-                                <a href="{{ ('/admin/pdf-bank-bookings/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Booking </button></a>
+                                <a href="{{ ('/admin/pdf-bank-bookings/create?page_type=group') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Booking </button></a>
                             </div>
                       </div>
                       <div class="table-responsive table-responsive-md">
@@ -49,8 +49,8 @@
                                 <td>{{$booking->id}}</td>
                                 <td class="classroom-btn" width="150">
                                     <a href="/admin/pdf-bank-bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                    <a href="/admin/pdf-bank-bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
-                                    <form id="delete-form-{{$booking->id}}" action="/admin/pdf-bank-bookings/{{$booking->id}}" method="POST" style="display: inline">
+                                    <a href="/admin/pdf-bank-bookings/{{$booking->id}}/edit?page_type=group" class="btn btn-danger">Edit</a>
+                                    <form id="delete-form-{{$booking->id}}" action="/admin/pdf-bank-bookings/{{$booking->id}}?page_type=group" method="POST" style="display: inline">
                                         @csrf
                                         @method('DELETE')
                                         <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>

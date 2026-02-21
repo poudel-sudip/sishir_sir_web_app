@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/moderator/home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ url('/moderator/blogs') }}">Blogs</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('/moderator/newsroom') }}">Newsroom</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Comments</li>
                 </ol>
             </nav>
@@ -57,17 +57,17 @@
                                             <div class="dropdown">
                                                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
-                                                    <form id="publish-form-{{$comment->id}}" action="/moderator/blogs/{{$blog->id}}/comment/{{$comment->id}}/Published" method="POST">
+                                                    <form id="publish-form-{{$comment->id}}" action="/moderator/newsroom/{{$blog->id}}/comment/{{$comment->id}}/Published" method="POST">
                                                         @csrf
                                                         @method('PATCH')
                                                         <a href="javascript:{}" onclick="javascript:publishData({{$comment->id}});" class="text-primary dropdown-item">Publish</a>
                                                     </form>
-                                                    <form id="unpublish-form-{{$comment->id}}" action="/moderator/blogs/{{$blog->id}}/comment/{{$comment->id}}/Unpublished" method="POST">
+                                                    <form id="unpublish-form-{{$comment->id}}" action="/moderator/newsroom/{{$blog->id}}/comment/{{$comment->id}}/Unpublished" method="POST">
                                                         @csrf
                                                         @method('PUT')
                                                         <a href="javascript:{}" onclick="javascript:unPublish({{$comment->id}});" class="text-warning dropdown-item">UnPublish</a>
                                                     </form>
-                                                    <form id="delete-form-{{$comment->id}}" action="/moderator/blogs/{{$blog->id}}/comment/{{$comment->id}}/delete" method="POST">
+                                                    <form id="delete-form-{{$comment->id}}" action="/moderator/newsroom/{{$blog->id}}/comment/{{$comment->id}}/delete" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <a href="javascript:{}" onclick="javascript:deleteData({{$comment->id}});" class="text-danger dropdown-item">Delete</a>

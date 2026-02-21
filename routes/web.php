@@ -219,25 +219,25 @@ Route::delete('/admin/pdf-bank-bookings/{booking}', 'App\Http\Controllers\Admin\
 //admin merchant wise bookings
 Route::get('/admin/booking-through-merchant', 'App\Http\Controllers\Admin\MerchantBookingController@index')->middleware('role:Admin');
 
-//blogs category managing by admin
-Route::get('/admin/blogs/categories', 'App\Http\Controllers\Admin\Blog\CategoryController@index')->middleware('role:Admin');
-Route::post('/admin/blogs/categories', 'App\Http\Controllers\Admin\Blog\CategoryController@store')->middleware('role:Admin');
-Route::patch('/admin/blogs/categories', 'App\Http\Controllers\Admin\Blog\CategoryController@update')->middleware('role:Admin');
-Route::delete('/admin/blogs/categories/{category}', 'App\Http\Controllers\Admin\Blog\CategoryController@destroy')->middleware('role:Admin');
-Route::get('/admin/blogs/categories/{category}/posts', 'App\Http\Controllers\Admin\Blog\CategoryController@blogPosts')->middleware('role:Admin');
+//newsroom category managing by admin
+Route::get('/admin/newsroom/categories', 'App\Http\Controllers\Admin\Blog\CategoryController@index')->middleware('role:Admin');
+Route::post('/admin/newsroom/categories', 'App\Http\Controllers\Admin\Blog\CategoryController@store')->middleware('role:Admin');
+Route::patch('/admin/newsroom/categories', 'App\Http\Controllers\Admin\Blog\CategoryController@update')->middleware('role:Admin');
+Route::delete('/admin/newsroom/categories/{category}', 'App\Http\Controllers\Admin\Blog\CategoryController@destroy')->middleware('role:Admin');
+Route::get('/admin/newsroom/categories/{category}/posts', 'App\Http\Controllers\Admin\Blog\CategoryController@blogPosts')->middleware('role:Admin');
 
-//blogs managing by admin
-Route::get('/admin/blogs', 'App\Http\Controllers\Admin\Blog\BlogController@index')->middleware('role:Admin');
-Route::get('/admin/blogs/create', 'App\Http\Controllers\Admin\Blog\BlogController@create')->middleware('role:Admin');
-Route::post('/admin/blogs', 'App\Http\Controllers\Admin\Blog\BlogController@store')->middleware('role:Admin');
-Route::get('/admin/blogs/{blog}', 'App\Http\Controllers\Admin\Blog\BlogController@show')->middleware('role:Admin');
-Route::get('/admin/blogs/{blog}/edit', 'App\Http\Controllers\Admin\Blog\BlogController@edit')->middleware('role:Admin');
-Route::patch('/admin/blogs/{blog}', 'App\Http\Controllers\Admin\Blog\BlogController@update')->middleware('role:Admin');
-Route::delete('/admin/blogs/{blog}', 'App\Http\Controllers\Admin\Blog\BlogController@destroy')->middleware('role:Admin');
-Route::get('/admin/blogs/{blog}/comments', 'App\Http\Controllers\Admin\Blog\CommentController@index')->middleware('role:Admin');
-Route::patch('/admin/blogs/{blog}/comment/{comment}/{status}', 'App\Http\Controllers\Admin\Blog\CommentController@update')->middleware('role:Admin');
-Route::put('/admin/blogs/{blog}/comment/{comment}/{status}', 'App\Http\Controllers\Admin\Blog\CommentController@update')->middleware('role:Admin');
-Route::delete('/admin/blogs/{blog}/comment/{comment}/delete', 'App\Http\Controllers\Admin\Blog\CommentController@destroy')->middleware('role:Admin');
+//newsroom managing by admin
+Route::get('/admin/newsroom', 'App\Http\Controllers\Admin\Blog\BlogController@index')->middleware('role:Admin');
+Route::get('/admin/newsroom/create', 'App\Http\Controllers\Admin\Blog\BlogController@create')->middleware('role:Admin');
+Route::post('/admin/newsroom', 'App\Http\Controllers\Admin\Blog\BlogController@store')->middleware('role:Admin');
+Route::get('/admin/newsroom/{blog}', 'App\Http\Controllers\Admin\Blog\BlogController@show')->middleware('role:Admin');
+Route::get('/admin/newsroom/{blog}/edit', 'App\Http\Controllers\Admin\Blog\BlogController@edit')->middleware('role:Admin');
+Route::patch('/admin/newsroom/{blog}', 'App\Http\Controllers\Admin\Blog\BlogController@update')->middleware('role:Admin');
+Route::delete('/admin/newsroom/{blog}', 'App\Http\Controllers\Admin\Blog\BlogController@destroy')->middleware('role:Admin');
+Route::get('/admin/newsroom/{blog}/comments', 'App\Http\Controllers\Admin\Blog\CommentController@index')->middleware('role:Admin');
+Route::patch('/admin/newsroom/{blog}/comment/{comment}/{status}', 'App\Http\Controllers\Admin\Blog\CommentController@update')->middleware('role:Admin');
+Route::put('/admin/newsroom/{blog}/comment/{comment}/{status}', 'App\Http\Controllers\Admin\Blog\CommentController@update')->middleware('role:Admin');
+Route::delete('/admin/newsroom/{blog}/comment/{comment}/delete', 'App\Http\Controllers\Admin\Blog\CommentController@destroy')->middleware('role:Admin');
 
 //admin sliders mgmt
 Route::get('/admin/sliders', 'App\Http\Controllers\Admin\SliderController@index')->middleware('role:Admin');
@@ -622,18 +622,18 @@ Route::delete('/admin/play-puzzle/image/{question}', 'App\Http\Controllers\Admin
 //final routes for moderator panel section
 Route::get('/moderator/home', 'App\Http\Controllers\Moderator\HomeController@index')->middleware('role:Moderator');
 
-//blogs managing by moderator
-Route::get('/moderator/blogs', 'App\Http\Controllers\Moderator\BlogController@index')->middleware('role:Moderator');
-Route::get('/moderator/blogs/create', 'App\Http\Controllers\Moderator\BlogController@create')->middleware('role:Moderator');
-Route::post('/moderator/blogs', 'App\Http\Controllers\Moderator\BlogController@store')->middleware('role:Moderator');
-Route::get('/moderator/blogs/{blog}', 'App\Http\Controllers\Moderator\BlogController@show')->middleware('role:Moderator');
-Route::get('/moderator/blogs/{blog}/edit', 'App\Http\Controllers\Moderator\BlogController@edit')->middleware('role:Moderator');
-Route::patch('/moderator/blogs/{blog}', 'App\Http\Controllers\Moderator\BlogController@update')->middleware('role:Moderator');
-Route::delete('/moderator/blogs/{blog}', 'App\Http\Controllers\Moderator\BlogController@destroy')->middleware('role:Moderator');
-Route::get('/moderator/blogs/{blog}/comments', 'App\Http\Controllers\Moderator\BlogController@indexComment')->middleware('role:Moderator');
-Route::patch('/moderator/blogs/{blog}/comment/{comment}/{status}', 'App\Http\Controllers\Moderator\BlogController@updateComment')->middleware('role:Moderator');
-Route::put('/moderator/blogs/{blog}/comment/{comment}/{status}', 'App\Http\Controllers\Moderator\BlogController@updateComment')->middleware('role:Moderator');
-Route::delete('/moderator/blogs/{blog}/comment/{comment}/delete', 'App\Http\Controllers\Moderator\BlogController@destroyComment')->middleware('role:Moderator');
+//newsroom managing by moderator
+Route::get('/moderator/newsroom', 'App\Http\Controllers\Moderator\BlogController@index')->middleware('role:Moderator');
+Route::get('/moderator/newsroom/create', 'App\Http\Controllers\Moderator\BlogController@create')->middleware('role:Moderator');
+Route::post('/moderator/newsroom', 'App\Http\Controllers\Moderator\BlogController@store')->middleware('role:Moderator');
+Route::get('/moderator/newsroom/{blog}', 'App\Http\Controllers\Moderator\BlogController@show')->middleware('role:Moderator');
+Route::get('/moderator/newsroom/{blog}/edit', 'App\Http\Controllers\Moderator\BlogController@edit')->middleware('role:Moderator');
+Route::patch('/moderator/newsroom/{blog}', 'App\Http\Controllers\Moderator\BlogController@update')->middleware('role:Moderator');
+Route::delete('/moderator/newsroom/{blog}', 'App\Http\Controllers\Moderator\BlogController@destroy')->middleware('role:Moderator');
+Route::get('/moderator/newsroom/{blog}/comments', 'App\Http\Controllers\Moderator\BlogController@indexComment')->middleware('role:Moderator');
+Route::patch('/moderator/newsroom/{blog}/comment/{comment}/{status}', 'App\Http\Controllers\Moderator\BlogController@updateComment')->middleware('role:Moderator');
+Route::put('/moderator/newsroom/{blog}/comment/{comment}/{status}', 'App\Http\Controllers\Moderator\BlogController@updateComment')->middleware('role:Moderator');
+Route::delete('/moderator/newsroom/{blog}/comment/{comment}/delete', 'App\Http\Controllers\Moderator\BlogController@destroyComment')->middleware('role:Moderator');
 
 //moderator mcq exam category
 Route::get('/moderator/exam-category', 'App\Http\Controllers\Moderator\ExamController@categoryIndex')->middleware('role:Moderator');
@@ -837,11 +837,12 @@ Route::delete('/discussion-forum', 'App\Http\Controllers\FrontController@discuss
 Route::get('/image-gallery', 'App\Http\Controllers\FrontController@imageGallery');
 
 
-// front blogs
-Route::get('/blogs', 'App\Http\Controllers\Blog\BlogController@index');
-Route::get('/blogs-category/{cat}', 'App\Http\Controllers\Blog\BlogController@categoryBlogs');
-Route::get('/blogs/{bid}', 'App\Http\Controllers\Blog\BlogController@show');
-Route::post('/blogs/{blog}/comments/add', 'App\Http\Controllers\Blog\BlogController@addComments');
+// front newsroom
+Route::get('/newsroom', 'App\Http\Controllers\Blog\BlogController@index');
+Route::get('/newsroom-category/{cat}', 'App\Http\Controllers\Blog\BlogController@categoryBlogs');
+Route::get('/newsroom-author/{author}', 'App\Http\Controllers\Blog\BlogController@authorBlogs');
+Route::get('/newsroom/{bid}', 'App\Http\Controllers\Blog\BlogController@show');
+Route::post('/newsroom/{blog}/comments/add', 'App\Http\Controllers\Blog\BlogController@addComments');
 
 //front public exams mgmt
 Route::get('/public-exams', 'App\Http\Controllers\PublicExamController@examlist');

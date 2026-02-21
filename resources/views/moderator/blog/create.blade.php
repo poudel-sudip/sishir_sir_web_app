@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/moderator/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/moderator/blogs') }}">Blogs</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/moderator/newsroom') }}">Newsroom</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Add Blog </li>
                 </ol>
             </nav>
@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header">Add Blog</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ ('/moderator/blogs') }}" enctype="multipart/form-data" class="forms-sample">
+                        <form method="POST" action="{{ ('/moderator/newsroom') }}" enctype="multipart/form-data" class="forms-sample">
                             @csrf
 
                             <div class="form-group row">

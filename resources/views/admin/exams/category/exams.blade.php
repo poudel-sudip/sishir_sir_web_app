@@ -46,11 +46,11 @@
                           <tr>
                             <td>{{ $i }}</td>
                             {{-- <td>{{ ucwords($exam->category->title ?? '-') }}</td> --}}
-                            <td>{{ $exam->name }}</td>
+                            <td class="text-wrap">{{ $exam->name }}</td>
                             {{-- <td>{{ $exam->exam_date }}</td> --}}
                             <td>{{ $exam->exam_time.':00' }} </td>
                             <td> <a href="/admin/exams/{{$exam->id}}/questions"> Count({{ $exam->questions->count() }}) </a></td>
-                            <td> {{$exam->creator->name ?? '-'}} </td>
+                            <td class="text-wrap"> {{$exam->creator->name ?? '-'}} </td>
                             <td>
                               @if($exam->status == 'Inactive')
                               <span class="text-danger">{{$exam->status}}</span>

@@ -9,7 +9,7 @@
 @endif
 
 
-@php($important_footer_links = App\Models\Categories::where(['status'=>'Active','type'=>'imp_link'])->whereHas('imp_links')->get())
+@php($important_footer_links = App\Models\Categories::where(['status'=>'Active','type'=>'imp_link'])->whereHas('imp_links')->orderBy('order')->get())
 @if($important_footer_links->count())
 <section class="footer-imp-link mt-5 mb-1">
   <div class="container-fluid">

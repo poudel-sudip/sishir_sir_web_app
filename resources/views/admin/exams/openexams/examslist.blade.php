@@ -43,11 +43,11 @@
                             @foreach ($exams as $exam)
                           <tr>
                             <td>{{ $i }}</td>
-                            <td>{{ $exam->exam->name ?? '' }}</td>
+                            <td class="text-wrap">{{ $exam->exam->name ?? '' }}</td>
                             <td>{{ date('Y-m-d',strtotime($exam->created_at)) }}</td>
-                            <td>{{ ($exam->exam->exam_time ?? '00:00').':00'  }} </td>
+                            <td class="text-wrap">{{ ($exam->exam->exam_time ?? '00:00').':00'  }} </td>
                             <td> Count({{ $exam->exam->questions()->count() ?? 0 }}) </td>
-                            <td> {{$exam->creator->name ?? '-'}} </td>
+                            <td class="text-wrap"> {{$exam->creator->name ?? '-'}} </td>
                             <td> <a href="/admin/open-exams/{{$exam->id}}/results">{{$exam->result_status}} / Count({{ $exam->results->count() }}) </a></td>
                             
                             <td class="classroom-btn" width="160">

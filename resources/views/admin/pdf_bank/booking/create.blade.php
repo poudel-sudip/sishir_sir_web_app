@@ -22,6 +22,8 @@
                     <div class="card-body">
                         <form method="POST" action="/admin/pdf-bank-bookings" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="page_type" value="{{$page_type ?? null}}">
+                            
                             <div class="form-group row">
                                 <label for="group_name" class="col-md-5 col-form-label">{{ __('eBook Group') }}</label>
                                 <div class="col-md-7">

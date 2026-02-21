@@ -22,6 +22,7 @@
                     <div class="card-body">
                         <form method="POST" action="/admin/exam-hall/bookings" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="page_type" value="{{$page_type ?? null}}">
 
                             <div class="form-group row">
                                 <label for="userID" class="col-md-4 col-form-label">{{ __('User ID') }}</label>

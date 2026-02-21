@@ -48,7 +48,7 @@
                         <h5 class="text-center text-light"> <a href="/public-exams" class="d-block">All Groups</a> </h5>
                         <ul class="course-nav" style="height:auto; min-height: 370px; ">
                             @foreach($exam_categories as $row)
-                                <li>
+                                <li class="{{ $exam_group && $exam_group->id == $row->id ? 'active' : '' }}">
                                     <a href="/exam-hall/category/{{$row->id}}" class="d-block">
                                         <i class="fas fa-star pr-2 text-light"></i>
                                         {{$row->name}}

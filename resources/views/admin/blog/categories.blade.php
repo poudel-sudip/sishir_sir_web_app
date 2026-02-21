@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-  Blogs Categories
+  Newsroom Categories
 @endsection
 
 @section('content')
   <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title"> Blogs Categories</h3>
+      <h3 class="page-title"> Newsroom Categories</h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-          <li class="breadcrumb-item active" aria-current="page"> Blogs Categories </li>
+          <li class="breadcrumb-item active" aria-current="page"> Newsroom Categories </li>
         </ol>
       </nav>
     </div>
@@ -20,7 +20,7 @@
         <div class="card">
           <div class="card-body">
             <div class="custon-table-header">
-              <h4 class="card-title"> Blogs Categories </h4>
+              <h4 class="card-title"> Newsroom Categories </h4>
               <div class="text-right">
                 <a class="btn btn-sm ml-3 btn-success" href="#add_category" data-bs-toggle="modal" data-bs-target="#add_category" data-toggle="modal" data-target="#add_category">Add Category</a>
               </div>
@@ -31,7 +31,8 @@
                   <tr>
                     <th>SN</th>
                     <th>Category Name</th>
-                    <th>Blogs</th>
+                    <th>Order</th>
+                    <th>Newsroom</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -41,10 +42,11 @@
                   <tr>
                     <td width="100">{{$i}}</td>
                     <td class="text-wrap">{{ucwords($cat->name)}}</td>
-                    <td class="text-nowrap"> <a href="/admin/blogs/categories/{{$cat->id}}/posts" class="btn-sm btn-info">Blogs ({{$cat->blogs()->count()}}) </a> </td>
+                    <td class="text-wrap">{{$cat->order}}</td>
+                    <td class="text-nowrap"> <a href="/admin/newsroom/categories/{{$cat->id}}/posts" class="btn-sm btn-info">Newsroom ({{$cat->blogs()->count()}}) </a> </td>
                     <td class="classroom-btn" width="100">
-                      <a class="edit_category btn btn-warning" href="#edit_category" category-id="{{$cat->id}}" category-name="{{$cat->name}}" data-bs-toggle="modal" data-bs-target="#edit_category" data-toggle="modal" data-target="#edit_category">Edit</a>
-                      <form id="delete-form-{{$cat->id}}" action="/admin/blogs/categories/{{$cat->id}}" method="POST" style="display: inline">
+                      <a class="edit_category btn btn-warning" href="#edit_category" category-id="{{$cat->id}}" category-name="{{$cat->name}}" category-order="{{$cat->order}}" data-bs-toggle="modal" data-bs-target="#edit_category" data-toggle="modal" data-target="#edit_category">Edit</a>
+                      <form id="delete-form-{{$cat->id}}" action="/admin/newsroom/categories/{{$cat->id}}" method="POST" style="display: inline">
                         @csrf
                         @method('DELETE')
                         <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
@@ -68,11 +70,11 @@
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title"> Add New Blog Category </h5>
+          <h5 class="modal-title"> Add New Newsroom Category </h5>
           <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="/admin/blogs/categories" enctype="multipart/form-data">
+          <form method="POST" action="/admin/newsroom/categories" enctype="multipart/form-data">
             @csrf
                 
             <div class="form-group row my-0">
@@ -82,6 +84,20 @@
                 <input id="category" type="text" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" required >
 
                 @error('category')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+
+            <div class="form-group row my-0">
+              <label for="order" class="col-md-4 col-form-label">{{ __(' Category Order') }}</label>
+
+              <div class="col-md-8">
+                <input id="order" type="number" class="form-control @error('order') is-invalid @enderror" name="order" value="{{ old('order') ?? 1 }}" required >
+
+                @error('order')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
@@ -110,11 +126,11 @@
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title"> Edit Blog Category </h5>
+          <h5 class="modal-title"> Edit Newsroom Category </h5>
           <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="/admin/blogs/categories" enctype="multipart/form-data">
+          <form method="POST" action="/admin/newsroom/categories" enctype="multipart/form-data">
             @csrf
             @method('PATCH')   
 
@@ -139,6 +155,20 @@
                 <input id="category_name" type="text" class="form-control @error('category_name') is-invalid @enderror" name="category_name" value="{{ old('category_name') }}" required >
 
                 @error('category_name')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+
+            <div class="form-group row my-0">
+              <label for="category_order" class="col-md-4 col-form-label">{{ __(' Category Order') }}</label>
+
+              <div class="col-md-8">
+                <input id="category_order" type="number" class="form-control @error('order') is-invalid @enderror" name="order" value="{{ old('order') ?? 1 }}" required >
+
+                @error('order')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
@@ -190,11 +220,14 @@
     $(document).on('click', '.edit_category', function(){
       const id=$(this).attr('category-id');
       const name=$(this).attr('category-name');
+      const order=$(this).attr('category-order');
       $('#category_id').val("");
       $('#category_name').val("");
+      $('#category_order').val("");
       
       $('#category_id').val(id);
       $('#category_name').val(name);
+      $('#category_order').val(order);
     })
   </script> 
 @endsection

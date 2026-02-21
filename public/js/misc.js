@@ -89,6 +89,37 @@ function postDataWithFetch(url = '', data = {}) {
     });
 }
 
+function calculateReadingTime() {
+
+  const mainContent = document.getElementById("main-area-content");
+  if (!mainContent) {
+    console.warn("No element with ID 'main-area-content' found!");
+    return;
+  }
+
+  const WORDS_PER_MINUTE = 250; // Average reading speed
+
+  const content = mainContent.cloneNode(true);
+
+  // Remove non-readable elements
+  const elementsToRemove = content.querySelectorAll(
+    "script, style, noscript, svg, canvas, iframe, video, audio"
+  );
+  elementsToRemove.forEach(el => el.remove());
+
+  // Get text
+  const text = content.textContent || "";
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  const wordCount = words.length;
+
+  // Base reading time (text only)
+  let minutes = wordCount / WORDS_PER_MINUTE;
+
+  return {
+    estimatedMinutes: Math.ceil(minutes)
+  };
+}
+
 
 $('.eb-seller-carousel').owlCarousel({
   items: 5,

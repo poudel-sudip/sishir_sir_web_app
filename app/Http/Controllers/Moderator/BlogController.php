@@ -51,7 +51,7 @@ class BlogController extends Controller
             'user_id'=>auth()->user()->id,
         ]);
 
-        return redirect('/moderator/blogs');
+        return redirect('/moderator/newsroom');
     }
 
     public function show(Blog $blog)
@@ -88,7 +88,7 @@ class BlogController extends Controller
             'author'=>$request->author ?? auth()->user()->name,
             'search_tags'=>$request->search_tags,
         ]);
-        return redirect('/moderator/blogs');
+        return redirect('/moderator/newsroom');
     }
 
     public function destroy(Blog $blog)
@@ -96,7 +96,7 @@ class BlogController extends Controller
         $blog->comments()->delete();
         $blog->delete();
 
-        return redirect('/moderator/blogs');
+        return redirect('/moderator/newsroom');
     }
 
     public function indexComment(Blog $blog)
@@ -107,12 +107,12 @@ class BlogController extends Controller
     public function updateComment(Blog $blog,Comment $comment,$status)
     {
         $comment->update(['status'=>$status]);
-        return redirect('/moderator/blogs/'.$blog->id.'/comments');
+        return redirect('/moderator/newsroom/'.$blog->id.'/comments');
     }
 
     public function destroyComment(Blog $blog,Comment $comment)
     {
         $comment->delete();
-        return redirect('/moderator/blogs/'.$blog->id.'/comments');
+        return redirect('/moderator/newsroom/'.$blog->id.'/comments');
     }
 }

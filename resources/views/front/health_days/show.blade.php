@@ -36,7 +36,10 @@
         <div class="blogs-details-container my-3  border border-primary rounded bg-white">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h3 class="text-primary">{{($healthDay->title)}}</h3>
+                    {{-- <h3 class="text-primary">{{($healthDay->title)}}</h3> --}}
+                    <div class="">
+                        <h3 class="text-primary">{{($healthDay->title)}}</h3>
+                    </div>
                     <div class="mx-3 h6 text-primary text-nowrap"><i class="fas fa-calendar"></i> {{$healthDay->date}}</div>
                     <div class="mx-3 h6 text-danger text-nowrap border-bottom border-danger pb-2"><i class="fa fa-tag"></i> {{optional($healthDay->category)->name}}</div>
                 </div>
@@ -60,6 +63,8 @@
                             <a href="{{url('/storage/'.$healthDay->pdf_file)}}" filename="{{($healthDay->title)}}" onclick="handleDownload(event)" target="_blank" class="text-primary"> Download <i class="fa fa-file-pdf text-danger"></i> ({{ $healthDay->pdf_size ?? 'undefined' }}) </a>
                         @endif
                     </span>
+                    <span class="mx-3 h6 text-primary text-nowrap" id="read-time"></span>
+                    
                 </div>
             </div>
             <div class="mt-3">  
@@ -211,6 +216,10 @@
             $('table').each(function () {
             $(this).wrap('<div style="overflow-x: auto; display: block; max-width: 100%;"></div>');
             });
+
+            let readTime = calculateReadingTime();
+            $('#read-time').html('<i class="fa fa-book-reader"></i> ' + readTime.estimatedMinutes + ' Mins Read');
+
         });
     </script>
     

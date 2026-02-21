@@ -13,12 +13,12 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{$exam->title}}</h2>
+                {{-- <h2>{{$exam->title}}</h2> --}}
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                         <li class="breadcrumb-item"><a href="/public-exams">Exam Hall</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{$exam->title}}</li>
+                        {{-- <li class="breadcrumb-item active" aria-current="page">{{$exam->title}}</li> --}}
                     </ol>
                 </div>
             </div>

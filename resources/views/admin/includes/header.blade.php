@@ -218,25 +218,25 @@
       </li>
 
       {{-- <li class="nav-item">
-        <a class="nav-link" href="{{ url('/admin/blogs') }}">
+        <a class="nav-link" href="{{ url('/admin/newsroom') }}">
             <i class="mdi mdi-file-delimited menu-icon"></i>
-            <span class="menu-title">Blogs</span>
+            <span class="menu-title">Newsroom</span>
         </a>
       </li>   --}}
       
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#blogs-section" aria-expanded="false" aria-controls="blogs-section">
+        <a class="nav-link" data-toggle="collapse" href="#newsroom-section" aria-expanded="false" aria-controls="newsroom-section">
           <i class="mdi mdi-file-delimited menu-icon"></i>
-          <span class="menu-title">Blogs</span>
+          <span class="menu-title">Newsroom</span>
           <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="blogs-section">
+        <div class="collapse" id="newsroom-section">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/blogs/categories') }}">Categories</a>
+              <a class="nav-link" href="{{ url('/admin/newsroom/categories') }}">Categories</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/admin/blogs') }}">Blogs</a>
+              <a class="nav-link" href="{{ url('/admin/newsroom') }}">Newsroom</a>
             </li>
           </ul>
         </div>

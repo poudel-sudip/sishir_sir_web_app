@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    Blog Details
+    News Details
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">Show Blog</h3>
+            <h3 class="page-title">Show News</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/admin/blogs') }}">Blogs</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/newsroom') }}">Newsroom</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Show</li>
                 </ol>
             </nav>

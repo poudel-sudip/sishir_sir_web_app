@@ -1,16 +1,16 @@
 @extends('moderator.layouts.app')
 @section('admin-title')
-    Blogs
+    Newsroom
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">All Blogs</h3>
+            <h3 class="page-title">All Newsroom</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/moderator/home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+                    <li class="breadcrumb-item active" aria-current="page">Newsroom</li>
                 </ol>
             </nav>
         </div>
@@ -19,9 +19,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">Blogs table</h4>
+                            <h4 class="card-title">Newsroom table</h4>
                             <div class="text-right">
-                                <a href="{{ ('/moderator/blogs/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Blog </button></a>
+                                <a href="{{ ('/moderator/newsroom/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Blog </button></a>
 
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                                         <td>{{$blog->title}}</td>
                                         <td>{{date('Y-m-d',strtotime($blog->created_at))}}</td>
                                         <td>{{$blog->author}}</td>
-                                        <td><a href="/moderator/blogs/{{$blog->id}}/comments">Comments({{$blog->comments->count()}})</a></td>
+                                        <td><a href="/moderator/newsroom/{{$blog->id}}/comments">Comments({{$blog->comments->count()}})</a></td>
                                         <td>
                                             @if($blog->status == 'Unpublished')
                                                 <span class="text-danger">{{$blog->status}}</span>
@@ -58,9 +58,9 @@
                                             <div class="dropdown">
                                                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
-                                                    <a href="/moderator/blogs/{{$blog->id}}" class="text-primary dropdown-item">Show</a>
-                                                    <a href="/moderator/blogs/{{$blog->id}}/edit" class="text-danger dropdown-item">Edit</a>
-                                                    <form id="delete-form-{{$blog->id}}" action="/moderator/blogs/{{$blog->id}}" method="POST">
+                                                    <a href="/moderator/newsroom/{{$blog->id}}" class="text-primary dropdown-item">Show</a>
+                                                    <a href="/moderator/newsroom/{{$blog->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                    <form id="delete-form-{{$blog->id}}" action="/moderator/newsroom/{{$blog->id}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <a href="javascript:{}" onclick="javascript:deleteData({{$blog->id}});" class="text-warning dropdown-item">Delete</a>

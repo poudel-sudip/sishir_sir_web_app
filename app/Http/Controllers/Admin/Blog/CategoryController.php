@@ -22,14 +22,19 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(['category'=> 'string|required|min:2']);
+        $request->validate([
+            'category'=> 'string|required|min:2',
+            'order' => 'numeric|nullable',
+        ]);
+
         Category::create([
             'name' => $request->category,
             'type' => 'blog-category',
             'status' => 'active',
+            'order' => $request->order ?? 1,
         ]);
 
-        return redirect('/admin/blogs/categories');
+        return redirect('/admin/newsroom/categories');
     }
 
     public function update(Request $request)
@@ -37,12 +42,16 @@ class CategoryController extends Controller
         $request->validate([
             'category_id' => 'numeric|required|min:1',
             'category_name' => 'string|required',
+            'order' => 'numeric|nullable',
         ]);
         Category::where('type','=','blog-category')
         ->find($request->category_id)
-        ->update(['name'=>$request->category_name]);
+        ->update([
+            'name'=>$request->category_name,
+            'order'=>$request->order ?? 1,
+        ]);
 
-        return redirect('/admin/blogs/categories');
+        return redirect('/admin/newsroom/categories');
     }
 
     public function destroy($category)
@@ -53,7 +62,7 @@ class CategoryController extends Controller
             $category->delete();
         }
         
-        return redirect('/admin/blogs/categories');
+        return redirect('/admin/newsroom/categories');
     }
 
     public function blogPosts($category)

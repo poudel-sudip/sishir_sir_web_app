@@ -58,7 +58,7 @@ class FrontController extends Controller
         $data['exams'] = OpenExam::where('result_status', '=', 'Unpublished')->orderByDesc('id')->take(4)->get();
         $data['last_blog'] = Blog::where('status', '=', 'Published')->orderByDesc('id')->first();
         $data['blogs'] = Blog::where('status', '=', 'Published')->orderByDesc('id')->take(9)->get(['id', 'title', 'slug', 'image', 'author', 'created_at']);
-        $data['blog_categories'] = Categories::where('type', '=', 'blog-category')->whereHas('blogs')->orderBy('id')->get(['id','name']);
+        $data['blog_categories'] = Categories::where('type', '=', 'blog-category')->orderBy('order')->whereHas('blogs')->orderBy('id')->get(['id','name']);
 
         $data['books'] = Book::where('status', '=', 'Active')->orderByDesc('id')->take(6)->get(['id', 'title', 'slug', 'price', 'discount', 'thumbnail', 'published_year', 'edition','created_at']);
         // $data['testimonials'] = Testimonial::where('status', '=', 'Active')->orderByDesc('id')->take(9)->get();
@@ -75,7 +75,7 @@ class FrontController extends Controller
             return $v;
         });
 
-
+        $data['healthDayCategories'] = Categories::where('type','=','health-day-category')->get();
         $data['healthDays'] = HealthDay::orderBy('sorting_date', 'asc')
             ->take(10)
             ->get(['id','title','date','sorting_date'])
@@ -100,25 +100,34 @@ class FrontController extends Controller
             ->get()
             ->values();
 
-        foreach ($data['pdf_bank_categories'] as $cat) {
-            $cat->pdf_banks = $cat->ebooks()
-                ->where('status', '=', 'Active')
-                ->where(function ($q) {
-                    $q->where('type', '=', 'single')
-                        ->orWhere(function ($sq) {
-                            $sq->whereHas('chapters', function ($ch) {
-                                $ch->where('status', '=', 'Active');
-                            });
-                        });
-                })
-                ->select(['id', 'category_id', 'type', 'title', 'slug', 'author', 'price', 'discount', 'status', 'thumbnail'])
-                ->withCount(['chapters as pdf_count' => function ($ch) {
-                    $ch->where('status', '=', 'Active');
-                }])
-                ->orderByDesc('id')
-                ->take(4)
-                ->get();
-        }
+        $data['pdf_bank_ebooks'] = PDFBank::where('status', '=', 'Active')
+            ->withCount(['chapters as pdf_count' => function ($ch) {
+                $ch->where('status', '=', 'Active');
+            }])
+            ->orderByDesc('id')
+            ->take(4)
+            ->get(['id', 'title', 'slug','thumbnail', 'created_at'])
+            ->values();
+
+        // foreach ($data['pdf_bank_categories'] as $cat) {
+        //     $cat->pdf_banks = $cat->ebooks()
+        //         ->where('status', '=', 'Active')
+        //         ->where(function ($q) {
+        //             $q->where('type', '=', 'single')
+        //                 ->orWhere(function ($sq) {
+        //                     $sq->whereHas('chapters', function ($ch) {
+        //                         $ch->where('status', '=', 'Active');
+        //                     });
+        //                 });
+        //         })
+        //         ->select(['id', 'category_id', 'type', 'title', 'slug', 'author', 'price', 'discount', 'status', 'thumbnail'])
+        //         ->withCount(['chapters as pdf_count' => function ($ch) {
+        //             $ch->where('status', '=', 'Active');
+        //         }])
+        //         ->orderByDesc('id')
+        //         ->take(4)
+        //         ->get();
+        // }
 
         $premium_exams = ExamHallCategories::where('status', 'Active')
             ->orderByDesc('id')
@@ -140,27 +149,29 @@ class FrontController extends Controller
             ->get()
             ->values();
 
-        foreach ($data['examhall_categories'] as $cat) {
-            $cat->exam_sets = $cat->premium_exams()
-                ->where('status', '=', 'Active')
-                ->select(['id', 'group_id', 'title', 'slug', 'image', 'created_at'])
-                ->withCount(['category_exams as mcq_count'])
-                ->orderByDesc('id')
-                ->take(4)
-                ->get();
-        }
+        $data['premium_exams'] = $premium_exams;
 
-        if (!$data['examhall_categories']->count()) {
-            $data['examhall_categories'] = collect([
-                (object)[
-                    'id' => 'premium',
-                    'name' => 'Premium',
-                    'slug' => 'premium',
-                    "order" => 1,
-                    "exam_sets" => $premium_exams,
-                ],
-            ]);
-        }
+        // foreach ($data['examhall_categories'] as $cat) {
+        //     $cat->exam_sets = $cat->premium_exams()
+        //         ->where('status', '=', 'Active')
+        //         ->select(['id', 'group_id', 'title', 'slug', 'image', 'created_at'])
+        //         ->withCount(['category_exams as mcq_count'])
+        //         ->orderByDesc('id')
+        //         ->take(4)
+        //         ->get();
+        // }
+
+        // if (!$data['examhall_categories']->count()) {
+        //     $data['examhall_categories'] = collect([
+        //         (object)[
+        //             'id' => 'premium',
+        //             'name' => 'Premium',
+        //             'slug' => 'premium',
+        //             "order" => 1,
+        //             "exam_sets" => $premium_exams,
+        //         ],
+        //     ]);
+        // }
 
         $data['updates'] = [];
 
@@ -270,7 +281,7 @@ class FrontController extends Controller
             return (object)[
                 'title' => $b->title,
                 'created_at' => $b->created_at,
-                'link' => '/blogs/' . $b->id,
+                'link' => '/newsroom/' . $b->id,
             ];
         })->toArray();
 
@@ -304,10 +315,20 @@ class FrontController extends Controller
             ->values()
             ->toArray();
 
-        $pdf_bank_updates = PDFBank::where('status', '=', 'Active')
-            ->orderByDesc('id')
-            ->take(6)
-            ->get(['id', 'title', 'slug', 'created_at'])
+        // $pdf_bank_updates = PDFBank::where('status', '=', 'Active')
+        //     ->orderByDesc('id')
+        //     ->take(6)
+        //     ->get(['id', 'title', 'slug', 'created_at'])
+        //     ->map(function ($b) {
+        //         return (object)[
+        //             'title' => $b->title,
+        //             'created_at' => $b->created_at,
+        //             'link' => '/pdf-banks/bank/' . $b->id,
+        //         ];
+        //     })
+        //     ->toArray();
+
+        $pdf_bank_updates = $data['pdf_bank_ebooks']
             ->map(function ($b) {
                 return (object)[
                     'title' => $b->title,
@@ -1170,7 +1191,7 @@ class FrontController extends Controller
             ->take(20)
             ->get(['id', 'title', 'slug', 'created_at'])
             ->map(function ($b) {
-                $b['link'] = '/blogs/' . $b->id;
+                $b['link'] = '/newsroom/' . $b->id;
                 return $b;
             })
             ->values()
