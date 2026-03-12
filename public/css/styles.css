@@ -7013,6 +7013,9 @@ label.star:before {
     color: #0C2B64 !important;
 }
 
+table.dataTable th.dt-type-numeric, table.dataTable th.dt-type-date, table.dataTable td.dt-type-numeric, table.dataTable td.dt-type-date {
+    text-align: left !important;
+}
 
 @media (min-width:576px) {
     .w-sm-100 {

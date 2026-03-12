@@ -104,6 +104,7 @@ class FrontController extends Controller
             ->withCount(['chapters as pdf_count' => function ($ch) {
                 $ch->where('status', '=', 'Active');
             }])
+            ->orderByDesc('isPinned')
             ->orderByDesc('id')
             ->take(4)
             ->get(['id', 'title', 'slug','thumbnail', 'created_at'])

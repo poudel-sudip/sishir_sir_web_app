@@ -29,7 +29,7 @@
                     <div class="swiper category-swiper nav nav-tabs"> 
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <a href="/newsroom"> <button class="nav-link border">All</button> </a>
+                                <a href="/newsroom"> <button class="nav-link border">Home</button> </a>
                             </div>
                             @foreach($blog_categories as $cat)
                                 <div class="swiper-slide">

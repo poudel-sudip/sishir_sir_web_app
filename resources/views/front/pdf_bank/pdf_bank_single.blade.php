@@ -52,7 +52,7 @@
                         <div style="font-size:16px !important; font-weight:bold;">
                             <div class="my-1"><span class="text-primary">Author(s):</span> <span class="text-success">{{$pdf_bank->author}}</span> </div>
                             <div class="my-1"><span class="text-primary">Price:</span> @if($pdf_bank->discount >0)  <s class="text-danger mx-2"> Rs. {{$pdf_bank->price}} </s> @endif <span class="text-success mx-2"> Rs. {{$pdf_bank->price - $pdf_bank->discount}} </span> </div>
-                            <div class="my-1"><span class="text-primary">No of PDF Sets:</span> <span class="text-success"> {{$pdf_bank->type == 'set' ? $pdf_bank->pdf_count : '1'}} </span></div>
+                            <div class="my-1"><span class="text-primary">No of eBooks:</span> <span class="text-success"> {{$pdf_bank->type == 'set' ? $pdf_bank->pdf_count : '1'}} </span></div>
                             <div class="my-1"><span class="text-primary">Paper:</span> <span class="text-success"> {{($pdf_bank->paper)}} </span></div>
                             <div class="my-1"><span class="text-primary">No of Pages:</span><span class="text-success"> {{($pdf_bank->pages)}} </span></div>
                             <div class="my-1"><span class="text-primary">Available Videos:</span><span class="text-success"> {{$pdf_bank->type == 'set' ? $pdf_bank->video_count : (trim($pdf_bank->video_file) ? '1' : '0') }} </span></div>
@@ -97,7 +97,7 @@
                         <div class="row">
                             <div class="col-md-8" style="color:#0C2B64 !important;">
                                 @if($pdf_bank->pdf_count)
-                                <h5>Available PDF Sets:</h5>
+                                <h5>Available eBooks:</h5>
                                 <ol>
                                     @foreach($pdf_bank->pdf_sets as $row)
                                     <li>{{$row->title}}</li>

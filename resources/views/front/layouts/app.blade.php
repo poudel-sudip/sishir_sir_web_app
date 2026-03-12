@@ -199,5 +199,22 @@
 
   </script>
 
+  <script>
+    $(document).ready(function () {
+      $('table').each(function () {
+        $(this).css('width', '100%');
+        $(this).css('text-wrap', 'wrap');
+        $(this).wrap('<div style="overflow-x: auto; display: block; max-width: 100%;"></div>');
+      });
+
+      $('iframe').each(function () {
+        $(this).css('width', '100%');
+        $(this).wrap('<div style="overflow-x: auto; display: block; max-width: 100%;"></div>');
+      });
+      
+      $('img').attr('referrerpolicy', 'no-referrer');
+    });
+  </script>
+
 </body>
 </html>

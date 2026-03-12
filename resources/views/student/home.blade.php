@@ -31,7 +31,7 @@
 
                 <div class="student-dashboard-card block-third">
                     <div class="first-row">
-                        <span>ExamSet Bookings</span>
+                        <span>Exam Set Bookings</span>
                         <i class="fas fa-newspaper"></i>
                     </div>
                     <div class="second-row">
@@ -108,7 +108,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/blogs"><i class="fas fa-blog text-primary me-1"></i>Blogs</a>
+                        <a class="nav-link" href="/newsroom"><i class="fas fa-blog text-primary me-1"></i>Newsroom</a>
                     </li>
 
                     <li class="nav-item">

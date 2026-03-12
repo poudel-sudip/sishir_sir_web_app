@@ -72,7 +72,7 @@ class CategoryController extends Controller
         {
             abort(404,'Category not found');
         }
-        $blogs = $category->blogs()->get(['id','category_id','title','created_at','author','status']);
+        $blogs = $category->blogs()->orderByDesc('id')->get(['id','category_id','title','created_at','author','status']);
         return view('admin.blog.category_blogs',compact('blogs','category'));
     }
 }

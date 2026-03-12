@@ -35,6 +35,7 @@
                             {{-- <th>Category</th> --}}
                             <th>Price</th>
                             <th>Purchases</th>
+                            <th>Pinned</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
@@ -48,6 +49,7 @@
                             {{-- <td class="text-wrap">{{$row->category->name ?? '' }}</td> --}}
                             <td>{{$row->price ?? ''}} - {{$row->discount ?? ''}} = {{$row->price - $row->discount}} </td>
                             <td>{{$row->bookings->where('status','=','Verified')->count()}} </td>
+                            <td class="text-wrap">{{$row->isPinned ?? ''}}</td>
                             <td><span class='text-{{$row->status == "Active" ? "success" : "danger"}}'>{{$row->status}}</span></td>
                             <td class="classroom-btn" width="50">
                               <a href="/admin/pdf-bank/pdf-singles/{{$row->id}}" class="btn btn-info">Show</a>

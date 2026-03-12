@@ -37,6 +37,7 @@
                             <th>PDF Files</th>
                             <th>Purchases</th>
                             <th>Status</th>
+                            <th>Pinned</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -51,6 +52,7 @@
                             <td class="classroom-btn"> <a href="/admin/pdf-bank/pdf-groups/{{$row->id}}/pdf-files" class="btn btn-primary">PDF Files ({{$row->chapters()->count()}}) </a> </td>
                             <td>{{$row->bookings->where('status','=','Verified')->count()}} </td>
                             <td><span class='text-{{$row->status == "Active" ? "success" : "danger"}}'>{{$row->status}}</span></td>
+                            <td class="text-wrap">{{$row->isPinned ?? ''}}</td>
                             <td class="classroom-btn" width="50">
                               <a href="/admin/pdf-bank/pdf-groups/{{$row->id}}" class="btn btn-info">Show</a>
                               <a href="/admin/pdf-bank/pdf-groups/{{$row->id}}/edit" class="btn btn-warning">Edit</a>

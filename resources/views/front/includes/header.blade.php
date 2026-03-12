@@ -165,6 +165,12 @@
               <li class="parent-dropdown">
                 <a class="dropdown-item" aria-current="page" href="/health-days">Health Days</a>
               </li>
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/4/64">Notices</a>
+              </li>
+              <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/library/739">Public Holidays</a>
+              </li>
             </ul>
           </li>
               

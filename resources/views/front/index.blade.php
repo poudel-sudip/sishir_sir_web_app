@@ -633,7 +633,7 @@
                                             <img src="/storage/{{$row->thumbnail}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                         </a>
                                         <h6 class="mt-3"><a href="/pdf-banks/bank/{{$row->id}}">{{($row->title)}}</a></h6>
-                                        <h6 class="small">{{$row->type == 'set' ? $row->pdf_count : '1'}} PDF Sets </h6>
+                                        <h6 class="small">{{$row->type == 'set' ? $row->pdf_count : '1'}} eBooks </h6>
 
                                     </div>
                                 </div>
@@ -736,7 +736,7 @@
                             <div class="swiper category-swiper nav nav-tabs"> 
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <a href="/newsroom"> <button class="nav-link border active">All</button> </a>
+                                        <a href="/newsroom"> <button class="nav-link border active">Home</button> </a>
                                     </div>
                                     @foreach($blog_categories as $cat)
                                         <div class="swiper-slide">

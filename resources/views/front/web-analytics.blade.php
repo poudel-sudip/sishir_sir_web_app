@@ -38,7 +38,7 @@
                                 <div><span>Total Book Editions: </span><strong class="text-warning"> {{$web_counter->book_edition ?? '0'}} </strong></div>
                                 <div><span>Total Exams: </span><strong class="text-warning"> {{$web_counter->exam ?? '0'}} </strong></div>
                                 <div><span>Total MCQs: </span><strong class="text-warning"> {{$web_counter->mcq ?? '0'}} </strong></div>
-                                <div><span>Total PDF Bank: </span><strong class="text-warning"> {{$web_counter->pdf_bank ?? '0'}} </strong></div>
+                                <div><span>Total eBooks: </span><strong class="text-warning"> {{$web_counter->pdf_bank ?? '0'}} </strong></div>
                                 <div><span>Total PDF: </span><strong class="text-warning"> {{$web_counter->pdf ?? '0'}} </strong></div>
                                 <div><span>Total Vacancies: </span><strong class="text-warning"> {{$web_counter->vaccancy ?? '0'}} </strong></div>
                                 <div><span>Total Downloads: </span><strong class="text-warning"> {{$web_counter->download ?? '0'}} </strong></div>

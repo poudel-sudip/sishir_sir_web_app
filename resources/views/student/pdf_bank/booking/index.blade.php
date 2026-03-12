@@ -31,7 +31,7 @@
                     <div class="student-vid-dec">
                         <h6>{{($booking->book->title ?? '')}}</h6>
                         @if($booking->book)
-                            <div>{{ $booking->book->type == 'set' ? $booking->book->chapters()->where('status','=','Active')->count() : 1 }} pdf sets</div>
+                            <div>{{ $booking->book->type == 'set' ? $booking->book->chapters()->where('status','=','Active')->count() : 1 }} ebooks</div>
                         @endif
                         <div class="small">Expiry Date: {{$booking->expiry_date}}</div>
                         <div class="student-vid-status">                            
