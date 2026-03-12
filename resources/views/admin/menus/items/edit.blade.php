@@ -69,13 +69,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="file" class="col-sm-4 col-form-label">{{ __('Item File') }}</label>
+                            <label for="pdf_file" class="col-sm-4 col-form-label">{{ __('Item File') }}</label>
                             <div class="col-md-8">
                                 <small>{{$item->filename}}</small>
-                                <input id="file" type="file" class="form-control @error('file') is-invalid @enderror" name="file" value="{{ old('file')}}"  autocomplete="file" >
+                                <input id="pdf_file" type="file" class="form-control @error('pdf_file') is-invalid @enderror" name="pdf_file" value="{{ old('pdf_file')}}"  autocomplete="pdf_file" >
                                 <input type="hidden" name="old_file" value="{{$item->fileurl}}">
                                 <input type="hidden" name="filename" value="{{$item->filename}}">
-                                @error('file')
+                                @error('pdf_file')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

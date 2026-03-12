@@ -60,12 +60,12 @@ class SubItemController extends Controller
         elseif($data['type'] == 'file' || $data['type'] == 'File')
         {
             $request->validate([ 
-                'file' => 'required|file|mimes:pdf',
+                'pdf_file' => 'required|file|mimes:pdf',
                 'can_download' => 'required|boolean',
             ]);
             $data['download'] = $request->can_download;
-            $data['filename'] = $request->file->getClientOriginalName();
-            $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
+            $data['filename'] = $request->pdf_file->getClientOriginalName();
+            $data['fileurl'] = $request->pdf_file->storeAs('uploads',$data['filename'],'public');
             $data['description'] = $request->description;
         }
 
@@ -95,7 +95,7 @@ class SubItemController extends Controller
             'name' => 'string|required',
             'order' => 'numeric|required',
             'status' => 'string|required',
-            'file' => 'nullable|file|mimes:pdf',
+            'pdf_file' => 'nullable|file|mimes:pdf',
             'old_file' => 'nullable|string',
             'filename' => 'nullable|string',
             'description' => 'string|nullable',
@@ -126,14 +126,14 @@ class SubItemController extends Controller
         {
             $data['description'] = $request->description;
             $data['download'] = $request->can_download;
-            if($request->old_file == '' && !isset($request->file))
+            if($request->old_file == '' && !isset($request->pdf_file))
             {
-                return back()->withInput()->withErrors(['file' => 'Please select a pdf file']);
+                return back()->withInput()->withErrors(['pdf_file' => 'Please select a pdf file']);
             }
-            elseif(isset($request->file))
+            elseif(isset($request->pdf_file))
             {
-                $data['filename'] = $request->file->getClientOriginalName();
-                $data['fileurl'] = $request->file->storeAs('uploads',$data['filename'],'public');
+                $data['filename'] = $request->pdf_file->getClientOriginalName();
+                $data['fileurl'] = $request->pdf_file->storeAs('uploads',$data['filename'],'public');
             }
             else
             {
