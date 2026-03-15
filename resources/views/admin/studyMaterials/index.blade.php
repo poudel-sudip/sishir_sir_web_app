@@ -29,15 +29,14 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Materials Title</th>
                                         <th>Action</th>
+                                        <th>Materials Title</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($data as $data)
                                     <tr>
                                         <td>{{$data->id}}</td>
-                                        <td>{{$data->title}}</td>
                                         <td width="165">
                                             <a href="/storage/{{$data->filePath}}" target="_blank" class="btn btn-primary btn-sm">View</a>
                                             <form id="delete-form-{{$data->id}}" action="/admin/studyMaterials/{{$data->id}}" method="POST" style="display: inline">
@@ -46,6 +45,8 @@
                                                 <a href="javascript:{}" onclick="javascript:deleteData({{$data->id}});" class="btn btn-warning btn-sm">Delete</a>
                                             </form>
                                         </td>
+                                        <td>{{$data->title}}</td>
+                                        
                                     </tr>
                                 @endforeach
                                 </tbody>

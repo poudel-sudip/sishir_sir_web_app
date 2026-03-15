@@ -46,15 +46,21 @@
                               @foreach($bookings as $booking)
                             <tr>
                                 <td class="text-wrap">{{$booking->id}}</td>
-                                <td class="classroom-btn" width="150">
-                                    <a href="/admin/pdf-bank-bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                    <a href="/admin/pdf-bank-bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
-                                    <form id="delete-form-{{$booking->id}}" action="/admin/pdf-bank-bookings/{{$booking->id}}" method="POST" style="display: inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
-                                    </form>
+                                <td width="50">
+                                    <div class="dropdown">
+                                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                            <a href="/admin/pdf-bank-bookings/{{$booking->id}}" class="text-primary dropdown-item">Show</a>
+                                            <a href="/admin/pdf-bank-bookings/{{$booking->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                            <form id="delete-form-{{$booking->id}}" action="/admin/pdf-bank-bookings/{{$booking->id}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="text-warning dropdown-item">Delete</a>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </td>
+                                
                                 <td class="text-wrap">{{date('Y-m-d',strtotime($booking->created_at))}}</td>
                                 <td class="text-wrap">{{$booking->book->title ?? ''}}</td>
                                 <td class="text-wrap">{{$booking->user->name ?? ''}}</td>

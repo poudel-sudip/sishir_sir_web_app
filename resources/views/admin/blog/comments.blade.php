@@ -27,13 +27,13 @@
                                 <thead>
                                 <tr>
                                     <th>SN</th>
+                                    <th>Action</th>
                                     <th>Date</th>
                                     <th> Title</th>
                                     <th>Commented By</th>
                                     <th>Email</th>
                                     <th>Comments</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -41,18 +41,6 @@
                                 @foreach($blog->comments as $comment)
                                     <tr>
                                         <td>{{$i}}</td>
-                                        <td>{{date('Y-m-d',strtotime($comment->created_at))}}</td>
-                                        <td>{{$blog->title}}</td>
-                                        <td>{{$comment->name}}</td>
-                                        <td>{{$comment->email}}</td>
-                                        <td class="text-wrap">{!! $comment->message !!}</td>
-                                        <td>
-                                            @if($comment->status == 'Unpublished')
-                                                <span class="text-danger">{{$comment->status}}</span>
-                                            @else
-                                                <span class="text-success">{{$comment->status}}</span>
-                                            @endif
-                                        </td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
@@ -75,6 +63,19 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>{{date('Y-m-d',strtotime($comment->created_at))}}</td>
+                                        <td>{{$blog->title}}</td>
+                                        <td>{{$comment->name}}</td>
+                                        <td>{{$comment->email}}</td>
+                                        <td class="text-wrap">{!! $comment->message !!}</td>
+                                        <td>
+                                            @if($comment->status == 'Unpublished')
+                                                <span class="text-danger">{{$comment->status}}</span>
+                                            @else
+                                                <span class="text-success">{{$comment->status}}</span>
+                                            @endif
+                                        </td>
+                                        
                                     </tr>
                                     @php($i++)
                                 @endforeach

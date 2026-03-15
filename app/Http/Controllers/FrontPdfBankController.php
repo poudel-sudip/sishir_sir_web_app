@@ -46,7 +46,7 @@ class FrontPdfBankController extends Controller
         }])
         ->paginate(12);
 
-        $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')->orderByDesc('id')->get();
+        $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')->orderBy('order')->get();
         $data['sidebar_ad'] = Advertisement::where('status','Active')->where('position','page_sidebar_ad')->first();
 
         return view('front.pdf_bank.index',$data);

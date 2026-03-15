@@ -31,8 +31,8 @@
                         <thead>
                           <tr>
                             <th>SN</th>
-                            <th>Name</th>
                             <th>Action</th>
+                            <th>Name</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -40,7 +40,6 @@
                           @foreach($cities as $city)
                             <tr>
                               <td>{{$i}}</td>
-                              <td>{{$city->name}}</td>
                               <td class="classroom-btn" width="160">
                                 <form id="delete-form-{{$city->id}}" action="/admin/provience/{{$provience->id}}/district-city/{{$city->id}}" method="POST" style="display: inline">
                                     @csrf
@@ -48,6 +47,7 @@
                                     <a href="javascript:{}" onclick="javascript:deleteData({{$city->id}});" class="btn btn-danger">Delete</a>
                                 </form>
                               </td>
+                              <td>{{$city->name}}</td>
                             </tr>
                             @php($i++)
                           @endforeach

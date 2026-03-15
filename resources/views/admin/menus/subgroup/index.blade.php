@@ -31,12 +31,12 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th>Action</th>
                             <th>Name</th>
                             <th>Order</th>
                             <th>Type</th>
                             <th>Categories</th>
                             <th>Status</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -44,6 +44,20 @@
                             @foreach($subgroups as $subgroup)
                           <tr>
                             <td width="50">{{$i}}</td>
+                            <td width="50">
+                                <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                        <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}" class="text-primary dropdown-item">Show</a>
+                                        <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                        <form id="delete-form-{{$subgroup->id}}" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:{}" onclick="javascript:deleteData({{$subgroup->id}});" class="text-warning dropdown-item">Delete</a>
+                                        </form>
+                                    </div>
+                                </div>  
+                            </td>
                             <td>{{ucwords($subgroup->name)}}</td>
                             <td>{{$subgroup->order}}</td>
                             <td>{{ucwords($subgroup->type)}}</td>
@@ -59,15 +73,7 @@
                                 <span class="text-success">{{$subgroup->status}}</span>
                               @endif
                             </td>
-                            <td class="classroom-btn" width="125">
-                              <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}" class="btn btn-info">Show</a>
-                              <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/edit" class="btn btn-danger">Edit</a>
-                              <form id="delete-form-{{$subgroup->id}}" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}" method="POST" style="display: inline">
-                                @csrf
-                                @method('DELETE')
-                                <a href="javascript:{}" onclick="javascript:deleteData({{$subgroup->id}});" class="btn btn-warning">Delete</a>
-                              </form>
-                          </td>
+                            
                           </tr>
                           @php($i++)
                           @endforeach

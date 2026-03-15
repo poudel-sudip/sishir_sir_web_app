@@ -29,19 +29,16 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Action</th>
                                         <th>Filename</th>
                                         <th>URL</th>
                                         <th>Uploaded Date</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($videos as $video)
                                     <tr>
                                         <td> {{$video->id}} </td>
-                                        <td class="text-wrap">{{$video->filename}}</td>
-                                        <td class="text-wrap">{{$video->url}}</td>
-                                        <td>{{date('Y-m-d',strtotime($video->created_at))}}</td>
                                         <td>
                                             <form id="delete-form-{{$video->id}}" action="/admin/videos/{{$video->id}}" method="POST">
                                                 @csrf
@@ -49,6 +46,10 @@
                                                 <a href="javascript:{}" onclick="javascript:deleteData({{$video->id}});" class="btn btn-warning">Delete</a>
                                             </form>
                                         </td>
+                                        <td class="text-wrap">{{$video->filename}}</td>
+                                        <td class="text-wrap">{{$video->url}}</td>
+                                        <td>{{date('Y-m-d',strtotime($video->created_at))}}</td>
+                                       
                                     </tr>
                                 @endforeach
                                 </tbody>

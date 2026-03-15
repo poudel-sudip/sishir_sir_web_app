@@ -34,11 +34,11 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th width="100">Action</th>
                             <th>Name</th>
                             <th width="20">Order</th>
                             <th>Type</th>
                             <th>Status</th>
-                            <th width="100">Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -46,6 +46,20 @@
                             @foreach($subItems as $sitem)
                           <tr>
                             <td width="50">{{$i}}</td>
+                            <td width="50">
+                                <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                        <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$category->id}}/items/{{$item->id}}/sub-items/{{$sitem->id}}" class="text-primary dropdown-item">Show</a>
+                                        <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$category->id}}/items/{{$item->id}}/sub-items/{{$sitem->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                        <form id="delete-form-{{$sitem->id}}" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$category->id}}/items/{{$item->id}}/sub-items/{{$sitem->id}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:{}" onclick="javascript:deleteData({{$sitem->id}});" class="text-warning dropdown-item">Delete</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
                             <td class="text-wrap">{{$sitem->name}}</td>
                             <td>{{$sitem->order}}</td>
                             <td>{{ucwords($sitem->type)}}</td>
@@ -56,15 +70,7 @@
                                 <span class="text-success">{{$sitem->status}}</span>
                               @endif
                             </td>
-                            <td class="classroom-btn" width="100">
-                              <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$category->id}}/items/{{$item->id}}/sub-items/{{$sitem->id}}" class="btn btn-info">Show</a>
-                              <a href="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$category->id}}/items/{{$item->id}}/sub-items/{{$sitem->id}}/edit" class="btn btn-danger">Edit</a>
-                              <form id="delete-form-{{$sitem->id}}" action="/admin/menus/{{$group->id}}/sub-groups/{{$subgroup->id}}/categories/{{$category->id}}/items/{{$item->id}}/sub-items/{{$sitem->id}}" method="POST" style="display: inline">
-                                @csrf
-                                @method('DELETE')
-                                <a href="javascript:{}" onclick="javascript:deleteData({{$sitem->id}});" class="btn btn-warning">Delete</a>
-                              </form>
-                          </td>
+                            
                           </tr>
                           @php($i++)
                           @endforeach

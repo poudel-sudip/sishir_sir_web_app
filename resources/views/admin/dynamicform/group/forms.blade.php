@@ -31,12 +31,12 @@
                         <thead>
                           <tr>
                             <th class="text-wrap">SN</th>
+                            <th class="text-wrap">Action</th>
                             <th class="text-wrap">Form Title</th>
                             <th class="text-wrap">Sub Categories</th>
                             <th class="text-wrap">Form Applicants</th>
                             <th class="text-wrap">Form Link</th>
                             <th class="text-wrap">Status</th>
-                            <th class="text-wrap">Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -44,6 +44,21 @@
                             @foreach($forms as $cat)
                           <tr>
                             <td class="text-wrap">{{$i}}</td>
+                            <td class="text-wrap">
+                              <div class="dropdown">
+                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                  <a href="/admin/dynamic-forms/{{$cat->id}}" class="text-primary dropdown-item">Show</a>
+                                  <a href="/admin/dynamic-forms/{{$cat->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                  <form id="delete-form-{{$cat->id}}" action="/admin/dynamic-forms/{{$cat->id}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="text-warning dropdown-item">Delete</a>
+                                  </form>
+                                  
+                                </div>
+                              </div>
+                            </td>
                             <td class="text-wrap">{{ucwords($cat->title)}}</td>
                             <td class="text-wrap">{!! ucwords($cat->sub_categories) !!}</td>
                             <td class="text-wrap"><a href="/admin/dynamic-forms/{{$cat->id}}/applicants">Applicants ( {{$cat->applicants->count()}} ) </a></td>
@@ -55,15 +70,7 @@
                                 <span class="text-success">{{$cat->status}}</span>
                               @endif
                             </td>
-                            <td class="classroom-btn" width="100">
-                              <a href="/admin/dynamic-forms/{{$cat->id}}" class="btn btn-info">Show</a>
-                              <a href="/admin/dynamic-forms/{{$cat->id}}/edit" class="btn btn-warning">Edit</a>
-                              <form id="delete-form-{{$cat->id}}" action="/admin/dynamic-forms/{{$cat->id}}" method="POST" style="display: inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
-                                </form>
-                            </td>
+                            
                           </tr>
                           @php($i++)
                           @endforeach

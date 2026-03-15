@@ -30,12 +30,12 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th>Action</th>
                             <th>Category Name</th>
                             <th>Order</th>
                             <th>Status</th>
                             <th>eBook Groups</th>
                             <th>eBook Singles</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -43,19 +43,25 @@
                           @foreach($categories as $cat)
                           <tr>
                             <td>{{$i}}</td>
+                            <td width="50">
+                                <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                        <a href="/admin/pdf-bank/categories/{{$cat->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                        <form id="delete-form-{{$cat->id}}" action="/admin/pdf-bank/categories/{{$cat->id}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="text-warning dropdown-item">Delete</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
                             <td>{{$cat->name}}</td>
                             <td>{{$cat->order}}</td>
                             <td><span class='text-{{$cat->status == "Active" ? "success" : "danger"}}'>{{$cat->status}}</span></td>
                             <td class="classroom-btn"> <a href="/admin/pdf-bank/categories/{{$cat->id}}/groups" class="btn btn-primary">eBook Groups ({{$cat->ebooks()->where('type','=','set')->count()}}) </a> </td>
                             <td class="classroom-btn"> <a href="/admin/pdf-bank/categories/{{$cat->id}}/singles" class="btn btn-primary">eBook Singles ({{$cat->ebooks()->where('type','=','single')->count()}}) </a> </td>
-                            <td class="classroom-btn" width="50">
-                              <a href="/admin/pdf-bank/categories/{{$cat->id}}/edit" class="btn btn-warning">Edit</a>
-                              <form class="d-inline" id="delete-form-{{$cat->id}}" action="/admin/pdf-bank/categories/{{$cat->id}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
-                              </form>
-                            </td>
+                            
                           </tr>
                           @php($i++)
                           @endforeach

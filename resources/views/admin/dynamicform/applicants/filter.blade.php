@@ -34,6 +34,7 @@
                       <thead>
                         <tr>
                           <th>SN</th>
+                          <th>Action</th>
                           {{-- <th>ID</th> --}}
                           <th class="text-wrap">Sub Category</th>
                           <th class="text-wrap">Name</th>
@@ -42,7 +43,6 @@
                           <th class="text-wrap">Message</th>
                           <th class="text-wrap">Remarks</th>
                           {{-- <th class="text-wrap">Updated By</th> --}}
-                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -50,6 +50,14 @@
                         @foreach($applicants as $row)
                         <tr>
                           <td>{{$i}}</td>
+                          <td class="classroom-btn" width="75">
+                            <a href="/admin/dynamic-forms/{{$vform->id}}/applicants/{{$row->id}}" class="btn btn-info">Edit</a>
+                            <form id="delete-form-{{$row->id}}" action="/admin/dynamic-forms/{{$vform->id}}/applicants/{{$row->id}}" method="POST" style="display: inline">
+                              @csrf
+                              @method('DELETE')
+                              <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="btn btn-danger">Delete</a>
+                            </form>
+                          </td>
                           {{-- <td class="text-wrap">{{$row->id}}</td> --}}
                           <td class="text-wrap">{{$row->sub_category}}</td>
                           <td class="text-wrap">{{$row->name}}</td>
@@ -59,14 +67,7 @@
                           <td class="text-wrap">{{$row->remarks}}</td>
                           {{-- <td class="text-wrap">{{$row->uploaded_by}}</td> --}}
                           
-                          <td class="classroom-btn" width="75">
-                            <a href="/admin/dynamic-forms/{{$vform->id}}/applicants/{{$row->id}}" class="btn btn-info">Edit</a>
-                            <form id="delete-form-{{$row->id}}" action="/admin/dynamic-forms/{{$vform->id}}/applicants/{{$row->id}}" method="POST" style="display: inline">
-                              @csrf
-                              @method('DELETE')
-                              <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="btn btn-danger">Delete</a>
-                            </form>
-                          </td>
+                          
                         </tr>
                         @php($i++)
                         @endforeach

@@ -33,6 +33,7 @@
                           <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Action</th>
                                 <th>Date</th>
                                 <th>Course Name</th>
                                 <th>Booked By</th>
@@ -40,13 +41,23 @@
                                 <th>Phone</th>
                                 <th>Due Amount</th>
                                 <th>Status</th>
-                                <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
                               @foreach($bookings as $booking)
                             <tr style="@if($booking->suspended) color:red !important @endif">
                                 <td>{{$booking->id}}</td>
+                                <td class="classroom-btn" width="150">
+                                    <a href="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}/bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
+                                    @if(auth()->user()->permission>=40)
+                                    <a href="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}/bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
+                                    <form id="delete-form-{{$booking->id}}" action="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}/bookings/{{$booking->id}}" method="POST" style="display: inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
+                                    </form>
+                                    @endif
+                                </td>
                                 <td>{{date('Y-m-d',strtotime($booking->created_at))}}</td>
                                 <td>{{$booking->course->course ?? ''}}</td>
                                 <td>{{$booking->user_name}}</td>
@@ -65,17 +76,7 @@
                                     <span class="text-warning">{{$booking->status}}</span>
                                     @endif
                                 </td>
-                                <td class="classroom-btn" width="150">
-                                    <a href="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}/bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                    @if(auth()->user()->permission>=40)
-                                    <a href="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}/bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
-                                    <form id="delete-form-{{$booking->id}}" action="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}/bookings/{{$booking->id}}" method="POST" style="display: inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
-                                    </form>
-                                    @endif
-                                </td>
+                                
                             </tr>
                             @endforeach
                           </tbody>

@@ -29,6 +29,7 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th>Action</th>
                             <th>Category</th>
                             <th>Exam Name</th>
                             {{-- <th>Date</th> --}}
@@ -36,7 +37,6 @@
                             <th>Questions</th>
                             <th>Creator</th>
                             <th>Status</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -44,6 +44,20 @@
                             @foreach ($exams as $exam)
                           <tr>
                             <td>{{ $i }}</td>
+                            <td class="text-wrap">
+                                <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                        <a href="/admin/exams/{{$exam->id}}" class="text-primary dropdown-item">Show</a>
+                                        <a href="/admin/exams/{{$exam->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                        <form id="delete-form-{{$exam->id}}" action="/admin/exams/{{$exam->id}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:{}" onclick="javascript:deleteData({{$exam->id}});" class="text-warning dropdown-item">Delete</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
                             <td class="text-wrap">{{ ucwords($exam->category->title ?? '-') }}</td>
                             <td class="text-wrap">{{ $exam->name }}</td>
                             {{-- <td>{{ $exam->exam_date }}</td> --}}
@@ -57,15 +71,7 @@
                               <span class="text-success">{{$exam->status}}</span>
                               @endif
                             </td>
-                            <td class="classroom-btn" width="160">
-                                <a href="/admin/exams/{{$exam->id}}" class="btn btn-primary">Show</a>
-                                <a href="/admin/exams/{{$exam->id}}/edit" class="btn btn-danger">Edit</a>
-                                <form id="delete-form-{{$exam->id}}" action="/admin/exams/{{$exam->id}}" method="POST" style="display: inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="javascript:{}" onclick="javascript:deleteData({{$exam->id}});" class="btn btn-warning">Delete</a>
-                                </form>
-                            </td>
+                            
                           </tr>
                           @php($i++)
                           @endforeach

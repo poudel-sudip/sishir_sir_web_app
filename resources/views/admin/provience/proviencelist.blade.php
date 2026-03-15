@@ -30,9 +30,9 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th>Action</th>
                             <th>Name</th>
                             <th>Options</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -40,10 +40,6 @@
                             @foreach($proviences as $pro)
                             <tr>
                               <td>{{$i}}</td>
-                              <td>{{$pro->name}}</td>
-                              <td class="classroom-btn">
-                                <a href="/admin/provience/{{$pro->id}}/district-city"  class="btn btn-primary">District/City ({{$pro->cities->count()}})</a>
-                              </td>
                               <td class="classroom-btn" width="160">
                                 <a href="/admin/provience/{{$pro->id}}/edit"  class="btn btn-warning">Edit</a>
                                 <form id="delete-form-{{$pro->id}}" action="/admin/provience/{{$pro->id}}" method="POST" style="display: inline">
@@ -52,6 +48,11 @@
                                     <a href="javascript:{}" onclick="javascript:deleteData({{$pro->id}});" class="btn btn-danger">Delete</a>
                                 </form>
                               </td>
+                              <td>{{$pro->name}}</td>
+                              <td class="classroom-btn">
+                                <a href="/admin/provience/{{$pro->id}}/district-city"  class="btn btn-primary">District/City ({{$pro->cities->count()}})</a>
+                              </td>
+                              
                             </tr>
                             @php($i++)
                           @endforeach

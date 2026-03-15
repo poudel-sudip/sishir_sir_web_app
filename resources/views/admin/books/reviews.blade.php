@@ -27,12 +27,12 @@
                 <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Action</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Rating</th>
                     <th>Message</th>
                     <th>Date</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -40,12 +40,6 @@
                   @foreach($reviews as $rev)
                     <tr>
                       <td width='75'>{{$i}}</td>
-                      <td class="text-wrap">{{$rev->name}}</td>
-                      <td class="text-wrap">{{$rev->email}}</td>
-                      <td class="text-wrap">{{$rev->rating}}</td>
-                      <td class="text-wrap"> {!! $rev->message !!} </td>
-                      <td class="text-wrap">{{$rev->created_at}}</td>
-
                       <td width='75'>
                         <form id="delete-form-{{$rev->id}}" action="/admin/books/{{$book->id}}/reviews/{{$rev->id}}" method="POST" class="d-inline">
                           @csrf
@@ -53,6 +47,13 @@
                           <a href="javascript:{}" onclick="javascript:deleteData({{$rev->id}});">Delete</a>
                         </form>
                       </td>
+                      <td class="text-wrap">{{$rev->name}}</td>
+                      <td class="text-wrap">{{$rev->email}}</td>
+                      <td class="text-wrap">{{$rev->rating}}</td>
+                      <td class="text-wrap"> {!! $rev->message !!} </td>
+                      <td class="text-wrap">{{$rev->created_at}}</td>
+
+                      
                     </tr>
                     @php($i++)
                   @endforeach

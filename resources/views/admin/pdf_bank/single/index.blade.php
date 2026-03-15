@@ -30,6 +30,7 @@
                         <thead>
                           <tr>
                             <th>ID</th>
+                            <th>Action</th>
                             <th>eBook Name</th>
                             <th>Category</th>
                             <th>Author</th>
@@ -37,13 +38,26 @@
                             <th>Purchases</th>
                             <th>Pinned</th>
                             <th>Status</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                             @foreach($singles as $row)
                           <tr>
                             <td class="text-wrap">{{$row->id}}</td>
+                            <td class="text-wrap">
+                                <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                        <a href="/admin/pdf-bank/pdf-singles/{{$row->id}}" class="text-primary dropdown-item">Show</a>
+                                        <a href="/admin/pdf-bank/pdf-singles/{{$row->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                        <form id="delete-form-{{$row->id}}" action="/admin/pdf-bank/pdf-singles/{{$row->id}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="text-warning dropdown-item">Delete</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
                             <td class="text-wrap">{{$row->title}}</td>
                             <td class="text-wrap">{{$row->category->name ?? ''}}</td>
                             <td class="text-wrap">{{$row->author}}</td>
@@ -51,15 +65,7 @@
                             <td class="classroom-btn"> <a href="/admin/pdf-bank/pdf-singles/{{$row->id}}/bookings" class="btn btn-info">Purchases ({{$row->bookings()->count()}}) </a> </td>
                             <td class="text-wrap">{{$row->isPinned ?? ''}}</td>
                             <td><span class='text-{{$row->status == "Active" ? "success" : "danger"}}'>{{$row->status}}</span></td>
-                            <td class="classroom-btn" width="50">
-                              <a href="/admin/pdf-bank/pdf-singles/{{$row->id}}" class="btn btn-info">Show</a>
-                              <a href="/admin/pdf-bank/pdf-singles/{{$row->id}}/edit" class="btn btn-warning">Edit</a>
-                              <form id="delete-form-{{$row->id}}" action="/admin/pdf-bank/pdf-singles/{{$row->id}}" method="POST" class="d-inline">
-                                  @csrf
-                                  @method('DELETE')
-                                  <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="btn btn-danger">Delete</a>
-                              </form>
-                            </td>
+                            
                           </tr>
                           @endforeach
                         </tbody>

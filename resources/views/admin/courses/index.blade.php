@@ -29,29 +29,18 @@
                         <thead>
                           <tr>
                             <th>ID</th>
+                            <th>Action</th>
                             <th>Course Name</th>
                             <th>Category</th>
                             <th>Popular</th>
                             <th>Status</th>
                             <th>Features</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                             @foreach($courses as $course)
                           <tr>
                             <td>{{$course->id}}</td>
-                            <td>{{$course->name}}</td>
-                            <td>{{$course->category->name ?? ''}}</td>
-                            <td>{{$course->isPopular}}</td>
-                            <td>
-                              @if($course->status == 'Inactive')
-                              <span class="text-danger">{{$course->status}}</span>
-                              @else
-                              <span class="text-success">{{$course->status}}</span>
-                              @endif
-                            </td>
-                            <td><a href="/admin/courses/{{$course->id}}/features" class="text-primary"> Features </a></td>
                             <td>
                               <div class="dropdown">
                                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
@@ -68,6 +57,18 @@
                                 </div>
                               </div>
                             </td>
+                            <td>{{$course->name}}</td>
+                            <td>{{$course->category->name ?? ''}}</td>
+                            <td>{{$course->isPopular}}</td>
+                            <td>
+                              @if($course->status == 'Inactive')
+                              <span class="text-danger">{{$course->status}}</span>
+                              @else
+                              <span class="text-success">{{$course->status}}</span>
+                              @endif
+                            </td>
+                            <td><a href="/admin/courses/{{$course->id}}/features" class="text-primary"> Features </a></td>
+                            
                           </tr>
                           @endforeach
                         </tbody>

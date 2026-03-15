@@ -30,6 +30,7 @@
                           <thead>
                             <tr>
                               <th>ID</th>
+                              <th>Action</th>
                               <th>Date</th>
                               <th>Batch</th>
                               <th>Name</th>
@@ -37,13 +38,26 @@
                               <th>Contact</th>
                               <th>Status</th>
                               <th>Remarks</th>
-                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
                             @foreach($data as $booking)
                             <tr style="@if($booking->suspended) color:red !important @endif">
                                 <td>{{$booking->id}}</td>
+                                <td>
+                                    <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                        <a href="/admin/batches/{{$batch->id}}/bookings/{{$booking->id}}" class="text-primary dropdown-item">Show</a>
+                                        <a href="/admin/batches/{{$batch->id}}/bookings/{{$booking->id}}/edit" class="text-warning dropdown-item">Edit</a>
+                                        <form id="delete-form-{{$booking->id}}" action="/admin/batches/{{$batch->id}}/bookings/{{$booking->id}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="text-danger dropdown-item">Delete</a>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </td>
                                 <td>{{date('Y-m-d',strtotime($booking->created_at))}}</td>
                                 <td>{{$booking->batch->name ?? ''}}</td>
                                 <td>{{$booking->user_name}}</td>
@@ -58,16 +72,7 @@
                                   @endif
                                 </td>
                                 <td class="text-wrap" max-width="150px">{{ $booking->remarks }}</td>
-                                
-                                <td class="classroom-btn" width="150">
-                                    <a href="/admin/batches/{{$batch->id}}/bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                    <a href="/admin/batches/{{$batch->id}}/bookings/{{$booking->id}}/edit" class="btn btn-danger">Edit</a>
-                                    <form id="delete-form-{{$booking->id}}" action="/admin/batches/{{$batch->id}}/bookings/{{$booking->id}}" method="POST" style="display: inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
-                                    </form>
-                                </td>
+                              
                             </tr>
                             @endforeach
                           </tbody>

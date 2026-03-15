@@ -27,10 +27,10 @@
                                 <thead>
                                 <tr>
                                     <th>SN</th>
+                                    <th>Action</th>
                                     <th>Date</th>
                                     <th>Posted By</th>
                                     <th>Question</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -38,9 +38,6 @@
                                 @foreach($category->cqcs as $cqc)
                                     <tr>
                                         <td> {{$i}} </td>
-                                        <td> {{date('Y-m-d (D)',strtotime($cqc->created_at))}} </td>
-                                        <td> {{$cqc->name}} </td>
-                                        <td class="text-wrap"> {!! $cqc->question !!} </td>
                                         <td class="classroom-btn" width="160">
                                             <form id="delete-form-{{$cqc->id}}" action="/admin/exam-hall/{{$category->id}}/cqc/{{$cqc->id}}" method="POST" style="display: inline">
                                                 @csrf
@@ -48,6 +45,10 @@
                                                 <a href="javascript:{}" onclick="javascript:deleteData({{$cqc->id}});" class="btn btn-danger">Delete</a>
                                             </form>
                                         </td>
+                                        <td> {{date('Y-m-d (D)',strtotime($cqc->created_at))}} </td>
+                                        <td> {{$cqc->name}} </td>
+                                        <td class="text-wrap"> {!! $cqc->question !!} </td>
+                                        
                                     </tr>
                                     @php($i++)
                                 @endforeach

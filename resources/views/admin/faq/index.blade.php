@@ -30,28 +30,34 @@
                                 <thead>
                                 <tr>
                                     <th>SN</th>
+                                    <th>Action</th>
                                     <th>Faq Title</th>
                                     <th>Created Date</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($faqs as $key=>$faq)
                                         <tr>
                                             <td>{{$key+1}}</td>
-                                            <td>{{$faq->name}}</td>
+                                            <td class="text-wrap">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                        <a href="/admin/faqs/{{$faq->id}}" class="text-primary dropdown-item">Show</a>
+                                                        <a href="/admin/faqs/{{$faq->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                        <form id="delete-form-{{$faq->id}}" action="/admin/faqs/{{$faq->id}}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a href="javascript:{}" onclick="javascript:deleteData({{$faq->id}});" class="text-warning dropdown-item">Delete</a>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-wrap">{{$faq->name}}</td>
                                             <td>{{date('Y-m-d',strtotime($faq->created_at))}}</td>
                                             <td class="{{strtolower($faq->status) == 'active' ? 'text-primary' : 'text-danger'}}"> {{ucwords($faq->status)}} </td>
-                                            <td class="classroom-btn" width="100">
-                                                <a href="/admin/faqs/{{$faq->id}}" class="btn btn-primary">Show</a>
-                                                <a href="/admin/faqs/{{$faq->id}}/edit" class="btn btn-danger">Edit</a>
-                                                <form id="delete-form-{{$faq->id}}" action="/admin/faqs/{{$faq->id}}" method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a href="javascript:{}" onclick="javascript:deleteData({{$faq->id}});" class="btn btn-warning">Delete</a>
-                                                </form>
-                                            </td>
+                                            
                                         </tr>
                                     @endforeach
                                 </tbody>

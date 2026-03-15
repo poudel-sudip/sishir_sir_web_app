@@ -30,10 +30,10 @@
                 <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Action</th>
                     <th>Category Title</th>
                     <th>Exams</th>
                     <th>Creator</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -41,17 +41,23 @@
                   @foreach($categories as $cat)
                     <tr>
                       <td>{{$i}}</td>
+                      <td class="text-wrap">
+                        <div class="dropdown">
+                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                <a href="#edit_category" cat-name="{{$cat->title}}"  cat-id="{{$cat->id}}" data-toggle="modal" data-target="#edit_category" class="edit-category text-warning dropdown-item">Edit</a>
+                                <form id="delete-form-{{$cat->id}}" action="/admin/exam-category/{{$cat->id}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="text-danger dropdown-item">Delete</a>
+                                </form>
+                            </div>
+                        </div>
+                      </td>
                       <td class="text-wrap">{{ucwords($cat->title)}}</td>
                       <td> <a href="/admin/exam-category/{{$cat->id}}/exams" class="btn-sm btn-info">Exams ( {{$cat->exams->count()}} ) </a> </td>
                       <td> {{$cat->creator->name ?? '-'}} </td>
-                      <td class="classroom-btn" width="50">
-                        <a class="edit-category btn btn-warning" href="#edit_category" cat-name="{{$cat->title}}"  cat-id="{{$cat->id}}" data-toggle="modal" data-target="#edit_category">Edit</a>
-                        <form id="delete-form-{{$cat->id}}" action="/admin/exam-category/{{$cat->id}}" method="POST" style="display: inline">
-                            @csrf
-                            @method('DELETE')
-                            <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
-                        </form>
-                      </td>
+                      
                     </tr>
                     @php($i++)
                   @endforeach

@@ -25,30 +25,36 @@
                             <table class="table table-bordered all-entries-table" >
                                 <thead>
                                     <tr>
+                                        <th>Actions</th>                                        
                                         <th>Updated At</th>
                                         <th>Ticket Title</th>
                                         <th>Status</th>
                                         <th>Ticket ID</th>
                                         <th>Ticket By</th>
-                                        <th>Actions</th>                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($tickets as $row)
                                     <tr>
+                                        <td width="50">
+                                            <div class="dropdown">
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                    <a href="/admin/user-tickets/{{$row->id}}/contents" class="text-primary dropdown-item">View Messages</a>
+                                                    <form id="delete-form-{{$row->id}}" action="/admin/user-tickets/{{$row->id}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="text-danger dropdown-item">Delete</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>{{$row->sort_date }}</td>
                                         <td class="text-wrap">{{$row->title}}</td>
                                         <td class="text-{{$row->status ? 'success':'danger'}}">{{$row->status ? 'Open':'Closed'}}</td>
                                         <td>{{$row->id}}</td>
                                         <td class="test-wrap">{{$row->user->name ?? 'Unknown' }}</td>
-                                        <td class="classroom-btn" width="50">
-                                            <a href="/admin/user-tickets/{{$row->id}}/contents" class="btn btn-primary ">View Messages</a> 
-                                            <form id="delete-form-{{$row->id}}" action="/admin/user-tickets/{{$row->id}}" method="POST" style="display: inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="btn btn-danger">Delete</a>
-                                            </form>                                    
-                                        </td>
+                                       
                                     </tr>
                                     @endforeach                                 
                                     

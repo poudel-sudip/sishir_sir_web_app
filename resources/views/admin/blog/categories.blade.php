@@ -30,10 +30,10 @@
                 <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Action</th>
                     <th>Category Name</th>
                     <th>Order</th>
                     <th>Newsroom</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -41,17 +41,24 @@
                   @foreach($categories as $cat)
                   <tr>
                     <td width="100">{{$i}}</td>
+                    <td>
+                      <div class="dropdown">
+                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                            <a class="edit_category text-warning dropdown-item" href="#edit_category" category-id="{{$cat->id}}" category-name="{{$cat->name}}" category-order="{{$cat->order}}" data-bs-toggle="modal" data-bs-target="#edit_category" data-toggle="modal" data-target="#edit_category">Edit</a>
+                            <form id="delete-form-{{$cat->id}}" action="/admin/newsroom/categories/{{$cat->id}}" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="text-warning dropdown-item">Delete</a>
+                            </form>
+                          </div>
+                      </div>
+                    </td>
+                
                     <td class="text-wrap">{{ucwords($cat->name)}}</td>
                     <td class="text-wrap">{{$cat->order}}</td>
                     <td class="text-nowrap"> <a href="/admin/newsroom/categories/{{$cat->id}}/posts" class="btn-sm btn-info">Newsroom ({{$cat->blogs()->count()}}) </a> </td>
-                    <td class="classroom-btn" width="100">
-                      <a class="edit_category btn btn-warning" href="#edit_category" category-id="{{$cat->id}}" category-name="{{$cat->name}}" category-order="{{$cat->order}}" data-bs-toggle="modal" data-bs-target="#edit_category" data-toggle="modal" data-target="#edit_category">Edit</a>
-                      <form id="delete-form-{{$cat->id}}" action="/admin/newsroom/categories/{{$cat->id}}" method="POST" style="display: inline">
-                        @csrf
-                        @method('DELETE')
-                        <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
-                      </form>
-                    </td>
+                    
                   </tr>
                   @php($i++)
                   @endforeach

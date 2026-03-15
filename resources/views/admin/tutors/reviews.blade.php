@@ -27,13 +27,13 @@
                                 <thead>
                                 <tr>
                                     <th>SN</th>
+                                    <th>Action</th>
                                     <th>Date</th>
                                     <th>Reviewed By</th>
                                     <th>Email</th>
                                     <th>Rating</th>
                                     <th>Content</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -41,18 +41,6 @@
                                 @foreach($tutor->reviews as $review)
                                     <tr>
                                         <td>{{$i}}</td>
-                                        <td>{{date('Y-m-d',strtotime($review->created_at))}}</td>
-                                        <td>{{$review->name}}</td>
-                                        <td>{{$review->email}}</td>
-                                        <td>{{$review->rating}}</td>
-                                        <td class="text-wrap">{!! $review->review !!}</td>
-                                        <td>
-                                            @if($review->status == 'Unpublished')
-                                                <span class="text-danger">{{$review->status}}</span>
-                                            @else
-                                                <span class="text-success">{{$review->status}}</span>
-                                            @endif
-                                        </td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
@@ -75,6 +63,19 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>{{date('Y-m-d',strtotime($review->created_at))}}</td>
+                                        <td>{{$review->name}}</td>
+                                        <td>{{$review->email}}</td>
+                                        <td>{{$review->rating}}</td>
+                                        <td class="text-wrap">{!! $review->review !!}</td>
+                                        <td>
+                                            @if($review->status == 'Unpublished')
+                                                <span class="text-danger">{{$review->status}}</span>
+                                            @else
+                                                <span class="text-success">{{$review->status}}</span>
+                                            @endif
+                                        </td>
+                                        
                                     </tr>
                                     @php($i++)
                                 @endforeach

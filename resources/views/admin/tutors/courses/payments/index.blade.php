@@ -38,11 +38,11 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
+                                        <th>Action</th>
                                         <th>Requested Date</th>
                                         <th>Amount</th>
                                         <th>Status</th>
                                         <th>Updated Date</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,10 +50,6 @@
                                     @foreach($payments as $pay)
                                     <tr>
                                         <td>{{$i}}</td>
-                                        <td>{{date('Y-m-d',strtotime($pay->created_at))}}</td>
-                                        <td>{{$pay->amount}}</td>
-                                        <td>{{$pay->status}}</td>
-                                        <td>{{date('Y-m-d',strtotime($pay->updated_at))}}</td>
                                         <td class="classroom-btn" width="160">
                                             @if($pay->status=='Unpaid')
                                             <form id="update-form-{{$pay->id}}" action="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}/payments/{{$pay->id}}" method="POST" style="display: inline">
@@ -63,6 +59,11 @@
                                             </form>
                                             @endif
                                         </td>
+                                        <td>{{date('Y-m-d',strtotime($pay->created_at))}}</td>
+                                        <td>{{$pay->amount}}</td>
+                                        <td>{{$pay->status}}</td>
+                                        <td>{{date('Y-m-d',strtotime($pay->updated_at))}}</td>
+                                        
                                     </tr>
                                     @php($i++)
                                     @endforeach

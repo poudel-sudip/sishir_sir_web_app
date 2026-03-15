@@ -30,26 +30,31 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Action</th>
                                         <th>Filename</th>
                                         <th>URL</th>
                                         <th>Uploaded Date</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($audios as $audio)
                                     <tr>
                                         <td> {{$audio->id}} </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                <form id="delete-form-{{$audio->id}}" action="/admin/audios/{{$category->id}}/files/{{$audio->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="javascript:{}" onclick="javascript:deleteData({{$audio->id}});" class="text-warning dropdown-item">Delete</a>
+                                                </form>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td class="text-wrap">{{$audio->filename}}</td>
                                         <td class="text-wrap">{{$audio->url}}</td>
                                         <td>{{date('Y-m-d',strtotime($audio->created_at))}}</td>
-                                        <td>
-                                            <form id="delete-form-{{$audio->id}}" action="/admin/audios/{{$category->id}}/files/{{$audio->id}}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$audio->id}});" class="btn btn-warning">Delete</a>
-                                            </form>
-                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

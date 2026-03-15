@@ -98,7 +98,7 @@
                                 <label for="course" class="col-md-4 col-form-label">{{ __('Course') }} </label>
 
                                 <div class="col-md-8">
-                                    <input id="course" type="text" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course') ?? $enquiry->course->name }}" readonly>
+                                    <input id="course" type="text" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course') ?? $enquiry->course->name ?? ' '}}" readonly>
 
                                     @error('course')
                                     <span class="invalid-feedback" role="alert">

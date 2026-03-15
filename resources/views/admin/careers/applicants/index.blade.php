@@ -27,6 +27,7 @@
                                 <thead>
                                 <tr>
                                     <th>SN</th>
+                                    <th>Action</th>
                                     <th>Date</th>
                                     <th>Name</th>
                                     <th>Email</th>
@@ -34,7 +35,6 @@
                                     <th>Qualification</th>
                                     <th>Post</th>
                                     <th>Remarks</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -42,6 +42,20 @@
                                 @foreach($applicants as $data)
                                     <tr>
                                         <td>{{$i}}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                    <a href="/admin/careers/{{$vaccancy->id}}/applicants/{{$data->id}}" class="text-primary dropdown-item">Show</a>
+                                                    <a href="/admin/careers/{{$vaccancy->id}}/applicants/{{$data->id}}/edit" class="text-warning dropdown-item">Edit</a>
+                                                    <form id="delete-form-{{$data->id}}" action="/admin/careers/{{$vaccancy->id}}/applicants/{{$data->id}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="javascript:{}" onclick="javascript:deleteData({{$data->id}});" class="text-danger dropdown-item">Delete</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>{{date('Y-m-d',strtotime($data->created_at))}}</td>
                                         <td>{{$data->name}}</td>
                                         <td>{{$data->email}}</td>
@@ -49,15 +63,7 @@
                                         <td>{{$data->qualification}}</td>
                                         <td>{{$data->post_name}}</td>
                                         <td class="text-wrap">{!! $data->remarks !!}</td>
-                                        <td class="classroom-btn" width="150">
-                                            <a href="/admin/careers/{{$vaccancy->id}}/applicants/{{$data->id}}" class="btn btn-info">Show</a>
-                                            <a href="/admin/careers/{{$vaccancy->id}}/applicants/{{$data->id}}/edit" class="btn btn-warning">Edit</a>
-                                            <form id="delete-form-{{$data->id}}" action="/admin/careers/{{$vaccancy->id}}/applicants/{{$data->id}}" method="POST" style="display: inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$data->id}});" class="btn btn-danger">Delete</a>
-                                            </form>
-                                        </td>
+                                        
                                     </tr>
                                     @php($i++)
                                 @endforeach

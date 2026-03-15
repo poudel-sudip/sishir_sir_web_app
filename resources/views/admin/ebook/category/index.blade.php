@@ -30,10 +30,10 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th>Action</th>
                             <th>Name</th>
                             <th>Order</th>
                             <th>Status</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -41,9 +41,6 @@
                           @foreach($categories as $cat)
                           <tr>
                             <td>{{$i}}</td>
-                            <td>{{$cat->name}}</td>
-                            <td>{{$cat->order}}</td>
-                            <td><span class='text-{{$cat->status == "Active" ? "success" : "danger"}}'>{{$cat->status}}</span></td>
                             <td class="classroom-btn" width="160">
                               <a href="/admin/ebook/categories/{{$cat->id}}/edit" class="btn btn-warning">Edit</a>
                               <form class="d-inline" id="delete-form-{{$cat->id}}" action="/admin/ebook/categories/{{$cat->id}}" method="POST">
@@ -53,6 +50,10 @@
                               </form>
                               <a href="/admin/ebook/categories/{{$cat->id}}/books" class="btn btn-primary">E-Books</a>
                             </td>
+                            <td>{{$cat->name}}</td>
+                            <td>{{$cat->order}}</td>
+                            <td><span class='text-{{$cat->status == "Active" ? "success" : "danger"}}'>{{$cat->status}}</span></td>
+                            
                           </tr>
                           @php($i++)
                           @endforeach

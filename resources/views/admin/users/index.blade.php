@@ -29,6 +29,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Action</th>
                                         <th>Full Name</th>
                                         <th>Email</th>
                                         <th>Contact</th>
@@ -38,13 +39,26 @@
                                         <th>B Donate</th>
                                         <th>Role</th>
                                         {{-- <th class="text-wrap">Created Date</th> --}}
-                                        <th>Action</th>
                                     </tr>
                                 </thead>       
                                 <tbody>
                                     @foreach($users as $user)
                                     <tr>
                                         <td>{{$user->id}}</td>
+                                        <td width="50">
+                                            <div class="dropdown">
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                    <a href="/admin/users/{{$user->id}}" class="text-primary dropdown-item">Show</a>
+                                                    <a href="/admin/users/{{$user->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                    <form id="delete-form-{{$user->id}}" action="/admin/users/{{$user->id}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="javascript:{}" onclick="javascript:deleteData({{$user->id}});" class="text-warning dropdown-item">Delete</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td class="text-wrap">{{$user->name}}</td>
                                         <td class="text-wrap">{{$user->email}}</td>
                                         <td class="text-wrap">{{$user->contact}}</td>
@@ -63,15 +77,6 @@
                                         </td>
                                         {{-- <td class="text-wrap">{{$user->created_at}}</td> --}}
                                         
-                                        <td class="classroom-btn" width="160">
-                                            <a href="/admin/users/{{$user->id}}" class="btn btn-primary">Show</a>
-                                            <a href="/admin/users/{{$user->id}}/edit" class="btn btn-danger">Edit</a>
-                                            <form id="delete-form-{{$user->id}}" action="/admin/users/{{$user->id}}" method="POST" style="display: inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$user->id}});" class="btn btn-warning">Delete</a>
-                                            </form>
-                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>                         

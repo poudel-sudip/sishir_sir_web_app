@@ -29,6 +29,7 @@
                           <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Action</th>
                                 <th>Batch Name</th>
                                 <th>Course Name</th>
                                 <th>Duration </th>
@@ -36,40 +37,12 @@
                                 <th>Time Slot</th>
                                 <th>Status</th>
                                 <th>Classroom</th>
-                                <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
                               @foreach($batches as $batch)
                             <tr>
-                                <td>{{$batch->id}}</td>
-                                <td>{{$batch->name}}</td>
-                                <td>{{$batch->course->name ?? ''}}</td>
-                                <td>{{$batch->duration}} {{$batch->durationType}}</td>
-                                <td>
-                                  @if($batch->class_status == 'No Class')
-                                    <span class="text-danger">{{$batch->class_status}}</span>
-                                  @else
-                                    <span class="text-primary">{{$batch->class_status}}</span>
-                                  @endif
-                                </td>
-                                <td>{{$batch->timeSlot}}</td>
-                                <td>
-                                  @if($batch->status == 'Active')
-                                  <span class="text-success">{{$batch->status}}</span>
-                                  @elseif($batch->status == 'Inactive')
-                                  <span class="text-danger">{{$batch->status}}</span>
-                                  @elseif($batch->status == 'No Class')
-                                  <span class="text-danger">{{$batch->status}}</span>
-                                  @elseif($batch->status == 'Closed')
-                                  <span class="text-warning">{{$batch->status}}</span>
-                                  @else
-                                  <span class="text-info">{{$batch->status}}</span>
-                                  @endif
-                                </td>
-                                <td class="classroom-btn">
-                                  <a href="/classroom/chat/{{$batch->id}}" class="btn btn-primary">View</a>
-                                </td>
+                              <td>{{$batch->id}}</td>
                               <td>
                                 <div class="dropdown">
                                   <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
@@ -89,6 +62,34 @@
                                   </div>
                                 </div>
                               </td>
+                              <td>{{$batch->name}}</td>
+                              <td>{{$batch->course->name ?? ''}}</td>
+                              <td>{{$batch->duration}} {{$batch->durationType}}</td>
+                              <td>
+                                @if($batch->class_status == 'No Class')
+                                  <span class="text-danger">{{$batch->class_status}}</span>
+                                @else
+                                  <span class="text-primary">{{$batch->class_status}}</span>
+                                @endif
+                              </td>
+                              <td>{{$batch->timeSlot}}</td>
+                              <td>
+                                @if($batch->status == 'Active')
+                                <span class="text-success">{{$batch->status}}</span>
+                                @elseif($batch->status == 'Inactive')
+                                <span class="text-danger">{{$batch->status}}</span>
+                                @elseif($batch->status == 'No Class')
+                                <span class="text-danger">{{$batch->status}}</span>
+                                @elseif($batch->status == 'Closed')
+                                <span class="text-warning">{{$batch->status}}</span>
+                                @else
+                                <span class="text-info">{{$batch->status}}</span>
+                                @endif
+                              </td>
+                              <td class="classroom-btn">
+                                <a href="/classroom/chat/{{$batch->id}}" class="btn btn-primary">View</a>
+                              </td>
+                              
                             </tr>
                             @endforeach
                           </tbody>

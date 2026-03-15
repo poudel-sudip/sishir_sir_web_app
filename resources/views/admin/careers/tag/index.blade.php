@@ -30,9 +30,9 @@
                 <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Action</th>
                     <th>Tag Title</th>
                     <th>Vaccancies</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -40,16 +40,22 @@
                   @foreach($tags as $cat)
                     <tr>
                       <td>{{$i}}</td>
+                      <td>
+                        <div class="dropdown">
+                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                            <a class="edit-category text-danger dropdown-item" href="#edit_category" cat-name="{{$cat->name}}"  cat-id="{{$cat->id}}" data-toggle="modal" data-target="#edit_category">Edit</a>
+                            <form id="delete-form-{{$cat->id}}" action="/admin/careers-tag/{{$cat->id}}" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="text-warning dropdown-item">Delete</a>
+                            </form>
+                          </div>
+                        </div>
+                      </td>
                       <td>{{$cat->name}}</td>
                       <td> <a href="/admin/careers-tag/{{$cat->id}}/vaccancies" class="btn-sm btn-info">Vaccancies ({{$cat->vaccancies()->count()}}) </a> </td>
-                      <td class="classroom-btn" width="50">
-                        <a class="edit-category btn btn-warning" href="#edit_category" cat-name="{{$cat->name}}"  cat-id="{{$cat->id}}" data-toggle="modal" data-target="#edit_category">Edit</a>
-                        <form id="delete-form-{{$cat->id}}" action="/admin/careers-tag/{{$cat->id}}" method="POST" style="display: inline">
-                            @csrf
-                            @method('DELETE')
-                            <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
-                        </form>
-                      </td>
+                      
                     </tr>
                     @php($i++)
                   @endforeach

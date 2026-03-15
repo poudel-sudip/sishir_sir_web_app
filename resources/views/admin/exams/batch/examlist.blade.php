@@ -30,11 +30,11 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th>Action</th>
                             <th>Exam Name</th>
                             {{-- <th>Date</th> --}}
                             <th>Time(HH:MM:SS)</th>
                             <th>Questions</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -42,11 +42,6 @@
                             @foreach ($exams as $exam)
                           <tr>
                             <td>{{ $i }}</td>
-                            <td>{{ $exam->exam->name ?? '' }}</td>
-                            {{-- <td>{{ $exam->exam->exam_date ?? '' }}</td> --}}
-                            <td>{{ $exam->exam->exam_time.':00' ?? '' }} </td>
-                            <td>{{ $exam->exam->questions->count() }} </td>
-                           
                             <td class="classroom-btn" width="160">
                              
                                 <form id="delete-form-{{$exam->id}}" action="/admin/batches/{{$batch->id}}/exams/{{$exam->id}}" method="POST" style="display: inline">
@@ -57,6 +52,12 @@
                                 <a href="/admin/batches/{{$batch->id}}/exams/{{$exam->exam->id}}/results" class="btn btn-primary">Results</a>
 
                             </td>
+                            <td>{{ $exam->exam->name ?? '' }}</td>
+                            {{-- <td>{{ $exam->exam->exam_date ?? '' }}</td> --}}
+                            <td>{{ $exam->exam->exam_time.':00' ?? '' }} </td>
+                            <td>{{ $exam->exam->questions->count() }} </td>
+                           
+                            
                             
                           </tr>
                           @php($i++)

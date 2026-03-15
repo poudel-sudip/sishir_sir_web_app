@@ -30,6 +30,7 @@
                 <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Action</th>
                     <th>Category</th>
                     <th>Publisher</th>
                     <th>Book</th>
@@ -37,7 +38,6 @@
                     <th>Pub. Year</th>
                     <th>Winners</th>
                     <th>Quantity</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -45,6 +45,19 @@
                   @foreach($books as $row)
                     <tr>
                       <td>{{$i}}</td>
+                      <td width="50">
+                        <div class="dropdown">
+                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                            <a href="/admin/qr-books/{{$row->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                            <form id="delete-form-{{$row->id}}" action="/admin/qr-books/{{$row->id}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="text-warning dropdown-item">Delete</a>
+                            </form>
+                          </div>
+                        </div>
+                      </td>
                       <td class="text-wrap">{{ucwords($row->book->category->name ?? '')}}</td>
                       <td class="text-wrap">{{ucwords($row->book->category->publisher->name ?? '')}}</td>
                       <td class="text-wrap">{{ucwords($row->book->title ?? '')}}</td>
@@ -52,15 +65,7 @@
                       <td>{{$row->book->published_year ?? ''}} </td>
                       <td><a href="/admin/qr-books/{{$row->id}}/winners">Winners ({{$row->winners()->count()}})</a></td>
                       <td><a href="/admin/qr-books/{{$row->id}}/scans">Show ({{$row->quantity}})</a></td>
-                      <td class="classroom-btn" width="100">
-                        {{-- <a href="/admin/qr-books/{{$row->id}}/show" class="btn btn-primary">Show</a> --}}
-                        <a href="/admin/qr-books/{{$row->id}}/edit" class="btn btn-warning">Edit</a>
-                        <form id="delete-form-{{$row->id}}" action="/admin/qr-books/{{$row->id}}" method="POST" class="d-inline">
-                          @csrf
-                          @method('DELETE')
-                          <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="btn btn-danger">Delete</a>
-                        </form>
-                      </td>
+                     
                     </tr>
                     @php($i++)
                   @endforeach

@@ -30,17 +30,30 @@
                         <thead>
                           <tr>
                             <th>ID</th>
+                            <th>Action</th>
                             <th>Name</th>
                             <th>Slug</th>
                             <th>Order</th>
                             <th>Status</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                             @foreach($categories as $cat)
                           <tr>
                             <td>{{$cat->id}}</td>
+                            <td>
+                              <div class="dropdown">
+                                  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                      <a href="/admin/categories/{{$cat->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                      <form id="delete-form-{{$cat->id}}" action="/admin/categories/{{$cat->id}}" method="POST">
+                                          @csrf
+                                          @method('DELETE')
+                                          <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="text-warning dropdown-item">Delete</a>
+                                      </form>
+                                  </div>
+                              </div>
+                            </td>
                             <td>{{$cat->name}}</td>
                             <td>{{$cat->slug}}</td>
                             <td>{{$cat->order}}</td>
@@ -51,14 +64,7 @@
                               <span class="text-success">{{$cat->status}}</span>
                             @endif
                             </td>
-                              <td class="classroom-btn" width="160">
-                                  <a href="/admin/categories/{{$cat->id}}/edit" class="btn btn-danger">Edit</a>
-                                  <form id="delete-form-{{$cat->id}}" action="/admin/categories/{{$cat->id}}" method="POST" style="display: inline">
-                                      @csrf
-                                      @method('DELETE')
-                                      <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-warning">Delete</a>
-                                  </form>
-                              </td>
+                              
                           </tr>
                           @endforeach
                         </tbody>

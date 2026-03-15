@@ -29,29 +29,18 @@
                         <thead>
                           <tr>
                             <th>ID</th>
+                            <th>Action</th>
                             <th>Book Title</th>
                             <th>Category</th>
                             <th>Book Author</th>
                             <th>Book Price</th>
                             <th>Status</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                             @foreach($books as $book)
                           <tr>
                             <td class="text-wrap">{{$book->id}}</td>
-                            <td class="text-wrap">{{$book->title}}</td>
-                            <td class="text-wrap">{{$book->category->name ?? ''}}</td>
-                            <td class="text-wrap">{{$book->author}}</td>
-                            <td class="text-wrap">{{$book->price ?? 0}} - {{$book->discount ?? 0}} = {{$book->price - $book->discount}}</td>
-                            <td>
-                              @if($book->status == 'Inactive')
-                              <span class="text-danger">{{$book->status}}</span>
-                              @else
-                              <span class="text-success">{{$book->status}}</span>
-                              @endif
-                            </td>
                             <td>
                               <div class="dropdown">
                                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
@@ -70,6 +59,18 @@
                                 </div>
                               </div>
                             </td>
+                            <td class="text-wrap">{{$book->title}}</td>
+                            <td class="text-wrap">{{$book->category->name ?? ''}}</td>
+                            <td class="text-wrap">{{$book->author}}</td>
+                            <td class="text-wrap">{{$book->price ?? 0}} - {{$book->discount ?? 0}} = {{$book->price - $book->discount}}</td>
+                            <td>
+                              @if($book->status == 'Inactive')
+                              <span class="text-danger">{{$book->status}}</span>
+                              @else
+                              <span class="text-success">{{$book->status}}</span>
+                              @endif
+                            </td>
+                            
                           </tr>
                           @endforeach
                         </tbody>

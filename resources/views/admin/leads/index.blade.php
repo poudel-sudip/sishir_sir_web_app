@@ -25,6 +25,7 @@
                             <table class="table table-bordered" id="advanced-desc-table">
                                 <thead>
                                     <tr>
+                                        <th>Action</th>
                                         <th>Date</th>
                                         <th>Name</th>
                                         <th>Email</th>
@@ -34,12 +35,24 @@
                                         <th>Course</th>
                                         <th>Message</th>
                                         <th>Remarks</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($enquiries as $enquiry)
                                     <tr>
+                                        <td class="text-wrap">
+                                            <div class="dropdown">
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                    <a href="/leads/enquiries/{{$enquiry->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                    <form id="delete-form-{{$enquiry->id}}" action="/leads/enquiries/{{$enquiry->id}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="javascript:{}" onclick="javascript:deleteData({{$enquiry->id}});" class="text-warning dropdown-item">Delete</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td class="text-wrap">{{date("Y-m-d",strtotime($enquiry->created_at))}}</td>
                                         <td class="text-wrap">{{$enquiry->name}}</td>
                                         <td class="text-wrap">{{$enquiry->email}}</td>
@@ -50,14 +63,6 @@
                                         <td class="text-wrap">{!! $enquiry->message !!}</td>
                                         <td class="text-wrap">{!! $enquiry->remarks !!}</td>
 
-                                        <td class="classroom-btn" width="160">
-                                            <a href="/leads/enquiries/{{$enquiry->id}}/edit" class="btn btn-danger">Edit</a>
-                                            <form id="delete-form-{{$enquiry->id}}" action="/leads/enquiries/{{$enquiry->id}}" method="POST" style="display: inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$enquiry->id}});" class="btn btn-warning">Delete</a>
-                                            </form>
-                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

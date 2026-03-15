@@ -30,8 +30,8 @@
                         <thead>
                           <tr>
                             <th>SN</th>
-                            <th>Group Name</th>
                             <th>Action</th>
+                            <th>Group Name</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -39,8 +39,6 @@
                           @foreach($groups as $cat)
                           <tr>
                             <td>{{$i}}</td>
-                            <td class="text-wrap">{{ucwords($cat->name)}}</td>
-                           
                             <td class="classroom-btn" width="175">
                               <a href="/admin/dynamic-forms/groups/{{$cat->id}}/forms" class="btn btn-info">Forms</a>
                               <a class="edit_group btn btn-warning" href="#edit_group" group-id="{{$cat->id}}" group-name="{{$cat->name}}" data-bs-toggle="modal" data-bs-target="#edit_group" data-toggle="modal" data-target="#edit_group">Edit</a>
@@ -51,6 +49,9 @@
                                     <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
                                 </form>
                             </td>
+                            <td class="text-wrap">{{ucwords($cat->name)}}</td>
+                           
+                            
                           </tr>
                           @php($i++)
                           @endforeach

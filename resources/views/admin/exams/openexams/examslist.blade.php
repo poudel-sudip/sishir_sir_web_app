@@ -29,13 +29,13 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th>Action</th>
                             <th>Exam Name</th>
                             <th>Created Date</th>
                             <th>Time(HH:MM:SS)</th>
                             <th>Questions</th>
                             <th>Creator</th>
                             <th>Results</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -43,22 +43,28 @@
                             @foreach ($exams as $exam)
                           <tr>
                             <td>{{ $i }}</td>
+                            <td class="text-wrap">
+                                <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                        <a href="/admin/open-exams/{{$exam->id}}" class="text-primary dropdown-item">Show</a>
+                                        <a href="/admin/open-exams/{{$exam->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                        <form id="delete-form-{{$exam->id}}" action="/admin/open-exams/{{$exam->id}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:{}" onclick="javascript:deleteData({{$exam->id}});" class="text-warning dropdown-item">Delete</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+
                             <td class="text-wrap">{{ $exam->exam->name ?? '' }}</td>
                             <td>{{ date('Y-m-d',strtotime($exam->created_at)) }}</td>
                             <td class="text-wrap">{{ ($exam->exam->exam_time ?? '00:00').':00'  }} </td>
                             <td> Count({{ $exam->exam->questions()->count() ?? 0 }}) </td>
                             <td class="text-wrap"> {{$exam->creator->name ?? '-'}} </td>
-                            <td> <a href="/admin/open-exams/{{$exam->id}}/results">{{$exam->result_status}} / Count({{ $exam->results->count() }}) </a></td>
-                            
-                            <td class="classroom-btn" width="160">
-                                <a href="/admin/open-exams/{{$exam->id}}" class="btn btn-primary">Show</a>
-                                <a href="/admin/open-exams/{{$exam->id}}/edit" class="btn btn-danger">Edit</a>
-                                <form id="delete-form-{{$exam->id}}" action="/admin/open-exams/{{$exam->id}}" method="POST" style="display: inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="javascript:{}" onclick="javascript:deleteData({{$exam->id}});" class="btn btn-warning">Delete</a>
-                                </form>
-                            </td>
+                            <td> <a href="/admin/open-exams/{{$exam->id}}/results">{{$exam->result_status}} / Count({{ $exam->results()->count() }}) </a></td>
+    
                           </tr>
                           @php($i++)
                           @endforeach

@@ -29,19 +29,16 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Action</th>
                                         <th>Slider Order</th>
                                         <th>Slider Image</th>
                                         <th>Slider Title</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($sliders as $slider)
                                         <tr>
                                             <td>{{$slider->id}}</td>
-                                            <td>{{$slider->order}}</td>
-                                            <td> <img src="/storage/{{$slider->image}}" class="img img-responsive img-fluid"> </td>
-                                            <td>{{$slider->title}}</td>
                                             <td width="100" class="classroom-btn">
                                                 <a href="/admin/sliders/{{$slider->id}}/edit" class="btn btn-danger ">Edit</a>
                                                 <form id="delete-form-{{$slider->id}}" action="/admin/sliders/{{$slider->id}}" method="POST" style="display: inline">
@@ -50,6 +47,10 @@
                                                     <a href="javascript:{}" onclick="javascript:deleteData({{$slider->id}});" class="btn btn-warning ">Delete</a>
                                                 </form>
                                             </td>
+                                            <td>{{$slider->order}}</td>
+                                            <td> <img src="/storage/{{$slider->image}}" class="img img-responsive img-fluid"> </td>
+                                            <td>{{$slider->title}}</td>
+                                            
                                         </tr>
                                     @endforeach
                                 </tbody>

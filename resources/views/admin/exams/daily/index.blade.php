@@ -30,6 +30,7 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th>Action</th>
                             <th>Date</th>
                             <th>Question</th>
                             <th>Option A</th>
@@ -37,7 +38,6 @@
                             <th>Option C</th>
                             <th>Option D</th>
                             <th>Correct Option</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -45,6 +45,21 @@
                           @foreach ($questions as $question)
                           <tr>
                             <td>{{ $i }}</td>
+                            <td class="text-wrap">
+                                <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                        <a href="/admin/daily-mcq-questions/{{$question->id}}" class="text-primary dropdown-item">Show</a>
+                                        <a href="/admin/daily-mcq-questions/{{$question->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                        <form id="delete-form-{{$question->id}}" action="/admin/daily-mcq-questions/{{$question->id}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:{}" onclick="javascript:deleteData({{$question->id}});" class="text-warning dropdown-item">Delete</a>
+                                        </form>
+                                        <a href="/admin/daily-mcq-questions/{{$question->id}}/comments" class="text-primary dropdown-item">Comments</a>
+                                    </div>
+                                </div>
+                             </td>
                             <td>{{$question->show_date}}</td>
                             <td class="text-wrap">{!! $question->question !!}</td>
                             <td class="text-wrap">{!! $question->opt_a !!}</td>
@@ -52,16 +67,7 @@
                             <td class="text-wrap">{!! $question->opt_c !!}</td>
                             <td class="text-wrap">{!! $question->opt_d !!}</td>
                             <td>{{ $question->opt_correct }}</td>
-                            <td class="classroom-btn" width="100">
-                              <a href="/admin/daily-mcq-questions/{{$question->id}}/comments" class="btn btn-primary">Comments</a>
-                              <a href="/admin/daily-mcq-questions/{{$question->id}}" class="btn btn-info">Show</a>
-                              <a href="/admin/daily-mcq-questions/{{$question->id}}/edit" class="btn btn-warning">Edit</a>
-                                <form id="delete-form-{{$question->id}}" action="/admin/daily-mcq-questions/{{$question->id}}" method="POST" style="display: inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="javascript:{}" onclick="javascript:deleteData({{$question->id}});" class="btn btn-danger">Delete</a>
-                                </form>
-                            </td>
+                            
                           </tr>
                           @php($i++)
                           @endforeach

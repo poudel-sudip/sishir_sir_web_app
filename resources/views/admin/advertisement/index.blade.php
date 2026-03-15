@@ -30,11 +30,11 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th>Action</th>
                             <th>Caption</th>
                             <th>Banner Image</th>
                             <th>Position</th>
                             <th>Status</th>
-                            <th>Action</th>                                                        
                           </tr>
                         </thead>
                         <tbody>
@@ -42,18 +42,23 @@
                           @foreach($ads as $row)
                           <tr>
                             <td width="50">{{$i}}</td>
+                            <td>
+                              <div class="dropdown">
+                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                  <a href="/admin/advertisement/{{$row->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                  {{-- <form id="delete-form-{{$row->id}}" action="/admin/advertisement/{{$row->id}}" method="POST">
+                                      @csrf
+                                      @method('DELETE')
+                                      <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="text-warning dropdown-item">Delete</a>
+                                  </form> --}}
+                                </div>
+                              </div>
+                            </td>
                             <td class="text-wrap">{{$row->info}}</td>
                             <td class="text-center"> <img src="/storage/{{$row->banner}}" alt="" style="max-width:100%; width:auto; max-height:150px; height: auto; " class="">  </td>
                             <td class="text-wrap">{{$row->position}}</td>
                             <td width="50"><span class='text-{{$row->status == "Active" ? "success" : "danger"}}'>{{$row->status}}</span></td>
-                            <td class="classroom-btn" width="50">
-                              <a href="/admin/advertisement/{{$row->id}}/edit" class="btn btn-warning">Edit</a>
-                              {{-- <form id="delete-form-{{$row->id}}" action="/admin/advertisement/{{$row->id}}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="btn btn-danger">Delete</a>
-                              </form> --}}
-                            </td>
                           </tr>
                           @php($i++)
                           @endforeach

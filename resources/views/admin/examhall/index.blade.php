@@ -29,6 +29,7 @@
                                 <thead>
                                 <tr>
                                     <th>SN</th>
+                                    <th>Action</th>
                                     <th class="text-wrap">Group</th>
                                     <th class="text-wrap">Exam Set Title</th>
                                     <th>Exams Count</th>
@@ -37,9 +38,9 @@
                                     <th>Creator</th>
                                     <th>CQC</th>
                                     <th class="text-wrap">Bookings (Unverified/Total)</th>
+                                    <th>Pinned</th>
                                     <th>Status</th>
 
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -47,6 +48,19 @@
                                 @foreach($categories as $cat)
                                     <tr>
                                         <td>{{$i}}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                    <a href="/admin/exam-hall/{{$cat->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                    <form id="delete-form-{{$cat->id}}" action="/admin/exam-hall/{{$cat->id}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="text-warning dropdown-item">Delete</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td class="text-wrap">{{$cat->examGroup->name ?? '-'}}</td>
                                         <td class="text-wrap">{{$cat->title}}</td>
                                         <td> <a href="/admin/exam-hall/{{$cat->id}}/exams">Count({{$cat->category_exams->count()}})</a> </td>
@@ -55,6 +69,7 @@
                                         <td>{{$cat->creator->name ?? '-'}}</td>
                                         <td> <a href="/admin/exam-hall/{{$cat->id}}/cqc">CQCs({{$cat->cqcs->count()}})</a> </td>
                                         <td> <a href="/admin/exam-hall/{{$cat->id}}/bookings">Bookings( {{$cat->bookings()->where('status','!=','Verified')->count()}}/{{$cat->bookings->count()}} )</a> </td>
+                                        <td>{{$cat->isPinned}}</td>
                                         <td>
                                             @if($cat->status == 'Active')
                                                 <span class="text-success">{{$cat->status}}</span>
@@ -62,14 +77,7 @@
                                                 <span class="text-warning">{{$cat->status}}</span>
                                             @endif
                                         </td>
-                                        <td class="classroom-btn" width="100">
-                                            <a href="/admin/exam-hall/{{$cat->id}}/edit" class="btn btn-success">Edit</a>
-                                            <form id="delete-form-{{$cat->id}}" action="/admin/exam-hall/{{$cat->id}}" method="POST" style="display: inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
-                                            </form>
-                                        </td>
+                                        
                                     </tr>
                                     @php($i++)
                                 @endforeach

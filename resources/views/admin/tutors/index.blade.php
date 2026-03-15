@@ -31,19 +31,33 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Action</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Courses</th>
                                         <th>Reviews</th>
                                         <th>Special Courses</th>
                                         <th>Status</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($tutors as $tutor)
                                 <tr>
                                     <td>{{$tutor->id}}</td>
+                                    <td width="50">
+                                        <div class="dropdown">
+                                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                <a href="/admin/tutors/{{$tutor->id}}" class="text-primary dropdown-item">Show</a>
+                                                <a href="/admin/tutors/{{$tutor->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                <form id="delete-form-{{$tutor->id}}" action="/admin/tutors/{{$tutor->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="javascript:{}" onclick="javascript:deleteData({{$tutor->id}});" class="text-warning dropdown-item">Delete</a>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td class="text-wrap">{{$tutor->name}}</td>
                                     <td class="text-wrap">{{$tutor->user->email ?? ''}}</td>
                                     <td class="text-wrap">
@@ -65,17 +79,7 @@
                                         <a href="/admin/tutors/{{$tutor->id}}/courses"> Courses({{$tutor->specialCourses()->where('status','=','Inactive')->count() .'/'.$tutor->specialCourses->count()}}) </a>
                                     </td>
                                     <td>{{$tutor->status ?? ''}}</td>
-                                    <td class="classroom-btn" width="160">
-                                        <a href="/admin/tutors/{{$tutor->id}}" class="btn btn-primary">Show</a>
-                                        @if(auth()->user()->permission>=20)
-                                        <a href="/admin/tutors/{{$tutor->id}}/edit" class="btn btn-danger">Edit</a>
-                                        <form id="delete-form-{{$tutor->id}}" action="/admin/tutors/{{$tutor->id}}" method="POST" style="display: inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <a href="javascript:{}" onclick="javascript:deleteData({{$tutor->id}});" class="btn btn-warning">Delete</a>
-                                        </form>
-                                        @endif
-                                    </td>
+                                    
                                 </tr>
                                 @endforeach
                                 </tbody>

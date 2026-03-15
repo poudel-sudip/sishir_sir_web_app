@@ -67,6 +67,7 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
+                                        <th>Action</th>
                                         <th>Date</th>
                                         <th>Name</th>
                                         <th>Email</th>
@@ -76,7 +77,6 @@
                                         <th>Course</th>
                                         <th>Message</th>
                                         <th>Remarks</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,6 +84,7 @@
                                     @foreach($enquiries as $enquiry)
                                     <tr>
                                         <td>{{$i}}</td>
+                                        <td><a href="/leads/enquiries/{{$enquiry->id}}/edit">Edit</a> </td>
                                         <td class="text-wrap">{{date("Y-m-d",strtotime($enquiry->created_at))}}</td>
                                         <td class="text-wrap">{{$enquiry->name}}</td>
                                         <td class="text-wrap">{{$enquiry->email}}</td>
@@ -94,7 +95,6 @@
                                         <td class="text-wrap">{!! $enquiry->message !!}</td>
                                         <td class="text-wrap">{!! $enquiry->remarks !!}</td>
 
-                                        <td><a href="/leads/enquiries/{{$enquiry->id}}/edit">Edit</a> </td>
                                     </tr>
                                     @php($i++)
                                 @endforeach

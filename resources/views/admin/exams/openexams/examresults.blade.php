@@ -32,6 +32,7 @@
                         <thead>
                           <tr>
                             <th>ID</th>
+                            <th>Action</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Contact</th>
@@ -42,7 +43,6 @@
                             <th>WQ</th>
                             <th>MO</th>
                             <th>Date</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -50,6 +50,13 @@
                           @foreach ($results as $result)
                           <tr>
                             <td>{{ $result->id }}</td>
+                            <td>
+                              <form id="delete-form-{{$result->id}}" action="/admin/open-exams/{{$exam->id}}/results/{{$result->id}}" method="POST" style="display: inline">
+                                @csrf
+                                @method('DELETE')
+                                <a href="javascript:{}" onclick="javascript:deleteData({{$result->id}});" class="text-danger">Delete</a>
+                              </form>
+                            </td>  
                             <td>{{ $result->name }}</td>
                             <td>{{ $result->email }}</td>
                             <td>{{ $result->contact }}</td>
@@ -60,13 +67,7 @@
                             <td>{{ $result->wrong_questions ?? '' }} </td>
                             <td>{{ ($result->correct_questions * ($exam->exam->marks_per_question ?? 1))-($result->wrong_questions * ($exam->exam->negative_marks ?? 0))}} </td>
                             <td>{{ date('Y-m-d',strtotime($result->created_at))}} </td>   
-                            <td>
-                              <form id="delete-form-{{$result->id}}" action="/admin/open-exams/{{$exam->id}}/results/{{$result->id}}" method="POST" style="display: inline">
-                                @csrf
-                                @method('DELETE')
-                                <a href="javascript:{}" onclick="javascript:deleteData({{$result->id}});" class="text-danger">Delete</a>
-                              </form>
-                            </td>                        
+                                                  
                           </tr>
                           @php($i++)
                           @endforeach

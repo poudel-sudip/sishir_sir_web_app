@@ -30,11 +30,11 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th>Action</th>
                             <th>Name</th>
                             <th>Order</th>
                             <th>Sub Groups</th>
                             <th>Status</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -42,6 +42,19 @@
                             @foreach($groups as $group)
                           <tr>
                             <td width="50">{{$i}}</td>
+                            <td width="50">
+                                <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                        <a href="/admin/menus/{{$group->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                        <form id="delete-form-{{$group->id}}" action="/admin/menus/{{$group->id}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="javascript:{}" onclick="javascript:deleteData({{$group->id}});" class="text-warning dropdown-item">Delete</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
                             <td>{{$group->name}}</td>
                             <td>{{$group->order}}</td>
                             <td><a href="/admin/menus/{{$group->id}}/sub-groups">Sub Groups ( {{$group->subGroups->count()}} ) </a></td>
@@ -52,14 +65,7 @@
                                 <span class="text-success">{{$group->status}}</span>
                               @endif
                             </td>
-                            <td class="classroom-btn" width="160">
-                              <a href="/admin/menus/{{$group->id}}/edit" class="btn btn-danger">Edit</a>
-                              <form id="delete-form-{{$group->id}}" action="/admin/menus/{{$group->id}}" method="POST" style="display: inline">
-                                @csrf
-                                @method('DELETE')
-                                <a href="javascript:{}" onclick="javascript:deleteData({{$group->id}});" class="btn btn-warning">Delete</a>
-                              </form>
-                          </td>
+                            
                           </tr>
                           @php($i++)
                           @endforeach

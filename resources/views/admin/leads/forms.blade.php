@@ -68,17 +68,15 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Action</th>
                                         <th>Course</th>
                                         <th>Form Link</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($enquiryforms as $row)
                                     <tr>
                                         <td class="text-wrap">{{$row->id}}</td>
-                                        <td class="text-wrap">{{$row->course_name}}</td>
-                                        <td class="text-wrap">{{url($row->enquiry_link)}}</td>
                                         <td class="classroom-btn" width="100">
                                             <form id="delete-form-{{$row->id}}" action="/admin/enquiry-form/{{$row->id}}" method="POST" style="display: inline">
                                                 @csrf
@@ -86,6 +84,9 @@
                                                 <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="btn btn-danger">Delete</a>
                                             </form>
                                         </td>
+                                        <td class="text-wrap">{{$row->course_name}}</td>
+                                        <td class="text-wrap">{{url($row->enquiry_link)}}</td>
+                                        
                                     </tr>
                                 @endforeach
                                 </tbody>

@@ -30,11 +30,11 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Action</th>
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>Posted On</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -42,6 +42,20 @@
                                 @foreach($vaccancies as $vaccancy)
                                     <tr>
                                         <td>{{$vaccancy->id}}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                    <a href="/admin/careers/{{$vaccancy->id}}" class="text-primary dropdown-item">Show</a>
+                                                    <a href="/admin/careers/{{$vaccancy->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                    <form id="delete-form-{{$vaccancy->id}}" action="/admin/careers/{{$vaccancy->id}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="javascript:{}" onclick="javascript:deleteData({{$vaccancy->id}});" class="text-warning dropdown-item">Delete</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td class="text-wrap">{{$vaccancy->title}}</td>
                                         <td class="text-wrap">{{$vaccancy->author}}</td>
                                         <td class="text-wrap">{{$vaccancy->created_at}}</td>
@@ -52,15 +66,7 @@
                                                 <span class="text-danger">{{$vaccancy->status}}</span>
                                             @endif
                                         </td>
-                                        <td class="classroom-btn" width="50">
-                                            <a href="/admin/careers/{{$vaccancy->id}}" class="btn btn-info">Show</a>
-                                            <a href="/admin/careers/{{$vaccancy->id}}/edit" class="btn btn-warning">Edit</a>
-                                            <form id="delete-form-{{$vaccancy->id}}" action="/admin/careers/{{$vaccancy->id}}" method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$vaccancy->id}});" class="btn btn-danger">Delete</a>
-                                            </form>                                            
-                                        </td>
+                                        
                                     </tr>
                                     {{-- @php($i++) --}}
                                 @endforeach

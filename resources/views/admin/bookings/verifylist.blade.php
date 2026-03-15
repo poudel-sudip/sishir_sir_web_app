@@ -27,6 +27,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Action</th>
                                         <th>Date</th>
                                         <th>Batch</th>
                                         <th>Name</th>
@@ -40,6 +41,20 @@
                                     @foreach($bookings as $booking)
                                     <tr>
                                         <td>{{$booking->id}}</td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                    <a href="/admin/bookings/{{$booking->id}}" class="text-primary dropdown-item">Show</a>
+                                                    <a href="/admin/bookings/{{$booking->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                    <form id="delete-form-{{$booking->id}}" action="/admin/bookings/{{$booking->id}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="text-warning dropdown-item">Delete</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>{{date('Y-m-d',strtotime($booking->created_at))}}</td>
                                         <td>{{$booking->batch->name ?? ''}}</td>
                                         <td>{{$booking->user_name}}</td>
@@ -55,17 +70,7 @@
                                             <span class="text-info">{{$booking->status}}</span>
                                             @endif
                                         </td>
-                                        <td class="classroom-btn" width="170">
-                                            <a href="/admin/bookings/{{$booking->id}}" class="btn btn-primary">Show</a>
-                                            @if(auth()->user()->permission>=40)
-                                            <a href="/admin/bookings/{{$booking->id}}/edit" class="btn btn-danger">Verify</a>
-                                            <form id="delete-form-{{$booking->id}}" action="/admin/bookings/{{$booking->id}}" method="POST" style="display: inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-warning">Delete</a>
-                                            </form>
-                                            @endif
-                                        </td>
+                                        
                                     </tr>
                                 @endforeach
                                 </tbody>

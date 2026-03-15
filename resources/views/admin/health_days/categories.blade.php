@@ -30,17 +30,15 @@
                 <thead>
                   <tr>
                     <th>SN</th>
-                    <th>Category Name</th>
                     <th>Action</th>
+                    <th>Category Name</th>
                   </tr>
                 </thead>
                 <tbody>
                   @php($i=1)
                   @foreach($categories as $cat)
                   <tr>
-                    <td width="100">{{$i}}</td>
-                    <td class="text-wrap">{{ucwords($cat->name)}}</td>
-                    
+                    <td width="100">{{$i}}</td>                    
                     <td class="classroom-btn" width="100">
                       <a class="edit_category btn btn-warning" href="#edit_category" category-id="{{$cat->id}}" category-name="{{$cat->name}}" data-bs-toggle="modal" data-bs-target="#edit_category" data-toggle="modal" data-target="#edit_category">Edit</a>
                       <form id="delete-form-{{$cat->id}}" action="/admin/health-days/categories/{{$cat->id}}" method="POST" style="display: inline">
@@ -49,6 +47,7 @@
                         <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
                       </form>
                     </td>
+                    <td class="text-wrap">{{ucwords($cat->name)}}</td>
                   </tr>
                   @php($i++)
                   @endforeach

@@ -29,33 +29,40 @@
                                 <thead>
                                 <tr>
                                     <th>SN</th>
+                                    <th>Action</th>
                                     <th>Category</th>
                                     <th>Date</th>
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>Slogans</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($healthDays as $key=>$row)
                                         <tr>
                                             <td width="50">{{$key+1}}</td>
+                                            <td class="text-wrap">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                        <a href="/admin/health-days/{{$row->id}}" class="text-primary dropdown-item">Show</a>
+                                                        <a href="/admin/health-days/{{$row->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                        <form id="delete-form-{{$row->id}}" action="/admin/health-days/{{$row->id}}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="text-warning dropdown-item">Delete</a>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+
                                             <td class="text-wrap">{{optional($row->category)->name}}</td>
                                             <td class="text-wrap">{{ $row->date }}</td>
                                             <td class="text-wrap">{{ $row->title }}</td>
                                             <td class="text-wrap">{{ $row->author_name }}</td>
                                             {{-- <td class="{{strtolower($row->status) == 'active' ? 'text-primary' : 'text-danger'}}"> {{ucwords($row->status)}} </td> --}}
                                             <td class="classroom-btn" width="100"> <a href="/admin/health-days/{{$row->id}}/slogans" class="">Slogans ({{$row->slogans()->count()}}) </a> </td>
-                                            <td class="classroom-btn" width="100">
-                                                <a href="/admin/health-days/{{$row->id}}" class="btn btn-primary">Show</a>
-                                                <a href="/admin/health-days/{{$row->id}}/edit" class="btn btn-danger">Edit</a>
-                                                <form id="delete-form-{{$row->id}}" action="/admin/health-days/{{$row->id}}" method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="btn btn-warning">Delete</a>
-                                                </form>
-                                            </td>
+                                           
                                         </tr>
                                     @endforeach
                                 </tbody>

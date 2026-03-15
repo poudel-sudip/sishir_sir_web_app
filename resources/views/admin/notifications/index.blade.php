@@ -29,28 +29,34 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Action</th>
                                         <th>Notification</th>
                                         <th>Group</th>
                                         <th>Date</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($notifications as $notification)
                                 <tr>
                                     <td>{{$notification->id}}</td>
+                                    <td width="50">
+                                        <div class="dropdown">
+                                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                <a href="/admin/notifications/{{$notification->id}}" class="text-primary dropdown-item">Show</a>
+                                                <a href="/admin/notifications/{{$notification->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                <form id="delete-form-{{$notification->id}}" action="/admin/notifications/{{$notification->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="javascript:{}" onclick="javascript:deleteData({{$notification->id}});" class="text-warning dropdown-item">Delete</a>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td class="text-wrap"><h5>{{$notification->title}}</h5></td>
                                     <td class="text-wrap">{{$notification->groups}}</td>
                                     <td>{{date('Y-m-d',strtotime($notification->created_at))}}</td>
-                                    <td class="classroom-btn" width="160">
-                                        <a href="/admin/notifications/{{$notification->id}}" class="btn btn-primary">Show</a>
-                                        <a href="/admin/notifications/{{$notification->id}}/edit" class="btn btn-danger">Edit</a>
-                                        <form id="delete-form-{{$notification->id}}" action="/admin/notifications/{{$notification->id}}" method="POST" style="display: inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <a href="javascript:{}" onclick="javascript:deleteData({{$notification->id}});" class="btn btn-warning">Delete</a>
-                                        </form>
-                                    </td>
+                                    
                                 </tr>
                                 @endforeach
                                 </tbody>

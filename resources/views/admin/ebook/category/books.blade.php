@@ -31,13 +31,13 @@
                         <thead>
                           <tr>
                             <th>SN</th>
+                            <th>Action</th>
                             <th>Book Title</th>
                             <th>Category</th>
                             <th>Price</th>
                             <th>Chapters</th>
                             <th>Purchases</th>
                             <th>Status</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -45,13 +45,7 @@
                           @foreach($books as $row)
                           <tr>
                             <td>{{$i}}</td>
-                            <td class="text-wrap">{{$row->title ?? ''}}</td>
-                            <td class="text-wrap">{{$row->category->name ?? '' }}</td>
-                            <td>{{$row->price ?? ''}} - {{$row->discount ?? ''}} = {{$row->price - $row->discount}} </td>
-                            <td> <a href="/admin/ebook/books/{{$row->id}}/chapters" class="btn-sm btn-primary">Chapters</a> </td>
-                            <td>{{$row->bookings->where('status','=','Verified')->count()}} </td>
-                            <td><span class='text-{{$row->status == "Active" ? "success" : "danger"}}'>{{$row->status}}</span></td>
-                            <td>
+                             <td>
                               <div class="dropdown">
                                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
@@ -65,6 +59,13 @@
                                 </div>
                               </div>
                             </td>
+                            <td class="text-wrap">{{$row->title ?? ''}}</td>
+                            <td class="text-wrap">{{$row->category->name ?? '' }}</td>
+                            <td>{{$row->price ?? ''}} - {{$row->discount ?? ''}} = {{$row->price - $row->discount}} </td>
+                            <td> <a href="/admin/ebook/books/{{$row->id}}/chapters" class="btn-sm btn-primary">Chapters</a> </td>
+                            <td>{{$row->bookings->where('status','=','Verified')->count()}} </td>
+                            <td><span class='text-{{$row->status == "Active" ? "success" : "danger"}}'>{{$row->status}}</span></td>
+                           
                           </tr>
                           @php($i++)
                           @endforeach

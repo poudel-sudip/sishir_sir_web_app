@@ -30,25 +30,16 @@
                         <thead>
                           <tr>
                             <th>ID</th>
+                            <th>Action</th>
                             <th>Chapter Name</th>
                             <th>Chapter Title</th>
                             <th>Status</th>
-                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                             @foreach($chapters as $chapter)
                           <tr>
                             <td class="text-wrap">{{$chapter->id}}</td>
-                            <td class="text-wrap">{{$chapter->name}}</td>
-                            <td class="text-wrap">{{$chapter->title}}</td>
-                            <td>
-                              @if($chapter->status == 'Inactive')
-                              <span class="text-danger">{{$chapter->status}}</span>
-                              @else
-                              <span class="text-success">{{$chapter->status}}</span>
-                              @endif
-                            </td>
                             <td>
                               <div class="dropdown">
                                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
@@ -65,6 +56,16 @@
                                 </div>
                               </div>
                             </td>
+                            <td class="text-wrap">{{$chapter->name}}</td>
+                            <td class="text-wrap">{{$chapter->title}}</td>
+                            <td>
+                              @if($chapter->status == 'Inactive')
+                              <span class="text-danger">{{$chapter->status}}</span>
+                              @else
+                              <span class="text-success">{{$chapter->status}}</span>
+                              @endif
+                            </td>
+                            
                           </tr>
                           @endforeach
                         </tbody>

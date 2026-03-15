@@ -31,9 +31,9 @@
                 <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Action</th>
                     <th>Year</th>
                     <th>Slogan Title</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -41,9 +41,6 @@
                   @foreach($slogans as $cat)
                   <tr>
                     <td width="100">{{$i}}</td>
-                    <td class="text-wrap">{{$cat->name}}</td>
-                    <td class="text-wrap">{{$cat->description}}</td>
-                    
                     <td class="classroom-btn" width="100">
                       <a class="edit_slogan btn btn-warning" href="#edit_slogan" slogan-id="{{$cat->id}}" slogan-year="{{$cat->name}}" slogan-title="{{$cat->description}}" data-bs-toggle="modal" data-bs-target="#edit_slogan" data-toggle="modal" data-target="#edit_slogan">Edit</a>
                       <form id="delete-form-{{$cat->id}}" action="/admin/health-days/{{$healthDay->id}}/slogans/{{$cat->id}}" method="POST" style="display: inline">
@@ -52,6 +49,10 @@
                         <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
                       </form>
                     </td>
+                    <td class="text-wrap">{{$cat->name}}</td>
+                    <td class="text-wrap">{{$cat->description}}</td>
+                    
+                    
                   </tr>
                   @php($i++)
                   @endforeach

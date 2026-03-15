@@ -27,6 +27,7 @@
                           <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Action</th>
                                 <th>Date</th>
                                 <th>Category</th>
                                 <th>Publisher</th>
@@ -35,13 +36,25 @@
                                 <th>D. Location</th>
                                 <th>Quantity</th>
                                 <th>Unit Rate</th>
-                                <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
                             @foreach($orders as $row)
                                 <tr>
                                     <td class="text-wrap">{{$row->id}} </td>
+                                    <td>
+                                      <div class="dropdown">
+                                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                              <a href="/admin/physical-book-orders/{{$row->id}}" class="text-primary dropdown-item">Show</a>
+                                              <form id="delete-form-{{$row->id}}" action="/admin/physical-book-orders/{{$row->id}}" method="POST">
+                                                  @csrf
+                                                  @method('DELETE')
+                                                  <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="text-warning dropdown-item">Delete</a>
+                                              </form>
+                                          </div>
+                                      </div>
+                                    </td>
                                     <td class="text-wrap">{{date('Y-m-d',strtotime($row->created_at))}}</td>
                                     <td class="text-wrap">{{$row->book_category ?? ''}}</td>
                                     <td class="text-wrap">{{$row->book_publisher ?? ''}}</td>
@@ -50,14 +63,7 @@
                                     <td class="text-wrap">{{$row->location}}</td>
                                     <td class="text-wrap">{{$row->quantity}}</td>
                                     <td class="text-wrap">{{$row->unit_price}}</td>     
-                                    <td >
-                                      <a href="/admin/physical-book-orders/{{$row->id}}/show">Show</a> 
-                                      <form id="delete-form-{{$row->id}}" action="/admin/physical-book-orders/{{$row->id}}" method="POST" style="display: inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="text-danger">Delete</a>
-                                      </form>
-                                    </td>                               
+                                                                
                                 </tr>
                             @endforeach
                           </tbody>

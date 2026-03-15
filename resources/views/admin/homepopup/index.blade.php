@@ -29,17 +29,25 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Action</th>
                                         <th>Popup Description</th>
                                         <th>Popup Image</th>
                                         {{-- <th>Popup Link</th> --}}
                                         <th>Status</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($popup as $popup)
                                         <tr>
                                             <td>{{$popup->id}}</td>
+                                            <td width="100" class="classroom-btn">
+                                                <a href="/admin/home-popup/{{$popup->id}}/edit" class="btn btn-danger btn-sm">Edit</a>
+                                                <form id="delete-form-{{$popup->id}}" action="/admin/home-popup/{{$popup->id}}" method="POST" style="display: inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="javascript:{}" onclick="javascript:deleteData({{$popup->id}});" class="btn btn-warning btn-sm">Delete</a>
+                                                </form>
+                                            </td>
                                             <td>{{$popup->title}}</td>
                                             <td> <img src="/storage/{{$popup->image}}"> </td>
                                             {{-- <td>{{$popup->link}}</td> --}}
@@ -50,14 +58,7 @@
                                                 <span class="text-info">{{$popup->status}}</span>
                                                 @endif
                                             </td>
-                                            <td width="100" class="classroom-btn">
-                                                <a href="/admin/home-popup/{{$popup->id}}/edit" class="btn btn-danger btn-sm">Edit</a>
-                                                <form id="delete-form-{{$popup->id}}" action="/admin/home-popup/{{$popup->id}}" method="POST" style="display: inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a href="javascript:{}" onclick="javascript:deleteData({{$popup->id}});" class="btn btn-warning btn-sm">Delete</a>
-                                                </form>
-                                            </td>
+                                            
                                         </tr>
                                     @endforeach
                                 </tbody>

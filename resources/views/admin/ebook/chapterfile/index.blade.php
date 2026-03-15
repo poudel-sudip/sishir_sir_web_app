@@ -31,24 +31,25 @@
                         <thead>
                           <tr>
                             <th>ID</th>
-                            <th>Files</th>
                             <th>Action</th>
+                            <th>Files</th>
                           </tr>
                         </thead>
                         <tbody>
                             @foreach($chaptersfiles as $files)
                           <tr>
                             <td class="text-wrap">{{$files->id}}</td>
-                            <td class="text-wrap">
-                                <a href="/storage/{{$files->image}}" target="_blank"><img src="/storage/{{$files->image}}" width="200" alt=""></a>
-                            </td>
-                            <td width="100"><form id="delete-form-{{$chapter->id}}" action="/admin/ebook/books/{{$book->id}}/chapters/{{$chapter->id}}/files/{{$files->id}}" method="POST">
+                            <td width="100">
+                              <form id="delete-form-{{$chapter->id}}" action="/admin/ebook/books/{{$book->id}}/chapters/{{$chapter->id}}/files/{{$files->id}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <a href="javascript:{}" onclick="javascript:deleteData({{$chapter->id}});" class="btn btn-danger btn-sm">Delete</a>
-                            </form></td>
-                            <td>
+                              </form>
                             </td>
+                            <td class="text-wrap">
+                              <a href="/storage/{{$files->image}}" target="_blank"><img src="/storage/{{$files->image}}" width="200" alt=""></a>
+                            </td>
+                            
                           </tr>
                           @endforeach
                         </tbody>

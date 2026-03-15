@@ -6980,7 +6980,7 @@ label.star:before {
 
 .dchl-title {
     color: transparent;
-    background: linear-gradient(90deg, red, green);
+    background: linear-gradient(90deg, #0C2B64, #0C2B64);
     position: relative;
     display: inline-block;
     padding: 0 2rem; 
@@ -6990,7 +6990,7 @@ label.star:before {
 }
 .dcvl-title {
     color: transparent;
-    background: linear-gradient(180deg, red, green);
+    background: linear-gradient(180deg, #0C2B64, #0C2B64);
     position: relative;
     display: inline-block;
     padding: 0 2rem; 
@@ -7000,7 +7000,7 @@ label.star:before {
 }
 
 .dchl-title::after, .dcvl-title::after{
-    background: linear-gradient(90deg, red, green);
+    background: linear-gradient(90deg, red, red);
     content: "";
     position: absolute;
     left: 0;

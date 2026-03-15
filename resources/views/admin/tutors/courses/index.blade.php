@@ -32,6 +32,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Action</th>
                                         <th>Course</th>
                                         <th>Fee</th>
                                         <th>Discount</th>
@@ -39,13 +40,26 @@
                                         <th>Duration</th>
                                         <th>Status</th>
                                         <th>Payments</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($courses as $course)
                                     <tr>
                                         <td>{{$course->id}}</td>
+                                        <td width="50">
+                                            <div class="dropdown">
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                    <a href="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}" class="text-primary dropdown-item">Show</a>
+                                                    <a href="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                    <form id="delete-form-{{$course->id}}" action="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="javascript:{}" onclick="javascript:deleteData({{$course->id}});" class="text-warning dropdown-item">Delete</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>{{$course->course}}</td>
                                         <td>Rs {{$course->fee}}</td>
                                         <td>Rs {{$course->discount}}</td>
@@ -55,19 +69,7 @@
                                         <td>
                                             <a href="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}/payments">View Paid {{$course->payments()->where('status','=','Paid')->count()}} out of {{$course->payments->count()}} requests </a>
                                         </td>
-                                        <td class="classroom-btn" width="160">
-                                            <a href="/special-course/classroom/chat/{{$course->id}}" class="btn btn-success">Classroom</a>
-                                            <a href="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}/bookings" class="btn btn-info">Bookings</a>
-                                            <a href="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}" class="btn btn-primary">Show</a>
-                                            @if(auth()->user()->permission>=20)
-                                            <a href="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}/edit" class="btn btn-danger">Edit</a>
-                                            <form id="delete-form-{{$course->id}}" action="/admin/tutors/{{$tutor->id}}/courses/{{$course->id}}" method="POST" style="display: inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$course->id}});" class="btn btn-warning">Delete</a>
-                                            </form>
-                                            @endif
-                                        </td>
+                                       
                                     </tr>
                                     @endforeach
                                 </tbody>

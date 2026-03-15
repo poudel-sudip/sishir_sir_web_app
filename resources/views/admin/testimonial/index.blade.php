@@ -29,29 +29,35 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Action</th>
                                         <th>Testimonial By</th>
                                         <th>As</th>
                                         <th>Date</th>
                                         <th>Status</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($testimonials as $testimonial)
                                     <tr>
                                         <td>{{$testimonial->id}}</td>
+                                        <td width="50">
+                                            <div class="dropdown">
+                                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                                <a href="/admin/testimonials/{{$testimonial->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                                <form id="delete-form-{{$testimonial->id}}" action="/admin/testimonials/{{$testimonial->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="javascript:{}" onclick="javascript:deleteData({{$testimonial->id}});" class="text-warning dropdown-item">Delete</a>
+                                                </form>
+                                            </div>
+                                            </div>
+                                        </td>
                                         <td class="text-wrap">{{$testimonial->name}}</td>
                                         <td class="text-wrap"> {{$testimonial->role}} </td>
                                         <td>{{date('Y-m-d',strtotime($testimonial->created_at))}}</td>
                                         <td class="text-{{ucwords($testimonial->status) == 'Active' ? 'success' : 'danger'}}">{{ucwords($testimonial->status)}}</td>
-                                        <td class="classroom-btn" width="100">
-                                            <a href="/admin/testimonials/{{$testimonial->id}}/edit" class="btn btn-danger btn-sm">Edit</a>
-                                            <form id="delete-form-{{$testimonial->id}}" action="/admin/testimonials/{{$testimonial->id}}" method="POST" style="display: inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:deleteData({{$testimonial->id}});" class="btn btn-warning btn-sm">Delete</a>
-                                            </form>
-                                        </td>
+                                        
                                     </tr>
                                     @endforeach
                                 </tbody>

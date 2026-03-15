@@ -29,9 +29,9 @@
                 <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Action</th>
                     <th>Question</th>
                     <th>Answer</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -39,17 +39,22 @@
                   @foreach ($questions as $question)
                   <tr>
                     <td>{{ $i }}</td>
+                    <td class="text-wrap">
+                        <div class="dropdown">
+                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                <a href="/admin/play-puzzle/image/{{$question->id}}" class="text-primary dropdown-item">Show</a>
+                                <a href="/admin/play-puzzle/image/{{$question->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                <form id="delete-form-{{$question->id}}" action="/admin/play-puzzle/image/{{$question->id}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="javascript:{}" onclick="javascript:deleteData({{$question->id}});" class="text-warning dropdown-item">Delete</a>
+                                </form>
+                            </div>
+                        </div>
                     <td class="text-wrap"><img src="{{ asset('storage/'.$question->question) }}" alt="Question Image" class="img-fluid"></td>
                     <td class="text-wrap">{!! $question->answer !!}</td>
-                    <td class="classroom-btn" width="100">
-                      <a href="/admin/play-puzzle/image/{{$question->id}}" class="btn btn-info">Show</a>
-                      <a href="/admin/play-puzzle/image/{{$question->id}}/edit" class="btn btn-warning">Edit</a>
-                        <form id="delete-form-{{$question->id}}" action="/admin/play-puzzle/image/{{$question->id}}" method="POST" style="display: inline">
-                          @csrf
-                          @method('DELETE')
-                          <a href="javascript:{}" onclick="javascript:deleteData({{$question->id}});" class="btn btn-danger">Delete</a>
-                        </form>
-                    </td>
+                    
                   </tr>
                   @php($i++)
                   @endforeach

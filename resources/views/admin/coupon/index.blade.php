@@ -30,9 +30,9 @@
                 <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Action</th>                                                        
                     <th>Coupon For </th>
                     <th>Coupon Code</th>
-                    <th>Action</th>                                                        
                   </tr>
                 </thead>
                 <tbody>
@@ -40,8 +40,6 @@
                   @foreach($coupons as $row)
                     <tr>
                       <td width="50">{{$i}}</td>
-                      <td class="text-wrap" width="200">{{$row->source}}</td>
-                      <td class="text-wrap">{{$row->coupon}}</td>
                       <td class="classroom-btn" width="50">
                         <form id="delete-form-{{$row->id}}" action="/admin/booking-coupons/{{$row->id}}" method="POST" class="d-inline">
                           @csrf
@@ -49,6 +47,9 @@
                           <a href="javascript:{}" onclick="javascript:deleteData({{$row->id}});" class="btn btn-danger">Delete</a>
                         </form>
                       </td>
+                      <td class="text-wrap" width="200">{{$row->source}}</td>
+                      <td class="text-wrap">{{$row->coupon}}</td>
+                      
                     </tr>
                     @php($i++)
                   @endforeach

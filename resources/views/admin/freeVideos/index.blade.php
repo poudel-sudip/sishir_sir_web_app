@@ -29,9 +29,9 @@
                                 <thead>
                                     <tr>
                                         <th>SN</th>
+                                        <th>Action</th>
                                         <th>Title</th>
                                         <th>Link</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,9 +39,6 @@
                                     @foreach($videos as $video)
                                     <tr>
                                         <td>{{$i}}</td>
-                                        <td class="text-wrap">{{$video->title}}</td>
-                                        <td class="text-wrap">{{$video->link}}</td>
-
                                         <td class="classroom-btn" width="50">
                                             <form id="delete-form-{{$video->id}}" action="/admin/free-videos/{{$video->id}}" method="POST" style="display: inline">
                                                 @csrf
@@ -49,6 +46,10 @@
                                                 <a href="javascript:{}" onclick="javascript:deleteData({{$video->id}});" class="btn btn-danger">Delete</a>
                                             </form>
                                         </td>
+                                        <td class="text-wrap">{{$video->title}}</td>
+                                        <td class="text-wrap">{{$video->link}}</td>
+
+                                        
                                     </tr>
                                         @php($i++)
                                 @endforeach

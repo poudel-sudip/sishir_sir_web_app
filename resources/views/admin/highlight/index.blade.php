@@ -30,10 +30,10 @@
                 <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Action</th>
                     <th>Title</th>
                     <th>Link</th>
                     <th>Status</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -41,9 +41,7 @@
                     @foreach($highlights as $cat)
                   <tr>
                     <td width="50">{{$i}}</td>
-                    <td class="text-wrap">{{$cat->name}}</td>
-                    <td class="text-wrap">{{$cat->description}}</td>   
-                    <td class="text-wrap" width="75">{{$cat->status}}</td>                         
+                    
                     <td class="classroom-btn" width="50">
                       <a class="edit_highlight btn btn-warning" href="javascript:{}" data-toggle="modal" data-target="#edit_highlight" data-id="{{$cat->id}}" data-title="{{$cat->name}}" data-description="{{$cat->description}}" data-status="{{$cat->status}}">Edit</a>
                       <form id="delete-form-{{$cat->id}}" action="/admin/highlights/{{$cat->id}}" method="POST" style="display: inline">
@@ -52,6 +50,10 @@
                         <a href="javascript:{}" onclick="javascript:deleteData({{$cat->id}});" class="btn btn-danger">Delete</a>
                       </form>
                     </td>
+                    <td class="text-wrap">{{$cat->name}}</td>
+                    <td class="text-wrap">{{$cat->description}}</td>   
+                    <td class="text-wrap" width="75">{{$cat->status}}</td>                         
+                    
                   </tr>
                   @php($i++)
                   @endforeach

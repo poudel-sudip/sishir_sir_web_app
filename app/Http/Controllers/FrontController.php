@@ -131,6 +131,7 @@ class FrontController extends Controller
         // }
 
         $premium_exams = ExamHallCategories::where('status', 'Active')
+            ->orderByDesc('isPinned')
             ->orderByDesc('id')
             ->take(4)
             ->get(['id', 'title', 'slug', 'image', 'created_at'])
