@@ -198,7 +198,7 @@
                                 <div><strong>Author(s):</strong> ${mat.author}</div>
                                 <div><strong>Published On:</strong> ${mat.published_year}</div>
                                 <div><strong>Pages:</strong> ${mat.pages}</div>
-                                <div><strong>Size:</strong> ${mat.size}</div>
+                                <div><strong>Size:</strong> ${mat.size} MB</div>
                                 <div>${mat.description}</div>
                             </div>
                         </div>
@@ -221,7 +221,7 @@
                         <th>Author(s)</th>
                         <th width="150">Published On</th>
                         <th width="50">Pages</th>
-                        <th width="75">Size</th>
+                        <th class="text-nowrap" width="100">Size (MB)</th>
                         <th width="50">Action</th>
                     </tr>
                 `;

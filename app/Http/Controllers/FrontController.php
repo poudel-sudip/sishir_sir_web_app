@@ -506,7 +506,7 @@ class FrontController extends Controller
 
         $data['menuCategory'] = $menuCategory;
 
-        $data['menuItems'] = $menuCategory->items()->where('status', '=', 'Active')->orderByDesc('id')->get();
+        $data['menuItems'] = $menuCategory->items()->where('status', '=', 'Active')->orderBy('order')->orderByDesc('id')->get();
 
         // $pgurl = "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
         $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
@@ -662,11 +662,11 @@ class FrontController extends Controller
         ->get(['id', 'name', 'slug', 'published_year', 'author', 'pages', 'fileurl'])
         ->map(function($m) use($storage){
 
-            $size = "0 MB"; // "0 KB" 
+            $size = "0"; // "0 KB" 
             try {
                 $size = $storage->size($m->fileurl);
                 // $size = Number::fileSize($size);
-                $size = round($size / 1024 / 1024, 2).' MB';
+                $size = round($size / 1024 / 1024, 2);
 
             } catch (\Throwable $th) {
                 //throw $th;

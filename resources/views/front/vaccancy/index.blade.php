@@ -75,7 +75,7 @@
                             <h4 class="text-center"><a href="/vaccancies/{{$vaccancy->id}}" style="color: #1374ba;">{{$vaccancy->title}}</a></h4>
                             <div class="blog-footer">
                                 <div><i class="fa fa-user text-danger" aria-hidden="true"></i> <span class="text-danger">{{$vaccancy->author}}</span></div>
-                                <div class="text-end">Posted On: <span class="text-primary"> {{date('Y-m-d',strtotime($vaccancy->created_at))}}</span></div>
+                                <div class="text-end">Posted On: <span class="text-primary"> {{$vaccancy->created_at->format('d M, Y')}}</span></div>
                             </div>
                         </div>
                     </div>

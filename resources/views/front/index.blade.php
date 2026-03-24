@@ -26,22 +26,25 @@
                 <div class="col-12 mb-2">
                     <div class="d-flex align-items-center " style="background: #ffced2; border-radius:6px; font-weight:bold;">
                         <div class="rounded bg-danger text-light p-2" style="align-self: stretch;">Highlight</div>
-                        <marquee direction="left" >
-                            @foreach($highlights as $highlight)
-                            <a @if(trim($highlight->link)) href="{{$highlight->link}}" target="_blank" @endif class="highlight-text"> {{strtoupper($highlight->title)}} </a>
-                            @endforeach
-                        </marquee>
+                        <div class="marquee">
+                            <div class="marquee-content" >
+                                @foreach($highlights as $highlight)
+                                <a @if(trim($highlight->link)) href="{{$highlight->link}}" target="_blank" @endif class="highlight-text"> {{strtoupper($highlight->title)}} </a>
+                                @endforeach
+                            </div>
+                        </div>
+                        
                     </div>                    
                 </div>
                 @endif
 
                 <div class="col-md-9">
-                    <div class="marquee-text">
-                        <marquee width="100%" direction="left" height="25px">
+                    <div class="marquee-text py-2 marquee">
+                        <div class="marquee-content">
                             @foreach ($updates as $update)
                             <span style="padding-right: 10rem"><a href="{{$update->link}}"><i class="fas fa-star text-danger"></i> {{($update->title)}}</a></span>
                             @endforeach
-                        </marquee>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3 align-self-end">

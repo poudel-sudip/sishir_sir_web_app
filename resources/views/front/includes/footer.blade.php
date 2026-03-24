@@ -78,11 +78,13 @@
     <div class="col-12">
       <div class="d-flex align-items-center " style="background: #ffced2; font-weight:bold;">
           <div class=" bg-danger text-light p-2" style="align-self: stretch;">Trendings</div>
-          <marquee direction="left" >
-            @foreach(Helper::mostViewPosts() as $row)
-            <a @if(trim($row->url)) href="{{$row->url}}" target="_blank" @endif class="highlight-text"> {{strtoupper($row->title)}} <small class=" text-primary text-nowrap">({{$row->count}} views)</small> </a>
-            @endforeach
-          </marquee>
+          <div class="marquee">
+            <div class="marquee-content" >
+              @foreach(Helper::mostViewPosts() as $row)
+              <a @if(trim($row->url)) href="{{$row->url}}" target="_blank" @endif class="highlight-text mx-4"> {{strtoupper($row->title)}} <small class=" text-primary text-nowrap">({{$row->count}} views)</small> </a>
+              @endforeach
+            </div>
+          </div>
       </div>                    
     </div>
   </div>
@@ -102,6 +104,7 @@
           <li class="col-12 col-sm-6"><a href="//drive.google.com/drive/u/2/folders/1XP8xzmVw51RiRfooHMZf1vAdyydnvmY4"> Barambar Chahine Dastavej</a></li>
           <li class="col-12 col-sm-6"><a href="//gorkhapatraonline.com/categories/loksewa" target="_blank">Gorkhapatra Loksewa</a></li>
           <li class="col-12 col-sm-6"><a href="//drive.google.com/drive/folders/1ixtmm2DxJD7vhjCrAmy29-ID3RUxAsBf" target="_blank">IEC Materials</a></li>
+          <li class="col-12 col-sm-6"><a href="/library/610">Form/Formats</a></li>
           <li class="col-12 col-sm-6"><a href="/health-days">Health Days</a></li>
           <li class="col-12 col-sm-6"><a href="/enquiry">Enquiries</a></li>
           <li class="col-12 col-sm-6"><a href="/testimonials">Testimonials</a></li>

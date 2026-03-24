@@ -29,7 +29,7 @@
         <div class="blog-container ">
             <h3 class="text-primary text-center">{{($material->name)}}</h3>
             <div class="mt-3">
-                <span class="mx-2 text-nowrap text-primary"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($material->created_at))}}</span>
+                <span class="mx-2 text-nowrap text-primary"><i class="fa fa-pen"></i> {{$material->created_at->format('d M, Y')}}</span>
                 <span class="mx-2 text-nowrap text-primary"><i class="fa fa-calendar"></i> {{$material->published_year}}</span>
                 <span class="mx-2 text-nowrap text-success"><i class="fa fa-users"></i> {{$material->author}}</span>
                 <span class="mx-2 text-nowrap text-primary"><i class="fa fa-file"></i> {{$material->pages}}</span>

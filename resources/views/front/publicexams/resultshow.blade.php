@@ -20,7 +20,7 @@
             <div class="text-end"><span class="mx-2"><i class="fa fa-eye"></i> {{$counterData->page_view_count}}</span></div>
             <div>TQ= Total Question, FM= Full Marks, LQ= Leaved Questions, CQ= Correct Questions, WQ= Wrong Questions, MO= Marks Obtained</div>
             <div class="public-exam-section table-responsive">
-                <table class="table table-bordered" id="table-courses">
+                <table class="table table-bordered" id="table-coursess">
                     <thead>
                         <tr>
                         <th>ID</th>
@@ -37,14 +37,14 @@
                         @php($i=1)
                         @foreach ($results as $result)
                         <tr>
-                        <td>{{ $result->id }}</td>
-                        <td>{{ $result->name }}</td>
-                        <td>{{ $result->total_questions ?? '' }}</td>
-                        <td>{{ ($result->total_questions * ($exam->exam->marks_per_question ?? 1)) }}</td>
-                        <td>{{ $result->leaved_questions ?? '' }} </td>
-                        <td>{{ $result->correct_questions ?? '' }} </td>
-                        <td>{{ $result->wrong_questions ?? '' }} </td>
-                        <td>{{ ($result->correct_questions * ($exam->exam->marks_per_question ?? 1))-($result->wrong_questions * ($exam->exam->negative_marks ?? 0))}} </td>
+                        <td class="text-wrap">{{ $result->id }}</td>
+                        <td class="text-wrap">{{ $result->name }}</td>
+                        <td class="text-wrap">{{ $result->total_questions ?? '' }}</td>
+                        <td class="text-wrap">{{ ($result->total_questions * ($exam->exam->marks_per_question ?? 1)) }}</td>
+                        <td class="text-wrap">{{ $result->leaved_questions ?? '' }} </td>
+                        <td class="text-wrap">{{ $result->correct_questions ?? '' }} </td>
+                        <td class="text-wrap">{{ $result->wrong_questions ?? '' }} </td>
+                        <td class="text-wrap">{{ ($result->correct_questions * ($exam->exam->marks_per_question ?? 1))-($result->wrong_questions * ($exam->exam->negative_marks ?? 0))}} </td>
                         </tr>
                         @php($i++)
                         @endforeach

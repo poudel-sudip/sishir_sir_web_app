@@ -7091,3 +7091,27 @@ table.dataTable th.dt-type-numeric, table.dataTable th.dt-type-date, table.dataT
         width: 25%!important;   
     }
 }
+
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.marquee-content {
+    display: inline-flex;
+    white-space: nowrap;
+    will-change: transform;
+    /* padding-left: 100%; */
+    /* animation: marquee 15s linear infinite; */
+}
+
+@keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee-right {
+    0%   { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+}

@@ -221,6 +221,30 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  function startMarquee() {
+    const tracks = document.querySelectorAll('.marquee .marquee-content');
+    const speed = 50; // px per second
+    tracks.forEach(track => {
+      let position = 0;
+      track.innerHTML += track.innerHTML;
+      const totalWidth = track.scrollWidth / 2;
+      function animate() {
+        position -= speed / 60;
+
+        if (Math.abs(position) >= totalWidth) {
+            position = 0;
+        }
+
+        track.style.transform = `translateX(${position}px)`;
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    });
+
+  }
+
+  startMarquee();
 });
   
 function formatYoutubeCount(count) {

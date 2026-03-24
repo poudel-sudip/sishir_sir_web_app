@@ -33,7 +33,7 @@
             <div class="blog-container ">
                 <h3 class="text-primary text-center">{{($menuCategory->name)}}</h3>
                 <div class="mt-3">
-                    <span class="mx-2 text-primary"><i class="fa fa-pen"></i> {{date('Y-m-d',strtotime($menuCategory->created_at))}}</span>
+                    <span class="mx-2 text-primary"><i class="fa fa-pen"></i> {{$menuCategory->created_at->format('d M, Y, h:i A')}}</span>
                     <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                     <span class="mx-2 text-info"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
                     <span class="mx-2 text-primary">
@@ -83,7 +83,7 @@
                         </tr>
                     </thead>
                     <?php 
-                        $menuItems = $menuCategory->items()->where('status','=','Active')->orderByDesc('id')->get(['id','name','slug']); 
+                        $menuItems = $menuCategory->items()->where('status','=','Active')->orderBy('order')->orderByDesc('id')->get(['id','name','slug']); 
                         $i = 1;
                     ?>
 
