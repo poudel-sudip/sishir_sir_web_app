@@ -88,7 +88,7 @@
                         @forelse($menuCategories as $cat)
                             <tr>
                                 <td>{{$i}}</td>
-                                <td>{{$cat->name}}</td>
+                                <td><a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$cat->id}}">{{$cat->name}}</a></td>
                                 <td width="50"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$cat->id}}"><i class="fas fa-eye text-success"></i></a> </td>
                             </tr>
                             @php($i++)

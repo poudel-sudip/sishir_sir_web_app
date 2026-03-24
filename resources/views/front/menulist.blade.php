@@ -92,7 +92,7 @@
                             
                             <tr>
                                 <td>{{$i}}</td>
-                                <td>{{$item->name}}</td>
+                                <td> <a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$menuCategory->id}}/{{$item->id}}">{{$item->name}}</a></td>
                                 <td width="50"><a href="/{{$mainMenu->id}}/{{$subMenu->id}}/{{$menuCategory->id}}/{{$item->id}}"><i class="fas fa-eye text-success"></i></a></td>
                                 {{-- <td style="max-width: 50px">
                                     <div class="d-inline post-share-option">

@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function startMarquee() {
     const tracks = document.querySelectorAll('.marquee .marquee-content');
-    const speed = 50; // px per second
+    const speed = 30; // px per second
     tracks.forEach(track => {
       let position = 0;
       track.innerHTML += track.innerHTML;
