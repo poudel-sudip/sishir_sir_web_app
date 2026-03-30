@@ -18,10 +18,10 @@ class DailyQuestionsImport implements ToModel, WithHeadingRow
 
             return new DailyMCQQuestion([
                 'question'=>$row['question'],
-                'opt_a'=>$row['a'],
-                'opt_b'=>$row['b'],
-                'opt_c'=>$row['c'],
-                'opt_d'=>$row['d'],
+                'opt_a'=>$row['a'].' ',
+                'opt_b'=>$row['b'].' ',
+                'opt_c'=>$row['c'].' ',
+                'opt_d'=>$row['d'].' ',
                 'opt_correct'=>strtoupper($row['correct']),
                 'rationale'=>$row['correct'] ?? '',
                 'show_date'=>$next,

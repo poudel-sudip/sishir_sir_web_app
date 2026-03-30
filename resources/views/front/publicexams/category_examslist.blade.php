@@ -69,7 +69,7 @@
                                         <a href="/public-exams/{{$row->id}}" class="d-block">
                                             <i class="fas fa-star pr-2 text-light"></i>
                                             {{$row->name}}
-                                            ({{ $row->exam ? ($row->exam->questions ? $row->exam->questions->count() : '-') : '-' }} Questions)
+                                            ({{ $row->exam ? ($row->exam->questions()->count()) : '-' }} Questions)
                                         </a>
                                     </li>
                                 @endforeach

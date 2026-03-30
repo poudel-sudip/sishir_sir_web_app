@@ -23,10 +23,10 @@ class ExamQuestionsImport implements ToModel, WithHeadingRow
             return new Question([
                 'exam_id'=>$exam->id,
                 'name'=>$row['question'],
-                'opt_a'=>$row['a'],
-                'opt_b'=>$row['b'],
-                'opt_c'=>$row['c'],
-                'opt_d'=>$row['d'],
+                'opt_a'=>$row['a'].' ',
+                'opt_b'=>$row['b'].' ',
+                'opt_c'=>$row['c'].' ',
+                'opt_d'=>$row['d'].' ',
                 'opt_correct'=>$row['correct'],
                 'rationale'=>$row['rationale'] ?? '',
             ]);

@@ -57,7 +57,7 @@
                                 <label for="exam_category" class="col-md-4 col-form-label text-md-right">{{ __('Exam Set') }}</label>
 
                                 <div class="col-md-8">
-                                    <input id="exam_category" type="text" class="form-control @error('exam_category') is-invalid @enderror" name="exam_category" value="{{ old('exam_category') ?? ($booking->category->title.' @ Rs.'. ($booking->category->price - $booking->category->discount)) }}" readonly>
+                                    <input id="exam_category" type="text" class="form-control @error('exam_category') is-invalid @enderror" name="exam_category" value="{{ old('exam_category') ?? ($booking->category->title.' @ Rs.'. ($booking->booking_price)) }}" readonly>
 
                                     @error('exam_category')
                                     <span class="invalid-feedback" role="alert">
@@ -181,7 +181,7 @@
                 <label for="paymentAmount" class="col-md-4 col-form-label text-md-right">{{ __('Payment Amount') }}</label>
 
                 <div class="col-md-8">
-                    <input id="paymentAmount" type="text" class="form-control @error('paymentAmount') is-invalid @enderror" name="paymentAmount" value="{{ old('paymentAmount') ?? $booking->paidAmount ?? ($booking->category->price - $booking->category->discount) }}" >
+                    <input id="paymentAmount" type="text" class="form-control @error('paymentAmount') is-invalid @enderror" name="paymentAmount" value="{{ old('paymentAmount') ?? $booking->booking_price }}" >
 
                     @error('paymentAmount')
                     <span class="invalid-feedback" role="alert">
@@ -353,7 +353,7 @@
                 var InstrumentName = $(this).find(":selected").attr('InstrumentName');
                 var InstrumentValue = $(this).find(":selected").attr('InstrumentValue');
                 var processId = "{{$nepalpay_pay_data->process_id}}";
-                var transRem = 'PDF Booking Payment For {{ucwords($booking->book->title ?? "")}}' ; 
+                var transRem = 'Ebook Booking Payment For {{ucwords($booking->book->title ?? "")}}' ; 
                 var hash_data = '{{$booking->booking_price}}' + InstrumentCode + '{{$nepalpay_pay_data->merchantId}}' + '{{$nepalpay_pay_data->mercahntName}}' + '{{$booking->trans_id}}' + processId + transRem;
                 var hash_sign = '{{ hash_hmac("sha512", "' + hash_data + '" , $nepalpay_pay_data->secret) }}';
 

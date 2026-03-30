@@ -80,20 +80,24 @@
             });
 
             this.initialize = function () {
+                var uniqueId = 'sn-' + Math.random().toString(36).substring(2, 10);
+                var urlTabId = `note-imageupload-url-${uniqueId}`;
+                var fileTabId = `note-imageupload-file-${uniqueId}`;
+
                 var $container = options.dialogsInBody ? $(document.body) : $editor;
                 var body = `
                     <ul class="nav nav-tabs">
-                        <li class="nav-item"><a class="nav-link active" href="#note-imageupload-url" data-bs-toggle="tab" data-toggle="tab">${lang.imageupload.url}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#note-imageupload-file" data-bs-toggle="tab" data-toggle="tab">${lang.imageupload.file}</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="#${urlTabId}" data-bs-toggle="tab" data-toggle="tab">${lang.imageupload.url}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#${fileTabId}" data-bs-toggle="tab" data-toggle="tab">${lang.imageupload.file}</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="note-imageupload-url">
+                        <div class="tab-pane active" id="${urlTabId}">
                             <div class="form-group note-group-image-url">
                                 <label class="note-form-label">${lang.imageupload.url}</label>
                                 <input class="note-image-url form-control note-form-control note-input" type="text" />
                             </div>
                         </div>
-                        <div class="tab-pane" id="note-imageupload-file">
+                        <div class="tab-pane" id="${fileTabId}">
                             <div class="form-group">
                                 <label class="note-form-label">${lang.imageupload.selectFromFiles}</label>
                                 <input class="note-image-input form-control-file note-form-control note-input" type="file" name="file" accept="image/*" />

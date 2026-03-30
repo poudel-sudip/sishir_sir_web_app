@@ -49,7 +49,7 @@
                                         <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-danger btn-sm">Delete</a>
                                     </form>
                                 @else 
-                                <a href="/student/pdf-bank-bookings/{{$booking->id}}/pdf-contents" class="btn btn-success btn-sm">View PDFs</a> 
+                                <a href="/student/pdf-bank-bookings/{{$booking->id}}/pdf-contents" class="btn btn-success btn-sm">View Ebook</a> 
                                 @endif
                             </div>
                         </div>

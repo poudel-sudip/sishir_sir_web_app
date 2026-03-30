@@ -28,7 +28,7 @@
                 </div>
                 <div class="mt-2 d-flex align-items-center flex-wrap">
                     <span class="mx-3 h6 text-success text-nowrap"><i class="fa fa-user"></i> {{$vaccancy->author}}</span>
-                    <span class="mx-3 h6 text-primary text-nowrap"><i class="fa fa-pen"></i> {{$vaccancy->created_at->format('d M, Y, h:i A')}}</span>
+                    <span class="mx-3 h6 text-primary text-nowrap"><i class="fa fa-calendar-alt"></i>{{$vaccancy->created_at->format('d M, Y, h:i A')}}</span>
                     <span class="mx-3 h6 text-danger text-nowrap"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                     <span class="mx-3 h6 text-info text-nowrap"><i class="fa fa-eye"></i> {{$counterData->page_view_count ?? '1'}}</span>
                     <span class="mx-2 h6 text-nowrap text-primary"> 

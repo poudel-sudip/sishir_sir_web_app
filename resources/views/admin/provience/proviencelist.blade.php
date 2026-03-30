@@ -1,16 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin-title')
-    All Proviences
+    All Province
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-        <h3 class="page-title">All Proviences</h3>
+        <h3 class="page-title">All Province</h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page"> Proviences </li>
+              <li class="breadcrumb-item active" aria-current="page"> Province </li>
             </ol>
         </nav>
         </div>
@@ -20,9 +20,9 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="custon-table-header">
-                        <h4 class="card-title">All Proviences</h4>
+                        <h4 class="card-title">All Province</h4>
                         <div class="text-right">
-                            <a href="/admin/provience/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Provience </button></a>
+                            <a href="/admin/provience/create"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Province </button></a>
                         </div>
                     </div>
                     <div class="table-responsive table-responsive-md">

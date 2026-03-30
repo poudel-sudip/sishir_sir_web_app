@@ -54,30 +54,53 @@
                         </div>
                         <div class="col-6 text-end">
                             @if($exam->pdf_view)
-                            <a class="view-video btn btn-danger" href="/student/exam-bookings/{{$category->id}}/exams/{{$exam->id}}/download" target="_blank">Download Question PDF <span class="fas fa-file-pdf"></span></a>
+                                <a class="view-video btn btn-danger" href="/student/exam-bookings/{{$category->id}}/exams/{{$exam->id}}/download" target="_blank">Download Question PDF <span class="fas fa-file-pdf"></span></a>
+                                @if($exam->answer_pdf)
+                                    <div class="_df_button btn btn-success" id="pdf_book_df" source="/storage/{{$exam->answer_pdf}}">
+                                        View Solution PDF <span class="fas fa-file-pdf"></span>
+                                    </div>
+                                    {{-- <a class="view-pdf btn btn-success" href="#pdfModal" pdf-title="{{'PDF Answer Solution for '.$exam->name}}" pdf-url="{{$exam->answer_pdf}}" data-bs-toggle="modal" data-bs-target="#pdfModal" data-toggle="modal" data-target="#pdfModal">View Solution PDF <span class="fas fa-file-pdf"></span></a> --}}
+                                @endif
                             @endif
                             @if($exam->answer_video)
-                            <a class="view-video btn btn-primary" href="#videoModal" video-title="{{'Video Answer Solution for '.$exam->name}}" video-url="{{$exam->answer_video}}" data-bs-toggle="modal" data-bs-target="#videoModal" data-toggle="modal" data-target="#videoModal">Play Solution Video <span class="fas fa-video"></span></a>
+                                <a class="view-video btn btn-primary" href="#videoModal" video-title="{{'Video Answer Solution for '.$exam->name}}" video-url="{{$exam->answer_video}}" data-bs-toggle="modal" data-bs-target="#videoModal" data-toggle="modal" data-target="#videoModal">Play Solution Video <span class="fas fa-video"></span></a>
                             @endif
-                            @if($exam->answer_pdf)
-                                <div class="_df_button btn btn-success" id="pdf_book_df" source="/storage/{{$exam->answer_pdf}}">
-                                    View Solution PDF <span class="fas fa-file-pdf"></span>
-                                </div>
-                                {{-- <a class="view-pdf btn btn-success" href="#pdfModal" pdf-title="{{'PDF Answer Solution for '.$exam->name}}" pdf-url="{{$exam->answer_pdf}}" data-bs-toggle="modal" data-bs-target="#pdfModal" data-toggle="modal" data-target="#pdfModal">View Solution PDF <span class="fas fa-file-pdf"></span></a> --}}
-                            @endif
+                            
                         </div>
                     </div>
                     @php($i=1)
                     @foreach ($answers as $ans)
                     <div class="mcq-solution-sheet"> 
-                        <h5>{{$i}}. {!!$ans->question ?? $ans->getQuestion->name ?? '' !!} <small class=" text-secondary"> ({{$exam->marks_per_question}} Marks) </small> </h5>
+                        {{-- <h5>{{$i}}. {!!$ans->question ?? $ans->getQuestion->name ?? '' !!} <small class=" text-secondary"> ({{$exam->marks_per_question}} Marks) </small> </h5> --}}
+                        <h5 class="d-flex gap-1">
+                            <div class="">{{$i}}.</div>
+                            <div class="text-justify" style="text-align:justify;">{!!$ans->question ?? $ans->getQuestion->name ?? '' !!}  <small class="text-secondary">({{$exam->marks_per_question}} Marks)</small></div>
+                        </h5>
                         <h6>Options:</h6>
-                        <div class="row">
-                            <div class="col-md-3">A. {!! $ans->getQuestion->opt_a ?? '' !!}</div>
-                            <div class="col-md-3">B. {!! $ans->getQuestion->opt_b ?? '' !!}</div>
-                            <div class="col-md-3">C. {!! $ans->getQuestion->opt_c ?? '' !!}</div>
-                            <div class="col-md-3">D. {!! $ans->getQuestion->opt_d ?? '' !!}</div>
+                        <div class="">
+                            <div class="d-flex gap-1">
+                                <div class="">A.</div>
+                                <div class="text-justify" style="text-align:justify;">{!! $ans->getQuestion->opt_a ?? '' !!}</div>
+                            </div>
+                            <div class="d-flex gap-1">
+                                <div class="">B.</div>
+                                <div class="text-justify" style="text-align:justify;">{!! $ans->getQuestion->opt_b ?? '' !!}</div>
+                            </div>
+                            <div class="d-flex gap-1">
+                                <div class="">C.</div>
+                                <div class="text-justify" style="text-align:justify;">{!! $ans->getQuestion->opt_c ?? '' !!}</div>
+                            </div>
+                            <div class="d-flex gap-1">
+                                <div class="">D.</div>
+                                <div class="text-justify" style="text-align:justify;">{!! $ans->getQuestion->opt_d ?? '' !!}</div>
+                            </div>
                         </div>
+                        {{-- <div class="row">
+                            <div class="col-12">A. {!! $ans->getQuestion->opt_a ?? '' !!}</div>
+                            <div class="col-12">B. {!! $ans->getQuestion->opt_b ?? '' !!}</div>
+                            <div class="col-12">C. {!! $ans->getQuestion->opt_c ?? '' !!}</div>
+                            <div class="col-12">D. {!! $ans->getQuestion->opt_d ?? '' !!}</div>
+                        </div> --}}
                         <hr>
                         <div class="mcq-solution">
                             <div class="correct-answer"><span class="icon-checkbox-checked text-success"></span>Correct Answer:  {!!$ans->correct_ans!!}</div>
@@ -91,7 +114,7 @@
                         </div>
                         @if(trim($ans->getQuestion->rationale))
                         <hr>
-                        <h6>Rationale / Justification:</h6>
+                        <h6 style="color: red;">Rationale / Justification:</h6>
                         <div>
                             {!! $ans->getQuestion->rationale ?? '' !!}
                         </div>

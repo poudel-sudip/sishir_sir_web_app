@@ -372,7 +372,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/provience') }}">
             <i class="mdi mdi-map-marker menu-icon"></i>
-            <span class="menu-title">Provience</span>
+            <span class="menu-title">Province</span>
         </a>
       </li>
       

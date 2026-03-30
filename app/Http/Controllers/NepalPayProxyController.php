@@ -261,17 +261,50 @@ class NepalPayProxyController extends Controller
                     $return_url = '/login';
                     $expiry = Carbon::now()->addDays(365);
 
+                    $invoice_data = [
+                        'user_id' => $booking->user_id,
+                        'type' => '',
+                        'booking_id' => $booking->id,
+                        'payment_mode' => 'NepalPayment',
+                        'reference_code' => '',
+                        'payment_amount' => '',
+                        'payment_remarks' => '',
+                        'discount_amount' => '',
+                        'due_amount' => 0,
+                        'verified_by' => auth()->user()->name ?? '',
+                        'expiry_date' => $expiry,
+                        'paid' => 1,
+                        'informed' => 0,
+                    ];
+
+                    $booking_bill_amount = 0;
+                    $booking_payment_remarks = null;
+
                     if($transaction[0] == 'pdfbank')
                     {
                         $booking = PdfBankBooking::find($transaction[1]);
                         $return_url = '/student/pdf-bank-bookings';
                         $expiry = Carbon::now()->addDays($booking->book->expiry_days ?? 365);
+                        $booking_bill_amount = intval(($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
+                        $booking_payment_remarks = ($booking->book->title ?? 'Unknown Ebook');
+
+                        $invoice_data = [
+                            'type' => 'ebook',
+                            'expiry_date' => $expiry,
+                        ];
                     }
                     elseif($transaction[0] == 'exam')
                     {
                         $booking = ExamBooking::find($transaction[1]);
                         $return_url = '/student/exam-bookings';
                         $expiry = Carbon::now()->addDays($booking->category->expiry_days ?? 365);
+                        $booking_bill_amount = intval(($booking->category->price ?? 0) - ($booking->category->discount ?? 0));
+                        $booking_payment_remarks = ($booking->category->name ?? 'Unknown Exam');
+
+                        $invoice_data = [
+                            'type' => 'exam',
+                            'expiry_date' => $expiry,
+                        ];
                     }
                     else
                     {
@@ -285,6 +318,22 @@ class NepalPayProxyController extends Controller
                         {
                             if($booking)
                             {
+                                if(strtolower($booking->status) == 'expired')
+                                {
+                                    $booking_payment_remarks = ucwords($invoice_data['type']).' booking renewal with 50% discount of '.$booking_payment_remarks;
+                                }
+                                else
+                                {
+                                    $booking_payment_remarks = 'New '.ucwords($invoice_data['type']).' booking of '.$booking_payment_remarks;
+                                }
+
+                                $invoice_data = [
+                                    'reference_code' => $resData['GatewayReferenceNo'],
+                                    'payment_amount' => $resData['Amount'],
+                                    'payment_remarks' => $booking_payment_remarks,
+                                    'discount_amount' => $booking_bill_amount - $resData['Amount'],
+                                ];
+
                                 $booking->update([
                                     'status' => 'Verified',
                                     'verificationMode' => 'NepalPayment',
@@ -292,6 +341,11 @@ class NepalPayProxyController extends Controller
                                     'remarks' => 'Booked by Student with Nepal Payment From '.$resData['Institution'].' with Gateway Reference Number: '.$resData['GatewayReferenceNo'],
                                     'expiry_date' =>  $expiry,
                                 ]);
+
+                                if($invoice_data['type'] && $invoice_data['booking_id'])
+                                {
+                                    $booking->payment_invoices()->create($invoice_data);
+                                }
                             }
 
                             return redirect($return_url)->with('success_message','Transction Completed Succesfully.');

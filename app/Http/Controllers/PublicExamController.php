@@ -22,6 +22,7 @@ class PublicExamController extends Controller
         $data = [];
         
         $data['premium_exams'] = ExamHallCategories::where('status','Active')
+        ->orderByDesc('isPinned')
         ->orderByDesc('id')
         ->paginate(12);
 
@@ -296,6 +297,7 @@ class PublicExamController extends Controller
 
         $data['premium_exams'] = $exam_group->premium_exams()
         ->where('status','Active')
+        ->orderByDesc('isPinned')
         ->orderByDesc('id')
         ->paginate(12);
 

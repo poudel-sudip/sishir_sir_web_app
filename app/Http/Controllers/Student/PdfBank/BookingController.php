@@ -68,7 +68,12 @@ class BookingController extends Controller
     {
         $data = [];
 
-        $booking->booking_price = (($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
+        $booking->booking_price = intval(($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
+        if(strtolower($booking->status) == 'expired')
+        {
+            $booking->booking_price = intval($booking->booking_price * 0.5);
+        }
+
         $trans_id = 'pdfbank-'.$booking->id.'-'.time();
         $booking->trans_id = $trans_id;
 
@@ -200,6 +205,26 @@ class BookingController extends Controller
             'status' => 'Processing',
         ]);
 
+        if(!$booking->payment_invoices()->exists())
+        {
+            $expiry = Carbon::now()->addDays($booking->book->expiry_days ?? 365);
+            $booking->payment_invoices()->create([
+                'user_id' => auth()->user()->id,
+                'type' => 'ebook',
+                'booking_id' => $booking->id,
+                'payment_mode' => 'Cash',
+                'reference_code' => '',
+                'payment_amount' => $request->paymentAmount ?? '0',
+                'payment_remarks' => 'New Ebook booking of '.($booking->book->title ?? 'Unknown Ebook'),
+                'discount_amount' => 0,
+                'due_amount' => 0,
+                'verified_by' => auth()->user()->name,
+                'expiry_date' => $expiry,
+                'paid' => 0,
+                'informed' => 0,
+            ]);
+        }
+
         return redirect('/student/pdf-bank-bookings');
     }
 
@@ -281,8 +306,18 @@ class BookingController extends Controller
                 if($signature === $json_data['signature'])
                 {
                     $url = config('payment.esewa_verify_url');
+                    
+                    $booking_payment_amount = intval(($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
+                    $booking_bill_amount = intval(($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
+                    $booking_payment_remarks = 'New Ebook booking of '.($booking->book->title ?? 'Unknown Ebook');
+                    if(strtolower($booking->status) == 'expired')
+                    {
+                        $booking_payment_amount = intval($booking_payment_amount * 0.5);
+                        $booking_payment_remarks = 'Ebook booking renewal with 50% discount of '.($booking->book->title ?? 'Unknown Ebook');
+                    }
+
                     $data = http_build_query(array(
-                        'total_amount'=> (($booking->book->price ?? 0) - ($booking->book->discount ?? 0)),
+                        'total_amount'=> $booking_payment_amount,
                         'transaction_uuid'=> $json_data['transaction_uuid'],
                         'product_code'=> config('payment.esewa_scd'),
                     ));
@@ -293,6 +328,23 @@ class BookingController extends Controller
                     if($json_response->status === 'COMPLETE')
                     {
                         $expiry = Carbon::now()->addDays($booking->book->expiry_days ?? 365);
+
+                        $invoice_data = [
+                            'user_id' => auth()->user()->id,
+                            'type' => 'ebook',
+                            'booking_id' => $booking->id,
+                            'payment_mode' => 'Esewa',
+                            'reference_code' => $json_response->ref_id ?? null,
+                            'payment_amount' => $booking_payment_amount ?? '0',
+                            'payment_remarks' => $booking_payment_remarks,
+                            'discount_amount' => $booking_bill_amount - $booking_payment_amount,
+                            'due_amount' => 0,
+                            'verified_by' => auth()->user()->name,
+                            'expiry_date' => $expiry,
+                            'paid' => 1,
+                            'informed' => 0,
+                        ];
+
                         $booking->update([
                             'status'=>'Verified',
                             'verificationMode'=>'Esewa',
@@ -301,6 +353,8 @@ class BookingController extends Controller
                             'updatedBy'=>auth()->user()->name,
                             'expiry_date' => $expiry,
                         ]);
+
+                        $booking->payment_invoices()->create($invoice_data);
 
                         return redirect('/student/pdf-bank-bookings')->with('success_message','Transction Completed Succesfully.');
                     }
@@ -340,6 +394,32 @@ class BookingController extends Controller
                     if ($ps === 'true' && $rc === 'successful')
                     {
                         $expiry = Carbon::now()->addDays($booking->book->expiry_days ?? 365);
+
+                        $booking_payment_amount = intval(($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
+                        $booking_bill_amount = intval(($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
+                        $booking_payment_remarks = 'New Ebook booking of '.($booking->book->title ?? 'Unknown Ebook');
+                        if(strtolower($booking->status) == 'expired')
+                        {
+                            $booking_payment_amount = intval($booking_payment_amount * 0.5);
+                            $booking_payment_remarks = 'Ebook booking renewal with 50% discount of '.($booking->book->title ?? 'Unknown Ebook');
+                        }
+
+                        $invoice_data = [
+                            'user_id' => auth()->user()->id,
+                            'type' => 'ebook',
+                            'booking_id' => $booking->id,
+                            'payment_mode' => 'Fonepay',
+                            'reference_code' => $uid ?? null,
+                            'payment_amount' => $booking_payment_amount ?? '0',
+                            'payment_remarks' => $booking_payment_remarks,
+                            'discount_amount' => $booking_bill_amount - $booking_payment_amount,
+                            'due_amount' => 0,
+                            'verified_by' => auth()->user()->name,
+                            'expiry_date' => $expiry,
+                            'paid' => 1,
+                            'informed' => 0,
+                        ];
+
                         $booking->update([
                             'status'=>'Verified',
                             'verificationMode'=>'Fonepay',
@@ -349,6 +429,8 @@ class BookingController extends Controller
                             'expiry_date' => $expiry,
                         ]);
 
+                        $booking->payment_invoices()->create($invoice_data);
+                        
                         return redirect('/student/pdf-bank-bookings')->with('success_message','Transction Completed Succesfully.');
                     }
                 }

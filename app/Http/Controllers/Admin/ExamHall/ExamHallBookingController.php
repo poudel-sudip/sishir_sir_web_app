@@ -83,6 +83,7 @@ class ExamHallBookingController extends Controller
             'remarks' => $request->remarks,
         ]);
 
+        $expiry = null;
         if(!$booking->expiry_date)
         {
             if($booking->status == 'Expired')
@@ -100,6 +101,25 @@ class ExamHallBookingController extends Controller
 
             $booking->update([
                 'expiry_date' => $expiry,
+            ]);
+        }
+
+        if(!$booking->payment_invoices()->exists())
+        {
+            $booking->payment_invoices()->create([
+                'user_id' => $booking->user_id,
+                'type' => 'exam',
+                'booking_id' => $booking->id,
+                'payment_mode' => $request->verificationMode,
+                'reference_code' => '',
+                'payment_amount' => $request->paymentAmount ?? '0',
+                'payment_remarks' => 'New Exam booking of '.($booking->category->title ?? 'Unknown Exam Set'),
+                'discount_amount' => $request->discount ?? '0',
+                'due_amount' => 0,
+                'verified_by' => auth()->user()->name,
+                'expiry_date' => $expiry,
+                'paid' => 1,
+                'informed' => 0,
             ]);
         }
 
