@@ -435,7 +435,7 @@
                                             <img src="/storage/{{$row->image}}" alt="" onerror="this.src='/images/default-post.png'" style="max-height:150px; width:auto;" class="img img-fluid" draggable="false">
                                         </a>
                                         <h6 class="mt-3"><a href="/exam-hall/premium/{{$row->id}}">{{($row->title)}}</a></h6>
-                                        <h6 class="small">{{$row->mcq_count}} MCQ Sets </h6>
+                                        <h6 class="small">{{$row->mcq_count}} Sets MCQs </h6>
 
                                     </div>
                                 </div>

@@ -606,6 +606,7 @@ Route::patch('/admin/play-puzzle/image/{question}', 'App\Http\Controllers\Admin\
 Route::delete('/admin/play-puzzle/image/{question}', 'App\Http\Controllers\Admin\Exams\PlayPuzzleController@destroyImagePuzzle')->middleware('role:Admin');
 
 
+Route::get('/admin/invoice/{invoice}', 'App\Http\Controllers\Admin\InvoiceController@show')->middleware('role:Admin');
 
 
 

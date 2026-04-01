@@ -42,7 +42,7 @@
                         </div>
                         <div class="d-flex justify-content-center align-items-center flex-wrap">
                             @foreach($solutions as $key=>$value)
-                                <span class="m-1 btn btn-sm {{$value == 'c' ? 'btn-success' : ($value == 'w' ? 'btn-danger' : 'btn-info') }} ">{{ucwords($key)}}</span>
+                                <span class="question-key m-1 btn btn-sm {{$value == 'c' ? 'btn-success' : ($value == 'w' ? 'btn-danger' : 'btn-info') }} " data-key="{{ucwords($key)}}">{{ucwords($key)}}</span>
                             @endforeach
                         </div>
                     @endif
@@ -70,7 +70,7 @@
                     </div>
                     @php($i=1)
                     @foreach ($answers as $ans)
-                    <div class="mcq-solution-sheet"> 
+                    <div class="mcq-solution-sheet d-none" id="ans-block-Q-{{ $i }}"> 
                         {{-- <h5>{{$i}}. {!!$ans->question ?? $ans->getQuestion->name ?? '' !!} <small class=" text-secondary"> ({{$exam->marks_per_question}} Marks) </small> </h5> --}}
                         <h5 class="d-flex gap-1">
                             <div class="">{{$i}}.</div>
@@ -160,6 +160,8 @@
         </div>
     </div> --}}
 
+    <script type="text/javascript" src="{{asset('js/noprint.js')}}"></script>
+
     <link href="{{asset('dflip/css/dflip.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('dflip/css/themify-icons.min.css')}}" rel="stylesheet" type="text/css">
 
@@ -179,6 +181,15 @@
             moreControls: "",
             hideControls: "share,download",
         };
+    </script>
+
+    <script>
+        $('.question-key').on('click', function(){
+            var key = $(this).data('key');
+            $('.mcq-solution-sheet').addClass('d-none');
+            $('#ans-block-'+key).removeClass('d-none');
+        });
+
     </script>
 
     {{-- <script>

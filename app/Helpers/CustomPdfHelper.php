@@ -9,16 +9,17 @@ use TCPDF;
 class CustomPdfHelper
 {
     
-    public static function createPdf($title,$html='')
+    public static function createPdf($title,$html='',$footer=true,$download=false)
     {
         // dd($title,$html);
+        $output_type = $download ? 'D' : 'I'; // D for download, I for inline display
 
         $pdf = new CustomPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('shisiradhikari.com.np');
         $pdf->SetTitle($title);
         $pdf->setPrintHeader(true);
-        $pdf->setPrintFooter(true);
+        $pdf->setPrintFooter($footer);
         $pdf->SetMargins(PDF_MARGIN_LEFT, 20, PDF_MARGIN_RIGHT);
         $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -27,7 +28,7 @@ class CustomPdfHelper
         $pdf->AddPage();
         $pdf->writeHTML($html);
 
-        return $pdf->Output($title.'.pdf', 'I'); //show only in browser   
+        return $pdf->Output($title.'.pdf', $output_type); //show only in browser   
         // return $pdf->Output($title.'.pdf', 'D');  //force download
     }
     

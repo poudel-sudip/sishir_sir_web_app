@@ -70,6 +70,31 @@
                             <div>Payment Document:</div>
                             <div><img src="/storage/{{$booking->verificationDocument}}" alt="" class="w-100 img img-responsive"></div>
                         </div>
+                        <div class="course-row">
+                            <div>Available Invoices:</div>
+                            <div>
+                                <div class="table-responsive table-responsive-md">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Date</th>
+                                                <th>Show</th>                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($booking->payment_invoices as $invoice)
+                                                <tr>
+                                                    <td class="text-wrap">Invoice: #{{$invoice->id}}</td>
+                                                    <td class="text-wrap">{{$invoice->created_at}}</td>
+                                                    <td class="text-wrap"><a href="/admin/invoice/{{ $invoice->id }}" target="_blank">Show</a></td>                                                                                            
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

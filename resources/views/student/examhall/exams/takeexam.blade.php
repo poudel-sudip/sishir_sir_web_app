@@ -202,4 +202,5 @@
         
     </script>
 
+    <script type="text/javascript" src="{{asset('js/noprint.js')}}"></script>
 @endsection
