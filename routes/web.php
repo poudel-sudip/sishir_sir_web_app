@@ -798,7 +798,8 @@ Route::get('/student/vaccancies/{vaccancy}', 'App\Http\Controllers\Student\Vacca
 
 Route::get('/student/free-exams', 'App\Http\Controllers\Student\StudentHomeController@freeExamList')->middleware('role:Student');
 
-
+Route::get('/student/invoices', 'App\Http\Controllers\Student\InvoiceController@index')->middleware('role:Student');
+Route::get('/student/invoices/{invoice}', 'App\Http\Controllers\Student\InvoiceController@show')->middleware('role:Student');
 
 
 

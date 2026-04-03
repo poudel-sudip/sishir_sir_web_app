@@ -31,10 +31,11 @@
         <div></div>
         <table>
             <tr>
-                <td><img src="{{ url('/images/logo.png') }}" alt="" style="height: 50px; width:auto; max-width: 100%;"> </td>
+                <td><img src="{{ $invoice->logo }}" alt="" style="height: 75px; width:auto; max-width: 100%;"> </td>
                 <td class="header">
-                    <div style="font-size: 20px;">Payment Receipt</div>
-                    <div style="font-size: 15px;">Invoice ID: {{ $invoice['id'] }}</div>
+                    <div style="font-size: 12px;">E. Health Network Pvt. Ltd.</div>
+                    <div style="font-size: 15px;">Online Payment Receipt</div>
+                    <div style="font-size: 13px;">Invoice ID: {{ $invoice['id'] }}</div>
                 </td>
                 <td style="text-align: right; font-size:20px; font-weight:bold; color:{{$invoice->paid ? 'green' : 'red'}};">
                     <br><br>{{$invoice->paid ? 'PAID' : 'NOT PAID'}}
@@ -50,7 +51,7 @@
                     <strong>Contact:</strong> {{ optional($invoice->user)->contact }} <br>
                 </td>
                 <td style="text-align: right;">
-                    <strong style="font-size: 15px;">E Health Network</strong> <br>
+                    <strong style="font-size: 15px;">E. Health Network</strong> <br>
                     <strong>PAN: 621123751</strong> <br>
                 </td>
             </tr>
@@ -90,6 +91,9 @@
             <tr>
                 <td style="text-align: right;"><strong>Total Paid: Rs. {{ number_format($invoice['payment_amount'], 2) }} </strong></td>
             </tr>
+            <tr>
+                <td><strong>In Words: </strong>{{ ucfirst($invoice['payment_in_words'] ?? '') }}</td>
+            </tr>
         </table>
         <br><br>
         <div style="text-align: right;">
@@ -98,4 +102,5 @@
         </div>
 
     </div>
+    <p style="text-align: center; line-height: 0.5;">Customer Support: +977-9702844270, Email: ehealthehn@gmail.com</p>
 </body>

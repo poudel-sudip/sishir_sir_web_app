@@ -41,8 +41,10 @@
                             <span class="m-1 btn btn-sm btn-info">Leaved({{ $result->leaved_questions ?? '' }})</span>
                         </div>
                         <div class="d-flex justify-content-center align-items-center flex-wrap">
+                            @php($counter=1)
                             @foreach($solutions as $key=>$value)
-                                <span class="question-key m-1 btn btn-sm {{$value == 'c' ? 'btn-success' : ($value == 'w' ? 'btn-danger' : 'btn-info') }} " data-key="{{ucwords($key)}}">{{ucwords($key)}}</span>
+                                <span class="question-key m-1 btn btn-sm {{$value == 'c' ? 'btn-success' : ($value == 'w' ? 'btn-danger' : 'btn-info') }} " data-key="{{ucwords($key)}}">{{$counter}}</span>
+                            @php($counter++)
                             @endforeach
                         </div>
                     @endif

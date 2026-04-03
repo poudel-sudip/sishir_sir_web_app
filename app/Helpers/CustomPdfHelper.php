@@ -44,8 +44,8 @@ class CustomPDF extends TCPDF
 
     public function Header()
     {
-        // $watermarkImage = './images/watermark.webp';
         $watermarkImage = url('images/watermark.webp');
+        // $watermarkImage = './images/watermark.webp';
 
         $this->SetAlpha(0.2);
         $this->Image($watermarkImage, $this->getPageWidth() / 4, $this->getPageHeight() / 4, $this->getPageWidth() / 2, '', '', '', '', false, 300, '', false, false, 0);
