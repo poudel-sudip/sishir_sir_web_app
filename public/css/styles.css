@@ -7003,10 +7003,12 @@ label.star:before {
     background: linear-gradient(90deg, red, red);
     content: "";
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
     bottom: -5px;
     height: 3px;
+    width: 50%;
 }
 
 .text-header-blue {
