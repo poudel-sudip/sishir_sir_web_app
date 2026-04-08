@@ -12,7 +12,9 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{ $pdf_category->name ?? 'All eBooks' }} </h2>
+                <div class="text-center">
+                    <h3 class="dchl-title fs-3">{{ $pdf_category->name ?? 'All eBooks' }} </h3>
+                </div>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>

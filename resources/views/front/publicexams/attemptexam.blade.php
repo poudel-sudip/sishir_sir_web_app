@@ -15,7 +15,9 @@
                 <div class="col-md-12">
                     <div class="public-question-list">
                         <div class="public-question-header" style="">
-                            <h5 class="text-center">{{$exam->name}}</h5>  
+                            <div class="text-center mb-2">
+                                <h3 class="dchl-title fs-3">{{($exam->name)}}</h3>
+                            </div>
                             <div class="d-flex justify-content-around">
                                 <span> <strong> Name:</strong> {{$user->name}} </span>
                                 <span> <strong> Email:</strong> {{$user->email}} </span>

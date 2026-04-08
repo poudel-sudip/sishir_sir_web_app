@@ -15,7 +15,11 @@
       <div class="forum-chat">
         <div class="chat-header">  
           <div class="chat-about text-center">
-            <div class="chat-with">Discussion Forum</div>
+            <div class="chat-with">
+              <div class="text-center">
+                <h3 class="dchl-title fs-3"> Discussion Forum </h3>
+              </div>
+            </div>
             <div class="">Hello Everyone! Thank you for joining our discussion forum. Should you have any questions or concerns regarding health loksewa, please don't hesitate to leave a comment and share images if necessary. We will be conducting live chats daily from 10:00 to 10:15 PM (15 minutes). Looking forward to engaging with you!</div>
           </div>
         </div> <!-- end chat-header -->

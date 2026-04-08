@@ -226,7 +226,7 @@ class ExamBookingController extends Controller
                 'payment_mode' => 'Cash',
                 'reference_code' => '',
                 'payment_amount' => $request->paymentAmount ?? '0',
-                'payment_remarks' => 'New Exam booking of '.($booking->category->title ?? 'Unknown Exam Set'),
+                'payment_remarks' => 'New Exam Booking of '.($booking->category->title ?? 'Unknown Exam Set'),
                 'discount_amount' => 0,
                 'due_amount' => 0,
                 'verified_by' => auth()->user()->name,
@@ -304,11 +304,11 @@ class ExamBookingController extends Controller
 
                     $booking_payment_amount = intval(($booking->category->price ?? 0) - ($booking->category->discount ?? 0));
                     $booking_bill_amount = intval(($booking->category->price ?? 0) - ($booking->category->discount ?? 0));
-                    $booking_payment_remarks = 'New Exam booking of '.($booking->category->title ?? 'Unknown Exam Set');
+                    $booking_payment_remarks = 'New Exam Booking of '.($booking->category->title ?? 'Unknown Exam Set');
                     if(strtolower($booking->status) == 'expired')
                     {
                         $booking_payment_amount = intval($booking_payment_amount * 0.5);
-                        $booking_payment_remarks = 'Exam booking renewal with 50% discount of '.($booking->category->title ?? 'Unknown Exam Set');
+                        $booking_payment_remarks = 'Exam Booking renewal with 50% discount of '.($booking->category->title ?? 'Unknown Exam Set');
                     }
 
 
@@ -393,11 +393,11 @@ class ExamBookingController extends Controller
 
                         $booking_payment_amount = intval(($booking->category->price ?? 0) - ($booking->category->discount ?? 0));
                         $booking_bill_amount = intval(($booking->category->price ?? 0) - ($booking->category->discount ?? 0));
-                        $booking_payment_remarks = 'New Exam booking of '.($booking->category->title ?? 'Unknown Exam Set');
+                        $booking_payment_remarks = 'New Exam Booking of '.($booking->category->title ?? 'Unknown Exam Set');
                         if(strtolower($booking->status) == 'expired')
                         {
                             $booking_payment_amount = intval($booking_payment_amount * 0.5);
-                            $booking_payment_remarks = 'Exam booking renewal with 50% discount of '.($booking->category->title ?? 'Unknown Exam Set');
+                            $booking_payment_remarks = 'Exam Booking renewal with 50% discount of '.($booking->category->title ?? 'Unknown Exam Set');
                         }                       
 
                         $invoice_data = [

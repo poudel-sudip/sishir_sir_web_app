@@ -27,7 +27,10 @@
     <div class="container-fluid px-md-5">
 
         <div class="blog-container ">
-            <h3 class="text-primary text-center">{{($material->name)}}</h3>
+            <div class="text-center">
+                <h3 class="dchl-title fs-3">{{($material->name)}}</h3>
+            </div>
+
             <div class="mt-3">
                 <span class="mx-2 text-nowrap text-primary"><i class="fa fa-calendar-alt"></i> {{$material->created_at->format('d M, Y')}}</span>
                 <span class="mx-2 text-nowrap text-primary"><i class="fa fa-calendar"></i> {{$material->published_year}}</span>

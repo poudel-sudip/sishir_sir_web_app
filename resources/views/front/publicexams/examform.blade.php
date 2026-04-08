@@ -13,12 +13,14 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{$exam->name}}</h2>
+                <div class="text-center">
+                    <h3 class="dchl-title fs-3">{{$exam->name}}</h3>
+                </div>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item"><a href="/public-exams">Exam Hall</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">{{$exam->name}}</li>
+                      {{-- <li class="breadcrumb-item active" aria-current="page">{{$exam->name}}</li> --}}
                     </ol>
                 </div>
             </div>

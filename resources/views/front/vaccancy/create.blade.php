@@ -26,10 +26,9 @@
                             <form method="POST" action="/vaccancies" enctype="multipart/form-data">
                                 @csrf
 
-                                <div class="form-group text-center">
-                                  <div class="h3" style="color:#005cb3;">Add New Vacancy Post</div>  
+                                <div class="text-center">
+                                    <h3 class="dchl-title fs-3">Add New Vacancy Post</h3>
                                 </div>
-                                <hr style="margin-top:0;height:2px;background:#0084ff;opacity:1;">
                                 
                                 <div class="form-group row">
                                     <label for="title" class="col-md-6 col-form-label">{{ __('Vacancy Title') }}</label>

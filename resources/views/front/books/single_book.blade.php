@@ -31,7 +31,9 @@
                         {{-- <li class="breadcrumb-item active" aria-current="page">{{($book->title)}}</li> --}}
                     </ol>
                 </div>
-                <h1>{{($book->title)}}</h1>
+                <div class="text-center">
+                    <h3 class="dchl-title fs-3"> {{$book->title}} </h3>
+                </div>
 
             </div>
         </div>

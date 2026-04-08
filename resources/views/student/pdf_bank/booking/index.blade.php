@@ -22,24 +22,25 @@
                     <div class="vid-card-img-container">
                         @if ($booking->status=="Verified")
                         <a href="/student/pdf-bank-bookings/{{$booking->id}}/pdf-contents">
-                            <img src="/storage/{{$booking->book->thumbnail ?? ''}}" alt="thumbnail error" class="img img-fluid">
+                            <img src="/storage/{{$booking->book->thumbnail ?? ''}}" alt="thumbnail error" onerror="this.src='/images/default-post.png'" class="img img-fluid">
                         </a>
                         @else
-                        <img src="/storage/{{$booking->book->thumbnail ?? ''}}" alt="thumbnail error" class="img img-fluid">
+                            <img src="/storage/{{$booking->book->thumbnail ?? ''}}" alt="thumbnail error" onerror="this.src='/images/default-post.png'" class="img img-fluid">
                         @endif
                     </div>
                     <div class="student-vid-dec">
                         <h6>{{($booking->book->title ?? '')}}</h6>
                         @if($booking->book)
-                            <div>{{ $booking->book->type == 'set' ? $booking->book->chapters()->where('status','=','Active')->count() : 1 }} ebooks</div>
+                            <div>{{ $booking->book->type == 'set' ? $booking->book->chapters()->where('status','=','Active')->count() : 1 }} eBooks</div>
                         @endif
                         <div class="small">Expiry Date: {{$booking->expiry_date}}</div>
-                        <div class="student-vid-status">                            
-                            @if ($booking->status == "Verified")
+                        @if ($booking->status == "Verified")
                             <div class="text-success">{{$booking->status}}</div>
-                            @else
-                            <div class="text-primary">{{$booking->status}}</div>
-                            @endif
+                        @elseif($booking->status == "Expired")
+                        <div class="text-danger">{{$booking->status}} <span class="text-primary">(Renew with 50% discount)</span> </div>
+                        @endif
+                        <div class="student-vid-status">                            
+                            <div class=""></div>
                             <div class="text-end">
                                 @if($booking->status!="Verified")
                                     <a href="/student/pdf-bank-bookings/{{$booking->id}}/edit" class="btn btn-warning btn-sm">Verify</a> 
@@ -49,7 +50,7 @@
                                         <a href="javascript:{}" onclick="javascript:deleteData({{$booking->id}});" class="btn btn-danger btn-sm">Delete</a>
                                     </form>
                                 @else 
-                                <a href="/student/pdf-bank-bookings/{{$booking->id}}/pdf-contents" class="btn btn-success btn-sm">View Ebook</a> 
+                                <a href="/student/pdf-bank-bookings/{{$booking->id}}/pdf-contents" class="btn btn-success btn-sm">View eBook</a> 
                                 @endif
                             </div>
                         </div>

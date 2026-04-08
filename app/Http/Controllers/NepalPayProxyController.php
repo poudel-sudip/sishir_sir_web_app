@@ -286,7 +286,7 @@ class NepalPayProxyController extends Controller
                         $return_url = '/student/pdf-bank-bookings';
                         $expiry = Carbon::now()->addDays($booking->book->expiry_days ?? 365);
                         $booking_bill_amount = intval(($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
-                        $booking_payment_remarks = ($booking->book->title ?? 'Unknown Ebook');
+                        $booking_payment_remarks = ($booking->book->title ?? 'Unknown eBook');
 
                         $invoice_data = [
                             'type' => 'ebook',
@@ -320,11 +320,11 @@ class NepalPayProxyController extends Controller
                             {
                                 if(strtolower($booking->status) == 'expired')
                                 {
-                                    $booking_payment_remarks = ucwords($invoice_data['type']).' booking renewal with 50% discount of '.$booking_payment_remarks;
+                                    $booking_payment_remarks = ucwords($invoice_data['type']).' Booking renewal with 50% discount of '.$booking_payment_remarks;
                                 }
                                 else
                                 {
-                                    $booking_payment_remarks = 'New '.ucwords($invoice_data['type']).' booking of '.$booking_payment_remarks;
+                                    $booking_payment_remarks = 'New '.ucwords($invoice_data['type']).' Booking of '.$booking_payment_remarks;
                                 }
 
                                 $invoice_data = [

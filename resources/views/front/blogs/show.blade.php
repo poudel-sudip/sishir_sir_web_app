@@ -26,7 +26,9 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <h3 class="text-primary ">{{($blog->title)}}</h3>
+                            <div class="text-center">
+                                <h3 class="dchl-title fs-3"> {{($blog->title)}} </h3>
+                            </div>
                         </div>
                         <div class="d-flex align-items-center flex-wrap">
                             <span class="mx-3 h5 text-success text-nowrap"> <img src="/storage/{{$blog->authorimage ?? $blog->creator->photo ?? ''}}" onerror="this.src='/images/student.jpg'" style="height:50px; width:50px; border-radius:50%; border:1px solid #198754;"> <a href="/newsroom-author/{{$blog->author}}" class="text-success">{{$blog->author}}</a></span>

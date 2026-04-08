@@ -23,8 +23,8 @@
         </div> --}}
         <div class="mt-3 blogs-details-container bg-white border border-success rounded">
             <div class="row">
-                <div class="col-md-12">
-                    <h3 class="text-primary text-center">{{($vaccancy->title)}}</h3>
+                <div class="col-md-12 text-center">
+                    <h3 class="dchl-title fs-3">{{($vaccancy->title)}}</h3>
                 </div>
                 <div class="mt-2 d-flex align-items-center flex-wrap">
                     <span class="mx-3 h6 text-success text-nowrap"><i class="fa fa-user"></i> {{$vaccancy->author}}</span>

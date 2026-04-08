@@ -26,6 +26,7 @@
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <h2>Exam Hall</h2>
+                
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                       <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -89,9 +90,11 @@
 
                 <div class="@if($exam_categories->count() || $free_exams->count()) col-md-9 @else col-md-12 @endif">
                     <div class="all-course-list">
-                        <h2 class="my-4 text-center" style="color: #0C2B64;"><u>All Premium Exams</u></h2>
+                        <div class="text-center">
+                            <h3 class="dchl-title fs-3">All Premium Exams</h3>
+                        </div>
                         {{-- <div class="free-exam-btn"><a href="#free-exam" class="btn btn-success btn-sm"><i class="fas fa-tag"></i> Free Exams</a></div> --}}
-                        <div class="blog-container">
+                        <div class="blog-container mt-2">
                             <div class="row">
                                 @forelse($premium_exams as $exam)
                                     <div class="col-md-4 mb-3">

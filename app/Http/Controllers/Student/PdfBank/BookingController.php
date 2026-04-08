@@ -215,7 +215,7 @@ class BookingController extends Controller
                 'payment_mode' => 'Cash',
                 'reference_code' => '',
                 'payment_amount' => $request->paymentAmount ?? '0',
-                'payment_remarks' => 'New Ebook booking of '.($booking->book->title ?? 'Unknown Ebook'),
+                'payment_remarks' => 'New eBook Booking of '.($booking->book->title ?? 'Unknown Ebook'),
                 'discount_amount' => 0,
                 'due_amount' => 0,
                 'verified_by' => auth()->user()->name,
@@ -309,11 +309,11 @@ class BookingController extends Controller
                     
                     $booking_payment_amount = intval(($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
                     $booking_bill_amount = intval(($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
-                    $booking_payment_remarks = 'New Ebook booking of '.($booking->book->title ?? 'Unknown Ebook');
+                    $booking_payment_remarks = 'New eBook Booking of '.($booking->book->title ?? 'Unknown Ebook');
                     if(strtolower($booking->status) == 'expired')
                     {
                         $booking_payment_amount = intval($booking_payment_amount * 0.5);
-                        $booking_payment_remarks = 'Ebook booking renewal with 50% discount of '.($booking->book->title ?? 'Unknown Ebook');
+                        $booking_payment_remarks = 'eBook Booking renewal with 50% discount of '.($booking->book->title ?? 'Unknown Ebook');
                     }
 
                     $data = http_build_query(array(
@@ -397,11 +397,11 @@ class BookingController extends Controller
 
                         $booking_payment_amount = intval(($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
                         $booking_bill_amount = intval(($booking->book->price ?? 0) - ($booking->book->discount ?? 0));
-                        $booking_payment_remarks = 'New Ebook booking of '.($booking->book->title ?? 'Unknown Ebook');
+                        $booking_payment_remarks = 'New eBook Booking of '.($booking->book->title ?? 'Unknown Ebook');
                         if(strtolower($booking->status) == 'expired')
                         {
                             $booking_payment_amount = intval($booking_payment_amount * 0.5);
-                            $booking_payment_remarks = 'Ebook booking renewal with 50% discount of '.($booking->book->title ?? 'Unknown Ebook');
+                            $booking_payment_remarks = 'eBook Booking renewal with 50% discount of '.($booking->book->title ?? 'Unknown Ebook');
                         }
 
                         $invoice_data = [

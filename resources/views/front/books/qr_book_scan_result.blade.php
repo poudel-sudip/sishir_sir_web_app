@@ -12,12 +12,12 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{($book->title)}}</h2>
+                {{-- <h2>{{($book->title)}}</h2> --}}
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>
                         <li class="breadcrumb-item">QR Book Scan Result</li>
-                        <li class="breadcrumb-item active" aria-current="page">{{($book->title)}}</li>
+                        {{-- <li class="breadcrumb-item active" aria-current="page">{{($book->title)}}</li> --}}
                     </ol>
                 </div>
             </div>
@@ -28,7 +28,9 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6 book-details">
-                                <h2 class="text-center">{{($book->title)}}</h2>
+                                <div class="text-center">
+                                    <h3 class="dchl-title fs-3"> {{$book->title}} </h3>
+                                </div>
                                 <div class="text-center">
                                     <img src="/storage/{{$book->thumbnail}}" onerror="this.src='{{asset('images/default-post.png')}}'" class="img img-fluid">                                
                                 </div>     

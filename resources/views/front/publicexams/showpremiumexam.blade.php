@@ -28,8 +28,8 @@
     <section class="course-details-page mb-5">
         <div class="container-fluid px-md-5">
             <div class="card p-3 border-success">
-                <div class="card-title">
-                    <div class="h3 text-center">{{$exam->title}}</div>
+                <div class="card-title text-center">
+                    <h3 class="dchl-title fs-3">{{$exam->title}}</h3>
                 </div>
                 <div class="row">
                     <div class="col-md-8 seller-item  ">

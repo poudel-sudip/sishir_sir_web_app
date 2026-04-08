@@ -37,8 +37,8 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     {{-- <h3 class="text-primary">{{($healthDay->title)}}</h3> --}}
-                    <div class="">
-                        <h3 class="text-primary">{{($healthDay->title)}}</h3>
+                    <div class="text-center">
+                        <h3 class="dchl-title fs-3"> {{($healthDay->title)}} </h3>
                     </div>
                     <div class="mx-3 h6 text-primary text-nowrap"><i class="fas fa-calendar"></i> {{$healthDay->date}}</div>
                     <div class="mx-3 h6 text-danger text-nowrap border-bottom border-danger pb-2"><i class="fa fa-tag"></i> {{optional($healthDay->category)->name}}</div>

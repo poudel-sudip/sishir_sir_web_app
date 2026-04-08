@@ -82,10 +82,6 @@
                     <li class="nav-item">
                       <a class="nav-link" href="/student/exam-bookings"><i class="fas fa-laptop-house text-info  me-1"></i>Exam Set Bookings</a>
                     </li>
-                    
-                    <li class="nav-item">
-                      <a class="nav-link" href="/student/invoices"><i class="fas fa-file-pdf text-primary  me-1"></i>Invoices</a>
-                    </li>
 
                     <li class="nav-item">
                       <a class="nav-link" href="/student/tickets"><i class="fas fa-address-card text-danger me-1"></i>Ask/Complain  Admin</a>
@@ -123,6 +119,10 @@
                         <a class="nav-link" href="/free-videos"><i class="fas fa-video text-pink me-1"></i>Videos</a>
                     </li>
 
+                    <li class="nav-item">
+                      <a class="nav-link" href="/student/invoices"><i class="fas fa-file-pdf text-primary  me-1"></i>Invoices</a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>

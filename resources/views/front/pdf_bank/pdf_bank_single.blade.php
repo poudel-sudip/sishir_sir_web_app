@@ -13,13 +13,15 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
-                <h2>{{$pdf_bank->title}}</h2>
+                {{-- <div class="text-center">
+                    <h3 class="dchl-title fs-3">{{ $pdf_bank->title}} </h3>
+                </div> --}}
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                         <li class="breadcrumb-item"><a href="/pdf-banks">eBooks</a></li>
                         <li class="breadcrumb-item"><a href="/pdf-banks/category/{{$pdf_bank->category->id ?? ''}}">{{$pdf_bank->category->name ?? ''}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{$pdf_bank->title}}</li>
+                        {{-- <li class="breadcrumb-item active" aria-current="page">{{$pdf_bank->title}}</li> --}}
                     </ol>
                 </div>
             </div>
@@ -29,8 +31,8 @@
     <section class="course-details-page mb-5">
         <div class="container-fluid px-md-5">
             <div class="card p-3 border-success">
-                <div class="card-title">
-                    <div class="h3 text-center" style="color:#0C2B64 !important; letter-spacing: -1px;">{{$pdf_bank->title}}</div>
+                <div class="text-center card-title">
+                    <h3 class="dchl-title fs-3">{{ $pdf_bank->title}} </h3>
                 </div>
                 <div class="row">
                     <div class="col-md-8 seller-item  ">

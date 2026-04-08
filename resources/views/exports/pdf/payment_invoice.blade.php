@@ -1,7 +1,8 @@
 <body>
     <style>
         body {
-            font-family: DejaVu Sans, sans-serif;
+            /* font-family: DejaVu Sans, sans-serif; */
+            font-family: 'Times New Roman', Times, serif;
             font-size: 12px;
             color: #000;
         }
@@ -22,7 +23,7 @@
             width: 100%;
         }
         .product{
-            font-family: FreeSans, Arial, Helvetica, sans-serif;
+            font-family: FreeSans, 'Times New Roman', Arial, Helvetica, sans-serif;
         }
     </style>
 

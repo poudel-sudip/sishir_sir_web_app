@@ -28,8 +28,9 @@
             <div class="row justify-content-center">
                 <div class="col-12">
                     <div class="card mb-5">
-                        <div class="card-header text-center">
-                            {{($vform->title)}}
+                        
+                        <div class="text-center mb-2">
+                            <h3 class="dchl-title fs-3"> {{($vform->title)}} </h3>
                         </div>
                         <div class="card-body enroll_form row">
                             @if($vform->banner)

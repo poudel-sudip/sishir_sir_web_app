@@ -11,7 +11,9 @@
     <div class="container-fluid px-md-5">
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center pt-4 pb-2">
-                <h2>eLibrary</h2>
+                <div class="text-center">
+                    <h3 class="dchl-title fs-3">eLibrary</h3>
+                </div>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                       <li class="breadcrumb-item"><a href="{{ ('/') }}">Home</a></li>

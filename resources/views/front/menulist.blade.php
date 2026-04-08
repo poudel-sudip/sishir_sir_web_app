@@ -13,7 +13,9 @@
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 @if($menuCategory->type == 'heading')
-                    <h2>{{($menuCategory->name)}}</h2>
+                    <div class="text-center">
+                        <h3 class="dchl-title fs-3">{{($menuCategory->name)}}</h3>
+                    </div>
                 @endif
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
@@ -31,7 +33,10 @@
         @if($menuCategory->type != 'heading')
         
             <div class="blog-container ">
-                <h3 class="text-primary text-center">{{($menuCategory->name)}}</h3>
+                <div class="text-center">
+                    <h3 class="dchl-title fs-3">{{($menuCategory->name)}}</h3>
+                </div>
+
                 <div class="mt-3">
                     <span class="mx-2 text-primary"><i class="fa fa-calendar-alt"></i> {{$menuCategory->created_at->format('d M, Y, h:i A')}}</span>
                     <span class="mx-2 text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>

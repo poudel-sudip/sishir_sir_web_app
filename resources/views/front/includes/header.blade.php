@@ -19,10 +19,11 @@
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 text-center">
           <div class="text-center" >
             <a href="{{ url('/') }}"><img src="{{ asset('images/logo.png') }}" alt="Logo" class="img img-fluid" style="max-height:85px;"></a>
           </div>
+          <span class="fw-bold fs-5 text-danger">धर्मो रक्षति रक्षितः</span>
         </div>
         
         <div class="col-sm-4 col-12 auth-nav">
