@@ -27,6 +27,7 @@ class CreateBatchesTable extends Migration
             $table->dateTime('startDate')->nullable();
             $table->dateTime('endDate')->nullable();
             $table->string('timeSlot')->nullable();
+            $table->string('image')->nullable();
             $table->string('classroomLink')->nullable();
             $table->string('class_status')->default('No Class');
             $table->string('status')->default('Inactive');

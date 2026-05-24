@@ -158,6 +158,27 @@
         </div>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#online_course" aria-expanded="false" aria-controls="online_course">
+          <i class="mdi mdi-book-open menu-icon"></i>
+          <span class="menu-title">Online Courses</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="online_course">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/courses') }}">Courses</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/course-bookings') }}">Latest Bookings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/course-bookings/all') }}">All Bookings</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
       {{-- <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#ebooks" aria-expanded="false" aria-controls="ebooks">
           <i class="mdi mdi-book menu-icon"></i>

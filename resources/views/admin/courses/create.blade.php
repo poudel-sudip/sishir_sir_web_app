@@ -16,16 +16,17 @@
             </nav>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-8 grid-margin stretch-card">
+            <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">Add Course</div>
                     <div class="card-body">
                         <form method="POST" action="{{ ('/admin/courses') }}" enctype="multipart/form-data" class="forms-sample">
                             @csrf
-                            <div class="form-group row">
-                                <label for="category" class="col-md-4 col-form-label">{{ __('Course Category') }}</label>
 
-                                <div class="col-md-8">
+                            {{-- <div class="form-group row">
+                                <label for="category" class="col-md-3 col-form-label">{{ __('Course Category') }}</label>
+
+                                <div class="col-md-9">
                                     <select id="category" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}">
                                         <option value=""></option>
                                         @foreach($categories as $cat)
@@ -38,12 +39,12 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label">{{ __('Course Name') }}</label>
+                                <label for="name" class="col-md-3 col-form-label">{{ __('Course Name') }}</label>
 
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                     @error('name')
@@ -55,10 +56,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="order" class="col-md-4 col-form-label">{{ __('Course Order') }}</label>
+                                <label for="order" class="col-md-3 col-form-label">{{ __('Course Order') }}</label>
 
-                                <div class="col-md-8">
-                                    <input id="order" type="number" class="form-control @error('order') is-invalid @enderror" name="order" value="{{ old('order') ?? 10 }}" required>
+                                <div class="col-md-9">
+                                    <input id="order" type="number" class="form-control @error('order') is-invalid @enderror" name="order" value="{{ old('order') ?? 1 }}" required>
 
                                     @error('order')
                                     <span class="invalid-feedback" role="alert">
@@ -97,9 +98,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="courseImage" class="col-md-4 col-form-label">{{ __('Course Image') }}</label>
-                                <div class="col-md-8">
-                                    <input id="courseImage" type="file" class="form-control @error('courseImage') is-invalid @enderror" name="courseImage" value="{{ old('courseImage') }}" required >
+                                <label for="courseImage" class="col-md-3 col-form-label">{{ __('Course Image') }}</label>
+                                <div class="col-md-9">
+                                    <input id="courseImage" type="file" class="form-control @error('courseImage') is-invalid @enderror" name="courseImage" value="{{ old('courseImage') }}" required accept="image/*">
 
                                     @error('courseImage')
                                     <span class="invalid-feedback" role="alert">
@@ -110,9 +111,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="isPopular" class="col-md-4 col-form-label">{{ __('Is Popular') }}</label>
+                                <label for="isPopular" class="col-md-3 col-form-label">{{ __('Is Popular') }}</label>
 
-                                <div class="col-md-8 row">
+                                <div class="col-md-9 row">
                                     <div class="col-sm-4">
                                         <div class="form-check">
                                           <label class="form-check-label">
@@ -133,9 +134,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="status" class="col-md-4 col-form-label">{{ __('Course Status') }}</label>
+                                <label for="status" class="col-md-3 col-form-label">{{ __('Course Status') }}</label>
 
-                                <div class="col-md-8">
+                                <div class="col-md-9">
                                     <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required>
                                         <option value="Inactive">Inactive</option>
                                         <option value="Active">Active</option>
@@ -149,7 +150,7 @@
                             </div>
 
                             <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
+                                <div class="col-md-6 offset-md-3">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Submit') }}
                                     </button>

@@ -21,6 +21,7 @@ class CreateClassVideosTable extends Migration
             $table->string('user_name');
             $table->string('videoTitle');
             $table->string('videoPath');
+            $table->string('videoKey')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->index(['batch_id','user_id']);

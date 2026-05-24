@@ -4,3 +4,9 @@ private function generatePdfThumbnail($pdfPath)
     $size = Storage::disk('public')->size($pdfPath);
     $size = \Number::fileSize($size);
 }
+
+
+
+update tables:
+1. batches :image
+2. class_videos: videoKey

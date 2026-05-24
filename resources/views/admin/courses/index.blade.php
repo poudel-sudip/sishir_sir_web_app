@@ -4,103 +4,98 @@
 @endsection
 
 @section('content')
-    <div class="content-wrapper">
-        <div class="page-header">
-            <h3 class="page-title">All Courses</h3>
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Courses</li>
-              </ol>
-          </nav>
-        </div>  
-        <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="custon-table-header">
-                        <h4 class="card-title">Course table</h4>
-                        <div class="text-right">
-                            <a href="{{ ('/admin/courses/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Course </button></a>
-                        </div>
-                    </div>
-                    <div class="table-responsive table-responsive-md">
-                      <table class="table table-bordered" id="advanced-desc-table">
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Action</th>
-                            <th>Course Name</th>
-                            <th>Category</th>
-                            <th>Popular</th>
-                            <th>Status</th>
-                            <th>Features</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($courses as $course)
-                          <tr>
-                            <td>{{$course->id}}</td>
-                            <td>
-                              <div class="dropdown">
-                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
-                                    <a href="/admin/courses/{{$course->id}}" class="text-primary dropdown-item">Show</a>
-                                    <a href="/admin/courses/{{$course->id}}/edit" class="text-danger dropdown-item">Edit</a>
-                                    <form id="delete-form-{{$course->id}}" action="/admin/courses/{{$course->id}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="javascript:{}" onclick="javascript:deleteData({{$course->id}});" class="text-warning dropdown-item">Delete</a>
-                                    </form>
-                                    <a href="/admin/courses/{{$course->id}}/batches/" class="text-info dropdown-item">Batches</a>
-
-                                </div>
-                              </div>
-                            </td>
-                            <td>{{$course->name}}</td>
-                            <td>{{$course->category->name ?? ''}}</td>
-                            <td>{{$course->isPopular}}</td>
-                            <td>
-                              @if($course->status == 'Inactive')
-                              <span class="text-danger">{{$course->status}}</span>
-                              @else
-                              <span class="text-success">{{$course->status}}</span>
-                              @endif
-                            </td>
-                            <td><a href="/admin/courses/{{$course->id}}/features" class="text-primary"> Features </a></td>
-                            
-                          </tr>
-                          @endforeach
-                        </tbody>
-                      </table>
-                      <script type="text/javascript">
-                        function deleteData(id)
-                        {
-                          Swal.fire({
-                            title: 'Are you sure?',
-                            text: "You won't be able to revert this!",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, delete it!'
-                          }).then((result) => {
-                            if (result.isConfirmed) {
-                              document.getElementById('delete-form-'+id).submit();
-                              Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
-                                'success'
-                              )
-                            }
-                          })
-                        }
-                    </script>
-                    </div>
-                  </div>
-                </div>
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">All Courses</h3>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Courses</li>
+        </ol>
+      </nav>
+    </div>  
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="custon-table-header">
+              <h4 class="card-title">Course table</h4>
+              <div class="text-right">
+                <a href="{{ ('/admin/courses/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Course </button></a>
               </div>
+            </div>
+            <div class="table-responsive table-responsive-md">
+              <table class="table table-bordered" id="advanced-desc-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Course Name</th>
+                    {{-- <th>Popular</th> --}}
+                    <th>Status</th>
+                    <th>Batches</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach($courses as $course)
+                  <tr>
+                    <td>{{$course->id}}</td>
+                    <td>{{$course->name}}</td>
+                    {{-- <td>{{$course->isPopular}}</td> --}}
+                    <td>
+                      @if($course->status == 'Inactive')
+                      <span class="text-danger">{{$course->status}}</span>
+                      @else
+                      <span class="text-success">{{$course->status}}</span>
+                      @endif
+                    </td>
+                    <td class="classroom-btn">                     
+                      <a href="/admin/courses/{{$course->id}}/batches" class="btn btn-info">Batches ({{$course->batches_count}}) </a>
+                    </td>
+                    {{-- <td><a href="/admin/courses/{{$course->id}}/features" class="text-primary"> Features </a></td> --}}
+                    <td class="classroom-btn" width="100">
+                      <a href="/admin/courses/{{$course->id}}" class="btn btn-primary">Show</a>
+                      <a href="/admin/courses/{{$course->id}}/edit" class="btn btn-warning">Edit</a>
+                      <form id="delete-form-{{$course->id}}" action="/admin/courses/{{$course->id}}" method="POST" class="d-inline">
+                          @csrf
+                          @method('DELETE')
+                          <a href="javascript:{}" onclick="javascript:deleteData({{$course->id}});" class="btn btn-danger">Delete</a>
+                      </form>
+
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+              
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
     
+  <script type="text/javascript">
+    function deleteData(id)
+    {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.getElementById('delete-form-'+id).submit();
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
+    }
+  </script>
 @endsection

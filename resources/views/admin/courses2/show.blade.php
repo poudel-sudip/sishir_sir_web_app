@@ -32,7 +32,10 @@
                             <div>Course Slug: </div>
                             <div>{{$course->slug}}</div>
                         </div>
-                       
+                        <div class="course-row">
+                            <div>Course Category: </div>
+                            <div>{{$course->category->name}}</div>
+                        </div>
                         <div class="course-row">
                             <div>Course Description: </div>
                             <div>{!! $course->description !!}</div>

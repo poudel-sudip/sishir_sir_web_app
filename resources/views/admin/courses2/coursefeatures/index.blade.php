@@ -30,28 +30,34 @@
                           <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Action</th>
                                 <th>Title</th>
                                 <th>Icon</th>
                                 <th>Unique Feature</th>
-                                <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
                               @foreach($course->features as $feature)
                             <tr>
                                 <td>{{$feature->id}}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Actions </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
+                                            <a href="/admin/courses/{{$course->id}}/features/{{$feature->id}}" class="text-primary dropdown-item">Show</a>
+                                            <a href="/admin/courses/{{$course->id}}/features/{{$feature->id}}/edit" class="text-danger dropdown-item">Edit</a>
+                                            <form id="delete-form-{{$feature->id}}" action="/admin/courses/{{$course->id}}/features/{{$feature->id}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a href="javascript:{}" onclick="javascript:deleteData({{$feature->id}});" class="text-warning dropdown-item">Delete</a>
+                                            </form>
+                                        </div>
+                                      </div>
+                                </td>
                                 <td>{{$feature->title}}</td>
                                 <td><img src="/storage/{{$feature->image}}" style="max-height: 40px;max-width:40px " ></td>
                                 <td>{{$feature->isunique}}</td>
-                                <td width="150" class="classroom-btn">
-                                    <a href="/admin/courses/{{$course->id}}/features/{{$feature->id}}" class="btn btn-primary ">Show</a>
-                                    <a href="/admin/courses/{{$course->id}}/features/{{$feature->id}}/edit" class="btn btn-danger ">Edit</a>
-                                    <form id="delete-form-{{$feature->id}}" action="/admin/courses/{{$course->id}}/features/{{$feature->id}}" method="POST" style="display: inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="javascript:{}" onclick="javascript:deleteData({{$feature->id}});" class="btn btn-warning ">Delete</a>
-                                    </form>
-                                </td>
+                                
                             </tr>
                             @endforeach
                           </tbody>

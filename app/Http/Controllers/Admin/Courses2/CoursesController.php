@@ -20,15 +20,14 @@ class CoursesController extends Controller
     public function index(Categories $category)
     {
         return view('admin.courses.index',[
-            'courses'=>Course::withCount('batches')->orderByDesc('id')->get(['id','name','status','isPopular','order']),
+            'courses'=>Course::all(),
         ]);
     }
 
     public function create()
     {
-        // $categories= Categories::all()->where('status','=','Active');
-        $data = [];
-        return view('admin.courses.create',$data);
+        $categories= Categories::all()->where('status','=','Active');
+        return view('admin.courses.create', compact('categories'));
     }
 
     public function show(Course $course)
@@ -38,31 +37,28 @@ class CoursesController extends Controller
 
     public function edit(Course $course)
     {
-        $data = [];
-        $data['course'] = $course;
-        // $categories= Categories::all()->where('status','=','Active');
+        $categories= Categories::all()->where('status','=','Active');
 
-        return view('admin.courses.edit', $data);
+        return view('admin.courses.edit', compact('course','categories'));
     }
 
     public function store()
     {
-        $data = request()->validate([
+        $data=request()->validate([
             'name'=>'required',
             'description'=>'required',
             'details'=>'required | string',
-            'status'=>'required',
+            'status'=>'',
             'isPopular'=>'required',
             'courseImage'=>'required | image',
-            // 'category'=>'required | min:1',
+            'category'=>'required | min:1',
             'order'=>'required | numeric | min:1',
         ]);
 
-        $imagePath = request('courseImage')->store('uploads/courses/thumbnails','public');
-
+        $imagePath=request('courseImage')->store('uploads','public');
         Course::create([
             'name'=>$data['name'],
-            // 'category_id'=>$data['category'],
+            'category_id'=>$data['category'],
             'description'=>$data['description'],
             'detail'=>$data['details'],
             'status'=>$data['status'],
@@ -76,29 +72,29 @@ class CoursesController extends Controller
 
     public function update(Course $course)
     {
-        $data = request()->validate([
+        $data=request()->validate([
             'name'=>'required',
             'description'=>'required',
             'details'=>'required',
-            'status'=>'required',
+            'status'=>'',
             'isPopular'=>'required',
             'courseImage'=>'',
             'oldImage'=>'',
-            // 'category'=>'required | min:1',
+            'category'=>'required | min:1',
             'order'=>'required | numeric | min:1',
         ]);
 
-        $imagePath = $data['oldImage'];
+        $imagePath=$data['oldImage'];
         if(isset($data['courseImage']))
         {
-            $imagePath = request('courseImage')->store('uploads/courses/thumbnails','public');
+            $imagePath=request('courseImage')->store('uploads','public');
         }
         $course->update([
             'name'=>$data['name'],
             'description'=>$data['description'],
             'detail'=>$data['details'],
             'status'=>$data['status'],
-            // 'category_id'=>$data['category'],
+            'category_id'=>$data['category'],
             'isPopular'=>$data['isPopular'],
             'image'=>$imagePath,
             'order'=>$data['order'],
@@ -108,14 +104,9 @@ class CoursesController extends Controller
 
     public function destroy(Course $course)
     {
-        if($course->batches()->count() > 0)
-        {
-            abort(403, 'Please Delete Associated Batches First');
-        }
-
         $course->bookings()->delete();
         $course->batches()->delete();
-        // $course->features()->delete();
+        $course->features()->delete();
         $course->delete();
         return redirect('/admin/courses');
     }

@@ -12,8 +12,11 @@ use Illuminate\Support\Str;
 use App\Models\Exams\BatchExam;
 use App\Models\Exams\Result;
 use App\Models\BatchCQC;
-use App\Models\ClassSchedule;
-use App\Models\ClassUnit;
+// use App\Models\ClassSchedule;
+// use App\Models\ClassUnit;
+use App\Models\ClassFile;
+use App\Models\ClassVideo;
+use App\Models\BatchCurriculum;
 
 class Batch extends Model
 {
@@ -91,5 +94,10 @@ class Batch extends Model
     public function units(): HasMany
     {
         return $this->hasMany(ClassUnit::class, 'batch_id');
+    }
+
+    public function curriculums(): HasMany
+    {
+        return $this->hasMany(BatchCurriculum::class, 'batch_id');
     }
 }

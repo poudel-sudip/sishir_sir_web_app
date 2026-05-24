@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Courses;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Models\Booking;
 use App\Models\Course;
 use App\Models\User;
@@ -18,49 +17,26 @@ class BookingsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $data['bookings'] = Booking::with('user:id,name,email,contact')->orderByDesc('id')->paginate(100);
-        return view('admin.courses.booking.index',$data);
+        $bookings=Booking::all()->sortByDesc('id')->take(300);
+        return view('admin.bookings.index',compact('bookings'));
     }
 
-    public function statusBookings(Request $request)
+    public function allBookings()
     {
-        $status = null;
-        if($request->status)
-        {
-            $status = ucwords(trim($request->status));
-        }
-        
-        $data['status'] = $status;
-        $data['bookings'] = Booking::with('user:id,name,email,contact')->where('status','=',$status)->orderByDesc('id')->paginate(100);
-        return view('admin.courses.booking.status',$data);
-    }
-
-    public function batchBookings(Course $course, Batch $batch, Request $request)
-    {
-        $status = $batch->name;
-                
-        $data['status'] = $status;
-        $data['bookings'] = Booking::with('user:id,name,email,contact')->where('batch_id','=',$batch->id)->orderByDesc('id')->paginate(100);
-        return view('admin.courses.booking.status',$data);
-    }
-
-    public function allBookings(Request $request)
-    {
-        $bookings = Booking::all();
-        return view('admin.courses.booking.all',compact('bookings'));
+        $bookings=Booking::all();
+        return view('admin.bookings.allBookings',compact('bookings'));
     }
 
     public function create()
     {
-        $courses = Course::whereIn('status',['Active','Running'])->get();
-        return view('admin.courses.booking.create',compact('courses'));
+        $courses=Course::whereIn('status',['Active','Running'])->get();
+        return view('admin.bookings.create',compact('courses'));
     }
 
     public function store()
     {
-        // dd(request()->all());
         $data=request()->validate([
             'course_name'=>'integer | required | min:1',
             'batch_name'=>'integer | required | min:1',
@@ -70,13 +46,13 @@ class BookingsController extends Controller
             'paymentAmount'=>'numeric|nullable',
             'discount'=>'numeric|nullable',
             'verificationDocument'=>'nullable | image',
-            'expiry_days'=>'numeric|nullable',
         ]);
 
         $batch = Batch::find($data['batch_name']);
         $user = User::find($data['userid']);
 
         $search = Booking::where([
+            ['course_id','=',$data['course_name']],
             ['batch_id','=',$data['batch_name']],
             ['user_id','=',$data['userid']],
         ])->count();
@@ -94,14 +70,11 @@ class BookingsController extends Controller
         $imagePath="";
         if(isset($data['verificationDocument']))
         {
-            $imagePath = request('verificationDocument')->store('uploads/courses/batch_'.$batch->id.'/payments','public');
-        }  
-        
-        $expiry_days = (int)($data['expiry_days'] ?? 365);
-        $expiry_date = Carbon::now()->addDays($expiry_days)->format('Y-m-d');
-        
+            $imagePath=request('verificationDocument')->store('uploads','public');
+        }       
         Booking::create([
-            'batch_id'=>$batch->id,
+            'course_id'=>$data['course_name'],
+            'batch_id'=>$data['batch_name'],
             'user_id'=>$user->id,
             'user_name'=>$user->name,
             'status'=>$data['status'],
@@ -111,10 +84,8 @@ class BookingsController extends Controller
             'discount'=>$data['discount'] ?? 0,
             'dueAmount'=>$due,
             'verificationDocument'=>$imagePath,
-            'expiry_date'=>$expiry_date,
         ]);
-
-        return redirect('/admin/course-bookings');
+        return redirect('/admin/bookings');
     }
 
     public function show($booking)
@@ -124,44 +95,28 @@ class BookingsController extends Controller
         {
             abort(404);
         }
-
-        $expiry = Carbon::parse($booking->expiry_date ?? date('Y-m-d'));
-        $today = Carbon::today();
-        $daysToExpire = Carbon::parse($today)->diffInDays($expiry, false);
-        $daysToExpire = max(0, $daysToExpire);
-        $booking->expiry_days = (int)$daysToExpire;
-
-        return view('admin.courses.booking.show',compact('booking'));
+        return view('admin.bookings.show',compact('booking'));
     }
 
     public function edit(Booking $booking)
     {
-        $expiry = Carbon::parse($booking->expiry_date ?? date('Y-m-d'));
-        $today = Carbon::today();
-        $daysToExpire = Carbon::parse($today)->diffInDays($expiry, false);
-        $daysToExpire = max(0, $daysToExpire);
-        $booking->expiry_days = (int)$daysToExpire;
-
-        // dd($booking,$daysToExpire);
-        $courses = Course::where('status','Active')->get();
-        return view('admin.courses.booking.edit',compact('booking','courses'));
+        $courses=Course::where('status','Active')->get();
+        return view('admin.bookings.edit',compact('booking','courses'));
     }
 
     public function update(Booking $booking)
     {
-        // dd(request()->all());
         $data=request()->validate([
             'status'=>'string | required',
             'uploadDocument'=>'image|nullable',
             'oldDocument'=>'string|nullable',
             'paymentAmount'=>'required|numeric',
             'discount'=>'required|numeric',
-            // 'suspended'=>'required|boolean',
+            'suspended'=>'required|boolean',
             'verificationMode'=>'min:1',
             'remarks'=>'string|nullable',
             'course_name'=>'numeric|required|min:1',
             'batch_name'=>'numeric|required|min:1',
-            'expiry_days'=>'numeric|nullable',
         ]);
 
         $batch = Batch::find($data['batch_name']);
@@ -173,18 +128,8 @@ class BookingsController extends Controller
         $img = $data['oldDocument'];
         if(isset($data['uploadDocument']))
         {
-            $img = request('uploadDocument')->store('uploads/courses/batch_'.$batch->id.'/payments','public');
+            $img=request('uploadDocument')->store('uploads','public');
         }
-
-        $expiry_days = (int)($data['expiry_days'] ?? 365);
-        if($expiry_days > 0)
-        {
-            $expiry = Carbon::now()->addDays($expiry_days)->format('Y-m-d');
-            $booking->update([
-                'expiry_date'=>$expiry,
-            ]);
-        }
-        
         $booking->update([
             'status'=>$data['status'],
             'paymentAmount'=>$data['paymentAmount'],
@@ -192,21 +137,44 @@ class BookingsController extends Controller
             'dueAmount'=>$due,
             'verificationDocument'=>$img,
             'updatedBy'=>auth()->user()->name,
-            // 'suspended'=>$data['suspended'],
+            'suspended'=>$data['suspended'],
             'verificationMode'=>$data['verificationMode'],
             'remarks'=>$data['remarks'],
+            'course_id'=>$batch->course_id,
             'batch_id'=>$batch->id,
         ]);
 
-        return redirect('/admin/course-bookings');
+        return redirect('/admin/bookings');
     }
 
     public function destroy(Booking $booking)
     {
         $booking->delete();
-        return redirect('/admin/course-bookings');
+        return redirect('/admin/bookings');
     }
 
-    
+    public function verifylist()
+    {
+        $bookings = Booking::where('status', '=', 'Processing')->get();
+        return view('admin.bookings.verifylist',compact('bookings'));
+    }
+
+    public function duelist()
+    {
+        $bookings = Booking::where('status', '=', 'Verified')->where('dueAmount','>','10')->get();
+        return view('admin.bookings.duelist',compact('bookings'));
+    }
+
+    public function suspendedlist()
+    {
+        $bookings = Booking::where('suspended', '=', true)->get();
+        return view('admin.bookings.suspendlist',compact('bookings'));
+    }
+
+    public function unverifiedlist()
+    {
+        $bookings = Booking::where('status', '=', 'Unverified')->get();
+        return view('admin.bookings.unverifiedlist',compact('bookings'));
+    }
 
 }

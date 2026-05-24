@@ -33,47 +33,47 @@ class BatchBookingsController extends Controller
         return view('admin.batches.bookings.statusbooking',compact('data','batch','status'));
     }
 
-    public function edit(Batch $batch, Booking $booking)
-    {
-        return view('admin.batches.bookings.editbooking',compact('booking','batch'));
-    }
+    // public function edit(Batch $batch, Booking $booking)
+    // {
+    //     return view('admin.batches.bookings.editbooking',compact('booking','batch'));
+    // }
 
-    public function update(Batch $batch, Booking $booking)
-    {        
-        $data=request()->validate([
-            'status'=>'string | required',
-            'uploadDocument'=>'image|nullable',
-            'oldDocument'=>'string|nullable',
-            'paymentAmount'=>'required|numeric',
-            'discount'=>'required|numeric',
-            'verificationMode'=>'min:1',
-            'remarks'=>'string|nullable',
-        ]);
-        $due = (integer)(($batch->fee - $batch->discount) - $data['paymentAmount']-$data['discount']);
-        // dd(request()->all(),$batch->fee,$batch->discount,$due);
+    // public function update(Batch $batch, Booking $booking)
+    // {        
+    //     $data=request()->validate([
+    //         'status'=>'string | required',
+    //         'uploadDocument'=>'image|nullable',
+    //         'oldDocument'=>'string|nullable',
+    //         'paymentAmount'=>'required|numeric',
+    //         'discount'=>'required|numeric',
+    //         'verificationMode'=>'min:1',
+    //         'remarks'=>'string|nullable',
+    //     ]);
+    //     $due = (integer)(($batch->fee - $batch->discount) - $data['paymentAmount']-$data['discount']);
+    //     // dd(request()->all(),$batch->fee,$batch->discount,$due);
 
-        $img=$data['oldDocument'];
-        if(isset($data['uploadDocument']))
-        {
-            $img=request('uploadDocument')->store('uploads','public');
-        }
-        $booking->update([
-            'status'=>$data['status'],
-            'paymentAmount'=>$data['paymentAmount'],
-            'discount'=>$data['discount'],
-            'dueAmount'=>$due,
-            'verificationDocument'=>$img,
-            'verificationMode'=>$data['verificationMode'] ?? '',
-            'updatedBy'=>auth()->user()->name,
-            'remarks'=>$data['remarks'],
-        ]);
+    //     $img=$data['oldDocument'];
+    //     if(isset($data['uploadDocument']))
+    //     {
+    //         $img=request('uploadDocument')->store('uploads','public');
+    //     }
+    //     $booking->update([
+    //         'status'=>$data['status'],
+    //         'paymentAmount'=>$data['paymentAmount'],
+    //         'discount'=>$data['discount'],
+    //         'dueAmount'=>$due,
+    //         'verificationDocument'=>$img,
+    //         'verificationMode'=>$data['verificationMode'] ?? '',
+    //         'updatedBy'=>auth()->user()->name,
+    //         'remarks'=>$data['remarks'],
+    //     ]);
 
-        return redirect('/admin/batches/'.$batch->id.'/bookings');
-    }
+    //     return redirect('/admin/batches/'.$batch->id.'/bookings');
+    // }
 
-    public function destroy(Batch $batch, Booking $booking)
-    {
-        $booking->delete();
-        return redirect('/admin/batches/'.$batch->id.'/bookings');
-    }
+    // public function destroy(Batch $batch, Booking $booking)
+    // {
+    //     $booking->delete();
+    //     return redirect('/admin/batches/'.$batch->id.'/bookings');
+    // }
 }

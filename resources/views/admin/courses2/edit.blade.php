@@ -16,7 +16,7 @@
             </nav>
         </div> 
         <div class="row justify-content-center">
-            <div class="col-md-12 grid-margin stretch-card">
+            <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">Edit {{$course->name}}</div>
                     <div class="card-body">
@@ -24,9 +24,9 @@
                             @csrf
                             @method('PATCH')
 
-                            {{-- <div class="form-group row">
-                                <label for="category" class="col-md-3 col-form-label">{{ __('Course Category') }}</label>
-                                <div class="col-md-9">
+                            <div class="form-group row">
+                                <label for="category" class="col-md-4 col-form-label">{{ __('Course Category') }}</label>
+                                <div class="col-md-8">
                                     <select id="category" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ $course->category->name ?? old('category') }}">
                                         <option value="{{$course->category->id ?? ''}}">{{$course->category->name ?? ''}}</option>
                                         <option value="">-----------------</option>
@@ -40,11 +40,11 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-3 col-form-label">{{ __('Course Name') }}</label>
-                                <div class="col-md-9">
+                                <label for="name" class="col-md-4 col-form-label">{{ __('Course Name') }}</label>
+                                <div class="col-md-8">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $course->name }}" required autocomplete="name" autofocus>
 
                                     @error('name')
@@ -56,8 +56,8 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="order" class="col-md-3 col-form-label">{{ __('Course Order') }}</label>
-                                <div class="col-md-9">
+                                <label for="order" class="col-md-4 col-form-label">{{ __('Course Order') }}</label>
+                                <div class="col-md-8">
                                     <input id="order" type="number" class="form-control @error('order') is-invalid @enderror" name="order" value="{{ old('order') ?? $course->order }}" required>
 
                                     @error('order')
@@ -97,11 +97,11 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="courseImage" class="col-md-3 col-form-label">{{ __('Course Image') }}</label>
+                                <label for="courseImage" class="col-md-4 col-form-label">{{ __('Course Image') }}</label>
                                 <div class="col-md-2 pt-2">
                                     <img src="/storage/{{$course->image}}" height="40">
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-6">
                                     <input id="courseImage" type="file" class="form-control @error('courseImage') is-invalid @enderror" name="courseImage" value="{{ old('courseImage') }}" >
                                     <input type="hidden" name="oldImage" value="{{$course->image}}">
                                     @error('courseImage')
@@ -113,9 +113,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="isPopular" class="col-md-3 col-form-label">{{ __('Is Popular') }}</label>
+                                <label for="isPopular" class="col-md-4 col-form-label">{{ __('Is Popular') }}</label>
 
-                                <div class="col-md-9 row">
+                                <div class="col-md-8 row">
                                     <div class="col-sm-4">
                                         <div class="form-check">
                                             <label class="form-check-label">
@@ -137,12 +137,14 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="status" class="col-md-3 col-form-label">{{ __('Course Status') }}</label>
+                                <label for="status" class="col-md-4 col-form-label">{{ __('Course Status') }}</label>
 
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') ?? $course->status }}" required>
-                                        <option value="Inactive" @if($course->status == 'Inactive') selected @endif>Inactive</option>
-                                        <option value="Active" @if($course->status == 'Active') selected @endif>Active</option>
+                                        <option value="{{$course->status}}">{{$course->status}}</option>
+                                        <option value=""></option>
+                                        <option value="Inactive">Inactive</option>
+                                        <option value="Active">Active</option>
                                     </select>
                                     @error('status')
                                     <span class="invalid-feedback" role="alert">
@@ -153,7 +155,7 @@
                             </div>
 
                             <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-3">
+                                <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Submit') }}
                                     </button>
