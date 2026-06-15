@@ -81,7 +81,7 @@
                 </div>
                 @endif
 
-                <div class="@if($exam_categories->count() || $free_exams->count()) col-md-9 @else col-md-12 @endif">
+                <div class="@if($exam_categories->count() || $free_exams->count()) col-md-9 @else col-md-12 @endif order-first order-md-last">
                     <div class="all-course-list">
                         <div class="text-center">
                             <h3 class="dchl-title fs-3">{{($exam_group->name)}} Premium Exams</h3>

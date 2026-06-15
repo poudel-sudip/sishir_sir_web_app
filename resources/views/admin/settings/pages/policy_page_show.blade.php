@@ -14,6 +14,12 @@
         </ol>
       </nav>
     </div> 
+    <div class="text-center">
+      <a href="{{ ('/admin/web-pages/about') }}"><button type="button" class="btn btn-sm ml-3 btn-outline-primary"> About Page </button></a>
+      <a href="{{ ('/admin/web-pages/policy') }}"><button type="button" class="btn btn-sm ml-3 btn-outline-primary active"> Policy Page </button></a>
+      <a href="{{ ('/admin/web-pages/vision') }}"><button type="button" class="btn btn-sm ml-3 btn-outline-primary"> Vision Page </button></a>
+      <a href="{{ ('/admin/web-pages/contact') }}"><button type="button" class="btn btn-sm ml-3 btn-outline-primary"> Contact Page </button></a>
+    </div>
     <div class="row">
       <div class="col-md-12 stretch-card grid-margin">
         <div class="card">

@@ -22,6 +22,7 @@
                     <div class="custon-table-header">
                         <h4 class="card-title">Dynamic Forms </h4>
                         <div class="text-right">
+                            <a href="{{ ('/admin/dynamic-forms/groups') }}"><button type="button" class="btn btn-sm ml-3 btn-primary"> Form Groups </button></a>
                             <a href="{{ ('/admin/dynamic-forms/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Form </button></a>
                         </div>
                     </div>

@@ -60,6 +60,7 @@ Route::get('/admin/home', 'App\Http\Controllers\Admin\AdminHomeController@index'
 //admin user mgmt
 Route::get('/admin/users', 'App\Http\Controllers\Admin\Users\UsersController@index')->middleware('role:Admin');
 Route::get('/admin/users/create', 'App\Http\Controllers\Admin\Users\UsersController@create')->middleware('role:Admin');
+Route::get('/admin/users/search', 'App\Http\Controllers\Admin\Users\UsersController@search')->middleware('role:Admin');
 Route::post('/admin/users', 'App\Http\Controllers\Admin\Users\UsersController@store')->middleware('role:Admin');
 Route::get('/admin/users/{user}', 'App\Http\Controllers\Admin\Users\UsersController@show')->middleware('role:Admin');
 Route::get('/admin/users/{user}/edit', 'App\Http\Controllers\Admin\Users\UsersController@edit')->middleware('role:Admin');

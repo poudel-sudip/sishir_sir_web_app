@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Provience\Provience;
 
+use Yajra\DataTables\Facades\DataTables;
+
 class UsersController extends Controller
 {
     public function __construct()
@@ -18,13 +20,51 @@ class UsersController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::whereIn('role',['Admin','Student','Moderator'])
-        ->orderByDesc('id')
-        ->paginate(50,['id','name','email','contact','role','blood_group','provience','district_city','donate_blood','created_at']);
+        $users = collect([]);
+        
+        // $users = User::whereIn('role',['Admin','Student','Moderator'])
+        // ->orderByDesc('id')
+        // ->paginate(50,['id','name','email','contact','role','blood_group','provience','district_city','donate_blood','created_at']);
 
+        if(isset($request->json_type) && $request->json_type == 1)
+        {
+            $users = User::whereIn('role',['Admin','Student','Moderator'])
+            ->select(['id','name','email','contact','role','blood_group','provience','district_city','donate_blood','created_at']);
+
+            return DataTables::of($users)
+            ->addIndexColumn()
+            ->editColumn('donate_blood', function ($row) {
+                return $row->donate_blood ? "Yes" : "No";
+            })
+            ->addColumn('action', function ($row) {
+
+                return "
+                    <div class='dropdown'>
+                        <button class='btn btn-info dropdown-toggle' type='button' id='dropdownMenuOutlineButton".$row->id."' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'> Actions </button>
+                        <div class='dropdown-menu' aria-labelledby='dropdownMenuOutlineButton".$row->id."'>
+                            <a href='/admin/users/".$row->id."' class='text-primary dropdown-item'>Show</a>
+                            <a href='/admin/users/".$row->id."/edit' class='text-danger dropdown-item'>Edit</a>
+                            
+                            <form id='delete-form-".$row->id."' action='/admin/users/".$row->id."' method='POST' style='display: inline;'>
+                                ".csrf_field()."
+                                ".method_field('DELETE')."
+                                <a href='javascript:void(0);' onclick='deleteData(".$row->id.");' class='text-warning dropdown-item'>Delete</a>
+                            </form>
+                        </div>
+                    </div>
+                ";
+                
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+
+        }
+
+        
         return view('admin.users.index',[
             'users'=>$users,
         ]);
+        
     }
 
     public function create()

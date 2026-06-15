@@ -5,6 +5,9 @@ private function generatePdfThumbnail($pdfPath)
     $size = \Number::fileSize($size);
 }
 
+composer require yajra/laravel-datatables
+
+
 
 
 update tables:

@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered all-desc-table">
+                            <table class="table table-bordered all-desc-table" id="search_users_table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -106,13 +106,53 @@
                                 }
                             </script>
                         </div>
-                        <div class="mt-2">
+                        {{-- <div class="mt-2">
                             {{$users->onEachSide(1)->links('paginator.bootstrap')}}
-                        </div>
+                        </div> --}}
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            const table_source = "/admin/users?json_type=1";
+            $('#search_users_table').DataTable().destroy();
+            $('#search_users_table').DataTable({
+                searching: true,
+                ordering: true,
+                paging: true,
+                info: true,
+                lengthChange: true,
+                processing: true,
+                serverSide: true,
+                ajax: table_source,
+                columns: [
+                    { data: 'id'},
+                    { data: 'action', orderable: false, searchable: false },
+                    { data: 'name' },
+                    { data: 'email' },
+                    { data: 'contact' },
+                    { data: 'provience' },
+                    { data: 'district_city' },
+                    { data: 'blood_group' },
+                    { data: 'donate_blood' },
+                    { data: 'role' },
+                ],
+                columnDefs: [
+                    {
+                        targets: '_all',
+                        className: 'text-start text-wrap'
+                    },
+                ],
+                order: [[0, 'desc']], 
+                lengthMenu: [[50, 100, 200, 500], [50, 100, 200, 500]],
+                pageLength: 50, 
+
+            });
+
+        });
+    </script>
 @endsection
