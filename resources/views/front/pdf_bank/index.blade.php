@@ -48,7 +48,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-9 order-first order-md-last">
                     <div class="blog-container">
                         <div class="row">
                             @forelse($pdf_banks as $row)
