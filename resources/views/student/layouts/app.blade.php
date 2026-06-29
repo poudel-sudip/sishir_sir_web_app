@@ -150,6 +150,10 @@
               <a class="nav-link" href="/student/exam-bookings"><i class="fas fa-laptop-house text-info"></i>Exam Set Bookings</a>
             </li>           
 
+            <li class="nav-item">
+              <a class="nav-link" href="/student/online-course-bookings"><i class="fas fa-book-open text-orange"></i>Course Bookings</a>
+            </li> 
+
 
             <li class="nav-item">
               <a class="nav-link" href="/student/tickets"><i class="fas fa-address-card text-danger"></i>Ask/Complain  Admin</a>

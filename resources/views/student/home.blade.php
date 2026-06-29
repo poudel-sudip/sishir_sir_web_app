@@ -50,6 +50,17 @@
                         <span>{{$count->bookings->pdf_banks ?? '-'}}</span>
                     </div>
                 </div>  
+
+                <div class="student-dashboard-card block-fifth">
+                    <div class="first-row">
+                        <span>Online Course Bookings</span>
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="second-row">
+                        <a class="btn" href="/student/online-course-bookings">View Bookings</a>
+                        <span>{{$count->bookings->online_courses ?? '-'}}</span>
+                    </div>
+                </div>  
                 
                 <div class="student-dashboard-card block-second">
                     <div class="first-row">
@@ -81,6 +92,10 @@
         
                     <li class="nav-item">
                       <a class="nav-link" href="/student/exam-bookings"><i class="fas fa-laptop-house text-info  me-1"></i>Exam Set Bookings</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="/student/online-course-bookings"><i class="fas fa-book-open text-orange  me-1"></i>Online Course Bookings</a>
                     </li>
 
                     <li class="nav-item">

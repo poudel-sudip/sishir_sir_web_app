@@ -855,6 +855,18 @@ Route::get('/student/free-exams', 'App\Http\Controllers\Student\StudentHomeContr
 Route::get('/student/invoices', 'App\Http\Controllers\Student\InvoiceController@index')->middleware('role:Student');
 Route::get('/student/invoices/{invoice}', 'App\Http\Controllers\Student\InvoiceController@show')->middleware('role:Student');
 
+//student online course bookings
+Route::get('/student/online-course-bookings', 'App\Http\Controllers\Student\Course\BookingController@index')->middleware('role:Student');
+Route::get('/student/online-course-bookings/create', 'App\Http\Controllers\Student\Course\BookingController@create')->middleware('role:Student');
+Route::post('/student/online-course-bookings', 'App\Http\Controllers\Student\Course\BookingController@store')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/edit', 'App\Http\Controllers\Student\Course\BookingController@edit')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/esewaSuccess', 'App\Http\Controllers\Student\Course\BookingController@esewaSuccess')->middleware('role:Student');
+// Route::post('/student/online-course-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\Course\BookingController@khaltiSuccess')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/fonepaySuccess', 'App\Http\Controllers\Student\Course\BookingController@fonepaySuccess')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/payment-failed', 'App\Http\Controllers\Student\Course\BookingController@paymentFailed')->middleware('role:Student');
+Route::patch('/student/online-course-bookings/{booking}/manual-pay', 'App\Http\Controllers\Student\Course\BookingController@manualPay')->middleware('role:Student');
+Route::patch('/student/online-course-bookings/{booking}/coupon-pay', 'App\Http\Controllers\Student\Course\BookingController@couponPay')->middleware('role:Student');
+Route::delete('/student/online-course-bookings/{booking}', 'App\Http\Controllers\Student\Course\BookingController@destroy')->middleware('role:Student');
 
 
 
