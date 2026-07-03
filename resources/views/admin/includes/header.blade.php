@@ -243,6 +243,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/admin/health-days') }}">Health Days</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url('/admin/health-dictionary') }}">Health Dictionary</a>
+            </li>
           </ul>
         </div>
       </li>

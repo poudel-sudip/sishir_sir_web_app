@@ -167,6 +167,9 @@
                 <a class="dropdown-item" aria-current="page" href="/health-days">Health Days</a>
               </li>
               <li class="parent-dropdown">
+                <a class="dropdown-item" aria-current="page" href="/health-dictionary">Health Dictionary</a>
+              </li>
+              <li class="parent-dropdown">
                 <a class="dropdown-item" aria-current="page" href="/4/64">Notices</a>
               </li>
               <li class="parent-dropdown">

@@ -380,4 +380,60 @@ class FrontMiscController extends Controller
         // dd($data);
         return view('front.web-analytics',$data);
     }
+
+    public function dictionaryIndex(Request $request)
+    {
+        $dictionary = Category::where('type','=','health_dictionary')
+            ->where('status', 'active')
+            ->orderBy('name')
+            ->take(10)
+            ->get(['id','name','description','created_at']);
+
+        $pgurl = strtok($_SERVER['REQUEST_URI'], '?');
+        $pgtitle = 'Health Dictionary';
+        $counterData = Helper::pageCounterCounts($pgtitle,$pgurl);
+
+        return view('front.dictionary.index', compact('dictionary', 'counterData'));
+    }
+
+    public function dictionarySearch(Request $request)
+    {
+        $query = trim($request->query('query', ''));
+        if (empty($query)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Please enter a search term.',
+                'data' => [],
+            ]);
+        }
+
+        $builder = Category::where('type', 'health_dictionary')
+            ->where('status', 'active')
+            ->where(function ($q) use ($query) {
+                $q->where('name', 'LIKE', "%{$query}%");
+                // ->orWhere('description', 'LIKE', "%{$query}%");
+            });
+
+        $total = (clone $builder)->count();
+
+        $dictionary = $builder
+        ->orderBy('name')
+        ->limit(10)
+        ->get([
+            'id',
+            'name',
+            'description',
+            'created_at',
+        ]);
+
+        return response()->json([
+            'success' => $dictionary->isNotEmpty(),
+            'message' => $dictionary->isNotEmpty()
+                ? "{$total} result(s) found."
+                : "No matching records found.",
+            'data' => $dictionary,
+        ]);
+       
+        
+    }
 }
