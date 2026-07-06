@@ -25,6 +25,16 @@ class DictionaryController extends Controller
             ->select(['id','name as title','description as content','created_at']);
 
             return DataTables::of($dictionary)
+            ->filter(function ($query) {
+                $keyword = request('search.value');
+
+                if ($keyword) {
+                    $query->where(function ($q) use ($keyword) {
+                        $q->where('name', 'LIKE', $keyword.'%');
+                        // $q->orWhere('description', 'LIKE', $keyword.'%');
+                    });
+                }
+            }, false) // Disable the default global search
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
 

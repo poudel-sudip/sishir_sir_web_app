@@ -28,8 +28,8 @@
                             <table class="table table-bordered all-desc-table" id="search_data_table">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Action</th>
+                                        <th width="50">ID</th>
+                                        <th width="50">Action</th>
                                         <th>Title</th>
                                         <th>Content</th>
                                     </tr>

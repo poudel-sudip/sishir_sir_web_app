@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12 etutor-breadcrumb text-center">
                 <div class="text-center">
-                    <h3 class="dchl-title fs-3"> Health Dictionary </h3>
+                    <h3 class="dchl-title fs-3">  Dictionary </h3>
                 </div>
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
@@ -35,7 +35,12 @@
         </div>
 
         <div class="my-2">
-            <div class="row justify-content-end align-items-center">
+            <div class="lib-filter-alphabets">
+                @foreach(range('A', 'Z') as $i)
+                    <a href="javascript:void();" data-filter="{{$i}}" class="lib-filter-character" > {{$i}} </a>
+                @endforeach
+            </div> 
+            <div class="row justify-content-center align-items-center">
                 <div class="col-8 col-lg-4 col-xl-3">
                     <div class="d-flex align-items-center gap-1">
                         <label for="dictionary_search"><b>Search:</b></label>
@@ -48,9 +53,9 @@
             </div>
             <div class="mt-2" id="dictionary_container">
                 @foreach ($dictionary as $row)
-                    <div class="mb-2">
-                        <div class=""><strong>{{$row->name}}</strong></div>
-                        <div class="">{!!$row->description!!}</div>
+                    <div class="mb-2 @unless($loop->last) border-bottom border-primary @endunless">
+                        <div class="text-header-blue"><strong>{{$row->name}}</strong></div>
+                        <div class="text-justify text-dark">{!!$row->description!!}</div>
                     </div>
                 @endforeach
             </div>
@@ -76,6 +81,7 @@
                 clearTimeout(debounceTimer);
                 debounceTimer = setTimeout(function () {
                     fetchData(query);
+                    $('.lib-filter-character').removeClass('active');
                 }, 500); // 1-second delay
             });
 
@@ -93,9 +99,9 @@
 
                         response.data.forEach(item => {
                             container.append(`
-                                <div class="mb-2">
-                                    <div class=""><strong>${item.name}</strong></div>
-                                    <div class="">${item.description}</div>
+                                <div class="mb-2 border-bottom border-primary">
+                                    <div class="text-header-blue"><strong>${item.name}</strong></div>
+                                    <div class="text-dark text-justify">${item.description}</div>
                                 </div>
                             `);
                         });
@@ -109,6 +115,13 @@
                     container.html('<p class="text-danger text-center">Something went wrong.</p>');
                 });
             }
+
+            $('.lib-filter-character').on('click',function(){
+                charfil = $(this).data('filter');
+                $('.lib-filter-character').removeClass('active');
+                $(this).addClass('active');
+                fetchData(charfil);
+            });
         });
     </script>
 

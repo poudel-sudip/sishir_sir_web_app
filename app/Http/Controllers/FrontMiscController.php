@@ -410,7 +410,7 @@ class FrontMiscController extends Controller
         $builder = Category::where('type', 'health_dictionary')
             ->where('status', 'active')
             ->where(function ($q) use ($query) {
-                $q->where('name', 'LIKE', "%{$query}%");
+                $q->where('name', 'LIKE', "{$query}%");
                 // ->orWhere('description', 'LIKE', "%{$query}%");
             });
 
