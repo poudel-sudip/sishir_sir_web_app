@@ -55,7 +55,7 @@
                 @foreach ($dictionary as $row)
                     <div class="mb-2 @unless($loop->last) border-bottom border-primary @endunless">
                         <div class="text-header-blue"><strong>{{$row->name}}</strong></div>
-                        <div class="text-justify text-dark">{!!$row->description!!}</div>
+                        <div class="text-justify text-dark">{!!Helper::prepareHtmlContent($row->description)!!}</div>
                     </div>
                 @endforeach
             </div>

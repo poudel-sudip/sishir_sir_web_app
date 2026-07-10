@@ -666,6 +666,7 @@ Route::get('/admin/invoice/{invoice}', 'App\Http\Controllers\Admin\InvoiceContro
 //admin dictionary mgmt
 Route::get('/admin/health-dictionary', 'App\Http\Controllers\Admin\DictionaryController@index')->middleware('role:Admin');
 Route::get('/admin/health-dictionary/create', 'App\Http\Controllers\Admin\DictionaryController@create')->middleware('role:Admin');
+Route::post('/admin/health-dictionary/upload', 'App\Http\Controllers\Admin\DictionaryController@upload')->middleware('role:Admin');
 Route::post('/admin/health-dictionary', 'App\Http\Controllers\Admin\DictionaryController@store')->middleware('role:Admin');
 Route::get('/admin/health-dictionary/{dictionary}/edit', 'App\Http\Controllers\Admin\DictionaryController@edit')->middleware('role:Admin');
 Route::get('/admin/health-dictionary/{dictionary}', 'App\Http\Controllers\Admin\DictionaryController@show')->middleware('role:Admin');

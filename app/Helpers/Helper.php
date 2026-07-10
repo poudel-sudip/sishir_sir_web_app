@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\PostViewCounter;
 use App\Models\DailyVisitCounter;
+use DOMDocument;
 
 use App\Models\Blog;
 use App\Models\Books\Book;
@@ -169,6 +170,76 @@ class Helper
         }
 
         return $content;
+    }
+
+    public static function prepareHtmlContent(string $html): string
+    {
+        if (trim($html) === '') {
+            return '';
+        }
+
+        libxml_use_internal_errors(true);
+
+        $dom = new DOMDocument();
+        $dom->loadHTML(
+            mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'),
+            LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+        );
+
+        // Remove width attributes and width-related inline styles
+        foreach ($dom->getElementsByTagName('*') as $element) {
+
+            // Remove width=""
+            $element->removeAttribute('width');
+
+            // Remove width/min-width/max-width from style=""
+            if ($element->hasAttribute('style')) {
+
+                $styles = explode(';', $element->getAttribute('style'));
+
+                $styles = array_filter($styles, function ($style) {
+                    return !preg_match(
+                        '/^\s*(width|min-width|max-width)\s*:/i',
+                        trim($style)
+                    );
+                });
+
+                if ($styles) {
+                    $element->setAttribute('style', implode('; ', array_map('trim', $styles)));
+                } else {
+                    $element->removeAttribute('style');
+                }
+            }
+        }
+
+        // Wrap every table in a responsive div
+        $tables = [];
+
+        foreach ($dom->getElementsByTagName('table') as $table) {
+            $tables[] = $table; // Copy first because NodeList is live
+        }
+
+        foreach ($tables as $table) {
+
+            $wrapper = $dom->createElement('div');
+            $wrapper->setAttribute(
+                'class',
+                'table-responsive'
+            );
+
+            $wrapper->setAttribute(
+                'style',
+                'overflow-x:auto;display:block;max-width:100%;'
+            );
+
+            $parent = $table->parentNode;
+            $parent->replaceChild($wrapper, $table);
+            $wrapper->appendChild($table);
+        }
+
+        libxml_clear_errors();
+
+        return $dom->saveHTML();
     }
 
     public static function websiteCounter()

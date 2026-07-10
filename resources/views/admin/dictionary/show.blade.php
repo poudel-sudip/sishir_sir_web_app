@@ -29,9 +29,9 @@
                             <div>{{$dictionary->name}}</div>
                         </div>
                         
-                        <div class="course-row">
+                        <div class="course-row ">
                             <div>Content: </div>
-                            <div>{!! $dictionary->description !!}</div>
+                            <div class="content-body">{!! Helper::prepareHtmlContent($dictionary->description) !!}</div>
                         </div>
 
                     </div>

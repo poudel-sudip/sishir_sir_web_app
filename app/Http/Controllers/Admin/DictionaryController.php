@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\DictionaryContentImport as DictionaryImport;
+use Str;
 use App\Models\Categories as Dictionary;
 
 class DictionaryController extends Controller
@@ -54,6 +56,9 @@ class DictionaryController extends Controller
                     </div>
                 ";
                 
+            })
+            ->editColumn('content', function($row){
+                return '<div class="content-preview">'.Str::limit($row->content, 300).'</div>';
             })
             ->rawColumns(['action','content'])
             ->make(true);
@@ -119,5 +124,15 @@ class DictionaryController extends Controller
     public function show(Dictionary $dictionary)
     {
         return view('admin.dictionary.show', compact('dictionary'));
+    }
+
+    public function upload(Request $request)
+    {
+        // dd($request->all());
+        $request->validate(['upload_file' => 'required|max:20480']);
+        Excel::import(new DictionaryImport,request()->file('upload_file'));
+        return redirect('/admin/health-dictionary');
+
+
     }
 }

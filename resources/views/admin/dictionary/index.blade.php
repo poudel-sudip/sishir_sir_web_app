@@ -21,6 +21,7 @@
                         <div class="custon-table-header">
                             <h4 class="card-title">Health Dictionary</h4>
                             <div class="text-right">
+                                <a class="btn btn-sm ml-3 btn-info" href="#upload_content" data-bs-toggle="modal" data-bs-target="#upload_content" data-toggle="modal" data-target="#upload_content">Upload Content</a>
                                 <a href="{{ ('/admin/health-dictionary/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Content </button></a>
                             </div>
                         </div>
@@ -91,6 +92,49 @@
             </div>
         </div>
     </div>
+
+    
+    {{-- popup model for upload content start --}}
+    <div id="upload_content" class="modal fade">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Upload Dictionary Content </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-right small text-primary"><a href="{{asset('admin/files/dictionaryupload.xlsx')}}" download target="_blank">Download Sample File</a></div>
+                    <form method="POST" action="/admin/health-dictionary/upload" enctype="multipart/form-data">
+                        @csrf
+                                    
+                        <div class="form-group row">
+                            <label for="upload_file" class="col-md-3 col-form-label">{{ __('Dictionary File') }}</label>
+
+                            <div class="col-md-9">
+                                <input id="upload_file" type="file" class="form-control @error('upload_file') is-invalid @enderror" name="upload_file" value="{{ old('upload_file') }}" required accept=".xls,.xlsx,.csv">
+
+                                @error('upload_file')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Upload Data') }}
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Popup Model For upload content End --}}
 
     <script>
         $(document).ready(function(){

@@ -426,6 +426,12 @@ class FrontMiscController extends Controller
             'created_at',
         ]);
 
+        $dictionary->transform(function ($item) {
+            $item->description = Helper::prepareHtmlContent($item->description);
+
+            return $item;
+        });
+
         return response()->json([
             'success' => $dictionary->isNotEmpty(),
             'message' => $dictionary->isNotEmpty()
