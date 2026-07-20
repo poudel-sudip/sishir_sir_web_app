@@ -13,3 +13,4 @@ composer require yajra/laravel-datatables
 update tables:
 1. batches :image
 2. class_videos: videoKey
+3. books: order_contact
