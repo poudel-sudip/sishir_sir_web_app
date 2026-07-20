@@ -218,9 +218,10 @@ class BookController extends Controller
             "image3d" => "image|nullable",
             "content_pdf" => "file|mimes:pdf|nullable",
             'search_tags' => 'string|nullable',
+            'order_contact' => 'string|nullable',
         ]);
 
-        $data = $request->only(['title','order','author','edition','isbn','published_year','pages','availability','price','discount','purchase_link','status','search_tags','description']);
+        $data = $request->only(['title','order','author','edition','isbn','published_year','pages','availability','price','discount','purchase_link','status','search_tags','description','order_contact']);
         
         $data['publisher_id'] = $publisher->id;
         $data['category_id'] = $category->id;
@@ -297,8 +298,9 @@ class BookController extends Controller
             "old_content_pdf" => "string|nullable",
             "content_pdf" => "file|mimes:pdf|nullable",
             'search_tags' => 'string|nullable',
+            'order_contact' => 'string|nullable',
         ]);
-        $data = $request->only(['title','order','author','edition','isbn','published_year','pages','availability','price','discount','purchase_link','status','search_tags','description']);
+        $data = $request->only(['title','order','author','edition','isbn','published_year','pages','availability','price','discount','purchase_link','status','search_tags','description','order_contact']);
         
         $data['thumbnail'] = $request->old_thumbnail;
         if(isset($request->thumbnail))

@@ -189,23 +189,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="availability" class="col-md-3 col-form-label">{{ __('Book Availability') }}</label>
-
-                                <div class="col-md-9">
-                                    <select id="availability" class="form-control @error('availability') is-invalid @enderror" name="availability" value="{{ old('availability') }}" required>
-                                        <option value="{{$book->availability}}">{{$book->availability}}</option>
-                                        <option value="">---------------</option>
-                                        <option value="In Stock">In Stock</option>
-                                        <option value="Out Of Stock">Out Of Stock</option>
-                                    </select>
-                                    @error('availability')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+                            
 
                             <div class="form-group row">
                                 <label for="price" class="col-md-3 col-form-label">{{ __('Book Price') }}</label>
@@ -242,6 +226,38 @@
                                     <input id="purchase_link" name="purchase_link" type="text" class="form-control @error('purchase_link') is-invalid @enderror" value="{{ old('purchase_link') ?? $book->purchase_link }}" >
 
                                     @error('purchase_link')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="order_contact" class="col-md-3 col-form-label">{{ __('Book Order Contact') }}</label>
+
+                                <div class="col-md-9">
+                                    <input id="order_contact" name="order_contact" type="text" class="form-control @error('order_contact') is-invalid @enderror" value="{{ old('order_contact') ?? $book->order_contact ?? '9841611771, 015344456' }}" >
+
+                                    @error('order_contact')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="availability" class="col-md-3 col-form-label">{{ __('Book Availability') }}</label>
+
+                                <div class="col-md-9">
+                                    <select id="availability" class="form-control @error('availability') is-invalid @enderror" name="availability" value="{{ old('availability') }}" required>
+                                        <option value="{{$book->availability}}">{{$book->availability}}</option>
+                                        <option value="">---------------</option>
+                                        <option value="In Stock">In Stock</option>
+                                        <option value="Out Of Stock">Out Of Stock</option>
+                                    </select>
+                                    @error('availability')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -75,10 +75,7 @@
                             <div>{{ucwords($book->pages)}}</div>
                         </div>
 
-                        <div class="course-row">
-                            <div>Book Availability: </div>
-                            <div>{{ucwords($book->availability)}}</div>
-                        </div>
+                       
 
                         <div class="course-row">
                             <div>Book Price: </div>
@@ -95,6 +92,16 @@
                         <div class="course-row">
                             <div>Book Purchase Link: </div>
                             <div>{{$book->purchase_link}}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Book Availability: </div>
+                            <div>{{ucwords($book->availability)}}</div>
+                        </div>
+
+                        <div class="course-row">
+                            <div>Book Order Contact: </div>
+                            <div>{{ucwords($book->order_contact)}}</div>
                         </div>
 
                         <div class="course-row">

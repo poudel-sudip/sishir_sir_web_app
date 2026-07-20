@@ -34,6 +34,7 @@ class CreateBooksTable extends Migration
             $table->string('image3d')->nullable();
             $table->string('content_pdf')->nullable();
             $table->longText('search_tags')->nullable();
+            $table->string('order_contact')->nullable();
             $table->string('status', 100)->nullable()->default('Inactive');
             $table->timestamps();
         });

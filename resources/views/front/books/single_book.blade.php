@@ -143,7 +143,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6 my-2">
+                                    <div class="col-md-7 my-2">
                                         {{-- @if(trim($book->purchase_link))
                                         <a href="{{$book->purchase_link}}" target="_blank" class="btn btn-primary">Purchase Online</a>
                                         @endif --}}
@@ -161,8 +161,12 @@
                                             {{-- <a href="javascript:void(0)"  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#bookOrderModal"> <i class="fa fa-file-pdf"></i> View PDF</a> --}}
                                         @endif
 
+                                        @if(trim($book->order_contact))
+                                            <span class="ms-2 dch-title fw-bold fs-4 text-nowrap">Order Now: {{$book->order_contact}}</span>
+                                        @endif
+
                                     </div>
-                                    <div class="col-md-6 my-2">
+                                    <div class="col-md-5 my-2">
                                         <div class="sharethis-inline-share-buttons" onclick="handleShare(event)" ></div>
                                     </div>
                                 </div>
