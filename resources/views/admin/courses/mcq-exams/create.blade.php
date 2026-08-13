@@ -65,6 +65,21 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="exam_type" class="col-md-4 col-form-label">{{ __('Exam Type') }}</label>
+
+                                <div class="col-md-8">
+                                    <select id="exam_type" class="form-control @error('exam_type') is-invalid @enderror" name="exam_type" value="{{ old('exam_type') }}" required>
+                                        <option value="0">Regular Exam</option>
+                                        <option value="1">Final Exam</option>
+                                    </select>
+                                    @error('exam_type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

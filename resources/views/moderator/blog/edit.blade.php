@@ -6,11 +6,11 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">{{ $blog->title }}</h3>
+            <h3 class="page-title">Update Blog</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/moderator/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/moderator/newsroom') }}">Newsroom</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/moderator/newsroom') }}">Blog</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Edit Blog </li>
                 </ol>
             </nav>
@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-header">Blog Slug: {{$blog->slug}}</div>
+                    <div class="card-header">Edit Blog</div>
                     <div class="card-body">
                         <form method="POST" action="{{ ('/moderator/newsroom/'.$blog->id) }}" enctype="multipart/form-data" class="forms-sample">
                             @csrf

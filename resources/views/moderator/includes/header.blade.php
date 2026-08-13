@@ -72,7 +72,7 @@
     
 
       <li class="nav-item">
-        <a class="nav-link" href="{{ url('/moderator/blogs') }}">
+        <a class="nav-link" href="{{ url('/moderator/newsroom') }}">
             <i class="mdi mdi-file-delimited menu-icon"></i>
             <span class="menu-title">Blogs</span>
         </a>

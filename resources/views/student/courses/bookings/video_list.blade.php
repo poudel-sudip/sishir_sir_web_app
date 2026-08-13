@@ -10,10 +10,17 @@
 @section('content')
     <div class="student-content-wrapper">
         <div class="card">
+            <div class="mt-2 text-center">
+                <div class=" dchl-title h4">{{$batch->name}}</div>
+            </div>
+            <div class=" text-end pe-2">
+                <a href="/student/online-course-bookings/{{$booking->id}}/curriculum" class="btn btn-sm btn-outline-primary  mb-1 ">Curriculum</a> 
+                <a href="/student/online-course-bookings/{{$booking->id}}/files" class="btn btn-sm btn-outline-primary  mb-1 ">Notes</a> 
+                <a href="/student/online-course-bookings/{{$booking->id}}/videos" class="btn btn-sm btn-outline-primary active mb-1 ">Videos</a> 
+                <a href="/student/online-course-bookings/{{$booking->id}}/mcq-exams" class="btn btn-sm btn-outline-primary mb-1 ">MCQ Exams</a> 
+            </div>
             <div class="card-body text-center">
-                <div class="h4 text-primary"> {{optional($batch->course)->name}} </div>
-                <div class="h5 text-success"> {{$batch->name}} </div>
-                <hr class="bg-danger">
+                
                 <div class="mt-4 row align-items-stretch">  
                     @forelse($videos as $video)
                         <div class="col-md-3 col-6 my-1">    
@@ -38,7 +45,7 @@
 
     {{-- for view video model start--}}
     <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header align-items-center">
                     <h5 class="modal-title text-white" id="playingTitle"></h5>
@@ -51,7 +58,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <div id="videoPlayer" class="embed-responsive embed-responsive-16by9" style=""> </div>
+                                <div id="videoPlayer" class="embed-responsive embed-responsive-16by9" style="min-height:30vh !important;"> </div>
                             </div>
                         </div>
                     </div>

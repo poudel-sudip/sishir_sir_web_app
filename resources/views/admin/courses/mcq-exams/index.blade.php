@@ -34,6 +34,8 @@
                     <th>Exam Name</th>
                     <th>Time(HH:MM:SS)</th>
                     <th>Questions</th>
+                    <th>CQCs</th>
+                    <th>Is Final Exam</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -43,7 +45,9 @@
                       <td>{{ $key+1 }}</td>
                       <td>{{ $exam->exam->name ?? '' }}</td>
                       <td>{{ $exam->exam->exam_time.':00' ?? '' }} </td>
-                      <td>{{ $exam->exam->questions->count() }} </td>
+                      <td> <a href="/admin/exams/{{$exam->exam->id}}/questions"> Questions({{ $exam->exam->questions()->count() }}) </a></td>
+                      <td> <a href="/admin/exams/{{$exam->exam->id}}/cqcs" class="@if($exam->exam->cqc_unread()->exists()) text-danger @endif"> CQCs({{ $exam->exam->cqcs()->count() }}) </a></td>
+                      <td>{{ $exam->is_final_exam ? 'Yes' : 'No' }} </td>
                       
                       <td class="classroom-btn" width="100">
                         

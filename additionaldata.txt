@@ -14,3 +14,7 @@ update tables:
 1. batches :image
 2. class_videos: videoKey
 3. books: order_contact
+4. bookings: remove course_id and index. add expiry_date
+5. results: remarks
+6. batch_exams: is_final_exam
+7. exam_c_q_c_s

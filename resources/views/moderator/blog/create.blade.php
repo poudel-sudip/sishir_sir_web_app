@@ -10,7 +10,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/moderator/home') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ url('/moderator/newsroom') }}">Newsroom</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/moderator/newsroom') }}">Blog</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Add Blog </li>
                 </ol>
             </nav>

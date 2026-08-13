@@ -127,6 +127,10 @@
             <a class="nav-link" href="/pdf-banks">eBooks</a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="/courses">Courses</a>
+          </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Mock Test</a>
             <ul class="dropdown-menu">

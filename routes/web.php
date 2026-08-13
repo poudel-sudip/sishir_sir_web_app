@@ -99,6 +99,14 @@ Route::get('/admin/exams/{exam}/questions/{question}', 'App\Http\Controllers\Adm
 Route::patch('/admin/exams/{exam}/questions/{question}', 'App\Http\Controllers\Admin\Exams\QuestionController@update')->middleware('role:Admin');
 Route::delete('/admin/exams/{exam}/questions/{question}', 'App\Http\Controllers\Admin\Exams\QuestionController@destroy')->middleware('role:Admin');
 
+// admin mcq exam cqcs
+Route::get('/admin/exams/{exam}/cqcs', 'App\Http\Controllers\Admin\Exams\ExamController@indexCqc')->middleware('role:Admin');
+Route::get('/admin/exams/{exam}/cqcs/create', 'App\Http\Controllers\Admin\Exams\ExamController@createCqc')->middleware('role:Admin');
+Route::post('/admin/exams/{exam}/cqcs', 'App\Http\Controllers\Admin\Exams\ExamController@storeCqc')->middleware('role:Admin');
+Route::get('/admin/exams/{exam}/cqcs/{cqc}/edit', 'App\Http\Controllers\Admin\Exams\ExamController@editCqc')->middleware('role:Admin');
+Route::patch('/admin/exams/{exam}/cqcs/{cqc}', 'App\Http\Controllers\Admin\Exams\ExamController@updateCqc')->middleware('role:Admin');
+Route::delete('/admin/exams/{exam}/cqcs/{cqc}', 'App\Http\Controllers\Admin\Exams\ExamController@destroyCqc')->middleware('role:Admin');
+
 //mcq exams associated with batch admin
 Route::get('/admin/batches/{batch}/exams', 'App\Http\Controllers\Admin\Exams\BatchExamController@index')->middleware('role:Admin');
 Route::get('/admin/batches/{batch}/exams/create', 'App\Http\Controllers\Admin\Exams\BatchExamController@create')->middleware('role:Admin');
@@ -609,59 +617,59 @@ Route::delete('/admin/play-puzzle/image/{question}', 'App\Http\Controllers\Admin
 
 Route::get('/admin/invoice/{invoice}', 'App\Http\Controllers\Admin\InvoiceController@show')->middleware('role:Admin');
 
-// //admin courses and course bookings mgmt
-// Route::get('/admin/courses', 'App\Http\Controllers\Admin\Courses\CoursesController@index')->middleware('role:Admin');
-// Route::get('/admin/courses/create', 'App\Http\Controllers\Admin\Courses\CoursesController@create')->middleware('role:Admin');
-// Route::get('/admin/courses/{course}', 'App\Http\Controllers\Admin\Courses\CoursesController@show')->middleware('role:Admin');
-// Route::get('/admin/courses/{course}/edit', 'App\Http\Controllers\Admin\Courses\CoursesController@edit')->middleware('role:Admin');
-// Route::post('/admin/courses', 'App\Http\Controllers\Admin\Courses\CoursesController@store')->middleware('role:Admin');
-// Route::patch('/admin/courses/{course}', 'App\Http\Controllers\Admin\Courses\CoursesController@update')->middleware('role:Admin');
-// Route::delete('/admin/courses/{course}', 'App\Http\Controllers\Admin\Courses\CoursesController@destroy')->middleware('role:Admin');
+//admin courses and course bookings mgmt
+Route::get('/admin/courses', 'App\Http\Controllers\Admin\Courses\CoursesController@index')->middleware('role:Admin');
+Route::get('/admin/courses/create', 'App\Http\Controllers\Admin\Courses\CoursesController@create')->middleware('role:Admin');
+Route::get('/admin/courses/{course}', 'App\Http\Controllers\Admin\Courses\CoursesController@show')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/edit', 'App\Http\Controllers\Admin\Courses\CoursesController@edit')->middleware('role:Admin');
+Route::post('/admin/courses', 'App\Http\Controllers\Admin\Courses\CoursesController@store')->middleware('role:Admin');
+Route::patch('/admin/courses/{course}', 'App\Http\Controllers\Admin\Courses\CoursesController@update')->middleware('role:Admin');
+Route::delete('/admin/courses/{course}', 'App\Http\Controllers\Admin\Courses\CoursesController@destroy')->middleware('role:Admin');
 
-// Route::get('/admin/courses/{course}/batchnames', 'App\Http\Controllers\Admin\Courses\BatchController@display');
-// Route::get('/admin/courses/{course}/batches', 'App\Http\Controllers\Admin\Courses\BatchController@index')->middleware('role:Admin');
-// Route::get('/admin/courses/{course}/batches/create', 'App\Http\Controllers\Admin\Courses\BatchController@create')->middleware('role:Admin');
-// Route::post('/admin/courses/{course}/batches', 'App\Http\Controllers\Admin\Courses\BatchController@store')->middleware('role:Admin');
-// Route::get('/admin/courses/{course}/batches/{batch}', 'App\Http\Controllers\Admin\Courses\BatchController@show')->middleware('role:Admin');
-// Route::get('/admin/courses/{course}/batches/{batch}/edit', 'App\Http\Controllers\Admin\Courses\BatchController@edit')->middleware('role:Admin');
-// Route::patch('/admin/courses/{course}/batches/{batch}', 'App\Http\Controllers\Admin\Courses\BatchController@update')->middleware('role:Admin');
-// Route::delete('/admin/courses/{course}/batches/{batch}', 'App\Http\Controllers\Admin\Courses\BatchController@destroy')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batchnames', 'App\Http\Controllers\Admin\Courses\BatchController@display');
+Route::get('/admin/courses/{course}/batches', 'App\Http\Controllers\Admin\Courses\BatchController@index')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/create', 'App\Http\Controllers\Admin\Courses\BatchController@create')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches', 'App\Http\Controllers\Admin\Courses\BatchController@store')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}', 'App\Http\Controllers\Admin\Courses\BatchController@show')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/edit', 'App\Http\Controllers\Admin\Courses\BatchController@edit')->middleware('role:Admin');
+Route::patch('/admin/courses/{course}/batches/{batch}', 'App\Http\Controllers\Admin\Courses\BatchController@update')->middleware('role:Admin');
+Route::delete('/admin/courses/{course}/batches/{batch}', 'App\Http\Controllers\Admin\Courses\BatchController@destroy')->middleware('role:Admin');
 
-// Route::get('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileIndex')->middleware('role:Admin');
-// Route::post('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileStore')->middleware('role:Admin');
-// Route::patch('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileUpdate')->middleware('role:Admin');
-// Route::delete('/admin/courses/{course}/batches/{batch}/files/{cfile}', 'App\Http\Controllers\Admin\Courses\BatchController@fileDestroy')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileIndex')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileStore')->middleware('role:Admin');
+Route::patch('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileUpdate')->middleware('role:Admin');
+Route::delete('/admin/courses/{course}/batches/{batch}/files/{cfile}', 'App\Http\Controllers\Admin\Courses\BatchController@fileDestroy')->middleware('role:Admin');
 
-// Route::get('/admin/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Admin\Courses\BatchController@videoIndex')->middleware('role:Admin');
-// Route::post('/admin/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Admin\Courses\BatchController@videoStore')->middleware('role:Admin');
-// Route::patch('/admin/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Admin\Courses\BatchController@videoUpdate')->middleware('role:Admin');
-// Route::delete('/admin/courses/{course}/batches/{batch}/videos/{cvideo}', 'App\Http\Controllers\Admin\Courses\BatchController@videoDestroy')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Admin\Courses\BatchController@videoIndex')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Admin\Courses\BatchController@videoStore')->middleware('role:Admin');
+Route::patch('/admin/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Admin\Courses\BatchController@videoUpdate')->middleware('role:Admin');
+Route::delete('/admin/courses/{course}/batches/{batch}/videos/{cvideo}', 'App\Http\Controllers\Admin\Courses\BatchController@videoDestroy')->middleware('role:Admin');
 
-// Route::get('/admin/courses/{course}/batches/{batch}/curriculum', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumIndex')->middleware('role:Admin');
-// Route::get('/admin/courses/{course}/batches/{batch}/curriculum/create', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumCreate')->middleware('role:Admin');
-// Route::post('/admin/courses/{course}/batches/{batch}/curriculum', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumStore')->middleware('role:Admin');
-// Route::get('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}/edit', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumEdit')->middleware('role:Admin');
-// Route::get('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumShow')->middleware('role:Admin');
-// Route::patch('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumUpdate')->middleware('role:Admin');
-// Route::delete('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumDestroy')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/curriculum', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumIndex')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/curriculum/create', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumCreate')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches/{batch}/curriculum', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumStore')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}/edit', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumEdit')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumShow')->middleware('role:Admin');
+Route::patch('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumUpdate')->middleware('role:Admin');
+Route::delete('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumDestroy')->middleware('role:Admin');
 
-// Route::get('/admin/courses/{course}/batches/{batch}/mcq-exams', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamIndex')->middleware('role:Admin');
-// Route::get('/admin/courses/{course}/batches/{batch}/mcq-exams/create', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamCreate')->middleware('role:Admin');
-// Route::post('/admin/courses/{course}/batches/{batch}/mcq-exams', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamStore')->middleware('role:Admin');
-// Route::delete('/admin/courses/{course}/batches/{batch}/mcq-exams/{exam}', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamDestroy')->middleware('role:Admin');
-// Route::get('/admin/courses/{course}/batches/{batch}/mcq-exams/{exam}/results', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamResult')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/mcq-exams', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamIndex')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/mcq-exams/create', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamCreate')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches/{batch}/mcq-exams', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamStore')->middleware('role:Admin');
+Route::delete('/admin/courses/{course}/batches/{batch}/mcq-exams/{exam}', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamDestroy')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/mcq-exams/{exam}/results', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamResult')->middleware('role:Admin');
 
-// Route::get('/admin/courses/{course}/batches/{batch}/bookings', 'App\Http\Controllers\Admin\Courses\BookingsController@batchBookings')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/bookings', 'App\Http\Controllers\Admin\Courses\BookingsController@batchBookings')->middleware('role:Admin');
 
-// Route::get('/admin/course-bookings', 'App\Http\Controllers\Admin\Courses\BookingsController@index')->middleware('role:Admin');
-// Route::get('/admin/course-bookings/all', 'App\Http\Controllers\Admin\Courses\BookingsController@allBookings')->middleware('role:Admin');
-// Route::get('/admin/course-bookings/filter', 'App\Http\Controllers\Admin\Courses\BookingsController@statusBookings')->middleware('role:Admin');
-// Route::get('/admin/course-bookings/create', 'App\Http\Controllers\Admin\Courses\BookingsController@create')->middleware('role:Admin');
-// Route::post('/admin/course-bookings', 'App\Http\Controllers\Admin\Courses\BookingsController@store')->middleware('role:Admin');
-// Route::get('/admin/course-bookings/{booking}/edit', 'App\Http\Controllers\Admin\Courses\BookingsController@edit')->middleware('role:Admin');
-// Route::get('/admin/course-bookings/{booking}', 'App\Http\Controllers\Admin\Courses\BookingsController@show')->middleware('role:Admin');
-// Route::patch('/admin/course-bookings/{booking}', 'App\Http\Controllers\Admin\Courses\BookingsController@update')->middleware('role:Admin');
-// Route::delete('/admin/course-bookings/{booking}', 'App\Http\Controllers\Admin\Courses\BookingsController@destroy')->middleware('role:Admin');
+Route::get('/admin/course-bookings', 'App\Http\Controllers\Admin\Courses\BookingsController@index')->middleware('role:Admin');
+Route::get('/admin/course-bookings/all', 'App\Http\Controllers\Admin\Courses\BookingsController@allBookings')->middleware('role:Admin');
+Route::get('/admin/course-bookings/filter', 'App\Http\Controllers\Admin\Courses\BookingsController@statusBookings')->middleware('role:Admin');
+Route::get('/admin/course-bookings/create', 'App\Http\Controllers\Admin\Courses\BookingsController@create')->middleware('role:Admin');
+Route::post('/admin/course-bookings', 'App\Http\Controllers\Admin\Courses\BookingsController@store')->middleware('role:Admin');
+Route::get('/admin/course-bookings/{booking}/edit', 'App\Http\Controllers\Admin\Courses\BookingsController@edit')->middleware('role:Admin');
+Route::get('/admin/course-bookings/{booking}', 'App\Http\Controllers\Admin\Courses\BookingsController@show')->middleware('role:Admin');
+Route::patch('/admin/course-bookings/{booking}', 'App\Http\Controllers\Admin\Courses\BookingsController@update')->middleware('role:Admin');
+Route::delete('/admin/course-bookings/{booking}', 'App\Http\Controllers\Admin\Courses\BookingsController@destroy')->middleware('role:Admin');
 
 //admin dictionary mgmt
 Route::get('/admin/health-dictionary', 'App\Http\Controllers\Admin\DictionaryController@index')->middleware('role:Admin');
@@ -859,26 +867,46 @@ Route::get('/student/vaccancies/create', 'App\Http\Controllers\Student\VaccancyC
 Route::post('/student/vaccancies', 'App\Http\Controllers\Student\VaccancyController@store')->middleware('role:Student');
 Route::get('/student/vaccancies/{vaccancy}', 'App\Http\Controllers\Student\VaccancyController@show')->middleware('role:Student');
 
-Route::get('/student/free-exams', 'App\Http\Controllers\Student\StudentHomeController@freeExamList')->middleware('role:Student');
-
 Route::get('/student/invoices', 'App\Http\Controllers\Student\InvoiceController@index')->middleware('role:Student');
 Route::get('/student/invoices/{invoice}', 'App\Http\Controllers\Student\InvoiceController@show')->middleware('role:Student');
 
-// //student online course bookings
-// Route::get('/student/online-course-bookings', 'App\Http\Controllers\Student\Course\BookingController@index')->middleware('role:Student');
-// Route::get('/student/online-course-bookings/create', 'App\Http\Controllers\Student\Course\BookingController@create')->middleware('role:Student');
-// Route::post('/student/online-course-bookings', 'App\Http\Controllers\Student\Course\BookingController@store')->middleware('role:Student');
-// Route::get('/student/online-course-bookings/{booking}/edit', 'App\Http\Controllers\Student\Course\BookingController@edit')->middleware('role:Student');
-// Route::get('/student/online-course-bookings/{booking}/esewaSuccess', 'App\Http\Controllers\Student\Course\BookingController@esewaSuccess')->middleware('role:Student');
-// // Route::post('/student/online-course-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\Course\BookingController@khaltiSuccess')->middleware('role:Student');
-// Route::get('/student/online-course-bookings/{booking}/fonepaySuccess', 'App\Http\Controllers\Student\Course\BookingController@fonepaySuccess')->middleware('role:Student');
-// Route::get('/student/online-course-bookings/{booking}/payment-failed', 'App\Http\Controllers\Student\Course\BookingController@paymentFailed')->middleware('role:Student');
-// Route::patch('/student/online-course-bookings/{booking}/manual-pay', 'App\Http\Controllers\Student\Course\BookingController@manualPay')->middleware('role:Student');
-// Route::patch('/student/online-course-bookings/{booking}/coupon-pay', 'App\Http\Controllers\Student\Course\BookingController@couponPay')->middleware('role:Student');
-// Route::delete('/student/online-course-bookings/{booking}', 'App\Http\Controllers\Student\Course\BookingController@destroy')->middleware('role:Student');
+//student online course bookings
+Route::get('/student/online-course-bookings', 'App\Http\Controllers\Student\Course\BookingController@index')->middleware('role:Student');
+Route::get('/student/online-course-bookings/create', 'App\Http\Controllers\Student\Course\BookingController@create')->middleware('role:Student');
+Route::post('/student/online-course-bookings', 'App\Http\Controllers\Student\Course\BookingController@store')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/edit', 'App\Http\Controllers\Student\Course\BookingController@edit')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/esewaSuccess', 'App\Http\Controllers\Student\Course\BookingController@esewaSuccess')->middleware('role:Student');
+// Route::post('/student/online-course-bookings/{booking}/khaltiSuccess','App\Http\Controllers\Student\Course\BookingController@khaltiSuccess')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/fonepaySuccess', 'App\Http\Controllers\Student\Course\BookingController@fonepaySuccess')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/payment-failed', 'App\Http\Controllers\Student\Course\BookingController@paymentFailed')->middleware('role:Student');
+Route::patch('/student/online-course-bookings/{booking}/manual-pay', 'App\Http\Controllers\Student\Course\BookingController@manualPay')->middleware('role:Student');
+Route::patch('/student/online-course-bookings/{booking}/coupon-pay', 'App\Http\Controllers\Student\Course\BookingController@couponPay')->middleware('role:Student');
+Route::delete('/student/online-course-bookings/{booking}', 'App\Http\Controllers\Student\Course\BookingController@destroy')->middleware('role:Student');
 
+Route::get('/student/online-course-bookings/{booking}/files','App\Http\Controllers\Student\Course\BookingController@fileList')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/videos','App\Http\Controllers\Student\Course\BookingController@videoList')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/curriculum','App\Http\Controllers\Student\Course\BookingController@curriculumList')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/curriculum/{cid}','App\Http\Controllers\Student\Course\BookingController@curriculumShow')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/certificate','App\Http\Controllers\Student\Course\BookingController@showCertificate')->middleware('role:Student');
 
+Route::get('/student/online-course-bookings/{booking}/mcq-exams','App\Http\Controllers\Student\Course\ExamController@McqExamList')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/mcq-exams/{exam}/attempt','App\Http\Controllers\Student\Course\ExamController@McqExamAttempt')->middleware('role:Student');
+Route::post('/student/online-course-bookings/{booking}/mcq-exams/{exam}/save','App\Http\Controllers\Student\Course\ExamController@McqExamSave')->middleware('role:Student');
+Route::delete('/student/online-course-bookings/{booking}/mcq-exams/{exam}/reset','App\Http\Controllers\Student\Course\ExamController@McqExamReset')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/mcq-exams/{exam}/view','App\Http\Controllers\Student\Course\ExamController@McqExamView')->middleware('role:Student');
 
+Route::get('/student/online-course-bookings/{booking}/final-exam','App\Http\Controllers\Student\Course\ExamController@FinalExamAttempt')->middleware('role:Student');
+Route::post('/student/online-course-bookings/{booking}/final-exam/{exam}/save','App\Http\Controllers\Student\Course\ExamController@FinalExamSave')->middleware('role:Student');
+
+// student mcq exam 
+Route::get('/student/free-exams', 'App\Http\Controllers\Student\McqExamController@freeExamList')->middleware('role:Student');
+
+Route::get('/student/mcq-exams/{exam}/cqcs', 'App\Http\Controllers\Student\McqExamController@indexCqc')->middleware('role:Student');
+Route::get('/student/mcq-exams/{exam}/cqcs/create', 'App\Http\Controllers\Student\McqExamController@createCqc')->middleware('role:Student');
+Route::post('/student/mcq-exams/{exam}/cqcs', 'App\Http\Controllers\Student\McqExamController@storeCqc')->middleware('role:Student');
+Route::get('/student/mcq-exams/{exam}/cqcs/{cqc}/edit', 'App\Http\Controllers\Student\McqExamController@editCqc')->middleware('role:Student');
+Route::patch('/student/mcq-exams/{exam}/cqcs/{cqc}', 'App\Http\Controllers\Student\McqExamController@updateCqc')->middleware('role:Student');
+Route::delete('/student/mcq-exams/{exam}/cqcs/{cqc}', 'App\Http\Controllers\Student\McqExamController@destroyCqc')->middleware('role:Student');
 
 
 
@@ -1003,6 +1031,17 @@ Route::get('/web-analytics', 'App\Http\Controllers\FrontMiscController@webAnalyt
 
 Route::get('/health-dictionary', 'App\Http\Controllers\FrontMiscController@dictionaryIndex');
 Route::get('/health-dictionary/search', 'App\Http\Controllers\FrontMiscController@dictionarySearch');
+
+// front courses section
+// Route::get('/courses', 'App\Http\Controllers\FrontCourseController@latestCourseList');
+// Route::get('/courses/popular', 'App\Http\Controllers\FrontCourseController@popularCourseList');
+// Route::get('/courses/show/{course}', 'App\Http\Controllers\FrontCourseController@courseDetailsShow');
+// Route::get('/courses/{course}/batches/show/{batch}', 'App\Http\Controllers\FrontCourseController@batchDetailsShow');
+
+Route::get('/courses', 'App\Http\Controllers\FrontCourseController@courseBatchList');
+Route::get('/courses/category/{id}', 'App\Http\Controllers\FrontCourseController@categoryCourseBatchList');
+Route::get('/courses/details/{id}', 'App\Http\Controllers\FrontCourseController@courseBatchDetails');
+
 
 
 //front menu details

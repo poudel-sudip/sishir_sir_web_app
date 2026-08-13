@@ -31,4 +31,18 @@ class Booking extends Model
         return $this->belongsTo(Batch::class,'batch_id');
     }
 
+    public function payment_invoices(): HasMany
+    {
+        return $this->hasMany(PaymentInvoice::class, 'booking_id')->where('type', 'course');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($data) {
+            $data->payment_invoices()->delete();
+        });
+
+    }
 }

@@ -43,7 +43,7 @@ class BookingCouponController extends Controller
             'coupon_count' => 'required|numeric|gt:0',
         ]);
 
-        $types = ['exam','pdfbank'];
+        $types = ['exam','pdfbank','onlinecourse'];
         if(!in_array(strtolower(trim($request->coupon_for)),$types))
         {
             return back()->withInput()->withErrors(['coupon_for'=>'Invalid Coupon Type.']);

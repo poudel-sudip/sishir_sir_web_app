@@ -10,11 +10,17 @@
 @section('content')
     <div class="student-content-wrapper">
         <div class="card">
+            <div class="mt-2 text-center">
+                <div class=" dchl-title h4">{{$batch->name}}</div>
+            </div>
+            <div class="pe-2 text-end">
+                <a href="/student/online-course-bookings/{{$booking->id}}/curriculum" class="btn btn-sm btn-outline-primary  mb-1 ">Curriculum</a> 
+                <a href="/student/online-course-bookings/{{$booking->id}}/files" class="btn btn-sm btn-outline-primary active mb-1 ">Notes</a> 
+                <a href="/student/online-course-bookings/{{$booking->id}}/videos" class="btn btn-sm btn-outline-primary mb-1 ">Videos</a> 
+                <a href="/student/online-course-bookings/{{$booking->id}}/mcq-exams" class="btn btn-sm btn-outline-primary mb-1 ">MCQ Exams</a> 
+            </div>
             <div class="card-body text-center">
-                <div class="h4 text-primary"> {{optional($batch->course)->name}} </div>
-                <div class="h5 text-success"> {{$batch->name}} </div>
-                <hr class="bg-danger">
-                <div class="mt-4 row align-items-stretch">                    
+                <div class="row align-items-stretch">                    
                     @forelse($files as $pdf)
                         <div class="col-md-3 col-6 my-1">    
                             <div class="border p-2 border-info" style="height: 100%">

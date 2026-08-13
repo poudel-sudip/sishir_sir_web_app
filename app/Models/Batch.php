@@ -76,6 +76,16 @@ class Batch extends Model
         return $this->hasMany(BatchExam::class, 'batch_id');
     }
 
+    public function batchNormalExams(): HasMany
+    {
+        return $this->hasMany(BatchExam::class, 'batch_id')->where('is_final_exam','=',0);
+    }
+
+    public function batchFinalExams(): HasMany
+    {
+        return $this->hasMany(BatchExam::class, 'batch_id')->where('is_final_exam','=',1);
+    }
+
     public function results(): HasMany
     {
         return $this->hasMany(Result::class, 'batch_id');

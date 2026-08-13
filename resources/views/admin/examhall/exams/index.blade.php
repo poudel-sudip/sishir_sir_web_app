@@ -35,6 +35,7 @@
                             <th>Date</th>
                             <th>Time(HH:MM:SS)</th>
                             <th>Questions</th>
+                            <th>CQCs</th>
                             <th>Creator</th>
                           </tr>
                         </thead>
@@ -56,7 +57,9 @@
                             <td>{{ $exam->exam->name ?? '' }}</td>
                             <td>{{ $exam->exam->exam_date ?? '' }}</td>
                             <td>{{ $exam->exam->exam_time.':00' ?? '' }} </td>
-                            <td>{{ $exam->exam->questions()->count() }} </td>
+                            <td> <a href="/admin/exams/{{$exam->exam->id}}/questions"> Questions({{ $exam->exam->questions()->count() }}) </a></td>
+                            <td> <a href="/admin/exams/{{$exam->exam->id}}/cqcs" class="@if($exam->exam->cqc_unread()->exists()) text-danger @endif"> CQCs({{ $exam->exam->cqcs()->count() }}) </a></td>
+
                             <td>{{ $exam->exam->creator->name ?? '-' }}</td>
                             
                             

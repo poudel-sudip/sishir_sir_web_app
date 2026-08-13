@@ -15,7 +15,6 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('batch_id');
             $table->string('user_name')->nullable();
@@ -29,9 +28,9 @@ class CreateBookingsTable extends Migration
             $table->string('verificationDocument')->nullable();
             $table->longText('description')->nullable();
             $table->longText('remarks')->nullable();
+            $table->date('expiry_date')->nullable();
             $table->timestamps();
             $table->rememberToken();
-            $table->index(['course_id','user_id','batch_id']);
         });
     }
 

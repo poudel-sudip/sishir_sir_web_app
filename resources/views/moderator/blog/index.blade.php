@@ -1,16 +1,16 @@
 @extends('moderator.layouts.app')
 @section('admin-title')
-    Newsroom
+    Blogs
 @endsection
 
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title">All Newsroom</h3>
+            <h3 class="page-title">All Blogs</h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('/moderator/home') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Newsroom</li>
+                    <li class="breadcrumb-item active" aria-current="page">Blogs</li>
                 </ol>
             </nav>
         </div>
@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="custon-table-header">
-                            <h4 class="card-title">Newsroom table</h4>
+                            <h4 class="card-title">Blogs table</h4>
                             <div class="text-right">
                                 <a href="{{ ('/moderator/newsroom/create') }}"><button type="button" class="btn btn-sm ml-3 btn-success"> Add Blog </button></a>
 
@@ -43,9 +43,9 @@
                                 @foreach($blogs as $blog)
                                     <tr>
                                         <td>{{$i}}</td>
-                                        <td>{{$blog->title}}</td>
-                                        <td>{{date('Y-m-d',strtotime($blog->created_at))}}</td>
-                                        <td>{{$blog->author}}</td>
+                                        <td class="text-wrap">{{$blog->title}}</td>
+                                        <td class="text-wrap">{{date('Y-m-d',strtotime($blog->created_at))}}</td>
+                                        <td class="text-wrap">{{$blog->author}}</td>
                                         <td><a href="/moderator/newsroom/{{$blog->id}}/comments">Comments({{$blog->comments->count()}})</a></td>
                                         <td>
                                             @if($blog->status == 'Unpublished')

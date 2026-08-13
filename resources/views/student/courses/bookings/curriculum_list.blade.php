@@ -9,12 +9,18 @@
 
 
 @section('content')
-    <div class="student-content-wrapper student-enroll-section">        
+    <div class="student-content-wrapper">    
+        <div class="mt-2 text-center">
+            <div class=" dchl-title h4">{{$batch->name}}</div>
+        </div>
+        <div class="pe-2 text-end">
+            <a href="/student/online-course-bookings/{{$booking->id}}/curriculum" class="btn btn-sm btn-outline-primary active mb-1 ">Curriculum</a> 
+            <a href="/student/online-course-bookings/{{$booking->id}}/files" class="btn btn-sm btn-outline-primary mb-1 ">Notes</a> 
+            <a href="/student/online-course-bookings/{{$booking->id}}/videos" class="btn btn-sm btn-outline-primary mb-1 ">Videos</a> 
+            <a href="/student/online-course-bookings/{{$booking->id}}/mcq-exams" class="btn btn-sm btn-outline-primary mb-1 ">MCQ Exams</a> 
+        </div>
+
         <div class="row mt-2">
-            <div class="col-12">
-                <div class="text-center h5">{{optional($batch->course)->name}}</div>
-                <div class="text-center h5">{{$batch->name}}</div>
-            </div>
             <div class="col-md-12">
                 <div class="enrolled-table table-responsive table-responsive-md">
                     <table class="table" style="width:100%">
@@ -31,7 +37,7 @@
                                 <td width="70">{{$key+1}}</td>
                                 <td class="text-wrap">{{$row->title}}</td>
                                 <td class="text-wrap" width="100">
-                                    <a href="/student/course-bookings/{{$booking->id}}/curriculum/{{$row->id}}" class="btn btn-success btn-sm mb-1 ">View</a> 
+                                    <a href="/student/online-course-bookings/{{$booking->id}}/curriculum/{{$row->id}}" class="btn btn-success btn-sm mb-1 ">View</a> 
                                 </td>
                             </tr>
                         @endforeach

@@ -49,4 +49,14 @@ class Exam extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function cqcs(): HasMany
+    {
+        return $this->hasMany(ExamCQC::class, 'exam_id');
+    }
+
+    public function cqc_unread(): HasMany
+    {
+        return $this->hasMany(ExamCQC::class, 'exam_id')->where('read','=',0);
+    }
 }

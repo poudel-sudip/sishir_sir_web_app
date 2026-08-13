@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Ebook\EbookBooking as PdfBankBooking;
 use App\Models\ExamHall\ExamHallBookings as ExamBooking;
+use App\Models\Booking as CourseBooking;
 
 class NepalPayProxyController extends Controller
 {
@@ -303,6 +304,19 @@ class NepalPayProxyController extends Controller
 
                         $invoice_data = [
                             'type' => 'exam',
+                            'expiry_date' => $expiry,
+                        ];
+                    }
+                    elseif($transaction[0] == 'course')
+                    {
+                        $booking = CourseBooking::find($transaction[1]);
+                        $return_url = '/student/online-course-bookings';
+                        $expiry = Carbon::now()->addDays($booking->batch->expiry_days ?? 365);
+                        $booking_bill_amount = intval(($booking->batch->fee ?? 0) - ($booking->batch->discount ?? 0));
+                        $booking_payment_remarks = ($booking->batch->name ?? 'Unknown Online Course');
+
+                        $invoice_data = [
+                            'type' => 'course',
                             'expiry_date' => $expiry,
                         ];
                     }

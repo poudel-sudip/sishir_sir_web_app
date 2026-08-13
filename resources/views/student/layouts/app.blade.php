@@ -184,6 +184,10 @@
             </li>
 
             <li class="nav-item">
+              <a class="nav-link" href="/health-dictionary"><i class="fas fa-blog text-orange"></i>Health Dictionary</a>
+            </li>
+
+            <li class="nav-item">
               <a class="nav-link" href="/books"><i class="fas fa-swatchbook text-info"></i>Books</a>
           </li>
 

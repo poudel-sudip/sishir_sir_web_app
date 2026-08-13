@@ -376,6 +376,20 @@ class FrontController extends Controller
             })
             ->toArray();
 
+        $course_updates = Batch::whereIn('status',['Active','Running'])
+            ->orderBy('id','desc')
+            ->take(6)
+            ->get(['id','name as title','created_at'])
+            ->values()
+            ->map(function ($b) {
+                return (object)[
+                    'title' => $b->title,
+                    'created_at' => $b->created_at,
+                    'link' => '/courses/details/' . $b->id,
+                ];
+            })
+            ->toArray();
+
         $data['updates'] = array_merge($data['updates'], $pdf_bank_updates);
         $data['updates'] = array_merge($data['updates'], $premium_exam_updates);
         $data['updates'] = array_merge($data['updates'], $blog_updates);
@@ -387,7 +401,7 @@ class FrontController extends Controller
         $data['updates'] = array_merge($data['updates'], $free_exam_updates);
         $data['updates'] = array_merge($data['updates'], $book_updates);
         $data['updates'] = array_merge($data['updates'], $health_day_updates);
-        // $data['updates'] = array_merge($data['updates'], $vaccancy_updates);
+        $data['updates'] = array_merge($data['updates'], $course_updates);
 
         usort($data['updates'], function ($a, $b) {
             return strcmp($b->created_at, $a->created_at);
@@ -1331,6 +1345,21 @@ class FrontController extends Controller
             ->values()
             ->toArray();
 
+        $data['courses'] = Batch::whereIn('status',['Active','Running'])
+            ->where(function ($req) use ($query) {
+                $req->where('name', 'Like', '%' . $query . '%');
+                    // ->orWhere('search_tags', 'Like', '%' . $query . '%');
+            })
+            ->orderByDesc('id')
+            ->take(20)
+            ->get(['id', 'name as title', 'created_at'])
+            ->map(function ($b) {
+                $b['link'] = '/courses/details/' . $b->id;
+                $b['slug'] = $b->title;
+                return $b;
+            })
+            ->values()
+            ->toArray();
         // dd($data);
 
         return view('front.search', $data);

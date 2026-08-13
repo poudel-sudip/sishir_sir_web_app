@@ -28,7 +28,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card student_verify_card">
-                    <div class="card-header">Course Batch Booking Update</div>
+                    <div class="card-header">{{ __('Booking ID: ') }} {{$booking->id}} | {{$booking->batch->name ?? ''}}</div>
 
                     <div class="card-body enroll_form">
                         <form id="verifyCourseForm" method="POST" action="#" enctype="multipart/form-data">
@@ -54,26 +54,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="course_id" class="col-md-4 col-form-label text-md-right">{{ __('Course') }}</label>
+                                <label for="online_course" class="col-md-4 col-form-label text-md-right">{{ __('Online Course') }}</label>
 
                                 <div class="col-md-8">
-                                    <input id="course_id" type="text" class="form-control @error('course_id') is-invalid @enderror" name="course_id" value="{{ old('course_id') ?? optional(optional($booking->batch)->course)->name }}" readonly>
+                                    <input id="online_course" type="text" class="form-control @error('online_course') is-invalid @enderror" name="online_course" value="{{ old('online_course') ?? ($booking->batch->name.' @ Rs.'. ($booking->booking_price)) }}" readonly>
 
-                                    @error('course_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="batch_id" class="col-md-4 col-form-label text-md-right">{{ __('Batch') }}</label>
-
-                                <div class="col-md-8">
-                                    <input id="batch_id" type="text" class="form-control @error('batch_id') is-invalid @enderror" name="batch_id" value="{{ old('batch_id') ?? ($booking->batch->name.' @ Rs.'. ($booking->batch->fee - $booking->batch->discount)) }}" readonly>
-
-                                    @error('batch_id')
+                                    @error('online_course')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -86,14 +72,25 @@
 
                                 <div class="col-md-8">
 
-                                    <div class="d-flex payment-images">                                        
-                                        <span class="p-1"><img src="/images/card10.jpg" alt="Manual" class="border img img-fluid active"  ></span>                                     
+                                    <div class="d-flex payment-images">
+                                        @if($nepalpay_pay_data)
+                                        <span class="p-1"><img src="/images/card8.jpg" alt="NepalPay" class="border img img-fluid"  ></span>
+                                        @endif
+                                        @if($esewa_pay_data)
+                                        <span class="p-1"><img src="/images/card1.jpg" alt="Esewa" class="border img img-fluid"  ></span>
+                                        @endif
+                                        @if($fonepay_pay_data)
+                                        <span class="p-1"><img src="/images/card5.jpg" alt="FonePay" class="border img img-fluid"  ></span>
+                                        @endif
+
+                                        <span class="p-1"><img src="/images/card9.jpg" alt="Coupon" class="border img img-fluid"  ></span>
+                                        <span class="p-1"><img src="/images/card10.jpg" alt="Manual" class="border img img-fluid"  ></span>                                     
                                         
                                     </div>
                                     
                                 </div>
-                            </div>  
-
+                            </div>                           
+                            
                             <div id="otherFormFields" class="d-none">
 
                             </div>
@@ -103,51 +100,84 @@
                                     
                                 </div>
                             </div>
-                                                        
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    {{-- <button type="button" class="btn btn-primary d-none" id="submitbtn" disabled>
-                                        {{ __('Verify') }}
-                                    </button> --}}
-
+                                   
                                     <div id="getPaymentBtn" class="d-inline"></div>
                                     
-                                    <a href="{{ url('/student/course-bookings') }}" class="btn btn-secondary">Verify Later</a>
+                                    <a href="{{ url('/student/online-course-bookings') }}" class="btn btn-secondary">Verify Later</a>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>
             </div>
-
+            
             <div class="col-12 text-center mt-2 d-none" id="qr-payment-image">
                 <img src="{{ asset('images/payment-details.png') }}" alt="" class="img img-fluid" style="max-height:400px;">
             </div>
         </div>
-    </div>   
+    </div>
 
-    <script>       
+
+    <script>
+
         $(document).ready(function() {
-            $("#verifyCourseForm").attr('action','#');
-            $('#getPaymentBtn').html('');
-            $('#alert_message').html('');
-            $('#alert_message').parent().addClass('d-none');
-            $('#otherFormFields').html('');                
-            $('#qr-payment-image').removeClass('d-none');
-            getManualPayment();
-        });
+            $('.payment-images span img').click(function() {
 
+                $('.payment-images span img').removeClass('active');
+                $(this).addClass('active');
+                
+                $("#verifyCourseForm").attr('action','#');
+                $('#getPaymentBtn').html('');
+                $('#alert_message').html('');
+                $('#alert_message').parent().addClass('d-none');
+                $('#otherFormFields').html('');
+                $('#qr-payment-image').addClass('d-none');
+
+                var mode = $(this).attr('alt');
+
+                if(mode=="Manual")
+                {
+                    $('#qr-payment-image').removeClass('d-none');
+                    getManualPayment(); 
+                }
+                else if(mode=="Coupon")
+                {
+                    getCouponPayment();
+                }
+                else if(mode=="Esewa")
+                {
+                    getEsewaPayment();
+                }
+                else if(mode=="FonePay")
+                {
+                    getFonePayPayment();
+                }
+                else if(mode=="NepalPay")
+                {
+                    getNepalPayPayment();
+                }
+                else{}
+
+            });
+        });
+       
+    </script>
+
+    <script>
+                
         function getManualPayment() 
         {
-            $("#verifyCourseForm").attr('action','/student/course-bookings/{{$booking->id}}/manual-pay');
+            $("#verifyCourseForm").attr('action','/student/online-course-bookings/{{$booking->id}}/manual-pay');
 
             var extrahtml = `
             <div class="form-group row">
                 <label for="paymentAmount" class="col-md-4 col-form-label text-md-right">{{ __('Payment Amount') }}</label>
 
                 <div class="col-md-8">
-                    <input id="paymentAmount" type="text" class="form-control @error('paymentAmount') is-invalid @enderror" name="paymentAmount" value="{{ old('paymentAmount') ?? $booking->paymentAmount ?? ($booking->batch->fee - $booking->batch->discount) }}" >
+                    <input id="paymentAmount" type="text" class="form-control @error('paymentAmount') is-invalid @enderror" name="paymentAmount" value="{{ old('paymentAmount') ?? $booking->booking_price }}" >
 
                     @error('paymentAmount')
                     <span class="invalid-feedback" role="alert">
@@ -172,6 +202,7 @@
             </div>
 
             <input type="hidden" name="verificationMode" value="Manual">
+
             `;
 
             $('#otherFormFields').removeClass('d-none');
@@ -182,8 +213,182 @@
             `;
             $('#getPaymentBtn').html(btn);
         }
-        
+
+        function getCouponPayment()
+        {
+            $("#verifyCourseForm").attr('action','/student/online-course-bookings/{{$booking->id}}/coupon-pay');
+            
+            var extrahtml = `
+            <div class="form-group row">
+                <label for="coupon_code" class="col-md-4 col-form-label text-md-right">{{ __('Coupon Code') }}</label>
+
+                <div class="col-md-8">
+                    <input id="coupon_code" type="text" class="form-control @error('coupon_code') is-invalid @enderror" name="coupon_code" value="{{ old('coupon_code') }}" required>
+                    
+                    @error('coupon_code')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <input type="hidden" name="verificationMode" value="Coupon">
+            `;
+
+            $('#otherFormFields').removeClass('d-none');
+            $('#otherFormFields').html(extrahtml);
+
+            var btn = `
+            <button type="submit" class="btn btn-primary"> Verify Using Coupon Code</button>
+            `;
+
+            $('#getPaymentBtn').html(btn);
+        }
 
     </script>
+
+    @if($esewa_pay_data)
+        <script>
+            function getEsewaPayment() 
+            {
+                var path = "{{Config::get('payment.esewa_pay_url')}}";
+                var form = document.createElement("form");
+                form.setAttribute("method", "POST");
+                form.setAttribute("action", path);
+                form.setAttribute("class", 'd-inline');
+
+                @foreach($esewa_pay_data as $key=>$value) 
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", "{{$key}}");
+                    hiddenField.setAttribute("value", "{{$value}}");
+                    form.appendChild(hiddenField);
+                @endforeach
+
+                var submit = document.createElement("input");
+                submit.setAttribute("type", "submit");
+                submit.setAttribute("name", "submit");
+                submit.setAttribute("value", "Pay With Esewa");
+                submit.setAttribute("class", "btn btn-primary");
+                form.appendChild(submit);
+
+                $('#getPaymentBtn').html(form);
+            }
+        </script>
+    @endif
+
+    @if($fonepay_pay_data)
+        <script>
+            function getFonePayPayment() 
+            {
+                var path = "{{Config::get('payment.fonepay_pay_url')}}";
+                var form = document.createElement("form");
+                form.setAttribute("method", "POST");
+                form.setAttribute("action", path);
+                form.setAttribute("class", 'd-inline');
+
+                @foreach($fonepay_pay_data as $key=>$value) 
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", "{{$key}}");
+                    hiddenField.setAttribute("value", "{{$value}}");
+                    form.appendChild(hiddenField);
+                @endforeach
+
+                var submit = document.createElement("input");
+                submit.setAttribute("type", "submit");
+                submit.setAttribute("name", "submit");
+                submit.setAttribute("value", "Pay With FonePay");
+                submit.setAttribute("class", "btn btn-primary");
+                form.appendChild(submit);
+
+                $('#getPaymentBtn').html(form);
+            }
+        </script>
+    @endif
+
+    @if($nepalpay_pay_data && count($nepalpay_pay_wallets))
+        <script>
+            function getNepalPayPayment()
+            {
+                $('#alert_message').parent().addClass('d-none');
+                $('#alert_message').html('');
+
+                var op =`<option value="" BankType="" BankUrl="" InstitutionName="" InstrumentCode="" InstrumentName="" InstrumentValue="" > Please Choose One Nepal Pay Wallet Options... </option>`;
+                @foreach($nepalpay_pay_wallets as $row)
+                op += `<option value="" BankType="{{$row['BankType']}}" BankUrl="{{$row['BankUrl']}}" InstitutionName="{{$row['InstitutionName']}}" InstrumentCode="{{$row['InstrumentCode']}}" InstrumentName="{{$row['InstrumentName']}}" InstrumentValue="{{$row['InstrumentValue']}}" > {{$row['InstitutionName']}} </option>`;
+                @endforeach
+                
+                var extrahtml = `
+                <div class="form-group row">
+                    <label for="nepalPayWallet" class="col-md-4 col-form-label text-md-right">{{ __('Nepal Pay Wallet Type') }}</label>
+
+                    <div class="col-md-8">
+                        <select name="nepalPayWallet" id="nepalPayWallet" class="form-control @error('nepalPayWallet') is-invalid @enderror" value="{{ old('nepalPayWallet') }}" >
+                            ${op}
+                        </select>
+                        @error('nepalPayWallet')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                `;
+
+                $('#otherFormFields').removeClass('d-none');
+                $('#otherFormFields').html(extrahtml);
+                
+            }
+
+            $(document).on('change', '#nepalPayWallet', function() {
+                var BankType = $(this).find(":selected").attr('BankType');
+                var BankUrl = $(this).find(":selected").attr('BankUrl');
+                var InstitutionName = $(this).find(":selected").attr('InstitutionName');
+                var InstrumentCode = $(this).find(":selected").attr('InstrumentCode');
+                var InstrumentName = $(this).find(":selected").attr('InstrumentName');
+                var InstrumentValue = $(this).find(":selected").attr('InstrumentValue');
+                var processId = "{{$nepalpay_pay_data->process_id}}";
+                var transRem = 'Online Course Booking Payment For {{ucwords($booking->book->title ?? "")}}' ; 
+                var hash_data = '{{$booking->booking_price}}' + InstrumentCode + '{{$nepalpay_pay_data->merchantId}}' + '{{$nepalpay_pay_data->mercahntName}}' + '{{$booking->trans_id}}' + processId + transRem;
+                var hash_sign = '{{ hash_hmac("sha512", "' + hash_data + '" , $nepalpay_pay_data->secret) }}';
+
+                var path = "{{$nepalpay_pay_data->redirect_url}}";
+                var form = document.createElement("form");
+                form.setAttribute("method", "POST");
+                form.setAttribute("action", path);
+                form.setAttribute("class", 'd-inline');
+
+                function appendInput(name, value) {
+                    var input = document.createElement("input");
+                    input.setAttribute("type", "hidden");
+                    input.setAttribute("name", name);
+                    input.setAttribute("value", value);
+                    form.appendChild(input);
+                }
+
+                appendInput("MerchantId", "{{ $nepalpay_pay_data->merchantId }}");
+                appendInput("MerchantName", "{{ $nepalpay_pay_data->mercahntName }}");
+                appendInput("MerchantTxnId", "{{ $booking->trans_id }}");
+                appendInput("Amount", "{{ $booking->booking_price }}");
+                appendInput("ProcessId", processId);
+                appendInput("InstrumentCode", InstrumentCode);
+                appendInput("TransactionRemarks", transRem);
+                appendInput("Signature", hash_sign);
+
+                var submit = document.createElement("input");
+                submit.setAttribute("type", "submit");
+                submit.setAttribute("name", "submit");
+                submit.setAttribute("value", "Pay With "+InstitutionName);
+                submit.setAttribute("class", "btn btn-primary");
+                form.appendChild(submit);
+
+                $('#getPaymentBtn').html(form);                
+
+            });
+
+        </script>
+    @endif
 
 @endsection

@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Batch;
 use App\Models\Course;
-use App\Models\ClassFile;
-use App\Models\ClassVideo;
+use App\Models\ClassFiles as ClassFile;
+use App\Models\ClassVideos as ClassVideo;
 use App\Models\BatchCurriculum;
 use App\Models\Exams\BatchExam;
 use App\Models\Exams\Exam;
@@ -484,6 +484,7 @@ class BatchController extends Controller
         // dd($request->all());
         $request->validate([
             'exam_name'=>'required|numeric|min:1',
+            'exam_type'=>'required|numeric',
         ]);
         $find = $batch->batchExams()->where('exam_id', $request->exam_name)->first();
         if($find)
@@ -492,6 +493,7 @@ class BatchController extends Controller
         }
         $batch->batchExams()->create([
             'exam_id'=>$request->exam_name,
+            'is_final_exam'=>$request->exam_type,
         ]);
 
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/mcq-exams');

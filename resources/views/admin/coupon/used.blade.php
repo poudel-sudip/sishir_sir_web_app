@@ -86,6 +86,7 @@
                 <select name="coupon_for" id="coupon_for" class="form-control @error('coupon_for') is-invalid @enderror" value="{{ old('coupon_for') }}" required>
                   <option value="exam">Exam</option>
                   <option value="pdfbank">PdfBank</option>
+                  <option value="onlinecourse">Online Course</option>
                 </select>
 
                 @error('coupon_for')

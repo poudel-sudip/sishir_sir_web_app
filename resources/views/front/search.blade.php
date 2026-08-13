@@ -39,25 +39,11 @@
                 </div>
 
                 <div class="col-6 single-search-area">
-                    <h5> Library Materials: {{count($library_materials) >= 20 ? count($library_materials).'+' : count($library_materials)}} </h5>
-                    @foreach($library_materials as $post)
-                        <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
-                    @endforeach
-                </div>
-
-                <div class="col-6 single-search-area">
                     <h5> Premium Exams: {{count($premium_exams) >= 20 ? count($premium_exams).'+' : count($premium_exams)}} </h5>
                     @foreach($premium_exams as $post)
                         <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
                     @endforeach
                 </div>
-
-                <div class="col-6 single-search-area">
-                    <h5> Blogs: {{count($blogs) >= 20 ? count($blogs).'+' : count($blogs)}} </h5>
-                    @foreach($blogs as $post)
-                        <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
-                    @endforeach
-                </div>               
 
                 <div class="col-6 single-search-area">
                     <h5> eBooks: {{count($pdf_banks) >= 20 ? count($pdf_banks).'+' : count($pdf_banks)}} </h5>
@@ -66,6 +52,27 @@
                     @endforeach
                 </div>
 
+                <div class="col-6 single-search-area">
+                    <h5> Online Courses: {{count($courses) >= 20 ? count($courses).'+' : count($courses)}} </h5>
+                    @foreach($courses as $post)
+                        <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
+                    @endforeach
+                </div>
+
+                <div class="col-6 single-search-area">
+                    <h5> Library Materials: {{count($library_materials) >= 20 ? count($library_materials).'+' : count($library_materials)}} </h5>
+                    @foreach($library_materials as $post)
+                        <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
+                    @endforeach
+                </div>               
+
+                <div class="col-6 single-search-area">
+                    <h5> Blogs: {{count($blogs) >= 20 ? count($blogs).'+' : count($blogs)}} </h5>
+                    @foreach($blogs as $post)
+                        <li><a href="{{$post['link']}}">{{$post['title']}}</a></li>
+                    @endforeach
+                </div>               
+                
                 <div class="col-6 single-search-area">
                     <h5> Vacancies: {{count($vaccancies) >= 20 ? count($vaccancies).'+' : count($vaccancies)}} </h5>
                     @foreach($vaccancies as $post)

@@ -64,14 +64,6 @@ class StudentHomeController extends Controller
          return redirect('/student/home');
     }
 
-    public function freeExamList(Request $request)
-    {
-        $data['free_exams'] = OpenExam::where('result_status','=','Unpublished')
-        ->get()
-        ->sortByDesc('id')
-        ->values();
-
-        return view('student.examhall.free.list',$data);
-    }
+    
 
 }

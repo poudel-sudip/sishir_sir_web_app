@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Exams\Exam;
 use App\Models\Exams\ExamCategory;
+use App\Models\Exams\ExamCQC;
 use App\Models\User;
 use App\Models\ExamHall\ExamHallExams;
 
@@ -174,10 +175,86 @@ class ExamController extends Controller
         $exam->questions()->delete();
         $exam->results()->delete();
         $exam->evaluations()->delete();
+        $exam->cqcs()->delete();
         $exam->delete();
 
         // return redirect('/admin/exams')->with('success','Data Deleted Successfuly');
         return redirect()->back()->with('success','Data Deleted Successfuly');
    
     }
+
+
+    public function indexCqc(Exam $exam, Request $request)
+    {
+        $data['exam'] = $exam;
+        $data['cqcs'] = $exam->cqcs()->orderByDesc('id')->paginate(15);
+        
+        $exam->cqc_unread()->update([
+            'read' => 1,
+        ]);
+
+        // dd($data);
+        return view('admin.exams.cqc.index',$data);
+    }
+
+    public function createCqc(Exam $exam, Request $request)
+    {
+        $data['exam'] = $exam;
+        
+        // dd($data);
+        return view('admin.exams.cqc.create',$data);
+    }
+
+    public function storeCqc(Exam $exam, Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+        ]);
+
+        $exam->cqcs()->create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'read' => 1,
+            'user_id' => auth()->user()->id,
+        ]);
+        
+        return redirect('/admin/exams/'.$exam->id.'/cqcs');
+    }
+
+    public function editCqc(Exam $exam, ExamCQC $cqc, Request $request)
+    {
+        $data['exam'] = $exam;
+        $data['cqc'] = $cqc;
+        
+        // dd($data);
+        return view('admin.exams.cqc.edit',$data);
+        
+    }
+
+    public function updateCqc(Exam $exam, ExamCQC $cqc, Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+        ]);
+
+        $cqc->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'read' => 1,
+        ]);
+
+        return redirect('/admin/exams/'.$exam->id.'/cqcs');
+    }
+
+    public function destroyCqc(Exam $exam, ExamCQC $cqc, Request $request)
+    {
+       $cqc->delete();
+
+       return redirect('/admin/exams/'.$exam->id.'/cqcs');
+    }
+
 }

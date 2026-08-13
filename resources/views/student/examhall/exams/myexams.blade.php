@@ -19,10 +19,10 @@
                     <table class="table" style="width:100%">
                         <thead class="table-light">
                             <tr>
-                                <th>SN</th>
-                                <th>Set Name</th>
+                                <th width="50">SN</th>
+                                {{-- <th>Set Name</th> --}}
                                 <th>Exam Title</th>
-                                <th>Action</th>
+                                <th class="text-center text-md-end pe-5">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,16 +30,18 @@
                             @foreach($cat_exams as $exam)
                             <tr>
                                 <td>{{$i}}</td>
-                                <td>{{$category->title ?? ''}}</td>
-                                <td>{{$exam->exam->name ?? ''}}</td>
-                                <td>
+                                {{-- <td>{{$category->title ?? ''}}</td> --}}
+                                <td class="text-wrap">{{$exam->exam->name ?? ''}}</td>
+                                <td class="text-wrap text-end">
                                     @if($exam->status)
-                                        <a href="/student/exam-bookings/{{$category->id}}/exams/{{$exam->exam->id ?? ''}}/view" class="btn btn-success btn-sm">View Evaluation</a>
+                                        <a href="/student/exam-bookings/{{$category->id}}/exams/{{$exam->exam->id ?? ''}}/view" class="btn btn-success btn-sm mb-1">View Evaluation</a>
                                         <form id="reset-form-{{$i}}" action="/student/exam-bookings/{{$category->id}}/exams/{{$exam->exam->id ?? ''}}/reset" method="POST" style="display: inline">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="javascript:{}" onclick="javascript:resetData({{$i}});" class="btn btn-danger btn-sm">Reset Exam</a>
-                                        </form>                                    
+                                            <a href="javascript:{}" onclick="javascript:resetData({{$i}});" class="btn btn-danger btn-sm mb-1">Reset Exam</a>
+                                        </form>
+                                        <a href="/student/mcq-exams/{{$exam->exam->id}}/cqcs" class="btn btn-primary btn-sm">View CQCs</a>
+                                    
                                     @else
                                         <a href="/student/exam-bookings/{{$category->id}}/exams/{{$exam->exam->id ?? ''}}/attempt" class="btn btn-primary btn-sm">Attempt Exam</a>
                                     @endif

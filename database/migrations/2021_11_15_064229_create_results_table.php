@@ -23,6 +23,7 @@ class CreateResultsTable extends Migration
             $table->integer('correct_questions')->nullable();
             $table->integer('wrong_questions')->nullable();
             $table->string('marks_obtained')->nullable();
+            $table->longText('remarks')->nullable();
             $table->timestamps();
         });
     }

@@ -3,13 +3,21 @@
 namespace App\Http\Controllers\Student\Course;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
+use Carbon\Carbon;
+
 use App\Models\Booking;
 use App\Models\Categories;
 use App\Models\Course;
 use App\Models\Batch;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 use App\Models\MerchantBooking;
+use App\Models\BookingCoupon as Coupon;
+use App\Http\Controllers\NepalPayProxyController;
+
+use App\Helpers\CustomPdfHelper;
 
 class BookingController extends Controller
 {
@@ -60,7 +68,7 @@ class BookingController extends Controller
             'remarks'=>$request->remarks,
         ]);
 
-        return redirect('/student/course-bookings/'.$booking->id.'/edit');
+        return redirect('/student/online-course-bookings/'.$booking->id.'/edit');
 
     }
 
@@ -72,7 +80,7 @@ class BookingController extends Controller
             abort(403,'Cannot Delete Verified Booking.');
         }
         $booking->delete();
-        return redirect('/student/course-bookings');
+        return redirect('/student/online-course-bookings');
     }
 
     public function edit(Booking $booking, Request $request)
@@ -80,25 +88,135 @@ class BookingController extends Controller
         $data = [];
 
         $booking->booking_price = (($booking->batch->fee ?? 0) - ($booking->batch->discount ?? 0));
+        if(strtolower($booking->status) == 'expired')
+        {
+            $booking->booking_price = intval($booking->booking_price * 0.5);
+        }
+
         $trans_id = 'course-'.$booking->id.'-'.time();
         $booking->trans_id = $trans_id;
+
+        $esewa_pay_data = null;
+        $fonepay_pay_data = null;
+        $nepalpay_pay_data = null;
+
+        try 
+        {
+            if($_SERVER['HTTP_HOST'] == 'shisiradhikari.com.np')
+            {
+                
+                $data['nepalpay_pay_wallets'] = [];
+                $processID = null;
+                $npay = new NepalPayProxyController;
+                try 
+                {
+                    $data['nepalpay_pay_wallets'] = $npay->getPaymentInstrumentDetails($request);
+                    $processID = $npay->getProcessId($booking->booking_price,$booking->trans_id);
+                } 
+                catch (\Throwable $th) {
+                    // throw $th;
+                }
+
+                if(count($data['nepalpay_pay_wallets']) && $processID)
+                {
+                    try 
+                    {
+                        $nepalpay_pay_data = (object)config('payment.nepal_pay');
+                        if($nepalpay_pay_data)
+                        {
+                            $nepalpay_pay_data->process_id = $processID;
+                        }
+                    } 
+                    catch (\Throwable $th) {
+                        //throw $th;
+                    }
+                }
+
+            }
+            
+        } 
+        catch (\Throwable $th) {
+            // throw $th;
+        }
+
+        try 
+        {
+            if(config('payment.esewa_scd') && config('payment.esewa_secret_key'))
+            {
+                $esewa_pay_data = (object)[
+                    "transaction_uuid" => $trans_id,
+                    "amount" => $booking->booking_price,
+                    "product_delivery_charge" => 0,
+                    "product_service_charge" => 0,
+                    "tax_amount" => 0,
+                    "total_amount" => $booking->booking_price,
+                    "product_code" => config('payment.esewa_scd'),
+                    "signed_field_names" => "total_amount,transaction_uuid,product_code",
+                    "signature" => base64_encode(hash_hmac('sha256', ('total_amount='.$booking->booking_price.',transaction_uuid='.$trans_id.',product_code='.config('payment.esewa_scd')), config('payment.esewa_secret_key'), true)),
+                    "failure_url" => url("/student/online-course-bookings/".$booking->id."/payment-failed"),
+                    "success_url" => url("/student/online-course-bookings/".$booking->id."/esewaSuccess"),
+                    
+                ];
+            }
+            
+        } 
+        catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        try 
+        {
+            if(config('payment.fonepay_pid') && config('payment.fonepay_secret_key'))
+            {
+                $MD = 'P'; 
+                $AMT = $booking->booking_price; 
+                $CRN = 'NPR'; 
+                $DT = date('m/d/Y'); 
+                $R1 = 'Online Course Booking Payment For '.ucwords($booking->batch->name ?? ''); 
+                $R2 = 'N/A'; 
+                $RU = url("/student/online-course-bookings/".$booking->id."/fonepaySuccess"); 
+                $PRN = $trans_id; 
+                $PID = config('payment.fonepay_pid'); 
+                $sharedSecretKey = config('payment.fonepay_secret_key'); 
+
+                $fonepay_pay_data = (object)[
+                    "RU" => $RU,
+                    "PID" => $PID,
+                    "PRN" => $PRN,
+                    "AMT" => $AMT,
+                    "CRN" => $CRN,
+                    "DT" => $DT,
+                    "R1" => $R1,
+                    "R2" => $R2,
+                    "MD" => $MD,
+                    "DV" => hash_hmac('sha512', ($PID.','.$MD.','.$PRN.','.$AMT.','.$CRN.','.$DT.','.$R1.','.$R2.','.$RU), $sharedSecretKey),                    
+                ];
+
+            }
+        } 
+        catch (\Throwable $th) {
+            //throw $th;
+        }
+
         $data['booking'] = $booking;
+        $data['esewa_pay_data'] = $esewa_pay_data; 
+        $data['fonepay_pay_data'] = $fonepay_pay_data; 
+        $data['nepalpay_pay_data'] = $nepalpay_pay_data; 
 
         return view('student.courses.bookings.verify',$data);
     }
 
     public function paymentFailed(Booking $booking, Request $request)
     {
-        return redirect("/student/course-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+        return redirect("/student/online-course-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
     }
 
-    public function manualVerify(Request $request, Booking $booking)
+    public function manualPay(Request $request, Booking $booking)
     {
         // dd($request->all(),$booking);
         $request->validate([
             'bookingid'=>'required|numeric',
-            'course_id'=>'required|string|min:1',
-            'batch_id'=>'required|string|min:1',
+            'online_course'=>'required|string|min:1',
             'verificationMode'=>'required|string|min:1',
             'verificationDocument'=>'required|image',
             'paymentAmount'=>'required|numeric',
@@ -113,7 +231,210 @@ class BookingController extends Controller
             'status'=>'Processing',
         ]);
 
-        return redirect('/student/course-bookings');
+        return redirect('/student/online-course-bookings');
+    }
+
+    public function couponPay(Request $request, Booking $booking)
+    {
+        // dd($request->all(),$booking);
+        $request->validate([
+            "verificationMode" => "string|required|min:1",
+            "coupon_code" => "string|required|min:1",
+        ]);
+
+        $coupon = Coupon::where('source','=','onlinecourse')
+        ->where('used','=',false)
+        ->where('coupon','=',strtolower(trim($request->coupon_code)))
+        ->first();
+
+        if(!$coupon)
+        {
+            return redirect("/student/online-course-bookings/$booking->id/edit")->with('error_message','Invalid Coupon Code or Coupon Code is Already Used.'); 
+        }
+        // dd($coupon);
+        
+        $expiry = Carbon::now()->addDays($booking->batch->expiry_days ?? 365);
+
+        $booking->update([
+            'verificationMode' => 'Coupon',
+            'paymentAmount' => '0',
+            'discount' => (($booking->batch->fee ?? 0) - ($booking->batch->discount ?? 0)),
+            'status' => 'Verified',
+            'remarks'=>'Booked by Student with Coupon Code: '.$coupon->coupon,
+            'updatedBy'=>auth()->user()->name,
+            'expiry_date' => $expiry,
+        ]);
+
+        $coupon->update([
+            'used' => true,
+            'use_date' => date('Y-m-d G:i:s'),
+            'booking_id' => $booking->id,
+            'user_id' => auth()->user()->id,
+            'remarks' => $booking->batch->name.'',
+        ]);
+
+        return redirect('/student/online-course-bookings');
+    }
+
+    public function esewaSuccess(Booking $booking, Request $request)
+    {
+        // dd($request->all());
+        if(isset($request->data))
+        {
+            $decoded_b64 = base64_decode($request->data);
+            $json_data = json_decode($decoded_b64,true);
+
+            if($json_data['status'] === 'COMPLETE')
+            {
+                $signed_fields = explode(',',$json_data['signed_field_names']);
+                $signed_fields = array_map(function($field) use($json_data) {
+                    return $field.'='.$json_data[$field];
+                },$signed_fields);
+
+                $signed_fields = implode(',',$signed_fields);
+                $signature = base64_encode(hash_hmac('sha256', $signed_fields, config('payment.esewa_secret_key'), true));
+                
+                if($signature === $json_data['signature'])
+                {
+                    $url = config('payment.esewa_verify_url');
+                    
+                    $booking_payment_amount = intval(($booking->batch->fee ?? 0) - ($booking->batch->discount ?? 0));
+                    $booking_bill_amount = intval(($booking->batch->fee ?? 0) - ($booking->batch->discount ?? 0));
+                    $booking_payment_remarks = 'New Online Course Booking of '.($booking->batch->name ?? 'Unknown Course');
+                    if(strtolower($booking->status) == 'expired')
+                    {
+                        $booking_payment_amount = intval($booking_payment_amount * 0.5);
+                        $booking_payment_remarks = 'Online Course Booking renewal with 50% discount of '.($booking->batch->name ?? 'Unknown Course');
+                    }
+
+                    $data = http_build_query(array(
+                        'total_amount'=> $booking_payment_amount,
+                        'transaction_uuid'=> $json_data['transaction_uuid'],
+                        'product_code'=> config('payment.esewa_scd'),
+                    ));
+                   
+                    $response = Http::get($url.'?'.$data)->getBody();
+                    $json_response = json_decode($response);
+
+                    if($json_response->status === 'COMPLETE')
+                    {
+                        $expiry = Carbon::now()->addDays($booking->batch->expiry_days ?? 365);
+
+                        $invoice_data = [
+                            'user_id' => auth()->user()->id,
+                            'type' => 'course',
+                            'booking_id' => $booking->id,
+                            'payment_mode' => 'Esewa',
+                            'reference_code' => $json_response->ref_id ?? null,
+                            'payment_amount' => $booking_payment_amount ?? '0',
+                            'payment_remarks' => $booking_payment_remarks,
+                            'discount_amount' => $booking_bill_amount - $booking_payment_amount,
+                            'due_amount' => 0,
+                            'verified_by' => auth()->user()->name,
+                            'expiry_date' => $expiry,
+                            'paid' => 1,
+                            'informed' => 0,
+                        ];
+
+                        $booking->update([
+                            'status'=>'Verified',
+                            'verificationMode'=>'Esewa',
+                            'paymentAmount'=> $json_response->total_amount,
+                            'remarks'=>'Booked by Student with Direct Esewa Payment For Product ID: '.$json_response->transaction_uuid.'  and Transaction Code: '.$json_response->ref_id,
+                            'updatedBy'=>auth()->user()->name,
+                            'expiry_date' => $expiry,
+                        ]);
+
+                        $booking->payment_invoices()->create($invoice_data);
+
+                        return redirect('/student/online-course-bookings')->with('success_message','Transction Completed Succesfully.');
+                    }
+
+                }
+
+            }
+
+        }
+
+        return redirect("/student/online-course-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+
+    }
+
+    public function fonepaySuccess(Booking $booking, Request $request)
+    {        
+        // dd($request->all());
+        if(isset($request->PRN) && isset($request->UID) && isset($request->PS) && isset($request->RC) && isset($request->DV) && isset($request->UID))
+        {
+
+            try 
+            {
+                $sharedSecretKey = config('payment.fonepay_secret_key');
+                $pid = config('payment.fonepay_pid'); 
+                $prn = $request->PRN ?? '';
+                $ps = $request->PS ?? '';
+                $rc = $request->RC ?? '';
+                $uid = $request->UID ?? '';
+                $bc = $request->BC ?? '';
+                $ini = $request->INI ?? '';
+                $dv = $request->DV ?? '';
+                $pamt = $request->P_AMT ?? '0';
+                $ramt = $request->R_AMT ?? '0';
+                $generatedDv = hash_hmac('sha512', ($prn.','.$pid.','.$ps.','.$rc.','.$uid.','.$bc.','.$ini.','.$pamt.','.$ramt), $sharedSecretKey);
+                if(strtolower($generatedDv) === strtolower($dv))
+                {
+                    if ($ps === 'true' && $rc === 'successful')
+                    {
+                        $expiry = Carbon::now()->addDays($booking->batch->expiry_days ?? 365);
+
+                        $booking_payment_amount = intval(($booking->batch->fee ?? 0) - ($booking->batch->discount ?? 0));
+                        $booking_bill_amount = intval(($booking->batch->fee ?? 0) - ($booking->batch->discount ?? 0));
+                        $booking_payment_remarks = 'New Online Course Booking of '.($booking->batch->fee ?? 'Unknown Course');
+                        if(strtolower($booking->status) == 'expired')
+                        {
+                            $booking_payment_amount = intval($booking_payment_amount * 0.5);
+                            $booking_payment_remarks = 'Online Course Booking renewal with 50% discount of '.($booking->batch->name ?? 'Unknown Course');
+                        }
+
+                        $invoice_data = [
+                            'user_id' => auth()->user()->id,
+                            'type' => 'course',
+                            'booking_id' => $booking->id,
+                            'payment_mode' => 'Fonepay',
+                            'reference_code' => $uid ?? null,
+                            'payment_amount' => $booking_payment_amount ?? '0',
+                            'payment_remarks' => $booking_payment_remarks,
+                            'discount_amount' => $booking_bill_amount - $booking_payment_amount,
+                            'due_amount' => 0,
+                            'verified_by' => auth()->user()->name,
+                            'expiry_date' => $expiry,
+                            'paid' => 1,
+                            'informed' => 0,
+                        ];
+
+                        $booking->update([
+                            'status'=>'Verified',
+                            'verificationMode'=>'Fonepay',
+                            'paymentAmount'=> $pamt,
+                            'remarks'=>'Booked by Student with Direct Fonepay Payment with Unique Retrival Reference Number: '.$uid,
+                            'updatedBy'=>auth()->user()->name,
+                            'expiry_date' => $expiry,
+                        ]);
+
+                        $booking->payment_invoices()->create($invoice_data);
+                        
+                        return redirect('/student/online-course-bookings')->with('success_message','Transction Completed Succesfully.');
+                    }
+                }
+                 
+            } 
+            catch (\Throwable $th) {
+                // throw $th;
+                return redirect("/student/online-course-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+            }
+
+        }       
+        return redirect("/student/online-course-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
+
     }
 
     public function fileList(Booking $booking)
@@ -169,7 +490,7 @@ class BookingController extends Controller
     {
         if($booking->status != 'Verified')
         {
-            abort(403,'Cannot Access Videos Unverified Booking.');
+            abort(403,'Cannot Access Contents of this course Booking.');
         }
         $batch = $booking->batch;
         if(!$batch)
@@ -222,197 +543,38 @@ class BookingController extends Controller
     }
    
 
-    // public function index()
-    // {
-    //     $data = [];
-    //     $data['bookings'] = auth()->user()->course_bookings()->get();
-    //     return view('student.courses.bookings.index',$data);
-    // }
+    public function showCertificate(Request $request, Booking $booking)
+    {
+        if($booking->status != 'Completed')
+        {
+            abort(403, 'This Course is not Completed.');
+        }
 
-    // public function create()
-    // {
-    //     $data = [];
-    //     $data['courses'] = Course::where('status','=','Active')->get();
-    //     return view('student.courses.bookings.create',$data);
-    // }
+        if($booking->user_id != auth()->user()->id){
+            abort(403,'This is not your course booking. Access Denied.');
+        }
 
-    // public function store()
-    // {
-    //     $data=request()->validate([
-    //         'course_name'=>'integer | required | min:1',
-    //         'batch_name'=>'integer | required | min:1',
-    //         'description'=>'string | nullable',
-    //     ]);
-    //     $search=Booking::where([
-    //         ['course_id','=',$data['course_name']],
-    //         ['batch_id','=',$data['batch_name']],
-    //         ['user_id','=',auth()->user()->id],
-    //         ])->count();
-    //     if($search){
-    //         return back()->withInput()->with('alreadybooked', 'You Have Already Booked This Course!');
-    //     }
-    //     $booking=Booking::create([
-    //         'course_id'=>$data['course_name'],
-    //         'batch_id'=>$data['batch_name'],
-    //         'user_id'=> auth()->user()->id,
-    //         'user_name'=>auth()->user()->name,
-    //         'description'=>$data['description'],
-    //         'status'=>'Unverified',
-    //         'updatedBy'=>auth()->user()->name,
-    //     ]);
-    //     return redirect('/student/course-bookings/'.$booking->id.'/edit');
-    // }
+        $booking->description = json_decode($booking->description);
 
-    // public function show(Booking $booking)
-    // {
-    //     return view('student.courses.bookings.show',compact('booking'));
-    // }
+        $certificate = (object)[];
+        $certificate->certificate_no  = "CERT-".date('Y')."-".$booking->id;
+        $certificate->logo = public_path('images/logo.png');
+        $certificate->date = Carbon::parse($booking->description->exam_date ?? Carbon::now())->format('d F Y');
+        $certificate->student_id = auth()->user()->id;
+        $certificate->student_name = auth()->user()->name;
+        $certificate->course = $booking->batch->name ?? '';
+        $certificate->duration = ($booking->batch->duration ?? '').' '.($booking->batch->durationType ?? '');
 
-    // public function edit(Booking $booking)
-    // {
-    //     return view('student.courses.bookings.verify',compact('booking'));
-    // }
+        // dd($booking, $certificate);
+        $data = [];
+        $data['certificate'] = $certificate;
 
-    // public function update(Booking $booking)
-    // { 
-    //     $data=request()->validate([
-    //         'verificationMode'=>'required | string',
-    //         'paymentAmount'=>'required | integer',
-    //         'verificationDocument'=>'required | image',
-    //     ]);
-    //     $imagePath=request('verificationDocument')->store('uploads','public');
+        $html = view('exports.pdf.course_certificate', $data)->render();
+        $title = 'Course Certificate';
 
-    //     $booking->update([
-    //         'verificationMode'=>$data['verificationMode'],
-    //         'paymentAmount'=>$data['paymentAmount'],
-    //         'verificationDocument'=>$imagePath,
-    //         'status'=>'Processing',
-    //     ]);
-        
-    //     // return redirect('/student/home');
-    //     return redirect('/student/course-bookings');
-    // }
+        return CustomPdfHelper::createPdf($title,$html,$footer=false,$download=false); 
+    }
 
-    // public function destroy(Booking $booking)
-    // {
-    //     // dd($booking);
-    //     $booking->delete();
-    //     return redirect('/student/course-bookings');
-    // }
 
-    // public function esewaSuccess(Booking $booking, Request $request)
-    // {
-    //     // dd($request, $booking);
-    //     if(isset($request->oid) && isset($request->amt) && isset($request->refId))
-    //     {
-    //         // dd($request->all(), $booking);
-    //         $url = config('payment.esewa_verify_url');
-    //         $data =[
-    //             'amt'=> ($booking->batch->fee - $booking->batch->discount),
-    //             'rid'=> $request->refId,
-    //             'pid'=> $request->oid,
-    //             'scd'=> config('payment.esewa_scd')
-    //         ];
-            
-    //         $curl = curl_init($url);
-    //         curl_setopt($curl, CURLOPT_POST, true);
-    //         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-    //         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    //         $response = curl_exec($curl);
-    //         curl_close($curl);
-    //         // dd($response);
-    //         $response_code =trim($this->get_xml_node_value('response_code',$response));
-    //         // dd($response_code);
-    //         if($response_code=='Success')
-    //         {
-    //             $booking->update([
-    //                 'status'=>'Verified',
-    //                 'verificationMode'=>'Esewa',
-    //                 'paymentAmount'=>$data['amt'],
-    //                 'remarks'=>'Booked by Student with Direct Esewa Payment',
-    //                 'description'=>'Booked by Student with Direct Esewa Payment',
-    //                 'updatedBy'=>auth()->user()->name,
-    //             ]);
-    //             // MerchantBooking::create([
-    //             //     'type' => 'course',
-    //             //     'title' => $booking->batch->name ?? '',
-    //             //     'merchant' => 'esewa',
-    //             //     'booking_id' => $booking->id,
-    //             // ]);
-
-    //             return redirect('/student/course-classroom')->with('success_message','Transction Completed Succesfully.');
-    //         }
-    //     }
-
-    //     return redirect("/student/course-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
-
-    // }
-
-    // public function khaltiSuccess(Booking $booking, Request $request)
-    // {
-    //     $args = http_build_query(array(
-    //         'token' => $request->token,
-    //         'amount'  => ($booking->batch->fee - $booking->batch->discount) * 100
-    //     ));
-        
-    //     $url = config('payment.khalti_verify_url');
-        
-    //     # Make the call using API.
-    //     $ch = curl_init();
-    //     curl_setopt($ch, CURLOPT_URL, $url);
-    //     curl_setopt($ch, CURLOPT_POST, 1);
-    //     curl_setopt($ch, CURLOPT_POSTFIELDS,$args);
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        
-    //     $headers = ['Authorization: Key '.config('payment.khalti_secret_key')];
-    //     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        
-    //     // Response
-    //     $response = curl_exec($ch);
-    //     $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    //     curl_close($ch);
-        
-    //     if($status_code == 200)
-    //     {
-    //         $booking->update([
-    //             'status'=>'Verified',
-    //             'verificationMode'=>'Khalti',
-    //             'paymentAmount'=>($booking->batch->fee - $booking->batch->discount),
-    //             'remarks'=>'Booked by Student with Direct Khalti Payment',
-    //             'description'=>'Booked by Student with Direct Khalti Payment',
-    //             'updatedBy'=>auth()->user()->name,
-    //         ]);
-    //         // MerchantBooking::create([
-    //         //     'type' => 'course',
-    //         //     'title' => $booking->batch->name ?? '',
-    //         //     'merchant' => 'khalti',
-    //         //     'booking_id' => $booking->id,
-    //         // ]);
-    //         return response()->json([
-    //             'success' => 1,
-    //             'redirecto' => url('/student/course-classroom')
-    //         ], 200);
-    //     }
-    //     else
-    //     {
-    //         return response()->json([
-    //             'error' => 1,
-    //             'message' => 'Payment Failed. Please try again later.'
-    //         ]);
-    //     }
-        
-    // }
-
-    // public function paymentFailed(Booking $booking, Request $request)
-    // {
-    //     return redirect("/student/course-bookings/$booking->id/edit")->with('error_message','Transaction Failed. Try Again Later.');
-    // }
-    
-    // public function classroom()
-    // {
-    //     $data = [];
-    //     $data['bookings'] = auth()->user()->bookings()->where([['status','=','Verified'],['suspended','=',false]])->orderByDesc('id')->get();
-    //     return view('student.courses.bookings.classroom',$data);
-    // }
 
 }

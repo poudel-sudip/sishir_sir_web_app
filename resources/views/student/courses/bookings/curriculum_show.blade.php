@@ -9,18 +9,22 @@
 
 
 @section('content')
-    <div class="student-content-wrapper student-enroll-section">        
-        <div class="mt-2">
-            <div class="text-center h5">{{optional($batch->course)->name}}</div>
-            <div class="text-center h5">{{$batch->name}}</div>
+    <div class="student-content-wrapper">        
+        <div class="mt-2 text-center">
+            <div class=" dchl-title h4">{{$batch->name}}</div>
         </div>
-
+        <div class="pe-2 text-end">
+            <a href="/student/online-course-bookings/{{$booking->id}}/curriculum" class="btn btn-sm btn-outline-primary active mb-1 ">Curriculum</a> 
+            <a href="/student/online-course-bookings/{{$booking->id}}/files" class="btn btn-sm btn-outline-primary mb-1 ">Notes</a> 
+            <a href="/student/online-course-bookings/{{$booking->id}}/videos" class="btn btn-sm btn-outline-primary mb-1 ">Videos</a> 
+            <a href="/student/online-course-bookings/{{$booking->id}}/mcq-exams" class="btn btn-sm btn-outline-primary mb-1 ">MCQ Exams</a> 
+        </div>
         <div class="row mt-3">
             <div class="col-md-3 border border-info py-2">
                 <div class="h5">Curriculum</div>
                 <div class="list">
                     @foreach ($curriculums as $row)
-                        <div class="{{$row->is_heading == 0 ? 'ms-3': ''}}"><a href="/student/course-bookings/{{$booking->id}}/curriculum/{{$row->id}}" @if($row->id == $curriculum_single->id ) class="h6 text-success" @endif >{{$row->title}}</a></div>
+                        <div class="{{$row->is_heading == 0 ? 'ms-3': ''}}"><a href="/student/online-course-bookings/{{$booking->id}}/curriculum/{{$row->id}}" @if($row->id == $curriculum_single->id ) class="h6 text-success" @endif >{{$row->title}}</a></div>
                     @endforeach 
                 </div>
             </div>

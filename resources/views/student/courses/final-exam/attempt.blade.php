@@ -1,6 +1,6 @@
 @extends('student.layouts.app')
 @section('student-title')
-    Attempt Exam
+    Attempt Final Exam
 @endsection
 @section('student-title-icon')
     <i class="fas fa-check-square"></i>
@@ -17,7 +17,6 @@
                                 <div class="text-center">
                                     <div class=" dchl-title h4">{{$batch->name}}</div>
                                 </div>
-                                {{-- <h4 class="text-center text-primary mb-1"><strong> {{$batch->name}} </strong></h4>   --}}
                                 <h5 class="text-center text-primary mb-4"><strong> {{$exam->name}} </strong></h5>  
                                                 
                                 <div class=" mt-1 d-flex justify-content-around">
@@ -31,7 +30,7 @@
                                 <div class="text-center mt-3" id="attempt-question-count"> </div>
                             </div>
                             <div class="public-question-body">
-                                <form action="/student/online-course-bookings/{{$booking->id}}/mcq-exams/{{$exam->id}}/save" method="POST" id="exam-form">
+                                <form action="/student/online-course-bookings/{{$booking->id}}/final-exam/{{$exam->id}}/save" method="POST" id="exam-form">
                                     @csrf
                                     @php
                                         $pages = $exam->questions->chunk(5); // Split into pages
@@ -148,7 +147,9 @@
 
                 if (hours== 0 && minutes == 0 && seconds == 0) { 
                     clearInterval(interval);  
-                    examSubmitAction('Time Over. Do You Want To Submit Your Exam?');
+                    formSubmitAllowed = true;
+                    $('#exam-form').submit();
+                    // examSubmitAction('Time Over. Do You Want To Submit Your Exam?');
                 }
             }, 1000);
         }
@@ -188,14 +189,10 @@
                     formSubmitAllowed = true;
                     $('#exam-form').submit();
                 }
-                else if(result.isDenied)
-                {
-                    window.location.href = '/student/online-course-bookings/{{$booking->id}}/mcq-exams';
-                }
                 else
                 {
                     // alert('cancncelled'); 
-                    window.location.href = '/student/online-course-bookings/{{$booking->id}}/mcq-exams';                   
+                    // window.location.href = '/student/online-course-bookings';                   
                 }
             });
 
