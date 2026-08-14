@@ -38,7 +38,17 @@ class McqExamcontroller extends Controller
     public function createCqc(Exam $exam, Request $request)
     {
         $data['exam'] = $exam;
-        
+        $data['cqc'] = (object)[];
+        if(isset($request->title) && trim($request->title))
+        {
+            $data['cqc']->title = trim($request->title);
+        }
+
+        if(isset($request->description) && trim($request->description))
+        {
+            $data['cqc']->description = trim($request->description);
+        }
+
         // dd($data);
         return view('student.mcq-exam.cqc.create',$data);
     }

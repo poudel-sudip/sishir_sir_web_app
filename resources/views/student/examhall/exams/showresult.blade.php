@@ -73,6 +73,8 @@
                     @php($i=1)
                     @foreach ($answers as $ans)
                     <div class="mcq-solution-sheet d-none" id="ans-block-Q-{{ $i }}"> 
+                        <div class="text-end mb-1"><a href="/student/mcq-exams/{{$exam->id}}/cqcs/create?title={{ rawurlencode('Q'.$i.'. '.($ans->question ?? $ans->getQuestion->name ?? '')) }}" class="ms-2 btn btn-sm btn-danger text-nowrap">Report Question</a></div>
+
                         {{-- <h5>{{$i}}. {!!$ans->question ?? $ans->getQuestion->name ?? '' !!} <small class=" text-secondary"> ({{$exam->marks_per_question}} Marks) </small> </h5> --}}
                         <h5 class="d-flex gap-1">
                             <div class="">{{$i}}.</div>

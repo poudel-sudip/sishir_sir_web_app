@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('exam_id');
-            $table->string('title')->nullable();
+            $table->longText('title')->nullable();
             $table->longText('description')->nullable();
             $table->tinyInteger('read')->nullable()->default(0);
             $table->timestamps();

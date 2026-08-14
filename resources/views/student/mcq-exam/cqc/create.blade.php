@@ -24,7 +24,7 @@
                                     <label for="title" class="col-md-12 col-form-labe">{{ __('Title') }}</label>
 
                                     <div class="col-md-12">
-                                        <input id="title" type="text" class="form-control @error('title') is-invalid @enderror"  name="title" value="{{ old('title') }}" required>
+                                        <input id="title" type="text" class="form-control @error('title') is-invalid @enderror"  name="title" value="{{ old('title') ?? $cqc->title ?? '' }}" required>
 
                                         @error('title')
                                         <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
                                     <label for="description" class="col-md-12 col-form-label">{{ __('Content') }}</label>
 
                                     <div class="col-md-12">
-                                        <textarea id="description" class="form-control summernote @error('description') is-invalid @enderror" name="description"  autocomplete="description">{{old('description')}}</textarea>
+                                        <textarea id="description" class="form-control summernote @error('description') is-invalid @enderror" name="description"  autocomplete="description">{{old('description') ?? $cqc->description ?? ''}}</textarea>
 
                                         @error('description')
                                         <span class="invalid-feedback" role="alert">
