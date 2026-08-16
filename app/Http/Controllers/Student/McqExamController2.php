@@ -8,7 +8,7 @@ use App\Models\OpenExams\OpenExam;
 use App\Models\Exams\Exam;
 use App\Models\Exams\ExamCQC;
 
-class McqExamcontroller extends Controller
+class McqExamController extends Controller
 {
     public function __construct()
     {
