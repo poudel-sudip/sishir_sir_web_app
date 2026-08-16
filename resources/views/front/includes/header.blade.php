@@ -125,7 +125,7 @@
           
 
           <li class="nav-item">
-            <a class="nav-link" href="/courses">Courses</a>
+            <a class="nav-link" href="/courses">eCourses</a>
           </li>
 
           <li class="nav-item">
