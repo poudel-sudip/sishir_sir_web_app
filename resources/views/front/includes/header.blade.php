@@ -122,13 +122,14 @@
               </ul>
             </li>
           @endforeach
-
-          <li class="nav-item">
-            <a class="nav-link" href="/pdf-banks">eBooks</a>
-          </li>
+          
 
           <li class="nav-item">
             <a class="nav-link" href="/courses">Courses</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/pdf-banks">eBooks</a>
           </li>
 
           <li class="nav-item dropdown">
