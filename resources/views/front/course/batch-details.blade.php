@@ -63,7 +63,7 @@
                             <span class="mx-2 text-nowrap text-danger"><i class="fa fa-share"></i> {{$counterData->page_share_count ?? '0'}}</span>
                         </div>
                         <div style="font-size:16px !important; font-weight:bold;">
-                            <div class="my-1"><span class="text-primary">Price:</span> @if($batch->discount >0)  <s class="text-danger mx-2"> Rs. {{$batch->fee}} </s> @endif <span class="text-success mx-2"> Rs. {{$batch->fee - $batch->discount}} </span> </div>
+                            <div class="my-1"><span class="text-primary">Price:</span> @if($batch->discount >0)  <s class="text-danger mx-2"> Rs. {{$batch->fee}} </s> @endif <span class="text-success mx-2"> Rs. {{$batch->final_price}} </span> </div>
                             <div class="my-1"><span class="text-primary">Notes:</span> <span class="text-success"> {{ $batch->file_count}} </span></div>
                             <div class="my-1"><span class="text-primary">Videos:</span> <span class="text-success"> {{($batch->video_count)}} </span></div>
                             <div class="my-1"><span class="text-primary">Duration:</span> <span class="text-success"> {{($batch->duration)}} </span></div>
