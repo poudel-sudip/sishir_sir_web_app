@@ -7113,6 +7113,51 @@ table.dataTable th.dt-type-numeric, table.dataTable th.dt-type-date, table.dataT
     /* animation: marquee 15s linear infinite; */
 }
 
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.analysis-grid .analysis-item {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.analysis-grid .analysis-item.correct {
+    background: hsl(142 76% 96%);
+    color: hsl(142 76% 36%);
+}
+
+.analysis-grid .analysis-item.incorrect {
+    background: hsl(0 84% 96%);
+    color: hsl(0 84% 52%);
+}
+
+.analysis-grid .analysis-item.unattempted {
+    background: hsl(213 90% 96%);
+    color: hsl(213 90% 45%);
+}
+
+.analysis-grid .analysis-item .analysis-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
+    margin: 0 auto 0.5rem;
+}
+
+.analysis-grid .analysis-item .analysis-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.analysis-grid .analysis-item .analysis-label {
+    font-size: 0.875rem;
+}
+
 @keyframes marquee {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-100%); }

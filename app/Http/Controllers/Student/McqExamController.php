@@ -29,7 +29,10 @@ class McqExamController extends Controller
     public function indexCqc(Exam $exam, Request $request)
     {
         $data['exam'] = $exam;
-        $data['cqcs'] = $exam->cqcs()->orderByDesc('id')->paginate(15);
+        $data['cqcs'] = $exam->cqcs()
+        ->where('user_id','=',auth()->user()->id)
+        ->orderByDesc('id')
+        ->paginate(15);
         
         // dd($data);
         return view('student.mcq-exam.cqc.index',$data);

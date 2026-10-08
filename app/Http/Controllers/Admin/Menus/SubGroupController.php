@@ -153,4 +153,26 @@ class SubGroupController extends Controller
         $subgroup->delete();
         return redirect('/admin/menus/'.$group->id.'/sub-groups');
     }
+
+    public function getMenuSubGroupFilesJson(MenuSubGroup $subgroup, Request $request)
+    {      
+        $menu_categories = [];
+        $menu_items = [];
+        $pdf_files = [];
+        
+        if($subgroup->categories()->count())  
+        {
+            $menu_categories = $subgroup->categories()->where('status','=','Active')->where('type','=','heading')->get(['id','name']);
+            $pdf_files = $subgroup->categories()->where('status','=','Active')->where('type','=','file')->get(['id','name','filename','fileurl','status']);
+        }
+        
+        return response()->json(
+            [
+                'source' => 'category',
+                'menu_categories' => $menu_categories,
+                'menu_items' => $menu_items,
+                'pdf_files' => $pdf_files,
+            ]
+        , 200);
+    }
 }

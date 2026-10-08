@@ -53,22 +53,22 @@ class Batch extends Model
 
     public function classDiscussions(): HasMany
     {
-        return $this->hasMany(ClassDiscussion::class)->orderBy('created_at');
+        return $this->hasMany(ClassDiscussion::class);
     }
 
     public function classFiles(): HasMany
     {
-        return $this->hasMany(ClassFiles::class)->orderBy('created_at');
+        return $this->hasMany(ClassFiles::class);
     }
 
     public function classVideos(): HasMany
     {
-        return $this->hasMany(ClassVideos::class)->orderBy('created_at');
+        return $this->hasMany(ClassVideos::class);
     }
 
     public function tutors(): BelongsToMany
     {
-        return $this->belongsToMany(Tutor::class)->orderBy('name')->withTimestamps();
+        return $this->belongsToMany(Tutor::class)->withTimestamps();
     }
 
     public function batchExams(): HasMany
@@ -93,7 +93,7 @@ class Batch extends Model
 
     public function cqcs(): HasMany
     {
-        return $this->hasMany(BatchCQC::class, 'batch_id')->orderByDesc('id');
+        return $this->hasMany(BatchCQC::class, 'batch_id');
     }
 
     public function schedules(): HasMany

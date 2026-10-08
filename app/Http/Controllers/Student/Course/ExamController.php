@@ -216,6 +216,35 @@ class ExamController extends Controller
         $data['batch'] = $batch;
         $data['exam'] = $exam;
         
+        $total_questions = $result->total_questions;
+        $correct_questions = $result->correct_questions;
+        $wrong_questions = $result->wrong_questions;
+        $leaved_questions = $result->leaved_questions;
+
+        $marks_obtained = $correct_questions * ($exam->marks_per_question ?? 0) - ($wrong_questions * $exam->negative_marks ?? 0);
+        $marks_obtained = max($marks_obtained, 0); 
+        $percentage = intval($correct_questions / $total_questions * 100) ?? 0;
+        $grade_info = (object)$this->getGradeInfo($percentage);
+
+
+        $data['analysis'] = (object)[
+            'id' => $exam->id,
+            'title' => $exam->name,
+            'user_name' => $user->name,
+            'result_id' => $result->id,
+            'total_questions' => $total_questions,
+            'full_marks' => $total_questions * ($exam->marks_per_question ?? 1),
+            'correct_questions' => $correct_questions,
+            'wrong_questions' => $wrong_questions,
+            'leaved_questions' => $leaved_questions,
+            'marks_obtained' => $marks_obtained,
+            'percentage' => $percentage,
+            'grade' => $grade_info->grade,
+            'grade_class' => $grade_info->class,
+            'grade_msg' => $grade_info->msg,
+        ];
+
+
         return view('student.courses.mcq-exams.result',$data);
     }
 
@@ -345,5 +374,21 @@ class ExamController extends Controller
         ]);
 
         return redirect('/student/online-course-bookings/certificate');
+    }
+
+    private function getGradeInfo($percentage) {
+        if ($percentage >= 90) return ['grade' => 'A+', 'class' => 'grade-a', 'msg' => 'Outstanding Performance! 🎉'];
+        if ($percentage >= 80) return ['grade' => 'A', 'class' => 'grade-a', 'msg' => 'Excellent Work! 👏'];
+        if ($percentage >= 70) return ['grade' => 'B', 'class' => 'grade-b', 'msg' => 'Good Job! 👍'];
+        if ($percentage >= 60) return ['grade' => 'C', 'class' => 'grade-c', 'msg' => 'Fair Performance 📚'];
+        if ($percentage >= 50) return ['grade' => 'D', 'class' => 'grade-d', 'msg' => 'Needs Improvement 📖'];
+        return ['grade' => 'F', 'class' => 'grade-f', 'msg' => 'Keep Practicing! 💪'];
+    }
+
+    private function formatTime($seconds) {
+        $hours = floor($seconds / 3600);
+        $minutes = floor(($seconds % 3600) / 60);
+        $secs = $seconds % 60;
+        return ($hours > 0 ? $hours . 'h ' : '') . $minutes . 'm ' . $secs . 's';
     }
 }

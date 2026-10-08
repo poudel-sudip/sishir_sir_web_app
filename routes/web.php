@@ -336,6 +336,7 @@ Route::post('/admin/menus', 'App\Http\Controllers\Admin\Menus\GroupController@st
 Route::get('/admin/menus/{group}/edit', 'App\Http\Controllers\Admin\Menus\GroupController@edit')->middleware('role:Admin');
 Route::patch('/admin/menus/{group}', 'App\Http\Controllers\Admin\Menus\GroupController@update')->middleware('role:Admin');
 Route::delete('/admin/menus/{group}', 'App\Http\Controllers\Admin\Menus\GroupController@destroy')->middleware('role:Admin');
+Route::get('/admin/menus/groups/{group}/filejson', 'App\Http\Controllers\Admin\Menus\GroupController@getMenuGroupFilesJson')->middleware('role:Admin');
 
 //admin menu sub group mgmt
 Route::get('/admin/menus/{group}/sub-groups', 'App\Http\Controllers\Admin\Menus\SubGroupController@index')->middleware('role:Admin');
@@ -345,6 +346,7 @@ Route::get('/admin/menus/{group}/sub-groups/{subgroup}/edit', 'App\Http\Controll
 Route::get('/admin/menus/{group}/sub-groups/{subgroup}', 'App\Http\Controllers\Admin\Menus\SubGroupController@show')->middleware('role:Admin');
 Route::patch('/admin/menus/{group}/sub-groups/{subgroup}', 'App\Http\Controllers\Admin\Menus\SubGroupController@update')->middleware('role:Admin');
 Route::delete('/admin/menus/{group}/sub-groups/{subgroup}', 'App\Http\Controllers\Admin\Menus\SubGroupController@destroy')->middleware('role:Admin');
+Route::get('/admin/menus/groups/sub-groups/{subgroup}/filejson', 'App\Http\Controllers\Admin\Menus\SubGroupController@getMenuSubGroupFilesJson')->middleware('role:Admin');
 
 //admin menu item category mgmt
 Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories', 'App\Http\Controllers\Admin\Menus\CategoryController@index')->middleware('role:Admin');
@@ -354,6 +356,7 @@ Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/edi
 Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}', 'App\Http\Controllers\Admin\Menus\CategoryController@show')->middleware('role:Admin');
 Route::patch('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}', 'App\Http\Controllers\Admin\Menus\CategoryController@update')->middleware('role:Admin');
 Route::delete('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}', 'App\Http\Controllers\Admin\Menus\CategoryController@destroy')->middleware('role:Admin');
+Route::get('/admin/menus/groups/sub-groups/categories/{category}/filejson', 'App\Http\Controllers\Admin\Menus\CategoryController@getMenuCategoryFilesJson')->middleware('role:Admin');
 
 
 // admin menu item management 
@@ -364,6 +367,7 @@ Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/ite
 Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}', 'App\Http\Controllers\Admin\Menus\ItemController@show')->middleware('role:Admin');
 Route::patch('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}', 'App\Http\Controllers\Admin\Menus\ItemController@update')->middleware('role:Admin');
 Route::delete('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}', 'App\Http\Controllers\Admin\Menus\ItemController@destroy')->middleware('role:Admin');
+Route::get('/admin/menus/groups/sub-groups/categories/items/{item}/filejson', 'App\Http\Controllers\Admin\Menus\ItemController@getMenuItemFilesJson')->middleware('role:Admin');
 
 // admin menu sub-item management 
 Route::get('/admin/menus/{group}/sub-groups/{subgroup}/categories/{category}/items/{item}/sub-items', 'App\Http\Controllers\Admin\Menus\SubItemController@index')->middleware('role:Admin');
@@ -638,6 +642,10 @@ Route::delete('/admin/courses/{course}/batches/{batch}', 'App\Http\Controllers\A
 Route::get('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileIndex')->middleware('role:Admin');
 Route::post('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileStore')->middleware('role:Admin');
 Route::patch('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileUpdate')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/files/import-library', 'App\Http\Controllers\Admin\Courses\BatchController@fileImportLibraryForm')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches/{batch}/files/import-library', 'App\Http\Controllers\Admin\Courses\BatchController@fileImportLibrary')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/files/import-menu', 'App\Http\Controllers\Admin\Courses\BatchController@fileImportMenuForm')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches/{batch}/files/import-menu', 'App\Http\Controllers\Admin\Courses\BatchController@fileImportMenu')->middleware('role:Admin');
 Route::delete('/admin/courses/{course}/batches/{batch}/files/{cfile}', 'App\Http\Controllers\Admin\Courses\BatchController@fileDestroy')->middleware('role:Admin');
 
 Route::get('/admin/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Admin\Courses\BatchController@videoIndex')->middleware('role:Admin');

@@ -55,7 +55,7 @@
                             <div class="my-1"><span class="text-primary">Total MCQ Sets:</span><span class="text-success"> {{ $exam->mcq_count}} </span></div>
                             <div class="my-1"><span class="text-primary">Total MCQ Questions:</span><span class="text-success"> {{ $exam->mcq_question_count}} </span></div>
                             <div class="my-1"><span class="text-primary">Available Videos:</span><span class="text-success"> {{ $exam->video_count}} </span></div>
-                            <div class="my-1"><span class="text-primary">Available PDF :</span><span class="text-success"> {{ $exam->pdf_count > $exam->mcq_count ? $exam->pdf_count : $exam->mcq_count}} </span></div>
+                            {{-- <div class="my-1"><span class="text-primary">Available PDF :</span><span class="text-success"> {{ $exam->pdf_count > $exam->mcq_count ? $exam->pdf_count : $exam->mcq_count}} </span></div> --}}
                             <div class="my-1"><span class="text-primary">Validity:</span><span class="text-success"> 1 Year From The Date of Purchase </span></div>
     
                             <div class="my-1"><span class="text-danger">* Bookings Are Non-Refundable</span> </div>

@@ -93,37 +93,7 @@ class PublicExamController extends Controller
             'contact'=>$request->contact,
             'courses'=>$request->courses
         ];
-        
-        try 
-        {
-            $pageurl = URL::previous();
-            $parsedurl = parse_url($pageurl);
-
-            $data = [
-                'name'=> $request->name,
-                'email'=> $request->email,
-                'contact'=> $request->contact,
-                // 'remarks'=> $request->courses,
-                'website' => $parsedurl['host'],
-                'source_url' => $parsedurl['host'].$parsedurl['path'],
-                'page_title' => $exam->name,
-            ];
-
-            $apiurl = "https://etutorclass.com/api/v1/collect-external-web-data";
-            $ch = curl_init($apiurl);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 6); // Set a timeout
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4); // Set a connection timeout
-            $response = curl_exec($ch);
-            curl_close($ch);
-        
-        } 
-        catch (\Throwable $th) {
-            //throw $th;
-        }
-
+              
 
         return view('front.publicexams.attemptexam',compact('user','exam','openexam'));
     }
@@ -187,12 +157,35 @@ class PublicExamController extends Controller
             'remarks' => $remarks,
         ]);
 
+        $marks_obtained = $correct_questions * ($exam->exam->marks_per_question ?? 0) - ($wrong_questions * $exam->exam->negative_marks ?? 0);
+        $marks_obtained = max($marks_obtained, 0); 
+        $percentage = intval($correct_questions / $total_questions * 100) ?? 0;
+        $grade_info = (object)$this->getGradeInfo($percentage);
+
+        $analysis = (object)[
+            'id' => $exam->id,
+            'title' => $exam->name,
+            'user_name' => $username,
+            'result_id' => $result->id,
+            'total_questions' => $total_questions,
+            'full_marks' => $total_questions * ($exam->exam->marks_per_question ?? 1),
+            'correct_questions' => $correct_questions,
+            'wrong_questions' => $wrong_questions,
+            'leaved_questions' => $leaved_questions,
+            'marks_obtained' => $marks_obtained,
+            'percentage' => $percentage,
+            'grade' => $grade_info->grade,
+            'grade_class' => $grade_info->class,
+            'grade_msg' => $grade_info->msg,
+        ];
+
         return view('front.publicexams.examsuccess',[
             'result'=>$result,
             'exam' => $exam,
             'question_solutions' => $question_solutions,
             'status'=>'1',
             'view_pdf' => $exam->exam->view_pdf ?? 0,
+            'analysis' => $analysis,
         ]);
     }
 
@@ -471,4 +464,19 @@ class PublicExamController extends Controller
         return view('front.publicexams.play_know_the_picture',$data);
     }
 
+    private function getGradeInfo($percentage) {
+        if ($percentage >= 90) return ['grade' => 'A+', 'class' => 'grade-a', 'msg' => 'Outstanding Performance! 🎉'];
+        if ($percentage >= 80) return ['grade' => 'A', 'class' => 'grade-a', 'msg' => 'Excellent Work! 👏'];
+        if ($percentage >= 70) return ['grade' => 'B', 'class' => 'grade-b', 'msg' => 'Good Job! 👍'];
+        if ($percentage >= 60) return ['grade' => 'C', 'class' => 'grade-c', 'msg' => 'Fair Performance 📚'];
+        if ($percentage >= 50) return ['grade' => 'D', 'class' => 'grade-d', 'msg' => 'Needs Improvement 📖'];
+        return ['grade' => 'F', 'class' => 'grade-f', 'msg' => 'Keep Practicing! 💪'];
+    }
+
+    private function formatTime($seconds) {
+        $hours = floor($seconds / 3600);
+        $minutes = floor(($seconds % 3600) / 60);
+        $secs = $seconds % 60;
+        return ($hours > 0 ? $hours . 'h ' : '') . $minutes . 'm ' . $secs . 's';
+    }
 }

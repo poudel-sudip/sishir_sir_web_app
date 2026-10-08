@@ -34,7 +34,7 @@
                                         <div class="text-justify text-wrap">{!!$cqc->description!!}</div>
                                         <div class="d-flex align-items-center justify-content-between gap-1">
                                             <div class="small text-muted">
-                                                {{$cqc->created_at}}
+                                                <strong>{{optional($cqc->user)->name}}</strong> at {{$cqc->created_at}}
                                             </div>
                                             <div class="text-right classroom-btn mt-1">
                                                 <a href="/admin/exams/{{$exam->id}}/cqcs/{{$cqc->id}}/edit" class="btn btn-sm btn-warning">Edit</a>

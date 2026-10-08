@@ -166,4 +166,21 @@ class ItemController extends Controller
         $item->delete();
         return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories/'.$category->id.'/items');
     }
+
+    public function getMenuItemFilesJson(MenuItem $item, Request $request)
+    {      
+        $pdf_files = [];
+        
+        if($item->subItems()->count())  
+        {
+            $pdf_files = $item->subItems()->where('status','=','Active')->where('type','=','file')->get(['id','name','filename','fileurl','status']);
+        }
+        
+        return response()->json(
+            [
+                'source' => 'sub_item',
+                'pdf_files' => $pdf_files,
+            ]
+        , 200);
+    }
 }

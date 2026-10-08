@@ -24,11 +24,22 @@
                         <div class="h4 text-info"> {{$batch->name}} </div>
                         <hr class="bg-info">
                         <div class="mt-4 row align-items-stretch">
-                            <div class="col-md-3 col-12 my-1 align-self-center">
-                                <button type="button" class="btn btn-outline-info p-4" data-toggle="modal" data-target="#create_file">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                    <div class="file-upload-hover">Add New File</div>
+                           
+                            <div class="col-12 my-1 align-self-center">
+                                <button type="button" class="btn btn-outline-info m-2" data-toggle="modal" data-target="#create_file">
+                                    <i class="fa fa-plus mr-2" aria-hidden="true"></i>
+                                    <span class="file-upload-hover">Add New File</span>
                                 </button>
+
+                                <a href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/import-library" class="btn btn-outline-info m-2 ">
+                                    <i class="fa fa-download mr-2" aria-hidden="true"></i>
+                                    <span class="file-upload-hover">Import From Library</span>
+                                </a>
+
+                                <a href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/import-menu" class="btn btn-outline-info m-2 ">
+                                    <i class="fa fa-download mr-2" aria-hidden="true"></i>
+                                    <span class="file-upload-hover">Import From Menu</span>
+                                </a>
                             </div>
 
                             @forelse($files as $pdf)

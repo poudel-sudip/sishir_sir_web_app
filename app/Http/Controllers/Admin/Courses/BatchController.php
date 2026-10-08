@@ -13,6 +13,13 @@ use App\Models\BatchCurriculum;
 use App\Models\Exams\BatchExam;
 use App\Models\Exams\Exam;
 use App\Models\Exams\ExamCategory;
+use App\Models\Library\LibraryCategory;
+use App\Models\Library\LibraryMaterial;
+use App\Models\Menu\MenuGroup;
+use App\Models\Menu\MenuSubGroup;
+use App\Models\Menu\MenuItemCategory;
+use App\Models\Menu\MenuItem;
+use App\Models\Menu\MenuSubItem;
 
 class BatchController extends Controller
 {
@@ -169,7 +176,7 @@ class BatchController extends Controller
     {
         $data['course'] = $course;
         $data['batch'] = $batch;
-        $data['files'] = $batch->classFiles()->orderBy('created_at')->get();
+        $data['files'] = $batch->classFiles()->orderByDesc('created_at')->get();
 
         return view('admin.courses.batch.files',$data);
     }
@@ -243,6 +250,101 @@ class BatchController extends Controller
 
         
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files')->with('success','Data Updated Successfully');
+    }
+
+
+    public function fileImportLibraryForm(Course $course, Batch $batch)
+    {
+        $libraries = LibraryCategory::where('parent_id','=',null)->orderBy('name')->get();
+
+        $data['course'] = $course;
+        $data['batch'] = $batch;
+        $data['libraries'] = $libraries;
+                
+        return view('admin.courses.batch.files-import-library',$data);
+    }
+
+    public function fileImportLibrary(Course $course, Batch $batch, Request $request)
+    {
+        $request->validate([
+            'main_library' => 'required|numeric',
+            'sub_library' => 'nullable|numeric',
+            'pdf_files' => 'required|array',
+        ]);
+
+        $pdf_files = LibraryMaterial::find($request->pdf_files,['id','name','filename','fileurl','download','author','pages','published_year']);
+
+        foreach ($pdf_files as $pdf) 
+        {
+            $batch->classFiles()->create([
+                'user_id'=>auth()->user()->id,
+                'user_name'=> $pdf->author,
+                'fileTitle'=> $pdf->name,
+                'filePath'=>  url('/storage/'.$pdf->fileurl),
+            ]);
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files');
+
+    }
+
+    public function fileImportMenuForm(Course $course, Batch $batch)
+    {
+        $menu_groups = MenuGroup::where('status','=','Active')->orderBy('name')->get(['id','name']);
+
+        $data['course'] = $course;
+        $data['batch'] = $batch;
+        $data['menu_groups'] = $menu_groups;
+                
+        return view('admin.courses.batch.files-import-menu',$data);
+    }
+
+    public function fileImportMenu(Course $course, Batch $batch, Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'pdf_files' => 'required|array',
+            'file_source' => 'required|string',
+        ]);
+
+        if(!in_array(strtolower($request->file_source),['sub_group','category','item','sub_item']))
+        {
+            return back()->withInput()->withErrors(['file_source'=>'Invalid File Source. Available: sub_group, category, item, sub_item']);
+        }
+
+        $source = strtolower($request->file_source);
+        $pdf_files = [];
+
+        if($source == 'sub_group')
+        {
+            $pdf_files = MenuSubGroup::find($request->pdf_files,['id','name','filename','fileurl','author']);
+        }
+        elseif($source == 'category')
+        {
+            $pdf_files = MenuItemCategory::find($request->pdf_files,['id','name','filename','fileurl','author']);
+        }
+        elseif($source == 'item')
+        {
+            $pdf_files = MenuItem::find($request->pdf_files,['id','name','filename','fileurl','author']);
+        }
+        elseif($source == 'sub_item')
+        {
+            $pdf_files = MenuSubItem::find($request->pdf_files,['id','name','filename','fileurl','author']);
+        }
+
+
+        foreach ($pdf_files as $pdf) 
+        {
+            $batch->classFiles()->create([
+                'user_id'=>auth()->user()->id,
+                'user_name'=> $pdf->author ?? auth()->user()->name,
+                'fileTitle'=> $pdf->name,
+                'filePath'=>  url('/storage/'.$pdf->fileurl),
+            ]);
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files');
+
     }
 
     public function fileDestroy(Course $course, Batch $batch, ClassFile $cfile, Request $request)

@@ -164,4 +164,23 @@ class CategoryController extends Controller
         return redirect('/admin/menus/'.$group->id.'/sub-groups/'.$subgroup->id.'/categories');
     }
 
+    public function getMenuCategoryFilesJson(MenuItemCategory $category, Request $request)
+    {      
+        $menu_items = [];
+        $pdf_files = [];
+        
+        if($category->items()->count())  
+        {
+            $menu_items = $category->items()->where('status','=','Active')->where('type','=','heading')->get(['id','name']);
+            $pdf_files = $category->items()->where('status','=','Active')->where('type','=','file')->get(['id','name','filename','fileurl','status']);
+        }
+        
+        return response()->json(
+            [
+                'source' => 'item',
+                'menu_items' => $menu_items,
+                'pdf_files' => $pdf_files,
+            ]
+        , 200);
+    }
 }

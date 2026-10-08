@@ -38,7 +38,7 @@
                             <form action="/public-exams/{{$openexam->id}}/save" method="POST" id="exam-form">
                                 @csrf
                                 @php
-                                    $pages = $exam->questions->chunk(10); // Split into pages
+                                    $pages = $exam->questions->chunk(1); // Split into pages
                                     $key = -1;
                                 @endphp
                             
