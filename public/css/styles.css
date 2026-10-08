@@ -1276,7 +1276,7 @@ p {
     font-size: 15px;
 }
 
-.course-details-page .booking-btn {
+.course-details-page .booking-btn, .course-blue-btn {
     background: #0C2B64;
     color: #ffffff;
     width: 100%;
@@ -7156,6 +7156,120 @@ table.dataTable th.dt-type-numeric, table.dataTable th.dt-type-date, table.dataT
 
 .analysis-grid .analysis-item .analysis-label {
     font-size: 0.875rem;
+}
+
+
+
+.course-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid white;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.course-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 32px rgba(220, 38, 38, 0.25);
+    border: 1px solid #fca5a5;
+}
+
+.course-card .course-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(105deg, #0C2B64, #3571df);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.course-card .course-header h4 {
+    color: #0C2B64;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.course-card .course-header p {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+.course-card .course-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+.course-card .course-stats .stat {
+    text-align: center;
+    flex: 1;
+}
+
+.course-card .course-stats .stat i {
+    color: #0C2B64;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.course-card .course-stats .stat span {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 0.9rem;
+}
+
+.course-card .course-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.course-card .course-features .feature-tag {
+    background: #e2e8f0;
+    color: #475569;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.course-card .course-pricing {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.course-card .course-pricing .current-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #e53e3e;
+}
+
+.course-card .course-pricing .original-price {
+    font-size: 1rem;
+    color: #94a3b8;
+    text-decoration: line-through;
+}
+
+.course-card .course-pricing .discount {
+    background: #dcfce7;
+    color: #16a34a;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 @keyframes marquee {

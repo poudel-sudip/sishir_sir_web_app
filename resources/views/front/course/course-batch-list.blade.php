@@ -48,7 +48,65 @@
                    
                 </div>
                 <div class="col-md-9 order-first order-md-last">
-                    <div class="blog-container">
+                    <div class="container-fluid px-md-5">
+                        @if($batches->count())
+                            <div class="row g-4">
+                                @foreach ($batches as $batch)
+                                    <div class="col-xxl-4 col-lg-6 col-md-6" data-aos="fade-up-left" data-aos-delay="100">
+                                        <div class="course-card h-100">
+                                            @if($batch->show_badge)
+                                                <div class="course-badge popular">{{$batch->status}}</div>
+                                            @endif
+                                            <div class="course-header">
+                                                <h4 class=" fw-bold">{{$batch->name}}</h4>
+                                                <p class="">{!! $batch->description !!}</p>
+                                            </div>
+                                            
+                                            <div class="course-stats">                                    
+                                                <div class="stat">
+                                                    <i class="fas fa-clock"></i>
+                                                    <span class="">{{$batch->duration}}</span>
+                                                </div>                                    
+                                                <div class="stat">
+                                                    <i class="fas fa-headset"></i>
+                                                    <span>24/7 Support</span>
+                                                </div>
+                                                <div class="stat">
+                                                    <i class="fas fa-star"></i>
+                                                    <span>{{$batch->rating ?? 4}}</span>
+                                                </div>
+                                            </div>
+                                            
+                                            {{-- @if(count($batch->offer_list))
+                                                <div class="course-features">
+                                                    @foreach ($batch->offer_list as $row)
+                                                        <div class="feature-tag">{{ $row }}</div>
+                                                    @endforeach
+                                                </div>
+                                            @endif --}}
+                                            
+                                            <div class="course-pricing">
+                                                <div class="current-price">Rs. {{number_format($batch->final_price)}}</div>
+                                                @if($batch->discount)
+                                                    <div class="original-price">Rs. {{number_format($batch->fee)}}</div>
+                                                    <div class="discount">{{$batch->discount}}% Discount</div>
+                                                @endif
+                                            </div>
+                                            
+                                            <a href="/courses/details/{{$batch->id}}" class="btn course-blue-btn w-100 ">View Details</a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                                    
+                            </div>
+                            <div class="">
+                                {{$batches->onEachSide(1)->links('paginator.bootstrap')}}
+                            </div>
+                        @else
+                            <div class="text-center h4">No Online Course Published...</div>
+                        @endif
+                    </div>
+                    {{-- <div class="blog-container">
                         <div class="row">
                             @forelse($batches as $row)
                             <div class="col-md-4 my-3">
@@ -72,7 +130,7 @@
                         <div class="">
                             {{$batches->onEachSide(1)->links('paginator.bootstrap')}}
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>            
         </div>

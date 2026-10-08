@@ -25,7 +25,7 @@ class FrontCourseController extends Controller
 
         $batches = Batch::whereIn('status', ['Active','Running'])
             ->orderBy('id','desc')
-            ->paginate(12, ['id','course_id','name','status','fee','discount','duration','durationType','image']);
+            ->paginate(12, ['id','course_id','name','status','fee','discount','duration','durationType','image','description']);
 
         $batches->getCollection()->transform(function($b) {
             $b->final_price = $b->fee - $b->discount;
@@ -61,7 +61,7 @@ class FrontCourseController extends Controller
 
         $batches = $course->batches()->whereIn('batches.status', ['Active','Running'])
             ->orderBy('id','desc')
-            ->paginate(12, ['id','course_id','name','status','fee','discount','duration','durationType','image']);
+            ->paginate(12, ['id','course_id','name','status','fee','discount','duration','durationType','image','description']);
 
         $batches->getCollection()->transform(function($b) {
             $b->final_price = $b->fee - $b->discount;
