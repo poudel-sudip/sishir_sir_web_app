@@ -373,7 +373,7 @@ class ExamController extends Controller
             'description' => $final_remarks,
         ]);
 
-        return redirect('/student/online-course-bookings/certificate');
+        return redirect('/student/online-course-bookings/'.$booking->id.'/certificate');
     }
 
     private function getGradeInfo($percentage) {
