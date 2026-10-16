@@ -20,12 +20,21 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                      <div class="custon-table-header">
-                          <h4 class="card-title">Curriculum || {{$batch->name}}</h4>
-                          <div class="text-right">
-                              <a  href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/curriculum/create" class="btn btn-success" > Create Curriculum </a>
-                          </div>
-                      </div>
+                        <div class="custom-table-header">
+                            <h4 class="card-title">Curriculum || {{$batch->name}}</h4>
+                            <div class="text-right">
+                                <a  href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/curriculum/create" class="btn btn-success" > Create Curriculum </a>
+                                <a href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/curriculum/import-library" class="btn btn-outline-info m-2 ">
+                                    <i class="fa fa-download mr-2" aria-hidden="true"></i>
+                                    <span class="file-upload-hover">Import From Library</span>
+                                </a>
+
+                                <a href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/curriculum/import-menu" class="btn btn-outline-info m-2 ">
+                                    <i class="fa fa-download mr-2" aria-hidden="true"></i>
+                                    <span class="file-upload-hover">Import From Menu</span>
+                                </a>
+                            </div>
+                        </div>
                       <div class="table-responsive table-responsive-md">
                         <table class="table table-bordered advanced-asc-table">
                           <thead>

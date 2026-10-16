@@ -12,7 +12,7 @@
                 <li class="breadcrumb-item"><a href="{{ url('/admin/home') }}">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="{{ url('/admin/courses') }}">Courses</a></li>
                 <li class="breadcrumb-item"><a href="{{ url('/admin/courses/'.$course->id.'/batches') }}">Batches</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Files</li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="{{ url('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files') }}">Files</a></li>
                 </ol>
             </nav>
         </div>
@@ -22,27 +22,33 @@
                     <div class="card-body text-center">
                         <div class="h5 text-primary"> {{optional($batch->course)->name}} </div>
                         <div class="h4 text-info"> {{$batch->name}} </div>
+                        <div class="h5 text-primary"> {{$unit->name ?? ''}} </div>
                         <hr class="bg-info">
                         <div class="mt-4 row align-items-stretch">
                            
                             <div class="col-12 my-1 align-self-center">
+                                <button type="button" class="btn btn-outline-info m-2" data-toggle="modal" data-target="#create_folder">
+                                    <i class="fa fa-folder mr-2" aria-hidden="true"></i>
+                                    <span class="file-upload-hover">Add New Folder</span>
+                                </button>
+
                                 <button type="button" class="btn btn-outline-info m-2" data-toggle="modal" data-target="#create_file">
-                                    <i class="fa fa-plus mr-2" aria-hidden="true"></i>
+                                    <i class="fa fa-file-pdf-o mr-2" aria-hidden="true"></i>
                                     <span class="file-upload-hover">Add New File</span>
                                 </button>
 
-                                <a href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/import-library" class="btn btn-outline-info m-2 ">
+                                <a href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/import-library?unit_id={{$unit->id ?? null}}" class="btn btn-outline-info m-2 ">
                                     <i class="fa fa-download mr-2" aria-hidden="true"></i>
                                     <span class="file-upload-hover">Import From Library</span>
                                 </a>
 
-                                <a href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/import-menu" class="btn btn-outline-info m-2 ">
+                                <a href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/import-menu?unit_id={{$unit->id ?? null}}" class="btn btn-outline-info m-2 ">
                                     <i class="fa fa-download mr-2" aria-hidden="true"></i>
                                     <span class="file-upload-hover">Import From Menu</span>
                                 </a>
                             </div>
 
-                            @forelse($files as $pdf)
+                            @foreach($files as $pdf)
                                 <div class="col-md-3 col-6 my-1">    
                                     <div class="border p-2 border-info" style="height: 100%">
                                         <div style="cursor: pointer" role="button" class="file-view-btn" data-toggle="modal" data-target="#view_file" file-title="{{$pdf->fileTitle}}" file-url="{{$pdf->filePath}}" file-id="{{$pdf->id}}">
@@ -52,17 +58,42 @@
                                         <div class="text-primary small">By: {{$pdf->user_name}} <span>on {{$pdf->created_at}}</span></div>
                                         <div class="mt-2">
                                             <a class="edit-file btn-sm btn-info" href="#edit_file" file-title="{{$pdf->fileTitle}}" file-url="{{$pdf->filePath}}" file-id="{{$pdf->id}}" data-bs-toggle="modal" data-bs-target="#edit_file" data-toggle="modal" data-target="#edit_file">Edit</a>
-                                            <form class="d-inline" id="delete-form-{{$pdf->id}}" action="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/{{$pdf->id}}" method="POST">
+                                            <form class="d-inline" id="delete-file-{{$pdf->id}}" action="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/{{$pdf->id}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <a class="btn-sm btn-danger" href="javascript:{}" onclick="javascript:deleteData({{$pdf->id}});" title="Delete">Delete</a>
+                                                <a class="btn-sm btn-danger" href="javascript:{}" onclick="javascript:deleteData('delete-file-{{$pdf->id}}');" title="Delete">Delete</a>
                                             </form>
                                         </div>
                                     </div>                              
                                 </div>
-                            @empty
-                                <div class="col-md-3 my-2">No Files Found</div>
-                            @endforelse
+                            @endforeach
+
+                            @foreach($units as $cat)
+                                <div class="col-md-3 col-6 my-3">
+                                    <div>
+                                    <a href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/unit/{{$cat->id}}" class="h1"><i class="fa fa-folder-open text-primary"></i></a>
+                                    </div>
+                                    <div class="h5">
+                                    <a href="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/unit/{{$cat->id}}" style="color:inherit;">{{($cat->name)}}</a>
+                                    </div>
+                                    <div>
+                                    <a class="edit-folder btn-sm btn-info" href="#edit_folder" folder-name="{{$cat->name}}"  folder-id="{{$cat->id}}" data-toggle="modal" data-target="#edit_folder">Edit</a>
+                                    <form class="d-inline" id="delete-unit-{{$cat->id}}" action="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/unit/{{$cat->id}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="parent" value={{$unit->id ?? null}}>
+                                        <a class="btn-sm btn-danger" href="javascript:{}" onclick="javascript:deleteData('delete-unit-{{$cat->id}}');" title="Delete">Delete</a>
+                                    </form>
+                                    </div>
+                                </div>
+                                    
+                            @endforeach
+
+                            @if($files->isEmpty() && $units->isEmpty())
+                                <div class="col-12 text-center">
+                                    <h4 class="text-danger">No Files Found</h4>
+                                </div>
+                            @endif
 
                         </div>
                     </div>
@@ -85,6 +116,20 @@
                 <div class="modal-body enroll_form">
                     <form method="POST" action="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files" enctype="multipart/form-data">
                         @csrf
+
+                        <div class="form-group row my-0">
+                            <label for="file_unit_id" class="col-md-4 col-form-label text-md-right">{{ __('Unit Id') }}</label>
+
+                            <div class="col-md-8">
+                                <input id="file_unit_id" type="text" class="form-control @error('file_unit_id') is-invalid @enderror" name="file_unit_id" value="{{ old('file_unit_id') ?? $unit->id ?? null }}" readonly>
+
+                                @error('file_unit_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row my-0">
                             <label for="filetitle" class="col-md-4 col-form-label text-md-right">{{ __('Your File Title') }}</label>
@@ -223,11 +268,126 @@
     </div>
     {{-- for view file model end--}}
 
+    {{-- for file unit create model start--}}
+    <div class="modal fade" id="create_folder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Folder</h5>
+                    <button type="button" class="close border-danger" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="text-danger">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body enroll_form">
+                    <form method="POST" action="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/unit" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="form-group row my-0">
+                            <label for="folder_unit_id" class="col-md-4 col-form-label text-md-right">{{ __('Parent Unit Id') }}</label>
+
+                            <div class="col-md-8">
+                                <input id="folder_unit_id" type="text" class="form-control @error('folder_unit_id') is-invalid @enderror" name="folder_unit_id" value="{{ old('folder_unit_id') ?? $unit->id ?? null }}" readonly>
+
+                                @error('folder_unit_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row my-0">
+                            <label for="folder_name" class="col-md-4 col-form-label text-md-right">{{ __('Folder Name') }}</label>
+
+                            <div class="col-md-8">
+                                <input id="folder_name" type="text" class="form-control @error('folder_name') is-invalid @enderror" name="folder_name" value="{{ old('folder_name') }}" autofocus>
+
+                                @error('folder_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row my-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Submit') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- for file upload model end--}}
+
+    {{-- Folder Edit Modal HTML --}}
+    <div id="edit_folder" class="modal fade">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Edit Folder </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/admin/courses/{{$course->id}}/batches/{{$batch->id}}/files/unit" enctype="multipart/form-data">
+                        @csrf
+                        @method('PATCH')
+
+                        <div class="form-group row my-0">
+                            <label for="folder_id" class="col-md-3 col-form-label">{{ __(' Folder ID') }}</label>
+
+                            <div class="col-md-9">
+                                <input id="folder_id" type="text" class="form-control @error('folder_id') is-invalid @enderror" name="folder_id" value="{{ old('folder_id') }}" required readonly>
+
+                                @error('folder_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row my-0">
+                            <label for="folder_title" class="col-md-3 col-form-label">{{ __(' Folder Name') }}</label>
+
+                            <div class="col-md-9">
+                                <input id="folder_title" type="text" class="form-control @error('folder_title') is-invalid @enderror" name="folder_title" value="{{ old('folder_title') }}" required autofocus>
+
+                                @error('folder_title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row my-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Submit') }}
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Folder Edit Modal HTML end --}}
 
 
     <script type="text/javascript">
         function deleteData(id)
         {
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -238,7 +398,7 @@
                 confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('delete-form-'+id).submit();
+                    document.getElementById(id).submit();
                     Swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',
@@ -268,6 +428,22 @@
                 $('#file_id').attr('value',fid);
                 $('#file_title').attr('value',ftitle);
                 $('#old_file').attr('value',furl);
+
+            });
+
+            $('.edit-folder').click(function(){
+                
+                //clear previous data
+                $('#folder_id').attr('value','');
+                $('#folder_title').attr('value','');
+
+                //fetch current data
+                let fid = $(this).attr('folder-id');
+                let ftitle = $(this).attr('folder-name');
+
+                //set the value to edit model
+                $('#folder_id').attr('value',fid);
+                $('#folder_title').attr('value',ftitle);
 
             });
         });

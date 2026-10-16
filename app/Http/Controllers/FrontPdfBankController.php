@@ -25,6 +25,12 @@ class FrontPdfBankController extends Controller
         $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')->orderBy('order')->get();
         $data['sidebar_ad'] = Advertisement::where('status','Active')->where('position','page_sidebar_ad')->first();
 
+        $data['pdf_banks']->getCollection()->transform(function($b) {
+            $b->final_price = $b->price - $b->discount;
+            $b->discount = $b->discount > 0 ? intval((($b->discount / $b->price) * 100)) : 0;
+            return $b;
+        });
+        
         return view('front.pdf_bank.index',$data);
     }
 
@@ -48,6 +54,12 @@ class FrontPdfBankController extends Controller
 
         $data['pdf_bank_categories'] = PDFBankCategory::where('status','=','Active')->orderBy('order')->get();
         $data['sidebar_ad'] = Advertisement::where('status','Active')->where('position','page_sidebar_ad')->first();
+
+        $data['pdf_banks']->getCollection()->transform(function($b) {
+            $b->final_price = $b->price - $b->discount;
+            $b->discount = $b->discount > 0 ? intval((($b->discount / $b->price) * 100)) : 0;
+            return $b;
+        });
 
         return view('front.pdf_bank.index',$data);
     }

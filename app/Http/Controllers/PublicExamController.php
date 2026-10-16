@@ -42,6 +42,12 @@ class PublicExamController extends Controller
 
         $data['sidebar_ad'] = Advertisement::where('status','Active')->where('position','page_sidebar_ad')->first();
 
+        $data['premium_exams']->getCollection()->transform(function($b) {
+            $b->final_price = $b->price - $b->discount;
+            $b->discount = $b->discount > 0 ? intval((($b->discount / $b->price) * 100)) : 0;
+            return $b;
+        });
+
         // dd($data);
         return view('front.publicexams.examslist',$data);
     }
@@ -308,6 +314,11 @@ class PublicExamController extends Controller
         ->get(['id','name','slug','order','status'])
         ->values();
 
+        $data['premium_exams']->getCollection()->transform(function($b) {
+            $b->final_price = $b->price - $b->discount;
+            $b->discount = $b->discount > 0 ? intval((($b->discount / $b->price) * 100)) : 0;
+            return $b;
+        });
 
         // dd($data);
         return view('front.publicexams.category_examslist',$data);

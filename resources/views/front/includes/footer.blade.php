@@ -121,7 +121,9 @@
         <h5 class="">Info & Support </h5>
         <ul class="footer-menu">
           <li><a>E. Health Network (Pvt. Ltd.)</a></li>
-          <li><a>Reg. No. 334903</a></li>
+          {{-- <li><a>Reg. No. 334903</a></li> --}}
+          <li><a href="{{ asset('images/company-registration.jpg') }}" target="_blank">Reg. No. 334903</a></li>
+          <li><a>PAN No. 621123751</a></li>
           <li><div class="info-phone"><a href="javascript:void(0);" style="color:#fff"><span class="fa fa-map-marker-alt"></span>  Birendranagar - 3 Surkhet, Nepal </a></div></li>
           <li><div class="info-phone"><a href="mailto:info@shisiradhikari.com" style="color:#fff"><span class="icon-mail2"></span>  info@shisiradhikari.com</a></div></li>
           <li><div class="info-phone"><a href="mailto: ehealthehn@gmail.com" style="color:#fff"><span class="icon-mail2"></span> ehealthehn@gmail.com</a></div></li>

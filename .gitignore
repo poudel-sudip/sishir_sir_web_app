@@ -8,8 +8,6 @@
 .env
 .env.backup
 .phpunit.result.cache
-composer.lock
-package-lock.json
 docker-compose.override.yml
 Homestead.json
 Homestead.yaml

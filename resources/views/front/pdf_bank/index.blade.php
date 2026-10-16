@@ -52,20 +52,54 @@
                     <div class="blog-container">
                         <div class="row">
                             @forelse($pdf_banks as $row)
-                            <div class="col-md-4 my-3">
-                                <a href="/pdf-banks/bank/{{$row->id}}">
-                                    <div class="single-blog pt-3 border border-primary border-2">
-                                        <div class="blog-image text-center">
-                                            <img src="/storage/{{$row->thumbnail}}">
+
+                                <div class="col-xxl-4 col-lg-6 col-md-6 mb-2" data-aos="fade-up-left" data-aos-delay="100">
+                                    <div class="course-card h-100">
+                                        <div class="course-header">
+                                            <h4 class="fw-bold">{{$row->title}}</h4>
                                         </div>
-                                        <div class="blog-details">
-                                            <h4 class="text-center"><a href="/pdf-banks/bank/{{$row->id}}">{{$row->title}}</a></h4>
-                                            <div class="text-center text-danger" style="margin-top: -0.5rem">(eBooks: <span class="text-primary">{{ $row->type == 'set' ? $row->pdf_count : '1' }}</span>)</div>
-                                            <div class="mx-2">Price : @if($row->discount > 0) <s class="text-danger">Rs. {{ $row->price }}</s> @endif <strong class="text-success"> Rs. {{ ($row->price - $row->discount) }}</strong></div>
+                                        
+                                        <div class="course-stats">                                    
+                                            <div class="stat">
+                                                <i class="fas fa-file-pdf"></i>
+                                                <span class="">{{ $row->type == 'set' ? $row->pdf_count : '1' }} eBooks</span>
+                                            </div>                                    
+                                            <div class="stat">
+                                                <i class="fas fa-headset"></i>
+                                                <span>24/7 Support</span>
+                                            </div>
+                                            <div class="stat">
+                                                <i class="fas fa-star"></i>
+                                                <span>{{$row->rating ?? 4}}</span>
+                                            </div>
                                         </div>
+                                        
+                                        <div class="course-pricing">
+                                            <div class="current-price">Rs. {{number_format($row->final_price)}}</div>
+                                            @if($row->discount)
+                                                <div class="original-price">Rs. {{number_format($row->price)}}</div>
+                                                <div class="discount">{{$row->discount}}% Discount</div>
+                                            @endif
+                                        </div>
+                                        
+                                        <a href="/pdf-banks/bank/{{$row->id}}" class="btn course-blue-btn w-100 ">View Details</a>
                                     </div>
-                                </a>
-                            </div>
+                                </div>
+
+                                {{-- <div class="col-md-4 my-3">
+                                    <a href="/pdf-banks/bank/{{$row->id}}">
+                                        <div class="single-blog pt-3 border border-primary border-2">
+                                            <div class="blog-image text-center">
+                                                <img src="/storage/{{$row->thumbnail}}">
+                                            </div>
+                                            <div class="blog-details">
+                                                <h4 class="text-center"><a href="/pdf-banks/bank/{{$row->id}}">{{$row->title}}</a></h4>
+                                                <div class="text-center text-danger" style="margin-top: -0.5rem">(eBooks: <span class="text-primary">{{ $row->type == 'set' ? $row->pdf_count : '1' }}</span>)</div>
+                                                <div class="mx-2">Price : @if($row->discount > 0) <s class="text-danger">Rs. {{ $row->price }}</s> @endif <strong class="text-success"> Rs. {{ ($row->price - $row->discount) }}</strong></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div> --}}
                             @empty
                                 <div>No eBooks Published</div>
                             @endforelse
