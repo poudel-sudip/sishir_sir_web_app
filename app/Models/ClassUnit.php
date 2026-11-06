@@ -19,11 +19,21 @@ class ClassUnit extends Model
 
     public function classFiles(): HasMany
     {
-        return $this->hasMany(ClassFiles::class,'unit_id')->orderBy('created_at');
+        return $this->hasMany(ClassFiles::class,'unit_id');
     }
 
     public function classVideos(): HasMany
     {
-        return $this->hasMany(ClassVideos::class,'unit_id')->orderBy('created_at');
+        return $this->hasMany(ClassVideos::class,'unit_id');
+    }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(ClassUnit::class, 'parent_id');
+    }
+
+    public function children(): HasMany
+    {
+        return $this->hasMany(ClassUnit::class, 'parent_id');
     }
 }

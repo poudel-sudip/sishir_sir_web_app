@@ -107,7 +107,12 @@ class FrontController extends Controller
             ->orderByDesc('isPinned')
             ->orderByDesc('id')
             ->take(4)
-            ->get(['id', 'title', 'slug','thumbnail', 'created_at'])
+            ->get(['id', 'title', 'slug','thumbnail','price','discount', 'created_at'])
+            ->map(function ($b) {
+                $b->final_price = $b->price - $b->discount;
+                $b->discount = $b->discount > 0 ? intval((($b->discount / $b->price) * 100)) : 0;
+                return $b;
+            })
             ->values();
 
         // foreach ($data['pdf_bank_categories'] as $cat) {
@@ -134,9 +139,11 @@ class FrontController extends Controller
             ->orderByDesc('isPinned')
             ->orderByDesc('id')
             ->take(4)
-            ->get(['id', 'title', 'slug', 'image', 'created_at'])
+            ->get(['id', 'title', 'slug', 'image','price','discount', 'created_at'])
             ->map(function ($b) {
                 $b->mcq_count = $b->category_exams()->count();
+                $b->final_price = $b->price - $b->discount;
+                $b->discount = $b->discount > 0 ? intval((($b->discount / $b->price) * 100)) : 0;
                 return $b;
             })
             ->values();

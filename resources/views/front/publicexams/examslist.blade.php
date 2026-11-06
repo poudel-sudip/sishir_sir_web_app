@@ -97,7 +97,39 @@
                         <div class="blog-container mt-2">
                             <div class="row">
                                 @forelse($premium_exams as $exam)
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-xxl-4 col-lg-6 col-md-6 mb-2" data-aos="fade-up-left" data-aos-delay="100">
+                                        <div class="course-card h-100">
+                                            <div class="course-header">
+                                                <h4 class="fw-bold">{{$exam->title}}</h4>
+                                            </div>
+                                            
+                                            <div class="course-stats">                                    
+                                                <div class="stat">
+                                                    <i class="fas fa-file-code"></i>
+                                                    <span class="">{{ $exam->category_exams()->count() }} Sets</span>
+                                                </div>                                    
+                                                <div class="stat">
+                                                    <i class="fas fa-headset"></i>
+                                                    <span>24/7 Support</span>
+                                                </div>
+                                                <div class="stat">
+                                                    <i class="fas fa-star"></i>
+                                                    <span>{{$exam->rating ?? 4}}</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="course-pricing">
+                                                <div class="current-price">Rs. {{number_format($exam->final_price)}}</div>
+                                                @if($exam->discount)
+                                                    <div class="original-price">Rs. {{number_format($exam->price)}}</div>
+                                                    <div class="discount">{{$exam->discount}}% Discount</div>
+                                                @endif
+                                            </div>
+                                            
+                                            <a href="/exam-hall/premium/{{$exam->id}}" class="btn course-blue-btn w-100 ">View Details</a>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="col-md-4 mb-3">
                                         <div class="seller-item border border-primary rounded border-2">
                                             <div class="seller-header text-center">
                                                 <a href="/exam-hall/premium/{{$exam->id}}">
@@ -108,7 +140,7 @@
 
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 @empty                  
                                     <div>No Exam Published</div>
                                 @endforelse

@@ -26,6 +26,32 @@
                             @csrf
 
                             <div class="form-group row">
+                                <label for="batch_name" class="col-sm-4 col-form-label">Batch Name</label>
+                                <div class="col-sm-8">
+                                <input id="batch_name" type="text" class="form-control @error('batch_name') is-invalid @enderror" name="batch_name" value="{{ old('batch_name') ?? $batch->name }}" required autocomplete="batch_name" readonly>
+
+                                @error('batch_name')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="unit_id" class="col-sm-4 col-form-label">Unit Id</label>
+                                <div class="col-sm-8">
+                                <input id="unit_id" type="text" class="form-control @error('unit_id') is-invalid @enderror" name="unit_id" value="{{ old('unit_id') ?? $unit->id ?? null }}" required autocomplete="unit_id" readonly>
+
+                                @error('unit_id')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="main_library" class="col-md-4 col-form-label">{{ __('Material Library') }}</label>
                                 <div class="col-md-8">
                                     <select name="main_library" id="main_library" class="form-control @error('main_library') is-invalid @enderror" value="{{ old('main_library') }}" autofocus required>

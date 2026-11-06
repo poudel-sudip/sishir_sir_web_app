@@ -428,7 +428,39 @@
                 <div class="shadow border-danger border border-top-0 border-2 p-1">
                     <div class="row align-items-stretch">
                         @foreach ($premium_exams as $row)
-                            <div class="col-sm-6 col-md-3 mb-3">
+                            <div class="col-lg-3 col-sm-6 mb-2" data-aos="fade-up-left" data-aos-delay="100">
+                                <div class="course-card h-100">
+                                    <div class="course-header">
+                                        <h4 class="fw-bold">{{$row->title}}</h4>
+                                    </div>
+                                    
+                                    <div class="course-stats">                                    
+                                        <div class="stat">
+                                            <i class="fas fa-file-code"></i>
+                                            <span class="">{{$row->mcq_count}}  Sets MCQs</span>
+                                        </div>                                    
+                                        <div class="stat">
+                                            <i class="fas fa-headset"></i>
+                                            <span>24/7 Support</span>
+                                        </div>
+                                        <div class="stat">
+                                            <i class="fas fa-star"></i>
+                                            <span>{{$row->rating ?? 4}}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="course-pricing">
+                                        <div class="current-price">Rs. {{number_format($row->final_price)}}</div>
+                                        @if($row->discount)
+                                            <div class="original-price">Rs. {{number_format($row->price)}}</div>
+                                            <div class="discount">{{$row->discount}}% Discount</div>
+                                        @endif
+                                    </div>
+                                    
+                                    <a href="/exam-hall/premium/{{$row->id}}" class="btn course-blue-btn w-100 ">View Details</a>
+                                </div>
+                            </div>
+                            {{-- <div class="col-sm-6 col-md-3 mb-3">
                                 <div class="seller-item border-primary rounded border border-2 h-100">
                                     <div class="seller-header text-center h-100">
                                         <a href="/exam-hall/premium/{{$row->id}}">
@@ -439,7 +471,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         @endforeach
                     </div>
                 </div>
@@ -629,7 +661,40 @@
                 <div class="shadow border-danger border border-top-0 border-2 p-1">
                     <div class="row align-items-stretch">
                         @foreach ($pdf_bank_ebooks as $row)
-                            <div class="col-sm-6 col-md-3 mb-3">
+                            <div class="col-lg-3 col-sm-6 mb-2" data-aos="fade-up-left" data-aos-delay="100">
+                                <div class="course-card h-100">
+                                    <div class="course-header">
+                                        <h4 class="fw-bold">{{$row->title}}</h4>
+                                    </div>
+                                    
+                                    <div class="course-stats">                                    
+                                        <div class="stat">
+                                            <i class="fas fa-file-pdf"></i>
+                                            <span class="">{{ $row->type == 'set' ? $row->pdf_count : '1' }} eBooks</span>
+                                        </div>                                    
+                                        <div class="stat">
+                                            <i class="fas fa-headset"></i>
+                                            <span>24/7 Support</span>
+                                        </div>
+                                        <div class="stat">
+                                            <i class="fas fa-star"></i>
+                                            <span>{{$row->rating ?? 4}}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="course-pricing">
+                                        <div class="current-price">Rs. {{number_format($row->final_price)}}</div>
+                                        @if($row->discount)
+                                            <div class="original-price">Rs. {{number_format($row->price)}}</div>
+                                            <div class="discount">{{$row->discount}}% Discount</div>
+                                        @endif
+                                    </div>
+                                    
+                                    <a href="/pdf-banks/bank/{{$row->id}}" class="btn course-blue-btn w-100 ">View Details</a>
+                                </div>
+                            </div>
+                            
+                            {{-- <div class="col-sm-6 col-md-3 mb-3">
                                 <div class="seller-item border-primary rounded border border-2 h-100">
                                     <div class="seller-header text-center h-100">
                                         <a href="/pdf-banks/bank/{{$row->id}}">
@@ -640,7 +705,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         @endforeach
                     </div>
                 </div>

@@ -9,6 +9,7 @@ use App\Models\Batch;
 use App\Models\Course;
 use App\Models\ClassFiles as ClassFile;
 use App\Models\ClassVideos as ClassVideo;
+use App\Models\ClassUnit;
 use App\Models\BatchCurriculum;
 use App\Models\Exams\BatchExam;
 use App\Models\Exams\Exam;
@@ -167,17 +168,115 @@ class BatchController extends Controller
         $batch->bookings()->delete();
         $batch->classFiles()->delete();
         $batch->classVideos()->delete();
+        $batch->curriculums()->delete();
+        $batch->units()->delete();
+        $batch->batchExams()->delete();
         $batch->delete();
 
         return redirect('/admin/courses/'.$course->id.'/batches');
     }
 
-    public function fileIndex(Course $course, Batch $batch)
+    public function fileUnitIndex(Course $course, Batch $batch, ClassUnit $unit)
     {
+
         $data['course'] = $course;
         $data['batch'] = $batch;
-        $data['files'] = $batch->classFiles()->orderByDesc('created_at')->get();
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','file')->where('parent_id','=',$unit->id ?? null)->get();
+        $data['files'] = $batch->classFiles()->where('unit_id', '=', $unit->id ?? null)->orderByDesc('created_at')->get();
 
+
+        // dd($data);
+        return view('admin.courses.batch.files',$data);
+    }
+
+    public function fileUnitStore(Course $course, Batch $batch, Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'folder_name'=>'string | required',
+            'folder_unit_id'=>'nullable|numeric',
+        ]);
+
+        $unit = ClassUnit::where('id','=',$request->folder_unit_id??null)->first();
+
+        $batch->units()->create([
+            'parent_id'=>$unit->id ?? null,
+            'name'=>$request->folder_name,
+            'type'=>'file',
+        ]);
+
+        if($unit)
+        {
+            return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files/unit/'.$unit->id);
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files');
+    }
+
+    public function fileUnitUpdate(Course $course, Batch $batch, Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'folder_id'=>'numeric | required',
+            'folder_title'=>'string | required',
+        ]);
+
+        $unit = ClassUnit::where('id','=',$request->folder_id)->first();
+
+        if($unit)
+        {
+            $unit->update([
+                'name'=>$request->folder_title,
+            ]);
+
+            $parentUnit = ClassUnit::where('id','=',$unit->parent_id ?? null)->first();
+            if($parentUnit)
+            {
+                return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files/unit/'.$parentUnit->id);
+            }
+
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files');
+    }
+
+    public function fileUnitDestroy(Course $course, Batch $batch, ClassUnit $unit, Request $request)
+    {
+
+        if($unit)
+        {
+            $parentUnit = ClassUnit::where('id','=',$unit->parent_id ?? null)->first();
+
+            $unit->classFiles()->delete();
+            $unit->delete();
+
+            if($parentUnit)
+            {
+                return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files/unit/'.$parentUnit->id);
+            }
+
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files');
+    }
+
+    public function fileIndex(Course $course, Batch $batch)
+    {
+        $unit = null;
+        if(request()->has('unit_id'))
+        {
+            $unit = ClassUnit::where('id','=',request()->unit_id)->first();
+        }
+
+        $data['course'] = $course;
+        $data['batch'] = $batch;
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','file')->where('parent_id','=',$unit->id ?? null)->get();
+        $data['files'] = $batch->classFiles()->where('unit_id', '=', $unit->id ?? null)->orderByDesc('created_at')->get();
+
+
+        // dd($data);
         return view('admin.courses.batch.files',$data);
     }
 
@@ -186,7 +285,10 @@ class BatchController extends Controller
         $request->validate([
             'filetitle'=>'string | nullable',
             'userfile'=>'required | mimes:pdf',
+            'file_unit_id'=>'nullable|numeric',
         ]);
+
+        $unit = ClassUnit::where('id','=',$request->file_unit_id??null)->first();
 
         $file = $request->file('userfile');
         $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
@@ -196,11 +298,17 @@ class BatchController extends Controller
         $url = url('/storage/'.$url);
 
         $batch->classFiles()->create([
+            'unit_id'=>$unit->id ?? null,
             'user_id'=>auth()->user()->id,
             'user_name'=>auth()->user()->name,
             'fileTitle'=>$request->filetitle ?? $filename,
             'filePath'=>$url,
         ]);
+
+        if($unit)
+        {
+            return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files/unit/'.$unit->id);
+        }
 
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files');
     }
@@ -248,6 +356,11 @@ class BatchController extends Controller
             ]);
         }
 
+        $unit = ClassUnit::where('id','=',$cfile->unit_id ?? null)->first();
+        if($unit)
+        {
+            return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files/unit/'.$unit->id)->with('success','Data Updated Successfully');
+        }
         
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files')->with('success','Data Updated Successfully');
     }
@@ -256,10 +369,16 @@ class BatchController extends Controller
     public function fileImportLibraryForm(Course $course, Batch $batch)
     {
         $libraries = LibraryCategory::where('parent_id','=',null)->orderBy('name')->get();
+        $unit = null;
+        if(request()->has('unit_id'))
+        {
+            $unit = ClassUnit::where('id','=',request()->unit_id)->first();
+        }
 
         $data['course'] = $course;
         $data['batch'] = $batch;
         $data['libraries'] = $libraries;
+        $data['unit'] = $unit;
                 
         return view('admin.courses.batch.files-import-library',$data);
     }
@@ -267,21 +386,30 @@ class BatchController extends Controller
     public function fileImportLibrary(Course $course, Batch $batch, Request $request)
     {
         $request->validate([
+            'unit_id'=>'nullable|numeric',
             'main_library' => 'required|numeric',
             'sub_library' => 'nullable|numeric',
             'pdf_files' => 'required|array',
         ]);
+
+        $unit = ClassUnit::where('id','=',$request->unit_id??null)->first();
 
         $pdf_files = LibraryMaterial::find($request->pdf_files,['id','name','filename','fileurl','download','author','pages','published_year']);
 
         foreach ($pdf_files as $pdf) 
         {
             $batch->classFiles()->create([
+                'unit_id'=>$unit ? $unit->id : null,
                 'user_id'=>auth()->user()->id,
                 'user_name'=> $pdf->author,
                 'fileTitle'=> $pdf->name,
                 'filePath'=>  url('/storage/'.$pdf->fileurl),
             ]);
+        }
+
+        if($unit)
+        {
+            return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files/unit/'.$unit->id);
         }
 
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files');
@@ -292,9 +420,16 @@ class BatchController extends Controller
     {
         $menu_groups = MenuGroup::where('status','=','Active')->orderBy('name')->get(['id','name']);
 
+        $unit = null;
+        if(request()->has('unit_id'))
+        {
+            $unit = ClassUnit::where('id','=',request()->unit_id)->first();
+        }
+
         $data['course'] = $course;
         $data['batch'] = $batch;
         $data['menu_groups'] = $menu_groups;
+        $data['unit'] = $unit;
                 
         return view('admin.courses.batch.files-import-menu',$data);
     }
@@ -303,6 +438,7 @@ class BatchController extends Controller
     {
         // dd($request->all());
         $request->validate([
+            'unit_id'=>'nullable|numeric',
             'pdf_files' => 'required|array',
             'file_source' => 'required|string',
         ]);
@@ -311,6 +447,9 @@ class BatchController extends Controller
         {
             return back()->withInput()->withErrors(['file_source'=>'Invalid File Source. Available: sub_group, category, item, sub_item']);
         }
+
+        $unit = ClassUnit::where('id','=',$request->unit_id??null)->first();
+
 
         $source = strtolower($request->file_source);
         $pdf_files = [];
@@ -336,6 +475,7 @@ class BatchController extends Controller
         foreach ($pdf_files as $pdf) 
         {
             $batch->classFiles()->create([
+                'unit_id'=>$unit ? $unit->id : null,
                 'user_id'=>auth()->user()->id,
                 'user_name'=> $pdf->author ?? auth()->user()->name,
                 'fileTitle'=> $pdf->name,
@@ -343,6 +483,11 @@ class BatchController extends Controller
             ]);
         }
 
+        if($unit)
+        {
+            return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files/unit/'.$unit->id);
+        }
+        
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files');
 
     }
@@ -353,16 +498,118 @@ class BatchController extends Controller
         if($cfile)
         {
             $cfile->delete();
+            $unit = ClassUnit::where('id','=',$cfile->unit_id ?? null)->first();
+            if($unit)
+            {
+                return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files/unit/'.$unit->id)->with('success','Data Deleted Successfully');
+            }
+
         }
         
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/files')->with('success','Data Deleted Successfully');
     }
 
-    public function videoIndex(Course $course, Batch $batch)
+
+    public function videoUnitIndex(Course $course, Batch $batch, ClassUnit $unit)
     {
+
         $data['course'] = $course;
         $data['batch'] = $batch;
-        $data['videos'] = $batch->classVideos()->orderBy('created_at')->get();
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','video')->where('parent_id','=',$unit->id ?? null)->get();
+        $data['videos'] = $batch->classVideos()->where('unit_id', '=', $unit->id ?? null)->orderByDesc('created_at')->get();
+
+
+        // dd($data);
+        return view('admin.courses.batch.videos',$data);
+    }
+
+    public function videoUnitStore(Course $course, Batch $batch, Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'folder_name'=>'string | required',
+            'folder_unit_id'=>'nullable|numeric',
+        ]);
+
+        $unit = ClassUnit::where('id','=',$request->folder_unit_id??null)->first();
+
+        $batch->units()->create([
+            'parent_id'=>$unit->id ?? null,
+            'name'=>$request->folder_name,
+            'type'=>'video',
+        ]);
+
+        if($unit)
+        {
+            return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos/unit/'.$unit->id);
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos');
+    }
+
+    public function videoUnitUpdate(Course $course, Batch $batch, Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'folder_id'=>'numeric | required',
+            'folder_title'=>'string | required',
+        ]);
+
+        $unit = ClassUnit::where('id','=',$request->folder_id)->first();
+
+        if($unit)
+        {
+            $unit->update([
+                'name'=>$request->folder_title,
+            ]);
+
+            $parentUnit = ClassUnit::where('id','=',$unit->parent_id ?? null)->first();
+            if($parentUnit)
+            {
+                return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos/unit/'.$parentUnit->id);
+            }
+
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos');
+    }
+
+    public function videoUnitDestroy(Course $course, Batch $batch, ClassUnit $unit, Request $request)
+    {
+
+        if($unit)
+        {
+            $parentUnit = ClassUnit::where('id','=',$unit->parent_id ?? null)->first();
+
+            $unit->classVideos()->delete();
+            $unit->delete();
+
+            if($parentUnit)
+            {
+                return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos/unit/'.$parentUnit->id);
+            }
+
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos');
+    }
+
+
+    public function videoIndex(Course $course, Batch $batch)
+    {
+        $unit = null;
+        if(request()->has('unit_id'))
+        {
+            $unit = ClassUnit::where('id','=',request()->unit_id)->first();
+        }
+
+        $data['course'] = $course;
+        $data['batch'] = $batch;
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','video')->where('parent_id','=',$unit->id ?? null)->get();
+        $data['videos'] = $batch->classVideos()->where('unit_id', '=', $unit->id ?? null)->orderByDesc('created_at')->get();
+
 
         return view('admin.courses.batch.videos',$data);
     }
@@ -373,17 +620,26 @@ class BatchController extends Controller
         $request->validate([
             'videotitle'=>'string | required',
             'uservideo'=>'string | required',
+            'video_unit_id'=>'nullable|numeric',
         ]);
+
+        $unit = ClassUnit::where('id','=',$request->video_unit_id??null)->first();
 
         $videoKey = $this->retriveVideoKey($request->uservideo);
 
         $batch->classVideos()->create([
+            'unit_id'=>$unit->id ?? null,
             'user_id'=>auth()->user()->id,
             'user_name'=>auth()->user()->name,
             'videoTitle'=>$request['videotitle'],
             'videoPath'=>$request['uservideo'],
             'videoKey'=>$videoKey,
         ]);
+
+        if($unit)
+        {
+            return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos/unit/'.$unit->id);
+        }
         
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos');
     }
@@ -410,7 +666,14 @@ class BatchController extends Controller
                 'videoKey'=>$videoKey,
             ]);
         }
-                
+            
+        $unit = ClassUnit::where('id','=',$video->unit_id ?? null)->first();
+        if($unit)
+        {
+            return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos/unit/'.$unit->id)->with('success','Data Updated Successfully');
+        }
+        
+
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos');
     }
 
@@ -420,6 +683,11 @@ class BatchController extends Controller
         if($cvideo)
         {
             $cvideo->delete();
+            $unit = ClassUnit::where('id','=',$cvideo->unit_id ?? null)->first();
+            if($unit)
+            {
+                return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos/unit/'.$unit->id)->with('success','Data Deleted Successfully');
+            }
         }
         
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/videos')->with('success','Data Deleted Successfully');
@@ -497,6 +765,109 @@ class BatchController extends Controller
         ]);
 
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/curriculum');
+    }
+
+    public function curriculumImportLibraryForm(Course $course, Batch $batch)
+    {
+        $libraries = LibraryCategory::where('parent_id','=',null)->orderBy('name')->get();
+
+        $data['course'] = $course;
+        $data['batch'] = $batch;
+        $data['libraries'] = $libraries;
+                
+        return view('admin.courses.curriculum.import-library',$data);
+    }
+
+    public function curriculumImportLibrary(Course $course, Batch $batch, Request $request)
+    {
+        $request->validate([
+            'main_library' => 'required|numeric',
+            'sub_library' => 'nullable|numeric',
+            'pdf_files' => 'required|array',
+        ]);
+
+        $pdf_files = LibraryMaterial::find($request->pdf_files);
+
+        foreach ($pdf_files as $pdf) 
+        {
+
+            $batch->curriculums()->create([
+                'user_id' => auth()->user()->id,
+                'title' => $pdf->name,
+                'description' => $pdf->description,
+                'pdf_file' => url('/storage/'.$pdf->fileurl),
+                'is_heading' => 1,
+                'status' => 1,
+            ]);
+
+            
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/curriculum');
+
+    }
+
+    public function curriculumImportMenuForm(Course $course, Batch $batch)
+    {
+        $menu_groups = MenuGroup::where('status','=','Active')->orderBy('name')->get(['id','name']);
+
+        $data['course'] = $course;
+        $data['batch'] = $batch;
+        $data['menu_groups'] = $menu_groups;
+                
+        return view('admin.courses.curriculum.import-menu',$data);
+    }
+
+    public function curriculumImportMenu(Course $course, Batch $batch, Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'pdf_files' => 'required|array',
+            'file_source' => 'required|string',
+        ]);
+
+        if(!in_array(strtolower($request->file_source),['sub_group','category','item','sub_item']))
+        {
+            return back()->withInput()->withErrors(['file_source'=>'Invalid File Source. Available: sub_group, category, item, sub_item']);
+        }
+
+        $source = strtolower($request->file_source);
+        $pdf_files = [];
+
+        if($source == 'sub_group')
+        {
+            $pdf_files = MenuSubGroup::find($request->pdf_files);
+        }
+        elseif($source == 'category')
+        {
+            $pdf_files = MenuItemCategory::find($request->pdf_files);
+        }
+        elseif($source == 'item')
+        {
+            $pdf_files = MenuItem::find($request->pdf_files);
+        }
+        elseif($source == 'sub_item')
+        {
+            $pdf_files = MenuSubItem::find($request->pdf_files);
+        }
+
+
+        foreach ($pdf_files as $pdf) 
+        {
+
+            $batch->curriculums()->create([
+                'user_id' => auth()->user()->id,
+                'title' => $pdf->name,
+                'description' => $pdf->description,
+                'pdf_file' => url('/storage/'.$pdf->fileurl),
+                'is_heading' => 1,
+                'status' => 1,
+            ]);
+
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/curriculum');
+
     }
 
     public function curriculumShow(Course $course, Batch $batch, BatchCurriculum $curriculum, Request $request)

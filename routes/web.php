@@ -642,6 +642,10 @@ Route::delete('/admin/courses/{course}/batches/{batch}', 'App\Http\Controllers\A
 Route::get('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileIndex')->middleware('role:Admin');
 Route::post('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileStore')->middleware('role:Admin');
 Route::patch('/admin/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Admin\Courses\BatchController@fileUpdate')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/files/unit/{unit}', 'App\Http\Controllers\Admin\Courses\BatchController@fileUnitIndex')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches/{batch}/files/unit', 'App\Http\Controllers\Admin\Courses\BatchController@fileUnitStore')->middleware('role:Admin');
+Route::patch('/admin/courses/{course}/batches/{batch}/files/unit', 'App\Http\Controllers\Admin\Courses\BatchController@fileUnitUpdate')->middleware('role:Admin');
+Route::delete('/admin/courses/{course}/batches/{batch}/files/unit/{unit}', 'App\Http\Controllers\Admin\Courses\BatchController@fileUnitDestroy')->middleware('role:Admin');
 Route::get('/admin/courses/{course}/batches/{batch}/files/import-library', 'App\Http\Controllers\Admin\Courses\BatchController@fileImportLibraryForm')->middleware('role:Admin');
 Route::post('/admin/courses/{course}/batches/{batch}/files/import-library', 'App\Http\Controllers\Admin\Courses\BatchController@fileImportLibrary')->middleware('role:Admin');
 Route::get('/admin/courses/{course}/batches/{batch}/files/import-menu', 'App\Http\Controllers\Admin\Courses\BatchController@fileImportMenuForm')->middleware('role:Admin');
@@ -651,11 +655,19 @@ Route::delete('/admin/courses/{course}/batches/{batch}/files/{cfile}', 'App\Http
 Route::get('/admin/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Admin\Courses\BatchController@videoIndex')->middleware('role:Admin');
 Route::post('/admin/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Admin\Courses\BatchController@videoStore')->middleware('role:Admin');
 Route::patch('/admin/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Admin\Courses\BatchController@videoUpdate')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/videos/unit/{unit}', 'App\Http\Controllers\Admin\Courses\BatchController@videoUnitIndex')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches/{batch}/videos/unit', 'App\Http\Controllers\Admin\Courses\BatchController@videoUnitStore')->middleware('role:Admin');
+Route::patch('/admin/courses/{course}/batches/{batch}/videos/unit', 'App\Http\Controllers\Admin\Courses\BatchController@videoUnitUpdate')->middleware('role:Admin');
+Route::delete('/admin/courses/{course}/batches/{batch}/videos/unit/{unit}', 'App\Http\Controllers\Admin\Courses\BatchController@videoUnitDestroy')->middleware('role:Admin');
 Route::delete('/admin/courses/{course}/batches/{batch}/videos/{cvideo}', 'App\Http\Controllers\Admin\Courses\BatchController@videoDestroy')->middleware('role:Admin');
 
 Route::get('/admin/courses/{course}/batches/{batch}/curriculum', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumIndex')->middleware('role:Admin');
 Route::get('/admin/courses/{course}/batches/{batch}/curriculum/create', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumCreate')->middleware('role:Admin');
 Route::post('/admin/courses/{course}/batches/{batch}/curriculum', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumStore')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/curriculum/import-library', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumImportLibraryForm')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches/{batch}/curriculum/import-library', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumImportLibrary')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/curriculum/import-menu', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumImportMenuForm')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches/{batch}/curriculum/import-menu', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumImportMenu')->middleware('role:Admin');
 Route::get('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}/edit', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumEdit')->middleware('role:Admin');
 Route::get('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumShow')->middleware('role:Admin');
 Route::patch('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}', 'App\Http\Controllers\Admin\Courses\BatchController@curriculumUpdate')->middleware('role:Admin');
@@ -949,7 +961,11 @@ Route::patch('/student/online-course-bookings/{booking}/coupon-pay', 'App\Http\C
 Route::delete('/student/online-course-bookings/{booking}', 'App\Http\Controllers\Student\Course\BookingController@destroy')->middleware('role:Student');
 
 Route::get('/student/online-course-bookings/{booking}/files','App\Http\Controllers\Student\Course\BookingController@fileList')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/files/unit/{unit}', 'App\Http\Controllers\Student\Course\BookingController@fileUnitList')->middleware('role:Student');
+
 Route::get('/student/online-course-bookings/{booking}/videos','App\Http\Controllers\Student\Course\BookingController@videoList')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/videos/unit/{unit}', 'App\Http\Controllers\Student\Course\BookingController@videoUnitList')->middleware('role:Student');
+
 Route::get('/student/online-course-bookings/{booking}/curriculum','App\Http\Controllers\Student\Course\BookingController@curriculumList')->middleware('role:Student');
 Route::get('/student/online-course-bookings/{booking}/curriculum/{cid}','App\Http\Controllers\Student\Course\BookingController@curriculumShow')->middleware('role:Student');
 Route::get('/student/online-course-bookings/{booking}/certificate','App\Http\Controllers\Student\Course\BookingController@showCertificate')->middleware('role:Student');

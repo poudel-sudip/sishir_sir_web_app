@@ -85,13 +85,13 @@
                             </div>
                         
                             <!-- Bottom Navigation -->
-                            <div class="owl-nav d-flex justify-content-end" style="margin-top: -10px">
+                            <div class="owl-nav d-flex justify-content-end" style="margin-top: auto;">
                                 <button type="button" class="mx-1 btn border border-primary text-primary owl-prev" style="font-size: 18px;">Previous Page</button>
                                 <button type="button" class="mx-1 btn border border-primary text-primary owl-next" style="font-size: 18px;">Next Page</button>
                             </div>
                         
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary mt-3 " style="font-size: 18px;">Submit Exam</button>
+                                <button type="submit" class="btn btn-primary " style="font-size: 18px;">Submit Exam</button>
                             </div>
 
                             

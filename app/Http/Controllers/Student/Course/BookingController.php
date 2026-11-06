@@ -13,6 +13,7 @@ use App\Models\Booking;
 use App\Models\Categories;
 use App\Models\Course;
 use App\Models\Batch;
+use App\Models\ClassUnit;
 use App\Models\MerchantBooking;
 use App\Models\BookingCoupon as Coupon;
 use App\Http\Controllers\NepalPayProxyController;
@@ -454,12 +455,50 @@ class BookingController extends Controller
             abort(403,'Cannot Access Files of Non-Active Batch.');
         }
 
+        $unit = null;
+        if(request()->has('unit_id'))
+        {
+            $unit = ClassUnit::where('id','=',request()->unit_id)->first();
+        }
+
         $data = [];
         $data['booking'] = $booking;
         $data['batch'] = $batch;
-        $data['files'] = $batch->classFiles()->orderBy('created_at')->get();
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','file')->where('parent_id','=',$unit->id ?? null)->get();
+        $data['files'] = $batch->classFiles()->where('unit_id', '=', $unit->id ?? null)->orderByDesc('created_at')->get();
 
         return view('student.courses.bookings.file_list',$data);
+    }
+
+    public function fileUnitList(Booking $booking, ClassUnit $unit)
+    {
+
+        if($booking->status != 'Verified')
+        {
+            abort(403,'Cannot Access Files Unverified Booking.');
+        }
+        $batch = $booking->batch;
+        if(!$batch)
+        {
+            abort(404,'Batch Not Found.');
+        }
+
+        if(in_array($batch->status,['Active','Running']) == false)
+        {
+            abort(403,'Cannot Access Files of Non-Active Batch.');
+        }
+
+        $data = [];
+
+        $data['booking'] = $booking;
+        $data['batch'] = $batch;
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','file')->where('parent_id','=',$unit->id ?? null)->get();
+        $data['files'] = $batch->classFiles()->where('unit_id', '=', $unit->id ?? null)->orderByDesc('created_at')->get();
+
+        return view('student.courses.bookings.file_list',$data);
+
     }
 
     public function videoList(Booking $booking)
@@ -478,13 +517,54 @@ class BookingController extends Controller
             abort(403,'Cannot Access Files of Non-Active Batch.');
         }
 
+        $unit = null;
+        if(request()->has('unit_id'))
+        {
+            $unit = ClassUnit::where('id','=',request()->unit_id)->first();
+        }
+
         $data = [];
+    
         $data['booking'] = $booking;
         $data['batch'] = $batch;
-        $data['videos'] = $batch->classVideos()->orderBy('created_at')->get();
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','video')->where('parent_id','=',$unit->id ?? null)->get();
+        $data['videos'] = $batch->classVideos()->where('unit_id', '=', $unit->id ?? null)->orderByDesc('created_at')->get();
+
+
         return view('student.courses.bookings.video_list',$data);
     }
 
+
+    public function videoUnitList(Booking $booking, ClassUnit $unit)
+    {
+
+        if($booking->status != 'Verified')
+        {
+            abort(403,'Cannot Access Videos Unverified Booking.');
+        }
+        $batch = $booking->batch;
+        if(!$batch)
+        {
+            abort(404,'Batch Not Found.');
+        }
+
+        if(in_array($batch->status,['Active','Running']) == false)
+        {
+            abort(403,'Cannot Access Videos of Non-Active Batch.');
+        }
+
+        $data = [];
+
+        $data['booking'] = $booking;
+        $data['batch'] = $batch;
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','file')->where('parent_id','=',$unit->id ?? null)->get();
+        $data['videos'] = $batch->classVideos()->where('unit_id', '=', $unit->id ?? null)->orderByDesc('created_at')->get();
+
+        return view('student.courses.bookings.video_list',$data);
+
+    }
 
     public function curriculumList(Booking $booking)
     {

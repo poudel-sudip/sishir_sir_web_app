@@ -16,8 +16,10 @@ class CreateClassUnitsTable extends Migration
         Schema::create('class_units', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('batch_id')->nullable();
+            $table->bigInteger('parent_id')->nullable();
             $table->string('name');
             $table->string('slug')->nullable();
+            $table->string('type')->nullable()->default('file');
             $table->timestamps();
         });
     }

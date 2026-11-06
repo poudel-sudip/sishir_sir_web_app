@@ -12,6 +12,8 @@
         <div class="card">
             <div class="mt-2 text-center">
                 <div class=" dchl-title h4">{{$batch->name}}</div>
+                <div class=" text-muted">{{$unit->name ?? ''}}</div>
+
             </div>
             <div class=" text-end pe-2">
                 <a href="/student/online-course-bookings/{{$booking->id}}/curriculum" class="btn btn-sm btn-outline-primary  mb-1 ">Curriculum</a> 
@@ -22,6 +24,15 @@
             <div class="card-body text-center">
                 
                 <div class="mt-4 row align-items-stretch">  
+                    @foreach($units as $cat)
+                        <div class="col-md-3 col-6 my-3">
+                            <a href="/student/online-course-bookings/{{$booking->id}}/videos/unit/{{$cat->id}}" class="d-inline-block p-2 border rounded border-primary" style="width: 100%; height: 100%; text-decoration: none;">
+                                <i class="fa fa-folder-open text-primary h1"></i>
+                                <div class="h5">{{($cat->name)}}</div>
+                            </a>
+                        </div>
+                    @endforeach
+
                     @forelse($videos as $video)
                         <div class="col-md-3 col-6 my-1">    
                             <div class="border p-2 border-info" style="height: 100%">

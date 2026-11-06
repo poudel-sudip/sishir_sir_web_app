@@ -1281,6 +1281,9 @@ p {
     color: #ffffff;
     width: 100%;
 }
+.course-blue-btn:hover{
+    color: #ffffff;
+}
 
 .course-details-page .more-decs {
     background: #f9f9f9;
@@ -3492,7 +3495,8 @@ p {
         margin-top: 10px;
         counter-reset: dots;
         text-align: center;
-        height: 60px;
+        /* height: 60px; */
+        height: auto;
     }
     .MCQ-exam .owl-dot:before {
         counter-increment: dots;

@@ -56,7 +56,7 @@ class CategoryController extends Controller
         $pdf_files = [];
         if(!$category->childs()->count())  
         {
-            $pdf_files = $category->materials()->get(['id','name','filename','status']);
+            $pdf_files = $category->materials()->where('status', 'Active')->get(['id','name','filename','status']);
 
         }
         else
