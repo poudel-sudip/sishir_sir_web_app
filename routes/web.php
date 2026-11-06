@@ -790,6 +790,63 @@ Route::patch('/moderator/exam-hall/bookings/{booking}', 'App\Http\Controllers\Mo
 
 
 
+//moderator courses and course bookings mgmt
+Route::get('/moderator/courses', 'App\Http\Controllers\Moderator\Courses\CoursesController@index')->middleware('role:Moderator');
+Route::get('/moderator/courses/create', 'App\Http\Controllers\Moderator\Courses\CoursesController@create')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}', 'App\Http\Controllers\Moderator\Courses\CoursesController@show')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}/edit', 'App\Http\Controllers\Moderator\Courses\CoursesController@edit')->middleware('role:Moderator');
+Route::post('/moderator/courses', 'App\Http\Controllers\Moderator\Courses\CoursesController@store')->middleware('role:Moderator');
+Route::patch('/moderator/courses/{course}', 'App\Http\Controllers\Moderator\Courses\CoursesController@update')->middleware('role:Moderator');
+// Route::delete('/moderator/courses/{course}', 'App\Http\Controllers\Moderator\Courses\CoursesController@destroy')->middleware('role:Moderator');
+
+Route::get('/moderator/courses/{course}/batchnames', 'App\Http\Controllers\Moderator\Courses\BatchController@display');
+Route::get('/moderator/courses/{course}/batches', 'App\Http\Controllers\Moderator\Courses\BatchController@index')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}/batches/create', 'App\Http\Controllers\Moderator\Courses\BatchController@create')->middleware('role:Moderator');
+Route::post('/moderator/courses/{course}/batches', 'App\Http\Controllers\Moderator\Courses\BatchController@store')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}/batches/{batch}', 'App\Http\Controllers\Moderator\Courses\BatchController@show')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}/batches/{batch}/edit', 'App\Http\Controllers\Moderator\Courses\BatchController@edit')->middleware('role:Moderator');
+Route::patch('/moderator/courses/{course}/batches/{batch}', 'App\Http\Controllers\Moderator\Courses\BatchController@update')->middleware('role:Moderator');
+// Route::delete('/moderator/courses/{course}/batches/{batch}', 'App\Http\Controllers\Moderator\Courses\BatchController@destroy')->middleware('role:Moderator');
+
+Route::get('/moderator/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Moderator\Courses\BatchController@fileIndex')->middleware('role:Moderator');
+Route::post('/moderator/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Moderator\Courses\BatchController@fileStore')->middleware('role:Moderator');
+Route::patch('/moderator/courses/{course}/batches/{batch}/files', 'App\Http\Controllers\Moderator\Courses\BatchController@fileUpdate')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}/batches/{batch}/files/import-library', 'App\Http\Controllers\Moderator\Courses\BatchController@fileImportLibraryForm')->middleware('role:Moderator');
+Route::post('/moderator/courses/{course}/batches/{batch}/files/import-library', 'App\Http\Controllers\Moderator\Courses\BatchController@fileImportLibrary')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}/batches/{batch}/files/import-menu', 'App\Http\Controllers\Moderator\Courses\BatchController@fileImportMenuForm')->middleware('role:Moderator');
+Route::post('/moderator/courses/{course}/batches/{batch}/files/import-menu', 'App\Http\Controllers\Moderator\Courses\BatchController@fileImportMenu')->middleware('role:Moderator');
+Route::delete('/moderator/courses/{course}/batches/{batch}/files/{cfile}', 'App\Http\Controllers\Moderator\Courses\BatchController@fileDestroy')->middleware('role:Moderator');
+
+Route::get('/moderator/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Moderator\Courses\BatchController@videoIndex')->middleware('role:Moderator');
+Route::post('/moderator/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Moderator\Courses\BatchController@videoStore')->middleware('role:Moderator');
+Route::patch('/moderator/courses/{course}/batches/{batch}/videos', 'App\Http\Controllers\Moderator\Courses\BatchController@videoUpdate')->middleware('role:Moderator');
+Route::delete('/moderator/courses/{course}/batches/{batch}/videos/{cvideo}', 'App\Http\Controllers\Moderator\Courses\BatchController@videoDestroy')->middleware('role:Moderator');
+
+Route::get('/moderator/courses/{course}/batches/{batch}/curriculum', 'App\Http\Controllers\Moderator\Courses\BatchController@curriculumIndex')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}/batches/{batch}/curriculum/create', 'App\Http\Controllers\Moderator\Courses\BatchController@curriculumCreate')->middleware('role:Moderator');
+Route::post('/moderator/courses/{course}/batches/{batch}/curriculum', 'App\Http\Controllers\Moderator\Courses\BatchController@curriculumStore')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}/batches/{batch}/curriculum/{curriculum}/edit', 'App\Http\Controllers\Moderator\Courses\BatchController@curriculumEdit')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}/batches/{batch}/curriculum/{curriculum}', 'App\Http\Controllers\Moderator\Courses\BatchController@curriculumShow')->middleware('role:Moderator');
+Route::patch('/moderator/courses/{course}/batches/{batch}/curriculum/{curriculum}', 'App\Http\Controllers\Moderator\Courses\BatchController@curriculumUpdate')->middleware('role:Moderator');
+Route::delete('/moderator/courses/{course}/batches/{batch}/curriculum/{curriculum}', 'App\Http\Controllers\Moderator\Courses\BatchController@curriculumDestroy')->middleware('role:Moderator');
+
+Route::get('/moderator/courses/{course}/batches/{batch}/mcq-exams', 'App\Http\Controllers\Moderator\Courses\BatchController@McqExamIndex')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}/batches/{batch}/mcq-exams/create', 'App\Http\Controllers\Moderator\Courses\BatchController@McqExamCreate')->middleware('role:Moderator');
+Route::post('/moderator/courses/{course}/batches/{batch}/mcq-exams', 'App\Http\Controllers\Moderator\Courses\BatchController@McqExamStore')->middleware('role:Moderator');
+Route::delete('/moderator/courses/{course}/batches/{batch}/mcq-exams/{exam}', 'App\Http\Controllers\Moderator\Courses\BatchController@McqExamDestroy')->middleware('role:Moderator');
+Route::get('/moderator/courses/{course}/batches/{batch}/mcq-exams/{exam}/results', 'App\Http\Controllers\Moderator\Courses\BatchController@McqExamResult')->middleware('role:Moderator');
+
+Route::get('/moderator/courses/{course}/batches/{batch}/bookings', 'App\Http\Controllers\Moderator\Courses\BookingsController@batchBookings')->middleware('role:Moderator');
+
+Route::get('/moderator/course-bookings', 'App\Http\Controllers\Moderator\Courses\BookingsController@index')->middleware('role:Moderator');
+Route::get('/moderator/course-bookings/all', 'App\Http\Controllers\Moderator\Courses\BookingsController@allBookings')->middleware('role:Moderator');
+Route::get('/moderator/course-bookings/filter', 'App\Http\Controllers\Moderator\Courses\BookingsController@statusBookings')->middleware('role:Moderator');
+// Route::get('/moderator/course-bookings/create', 'App\Http\Controllers\Moderator\Courses\BookingsController@create')->middleware('role:Moderator');
+// Route::post('/moderator/course-bookings', 'App\Http\Controllers\Moderator\Courses\BookingsController@store')->middleware('role:Moderator');
+Route::get('/moderator/course-bookings/{booking}/edit', 'App\Http\Controllers\Moderator\Courses\BookingsController@edit')->middleware('role:Moderator');
+Route::get('/moderator/course-bookings/{booking}', 'App\Http\Controllers\Moderator\Courses\BookingsController@show')->middleware('role:Moderator');
+Route::patch('/moderator/course-bookings/{booking}', 'App\Http\Controllers\Moderator\Courses\BookingsController@update')->middleware('role:Moderator');
+// Route::delete('/moderator/course-bookings/{booking}', 'App\Http\Controllers\Moderator\Courses\BookingsController@destroy')->middleware('role:Moderator');
 
 
 

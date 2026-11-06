@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class Course extends Model
 {
@@ -64,4 +65,8 @@ class Course extends Model
         return $this->hasMany(CourseFeatures::class)->where('isUnique','=','Yes');
     }
 
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

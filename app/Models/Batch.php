@@ -17,6 +17,7 @@ use App\Models\BatchCQC;
 use App\Models\ClassFile;
 use App\Models\ClassVideo;
 use App\Models\BatchCurriculum;
+use App\Models\User;
 
 class Batch extends Model
 {
@@ -109,5 +110,10 @@ class Batch extends Model
     public function curriculums(): HasMany
     {
         return $this->hasMany(BatchCurriculum::class, 'batch_id');
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

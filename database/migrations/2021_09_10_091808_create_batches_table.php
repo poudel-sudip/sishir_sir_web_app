@@ -16,6 +16,7 @@ class CreateBatchesTable extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('course_id');
+            $table->bigInteger('user_id')->nullable();
             $table->string('name');
             $table->string('slug')->nullable();
             $table->string('isPinned')->nullable()->default('No');
