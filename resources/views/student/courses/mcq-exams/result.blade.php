@@ -18,7 +18,56 @@
             <h2 class="" style="color:#0c2b64;">{{$analysis->title}}</h2>
         </div>
 
-        <!-- Stats Overview -->
+        <!-- Performance Overview -->
+        <div class="mt-4 card border-0 shadow-card">
+            <div class="card-body p-4">
+                <h5 class="mb-4"> <i class="fas fa-bullseye me-2"></i> Performance Analysis</h5>
+
+                <div class="analysis-grid mb-3">
+                    <div class="analysis-item border border-primary">                           
+                        <div class="stat-label text-muted">Score</div>
+                        <div class="stat-value fw-bold text-danger fs-3 mb-1" id="score">{{$analysis->marks_obtained}}/{{$analysis->full_marks}}</div>
+                        <div class="stat-label text-muted" id="percentage">{{$analysis->percentage}}%</div>
+                    </div>
+
+                    <div class="analysis-item border border-primary">                           
+                        <div class="stat-label text-muted">Grade</div>
+                        <div class="stat-value fw-bold text-danger fs-3 mb-1" id="grade">{{$analysis->grade}}</div>
+                        <div class="grade-badge {{$analysis->grade_class}}" id="performance-msg">{{$analysis->grade_msg}}</div>
+                    </div>
+
+                    <div class="analysis-item border border-primary">                           
+                        <div class="stat-label text-muted">Accuracy</div>
+                        <div class="stat-value fw-bold text-danger fs-3 mb-1" id="accuracy">{{$analysis->percentage}}%</div>
+                        <div class="progress">
+                            <div class="progress-fill bg-danger bg-opacity-50" id="accuracy-bar" style="width: {{$analysis->percentage}}%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-grid">
+                    <div class="analysis-item border border-success correct">                           
+                        <i class="fas fa-check-circle analysis-icon"></i>
+                        <div class="analysis-value" id="correct-count">{{$analysis->correct_questions}}</div>
+                        <div class="analysis-label">Correct Answers</div>
+                    </div>
+                    
+                    <div class="analysis-item border border-danger incorrect">
+                        <i class="fas fa-times-circle analysis-icon"></i>
+                        <div class="analysis-value" id="incorrect-count">{{$analysis->wrong_questions}}</div>
+                        <div class="analysis-label">Incorrect Answers</div>
+                    </div>
+                    
+                    <div class="analysis-item border border-primary unattempted">
+                        <i class="fas fa-exclamation-circle analysis-icon"></i>
+                        <div class="analysis-value" id="unattempted-count">{{$analysis->leaved_questions}}</div>
+                        <div class="analysis-label">Unattempted</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {{-- <!-- Stats Overview -->
         <div class="row g-4 justify-content-center">
             <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
                 <div class="stat-card text-center p-4 rounded-3 bg-white shadow-sm h-100 animated_border border-danger border-2">
@@ -71,7 +120,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         
     </div>
 

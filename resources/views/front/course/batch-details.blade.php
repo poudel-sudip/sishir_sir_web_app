@@ -116,6 +116,8 @@
                             <div class="nav nav-tabs justify-content-start align-items-center gap-1" id="nav-course-tab" role="tablist">
                                 <button class="nav-link tab-outline-primary active " data-bs-toggle="tab" type="button" role="tab" aria-selected="true" data-bs-target="#nav-batch-overview"  aria-controls="nav-batch-overview" >Overview</button>
                                 <button class="nav-link  tab-outline-primary " data-bs-toggle="tab" type="button" role="tab" aria-selected="false" data-bs-target="#nav-batch-curriculum"  aria-controls="nav-batch-curriculum" >Curriculum</button>
+                                <button class="nav-link  tab-outline-primary " data-bs-toggle="tab" type="button" role="tab" aria-selected="false" data-bs-target="#nav-batch-notes"  aria-controls="nav-batch-notes" >Notes</button>
+                                <button class="nav-link  tab-outline-primary " data-bs-toggle="tab" type="button" role="tab" aria-selected="false" data-bs-target="#nav-batch-videos"  aria-controls="nav-batch-videos" >Videos</button>
                             </div>
                         </div> 
 
@@ -135,6 +137,33 @@
                                     @endforeach  
                                 </div>                      
                             </div>
+
+                            <div class="tab-pane fade" id="nav-batch-notes" role="tabpanel" aria-labelledby="nav-batch-notes-tab" >
+                                <div class="row align-items-stretch"> 
+                                    @foreach($batch->file_units as $cat)
+                                        <div class="col-lg-3 col-md-4 col-6 my-3">
+                                            <a class="d-inline-block p-2 border rounded border-primary" style="width: 100%; height: 100%; text-decoration: none;">
+                                                <i class="fa fa-folder-open text-primary h1"></i>
+                                                <div class="h6">{{($cat->name)}}</div>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>                    
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-batch-videos" role="tabpanel" aria-labelledby="nav-batch-videos-tab" >
+                                <div class="row align-items-stretch"> 
+                                    @foreach($batch->video_units as $cat)
+                                        <div class="col-lg-3 col-md-4 col-6 my-3">
+                                            <a class="d-inline-block p-2 border rounded border-primary" style="width: 100%; height: 100%; text-decoration: none;">
+                                                <i class="fa fa-folder-open text-primary h1"></i>
+                                                <div class="h6">{{($cat->name)}}</div>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>                  
+                            </div>
+
                         </div>  
                     </div>
                 </div>

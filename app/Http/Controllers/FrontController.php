@@ -182,6 +182,28 @@ class FrontController extends Controller
         //     ]);
         // }
 
+        $data['courses'] = Course::where('status','=','Active')
+        ->whereHas('batches',function($batch){
+            $batch->whereIn('batches.status',['Active','Running']);
+        })
+        ->orderBy('order')
+        ->get(['id','name'])
+        ->values();
+
+        $data['course_batches'] = Batch::whereIn('status',['Active','Running'])
+            ->orderBy('id','desc')
+            ->take(4)
+            ->get(['id','course_id','name','status','fee','discount','duration','durationType','image','description','created_at'])
+            ->map(function($b){
+                $b->final_price = $b->fee - $b->discount;
+                $b->discount = $b->discount > 0 ? intval((($b->discount / $b->fee) * 100)) : 0;
+                $b->duration = $b->duration . ' ' . ucwords($b->durationType);
+                unset($b->durationType, $b->course_id);
+                return $b;
+            })
+            ->values();
+            
+
         $data['updates'] = [];
 
         $menu_sub_items = MenuSubItem::where('status', '=', 'Active')
@@ -383,14 +405,10 @@ class FrontController extends Controller
             })
             ->toArray();
 
-        $course_updates = Batch::whereIn('status',['Active','Running'])
-            ->orderBy('id','desc')
-            ->take(6)
-            ->get(['id','name as title','created_at'])
-            ->values()
+        $course_updates = $data['course_batches']
             ->map(function ($b) {
                 return (object)[
-                    'title' => $b->title,
+                    'title' => $b->name,
                     'created_at' => $b->created_at,
                     'link' => '/courses/details/' . $b->id,
                 ];

@@ -34,7 +34,7 @@
                                 <form action="/student/online-course-bookings/{{$booking->id}}/mcq-exams/{{$exam->id}}/save" method="POST" id="exam-form">
                                     @csrf
                                     @php
-                                        $pages = $exam->questions->chunk(5); // Split into pages
+                                        $pages = $exam->questions->chunk(1); // Split into pages
                                         $key = -1;
                                     @endphp
                                 

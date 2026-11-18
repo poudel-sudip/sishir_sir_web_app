@@ -786,7 +786,79 @@
         </section>
     @endif
 
-    
+    @if(count($course_batches))
+        <section class="footer-imp-link mt-5 mb-5">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    <div class="col-md-12 relative">
+                        <h2 class="home-section-heading">eCourses</h2>
+                    </div>
+                </div>
+               
+                <nav>
+                    <div class="d-flex align-items-center justify-content-center footer-imp-link">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper category-swiper nav nav-tabs"> 
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <a href="/courses"> <button class="nav-link border active">All</button> </a>
+                                </div>
+                                @foreach($courses as $cat)
+                                    <div class="swiper-slide">
+                                        <a href="/courses/category/{{$cat->id}}"> <button class="nav-link border">{{$cat->name}}</button> </a>
+                                    </div>
+                                @endforeach
+                               
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </nav>
+
+                <div class="shadow border-danger border border-top-0 border-2 p-1">
+                    <div class="row align-items-stretch">
+                        @foreach ($course_batches as $batch)
+                            <div class="col-lg-3 col-sm-6 mb-2" data-aos="fade-up-left" data-aos-delay="100">
+                                <div class="course-card h-100">
+                                    <div class="course-header">
+                                        <h4 class=" fw-bold">{{$batch->name}}</h4>
+                                        <p class="">{!! $batch->description !!}</p>
+                                    </div>
+                                    
+                                    <div class="course-stats">                                    
+                                        <div class="stat">
+                                            <i class="fas fa-clock"></i>
+                                            <span class="">{{$batch->duration}}</span>
+                                        </div>                                    
+                                        <div class="stat">
+                                            <i class="fas fa-headset"></i>
+                                            <span>24/7 Support</span>
+                                        </div>
+                                        <div class="stat">
+                                            <i class="fas fa-star"></i>
+                                            <span>{{$batch->rating ?? 4}}</span>
+                                        </div>
+                                    </div>
+                                                                                                            
+                                    <div class="course-pricing">
+                                        <div class="current-price">Rs. {{number_format($batch->final_price)}}</div>
+                                        @if($batch->discount)
+                                            <div class="original-price">Rs. {{number_format($batch->fee)}}</div>
+                                            <div class="discount">{{$batch->discount}}% Discount</div>
+                                        @endif
+                                    </div>
+                                    
+                                    <a href="/courses/details/{{$batch->id}}" class="btn course-blue-btn w-100 ">View Details</a>
+                                </div>
+                            </div>
+                            
+                        @endforeach
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    @endif
 
     <section class="home-blog mt-3 mb-5">
         <div class="container-fluid px-md-5">
