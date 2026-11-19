@@ -33,6 +33,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row my-0">
+                                <label for="exam_unit_id" class="col-md-4 col-form-label">{{ __('Unit Id') }}</label>
+
+                                <div class="col-md-8">
+                                    <input id="exam_unit_id" type="text" class="form-control @error('exam_unit_id') is-invalid @enderror" name="exam_unit_id" value="{{ old('exam_unit_id') ?? $unit->id ?? null }}" readonly>
+
+                                    @error('exam_unit_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
                             <div class="form-group row">
                                 <label for="exam_category" class="col-md-4 col-form-label">{{ __('Exam Category') }}</label>
 

@@ -937,17 +937,32 @@ class BatchController extends Controller
 
     public function McqExamIndex(Course $course, Batch $batch)
     {
+        $unit = null;
+        if(request()->has('unit_id'))
+        {
+            $unit = ClassUnit::where('id','=',request()->unit_id)->first();
+        }
+
         $data['course'] = $course;
         $data['batch'] = $batch;
-        $data['mcq_exams'] = $batch->batchExams()->get()->values();
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','mcq-exam')->where('parent_id','=',$unit->id ?? null)->get();
+        $data['mcq_exams'] = $batch->batchExams()->where('unit_id', '=', $unit->id ?? null)->orderByDesc('id')->get()->values();
 
         return view('admin.courses.mcq-exams.index',$data);
     }
 
     public function McqExamCreate(Course $course, Batch $batch)
     {
+        $unit = null;
+        if(request()->has('unit_id'))
+        {
+            $unit = ClassUnit::where('id','=',request()->unit_id)->first();
+        }
+
         $data['course'] = $course;
         $data['batch'] = $batch;
+        $data['unit'] = $unit;
         $data['categories'] = ExamCategory::all();
         return view('admin.courses.mcq-exams.create',$data);
     }
@@ -958,18 +973,30 @@ class BatchController extends Controller
         $request->validate([
             'exam_name'=>'required|numeric|min:1',
             'exam_type'=>'required|numeric',
+            'exam_unit_id'=>'nullable|numeric',
         ]);
+
         $find = $batch->batchExams()->where('exam_id', $request->exam_name)->first();
         if($find)
         {
             return back()->withInput()->withErrors(['exam_name'=>'Exam already associated for this batch.']);
         }
+
+        $unit = ClassUnit::where('id','=',$request->exam_unit_id??null)->first();
+
         $batch->batchExams()->create([
             'exam_id'=>$request->exam_name,
             'is_final_exam'=>$request->exam_type,
+            'unit_id'=>$unit->id ?? null,
         ]);
 
+        if($unit)
+        {
+            return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/mcq-exams/unit/'.$unit->id);
+        }
+
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/mcq-exams');
+
     }
 
     public function McqExamDestroy(Course $course, Batch $batch, BatchExam $exam, Request $request)
@@ -980,6 +1007,12 @@ class BatchController extends Controller
         $results->delete();
         $evaluations->delete();
         $exam->delete();
+
+        $unit = ClassUnit::where('id','=',$exam->unit_id ?? null)->first();
+        if($unit)
+        {
+            return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/mcq-exams/unit/'.$unit->id)->with('success','Data Deleted Successfully');
+        }
 
         return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/mcq-exams');
     }
@@ -994,4 +1027,89 @@ class BatchController extends Controller
         return view('admin.courses.mcq-exams.result', $data);
     }
 
+
+    public function mcqExamUnitIndex(Course $course, Batch $batch, ClassUnit $unit)
+    {
+
+        $data['course'] = $course;
+        $data['batch'] = $batch;
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','mcq-exam')->where('parent_id','=',$unit->id ?? null)->get();
+        $data['mcq_exams'] = $batch->batchExams()->where('unit_id', '=', $unit->id ?? null)->orderByDesc('id')->get();
+
+
+        // dd($data);
+        return view('admin.courses.mcq-exams.index',$data);
+    }
+
+    public function mcqExamUnitStore(Course $course, Batch $batch, Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'folder_name'=>'string | required',
+            'folder_unit_id'=>'nullable|numeric',
+        ]);
+
+        $unit = ClassUnit::where('id','=',$request->folder_unit_id??null)->first();
+
+        $batch->units()->create([
+            'parent_id'=>$unit->id ?? null,
+            'name'=>$request->folder_name,
+            'type'=>'mcq-exam',
+        ]);
+
+        if($unit)
+        {
+            return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/mcq-exams/unit/'.$unit->id);
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/mcq-exams');
+    }
+
+    public function mcqExamUnitUpdate(Course $course, Batch $batch, Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'folder_id'=>'numeric | required',
+            'folder_title'=>'string | required',
+        ]);
+
+        $unit = ClassUnit::where('id','=',$request->folder_id)->first();
+
+        if($unit)
+        {
+            $unit->update([
+                'name'=>$request->folder_title,
+            ]);
+
+            $parentUnit = ClassUnit::where('id','=',$unit->parent_id ?? null)->first();
+            if($parentUnit)
+            {
+                return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/mcq-exams/unit/'.$parentUnit->id);
+            }
+
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/mcq-exams');
+    }
+
+    public function mcqExamUnitDestroy(Course $course, Batch $batch, ClassUnit $unit, Request $request)
+    {
+
+        if($unit)
+        {
+            $parentUnit = ClassUnit::where('id','=',$unit->parent_id ?? null)->first();
+
+            $unit->classMcqExams()->delete();
+            $unit->delete();
+
+            if($parentUnit)
+            {
+                return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/mcq-exams/unit/'.$parentUnit->id);
+            }
+
+        }
+
+        return redirect('/admin/courses/'.$course->id.'/batches/'.$batch->id.'/mcq-exams');
+    }
 }

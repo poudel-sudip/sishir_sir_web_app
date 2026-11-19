@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Exams\BatchExam;
 
 class ClassUnit extends Model
 {
@@ -25,6 +26,11 @@ class ClassUnit extends Model
     public function classVideos(): HasMany
     {
         return $this->hasMany(ClassVideos::class,'unit_id');
+    }
+
+    public function classMcqExams(): HasMany
+    {
+        return $this->hasMany(BatchExam::class,'unit_id');
     }
 
     public function parent(): BelongsTo

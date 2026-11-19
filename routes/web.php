@@ -676,6 +676,10 @@ Route::delete('/admin/courses/{course}/batches/{batch}/curriculum/{curriculum}',
 Route::get('/admin/courses/{course}/batches/{batch}/mcq-exams', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamIndex')->middleware('role:Admin');
 Route::get('/admin/courses/{course}/batches/{batch}/mcq-exams/create', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamCreate')->middleware('role:Admin');
 Route::post('/admin/courses/{course}/batches/{batch}/mcq-exams', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamStore')->middleware('role:Admin');
+Route::get('/admin/courses/{course}/batches/{batch}/mcq-exams/unit/{unit}', 'App\Http\Controllers\Admin\Courses\BatchController@mcqExamUnitIndex')->middleware('role:Admin');
+Route::post('/admin/courses/{course}/batches/{batch}/mcq-exams/unit', 'App\Http\Controllers\Admin\Courses\BatchController@mcqExamUnitStore')->middleware('role:Admin');
+Route::patch('/admin/courses/{course}/batches/{batch}/mcq-exams/unit', 'App\Http\Controllers\Admin\Courses\BatchController@mcqExamUnitUpdate')->middleware('role:Admin');
+Route::delete('/admin/courses/{course}/batches/{batch}/mcq-exams/unit/{unit}', 'App\Http\Controllers\Admin\Courses\BatchController@mcqExamUnitDestroy')->middleware('role:Admin');
 Route::delete('/admin/courses/{course}/batches/{batch}/mcq-exams/{exam}', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamDestroy')->middleware('role:Admin');
 Route::get('/admin/courses/{course}/batches/{batch}/mcq-exams/{exam}/results', 'App\Http\Controllers\Admin\Courses\BatchController@McqExamResult')->middleware('role:Admin');
 

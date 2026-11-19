@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Batch;
 use App\Models\Exams\Exam;
+use App\Models\ClassUnit;
 
 class BatchExam extends Model
 {
@@ -21,5 +22,10 @@ class BatchExam extends Model
     public function exam(): BelongsTo
     {
         return $this->belongsTo(Exam::class, 'exam_id');
+    }
+
+    public function unit(): BelongsTo
+    {
+        return$this->belongsTo(ClassUnit::class,'unit_id');
     }
 }

@@ -17,6 +17,7 @@ class CreateBatchExamsTable extends Migration
             $table->id();
             $table->bigInteger('batch_id');
             $table->bigInteger('exam_id');
+            $table->bigInteger('unit_id')->nullable();
             $table->tinyInteger('is_final_exam')->nullable()->default(0);
             $table->timestamps();
         });
