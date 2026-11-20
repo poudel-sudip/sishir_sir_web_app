@@ -107,6 +107,7 @@ class FrontCourseController extends Controller
         
         $batch->video_units = $batch->units()->where('type','=','video')->where('parent_id','=', null)->get();
         $batch->file_units = $batch->units()->where('type','=','file')->where('parent_id','=', null)->get();
+        $batch->mcq_units = $batch->units()->where('type','=','mcq-exam')->where('parent_id','=', null)->get();
 
         unset($batch->durationType);
 

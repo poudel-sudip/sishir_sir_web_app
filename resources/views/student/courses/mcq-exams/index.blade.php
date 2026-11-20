@@ -10,6 +10,7 @@
     <div class="student-content-wrapper">
         <div class="mt-2 text-center">
             <div class=" dchl-title h4">{{$batch->name}}</div>
+            <div class=" text-muted">{{$unit->name ?? ''}}</div>
         </div>
         <div class=" text-end pe-2">
             <a href="/student/online-course-bookings/{{$booking->id}}/curriculum" class="btn btn-sm btn-outline-primary  mb-1 ">Curriculum</a> 
@@ -18,44 +19,58 @@
             <a href="/student/online-course-bookings/{{$booking->id}}/mcq-exams" class="btn btn-sm btn-outline-primary active mb-1 ">MCQ Exams</a> 
         </div>
 
-        <div class="row">
-            <div class="col-md-12 student_exam_card">
-                                
-                <div class="table-responsive table-responsive-md">
-                    <table class="table" style="width:100%">
-                        <thead class="table-light">
-                            <tr>
-                                <th width="50">SN</th>
-                                <th>Exam Title</th>
-                                <th class="text-center text-md-end pe-5">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($mcq_exams as $key=>$exam)
-                                <tr>
-                                    <td>{{$key+1}}</td>
-                                    <td class="text-wrap">{{$exam->exam->name ?? ''}}</td>
-                                    <td class="text-wrap text-end">
-                                        @if($exam->status)
-                                            <a href="/student/online-course-bookings/{{$booking->id}}/mcq-exams/{{$exam->exam->id}}/view" class="btn btn-success btn-sm mb-1">View Evaluation</a>
-                                            <form id="reset-form-{{$key+1}}" action="/student/online-course-bookings/{{$booking->id}}/mcq-exams/{{$exam->exam->id}}/reset" method="POST" style="display: inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <a href="javascript:{}" onclick="javascript:resetData({{$key+1}});" class="btn btn-danger btn-sm mb-1">Reset Exam</a>
-                                            </form> 
-                                            <a href="/student/mcq-exams/{{$exam->exam->id}}/cqcs" class="btn btn-primary btn-sm">View CQCs</a>
+        <div class="row align-items-stretch">  
+            @foreach($units as $cat)
+                <div class="col-md-3 col-6 my-3">
+                    <a href="/student/online-course-bookings/{{$booking->id}}/mcq-exams/unit/{{$cat->id}}" class="d-inline-block p-2 border rounded border-primary" style="width: 100%; height: 100%; text-decoration: none;">
+                        <i class="fa fa-folder-open text-primary h1"></i>
+                        <div class="h5">{{($cat->name)}}</div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
 
-                                        @else
-                                            <a href="/student/online-course-bookings/{{$booking->id}}/mcq-exams/{{$exam->exam->id}}/attempt" class="btn btn-primary btn-sm">Attempt Exam</a>
-                                        @endif
-                                    </td>
+        @if(!$mcq_exams->isEmpty())
+            <div class="row">
+                <div class="col-md-12 student_exam_card">             
+                    <div class="table-responsive table-responsive-md">
+                        <table class="table" style="width:100%">
+                            <thead class="table-light">
+                                <tr>
+                                    <th width="50">SN</th>
+                                    <th>Exam Title</th>
+                                    <th class="text-center text-md-end pe-5">Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach($mcq_exams as $key=>$exam)
+                                    <tr>
+                                        <td>{{$key+1}}</td>
+                                        <td class="text-wrap">{{$exam->exam->name ?? ''}}</td>
+                                        <td class="text-wrap text-end">
+                                            @if($exam->status)
+                                                <a href="/student/online-course-bookings/{{$booking->id}}/mcq-exams/{{$exam->exam->id}}/view" class="btn btn-success btn-sm mb-1">View Evaluation</a>
+                                                <form id="reset-form-{{$key+1}}" action="/student/online-course-bookings/{{$booking->id}}/mcq-exams/{{$exam->exam->id}}/reset" method="POST" style="display: inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="javascript:{}" onclick="javascript:resetData({{$key+1}});" class="btn btn-danger btn-sm mb-1">Reset Exam</a>
+                                                </form> 
+                                                <a href="/student/mcq-exams/{{$exam->exam->id}}/cqcs" class="btn btn-primary btn-sm">View CQCs</a>
+
+                                            @else
+                                                <a href="/student/online-course-bookings/{{$booking->id}}/mcq-exams/{{$exam->exam->id}}/attempt" class="btn btn-primary btn-sm">Attempt Exam</a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        @else
+            <div class="my-2 text-center">MCQ Exams Not Available</div>
+        @endif
 
     </div>
 

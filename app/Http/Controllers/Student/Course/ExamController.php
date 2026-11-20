@@ -13,7 +13,7 @@ use App\Models\Exams\WrittenExam;
 use App\Models\Batch;
 use App\Models\Exams\WrittenExamSolution;
 use App\Models\Booking;
-
+use App\Models\ClassUnit;
 // use Illuminate\Support\Facades\Gate;
 
 class ExamController extends Controller
@@ -35,12 +35,21 @@ class ExamController extends Controller
             abort(404,'Batch Not Found.');
         }
         
+        $unit = null;
+        if(request()->has('unit_id'))
+        {
+            $unit = ClassUnit::where('id','=',request()->unit_id)->first();
+        }
+
         $data = [];
         $data['booking'] = $booking;
         $data['batch'] = $batch;
-                
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','mcq-exam')->where('parent_id','=',$unit->id ?? null)->get();
+
         $data['mcq_exams'] = $batch->batchNormalExams()
         ->whereHas('exam')
+        ->where('unit_id', '=', $unit->id ?? null)
         ->get()
         ->map(function($exam) use($batch) {
             $exam = $exam->exam;
@@ -59,6 +68,56 @@ class ExamController extends Controller
 
         return view('student.courses.mcq-exams.index',$data);
     }
+
+    
+    public function McqExamUnitList(Booking $booking, ClassUnit $unit)
+    {
+
+        if($booking->status != 'Verified')
+        {
+            abort(403,'Cannot Access MCQ Exams of Unverified Booking.');
+        }
+        $batch = $booking->batch;
+        if(!$batch)
+        {
+            abort(404,'Batch Not Found.');
+        }
+
+        if(in_array($batch->status,['Active','Running']) == false)
+        {
+            abort(403,'Cannot Access MCQ Exams of Non-Active Batch.');
+        }
+
+        $data = [];
+
+        $data['booking'] = $booking;
+        $data['batch'] = $batch;
+        $data['unit'] = $unit;
+        $data['units'] = $batch->units()->where('type','=','mcq-exam')->where('parent_id','=',$unit->id ?? null)->get();
+        
+        $data['mcq_exams'] = $batch->batchNormalExams()
+        ->whereHas('exam')
+        ->where('unit_id', '=', $unit->id ?? null)
+        ->get()
+        ->map(function($exam) use($batch) {
+            $exam = $exam->exam;
+            $result = Result::where([
+                ['user_id','=',auth()->user()->id],
+                ['exam_id','=',$exam->id],
+                ['batch_id','=',$batch->id]
+            ])->first() ? true : false ;
+
+            return (object)[
+                'exam'=>$exam,
+                'status'=>$result,
+            ];
+        })
+        ->values();
+
+        return view('student.courses.mcq-exams.index',$data);
+
+    }
+
 
     public function McqExamAttempt(Booking $booking, Exam $exam)
     {

@@ -975,6 +975,7 @@ Route::get('/student/online-course-bookings/{booking}/curriculum/{cid}','App\Htt
 Route::get('/student/online-course-bookings/{booking}/certificate','App\Http\Controllers\Student\Course\BookingController@showCertificate')->middleware('role:Student');
 
 Route::get('/student/online-course-bookings/{booking}/mcq-exams','App\Http\Controllers\Student\Course\ExamController@McqExamList')->middleware('role:Student');
+Route::get('/student/online-course-bookings/{booking}/mcq-exams/unit/{unit}', 'App\Http\Controllers\Student\Course\ExamController@McqExamUnitList')->middleware('role:Student');
 Route::get('/student/online-course-bookings/{booking}/mcq-exams/{exam}/attempt','App\Http\Controllers\Student\Course\ExamController@McqExamAttempt')->middleware('role:Student');
 Route::post('/student/online-course-bookings/{booking}/mcq-exams/{exam}/save','App\Http\Controllers\Student\Course\ExamController@McqExamSave')->middleware('role:Student');
 Route::delete('/student/online-course-bookings/{booking}/mcq-exams/{exam}/reset','App\Http\Controllers\Student\Course\ExamController@McqExamReset')->middleware('role:Student');
